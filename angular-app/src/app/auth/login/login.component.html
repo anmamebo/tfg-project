@@ -1,0 +1,35 @@
+<p>login works!</p>
+<div>
+    <form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
+
+        <label for="">Usuario</label>
+        <input 
+            type="text" 
+            formControlName="username" 
+            class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && form['username'].errors }"
+        >
+        <div *ngIf="submitted && form['username'].errors" class="invalid-feedback">
+            <div *ngIf="form['username'].errors['required']">El usuario es obligatorio</div>
+        </div>
+
+        <label for="">Contraseña</label>
+        <input 
+            type="password" 
+            formControlName="password" 
+            class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && form['password'].errors }"
+        >
+        <div *ngIf="submitted && form['password'].errors" class="invalid-feedback">
+            <div *ngIf="form['password'].errors['required']">La contraseña es obligatoria</div>
+        </div>
+        
+        <div *ngIf="submitted && errorMessage != ''">
+            {{ errorMessage }}
+        </div>
+
+        <div>
+            <button class="btn btn-primary">Login</button>
+        </div>
+    </form>
+</div>

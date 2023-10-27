@@ -1,0 +1,37 @@
+# Archivos y directorios generados automáticamente
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+*.log
+
+# Archivos de configuración local
+.env
+
+# Directorios de entornos virtuales (por ejemplo, virtualenv, venv, .venv)
+venv/
+env/
+.venv/
+env2/
+
+# Directorio de archivos estáticos generados
+staticfiles/
+
+# Archivos de registro
+log/
+logs/
+
+# Directorio de archivos de medios generados
+media/
+
+# Directorio de datos de migraciones
+migrations/
+
+# Archivos de configuración local (pueden variar según tu configuración)
+local_settings.py
+
+# Archivos de registro de dependencias de pip (pipenv, poetry, etc.)
+pip-lock.txt
+Pipfile.lock
