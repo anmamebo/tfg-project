@@ -1,1 +1,20 @@
-/* You can add global styles to this file, and also import other style files */
+// Import custom Variables
+@import "./assets/scss/variables";
+
+// Bootstrap + Icons
+$bootstrap-icons-font-src: url('~bootstrap-icons/font/fonts/bootstrap-icons.woff2') format("woff") !default;
+@import "~bootstrap/scss/bootstrap";
+@import "~bootstrap-icons/font/bootstrap-icons";
+
+// Fix icon placement
+body .bi::before,
+[class^=bi-]::before,
+[class*=" bi-"]::before {
+    vertical-align: sub;
+}
+
+// Imports fonts
+@import "./assets/scss/fonts";
+
+// Customize CSS
+@import "./assets/scss/customized-components";

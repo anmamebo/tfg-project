@@ -1,10 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from "@angular/router";
+import { Title } from '@angular/platform-browser';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import { Router } from '@angular/router';
 
 // Servicios
-import { AuthService } from "../../core/services/auth.service";
-import { TokenStorageService } from "../../core/services/token-storage.service";
+import { AuthService } from '../../core/services/auth.service';
+import { TokenStorageService } from '../../core/services/token-storage.service';
 
 // Modelos
 import { User } from 'src/app/core/models/user.model';
@@ -13,10 +19,9 @@ import { User } from 'src/app/core/models/user.model';
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-  providers: [AuthService, TokenStorageService]
+  providers: [AuthService, TokenStorageService],
 })
 export class LoginComponent implements OnInit {
-
   user: User = new User('', '', '', '');
   loginForm: FormGroup = new FormGroup({
     username: new FormControl(''),
@@ -26,6 +31,7 @@ export class LoginComponent implements OnInit {
   errorMessage: string = '';
 
   constructor(
+    private titleService: Title,
     private authService: AuthService,
     private tokenStorageService: TokenStorageService,
     private formBuilder: FormBuilder,
@@ -33,12 +39,11 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.loginForm = this.formBuilder.group(
-      {
-        username: ['', Validators.required],
-        password: ['', Validators.required]
-      }
-    );
+    this.titleService.setTitle('Iniciar sesión | HospitalSys');
+    this.loginForm = this.formBuilder.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required],
+    });
   }
 
   get form() {
@@ -67,7 +72,7 @@ export class LoginComponent implements OnInit {
       error: (e) => {
         this.errorMessage = e.message;
         console.error(e.message);
-      }
-    });    
+      },
+    });
   }
 }
