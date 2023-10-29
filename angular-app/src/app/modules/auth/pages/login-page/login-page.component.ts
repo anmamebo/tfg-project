@@ -9,19 +9,19 @@ import {
 import { Router } from '@angular/router';
 
 // Servicios
-import { AuthService } from '../../core/services/auth.service';
-import { TokenStorageService } from '../../core/services/token-storage.service';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { TokenStorageService } from 'src/app/core/services/token-storage.service';
 
 // Modelos
 import { User } from 'src/app/core/models/user.model';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+  selector: 'app-login-page',
+  templateUrl: './login-page.component.html',
+  styleUrls: ['./login-page.component.scss'],
   providers: [AuthService, TokenStorageService],
 })
-export class LoginComponent implements OnInit {
+export class LoginPageComponent implements OnInit {
   user: User = new User('', '', '', '');
   loginForm: FormGroup = new FormGroup({
     username: new FormControl(''),
@@ -67,7 +67,7 @@ export class LoginComponent implements OnInit {
         this.tokenStorageService.saveSingIn(data);
         console.log(data);
         // TODO: no se hace así
-        this.router.navigate(['/logout']);
+        this.router.navigate(['/']);
       },
       error: (e) => {
         this.errorMessage = e.message;
