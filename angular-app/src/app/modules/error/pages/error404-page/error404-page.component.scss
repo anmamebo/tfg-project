@@ -18,8 +18,9 @@
 }
 
 html[data-bs-theme="dark"] {
+  @import "src/assets/scss/themes/dark/variables-dark";
+
   #error {
-    @import "src/assets/scss/themes/dark/variables-dark";
     background-color: $page-error-bg;
   }
 }

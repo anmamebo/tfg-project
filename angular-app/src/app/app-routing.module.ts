@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { NotFoundComponent } from './core/shared/components/not-found/not-found.component';
+import { ErrorModule } from 'src/app/modules/error/error.module';
+import { Error404PageComponent } from 'src/app/modules/error/pages/error404-page/error404-page.component';
 
 import { AuthGuard } from 'src/app/core/guards/auth.guard';
 
@@ -17,11 +18,11 @@ const routes: Routes = [
       import('./modules/home/home.module').then((m) => m.HomeModule),
     canActivate: [AuthGuard],
   },
-  { path: '**', component: NotFoundComponent },
+  { path: '**', component: Error404PageComponent },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes), ErrorModule],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
