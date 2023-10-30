@@ -1,3 +1,6 @@
+// Mixins
+@import "./mixins//navbar";
+
 // Alerts
 @import "./components/alert";
 
@@ -9,3 +12,9 @@
 
 // Placeholders
 @import "./components/placeholders";
+
+// Sidebar
+@import "./components/sidebar";
+
+// Layout
+@import "./layouts/main.scss";
