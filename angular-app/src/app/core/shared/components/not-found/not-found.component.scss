@@ -1,4 +1,4 @@
-@import "../../../../../assets/scss/variables";
+@import "src/assets/scss/variables";
 
 #error {
   background-color: $page-error-bg;
@@ -14,5 +14,12 @@
   .error-title {
     font-size: 3rem;
     margin-top: 1rem;
+  }
+}
+
+html[data-bs-theme="dark"] {
+  #error {
+    @import "src/assets/scss/themes/dark/variables-dark";
+    background-color: $page-error-bg;
   }
 }

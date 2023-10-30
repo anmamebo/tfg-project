@@ -1,4 +1,4 @@
-@import "../../../../../assets/scss/variables";
+@import "src/assets/scss/variables";
 
 body {
     background-color: var(--bs-body-bg);
@@ -46,5 +46,13 @@ body {
         @media screen and (max-width: 576px) {
             padding: 5rem 3rem;
         }
+    }
+}
+
+html[data-bs-theme="dark"] {
+    @import "src/assets/scss/themes/dark/variables-dark";
+
+    #auth-right {
+        background: $page-auth-right-bg;
     }
 }
