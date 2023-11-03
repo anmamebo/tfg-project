@@ -22,6 +22,9 @@ docker exec -it <id_contenedor> bash
 
 Para realizar las migraciones usaremos:
 ```
+python manage.py makemigrations
+```
+```
 python manage.py migrate
 ```
 
