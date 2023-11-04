@@ -99,10 +99,11 @@ class UserListSerializer(serializers.ModelSerializer):
     def to_representation(self, instance):
         print(instance)
         return {
-            'id': instance['id'],
-            'name': instance['name'],
-            'username': instance['username'],
-            'email': instance['email']
+            'id': instance.id,
+            'name': instance.name,
+            'username': instance.username,
+            'email': instance.email,
+            'groups': instance.groups.all().values_list('name', flat=True) # flat=True para que devuelva una lista de valores en vez de una lista de tuplas
         }
         
 # TODO: Crear serializer personalizado para mostrar en PatientSerializer y en DoctorSerializer

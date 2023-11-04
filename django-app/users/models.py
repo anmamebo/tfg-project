@@ -37,10 +37,17 @@ class User(AbstractBaseUser, PermissionsMixin):
   class Meta:
     verbose_name = 'Usuario'
     verbose_name_plural = 'Usuarios'
+    default_permissions = ()
+    permissions = [
+      ('list_user', 'Can list user'),
+      ('get_user', 'Can get user'),
+      ('add_user', 'Can add user'),
+      ('change_user', 'Can change user'),
+      ('delete_user', 'Can delete user'),
+    ]
   
   USERNAME_FIELD = 'username'
   REQUIRED_FIELDS = ['email', 'name', 'last_name']
   
   def __str__(self):
-    return f'{self.username}'
-  
+    return f'{self.name} {self.last_name} ({self.username}) - {self.email}'
