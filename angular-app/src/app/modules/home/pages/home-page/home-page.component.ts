@@ -15,7 +15,14 @@ export class HomePageComponent implements OnInit {
   ngOnInit(): void {}
 
   public logout() {
-    this.authService.logOut();
-    // this.router.navigate(['/login']);
+    this.authService.logOut().subscribe({
+      next: (data) => {
+        console.log(data);
+        window.location.reload();
+      },
+      error: (e) => {
+        console.log(e);
+      },
+    });
   }
 }

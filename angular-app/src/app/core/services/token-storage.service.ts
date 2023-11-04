@@ -4,15 +4,17 @@ const TOKEN_KEY = 'auth-token';
 const USER_KEY = 'auth-user';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TokenStorageService {
-
-  constructor() { }
+  constructor() {}
 
   public signOut() {
+    let user = this.getUser();
     window.sessionStorage.removeItem(TOKEN_KEY);
     window.sessionStorage.removeItem(USER_KEY);
+
+    return user;
   }
 
   public saveTokenSession(token: string) {
@@ -22,10 +24,9 @@ export class TokenStorageService {
 
   public getToken(): string {
     if (sessionStorage.getItem(TOKEN_KEY)) {
-      return (sessionStorage.getItem(TOKEN_KEY)) || '';
-    }
-    else if (localStorage.getItem(TOKEN_KEY)) {
-      return (localStorage.getItem(TOKEN_KEY)) || '';
+      return sessionStorage.getItem(TOKEN_KEY) || '';
+    } else if (localStorage.getItem(TOKEN_KEY)) {
+      return localStorage.getItem(TOKEN_KEY) || '';
     }
     return '';
   }
@@ -36,11 +37,10 @@ export class TokenStorageService {
   }
 
   public getUser() {
-    if (sessionStorage.getItem(USER_KEY)) { 
-      return (JSON.parse(sessionStorage.getItem(USER_KEY) || '')); 
-    }
-    else if (localStorage.getItem(USER_KEY)) { 
-      return (JSON.parse(localStorage.getItem(USER_KEY) || '')); 
+    if (sessionStorage.getItem(USER_KEY)) {
+      return JSON.parse(sessionStorage.getItem(USER_KEY) || '');
+    } else if (localStorage.getItem(USER_KEY)) {
+      return JSON.parse(localStorage.getItem(USER_KEY) || '');
     }
   }
 
@@ -50,6 +50,6 @@ export class TokenStorageService {
   }
 
   public saveSingIn(user: any): void {
-      this.saveSession(user);
+    this.saveSession(user);
   }
 }
