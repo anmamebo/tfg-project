@@ -54,12 +54,10 @@ class Login(TokenObtainPairView):
       
       return Response({
         'message': 'Contraseña o nombre de usuario incorrectos',
-        'errors': login_serializer.errors
       }, status=status.HTTP_400_BAD_REQUEST)
     
     return Response({
         'message': 'Contraseña o nombre de usuario incorrectos',
-        'errors': login_serializer.errors
       }, status=status.HTTP_400_BAD_REQUEST)
     
 class Logout(GenericAPIView):

@@ -58,7 +58,7 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
 class CustomUserSerializer(serializers.ModelSerializer):
   class Meta:
     model = User
-    fields = ('username', 'email', 'name', 'last_name')
+    fields = ('id', 'username', 'email', 'name', 'last_name')
     
 class UserSerializer(serializers.ModelSerializer):
   # Ejemplo de acceder a datos de una relación 1 a 1
