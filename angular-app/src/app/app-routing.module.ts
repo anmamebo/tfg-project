@@ -6,6 +6,8 @@ import { Error404PageComponent } from 'src/app/modules/error/pages/error404-page
 
 import { AuthGuard } from 'src/app/core/guards/auth.guard';
 
+import { ModulesComponent } from './modules/modules.component';
+
 const routes: Routes = [
   {
     path: 'auth',
@@ -14,8 +16,9 @@ const routes: Routes = [
   },
   {
     path: '',
+    component: ModulesComponent,
     loadChildren: () =>
-      import('./modules/home/home.module').then((m) => m.HomeModule),
+      import('./modules/modules.module').then((m) => m.ModulesModule),
     canActivate: [AuthGuard],
   },
   { path: '**', component: Error404PageComponent },
