@@ -77,6 +77,7 @@ export class CreateGroupCardComponent implements OnInit {
         this.submitted = false;
         this.notificationService.showSuccessToast(response.message);
         this.groupCreated.emit();
+        this.createGroupForm.reset();
       },
       error: (error) => {
         this.notificationService.showErrorToast(error.message);

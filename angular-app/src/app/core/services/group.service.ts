@@ -59,6 +59,11 @@ export class GroupService {
     return this.http.get<Group[]>(this.url + 'users/groups/', httpOptions);
   }
 
+  /**
+   * Crea un grupo.
+   * @param group El objeto `Group` con los datos del grupo.
+   * @returns Un observable que emite un objeto `Group`.
+   */
   public createGroup(group: Group): Observable<any> {
     let token = this.tokenStorageService.getToken();
     const headers = new HttpHeaders({
@@ -73,7 +78,7 @@ export class GroupService {
       .pipe(
         catchError((error: HttpErrorResponse) => {
           if (error.status === 400) {
-            let errorMessage = '';
+            let errorMessage = error.error.message || 'Hay errores en la creación del grupo';
             throw new Error(errorMessage);
           }
           throw new Error(
@@ -82,5 +87,4 @@ export class GroupService {
         })
       );
   }
-
 }
