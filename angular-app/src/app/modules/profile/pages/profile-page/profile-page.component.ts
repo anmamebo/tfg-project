@@ -20,6 +20,11 @@ export class ProfilePageComponent implements OnInit {
    */
   public user: User | null = null;
 
+  public breadcrumbData = [
+    { label: 'Panel Principal', url: '/'},
+    { label: 'Mi perfil', url: '/perfil'}
+  ]
+
   constructor(
     private tokenStorageService: TokenStorageService,
     private userService: UserService

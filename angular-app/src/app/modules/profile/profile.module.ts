@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { ProfileRoutingModule } from './profile-routing.module';
+import { BreadcrumbModule } from "src/app/shared/components/breadcrumb/breadcrumb.module";
 
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
@@ -25,6 +26,7 @@ import { ChangePasswordCardComponent } from './components/change-password-card/c
     ProfileRoutingModule,
     ReactiveFormsModule,
     SweetAlert2Module,
+    BreadcrumbModule
   ],
 })
 export class ProfileModule {}
