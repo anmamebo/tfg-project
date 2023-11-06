@@ -44,7 +44,7 @@ export class UserService {
     });
     const httpOptions = { headers };
 
-    return this.http.get<User>(this.url + 'users/' + id + '/', httpOptions);
+    return this.http.get<User>(this.url + 'users/users/' + id + '/', httpOptions);
   }
 
   /**
@@ -63,7 +63,7 @@ export class UserService {
     let params = JSON.stringify(user);
 
     return this.http
-      .put<any>(this.url + 'users/' + user.id + '/', params, httpOptions)
+      .put<any>(this.url + 'users/users/' + user.id + '/', params, httpOptions)
       .pipe(
         catchError((error: HttpErrorResponse) => {
           if (error.status === 400) {
@@ -101,7 +101,7 @@ export class UserService {
 
     return this.http
       .post<any>(
-        this.url + 'users/' + user_id + '/set_password/',
+        this.url + 'users/users/' + user_id + '/set_password/',
         params,
         httpOptions
       )
