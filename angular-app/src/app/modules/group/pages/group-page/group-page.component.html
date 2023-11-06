@@ -1,1 +1,44 @@
-<p>group-page works!</p>
+<div class="page-heading">
+  <div class="page-title">
+    <div class="row">
+      <div class="col-12 col-md-6 order-md-1 order-last">
+        <h3>Grupos (Roles)</h3>
+        <p class="text-subtitle text-muted">
+          Aquí puedes ver los diferentes grupos (roles).
+        </p>
+      </div>
+      <div class="col-12 col-md-6 order-md-2 order-first">
+        
+        <app-breadcrumb [breadcrumbs]="breadcrumbData" [isLastActive]="true"></app-breadcrumb>
+
+      </div>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="row">
+      <div class="col-12">
+
+        <app-create-group-card (groupCreated)="updateGroupList()"></app-create-group-card>
+        
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="row">
+      <div class="col-12">
+
+        <app-list-group-card></app-list-group-card>
+
+      </div>
+    </div>
+
+    <ng-template #elseBlock>
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Cargando...</span>
+      </div>
+    </ng-template>
+    
+  </section>
+</div>
