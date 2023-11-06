@@ -77,4 +77,44 @@ export class UserService {
         })
       );
   }
+
+  /**
+   * Actualiza la contraseña del usuario.
+   * @param data - Los datos necesarios para actualizar la contraseña, como la nueva contraseña.
+   * @returns Un Observable que se suscribe a la solicitud HTTP para actualizar la contraseña.
+   */
+  public updatePassword(data: any): Observable<any> {
+    // Obtiene el token de autenticación del usuario
+    let token = this.tokenStorageService.getToken();
+
+    // Obtiene la información del usuario actual, como su ID
+    let user = this.tokenStorageService.getUser();
+    let user_id = user.user.id;
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + token,
+    });
+    const httpOptions = { headers };
+
+    let params = JSON.stringify(data);
+
+    return this.http
+      .post<any>(
+        this.url + 'users/' + user_id + '/set_password/',
+        params,
+        httpOptions
+      )
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          if (error.status === 400) {
+            let errorMessage = 'Contraseña actual incorrecta';
+            throw new Error(errorMessage);
+          }
+          throw new Error(
+            'Ocurrió un error en el servidor. Intentalo más tarde.'
+          );
+        })
+      );
+  }
 }

@@ -6,6 +6,9 @@ import {
   Validators,
 } from '@angular/forms';
 
+import { UserService } from 'src/app/core/services/user.service';
+import { NotificationService } from 'src/app/core/services/notification.service';
+
 import Validation from 'src/app/core/validators/general.validator';
 
 /**
@@ -15,6 +18,7 @@ import Validation from 'src/app/core/validators/general.validator';
   selector: 'app-change-password-card',
   templateUrl: './change-password-card.component.html',
   styleUrls: ['./change-password-card.component.scss'],
+  providers: [UserService, NotificationService],
 })
 export class ChangePasswordCardComponent implements OnInit {
   /**
@@ -36,9 +40,14 @@ export class ChangePasswordCardComponent implements OnInit {
    */
   public errorMessage: string = '';
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private userService: UserService,
+    private notificationService: NotificationService
+  ) {}
 
   ngOnInit(): void {
+    // TODO: Añadir validación longitud mínima de contraseña.
     this.changePasswordForm = this.formBuilder.group(
       {
         current_password: ['', Validators.required],
@@ -69,5 +78,23 @@ export class ChangePasswordCardComponent implements OnInit {
     if (this.changePasswordForm.invalid) {
       return;
     }
+
+    let data = {
+      old_password: this.changePasswordForm['value'].current_password,
+      password: this.changePasswordForm['value'].new_password,
+      password2: this.changePasswordForm['value'].confirm_new_password,
+    };
+
+    this.userService.updatePassword(data).subscribe({
+      next: (data) => {
+        this.submitted = false;
+        this.changePasswordForm.reset();
+        this.notificationService.showSuccessToast(data.message);
+      },
+      error: (error) => {
+        this.submitted = false;
+        this.notificationService.showErrorToast(error.message);
+      },
+    });
   }
 }
