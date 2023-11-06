@@ -1,14 +1,28 @@
 import { Injectable } from '@angular/core';
 
+/**
+ * Clave para almacenar el token de autenticación en el almacenamiento de sesión.
+ */
 const TOKEN_KEY = 'auth-token';
+
+/**
+ * Clave para almacenar los datos del usuario en el almacenamiento de sesión.
+ */
 const USER_KEY = 'auth-user';
 
+/**
+ * Servicio para el almacenamiento y gestión de tokens de autenticación y datos de usuario en el almacenamiento de sesión.
+ */
 @Injectable({
   providedIn: 'root',
 })
 export class TokenStorageService {
   constructor() {}
 
+  /**
+   * Cierra la sesión del usuario actual y elimina el token y los datos del usuario del almacenamiento de sesión.
+   * @returns Los datos del usuario antes de cerrar la sesión.
+   */
   public signOut() {
     let user = this.getUser();
     window.sessionStorage.removeItem(TOKEN_KEY);
@@ -17,11 +31,19 @@ export class TokenStorageService {
     return user;
   }
 
+  /**
+   * Almacena el token de autenticación en el almacenamiento de sesión.
+   * @param token El token de autenticación a almacenar.
+   */
   public saveTokenSession(token: string) {
     window.sessionStorage.removeItem(TOKEN_KEY);
     window.sessionStorage.setItem(TOKEN_KEY, token);
   }
 
+  /**
+   * Obtiene el token de autenticación almacenado en el almacenamiento de sesión.
+   * @returns El token de autenticación.
+   */
   public getToken(): string {
     if (sessionStorage.getItem(TOKEN_KEY)) {
       return sessionStorage.getItem(TOKEN_KEY) || '';
@@ -31,11 +53,19 @@ export class TokenStorageService {
     return '';
   }
 
+  /**
+   * Almacena los datos del usuario en el almacenamiento de sesión.
+   * @param user Los datos del usuario a almacenar.
+   */
   public saveUserSession(user: any) {
     window.sessionStorage.removeItem(USER_KEY);
     window.sessionStorage.setItem(USER_KEY, JSON.stringify(user));
   }
 
+  /**
+   * Obtiene los datos del usuario almacenados en el almacenamiento de sesión.
+   * @returns Los datos del usuario.
+   */
   public getUser() {
     if (sessionStorage.getItem(USER_KEY)) {
       return JSON.parse(sessionStorage.getItem(USER_KEY) || '');
@@ -44,11 +74,19 @@ export class TokenStorageService {
     }
   }
 
+  /**
+   * Almacena el token de autenticación y los datos del usuario en el almacenamiento de sesión.
+   * @param user Los datos del usuario con el token de autenticación.
+   */
   public saveSession(user: any) {
     this.saveTokenSession(user.token);
     this.saveUserSession(user);
   }
 
+  /**
+   * Almacena el token de autenticación y los datos del usuario en el almacenamiento de sesión.
+   * @param user Los datos del usuario con el token de autenticación.
+   */
   public saveSingIn(user: any): void {
     this.saveSession(user);
   }

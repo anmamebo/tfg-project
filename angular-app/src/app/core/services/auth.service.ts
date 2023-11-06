@@ -11,17 +11,23 @@ import { TokenStorageService } from './token-storage.service';
 import { API_URL } from '../constants/API_URL';
 
 import { User } from '../models/user.model';
-import { AuthResponse } from '../models/auth-response';
+import { AuthResponse } from '../models/auth-response.model';
 
 // Configuración de encabezados HTTP
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
 };
 
+/**
+ * Servicio para la gestión de la autenticación y la interacción con la API de autenticación.
+ */
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
+  /**
+   * URL base de la API de autenticación.
+   */
   public url: string;
 
   constructor(
@@ -31,10 +37,13 @@ export class AuthService {
     this.url = API_URL.url;
   }
 
+  /**
+   * Inicia sesión con las credenciales de usuario proporcionadas.
+   * @param user El objeto `User` con las credenciales de inicio de sesión.
+   * @returns Un observable que emite un objeto `AuthResponse`.
+   */
   public login(user: User): Observable<AuthResponse> {
     let params = JSON.stringify(user);
-
-    console.log('params: ' + params);
 
     return this.http
       .post<AuthResponse>(this.url + 'login/', params, httpOptions)
@@ -53,6 +62,10 @@ export class AuthService {
       );
   }
 
+  /**
+   * Verifica si el usuario ha iniciado sesión.
+   * @returns `true` si el usuario ha iniciado sesión, de lo contrario `false`.
+   */
   public isLogin(): boolean {
     if (this.tokenStorageService.getToken()) {
       return true;
@@ -61,6 +74,10 @@ export class AuthService {
     }
   }
 
+  /**
+   * Cierra la sesión del usuario actual.
+   * @returns Un observable que emite un objeto `any`.
+   */
   public logOut(): Observable<any> {
     let user = this.tokenStorageService.signOut();
     let user_id = { user: user.user.id };

@@ -15,6 +15,9 @@ import { TokenStorageService } from 'src/app/core/services/token-storage.service
 // Modelos
 import { User } from 'src/app/core/models/user.model';
 
+/**
+ * Componente que representa la página de inicio de sesión.
+ */
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
@@ -22,13 +25,28 @@ import { User } from 'src/app/core/models/user.model';
   providers: [AuthService, TokenStorageService],
 })
 export class LoginPageComponent implements OnInit {
-  user: User = new User('', '', '', '');
-  loginForm: FormGroup = new FormGroup({
+  /**
+   * Objeto `User` para almacenar las credenciales de inicio de sesión.
+   */
+  public user: User = new User('', '', '', '');
+
+  /**
+   * Formulario de inicio de sesión.
+   */
+  public loginForm: FormGroup = new FormGroup({
     username: new FormControl(''),
     password: new FormControl(''),
   });
-  submitted: Boolean = false;
-  errorMessage: string = '';
+
+  /**
+   * Indica si se ha enviado el formulario.
+   */
+  public submitted: Boolean = false;
+
+  /**
+   * Mensaje de error.
+   */
+  public errorMessage: string = '';
 
   constructor(
     private titleService: Title,
@@ -46,14 +64,21 @@ export class LoginPageComponent implements OnInit {
     });
   }
 
+  /**
+   * Obtiene los controles del formulario.
+   * @returns Los controles del formulario.
+   */
   get form() {
     return this.loginForm.controls;
   }
 
-  onSubmit() {
+  /**
+   * Maneja la acción de envío del formulario de inicio de sesión.
+   */
+  public onSubmit() {
     this.submitted = true;
 
-    // Stop here is form is invalid
+    // Detiene el proceso si el formulario es inválido.
     if (this.loginForm.invalid) {
       return;
     }
