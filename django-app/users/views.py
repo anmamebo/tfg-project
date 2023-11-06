@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from rest_framework.generics import GenericAPIView
 
 from users.models import User
-from users.api.serializers import CustomTokenObtainPairSerializer, CustomUserSerializer
+from users.api.serializers.user_serializer import CustomTokenObtainPairSerializer, CustomUserSerializer
 
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import TokenObtainPairView

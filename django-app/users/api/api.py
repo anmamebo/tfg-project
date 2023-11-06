@@ -7,7 +7,7 @@ from rest_framework.decorators import action
 from rest_framework import viewsets
 
 from users.models import User
-from users.api.serializers import (UserSerializer, UserListSerializer, UpdateUserSerializer, PasswordSerializer)
+from users.api.serializers.user_serializer import (UserSerializer, UserListSerializer, UpdateUserSerializer, PasswordSerializer)
 
 
 class UserViewSet(viewsets.GenericViewSet):
