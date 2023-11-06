@@ -59,7 +59,7 @@ class UserViewSet(viewsets.GenericViewSet):
         Response: La respuesta que indica si se ha actualizado la contraseña con éxito o si ha habido errores.
     """
     user = self.get_object(pk)
-    password_serializer = PasswordSerializer(data=request.data)
+    password_serializer = PasswordSerializer(data=request.data, context={'request': request})
     if password_serializer.is_valid():
       user.set_password(password_serializer.validated_data['password'])
       user.save()

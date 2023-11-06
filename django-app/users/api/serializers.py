@@ -1,3 +1,5 @@
+from django.contrib.auth.hashers import check_password
+
 from rest_framework import serializers
 
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
@@ -82,15 +84,24 @@ class UpdateUserSerializer(serializers.ModelSerializer):
     fields = ('username', 'email', 'name', 'last_name')
 
 class PasswordSerializer(serializers.Serializer):
-    password = serializers.CharField(max_length=128, min_length=6, write_only=True)
-    password2 = serializers.CharField(max_length=128, min_length=6, write_only=True)
+    old_password = serializers.CharField(max_length=128, min_length=1, write_only=True)
+    password = serializers.CharField(max_length=128, min_length=1, write_only=True)
+    password2 = serializers.CharField(max_length=128, min_length=1, write_only=True)
 
     def validate(self, data):
-        if data['password'] != data['password2']:
-            raise serializers.ValidationError(
-                {'password':'Debe ingresar ambas contraseñas iguales'}
-            )
-        return data
+      user = self.context['request'].user
+
+      # Validar que la contraseña actual sea correcta
+      if not check_password(data['old_password'], user.password):
+        raise serializers.ValidationError(
+          {'old_password':'La contraseña actual no es correcta'}
+        )
+        
+      if data['password'] != data['password2']:
+          raise serializers.ValidationError(
+              {'password':'Debe ingresar ambas contraseñas iguales'}
+          )
+      return data
 
 class UserListSerializer(serializers.ModelSerializer):
     class Meta:
