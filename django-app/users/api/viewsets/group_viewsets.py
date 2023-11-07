@@ -5,8 +5,8 @@ from rest_framework import status
 from rest_framework import viewsets
 from rest_framework.response import Response
 
-
 from users.api.serializers.group_serializer import  (GroupSerializer, GroupListSerializer)
+
 
 class GroupViewSet(viewsets.GenericViewSet):
   """
@@ -46,8 +46,13 @@ class GroupViewSet(viewsets.GenericViewSet):
         Response: La respuesta que contiene la lista de grupos.
     """
     groups = self.get_queryset()
-    groups_serializer = self.list_serializer_class(groups, many=True)
-    return Response(groups_serializer.data, status=status.HTTP_200_OK)
+    page = self.paginate_queryset(groups)
+    if page is not None:
+      groups_serializer = self.list_serializer_class(page, many=True)
+      return self.get_paginated_response(groups_serializer.data)
+    else:
+      groups_serializer = self.list_serializer_class(groups, many=True)
+      return Response(groups_serializer.data, status=status.HTTP_200_OK)
   
   def create(self, request):
     """
