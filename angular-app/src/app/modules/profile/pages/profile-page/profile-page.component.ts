@@ -4,6 +4,7 @@ import { TokenStorageService } from 'src/app/core/services/token-storage.service
 import { UserService } from 'src/app/core/services/user.service';
 
 import { User } from 'src/app/core/models/user.model';
+import { breadcrumbProfileData } from "src/app/core/constants/breadcrumb-data";
 
 /**
  * Componente que representa la página de perfil de usuario.
@@ -20,10 +21,10 @@ export class ProfilePageComponent implements OnInit {
    */
   public user: User | null = null;
 
-  public breadcrumbData = [
-    { label: 'Panel Principal', url: '/'},
-    { label: 'Mi perfil', url: '/perfil'}
-  ]
+  /**
+   * Datos para el componente `app-breadcrumb`.
+   */
+  public breadcrumbData = breadcrumbProfileData
 
   constructor(
     private tokenStorageService: TokenStorageService,

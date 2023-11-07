@@ -2,6 +2,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { ListGroupCardComponent } from "../../components/list-group-card/list-group-card.component";
 
+import { breadcrumbGroupData } from "src/app/core/constants/breadcrumb-data";
+
+
 @Component({
   selector: 'app-group-page',
   templateUrl: './group-page.component.html',
@@ -11,10 +14,7 @@ export class GroupPageComponent implements OnInit {
   /**
    * Datos para el componente `app-breadcrumb`.
    */
-  public breadcrumbData = [
-    { label: 'Panel Principal', url: '/'},
-    { label: 'Grupos', url: '/grupo/grupos'}
-  ]
+  public breadcrumbData = breadcrumbGroupData;
 
   /**
    * Referencia al componente hijo `ListGroupCardComponent`.
