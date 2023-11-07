@@ -29,6 +29,6 @@ export class GroupPageComponent implements OnInit {
    * Actualiza la lista de grupos.
    */
   updateGroupList() {
-    this.listGroupCardComponent.getGroups();
+    this.listGroupCardComponent.getGroups(this.listGroupCardComponent.page);
   }
 }

@@ -5,7 +5,13 @@
   <div class="card-content">
     <div class="card-body">
 
-      <app-generic-table [columns]="columns" [data]="groups" [actions]="true"></app-generic-table>
+      <ng-container *ngIf="groups">
+
+        <app-generic-table [columns]="columns" [data]="groups" [actions]="true"></app-generic-table>
+
+        <app-pagination (pageEmitter)="goToPage($event)" [page]="page" [totalPages]="totalPages" [numItems]="numGroups"></app-pagination>
+
+      </ng-container>
 
     </div>
   </div>
