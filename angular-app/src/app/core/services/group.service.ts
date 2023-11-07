@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse, HttpParams } from "@angular/common/http";
 import { Observable, catchError } from "rxjs";
 
 import { HttpCommonService } from "./http-common.service";
@@ -44,11 +44,13 @@ export class GroupService {
    * Obtiene todos los grupos.
    * @returns Un observable que emite un array de objetos `Group`.
    */
-  public getGroups(): Observable<Group[]> {
+  public getGroups(page: number): Observable<any> {
     const headers = this.httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
-    return this.http.get<Group[]>(this.url + 'users/groups/', httpOptions);
+    const params = new HttpParams().set('page', page.toString());
+
+    return this.http.get<any>(this.url + 'users/groups/', { params, ...httpOptions });
   }
 
   /**
