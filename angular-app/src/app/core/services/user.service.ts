@@ -1,12 +1,9 @@
 import { Injectable } from '@angular/core';
-import {
-  HttpClient,
-  HttpErrorResponse,
-  HttpHeaders,
-} from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, catchError } from 'rxjs';
 
-import { TokenStorageService } from './token-storage.service';
+import { HttpCommonService } from "./http-common.service";
+import { TokenStorageService } from "./token-storage.service";
 
 import { API_URL } from '../constants/API_URL';
 
@@ -26,6 +23,7 @@ export class UserService {
 
   constructor(
     private http: HttpClient,
+    private httpCommonService: HttpCommonService,
     private tokenStorageService: TokenStorageService
   ) {
     this.url = API_URL.url;
@@ -37,11 +35,7 @@ export class UserService {
    * @returns Un observable que emite un objeto `User`.
    */
   public getUserById(id: number): Observable<User> {
-    let token = this.tokenStorageService.getToken();
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + token,
-    });
+    const headers = this.httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
     return this.http.get<User>(this.url + 'users/users/' + id + '/', httpOptions);
@@ -53,11 +47,7 @@ export class UserService {
    * @returns Un observable que emite un objeto `any`.
    */
   public updateUser(user: User): Observable<any> {
-    let token = this.tokenStorageService.getToken();
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + token,
-    });
+    const headers = this.httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
     let params = JSON.stringify(user);
@@ -84,18 +74,12 @@ export class UserService {
    * @returns Un Observable que se suscribe a la solicitud HTTP para actualizar la contraseña.
    */
   public updatePassword(data: any): Observable<any> {
-    // Obtiene el token de autenticación del usuario
-    let token = this.tokenStorageService.getToken();
+    const headers = this.httpCommonService.getCommonHeaders();
+    const httpOptions = { headers };
 
     // Obtiene la información del usuario actual, como su ID
     let user = this.tokenStorageService.getUser();
     let user_id = user.user.id;
-
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + token,
-    });
-    const httpOptions = { headers };
 
     let params = JSON.stringify(data);
 

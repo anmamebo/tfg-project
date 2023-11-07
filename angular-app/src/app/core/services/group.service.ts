@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { Observable, catchError } from "rxjs";
 
-import { TokenStorageService } from './token-storage.service';
+import { HttpCommonService } from "./http-common.service";
 
 import { API_URL } from "../constants/API_URL";
 
@@ -23,7 +23,7 @@ export class GroupService {
 
   constructor(
     private http: HttpClient,
-    private tokenStorageService: TokenStorageService
+    private httpCommonService: HttpCommonService
   ) {
     this.url = API_URL.url;
   }
@@ -34,11 +34,7 @@ export class GroupService {
    * @returns Un observable que emite un objeto `Group`.
    */
   public getGroupById(id: number): Observable<Group> {
-    let token = this.tokenStorageService.getToken();
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + token,
-    });
+    const headers = this.httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
     return this.http.get<Group>(this.url + 'users/groups/' + id + '/', httpOptions);
@@ -49,11 +45,7 @@ export class GroupService {
    * @returns Un observable que emite un array de objetos `Group`.
    */
   public getGroups(): Observable<Group[]> {
-    let token = this.tokenStorageService.getToken();
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + token,
-    });
+    const headers = this.httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
     return this.http.get<Group[]>(this.url + 'users/groups/', httpOptions);
@@ -65,11 +57,7 @@ export class GroupService {
    * @returns Un observable que emite un objeto `Group`.
    */
   public createGroup(group: Group): Observable<any> {
-    let token = this.tokenStorageService.getToken();
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + token,
-    });
+    const headers = this.httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
     let params = JSON.stringify(group);
