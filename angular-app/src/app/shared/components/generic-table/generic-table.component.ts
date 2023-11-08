@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-generic-table',
@@ -26,5 +26,17 @@ export class GenericTableComponent {
    */
   @Input() public actionsUrls: any = {}
 
+  /**
+   * Evento que se lanza al pulsar el botón de eliminar.
+   */
+  @Output() public onDeleteEvent: EventEmitter<any> = new EventEmitter<any>();
+
   constructor() { }
+
+  /**
+   * Emite el evento onDeleteEvent.
+   */
+  public onDelete(id: number): void {
+    this.onDeleteEvent.emit(id);
+  }
 }

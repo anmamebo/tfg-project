@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 // Servicios
 import { GroupService } from "src/app/core/services/group.service";
+import { NotificationService } from "src/app/core/services/notification.service";
 
 // Modelos
 import { Group } from "src/app/core/models/group.model";
@@ -13,7 +14,7 @@ import { Group } from "src/app/core/models/group.model";
   selector: 'app-list-group-card',
   templateUrl: './list-group-card.component.html',
   styleUrls: ['./list-group-card.component.scss'],
-  providers: [GroupService],
+  providers: [GroupService, NotificationService],
 })
 export class ListGroupCardComponent implements OnInit {
   /**
@@ -59,7 +60,8 @@ export class ListGroupCardComponent implements OnInit {
   }
 
   constructor(
-    private groupService: GroupService
+    private groupService: GroupService,
+    private notificationService: NotificationService
   ) {}
 
   ngOnInit(): void {
@@ -76,7 +78,8 @@ export class ListGroupCardComponent implements OnInit {
   }
 
   /**
-   * Obtiene la lista de grupos y la asigna a la propiedad 'groups'.
+   * Obtiene los grupos
+   * @param page Número de página que se quiere obtener
    */
   public getGroups(page: number): void {
     this.groupService.getGroups(page).subscribe({
@@ -88,6 +91,25 @@ export class ListGroupCardComponent implements OnInit {
       error: (error) => {
         console.error(error);
       },
+    });
+  }
+
+  /**
+   * Elimina un grupo
+   * @param id ID del grupo que se quiere eliminar
+   */
+  public deleteGroup(id: number): void {
+    this.notificationService.showConfirmDeleteDialog(() => {
+
+      this.groupService.deleteGroup(id).subscribe({
+        next: (response) => {
+          this.getGroups(this.page); 
+        },
+        error: (error) => {
+          console.error(error);
+        },
+      }); 
+
     });
   }
 
