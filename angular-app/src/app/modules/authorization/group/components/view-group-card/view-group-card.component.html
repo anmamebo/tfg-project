@@ -1,0 +1,44 @@
+<div class="card">
+  <div class="card-header">
+    <h4 class="card-title">Ver Grupo</h4>
+  </div>
+  <div class="card-content">
+    <div class="card-body">
+
+      <div class="row">
+        
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="staticInput">ID</label>
+            <input type="text" class="form-control" id="readonlyInput" readonly="readonly" [value]="group!.id">
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="staticInput">Nombre</label>
+            <input type="text" class="form-control" id="readonlyInput" readonly="readonly" [value]="group!.name">
+          </div>
+        </div>
+
+        <div class="col-12 mt-3">
+          <div class="form-group">
+            <label for="staticInput">Permisos vinculados</label>
+
+            <ng-container *ngIf="group!.permissions!.length > 0; else notPermissions">
+
+              <app-generic-table [columns]="columns" [data]="group?.permissions || []" [actions]="false"></app-generic-table>
+
+            </ng-container>
+            <ng-template #notPermissions>
+              <p class="form-control-static" id="staticInput">No hay permisos vinculados.</p>
+            </ng-template>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -9,10 +9,12 @@ import { PaginationModule } from "src/app/shared/components/pagination/paginatio
 
 import { GroupPageComponent } from "./pages/group-page/group-page.component";
 import { GroupEditPageComponent } from "./pages/group-edit-page/group-edit-page.component";
+import { GroupViewPageComponent } from './pages/group-view-page/group-view-page.component';
 
 import { CreateGroupCardComponent } from "./components/create-group-card/create-group-card.component";
 import { ListGroupCardComponent } from "./components/list-group-card/list-group-card.component";
 import { EditGroupCardComponent } from "./components/edit-group-card/edit-group-card.component";
+import { ViewGroupCardComponent } from './components/view-group-card/view-group-card.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { EditGroupCardComponent } from "./components/edit-group-card/edit-group-
     CreateGroupCardComponent,
     ListGroupCardComponent,
     GroupEditPageComponent,
-    EditGroupCardComponent
+    EditGroupCardComponent,
+    GroupViewPageComponent,
+    ViewGroupCardComponent
   ],
   imports: [
     CommonModule,
