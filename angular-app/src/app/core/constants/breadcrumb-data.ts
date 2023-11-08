@@ -7,5 +7,12 @@ export const breadcrumbProfileData = [
 // Grupos
 export const breadcrumbGroupData = [
   { label: 'Panel Principal', url: '/'},
-  { label: 'Grupos', url: '/grupo/grupos'}
+  { label: 'Grupos', url: ''}
+]
+
+// Grupos editar
+export const breadcrumbGroupEditData = [
+  { label: 'Panel Principal', url: '/'},
+  { label: 'Grupos', url: '/autorizacion/grupos'},
+  { label: 'Editar grupo', url: ''}
 ]

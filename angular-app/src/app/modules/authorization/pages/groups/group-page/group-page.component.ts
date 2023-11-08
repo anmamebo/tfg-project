@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 
-import { ListGroupCardComponent } from "../../components/list-group-card/list-group-card.component";
+import { ListGroupCardComponent } from "../../../components/groups/list-group-card/list-group-card.component";
 
 import { breadcrumbGroupData } from "src/app/core/constants/breadcrumb-data";
 

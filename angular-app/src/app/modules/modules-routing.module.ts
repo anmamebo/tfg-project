@@ -12,9 +12,9 @@ const routes: Routes = [
       import('./profile/profile.module').then((m) => m.ProfileModule),
   },
   {
-    path: 'grupo',
+    path: 'autorizacion',
     loadChildren: () =>
-      import('./group/group.module').then((m) => m.GroupModule),
+      import('./authorization/authorization.module').then((m) => m.AuthorizationModule),
   },
 ];
 

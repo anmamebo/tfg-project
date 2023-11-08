@@ -49,6 +49,15 @@ export class ListGroupCardComponent implements OnInit {
    */
   public numResults: number = 10;
 
+  /**
+   * Objeto con las urls de las acciones.
+   */
+  public actionsUrls = { 
+    show: '/autorizacion/grupos',
+    edit: '/autorizacion/grupos/editar',
+    delete: ''
+  }
+
   constructor(
     private groupService: GroupService
   ) {}

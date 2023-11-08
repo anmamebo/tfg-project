@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 import { GenericTableComponent } from './generic-table.component';
 
@@ -9,7 +10,8 @@ import { GenericTableComponent } from './generic-table.component';
     GenericTableComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule
   ],
   exports: [
     GenericTableComponent

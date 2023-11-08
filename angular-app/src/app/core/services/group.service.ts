@@ -77,4 +77,29 @@ export class GroupService {
         })
       );
   }
+
+  /**
+   * Actualiza los datos de un grupo.
+   * @param group El objeto `Group` con los datos actualizados.
+   * @returns Un observable que emite un objeto `any`.
+   */
+  public updateGroup(group: Group): Observable<any> {
+    const headers = this.httpCommonService.getCommonHeaders();
+    const httpOptions = { headers };
+
+    let params = JSON.stringify(group);
+
+    return this.http.put<any>(this.url + 'users/groups/' + group.id + '/', params, httpOptions)
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          if (error.status === 400) {
+            let errorMessage = error.error.message || 'Hay errores en la actualización del grupo';
+            throw new Error(errorMessage);
+          }
+          throw new Error(
+            'Ocurrió un error en el servidor. Intentalo más tarde.'
+          );
+        })
+      );
+  }
 }

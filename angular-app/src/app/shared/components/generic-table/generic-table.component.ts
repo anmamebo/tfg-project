@@ -21,5 +21,10 @@ export class GenericTableComponent {
    */
   @Input() public actions: boolean = false;
 
+  /**
+   * Objeto con las urls de las acciones.
+   */
+  @Input() public actionsUrls: any = {}
+
   constructor() { }
 }

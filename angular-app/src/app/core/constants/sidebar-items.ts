@@ -9,17 +9,17 @@ export const sidebarData = [
     icon: 'grid-fill'
   },
   {
-    name: 'Grupos (Roles)',
-    key: 'grupo',
+    name: 'Autorización',
+    key: 'autorizacion',
     icon: 'key-fill',
     submenu: [
       {
         name: 'Grupos',
-        url: '/grupo/grupos', 
+        url: '/autorizacion/grupos', 
       },
       {
         name: 'Permisos',
-        url: '/grupo/permisos'
+        url: '/autorizacion/permisos'
       }
     ]
   },
