@@ -16,3 +16,10 @@ export const breadcrumbGroupEditData = [
   { label: 'Grupos', url: '/autorizacion/grupos'},
   { label: 'Editar grupo', url: ''}
 ]
+
+// Grupos ver
+export const breadcrumbGroupViewData = [
+  { label: 'Panel Principal', url: '/'},
+  { label: 'Grupos', url: '/autorizacion/grupos'},
+  { label: 'Ver grupo', url: ''}
+]
