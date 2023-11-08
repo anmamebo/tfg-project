@@ -49,4 +49,32 @@ export class NotificationService {
       ...this.toastOptions,
     });
   }
+
+  /**
+   * Muestra un dialogo de confirmación para eliminar un registro y ejecuta la función `onConfirm` si se confirma.
+   * @param onConfirm Función que se ejecutará si se confirma la eliminación.
+   */
+  showConfirmDeleteDialog(onConfirm: () => void) {
+    Swal.fire({
+      title: "¿Estás seguro?",
+      text: "¡No podrás revertir esta acción!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#435ebe",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sí, eliminar",
+      cancelButtonText: "Cancelar",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: "¡Eliminado!",
+          text: "El registro ha sido eliminado.",
+          icon: "success",
+          confirmButtonColor: "#435ebe",
+        });
+      }
+      
+      onConfirm();
+    });
+  }
 }
