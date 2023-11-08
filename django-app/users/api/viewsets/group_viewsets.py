@@ -15,9 +15,9 @@ class GroupViewSet(viewsets.GenericViewSet):
   Esta vista permite realizar operaciones CRUD para grupos.
 
   Attributes:
-    model (Model): El modelo de usuario a gestionar.
-    serializer_class (Serializer): El serializador para representar los datos del usuario.
-    list_serializer_class (Serializer): El serializador para representar los datos de una lista de usuarios.
+    model (Model): El modelo de grupo a gestionar.
+    serializer_class (Serializer): El serializador para representar los datos del grupo.
+    list_serializer_class (Serializer): El serializador para representar los datos de una lista de grupos.
     queryset (QuerySet): El conjunto de datos que se utilizará para las consultas.
   """
   
