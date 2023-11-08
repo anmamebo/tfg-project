@@ -102,4 +102,16 @@ export class GroupService {
         })
       );
   }
+
+  /**
+   * Elimina un grupo.
+   * @param id El identificador del grupo.
+   * @returns Un observable que emite un objeto `any`.
+   */
+  public deleteGroup(id: number): Observable<any> {
+    const headers = this.httpCommonService.getCommonHeaders();
+    const httpOptions = { headers };
+
+    return this.http.delete<any>(this.url + 'users/groups/' + id + '/', httpOptions);
+  }
 }
