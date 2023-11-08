@@ -1,0 +1,18 @@
+<div class="card">
+  <div class="card-header">
+    <h4 class="card-title">Listado de Permisos</h4>
+  </div>
+  <div class="card-content">
+    <div class="card-body">
+
+      <ng-container *ngIf="permissions">
+
+        <app-generic-table [columns]="columns" [data]="permissions"></app-generic-table>
+
+        <app-pagination (pageEmitter)="goToPage($event)" [page]="page" [totalPages]="totalPages" [numItems]="numGroups"></app-pagination>
+
+      </ng-container>
+
+    </div>
+  </div>
+</div>

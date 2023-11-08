@@ -9,10 +9,13 @@ import { PaginationModule } from "src/app/shared/components/pagination/paginatio
 
 import { PermissionPageComponent } from "./pages/permission-page/permission-page.component";
 
+import { ListPermissionCardComponent } from './components/list-permission-card/list-permission-card.component';
+
 
 @NgModule({
   declarations: [
-    PermissionPageComponent
+    PermissionPageComponent,
+    ListPermissionCardComponent
   ],
   imports: [
     CommonModule,

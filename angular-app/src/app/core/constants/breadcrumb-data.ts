@@ -23,3 +23,9 @@ export const breadcrumbGroupViewData = [
   { label: 'Grupos', url: '/autorizacion/grupos'},
   { label: 'Ver grupo', url: ''}
 ]
+
+// Permisos
+export const breadcrumbPermissionData = [
+  { label: 'Panel Principal', url: '/'},
+  { label: 'Permisos', url: ''}
+]
