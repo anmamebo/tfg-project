@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, catchError } from 'rxjs';
 
@@ -40,7 +39,7 @@ export class PatientService {
 
     let params = JSON.stringify(patient);
 
-    return this.http.put<any>(this.url + 'patients/' + patient.id + '/', params, httpOptions)
+    return this.http.put<any>(this.url + 'patients/patients/' + patient.id + '/', params, httpOptions)
       .pipe(
         catchError((error: HttpErrorResponse) => {
           if (error.status === 400) {
