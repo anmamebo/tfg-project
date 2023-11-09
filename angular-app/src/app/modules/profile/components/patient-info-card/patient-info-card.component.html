@@ -20,6 +20,7 @@
                 [value]="patient.dni" [ngClass]="{ 'is-invalid': submitted && form['dni'].errors }">
               <div *ngIf="submitted && form['dni'].errors" class="invalid-feedback">
                 <div *ngIf="form['dni'].errors['required']">El DNI es obligatorio</div>
+                <div *ngIf="form['dni'].errors['maxlength']">Máx. {{ form['dni'].errors['maxlength']['requiredLength'] }} caracteres, actual {{ form['dni'].errors['maxlength']['actualLength'] }}</div>
               </div>
             </div>
           </div>
@@ -31,7 +32,7 @@
               <input type="text" formControlName="social_security" id="social_security" class="form-control" placeholder="Número seguridad social"
                 [value]="patient.social_security" [ngClass]="{ 'is-invalid': submitted && form['social_security'].errors }">
               <div *ngIf="submitted && form['social_security'].errors" class="invalid-feedback">
-                <div *ngIf="form['social_security'].errors['required']">El número de la seguridad social es obligatorio</div>
+                <div *ngIf="form['social_security'].errors['maxlength']">Máx. {{ form['social_security'].errors['maxlength']['requiredLength'] }} caracteres, actual {{ form['social_security'].errors['maxlength']['actualLength'] }}</div>
               </div>
             </div>
           </div>
@@ -57,8 +58,8 @@
               <label for="birthdate">Fecha de nacimiento</label>
               <input type="text" formControlName="birthdate" id="birthdate" class="form-control" [ngClass]="{ 'is-invalid': submitted && form['birthdate'].errors }"
                 mwlFlatpickr [altInput]="true" [convertModelValue]="true" [defaultValue]="patient.birthdate" [locale]="locale" [maxDate]="'today'" [dateFormat]="'Y-m-d'">
-              <div *ngIf="submitted && form['phone'].errors" class="invalid-feedback">
-                <div *ngIf="form['phone'].errors['required']">El número de teléfono es obligatorio</div>
+              <div *ngIf="submitted && form['birthdate'].errors" class="invalid-feedback">
+                <div *ngIf="form['birthdate'].errors['required']">La fecha de nacimiento es obligatoria</div>
               </div>
             </div>
           </div>
@@ -70,7 +71,7 @@
               <input type="text" formControlName="phone" id="phone" class="form-control" placeholder="Número de teléfono"
                 [value]="patient.phone" [ngClass]="{ 'is-invalid': submitted && form['phone'].errors }">
               <div *ngIf="submitted && form['phone'].errors" class="invalid-feedback">
-                <div *ngIf="form['phone'].errors['required']">El número de teléfono es obligatorio</div>
+                <div *ngIf="form['phone'].errors['pattern']">Formato incorrecto</div>
               </div>
             </div>
           </div>

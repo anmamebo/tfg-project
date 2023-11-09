@@ -4,6 +4,7 @@ import { DatePipe } from "@angular/common";
 
 import { Spanish } from "flatpickr/dist/l10n/es.js";
 import { GENDER_OPTIONS } from "src/app/core/constants/genders-options";
+import { PHONENUMBER_REGEXP } from "src/app/core/constants/reg-exp";
 
 // Servicios
 import { PatientService } from "src/app/core/services/patient.service";
@@ -70,11 +71,11 @@ export class PatientInfoCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.updatePatientDataForm = this.formBuilder.group({
-      dni: [this.patient.dni, Validators.required],
-      social_security: [this.patient.social_security],
+      dni: [this.patient.dni, [Validators.required, Validators.maxLength(9)]],
+      social_security: [this.patient.social_security, Validators.maxLength(12)],
       gender: [this.patient.gender, Validators.required],
       birthdate: [this.patient.birthdate],
-      phone: [this.patient.phone],
+      phone: [this.patient.phone, [Validators.pattern(PHONENUMBER_REGEXP)]],
     });
   }
 
