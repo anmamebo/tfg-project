@@ -7,13 +7,13 @@
 
 @use 'sass:math';
 
-@import "~bootstrap/scss/functions";
+@import "node_modules/bootstrap/scss/functions";
 
 $dark-mode: false !default;
 
 
 // Custom Variables
-@import "~bootstrap/scss/functions";
+@import "node_modules/bootstrap/scss/functions";
 
 $theme-colors-light: (
   'primary': #ebf3ff,

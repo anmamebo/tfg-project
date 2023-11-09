@@ -1,10 +1,10 @@
 # Use the official Node.js image as the base image
-FROM node:16.14.2
+FROM node:18.10.0
 
 # Set the working directory to /app
 WORKDIR /app
 
-RUN npm install -g @angular/cli@13
+RUN npm install -g @angular/cli@16.2.10
 
 # Copy the package.json and package-lock.json files to the container
 COPY package*.json angular.json tsconfig*.json ./
