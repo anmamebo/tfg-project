@@ -67,10 +67,21 @@ export class TokenStorageService {
    * @returns Los datos del usuario.
    */
   public getUser() {
-    if (sessionStorage.getItem(USER_KEY)) {
-      return JSON.parse(sessionStorage.getItem(USER_KEY) || '');
-    } else if (localStorage.getItem(USER_KEY)) {
-      return JSON.parse(localStorage.getItem(USER_KEY) || '');
+    return JSON.parse(sessionStorage.getItem(USER_KEY) || '');
+  }
+
+  /**
+   * 
+   */
+  public updateUser(userUpdated: any) {
+    let user = this.getUser();
+    
+    if (user.user.email != userUpdated.email || user.user.name != userUpdated.name || user.user.last_name != userUpdated.last_name) {
+      user.user.email = userUpdated.email;
+      user.user.name = userUpdated.name;
+      user.user.last_name = userUpdated.last_name;
+
+      this.saveUserSession(user);
     }
   }
 

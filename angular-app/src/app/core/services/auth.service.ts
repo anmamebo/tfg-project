@@ -56,7 +56,7 @@ export class AuthService {
             throw new Error(errorMessage);
           }
           throw new Error(
-            'Ocurrió un error en el servidor. Intentalo más tarde.'
+            'Ocurrió un error en el servidor. Inténtalo más tarde.'
           );
         })
       );
@@ -95,7 +95,7 @@ export class AuthService {
           throw new Error(errorMessage);
         }
         throw new Error(
-          'Ocurrió un error en el servidor. Intentalo más tarde.'
+          'Ocurrió un error en el servidor. Inténtalo más tarde.'
         );
       })
     );

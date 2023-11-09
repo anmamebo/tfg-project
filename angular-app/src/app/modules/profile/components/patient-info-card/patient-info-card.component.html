@@ -1,0 +1,87 @@
+<div class="card">
+
+  <div class="card-header">
+    <h4 class="card-title">
+      Información Paciente
+    </h4>
+  </div>
+
+  <div class="card-content">
+    <div class="card-body">
+
+      <form (ngSubmit)="onSubmit()" [formGroup]="updatePatientDataForm" class="form">
+        <div class="row">
+
+          <!-- DNI -->
+          <div class="col-md-6 col-12">
+            <div class="form-group">
+              <label for="dni">DNI*</label>
+              <input type="text" formControlName="dni" id="dni" class="form-control" placeholder="DNI"
+                [value]="patient.dni" [ngClass]="{ 'is-invalid': submitted && form['dni'].errors }">
+              <div *ngIf="submitted && form['dni'].errors" class="invalid-feedback">
+                <div *ngIf="form['dni'].errors['required']">El DNI es obligatorio</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Número de la seguridad social -->
+          <div class="col-md-6 col-12">
+            <div class="form-group">
+              <label for="social_security">Número seguridad social</label>
+              <input type="text" formControlName="social_security" id="social_security" class="form-control" placeholder="Número seguridad social"
+                [value]="patient.social_security" [ngClass]="{ 'is-invalid': submitted && form['social_security'].errors }">
+              <div *ngIf="submitted && form['social_security'].errors" class="invalid-feedback">
+                <div *ngIf="form['social_security'].errors['required']">El número de la seguridad social es obligatorio</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Género -->
+          <div class="col-md-6">
+            <fieldset class="form-group">
+                <label for="gender">Género*</label>
+                <select class="form-select" formControlName="gender" id="gender" [ngClass]="{ 'is-invalid': submitted && form['gender'].errors }">
+                    <option *ngFor="let option of gender_options" [value]="option.value" [attr.selected]="option.value === patient.gender ? true : null">
+                      {{ option.text }}
+                    </option>
+                </select>
+                <div *ngIf="submitted && form['gender'].errors" class="invalid-feedback">
+                  <div *ngIf="form['gender'].errors['required']">El género es obligatorio</div>
+                </div>
+            </fieldset>
+          </div>
+
+          <!-- Fecha nacimiento -->
+          <div class="col-md-6 col-12">
+            <div class="form-group">
+              <label for="birthdate">Fecha de nacimiento</label>
+              <input type="text" formControlName="birthdate" id="birthdate" class="form-control" [ngClass]="{ 'is-invalid': submitted && form['birthdate'].errors }"
+                mwlFlatpickr [altInput]="true" [convertModelValue]="true" [defaultValue]="patient.birthdate" [locale]="locale" [maxDate]="'today'" [dateFormat]="'Y-m-d'">
+              <div *ngIf="submitted && form['phone'].errors" class="invalid-feedback">
+                <div *ngIf="form['phone'].errors['required']">El número de teléfono es obligatorio</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Número teléfono -->
+          <div class="col-md-6 col-12">
+            <div class="form-group">
+              <label for="phone">Número de teléfono</label>
+              <input type="text" formControlName="phone" id="phone" class="form-control" placeholder="Número de teléfono"
+                [value]="patient.phone" [ngClass]="{ 'is-invalid': submitted && form['phone'].errors }">
+              <div *ngIf="submitted && form['phone'].errors" class="invalid-feedback">
+                <div *ngIf="form['phone'].errors['required']">El número de teléfono es obligatorio</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Botón -->
+          <div class="col-12 d-flex justify-content-end">
+            <button type="submit" class="btn btn-primary me-1 mb-1">Actualizar</button>
+          </div>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -48,6 +48,11 @@ export class BasicInfoCardComponent implements OnInit {
    */
   public submitted: Boolean = false;
 
+  /**
+   * Evento que se emite cuando se actualizan los datos del usuario
+   */
+  @Output() public updatedUserEvent: EventEmitter<void> = new EventEmitter<void>();
+
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
@@ -93,6 +98,7 @@ export class BasicInfoCardComponent implements OnInit {
     this.userService.updateUser(this.updateUser).subscribe({
       next: (data) => {
         this.submitted = false;
+        this.updatedUserEvent.emit();
         // Muestra un toast de éxito
         this.notificationService.showSuccessToast(data.message);
       },

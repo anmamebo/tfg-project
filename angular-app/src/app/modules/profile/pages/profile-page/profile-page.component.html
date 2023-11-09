@@ -22,7 +22,11 @@
 
             <app-avatar-card [user]="user"></app-avatar-card>
 
-            <app-basic-info-card [user]="user"></app-basic-info-card>
+            <app-basic-info-card [user]="user" (updatedUserEvent)="getUser()"></app-basic-info-card>
+
+            <ng-container *ngIf="user.patient">
+              <app-patient-info-card [patient]="user.patient" (updatedPatientEvent)="getUser()"></app-patient-info-card>
+            </ng-container>
 
             <app-contact-info-card *ngIf="null != null"></app-contact-info-card>
 

@@ -31,7 +31,8 @@
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/flatpickr/dist/flatpickr.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",

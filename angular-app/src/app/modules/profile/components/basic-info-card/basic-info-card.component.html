@@ -39,7 +39,7 @@
           <!-- Nombre de usuario -->
           <div class="col-md-6 col-12">
             <div class="form-group">
-              <label for="username-column">Nombre de usuario</label>
+              <label for="username-column">Nombre de usuario*</label>
               <input type="text" formControlName="username" id="username-column" class="form-control"
                 placeholder="Nombre de usuario" [value]="user.username"
                 [ngClass]="{ 'is-invalid': submitted && form['username'].errors }" readonly="readonly">
@@ -53,7 +53,7 @@
           <!-- Correo electrónico -->
           <div class="col-md-6 col-12">
             <div class="form-group">
-              <label for="email-column">Correo Electrónico</label>
+              <label for="email-column">Correo Electrónico*</label>
               <input type="text" formControlName="email" id="email-column" class="form-control"
                 placeholder="Correo Electrónico" [value]="user.email"
                 [ngClass]="{ 'is-invalid': submitted && form['email'].errors }">

@@ -1,3 +1,6 @@
+import { Patient } from "./patient.model";
+
+
 export class User {
   constructor(
     public id: string,
@@ -5,6 +8,7 @@ export class User {
     public password: string,
     public email: string,
     public name?: string,
-    public last_name?: string
+    public last_name?: string,
+    public patient?: Patient,
   ) {}
 }

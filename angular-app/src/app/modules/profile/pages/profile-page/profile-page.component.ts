@@ -39,13 +39,14 @@ export class ProfilePageComponent implements OnInit {
    * Obtiene los datos del usuario actual y los asigna a la propiedad `user`.
    * @private
    */
-  private getUser(): void {
+  public getUser(): void {
     const userSession = this.tokenStorageService.getUser();
 
     if (userSession) {
       this.userService.getUserById(userSession.user.id).subscribe({
         next: (user: User) => {
           this.user = user;
+          this.tokenStorageService.updateUser(user);
         },
         error: (error) => {
           console.error(error);
