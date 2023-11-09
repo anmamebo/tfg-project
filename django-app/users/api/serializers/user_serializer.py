@@ -6,7 +6,8 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 from users.models import User
 
-# from patients.serializers import PatientSerializer
+from patients.api.serializers.patient_serializer import PatientSerializer
+from users.api.serializers.group_serializer import GroupSerializer
 
 # Toma la estructura del modelo para convertirlo en JSON
 # ObjecetSerializer(object, many=True) -> Lista de objetos
@@ -66,7 +67,11 @@ class UserSerializer(serializers.ModelSerializer):
   # Ejemplo de acceder a datos de una relación 1 a 1
   # dni = serializers.CharField(source='patient.dni')
   # Si hay un serializer se podria hacer asi
-  # patient = PatientSerializer()
+  patient = PatientSerializer(read_only=True)
+
+  # groups = serializers.StringRelatedField(many=True, source='groups.name')
+  groups = GroupSerializer(many=True, read_only=True)
+  # groups = serializers.StringRelatedField(many=True, read_only=True)
   
   class Meta:
     model = User

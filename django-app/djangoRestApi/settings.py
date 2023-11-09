@@ -43,6 +43,7 @@ BASE_APPS = [
 LOCAL_APPS = [
     'base',
     'users',
+    'patients',
 ]
 
 THIRD_APPS = [
