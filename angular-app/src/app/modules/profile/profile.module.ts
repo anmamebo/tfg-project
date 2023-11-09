@@ -14,6 +14,7 @@ import { BasicInfoCardComponent } from './components/basic-info-card/basic-info-
 import { ContactInfoCardComponent } from './components/contact-info-card/contact-info-card.component';
 import { ChangePasswordCardComponent } from './components/change-password-card/change-password-card.component';
 import { PatientInfoCardComponent } from './components/patient-info-card/patient-info-card.component';
+import { AddressInfoCardComponent } from './components/address-info-card/address-info-card.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { PatientInfoCardComponent } from './components/patient-info-card/patient
     ContactInfoCardComponent,
     ChangePasswordCardComponent,
     PatientInfoCardComponent,
+    AddressInfoCardComponent,
   ],
   imports: [
     CommonModule,

@@ -26,6 +26,12 @@
 
             <ng-container *ngIf="user.patient">
               <app-patient-info-card [patient]="user.patient" (updatedPatientEvent)="getUser()"></app-patient-info-card>
+
+              <ng-container *ngIf="user.patient.address">
+
+                <app-address-info-card [address]="user.patient.address"></app-address-info-card>
+
+              </ng-container>
             </ng-container>
 
             <app-contact-info-card *ngIf="null != null"></app-contact-info-card>
