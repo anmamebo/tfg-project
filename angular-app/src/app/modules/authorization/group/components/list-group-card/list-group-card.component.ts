@@ -18,6 +18,11 @@ import { Group } from "src/app/core/models/group.model";
 })
 export class ListGroupCardComponent implements OnInit {
   /**
+   * Título de la tarjeta
+   */
+  public titleCard: string = 'Listado de Grupos';
+
+  /**
    * Columnas que se mostrarán en la tabla
    */
   public columns: any[] = [

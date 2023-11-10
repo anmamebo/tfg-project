@@ -1,49 +1,40 @@
-<div class="card">
-
-  <div class="card-header">
-    <h4 class="card-title">
-      Información Doctor
-    </h4>
-  </div>
-
+<app-generic-card [title]="titleCard">
   <div class="card-content">
-    <div class="card-body">
 
-      <form (ngSubmit)="onSubmit()" [formGroup]="updateDoctorDataForm" class="form">
-        <div class="row">
+    <form (ngSubmit)="onSubmit()" [formGroup]="updateDoctorDataForm" class="form">
+      <div class="row">
 
-          <!-- Número de colegiado -->
-          <div class="col-sm-6 col-12">
-            <div class="form-group">
-              <label for="collegiate_number">Número de colegiado*</label>
-              <input type="text" formControlName="collegiate_number" id="collegiate_number" class="form-control" placeholder="Número de colegiado"
-                [ngClass]="{ 'is-invalid': submitted && form['collegiate_number'].errors }">
-              <div *ngIf="submitted && form['collegiate_number'].errors" class="invalid-feedback">
-                <div *ngIf="form['collegiate_number'].errors['required']">El DNI es obligatorio</div>
-                <div *ngIf="form['collegiate_number'].errors['maxlength']">Máx. {{ form['collegiate_number'].errors['maxlength']['requiredLength'] }} caracteres, actual {{ form['collegiate_number'].errors['maxlength']['actualLength'] }}</div>
-                <div *ngIf="form['collegiate_number'].errors['pattern']">Debe introducir un valor numérico</div>
-              </div>
+        <!-- Número de colegiado -->
+        <div class="col-sm-6 col-12">
+          <div class="form-group">
+            <label for="collegiate_number">Número de colegiado*</label>
+            <input type="text" formControlName="collegiate_number" id="collegiate_number" class="form-control" placeholder="Número de colegiado"
+              [ngClass]="{ 'is-invalid': submitted && form['collegiate_number'].errors }">
+            <div *ngIf="submitted && form['collegiate_number'].errors" class="invalid-feedback">
+              <div *ngIf="form['collegiate_number'].errors['required']">El DNI es obligatorio</div>
+              <div *ngIf="form['collegiate_number'].errors['maxlength']">Máx. {{ form['collegiate_number'].errors['maxlength']['requiredLength'] }} caracteres, actual {{ form['collegiate_number'].errors['maxlength']['actualLength'] }}</div>
+              <div *ngIf="form['collegiate_number'].errors['pattern']">Debe introducir un valor numérico</div>
             </div>
-          </div>
-
-          <!-- Número de colegiado -->
-          <div class="col-sm-6 col-12">
-            <div class="form-group">
-                <label class="form-check-label" for="is_available">Disponibilidad*</label>
-                <div class="form-check form-switch">
-                  <input class="form-check-input" type="checkbox" id="is_available" [checked]="doctor.is_available" disabled>
-                </div>
-                <p><small class="text-muted">No se puede editar la disponibilidad.</small></p>
-            </div>
-          </div>
-
-          <!-- Botón -->
-          <div class="col-12 d-flex justify-content-end">
-            <button type="submit" class="btn btn-primary me-1 mb-1">Actualizar</button>
           </div>
         </div>
-      </form>
-      
-    </div>
+
+        <!-- Número de colegiado -->
+        <div class="col-sm-6 col-12">
+          <div class="form-group">
+              <label class="form-check-label" for="is_available">Disponibilidad*</label>
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="is_available" [checked]="doctor.is_available" disabled>
+              </div>
+              <p><small class="text-muted">No se puede editar la disponibilidad.</small></p>
+          </div>
+        </div>
+
+        <!-- Botón -->
+        <div class="col-12 d-flex justify-content-end">
+          <button type="submit" class="btn btn-primary me-1 mb-1">Actualizar</button>
+        </div>
+      </div>
+    </form>
+
   </div>
-</div>
+</app-generic-card>

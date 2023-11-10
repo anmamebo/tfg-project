@@ -22,6 +22,11 @@ import Validation from 'src/app/core/validators/general.validator';
 })
 export class ChangePasswordCardComponent implements OnInit {
   /**
+   * Título de la tarjeta.
+   */
+  public titleCard: string = 'Cambiar contraseña';
+
+  /**
    * Formulario para cambiar la contraseña, con campos para la contraseña actual, nueva contraseña y confirmación de la nueva contraseña.
    */
   public changePasswordForm: FormGroup = new FormGroup({

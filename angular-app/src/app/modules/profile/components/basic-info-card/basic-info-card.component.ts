@@ -24,6 +24,11 @@ import { User } from 'src/app/core/models/user.model';
 })
 export class BasicInfoCardComponent implements OnInit {
   /**
+   * Título de la tarjeta
+   */
+  public titleCard: string = 'Información Básica';
+
+  /**
    * Usuario que se mostrará
    */
   @Input() user: User = new User('', '', '', '');

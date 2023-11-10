@@ -17,6 +17,10 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
   styleUrls: ['./edit-group-card.component.scss']
 })
 export class EditGroupCardComponent implements OnInit {
+  /**
+   * Título de la tarjeta
+   */
+  public titleCard: string = 'Editar Grupo';
 
   /**
    * Grupo que se editará

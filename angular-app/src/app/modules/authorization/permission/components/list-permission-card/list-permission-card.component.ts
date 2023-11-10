@@ -6,6 +6,9 @@ import { PermissionService } from "src/app/core/services/permission.service";
 // Modelos
 import { Permission } from "src/app/core/models/permission.model";
 
+/**
+ * Componente que representa una tarjeta de listado de permisos.
+ */
 @Component({
   selector: 'app-list-permission-card',
   templateUrl: './list-permission-card.component.html',
@@ -13,6 +16,11 @@ import { Permission } from "src/app/core/models/permission.model";
   providers: [PermissionService],
 })
 export class ListPermissionCardComponent implements OnInit {
+  /**
+   * Título de la tarjeta
+   */
+  public titleCard: string = 'Listado de Permisos';
+
   /**
    * Columnas que se mostrarán en la tabla
    */

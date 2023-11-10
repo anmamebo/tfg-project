@@ -1,31 +1,26 @@
-<div class="card">
-  <div class="card-header">
-    <h4 class="card-title">Crear Grupo</h4>
-  </div>
+<app-generic-card [title]="titleCard">
   <div class="card-content">
-    <div class="card-body">
 
-      <!-- Formulario -->
-      <form (ngSubmit)="onSubmit()" [formGroup]="createGroupForm" class="form form-horizontal">
-        <div class="form-body">
-          <div class="row">
-            <div class="col-md-1">
-              <label for="group-name">Nombre</label>
-            </div>
-            <div class="col-md-5 col-6 form-group">
-              <input type="text" formControlName="name" id="group-name" class="form-control" placeholder="Nombre"
-                [ngClass]="{ 'is-invalid': submitted && form['name'].errors }">
-              <div *ngIf="submitted && form['name'].errors" class="invalid-feedback">
-                <div *ngIf="form['name'].errors['required']">El nombre es obligatorio</div>
-              </div>
-            </div>
-            <div class="col-md-3 col-6">
-              <button type="submit" class="btn btn-primary me-1 mb-1">Crear</button>
+    <!-- Formulario -->
+    <form (ngSubmit)="onSubmit()" [formGroup]="createGroupForm" class="form form-horizontal">
+      <div class="form-body">
+        <div class="row">
+          <div class="col-md-1">
+            <label for="group-name">Nombre</label>
+          </div>
+          <div class="col-md-5 col-6 form-group">
+            <input type="text" formControlName="name" id="group-name" class="form-control" placeholder="Nombre"
+              [ngClass]="{ 'is-invalid': submitted && form['name'].errors }">
+            <div *ngIf="submitted && form['name'].errors" class="invalid-feedback">
+              <div *ngIf="form['name'].errors['required']">El nombre es obligatorio</div>
             </div>
           </div>
+          <div class="col-md-3 col-6">
+            <button type="submit" class="btn btn-primary me-1 mb-1">Crear</button>
+          </div>
         </div>
-      </form>
+      </div>
+    </form>
 
-    </div>
   </div>
-</div>
+</app-generic-card>

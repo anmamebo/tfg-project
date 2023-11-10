@@ -1,32 +1,27 @@
-<div class="card">
-  <div class="card-header">
-    <h4 class="card-title">Editar Grupo</h4>
-  </div>
+<app-generic-card [title]="titleCard">
   <div class="card-content">
-    <div class="card-body">
 
-      <!-- Formulario -->
-      <form (ngSubmit)="onSubmit()" [formGroup]="editGroupForm" class="form form-horizontal">
-        <div class="form-body">
-          <div class="row">
-              <div class="col-12">
-                  <div class="form-group">
-                      <label for="group-name">Nombre</label>
-                      <input type="text" formControlName="name" id="group-name" class="form-control" placeholder="Nombre"
-                        [value]="group.name" [ngClass]="{ 'is-invalid': submitted && form['name'].errors }">
-                      <div *ngIf="submitted && form['name'].errors" class="invalid-feedback">
-                        <div *ngIf="form['name'].errors['required']">El nombre es obligatorio</div>
-                      </div>
-                  </div>
-              </div>
-              <div class="col-12 d-flex justify-content-end">
-                  <button type="submit" class="btn btn-primary me-1 mb-1">Actualizar</button>
-                  <button type="reset" class="btn btn-light-secondary me-1 mb-1">Vaciar</button>
-              </div>
-          </div>
+    <!-- Formulario -->
+    <form (ngSubmit)="onSubmit()" [formGroup]="editGroupForm" class="form form-horizontal">
+      <div class="form-body">
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group">
+                    <label for="group-name">Nombre</label>
+                    <input type="text" formControlName="name" id="group-name" class="form-control" placeholder="Nombre"
+                      [value]="group.name" [ngClass]="{ 'is-invalid': submitted && form['name'].errors }">
+                    <div *ngIf="submitted && form['name'].errors" class="invalid-feedback">
+                      <div *ngIf="form['name'].errors['required']">El nombre es obligatorio</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 d-flex justify-content-end">
+                <button type="submit" class="btn btn-primary me-1 mb-1">Actualizar</button>
+                <button type="reset" class="btn btn-light-secondary me-1 mb-1">Vaciar</button>
+            </div>
         </div>
-      </form>
-      
-    </div>
+      </div>
+    </form>
+
   </div>
-</div>
+</app-generic-card>

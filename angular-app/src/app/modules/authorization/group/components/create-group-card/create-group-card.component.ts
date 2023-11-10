@@ -19,6 +19,11 @@ import { Group } from "src/app/core/models/group.model";
 })
 export class CreateGroupCardComponent implements OnInit {
   /**
+   * Título de la tarjeta
+   */
+  public titleCard: string = 'Crear Grupo';
+
+  /**
    * Grupo que se creará
    */
   public group: Group = new Group('', '');

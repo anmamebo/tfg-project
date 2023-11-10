@@ -15,7 +15,9 @@ import { NotificationService } from "src/app/core/services/notification.service"
 // Modelos
 import { Address } from "src/app/core/models/address.model";
 
-
+/**
+ * Componente que representa una tarjeta de información de dirección de usuario.
+ */
 @Component({
   selector: 'app-address-info-card',
   templateUrl: './address-info-card.component.html',
@@ -23,6 +25,11 @@ import { Address } from "src/app/core/models/address.model";
   providers: [AddressService, NotificationService],
 })
 export class AddressInfoCardComponent implements OnInit {
+  /**
+   * Título de la tarjeta
+   */
+  public titleCard: string = 'Dirección';
+
   /**
    * Dirección que se mostrará
    */

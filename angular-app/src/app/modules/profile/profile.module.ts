@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { ProfileRoutingModule } from './profile-routing.module';
 import { GenericPageModule } from "src/app/shared/components/generic-page/generic-page.module";
+import { GenericCardModule } from "src/app/shared/components/generic-card/generic-card.module";
 import { LoadingSpinnerModule } from "src/app/shared/components/loading-spinner/loading-spinner.module";
 
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
@@ -35,6 +36,7 @@ import { DoctorInfoCardComponent } from './components/doctor-info-card/doctor-in
     FlatpickrModule.forRoot(),
     LoadingSpinnerModule,
     GenericPageModule,
+    GenericCardModule,
   ],
 })
 export class ProfileModule {}

@@ -11,6 +11,9 @@ import { NotificationService } from 'src/app/core/services/notification.service'
 import { Doctor } from 'src/app/core/models/doctor.model';
 
 
+/**
+ * Componente que representa una tarjeta de información de doctor.
+ */
 @Component({
   selector: 'app-doctor-info-card',
   templateUrl: './doctor-info-card.component.html',
@@ -18,6 +21,11 @@ import { Doctor } from 'src/app/core/models/doctor.model';
   providers: [DoctorService, NotificationService],
 })
 export class DoctorInfoCardComponent implements OnInit {
+  /**
+   * Título de la tarjeta
+   */
+  public titleCard: string = 'Información Doctor';
+
   /**
    * Doctor que se mostrará
    */

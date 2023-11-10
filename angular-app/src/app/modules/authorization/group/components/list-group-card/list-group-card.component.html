@@ -1,18 +1,13 @@
-<div class="card">
-  <div class="card-header">
-    <h4 class="card-title">Listado de Grupos</h4>
-  </div>
+<app-generic-card [title]="titleCard">
   <div class="card-content">
-    <div class="card-body">
 
-      <ng-container *ngIf="groups">
+    <ng-container *ngIf="groups">
 
-        <app-generic-table [columns]="columns" [data]="groups" [actions]="true" [actionsUrls]="actionsUrls" (onDeleteEvent)="deleteGroup($event)"></app-generic-table>
+      <app-generic-table [columns]="columns" [data]="groups" [actions]="true" [actionsUrls]="actionsUrls" (onDeleteEvent)="deleteGroup($event)"></app-generic-table>
 
-        <app-pagination (pageEmitter)="goToPage($event)" [page]="page" [totalPages]="totalPages" [numItems]="numGroups"></app-pagination>
+      <app-pagination (pageEmitter)="goToPage($event)" [page]="page" [totalPages]="totalPages" [numItems]="numGroups"></app-pagination>
 
-      </ng-container>
+    </ng-container>
 
-    </div>
   </div>
-</div>
+</app-generic-card>

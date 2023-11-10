@@ -14,6 +14,9 @@ import { NotificationService } from "src/app/core/services/notification.service"
 import { Patient } from 'src/app/core/models/patient.model';
 
 
+/**
+ * Componente que representa una tarjeta de información de paciente.
+ */
 @Component({
   selector: 'app-patient-info-card',
   templateUrl: './patient-info-card.component.html',
@@ -21,6 +24,11 @@ import { Patient } from 'src/app/core/models/patient.model';
   providers: [DatePipe, PatientService, NotificationService],
 })
 export class PatientInfoCardComponent implements OnInit {
+  /**
+   * Título de la tarjeta
+   */
+  public titleCard: string = 'Información Paciente';
+
   /**
    * Opciones para el campo de género
    */

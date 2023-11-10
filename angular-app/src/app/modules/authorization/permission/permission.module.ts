@@ -6,6 +6,7 @@ import { PermissionRoutingModule } from "./permission-routing.module";
 import { GenericTableModule } from "src/app/shared/components/generic-table/generic-table.module";
 import { PaginationModule } from "src/app/shared/components/pagination/pagination.module";
 import { GenericPageModule } from "src/app/shared/components/generic-page/generic-page.module";
+import { GenericCardModule } from "src/app/shared/components/generic-card/generic-card.module";
 
 import { PermissionPageComponent } from "./pages/permission-page/permission-page.component";
 
@@ -23,7 +24,8 @@ import { ListPermissionCardComponent } from './components/list-permission-card/l
     PermissionRoutingModule,
     GenericTableModule,
     PaginationModule,
-    GenericPageModule
+    GenericPageModule,
+    GenericCardModule
   ]
 })
 export class PermissionModule { }

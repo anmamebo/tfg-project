@@ -12,6 +12,10 @@ import { Group } from "src/app/core/models/group.model";
   styleUrls: ['./view-group-card.component.scss']
 })
 export class ViewGroupCardComponent implements OnInit {
+  /**
+   * Título de la tarjeta
+   */
+  public titleCard: string = 'Ver Grupo';
 
   /**
    * Grupo que se visualizará

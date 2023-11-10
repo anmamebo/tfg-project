@@ -6,6 +6,7 @@ import { GroupRoutingModule } from './group-routing.module';
 import { GenericTableModule } from "src/app/shared/components/generic-table/generic-table.module";
 import { PaginationModule } from "src/app/shared/components/pagination/pagination.module";
 import { GenericPageModule } from "src/app/shared/components/generic-page/generic-page.module";
+import { GenericCardModule } from "src/app/shared/components/generic-card/generic-card.module";
 
 import { GroupPageComponent } from "./pages/group-page/group-page.component";
 import { GroupEditPageComponent } from "./pages/group-edit-page/group-edit-page.component";
@@ -32,7 +33,8 @@ import { ViewGroupCardComponent } from './components/view-group-card/view-group-
     GroupRoutingModule,
     GenericTableModule,
     PaginationModule,
-    GenericPageModule
+    GenericPageModule,
+    GenericCardModule
   ]
 })
 export class GroupModule { }
