@@ -19,6 +19,15 @@ import { GroupService } from "src/app/core/services/group.service";
   providers: [GroupService]
 })
 export class GroupViewPageComponent implements OnInit {
+  /**
+   * Título de la página
+   */
+  public pageTitle: string = 'Visualizar grupo';
+
+  /**
+   * Descripción de la página
+   */
+  public pageDescription: string = 'Aquí puedes visualizar un grupo (rol).';
 
   /**
    * Datos para el breadcrumb

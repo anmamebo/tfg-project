@@ -1,37 +1,25 @@
-<div class="page-heading">
-  <div class="page-title">
-    <div class="row">
-      <div class="col-12 col-md-6 order-md-1 order-last">
-        <h3>Grupos (Roles)</h3>
-        <p class="text-subtitle text-muted">
-          Aquí puedes ver los diferentes grupos (roles).
-        </p>
-      </div>
-      <div class="col-12 col-md-6 order-md-2 order-first">
-        
-        <app-breadcrumb [breadcrumbs]="breadcrumbData" [isLastActive]="true"></app-breadcrumb>
+<app-generic-page [pageTitle]="pageTitle" [pageDescription]="pageDescription" [breadcrumbData]="breadcrumbData">
+  <div class="page-content">
 
+    <section class="section">
+      <div class="row">
+        <div class="col-12">
+  
+          <app-create-group-card (groupCreated)="updateGroupList()"></app-create-group-card>
+          
+        </div>
       </div>
-    </div>
+    </section>
+  
+    <section class="section">
+      <div class="row">
+        <div class="col-12">
+  
+          <app-list-group-card></app-list-group-card>
+  
+        </div>
+      </div>
+    </section>
+
   </div>
-
-  <section class="section">
-    <div class="row">
-      <div class="col-12">
-
-        <app-create-group-card (groupCreated)="updateGroupList()"></app-create-group-card>
-        
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="row">
-      <div class="col-12">
-
-        <app-list-group-card></app-list-group-card>
-
-      </div>
-    </div>
-  </section>
-</div>
+</app-generic-page>

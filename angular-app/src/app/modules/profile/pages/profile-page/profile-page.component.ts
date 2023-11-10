@@ -17,6 +17,16 @@ import { breadcrumbProfileData } from "src/app/core/constants/breadcrumb-data";
 })
 export class ProfilePageComponent implements OnInit {
   /**
+   * Título de la página.
+   */
+  public pageTitle: string = 'Mi Perfil';
+
+  /**
+   * Descripción de la página.
+   */
+  public pageDescription: string = 'Aquí puedes ver y editar tu perfil de usuario.';
+
+  /**
    * Objeto `User` que almacena los datos del usuario actual.
    */
   public user: User | null = null;

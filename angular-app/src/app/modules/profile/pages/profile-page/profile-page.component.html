@@ -1,81 +1,70 @@
-<div class="page-heading">
-  <div class="page-title">
-    <div class="row">
-      <div class="col-12 col-md-6 order-md-1 order-last">
-        <h3>Mi Perfil</h3>
-        <p class="text-subtitle text-muted">
-          Aquí puedes ver y editar tu información personal.
-        </p>
-      </div>
-      <div class="col-12 col-md-6 order-md-2 order-first">
+<app-generic-page [pageTitle]="pageTitle" [pageDescription]="pageDescription" [breadcrumbData]="breadcrumbData">
+  <div class="page-content">
 
-        <app-breadcrumb [breadcrumbs]="breadcrumbData" [isLastActive]="true"></app-breadcrumb>
-
-      </div>
-    </div>
-  </div>
-  <section class="section">
-    <div *ngIf="user; else loadingUser" class="row flex-column-reverse flex-md-row">
-      <div class="col-md-8">
-        <div class="tab-content" id="profileTabContent">
-          <div class="tab-pane fade active show" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-
-            <app-avatar-card [user]="user"></app-avatar-card>
-
-            <app-basic-info-card [user]="user" (updatedUserEvent)="getUser()"></app-basic-info-card>
-
-            <ng-container *ngIf="user.doctor">
-              <app-doctor-info-card [doctor]="user.doctor" (updatedDoctorEvent)="getUser()"></app-doctor-info-card>
-            </ng-container>
-
-            <ng-container *ngIf="user.patient">
-              <app-patient-info-card [patient]="user.patient" (updatedPatientEvent)="getUser()"></app-patient-info-card>
-
-              <ng-container *ngIf="user.patient.address">
-
-                <app-address-info-card [address]="user.patient.address"></app-address-info-card>
-
+    <section class="section">
+      <div *ngIf="user; else loadingUser" class="row flex-column-reverse flex-md-row">
+        <div class="col-md-8">
+          <div class="tab-content" id="profileTabContent">
+            <div class="tab-pane fade active show" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+  
+              <app-avatar-card [user]="user"></app-avatar-card>
+  
+              <app-basic-info-card [user]="user" (updatedUserEvent)="getUser()"></app-basic-info-card>
+  
+              <ng-container *ngIf="user.doctor">
+                <app-doctor-info-card [doctor]="user.doctor" (updatedDoctorEvent)="getUser()"></app-doctor-info-card>
               </ng-container>
-            </ng-container>
-
-          </div>
-          <div class="tab-pane fade" id="password" role="tabpanel" aria-labelledby="password-tab">
-
-            <app-change-password-card></app-change-password-card>
-
+  
+              <ng-container *ngIf="user.patient">
+                <app-patient-info-card [patient]="user.patient" (updatedPatientEvent)="getUser()"></app-patient-info-card>
+  
+                <ng-container *ngIf="user.patient.address">
+  
+                  <app-address-info-card [address]="user.patient.address"></app-address-info-card>
+  
+                </ng-container>
+              </ng-container>
+  
+            </div>
+            <div class="tab-pane fade" id="password" role="tabpanel" aria-labelledby="password-tab">
+  
+              <app-change-password-card></app-change-password-card>
+  
+            </div>
           </div>
         </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card sticky-top mb-4 mb-md-0">
-          <div class="card-content">
-            <div class="card-body">
-              <ul class="nav nav-pills flex-column gap-2" id="profileTab" role="tablist" aria-orientation="vertical">
-                <a href="#profile" class="nav-link active" id="profile-tab" data-bs-toggle="pill" role="tab"
-                  aria-controls="profile" aria-selected="true">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 16 16">
-                    <path fill="currentColor"
-                      d="M3 14s-1 0-1-1s1-4 6-4s6 3 6 4s-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6a3 3 0 0 0 0 6Z" />
-                  </svg>
-                  Perfil
-                </a>
-                <a href="#password" class="nav-link" id="password-tab" data-bs-toggle="pill" role="tab"
-                  aria-controls="password" aria-selected="false" tabindex="-1">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 16 16">
-                    <path fill="currentColor"
-                      d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z" />
-                  </svg>
-                  Contraseña
-                </a>
-              </ul>
+        <div class="col-md-4">
+          <div class="card sticky-top mb-4 mb-md-0">
+            <div class="card-content">
+              <div class="card-body">
+                <ul class="nav nav-pills flex-column gap-2" id="profileTab" role="tablist" aria-orientation="vertical">
+                  <a href="#profile" class="nav-link active" id="profile-tab" data-bs-toggle="pill" role="tab"
+                    aria-controls="profile" aria-selected="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 16 16">
+                      <path fill="currentColor"
+                        d="M3 14s-1 0-1-1s1-4 6-4s6 3 6 4s-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6a3 3 0 0 0 0 6Z" />
+                    </svg>
+                    Perfil
+                  </a>
+                  <a href="#password" class="nav-link" id="password-tab" data-bs-toggle="pill" role="tab"
+                    aria-controls="password" aria-selected="false" tabindex="-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 16 16">
+                      <path fill="currentColor"
+                        d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z" />
+                    </svg>
+                    Contraseña
+                  </a>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+  
+      <ng-template #loadingUser>
+        <app-loading-spinner></app-loading-spinner>
+      </ng-template>
+    </section>
 
-    <ng-template #loadingUser>
-      <app-loading-spinner></app-loading-spinner>
-    </ng-template>
-  </section>
-</div>
+  </div>
+</app-generic-page>

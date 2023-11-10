@@ -12,6 +12,15 @@ import { breadcrumbPermissionData } from "src/app/core/constants/breadcrumb-data
   styleUrls: ['./permission-page.component.scss']
 })
 export class PermissionPageComponent implements OnInit {
+  /**
+   * Título de la página.
+   */
+  public pageTitle: string = 'Permisos';
+
+  /**
+   * Descripción de la página.
+   */
+  public pageDescription: string = 'Aquí puedes ver los diferentes permisos.';
 
   /**
    * Datos para el componente `app-breadcrumb`.

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { ProfileRoutingModule } from './profile-routing.module';
-import { BreadcrumbModule } from "src/app/shared/components/breadcrumb/breadcrumb.module";
+import { GenericPageModule } from "src/app/shared/components/generic-page/generic-page.module";
 import { LoadingSpinnerModule } from "src/app/shared/components/loading-spinner/loading-spinner.module";
 
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
@@ -33,8 +33,8 @@ import { DoctorInfoCardComponent } from './components/doctor-info-card/doctor-in
     ReactiveFormsModule,
     SweetAlert2Module,
     FlatpickrModule.forRoot(),
-    BreadcrumbModule,
-    LoadingSpinnerModule
+    LoadingSpinnerModule,
+    GenericPageModule,
   ],
 })
 export class ProfileModule {}

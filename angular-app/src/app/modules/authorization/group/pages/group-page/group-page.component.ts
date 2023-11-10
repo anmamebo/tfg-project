@@ -12,6 +12,16 @@ import { breadcrumbGroupData } from "src/app/core/constants/breadcrumb-data";
 })
 export class GroupPageComponent implements OnInit {
   /**
+   * Título de la página.
+   */
+  public pageTitle: string = 'Grupos (Roles)';
+
+  /**
+   * Descripción de la página.
+   */
+  public pageDescription: string = 'Aquí puedes ver los diferentes grupos (roles).';
+  
+  /**
    * Datos para el componente `app-breadcrumb`.
    */
   public breadcrumbData = breadcrumbGroupData;
