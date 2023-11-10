@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { ProfileRoutingModule } from './profile-routing.module';
 import { BreadcrumbModule } from "src/app/shared/components/breadcrumb/breadcrumb.module";
+import { LoadingSpinnerModule } from "src/app/shared/components/loading-spinner/loading-spinner.module";
 
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { FlatpickrModule } from "angularx-flatpickr";
@@ -32,7 +33,8 @@ import { AddressInfoCardComponent } from './components/address-info-card/address
     ReactiveFormsModule,
     SweetAlert2Module,
     FlatpickrModule.forRoot(),
-    BreadcrumbModule
+    BreadcrumbModule,
+    LoadingSpinnerModule
   ],
 })
 export class ProfileModule {}

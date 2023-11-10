@@ -15,7 +15,7 @@
     </div>
   </div>
   <section class="section">
-    <div *ngIf="user; else elseBlock" class="row flex-column-reverse flex-md-row">
+    <div *ngIf="user; else loadingUser" class="row flex-column-reverse flex-md-row">
       <div class="col-md-8">
         <div class="tab-content" id="profileTabContent">
           <div class="tab-pane fade active show" id="profile" role="tabpanel" aria-labelledby="profile-tab">
@@ -72,10 +72,8 @@
       </div>
     </div>
 
-    <ng-template #elseBlock>
-      <div class="spinner-border text-primary" role="status">
-        <span class="visually-hidden">Cargando...</span>
-      </div>
+    <ng-template #loadingUser>
+      <app-loading-spinner></app-loading-spinner>
     </ng-template>
   </section>
 </div>
