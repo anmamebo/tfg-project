@@ -1,3 +1,4 @@
+import { Doctor } from "./doctor.model";
 import { Patient } from "./patient.model";
 
 
@@ -10,5 +11,6 @@ export class User {
     public name?: string,
     public last_name?: string,
     public patient?: Patient,
+    public doctor?: Doctor,
   ) {}
 }
