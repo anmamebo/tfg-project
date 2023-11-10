@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Title } from '@angular/platform-browser';
 import {
   FormBuilder,
   FormControl,
@@ -49,7 +48,6 @@ export class LoginPageComponent implements OnInit {
   public errorMessage: string = '';
 
   constructor(
-    private titleService: Title,
     private authService: AuthService,
     private tokenStorageService: TokenStorageService,
     private formBuilder: FormBuilder,
@@ -57,7 +55,6 @@ export class LoginPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.titleService.setTitle('Iniciar sesión | HospitalSys');
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required],

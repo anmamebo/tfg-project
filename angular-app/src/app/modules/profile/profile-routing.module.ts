@@ -7,6 +7,7 @@ const routes: Routes = [
   {
     path: '',
     component: ProfilePageComponent,
+    title: 'Mi Perfil | HospitalSys',
   },
 ];
 

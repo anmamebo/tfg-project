@@ -21,7 +21,11 @@ const routes: Routes = [
       import('./modules/modules.module').then((m) => m.ModulesModule),
     canActivate: [AuthGuard],
   },
-  { path: '**', component: Error404PageComponent },
+  { 
+    path: '**', 
+    component: Error404PageComponent,
+    title: 'Página no encontrada | HospitalSys'
+  },
 ];
 
 @NgModule({

@@ -9,14 +9,17 @@ const routes: Routes = [
   {
     path: '',
     component: GroupPageComponent,
+    title: 'Grupos (roles) | HospitalSys'
   },
   {
     path: ':id',
     component: GroupViewPageComponent,
+    title: 'Ver grupo | HospitalSys'
   },
   {
     path: 'editar/:id',
     component: GroupEditPageComponent,
+    title: 'Editar grupo | HospitalSys'
   },
 ];
 
