@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { UserDropdownComponent } from './user-dropdown.component';
 
@@ -8,7 +9,8 @@ describe('UserDropdownComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ UserDropdownComponent ]
+      declarations: [ UserDropdownComponent ],
+      imports: [HttpClientTestingModule]
     })
     .compileComponents();
   });

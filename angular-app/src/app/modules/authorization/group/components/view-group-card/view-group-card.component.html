@@ -5,15 +5,15 @@
         
       <div class="col-md-6">
         <div class="form-group">
-          <label for="staticInput">ID</label>
-          <input type="text" class="form-control" id="readonlyInput" readonly="readonly" [value]="group!.id">
+          <label for="id">ID</label>
+          <input type="text" class="form-control" id="id" [attr.readonly]="true" [value]="group?.id">
         </div>
       </div>
 
       <div class="col-md-6">
         <div class="form-group">
-          <label for="staticInput">Nombre</label>
-          <input type="text" class="form-control" id="readonlyInput" readonly="readonly" [value]="group!.name">
+          <label for="name">Nombre</label>
+          <input type="text" class="form-control" id="name" [attr.readonly]="true" [value]="group?.name">
         </div>
       </div>
 
@@ -21,7 +21,7 @@
         <div class="form-group">
           <label for="staticInput">Permisos vinculados</label>
 
-          <ng-container *ngIf="group!.permissions!.length > 0; else notPermissions">
+          <ng-container *ngIf="group?.permissions!.length > 0; else notPermissions">
 
             <app-generic-table [columns]="columns" [data]="group?.permissions || []" [actions]="false"></app-generic-table>
 

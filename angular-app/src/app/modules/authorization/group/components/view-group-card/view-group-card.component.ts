@@ -35,8 +35,4 @@ export class ViewGroupCardComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
-  dale(): void {
-
-  }
 }

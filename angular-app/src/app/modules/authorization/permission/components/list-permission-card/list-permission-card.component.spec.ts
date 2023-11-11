@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { ListPermissionCardComponent } from './list-permission-card.component';
 
@@ -8,7 +9,8 @@ describe('ListPermissionCardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ListPermissionCardComponent ]
+      declarations: [ ListPermissionCardComponent ],
+      imports: [HttpClientTestingModule]
     })
     .compileComponents();
   });

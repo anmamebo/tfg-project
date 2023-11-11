@@ -52,7 +52,7 @@ export class ProfilePageComponent implements OnInit {
   public getUser(): void {
     const userSession = this.tokenStorageService.getUser();
 
-    if (userSession) {
+    if (userSession.user) {
       this.userService.getUserById(userSession.user.id).subscribe({
         next: (user: User) => {
           this.user = user;

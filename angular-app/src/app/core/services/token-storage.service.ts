@@ -67,7 +67,7 @@ export class TokenStorageService {
    * @returns Los datos del usuario.
    */
   public getUser() {
-    return JSON.parse(sessionStorage.getItem(USER_KEY) || '');
+    return JSON.parse(sessionStorage.getItem(USER_KEY) || '{}');
   }
 
   /**

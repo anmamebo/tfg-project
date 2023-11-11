@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { CreateGroupCardComponent } from './create-group-card.component';
 
@@ -8,7 +9,8 @@ describe('CreateGroupCardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CreateGroupCardComponent ]
+      declarations: [ CreateGroupCardComponent ],
+      imports: [HttpClientTestingModule]
     })
     .compileComponents();
   });

@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { AddressInfoCardComponent } from './address-info-card.component';
 
@@ -8,7 +9,8 @@ describe('AddressInfoCardComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [AddressInfoCardComponent]
+      declarations: [AddressInfoCardComponent],
+      imports: [HttpClientTestingModule]
     });
     fixture = TestBed.createComponent(AddressInfoCardComponent);
     component = fixture.componentInstance;
