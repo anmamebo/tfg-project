@@ -1,4 +1,6 @@
+import { Location } from '@angular/common';
 import { Component, Input } from '@angular/core';
+
 
 /**
  * Componente genérico para páginas.
@@ -23,4 +25,15 @@ export class GenericPageComponent {
    * Datos para el componente `app-breadcrumb`.
    */
   @Input() breadcrumbData: any;
+
+  constructor(
+    private location: Location
+  ) {}
+
+  /**
+   * Regresa a la página anterior.
+   */
+  public goBack(): void {
+    this.location.back();
+  }
 }
