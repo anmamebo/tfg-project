@@ -5,6 +5,7 @@ from doctors.models import Doctor
 class DoctorSerializer(serializers.ModelSerializer):
   user = serializers.SerializerMethodField(read_only=True)
   departments = serializers.SerializerMethodField(read_only=True)
+  medical_specialties = serializers.SerializerMethodField(read_only=True)
   
   class Meta:
     model = Doctor
@@ -26,6 +27,13 @@ class DoctorSerializer(serializers.ModelSerializer):
       'id': department.id,
       'name': department.name,
     } for department in departments.all()]
+    
+  def get_medical_specialties(self, obj):
+    medical_specialties = obj.medical_specialties
+    return [{
+      'id': medical_specialty.id,
+      'name': medical_specialty.name,
+    } for medical_specialty in medical_specialties.all()]
     
 class DoctorInDepartmentListSerializer(serializers.ModelSerializer):
   user = serializers.SerializerMethodField(read_only=True)
