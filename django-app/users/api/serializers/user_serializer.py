@@ -7,6 +7,7 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from users.models import User
 
 from patients.api.serializers.patient_serializer import PatientSerializer
+from doctors.api.serializers.doctor_serializer import DoctorSerializer
 from users.api.serializers.group_serializer import GroupSerializer
 
 # Toma la estructura del modelo para convertirlo en JSON
@@ -68,7 +69,7 @@ class UserSerializer(serializers.ModelSerializer):
   # dni = serializers.CharField(source='patient.dni')
   # Si hay un serializer se podria hacer asi
   patient = PatientSerializer(read_only=True)
-
+  doctor = DoctorSerializer(read_only=True)
   # groups = serializers.StringRelatedField(many=True, source='groups.name')
   groups = GroupSerializer(many=True, read_only=True)
   # groups = serializers.StringRelatedField(many=True, read_only=True)
