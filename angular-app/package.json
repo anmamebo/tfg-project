@@ -8,7 +8,10 @@
     "watch": "ng build --watch --configuration development",
     "test": "jest --verbose",
     "test:coverage": "jest --coverage",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "compodoc:build": "compodoc -p tsconfig.doc.json",
+    "compodoc:build-and-serve": "compodoc -p tsconfig.doc.json -s",
+    "compodoc:serve": "compodoc -s"
   },
   "private": true,
   "dependencies": {
@@ -22,9 +25,11 @@
     "@angular/router": "^16.2.0",
     "@popperjs/core": "^2.11.8",
     "@sweetalert2/ngx-sweetalert2": "^12.2.0",
+    "angular-calendar": "^0.31.0",
     "angularx-flatpickr": "^7.3.0",
     "bootstrap": "^5.3.2",
     "bootstrap-icons": "^1.11.1",
+    "date-fns": "^2.30.0",
     "flatpickr": "^4.6.13",
     "jquery": "^3.7.1",
     "ngx-progressbar": "^11.1.0",
@@ -38,6 +43,7 @@
     "@angular-devkit/build-angular": "^16.2.10",
     "@angular/cli": "^16.2.10",
     "@angular/compiler-cli": "^16.2.0",
+    "@compodoc/compodoc": "^1.1.22",
     "@types/jest": "^29.5.8",
     "jest": "^29.7.0",
     "jest-preset-angular": "^13.1.4",

@@ -16,6 +16,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('./authorization/authorization.module').then((m) => m.AuthorizationModule),
   },
+  {
+    path: 'horario',
+    loadChildren: () =>
+      import('./schedule/schedule.module').then((m) => m.ScheduleModule),
+  }
 ];
 
 @NgModule({

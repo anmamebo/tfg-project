@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { NgProgressModule, NG_PROGRESS_CONFIG, NgProgressComponent } from 'ngx-progressbar';
@@ -28,7 +29,8 @@ import { AppComponent } from './app.component';
     CoreModule,
     SweetAlert2Module.forRoot(),
     NgProgressModule,
-    NgProgressComponent
+    NgProgressComponent,
+    BrowserAnimationsModule
   ],
   providers: [
     importProvidersFrom(NgProgressHttpModule),

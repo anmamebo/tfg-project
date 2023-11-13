@@ -4,6 +4,12 @@ export const breadcrumbProfileData = [
   { label: 'Mi perfil', url: '/perfil'}
 ]
 
+// Horario
+export const breadcrumbScheduleData = [
+  { label: 'Panel Principal', url: '/'},
+  { label: 'Mi horario', url: '' }
+]
+
 // Grupos
 export const breadcrumbGroupData = [
   { label: 'Panel Principal', url: '/'},
