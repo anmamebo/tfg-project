@@ -121,13 +121,26 @@ WSGI_APPLICATION = 'djangoRestApi.wsgi.application'
 #     }
 # }
 
+# DOCKER
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'hospital_db',
+#         'USER': 'user',
+#         'PASSWORD': 'password',
+#         'HOST': 'mysql',
+#         'PORT': 3306
+#     }
+# }
+
+# MI PC
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'hospital_db',
-        'USER': 'user',
-        'PASSWORD': 'password',
-        'HOST': 'mysql',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': 'localhost',
         'PORT': 3306
     }
 }
