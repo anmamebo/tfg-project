@@ -8,6 +8,7 @@ class Doctor(BaseModel):
   user = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name='Usuario')
   collegiate_number = models.CharField(verbose_name='Número de colegiado', max_length=10, unique=True)
   is_available = models.BooleanField(verbose_name='Disponible', default=True)
+  departments = models.ManyToManyField('departments.Department', verbose_name='Departamentos', blank=True)
   
   class Meta:
     verbose_name = 'Doctor'

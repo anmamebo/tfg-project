@@ -5,7 +5,7 @@ from rest_framework import status
 from rest_framework import viewsets
 
 from departments.models import Department
-from departments.api.serializers.department_serializer import DepartmentSerializer
+from departments.api.serializers.department_serializer import (DepartmentSerializer, DepartmentWithDoctorsSerializer)
 
 
 class DepartmentViewSet(viewsets.GenericViewSet):
@@ -23,7 +23,7 @@ class DepartmentViewSet(viewsets.GenericViewSet):
   
   model = Department
   serializer_class = DepartmentSerializer
-  list_serializer_class = DepartmentSerializer
+  list_serializer_class = DepartmentWithDoctorsSerializer
   queryset = None
   
   def get_object(self, pk):
