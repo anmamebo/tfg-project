@@ -7,6 +7,7 @@ import { GenericTableModule } from "src/app/shared/components/generic-table/gene
 import { PaginationModule } from "src/app/shared/components/pagination/pagination.module";
 import { GenericPageModule } from "src/app/shared/components/generic-page/generic-page.module";
 import { GenericCardModule } from "src/app/shared/components/generic-card/generic-card.module";
+import { SearchModule } from "src/app/shared/components/search/search.module";
 
 import { PermissionPageComponent } from "./pages/permission-page/permission-page.component";
 
@@ -25,7 +26,8 @@ import { ListPermissionCardComponent } from './components/list-permission-card/l
     GenericTableModule,
     PaginationModule,
     GenericPageModule,
-    GenericCardModule
+    GenericCardModule,
+    SearchModule
   ]
 })
 export class PermissionModule { }

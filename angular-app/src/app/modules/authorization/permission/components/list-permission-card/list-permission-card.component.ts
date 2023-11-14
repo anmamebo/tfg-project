@@ -16,14 +16,10 @@ import { Permission } from "src/app/core/models/permission.model";
   providers: [PermissionService],
 })
 export class ListPermissionCardComponent implements OnInit {
-  /**
-   * Título de la tarjeta
-   */
+  /** Título de la tarjeta */
   public titleCard: string = 'Listado de Permisos';
 
-  /**
-   * Columnas que se mostrarán en la tabla
-   */
+  /** Columnas que se mostrarán en la tabla */
   public columns: any[] = [
     { header: 'ID', field: 'id' },
     { header: 'NOMBRE', field: 'name' },
@@ -31,34 +27,27 @@ export class ListPermissionCardComponent implements OnInit {
     { header: 'MODELO RELACIONADO', field: 'content_type' },
   ]
 
-  /**
-   * Permisos que se mostrarán
-   */
+  /** Permisos que se mostrarán */
   public permissions: Permission[] | null = null;
 
-  /**
-   * Página actual
-   */
+  /** Página actual */
   public page: number = 1;
 
-  /**
-   * Número de páginas totales
-   */
+  /** Número de páginas totales */
   public totalPages: number = 1;
 
-  /**
-   * Número de grupos totales
-   */
+  /** Número de grupos totales */
   public numGroups: number = 0;
 
-  /**
-   * Número de resultados por página
-   */
+  /** Número de resultados por página */
   public numResults: number = 10;
 
+  /** Término de búsqueda */
+  public search: string = '';
+  
   constructor(
-    private permissionService: PermissionService
-  ) { }
+    private permissionService: PermissionService,
+  ) {}
 
   ngOnInit(): void {
     this.getPermissions(this.page);
@@ -74,20 +63,35 @@ export class ListPermissionCardComponent implements OnInit {
   }
 
   /**
-   * Obtiene los permisos.
-   * @param page Número de página que se quiere obtener.	
+   * Lanza el evento de búsqueda
+   * @param searchTerm Término de búsqueda
    */
-  public getPermissions(page: number): void {
-    this.permissionService.getPermissions(page).subscribe({
+  onSearchSubmitted(searchTerm: string): void {
+    this.getPermissions(this.page, searchTerm);
+  }
+
+  /**
+   * Obtiene el listado de permisos
+   * @param page Página a la que se quiere ir
+   * @param searchTerm Término de búsqueda
+   */
+  public getPermissions(page: number, searchTerm?: string): void {
+    // Comprueba si el término de búsqueda ha cambiado
+    if (searchTerm != undefined && searchTerm != this.search) {      
+      this.search = searchTerm ? searchTerm : '';
+      page = 1;
+      this.page = 1;
+    } 
+
+    this.permissionService.getPermissions(page, this.search).subscribe({
       next: (response: any) => {
         this.permissions = response.results;
         this.numGroups = response.count;
-        this.totalPages = Math.ceil(this.numGroups / this.numResults);;
+        this.totalPages = Math.ceil(this.numGroups / this.numResults);
       },
       error: (error: any) => {
         console.error(error);
       }
     });
   }
-
 }
