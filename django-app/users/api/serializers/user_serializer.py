@@ -57,7 +57,14 @@ from users.api.serializers.group_serializer import GroupSerializer
 
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
-  pass
+  @classmethod
+  def get_token(cls, user):
+    token = super().get_token(user)
+    # Add custom claims
+    token['username'] = user.username
+    token['email'] = user.email
+    token['groups'] = list(user.groups.all().values_list('name', flat=True))
+    return token
 
 class CustomUserSerializer(serializers.ModelSerializer):
   class Meta:
