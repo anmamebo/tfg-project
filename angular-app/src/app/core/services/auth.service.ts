@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, catchError } from 'rxjs';
+import { jwtDecode } from "jwt-decode";
 
 import { API_URL } from '../constants/API_URL';
 
@@ -96,5 +97,16 @@ export class AuthService {
         );
       })
     );
+  }
+
+  /**
+   * Obtiene los roles del usuario actual a partir del token de autenticación. 
+   * @returns Lista de roles del usuario actual.
+   */
+  public getRolesFromToken(): string[] {
+    const token: string = this.tokenStorageService.getToken();
+    const decodedToken: any = jwtDecode(token);
+    const roles = decodedToken.groups || [];
+    return roles;
   }
 }
