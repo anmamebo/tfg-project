@@ -1,0 +1,13 @@
+<form [formGroup]="formSearch" (ngSubmit)="submitSearch()">
+  <div class="form-group position-relative has-icon-left">
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Buscar"
+      formControlName="searchTerm"
+    />
+    <div class="form-control-icon" (click)="submitSearch()" style="cursor: pointer;">
+      <i class="bi bi-search"></i>
+    </div>
+  </div>
+</form>
