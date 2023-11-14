@@ -1,4 +1,4 @@
-<nav class="mt-4" aria-label="Paginación">
+<nav *ngIf="getPages().length > 0" class="mt-4" aria-label="Paginación">
   <ul class="pagination pagination-primary justify-content-center">
       <li class="page-item">
         <button class="page-link" (click)="prev()" [disabled]="page === 1">
