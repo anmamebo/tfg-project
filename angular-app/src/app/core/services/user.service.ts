@@ -2,12 +2,15 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, catchError } from 'rxjs';
 
+import { API_URL } from '../constants/API_URL';
+
+// Servicios
 import { HttpCommonService } from "./http-common.service";
 import { TokenStorageService } from "./token-storage.service";
 
-import { API_URL } from '../constants/API_URL';
-
+// Modelos
 import { User } from '../models/user.model';
+
 
 /**
  * Servicio para interactuar con la API para la gestión de usuarios.
@@ -16,9 +19,7 @@ import { User } from '../models/user.model';
   providedIn: 'root',
 })
 export class UserService {
-  /**
-   * URL base de la API para la gestión de usuarios.
-   */
+  /** URL base de la API. */
   public url: string;
 
   constructor(
@@ -26,7 +27,7 @@ export class UserService {
     private httpCommonService: HttpCommonService,
     private tokenStorageService: TokenStorageService
   ) {
-    this.url = API_URL.url;
+    this.url = API_URL.url + 'users/users/';
   }
 
   /**
@@ -38,7 +39,7 @@ export class UserService {
     const headers = this.httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
-    return this.http.get<User>(this.url + 'users/users/' + id + '/', httpOptions);
+    return this.http.get<User>(this.url + id + '/', httpOptions);
   }
 
   /**
@@ -52,8 +53,7 @@ export class UserService {
 
     let params = JSON.stringify(user);
 
-    return this.http
-      .put<any>(this.url + 'users/users/' + user.id + '/', params, httpOptions)
+    return this.http.put<any>(this.url + user.id + '/', params, httpOptions)
       .pipe(
         catchError((error: HttpErrorResponse) => {
           if (error.status === 400) {
@@ -84,11 +84,7 @@ export class UserService {
     let params = JSON.stringify(data);
 
     return this.http
-      .post<any>(
-        this.url + 'users/users/' + user_id + '/set_password/',
-        params,
-        httpOptions
-      )
+      .post<any>(this.url + user_id + '/set_password/', params, httpOptions)
       .pipe(
         catchError((error: HttpErrorResponse) => {
           if (error.status === 400) {

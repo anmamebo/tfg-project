@@ -2,9 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Observable } from "rxjs";
 
-import { HttpCommonService } from "./http-common.service";
-
 import { API_URL } from "../constants/API_URL";
+
+// Servicios
+import { HttpCommonService } from "./http-common.service";
 
 
 /**
@@ -21,7 +22,7 @@ export class PermissionService {
     private http: HttpClient,
     private httpCommonService: HttpCommonService
   ) {
-    this.url = API_URL.url;
+    this.url = API_URL.url + 'users/permissions/';
   }
 
   /**
@@ -42,6 +43,6 @@ export class PermissionService {
       params = params.set('search', searchTerm);
     }
 
-    return this.http.get<any>(this.url + 'users/permissions/', { params, ...httpOptions });
+    return this.http.get<any>(this.url, { params, ...httpOptions });
   }
 }

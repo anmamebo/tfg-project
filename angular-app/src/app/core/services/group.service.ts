@@ -2,10 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpParams } from "@angular/common/http";
 import { Observable, catchError } from "rxjs";
 
-import { HttpCommonService } from "./http-common.service";
-
 import { API_URL } from "../constants/API_URL";
 
+// Servicios
+import { HttpCommonService } from "./http-common.service";
+
+// Modelos
 import { Group } from "../models/group.model";
 
 
@@ -16,16 +18,14 @@ import { Group } from "../models/group.model";
   providedIn: 'root'
 })
 export class GroupService {
-  /**
-   * URL base de la API para la gestión de usuarios.
-   */
+  /** URL base de la API. */
   public url: string;
 
   constructor(
     private http: HttpClient,
     private httpCommonService: HttpCommonService
   ) {
-    this.url = API_URL.url;
+    this.url = API_URL.url + 'users/groups/';
   }
 
   /**
@@ -37,12 +37,13 @@ export class GroupService {
     const headers = this.httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
-    return this.http.get<Group>(this.url + 'users/groups/' + id + '/', httpOptions);
+    return this.http.get<Group>(this.url + id + '/', httpOptions);
   }
 
   /**
    * Obtiene todos los grupos.
-   * @returns Un observable que emite un array de objetos `Group`.
+   * @param page El número de página.
+   * @returns Un observable que emite un array de objetos `any`.
    */
   public getGroups(page: number): Observable<any> {
     const headers = this.httpCommonService.getCommonHeaders();
@@ -50,13 +51,13 @@ export class GroupService {
 
     const params = new HttpParams().set('page', page.toString());
 
-    return this.http.get<any>(this.url + 'users/groups/', { params, ...httpOptions });
+    return this.http.get<any>(this.url, { params, ...httpOptions });
   }
 
   /**
    * Crea un grupo.
    * @param group El objeto `Group` con los datos del grupo.
-   * @returns Un observable que emite un objeto `Group`.
+   * @returns Un observable que emite un objeto `any`.
    */
   public createGroup(group: Group): Observable<any> {
     const headers = this.httpCommonService.getCommonHeaders();
@@ -64,7 +65,7 @@ export class GroupService {
 
     let params = JSON.stringify(group);
 
-    return this.http.post<any>(this.url + 'users/groups/', params, httpOptions)
+    return this.http.post<any>(this.url, params, httpOptions)
       .pipe(
         catchError((error: HttpErrorResponse) => {
           if (error.status === 400) {
@@ -89,7 +90,7 @@ export class GroupService {
 
     let params = JSON.stringify(group);
 
-    return this.http.put<any>(this.url + 'users/groups/' + group.id + '/', params, httpOptions)
+    return this.http.put<any>(this.url + group.id + '/', params, httpOptions)
       .pipe(
         catchError((error: HttpErrorResponse) => {
           if (error.status === 400) {
@@ -112,6 +113,6 @@ export class GroupService {
     const headers = this.httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
-    return this.http.delete<any>(this.url + 'users/groups/' + id + '/', httpOptions);
+    return this.http.delete<any>(this.url + id + '/', httpOptions);
   }
 }

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 
 import Swal, { SweetAlertOptions } from 'sweetalert2';
 
+
 /**
  * Servicio para mostrar notificaciones estilo toast utilizando SweetAlert2.
  */
@@ -9,9 +10,7 @@ import Swal, { SweetAlertOptions } from 'sweetalert2';
   providedIn: 'root',
 })
 export class NotificationService {
-  /**
-   * Opciones de configuración para los toasts.
-   */
+  /** Opciones de configuración para los toasts. */
   private toastOptions: SweetAlertOptions = {
     toast: true,
     position: 'top-end',

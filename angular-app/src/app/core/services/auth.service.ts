@@ -1,15 +1,13 @@
 import { Injectable } from '@angular/core';
-import {
-  HttpClient,
-  HttpErrorResponse,
-  HttpHeaders,
-} from '@angular/common/http';
-import { Observable, catchError, tap, throwError } from 'rxjs';
-
-import { TokenStorageService } from './token-storage.service';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { Observable, catchError } from 'rxjs';
 
 import { API_URL } from '../constants/API_URL';
 
+// Servicios
+import { TokenStorageService } from './token-storage.service';
+
+// Modelos
 import { User } from '../models/user.model';
 import { AuthResponse } from '../models/auth-response.model';
 
@@ -18,6 +16,7 @@ const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
 };
 
+
 /**
  * Servicio para la gestión de la autenticación y la interacción con la API de autenticación.
  */
@@ -25,9 +24,7 @@ const httpOptions = {
   providedIn: 'root',
 })
 export class AuthService {
-  /**
-   * URL base de la API de autenticación.
-   */
+  /** URL base de la API. */
   public url: string;
 
   constructor(

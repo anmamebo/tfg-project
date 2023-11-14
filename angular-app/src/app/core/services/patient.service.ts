@@ -2,10 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, catchError } from 'rxjs';
 
-import { HttpCommonService } from "./http-common.service";
-
 import { API_URL } from '../constants/API_URL';
 
+// Servicios
+import { HttpCommonService } from "./http-common.service";
+
+// Modelos
 import { Patient } from '../models/patient.model';
 
 
@@ -16,16 +18,14 @@ import { Patient } from '../models/patient.model';
   providedIn: 'root'
 })
 export class PatientService {
-  /**
-   * URL base de la API para la gestión de pacientes.
-   */
+  /** URL base de la API. */
   public url: string;
 
   constructor(
     private http: HttpClient,
     private httpCommonService: HttpCommonService,
   ) {
-    this.url = API_URL.url;
+    this.url = API_URL.url + 'patients/patients/';
   }
 
   /**
@@ -39,7 +39,7 @@ export class PatientService {
 
     let params = JSON.stringify(patient);
 
-    return this.http.put<any>(this.url + 'patients/patients/' + patient.id + '/', params, httpOptions)
+    return this.http.put<any>(this.url + patient.id + '/', params, httpOptions)
       .pipe(
         catchError((error: HttpErrorResponse) => {
           if (error.status === 400) {
