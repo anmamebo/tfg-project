@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 
+// Servicios
 import { TokenStorageService } from 'src/app/core/services/token-storage.service';
 import { UserService } from 'src/app/core/services/user.service';
 
+// Modelos
 import { User } from 'src/app/core/models/user.model';
+
 import { breadcrumbProfileData } from "src/app/core/constants/breadcrumb-data";
+
 
 /**
  * Componente que representa la página de perfil de usuario.
@@ -16,24 +20,16 @@ import { breadcrumbProfileData } from "src/app/core/constants/breadcrumb-data";
   providers: [UserService, TokenStorageService],
 })
 export class ProfilePageComponent implements OnInit {
-  /**
-   * Título de la página.
-   */
+  /** Título de la página. */
   public pageTitle: string = 'Mi Perfil';
 
-  /**
-   * Descripción de la página.
-   */
+  /** Descripción de la página. */
   public pageDescription: string = 'Aquí puedes ver y editar tu perfil de usuario.';
 
-  /**
-   * Objeto `User` que almacena los datos del usuario actual.
-   */
+  /** Objeto `User` que almacena los datos del usuario actual. */
   public user: User | null = null;
 
-  /**
-   * Datos para el componente `app-breadcrumb`.
-   */
+  /** Datos para el componente `app-breadcrumb`. */
   public breadcrumbData = breadcrumbProfileData
 
   constructor(
@@ -47,7 +43,6 @@ export class ProfilePageComponent implements OnInit {
 
   /**
    * Obtiene los datos del usuario actual y los asigna a la propiedad `user`.
-   * @private
    */
   public getUser(): void {
     const userSession = this.tokenStorageService.getUser();

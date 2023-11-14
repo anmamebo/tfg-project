@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+// Módulos
 import { BreadcrumbModule } from "../breadcrumb/breadcrumb.module";
 
+// Componentes
 import { GenericPageComponent } from './generic-page.component';
 
 

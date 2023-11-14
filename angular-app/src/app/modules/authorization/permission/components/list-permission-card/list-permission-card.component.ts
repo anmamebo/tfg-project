@@ -6,6 +6,7 @@ import { PermissionService } from "src/app/core/services/permission.service";
 // Modelos
 import { Permission } from "src/app/core/models/permission.model";
 
+
 /**
  * Componente que representa una tarjeta de listado de permisos.
  */
@@ -57,7 +58,7 @@ export class ListPermissionCardComponent implements OnInit {
    * Va a la página indicada
    * @param page Número de página al que se quiere ir
    */
-  public goToPage(page: number) {
+  public goToPage(page: number): void {
     this.page = page;
     this.getPermissions(this.page);
   }

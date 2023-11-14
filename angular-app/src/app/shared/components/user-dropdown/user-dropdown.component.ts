@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
+// Servicios
 import { AuthService } from 'src/app/core/services/auth.service';
 import { TokenStorageService } from 'src/app/core/services/token-storage.service';
 
+
 /**
  * Componente para el dropdown del usuario logueado.
- * @class
  */
 @Component({
   selector: 'app-user-dropdown',
@@ -28,9 +29,8 @@ export class UserDropdownComponent implements OnInit {
 
   /**
    * Método para cerrar la sesión del usuario.
-   * @method
    */
-  public logout() {
+  public logout(): void {
     this.authService.logOut().subscribe({
       next: (data) => {
         // Recargar la página después del cierre de sesión.
@@ -44,8 +44,6 @@ export class UserDropdownComponent implements OnInit {
 
   /**
    * Método para obtener el usuario logueado y actualizar el nombre de usuario.
-   * @method
-   * @private
    */
   private getUser(): void {
     let user = this.tokenStorageService.getUser();

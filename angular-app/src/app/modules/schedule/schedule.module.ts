@@ -20,7 +20,7 @@ import { ScheduleRoutingModule } from './schedule-routing.module';
 import { GenericPageModule } from "src/app/shared/components/generic-page/generic-page.module";
 import { LoadingSpinnerModule } from "src/app/shared/components/loading-spinner/loading-spinner.module";
 
-// Componentes
+// Componentes páginas
 import { SchedulePageComponent } from './pages/schedule-page/schedule-page.component';
 
 

@@ -36,10 +36,10 @@ export class AuthService {
 
   /**
    * Inicia sesión con las credenciales de usuario proporcionadas.
-   * @param user El objeto `User` con las credenciales de inicio de sesión.
+   * @param user Credenciales de usuario.
    * @returns Un observable que emite un objeto `AuthResponse`.
    */
-  public login(user: User): Observable<AuthResponse> {
+  public login(user: {username: string, password: string}): Observable<AuthResponse> {
     let params = JSON.stringify(user);
 
     return this.http

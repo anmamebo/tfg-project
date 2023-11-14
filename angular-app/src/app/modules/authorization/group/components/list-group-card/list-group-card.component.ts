@@ -7,6 +7,7 @@ import { NotificationService } from "src/app/core/services/notification.service"
 // Modelos
 import { Group } from "src/app/core/models/group.model";
 
+
 /**
  * Componente que representa la tarjeta del listado de grupos
  */
@@ -17,47 +18,31 @@ import { Group } from "src/app/core/models/group.model";
   providers: [GroupService, NotificationService],
 })
 export class ListGroupCardComponent implements OnInit {
-  /**
-   * Título de la tarjeta
-   */
+  /** Título de la tarjeta */
   public titleCard: string = 'Listado de Grupos';
 
-  /**
-   * Columnas que se mostrarán en la tabla
-   */
+  /** Columnas que se mostrarán en la tabla */
   public columns: any[] = [
     { header: 'ID', field: 'id' },  
     { header: 'NOMBRE', field: 'name' },  
   ]
   
-  /**
-   * Grupos que se mostrarán
-   */
+  /** Grupos que se mostrarán */
   public groups: Group[] | null = null;
 
-  /**
-   * Página actual
-   */
+  /** Página actual */
   public page: number = 1;
 
-  /**
-   * Número de páginas totales
-   */
+  /** Número de páginas totales */
   public totalPages: number = 1;
 
-  /**
-   * Número de grupos totales
-   */
+  /** Número de grupos totales */
   public numGroups: number = 0;
 
-  /**
-   * Número de resultados por página
-   */
+  /** Número de resultados por página */
   public numResults: number = 10;
 
-  /**
-   * Objeto con las urls de las acciones.
-   */
+  /** Objeto con las urls de las acciones. */
   public actionsUrls = { 
     show: '/autorizacion/grupos',
     edit: '/autorizacion/grupos/editar',
@@ -77,7 +62,7 @@ export class ListGroupCardComponent implements OnInit {
    * Va a la página indicada
    * @param page Número de página al que se quiere ir
    */
-  public goToPage(page: number) {
+  public goToPage(page: number): void {
     this.page = page;
     this.getGroups(this.page);
   }
@@ -117,5 +102,4 @@ export class ListGroupCardComponent implements OnInit {
 
     });
   }
-
 }

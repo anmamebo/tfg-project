@@ -21,37 +21,22 @@ import { Doctor } from 'src/app/core/models/doctor.model';
   providers: [DoctorService, NotificationService],
 })
 export class DoctorInfoCardComponent implements OnInit {
-  /**
-   * Título de la tarjeta
-   */
+  /** Título de la tarjeta */
   public titleCard: string = 'Información Doctor';
 
-  /**
-   * Doctor que se mostrará
-   */
+  /** Doctor que se mostrará */
   @Input() public doctor: Doctor = new Doctor('', '', false);
 
-  /**
-   * Doctor que se actualizará
-   */
-  public updateDoctor: Doctor = new Doctor('', '', false);
-
-  /**
-   * Formulario para actualizar los datos del doctor
-   */
+  /** Formulario para actualizar los datos del doctor */
   public updateDoctorDataForm: FormGroup = new FormGroup({
     collegiate_number: new FormControl(''),
     is_available: new FormControl(''),
   });
 
-  /**
-   * Indica si se ha enviado el formulario
-   */
+  /** Indica si se ha enviado el formulario */
   public submitted: Boolean = false;
 
-  /**
-   * Evento que se emite cuando se actualizan los datos del doctor
-   */
+  /** Evento que se emite cuando se actualizan los datos del doctor */
   @Output() public updatedDoctorEvent: EventEmitter<void> = new EventEmitter<void>();
 
   constructor(
@@ -85,12 +70,14 @@ export class DoctorInfoCardComponent implements OnInit {
       return;
     }
 
-    this.updateDoctor.id = this.doctor.id;
-    this.updateDoctor.user = this.doctor.user;
-    this.updateDoctor.is_available = this.doctor.is_available;
-    this.updateDoctor.collegiate_number = this.updateDoctorDataForm.value.collegiate_number;
+    const updateDoctor: Doctor = new Doctor(
+      this.doctor.id,
+      this.updateDoctorDataForm.value.collegiate_number,
+      this.doctor.is_available,
+      this.doctor.user,
+    );
     
-    this.doctorService.updateDoctor(this.updateDoctor).subscribe({
+    this.doctorService.updateDoctor(updateDoctor).subscribe({
       next: (data) => {
         this.submitted = false;
         this.notificationService.showSuccessToast(data.message);

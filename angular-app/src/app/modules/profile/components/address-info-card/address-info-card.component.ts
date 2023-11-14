@@ -1,10 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { INTEGER_REGEXP } from "src/app/core/constants/reg-exp";
 
@@ -14,6 +9,7 @@ import { NotificationService } from "src/app/core/services/notification.service"
 
 // Modelos
 import { Address } from "src/app/core/models/address.model";
+
 
 /**
  * Componente que representa una tarjeta de información de dirección de usuario.
@@ -25,24 +21,13 @@ import { Address } from "src/app/core/models/address.model";
   providers: [AddressService, NotificationService],
 })
 export class AddressInfoCardComponent implements OnInit {
-  /**
-   * Título de la tarjeta
-   */
+  /** Título de la tarjeta */
   public titleCard: string = 'Dirección';
 
-  /**
-   * Dirección que se mostrará
-   */
+  /** Dirección que se mostrará */
   @Input() public address: Address = new Address('', '', '', '', '', '', '');
 
-  /**
-   * Dirección que se actualizará
-   */
-  public updateAddress: Address = new Address('', '', '', '', '', '', '');
-
-  /**
-   * Formulario para actualizar los datos de la dirección
-   */
+  /** Formulario para actualizar los datos de la dirección */
   public updateAddressDataForm: FormGroup = new FormGroup({
     street: new FormControl(''),
     number: new FormControl(''),
@@ -53,9 +38,7 @@ export class AddressInfoCardComponent implements OnInit {
     postal_code: new FormControl(''),
   });
 
-  /**
-   * Indica si se ha enviado el formulario
-   */
+  /** Indica si se ha enviado el formulario */
   public submitted: Boolean = false;
 
   constructor(
@@ -87,23 +70,25 @@ export class AddressInfoCardComponent implements OnInit {
   /**
    * Maneja la acción de envio del formulario
    */
-  onSubmit(): void {
+  public onSubmit(): void {
     this.submitted = true;
 
     if (this.updateAddressDataForm.invalid) {
       return;
     }
 
-    this.updateAddress.id = this.address.id;
-    this.updateAddress.street = this.updateAddressDataForm.value.street;
-    this.updateAddress.number = this.updateAddressDataForm.value.number;
-    this.updateAddress.city = this.updateAddressDataForm.value.city;
-    this.updateAddress.province = this.updateAddressDataForm.value.province;
-    this.updateAddress.country = this.updateAddressDataForm.value.country;
-    this.updateAddress.postal_code = this.updateAddressDataForm.value.postal_code;
-    this.updateAddress.floor = this.updateAddressDataForm.value.floor != '' ? this.updateAddressDataForm.value.floor : null;
+    const updateAddress: Address = new Address(
+      this.address.id,
+      this.updateAddressDataForm.value.street,
+      this.updateAddressDataForm.value.number,
+      this.updateAddressDataForm.value.city,
+      this.updateAddressDataForm.value.province,
+      this.updateAddressDataForm.value.country,
+      this.updateAddressDataForm.value.postal_code,
+      this.updateAddressDataForm.value.floor != '' ? this.updateAddressDataForm.value.floor : null,
+    );
 
-    this.addressService.updateAddress(this.updateAddress).subscribe({
+    this.addressService.updateAddress(updateAddress).subscribe({
       next: (data) => {
         this.submitted = false;
         this.notificationService.showSuccessToast(data.message);

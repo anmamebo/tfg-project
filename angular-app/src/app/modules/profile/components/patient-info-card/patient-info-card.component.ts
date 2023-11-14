@@ -24,34 +24,19 @@ import { Patient } from 'src/app/core/models/patient.model';
   providers: [DatePipe, PatientService, NotificationService],
 })
 export class PatientInfoCardComponent implements OnInit {
-  /**
-   * Título de la tarjeta
-   */
+  /** Título de la tarjeta */
   public titleCard: string = 'Información Paciente';
 
-  /**
-   * Opciones para el campo de género
-   */
+  /** Opciones para el campo de género */
   public gender_options = GENDER_OPTIONS;
   
-  /**
-   * Opciones para el campo de fecha de nacimiento
-   */
+  /** Opciones para el campo de fecha de nacimiento */
   public locale = Spanish;
 
-  /**
-   * Paciente que se mostrará
-   */
+  /** Paciente que se mostrará */
   @Input() public patient: Patient = new Patient('', '');
 
-  /**
-   * Paciente que se actualizará
-   */
-  public updatePatient: Patient = new Patient('', '');
-
-  /**
-   * Formulario para actualizar los datos del paciente
-   */
+  /** Formulario para actualizar los datos del paciente */
   public updatePatientDataForm: FormGroup = new FormGroup({
     dni: new FormControl(''),
     social_security: new FormControl(''),
@@ -60,14 +45,10 @@ export class PatientInfoCardComponent implements OnInit {
     phone: new FormControl(''),
   });
 
-  /**
-   * Indica si se ha enviado el formulario
-   */
+  /** Indica si se ha enviado el formulario */
   public submitted: Boolean = false;
 
-  /**
-   * Evento que se emite cuando se actualizan los datos del paciente
-   */
+  /** Evento que se emite cuando se actualizan los datos del paciente */
   @Output() public updatedPatientEvent: EventEmitter<void> = new EventEmitter<void>();
 
   constructor(
@@ -98,7 +79,7 @@ export class PatientInfoCardComponent implements OnInit {
   /**
    * Maneja la acción de envio del formulario
    */
-  public onSubmit() {
+  public onSubmit(): void {
     this.submitted = true;
 
     if (this.updatePatientDataForm.invalid) {
@@ -110,15 +91,16 @@ export class PatientInfoCardComponent implements OnInit {
       birthdate = this.datePipe.transform(new Date(this.updatePatientDataForm.value.birthdate), 'yyyy-MM-dd');
     }
 
-    this.updatePatient.id = this.patient.id;
-    this.updatePatient.user = this.patient.user;
-    this.updatePatient.dni = this.updatePatientDataForm.value.dni;
-    this.updatePatient.gender = this.updatePatientDataForm.value.gender;
-    this.updatePatient.social_security = this.updatePatientDataForm.value.social_security != '' ? this.updatePatientDataForm.value.social_security : null;
-    this.updatePatient.phone = this.updatePatientDataForm.value.phone != '' ? this.updatePatientDataForm.value.phone : null;
-    this.updatePatient.birthdate = birthdate ? birthdate : null;
+    const updatePatient: Patient = new Patient(
+      this.patient.id,
+      this.updatePatientDataForm.value.dni,
+      birthdate ? birthdate : null,
+      this.updatePatientDataForm.value.gender,
+      this.updatePatientDataForm.value.phone != '' ? this.updatePatientDataForm.value.phone : null,
+      this.updatePatientDataForm.value.social_security
+    );
 
-    this.patientService.updatePatient(this.updatePatient).subscribe({
+    this.patientService.updatePatient(updatePatient).subscribe({
       next: (data) => {
         this.submitted = false;
         this.updatedPatientEvent.emit();

@@ -1,15 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
+// Servicios
 import { UserService } from 'src/app/core/services/user.service';
 import { NotificationService } from 'src/app/core/services/notification.service';
 
+// Validadores
 import Validation from 'src/app/core/validators/general.validator';
+
 
 /**
  * Componente que representa un formulario para cambiar la contraseña del usuario.
@@ -21,28 +19,20 @@ import Validation from 'src/app/core/validators/general.validator';
   providers: [UserService, NotificationService],
 })
 export class ChangePasswordCardComponent implements OnInit {
-  /**
-   * Título de la tarjeta.
-   */
+  /** Título de la tarjeta. */
   public titleCard: string = 'Cambiar contraseña';
 
-  /**
-   * Formulario para cambiar la contraseña, con campos para la contraseña actual, nueva contraseña y confirmación de la nueva contraseña.
-   */
+  /** Formulario para cambiar la contraseña, con campos para la contraseña actual, nueva contraseña y confirmación de la nueva contraseña. */
   public changePasswordForm: FormGroup = new FormGroup({
     current_password: new FormControl(''),
     new_password: new FormControl(''),
     confirm_new_password: new FormControl(''),
   });
 
-  /**
-   * Indica si se ha enviado el formulario.
-   */
+  /** Indica si se ha enviado el formulario. */
   public submitted: Boolean = false;
 
-  /**
-   * Mensaje de error.
-   */
+  /** Mensaje de error. */
   public errorMessage: string = '';
 
   constructor(
@@ -76,7 +66,7 @@ export class ChangePasswordCardComponent implements OnInit {
   /**
    * Maneja la acción de envío del formulario de cambio de contraseña.
    */
-  onSubmit() {
+  public onSubmit(): void {
     this.submitted = true;
 
     // Detiene el proceso si el formulario es inválido.
@@ -84,10 +74,10 @@ export class ChangePasswordCardComponent implements OnInit {
       return;
     }
 
-    let data = {
-      old_password: this.changePasswordForm['value'].current_password,
-      password: this.changePasswordForm['value'].new_password,
-      password2: this.changePasswordForm['value'].confirm_new_password,
+    const data: {old_password: string, password: string, password2: string} = {
+      old_password: this.changePasswordForm.value.current_password,
+      password: this.changePasswordForm.value.new_password,
+      password2: this.changePasswordForm.value.confirm_new_password,
     };
 
     this.userService.updatePassword(data).subscribe({

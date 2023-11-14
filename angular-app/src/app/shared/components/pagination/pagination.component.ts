@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 
 /**
@@ -9,36 +9,25 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   templateUrl: './pagination.component.html',
   styleUrls: ['./pagination.component.scss']
 })
-export class PaginationComponent implements OnInit {
-  /**
-   * Página actual
-   */
+export class PaginationComponent {
+  /** Página actual */
   @Input() public page: number = 1;
   
-  /**
-   * Número de páginas totales
-   */
+  /** Número de páginas totales */
   @Input() public totalPages: number = 1;
   
-  /**
-   * Número de elementos totales
-   */
+  /** Número de elementos totales */
   @Input() public numItems: number = 0;
   
-  /**
-   * Evento que se emite cuando se cambia de página
-   */
+  /** Evento que se emite cuando se cambia de página */
   @Output() pageEmitter: EventEmitter<number> = new EventEmitter<number>();
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
-
   /**
    * Va a la página siguiente
    */
-  next() {
+  public next(): void {
     this.page++;
     this.turnPage();
   }
@@ -46,12 +35,15 @@ export class PaginationComponent implements OnInit {
   /**
    * Va a la página anterior
    */
-  prev() {
+  public prev(): void {
     this.page--;
     this.turnPage();
   }
 
-  goToPage(pageNumber: number) {
+  /**
+   * Va a la página indicada
+   */
+  public goToPage(pageNumber: number): void {
     if (pageNumber >= 1 && pageNumber <= this.totalPages) {
       this.page = pageNumber;
       this.turnPage();
@@ -61,11 +53,28 @@ export class PaginationComponent implements OnInit {
   /**
    * Emite al padre la página a la que se quiere ir
    */
-  turnPage() {
+  public turnPage(): void {
     this.pageEmitter.emit(this.page);
   }
 
-  getPages(): number[] {
+  /**
+   * Devuelve un array con las páginas que se van a mostrar en la paginación
+   * @returns Array con las páginas que se van a mostrar en la paginación
+   */
+  public getPages(): number[] {
+    // const maxDisplayedPages = 8;
+    // const pagesBeforeCurrent = Math.floor(maxDisplayedPages / 2);
+    // const pagesAfterCurrent = maxDisplayedPages - pagesBeforeCurrent;
+
+    // let startPage = Math.max(1, this.page - pagesBeforeCurrent);
+    // let endPage = Math.min(this.totalPages, this.page + pagesAfterCurrent);
+
+    // if (endPage - startPage < maxDisplayedPages) {
+    //   startPage = Math.max(1, endPage - maxDisplayedPages + 1);
+    // }
+
+    // return Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i);
+
     return Array.from({ length: this.totalPages }, (_, i) => i + 1);
   }
 }

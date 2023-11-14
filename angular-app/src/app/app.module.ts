@@ -11,8 +11,6 @@ import { NgProgressModule, NG_PROGRESS_CONFIG, NgProgressComponent } from 'ngx-p
 import { NgProgressHttpModule } from 'ngx-progressbar/http';
 import { NgProgressRouterModule } from 'ngx-progressbar/router';
 
-import { CoreModule } from './core/core.module';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
@@ -26,7 +24,6 @@ import { AppComponent } from './app.component';
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
-    CoreModule,
     SweetAlert2Module.forRoot(),
     NgProgressModule,
     NgProgressComponent,

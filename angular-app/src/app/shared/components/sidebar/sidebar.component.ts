@@ -1,13 +1,18 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 
-
+/**
+ * Componente que representa el sidebar de la aplicación.
+ */
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss'],
 })
 export class SidebarComponent implements OnInit, AfterViewInit {
+  /** Clave para almacenar el tema en el localStorage. */
   THEME_KEY: string = 'theme';
+
+  /** Script para cargar el sidebar. */
   sidebarScriptElement: HTMLScriptElement;
 
   constructor() {
@@ -37,7 +42,12 @@ export class SidebarComponent implements OnInit, AfterViewInit {
     }
   }
 
-  private setTheme(theme: string, persist = false) {
+  /**
+   * Set theme to dark or light
+   * @param theme string 'dark' | 'light'
+   * @param persist boolean persist theme in localStorage
+   */
+  private setTheme(theme: string, persist = false): void {
     document.body.classList.add(theme);
     document.documentElement.setAttribute('data-bs-theme', theme);
 
@@ -49,7 +59,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   /**
    * Init theme from setTheme()
    */
-  private initTheme() {
+  private initTheme(): void {
     //If the user manually set a theme, we'll load that
     const storedTheme = localStorage.getItem(this.THEME_KEY);
     if (storedTheme) {

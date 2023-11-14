@@ -11,19 +11,13 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./generic-page.component.scss']
 })
 export class GenericPageComponent {
-  /**
-   * Título de la página.
-   */
+  /** Título de la página. */
   @Input() pageTitle: string = 'Título';
 
-  /**
-   * Descripción de la página.
-   */
+  /** Descripción de la página. */
   @Input() pageDescription: string = 'Descripción';
 
-  /**
-   * Datos para el componente `app-breadcrumb`.
-   */
+  /** Datos para el componente `app-breadcrumb`. */
   @Input() breadcrumbData: any;
 
   constructor(

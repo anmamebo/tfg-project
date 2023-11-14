@@ -9,13 +9,9 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./generic-card.component.scss']
 })
 export class GenericCardComponent {
-  /**
-   * Título de la tarjeta.
-   */
+  /** Título de la tarjeta. */
   @Input() public title: string = 'Título tarjeta';
 
-  /**
-   * Indica si la tarjeta tiene un encabezado.
-   */
+  /** Indica si la tarjeta tiene un encabezado. */
   @Input() public hasCardHeader: boolean = true;
 }

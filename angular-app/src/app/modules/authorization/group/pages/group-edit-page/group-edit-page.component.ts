@@ -20,24 +20,16 @@ import { GroupService } from "src/app/core/services/group.service";
   providers: [GroupService]
 })
 export class GroupEditPageComponent implements OnInit {
-  /**
-   * Título de la página.
-   */
+  /** Título de la página. */
   public pageTitle: string = 'Editar grupo';
 
-  /**
-   * Descripción de la página.
-   */
+  /** Descripción de la página. */
   public pageDescription: string = 'Aquí puedes editar un grupo (rol).';
 
-  /**
-   * Datos para el componente `app-breadcrumb`.
-   */
+  /** Datos para el componente `app-breadcrumb`. */
   public breadcrumbData = breadcrumbGroupEditData;
 
-  /**
-   * Grupo a editar.
-   */
+  /** Grupo a editar. */
   public group: Group | null = null;
 
   constructor(
@@ -57,7 +49,7 @@ export class GroupEditPageComponent implements OnInit {
    * Obtiene un grupo por su `id`.
    * @param id `id` del grupo a obtener.
    */
-  getProduct(id: number) {
+  getProduct(id: number): void {
     this.groupService.getGroupById(id).subscribe({
       next: (group: Group) => {
         this.group = group;
@@ -67,5 +59,4 @@ export class GroupEditPageComponent implements OnInit {
       }
     });
   }
-
 }

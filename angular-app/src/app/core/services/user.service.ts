@@ -73,7 +73,7 @@ export class UserService {
    * @param data - Los datos necesarios para actualizar la contraseña, como la nueva contraseña.
    * @returns Un Observable que se suscribe a la solicitud HTTP para actualizar la contraseña.
    */
-  public updatePassword(data: any): Observable<any> {
+  public updatePassword(data: {old_password: string, password: string, password2: string}): Observable<any> {
     const headers = this.httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 

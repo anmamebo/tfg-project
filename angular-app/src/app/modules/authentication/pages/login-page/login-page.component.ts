@@ -1,10 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 // Servicios
@@ -13,6 +8,7 @@ import { TokenStorageService } from 'src/app/core/services/token-storage.service
 
 // Modelos
 import { User } from 'src/app/core/models/user.model';
+
 
 /**
  * Componente que representa la página de inicio de sesión.
@@ -24,27 +20,16 @@ import { User } from 'src/app/core/models/user.model';
   providers: [AuthService, TokenStorageService],
 })
 export class LoginPageComponent implements OnInit {
-  /**
-   * Objeto `User` para almacenar las credenciales de inicio de sesión.
-   */
-  public user: User = new User('', '', '', '');
-
-  /**
-   * Formulario de inicio de sesión.
-   */
+  /** Formulario de inicio de sesión. */
   public loginForm: FormGroup = new FormGroup({
     username: new FormControl(''),
     password: new FormControl(''),
   });
 
-  /**
-   * Indica si se ha enviado el formulario.
-   */
+  /** Indica si se ha enviado el formulario. */
   public submitted: Boolean = false;
 
-  /**
-   * Mensaje de error.
-   */
+  /** Mensaje de error. */
   public errorMessage: string = '';
 
   constructor(
@@ -72,7 +57,7 @@ export class LoginPageComponent implements OnInit {
   /**
    * Maneja la acción de envío del formulario de inicio de sesión.
    */
-  public onSubmit() {
+  public onSubmit(): void {
     this.submitted = true;
 
     // Detiene el proceso si el formulario es inválido.
@@ -80,10 +65,13 @@ export class LoginPageComponent implements OnInit {
       return;
     }
 
-    this.user.username = this.loginForm['value'].username;
-    this.user.password = this.loginForm['value'].password;
+    const user: {username: string, password: string} = {
+      username: this.loginForm.value.username,
+      password: this.loginForm.value.password,
+    };
+    
 
-    this.authService.login(this.user).subscribe({
+    this.authService.login(user).subscribe({
       next: (data) => {
         this.errorMessage = '';
         this.tokenStorageService.saveSingIn(data);

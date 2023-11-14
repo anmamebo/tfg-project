@@ -9,6 +9,7 @@ import { Group } from "src/app/core/models/group.model";
 // Servicios
 import { GroupService } from "src/app/core/services/group.service";
 
+
 /**
  * Componente para la página de visualización de un grupo
  */
@@ -19,24 +20,16 @@ import { GroupService } from "src/app/core/services/group.service";
   providers: [GroupService]
 })
 export class GroupViewPageComponent implements OnInit {
-  /**
-   * Título de la página
-   */
+  /** Título de la página */
   public pageTitle: string = 'Visualizar grupo';
 
-  /**
-   * Descripción de la página
-   */
+  /** Descripción de la página */
   public pageDescription: string = 'Aquí puedes visualizar un grupo (rol).';
 
-  /**
-   * Datos para el breadcrumb
-   */
+  /** Datos para el breadcrumb */
   public breadcrumbData = breadcrumbGroupViewData;
 
-  /**
-   * Grupo que se visualizará
-   */
+  /** Grupo que se visualizará */
   public group: Group | null = null;
 
   constructor(
@@ -56,7 +49,7 @@ export class GroupViewPageComponent implements OnInit {
    * Obtiene un grupo por su id
    * @param id Id del grupo
    */
-  getProduct(id: number) {
+  getProduct(id: number): void {
     this.groupService.getGroupById(id).subscribe({
       next: (group: Group) => {
         this.group = group;

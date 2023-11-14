@@ -1,10 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 // Servicios
 import { UserService } from 'src/app/core/services/user.service';
@@ -12,6 +7,7 @@ import { NotificationService } from 'src/app/core/services/notification.service'
 
 // Modelos
 import { User } from 'src/app/core/models/user.model';
+
 
 /**
  * Componente que representa la tarjeta de información básica del usuario
@@ -23,24 +19,13 @@ import { User } from 'src/app/core/models/user.model';
   providers: [UserService, NotificationService],
 })
 export class BasicInfoCardComponent implements OnInit {
-  /**
-   * Título de la tarjeta
-   */
+  /** Título de la tarjeta */
   public titleCard: string = 'Información Básica';
 
-  /**
-   * Usuario que se mostrará
-   */
-  @Input() user: User = new User('', '', '', '');
+  /** Usuario que se mostrará */
+  @Input() public user: User = new User('', '', '', '');
 
-  /**
-   * Usuario que se actualizará
-   */
-  public updateUser: User = new User('', '', '', '');
-
-  /**
-   * Formulario para actualizar los datos del usuario
-   */
+  /** Formulario para actualizar los datos del usuario */
   public updateUserDataForm: FormGroup = new FormGroup({
     name: new FormControl(''),
     last_name: new FormControl(''),
@@ -48,14 +33,10 @@ export class BasicInfoCardComponent implements OnInit {
     email: new FormControl(''),
   });
 
-  /**
-   * Indica si se ha enviado el formulario
-   */
+  /** Indica si se ha enviado el formulario */
   public submitted: Boolean = false;
 
-  /**
-   * Evento que se emite cuando se actualizan los datos del usuario
-   */
+  /** Evento que se emite cuando se actualizan los datos del usuario */
   @Output() public updatedUserEvent: EventEmitter<void> = new EventEmitter<void>();
 
   constructor(
@@ -85,22 +66,24 @@ export class BasicInfoCardComponent implements OnInit {
   /**
    * Maneja la acción de envio del formulario
    */
-  public onSubmit() {
+  public onSubmit(): void {
     this.submitted = true;
 
     if (this.updateUserDataForm.invalid) {
       return;
     }
 
-    // Actualiza los datos del usuario a partir del formulario
-    this.updateUser.id = this.user.id;
-    this.updateUser.name = this.updateUserDataForm['value'].name;
-    this.updateUser.last_name = this.updateUserDataForm['value'].last_name;
-    this.updateUser.username = this.updateUserDataForm['value'].username;
-    this.updateUser.email = this.updateUserDataForm['value'].email;
+    const updateUser: User = new User(
+      this.user.id,
+      this.updateUserDataForm.value.username,
+      '',
+      this.updateUserDataForm.value.email,
+      this.updateUserDataForm.value.name,
+      this.updateUserDataForm.value.last_name
+    );
 
     // Envía la solicitud de actualización de usuario al servicio
-    this.userService.updateUser(this.updateUser).subscribe({
+    this.userService.updateUser(updateUser).subscribe({
       next: (data) => {
         this.submitted = false;
         this.updatedUserEvent.emit();

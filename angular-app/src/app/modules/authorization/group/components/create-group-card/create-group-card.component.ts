@@ -8,6 +8,7 @@ import { NotificationService } from 'src/app/core/services/notification.service'
 // Modelos
 import { Group } from "src/app/core/models/group.model";
 
+
 /**
  * Componente que representa la tarjeta para crear un grupo
  */
@@ -18,38 +19,25 @@ import { Group } from "src/app/core/models/group.model";
   providers: [GroupService],
 })
 export class CreateGroupCardComponent implements OnInit {
-  /**
-   * Título de la tarjeta
-   */
+  /** Título de la tarjeta */
   public titleCard: string = 'Crear Grupo';
 
-  /**
-   * Grupo que se creará
-   */
-  public group: Group = new Group('', '');
-
-  /**
-   * Formulario para crear un grupo
-   */
+  /** Formulario para crear un grupo */
   public createGroupForm: FormGroup = new FormGroup({
     name: new FormControl('')
   });
 
-  /**
-   * Indica si se ha enviado el formulario
-   */
+  /** Indica si se ha enviado el formulario */
   public submitted: Boolean = false;
 
-  /**
-   * Evento que se emite cuando se crea un grupo
-   */
+  /** Evento que se emite cuando se crea un grupo */
   @Output() public groupCreated: EventEmitter<any> = new EventEmitter();
 
   constructor(
     private formBuilder: FormBuilder,
     private groupService: GroupService,
     private notificationService: NotificationService
-    ) { }
+  ) { }
 
   ngOnInit(): void {
     this.createGroupForm = this.formBuilder.group({
@@ -68,16 +56,20 @@ export class CreateGroupCardComponent implements OnInit {
   /**
    * Maneja la acción de envio del formulario
    */
-  public onSubmit() {
+  public onSubmit(): void {
     this.submitted = true;
 
     if (this.createGroupForm.invalid) {
       return;
     }
 
-    this.group.name = this.createGroupForm['value'].name;
+    const group: Group = new Group(
+      '',
+      this.createGroupForm.value.name
+    )
+    
 
-    this.groupService.createGroup(this.group).subscribe({
+    this.groupService.createGroup(group).subscribe({
       next: (response) => {
         this.submitted = false;
         this.notificationService.showSuccessToast(response.message);

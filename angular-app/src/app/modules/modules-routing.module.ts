@@ -7,6 +7,11 @@ const routes: Routes = [
     loadChildren: () => import('./home/home.module').then((m) => m.HomeModule),
   },
   {
+    path: 'horario',
+    loadChildren: () =>
+      import('./schedule/schedule.module').then((m) => m.ScheduleModule),
+  },
+  {
     path: 'perfil',
     loadChildren: () =>
       import('./profile/profile.module').then((m) => m.ProfileModule),
@@ -17,10 +22,10 @@ const routes: Routes = [
       import('./authorization/authorization.module').then((m) => m.AuthorizationModule),
   },
   {
-    path: 'horario',
+    path: 'usuarios',
     loadChildren: () =>
-      import('./schedule/schedule.module').then((m) => m.ScheduleModule),
-  }
+      import('./users/users.module').then((m) => m.UsersModule),
+  },
 ];
 
 @NgModule({

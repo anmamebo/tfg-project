@@ -1,51 +1,53 @@
 <div id="auth">
   <div class="row h-100">
-      <div class="col-lg-5 col-12">
-          <div id="auth-left">
-              <div class="auth-logo">
-                  <img [src]="'/assets/images/logo/logo-long.png'" alt="Logo">
-              </div>
+    <div class="col-lg-5 col-12">
+      <div id="auth-left">
+        <div class="auth-logo">
+          <img [src]="'/assets/images/logo/logo-long.png'" alt="Logo">
+        </div>
 
-              <h1 class="auth-title">Iniciar sesión</h1>
-              <p class="auth-subtitle mb-5">Inicia sesión en el sistema con tus datos de autenticación.</p>
+        <h1 class="auth-title">Iniciar sesión</h1>
+        <p class="auth-subtitle mb-5">Inicia sesión en el sistema con tus datos de autenticación.</p>
 
-              <form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
+        <form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
 
-                  <div class="form-group position-relative has-icon-left mb-4">
-                      <input type="text" formControlName="username" class="form-control form-control-xl"
-                          placeholder="Usuario" [ngClass]="{ 'is-invalid': submitted && form['username'].errors }">
-                      <div class="form-control-icon">
-                          <i class="bi bi-person"></i>
-                      </div>
-                      <div *ngIf="submitted && form['username'].errors" class="invalid-feedback">
-                          <div *ngIf="form['username'].errors['required']">El usuario es obligatorio</div>
-                      </div>
-                  </div>
-
-                  <div class="form-group position-relative has-icon-left mb-4">
-                      <input type="password" formControlName="password" class="form-control form-control-xl"
-                          placeholder="Contraseña" [ngClass]="{ 'is-invalid': submitted && form['password'].errors }">
-                      <div class="form-control-icon">
-                          <i class="bi bi-shield-lock"></i>
-                      </div>
-                      <div *ngIf="submitted && form['password'].errors" class="invalid-feedback">
-                          <div *ngIf="form['password'].errors['required']">La contraseña es obligatoria</div>
-                      </div>
-                  </div>
-
-                  <div *ngIf="submitted && errorMessage != ''" class="alert alert-light-danger color-danger">
-                      <i class="bi bi-exclamation-circle"></i>
-                      {{ errorMessage }}
-                  </div>
-
-                  <button class="btn btn-primary btn-block btn-lg shadow-lg mt-5">Ingresar</button>
-              </form>
+          <!-- Usuario -->
+          <div class="form-group position-relative has-icon-left mb-4">
+            <input type="text" formControlName="username" class="form-control form-control-xl"
+              placeholder="Usuario" [ngClass]="{ 'is-invalid': submitted && form['username'].errors }">
+            <div class="form-control-icon">
+              <i class="bi bi-person"></i>
+            </div>
+            <div *ngIf="submitted && form['username'].errors" class="invalid-feedback">
+              <div *ngIf="form['username'].errors['required']">El usuario es obligatorio</div>
+            </div>
           </div>
-      </div>
-      <div class="col-lg-7 d-none d-lg-block">
-          <div id="auth-right">
 
+          <!-- Contraseña -->
+          <div class="form-group position-relative has-icon-left mb-4">
+            <input type="password" formControlName="password" class="form-control form-control-xl"
+              placeholder="Contraseña" [ngClass]="{ 'is-invalid': submitted && form['password'].errors }">
+            <div class="form-control-icon">
+              <i class="bi bi-shield-lock"></i>
+            </div>
+            <div *ngIf="submitted && form['password'].errors" class="invalid-feedback">
+              <div *ngIf="form['password'].errors['required']">La contraseña es obligatoria</div>
+            </div>
           </div>
+
+          <!-- Mensajes de error -->
+          <div *ngIf="submitted && errorMessage != ''" class="alert alert-light-danger color-danger">
+            <i class="bi bi-exclamation-circle"></i>
+            {{ errorMessage }}
+          </div>
+
+          <button class="btn btn-primary btn-block btn-lg shadow-lg mt-5">Ingresar</button>
+        </form>
       </div>
+    </div>
+    <div class="col-lg-7 d-none d-lg-block">
+      <div id="auth-right">
+      </div>
+    </div>
   </div>
 </div>

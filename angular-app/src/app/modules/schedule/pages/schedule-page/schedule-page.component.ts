@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy, ChangeDetectorRef, OnInit } from '@angular/core';
-import { Subject } from "rxjs";
 import { DatePipe } from "@angular/common";
+import { Subject } from "rxjs";
 
 // Calendario
 import { isSameDay, isSameMonth } from "date-fns";
@@ -191,7 +191,7 @@ export class SchedulePageComponent implements OnInit {
   /**
    * Cierra el día abierto en la vista mensual del calendario.
    */
-  closeOpenMonthViewDay() {
+  closeOpenMonthViewDay(): void {
     this.activeDayIsOpen = false;
   }
 }

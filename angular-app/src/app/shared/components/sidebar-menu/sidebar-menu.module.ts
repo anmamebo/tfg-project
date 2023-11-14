@@ -4,8 +4,6 @@ import { RouterModule } from '@angular/router';
 
 import { SidebarMenuComponent } from './sidebar-menu.component';
 
-
-
 @NgModule({
   declarations: [
     SidebarMenuComponent
