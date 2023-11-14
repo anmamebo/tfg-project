@@ -12,5 +12,7 @@ export class User {
     public last_name?: string,
     public patient?: Patient,
     public doctor?: Doctor,
+    public is_staff?: boolean,
+    public is_active?: boolean,
   ) {}
 }
