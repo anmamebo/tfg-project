@@ -9,6 +9,7 @@
           </tr>
       </thead>
       <tbody>
+        <ng-container *ngIf="data && data.length > 0; else noData">
           <tr *ngFor="let item of data">
             <ng-container *ngFor="let column of columns">
               <td>{{ item[column.field] }}</td>
@@ -26,6 +27,12 @@
               </a>
             </td>
           </tr>
+        </ng-container>
+        <ng-template #noData>
+          <tr>
+            <td colspan="100%">No hay datos</td>
+          </tr>
+        </ng-template>
       </tbody>
   </table>
 </div>
