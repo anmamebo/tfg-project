@@ -11,7 +11,12 @@ import { SidebarComponent } from './sidebar.component';
 
 @NgModule({
   declarations: [SidebarComponent],
-  imports: [CommonModule, RouterModule, UserDropdownModule, SidebarMenuModule],
+  imports: [
+    CommonModule,
+    RouterModule, 
+    UserDropdownModule, 
+    SidebarMenuModule
+  ],
   exports: [SidebarComponent],
 })
 export class SidebarModule {}

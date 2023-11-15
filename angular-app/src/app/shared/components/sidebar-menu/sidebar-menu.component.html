@@ -1,10 +1,10 @@
 <ul class="menu">
   <ng-container *ngFor="let sidebarItem of sidebarItems">
       <ng-container *ngIf="sidebarItem.isTitle; else notTitle">
-        <li class="sidebar-title">{{ sidebarItem.name }}</li>
+        <li *appHasRole="sidebarItem.roles" class="sidebar-title">{{ sidebarItem.name }}</li>
       </ng-container>
       <ng-template #notTitle>
-        <li class="sidebar-item" [ngClass]="{'has-sub': sidebarItem.submenu, 'active': currentURL == sidebarItem.url || currentURL.includes(sidebarItem.key)}">
+        <li class="sidebar-item" *appHasRole="sidebarItem.roles" [ngClass]="{'has-sub': sidebarItem.submenu, 'active': currentURL == sidebarItem.url || currentURL.includes(sidebarItem.key)}">
           <a [routerLink]="sidebarItem.url ? [sidebarItem.url] : []" class="sidebar-link">
               <i class="bi bi-{{ sidebarItem.icon }}"></i>
               <span>{{ sidebarItem.name }}</span>
@@ -12,7 +12,7 @@
           <ng-container *ngIf="sidebarItem.submenu">
             <ul class="submenu">
               <ng-container *ngFor="let sub of sidebarItem.submenu">
-                <li class="submenu-item" [ngClass]="{'has-sub': sub.submenu, 'active': currentURL == sub.url || currentURL.includes(sub.url)}">
+                <li class="submenu-item" *appHasRole="sub.roles" [ngClass]="{'has-sub': sub.submenu, 'active': currentURL == sub.url || currentURL.includes(sub.url)}">
                   <a [routerLink]="sub.url ? [sub.url] : []" class="submenu-link">{{ sub.name }}</a>
 
                   <ng-container *ngIf="sub.submenu">
