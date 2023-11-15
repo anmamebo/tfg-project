@@ -75,7 +75,6 @@ export class LoginPageComponent implements OnInit {
       next: (data) => {
         this.errorMessage = '';
         this.tokenStorageService.saveSingIn(data);
-        console.log(data);
         // TODO: no se hace así
         this.router.navigate(['/']);
       },
