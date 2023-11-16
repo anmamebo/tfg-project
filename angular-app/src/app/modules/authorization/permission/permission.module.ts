@@ -9,6 +9,7 @@ import { PaginationModule } from "src/app/shared/components/pagination/paginatio
 import { GenericPageModule } from "src/app/shared/components/generic-page/generic-page.module";
 import { GenericCardModule } from "src/app/shared/components/generic-card/generic-card.module";
 import { SearchModule } from "src/app/shared/components/search/search.module";
+import { ElementsPerPageModule } from "src/app/shared/components/elements-per-page/elements-per-page.module";
 
 // Componentes páginas
 import { PermissionPageComponent } from "./pages/permission-page/permission-page.component";
@@ -30,7 +31,8 @@ import { ListPermissionCardComponent } from './components/list-permission-card/l
     PaginationModule,
     GenericPageModule,
     GenericCardModule,
-    SearchModule
+    SearchModule,
+    ElementsPerPageModule
   ]
 })
 export class PermissionModule { }

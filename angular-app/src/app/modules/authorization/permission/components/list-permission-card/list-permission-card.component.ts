@@ -72,6 +72,15 @@ export class ListPermissionCardComponent implements OnInit {
   }
 
   /**
+   * Lanza el evento de cambio de número de resultados por página
+   * @param elementsPerPage Número de resultados por página
+   */
+  onEntriesPerPageChanged(elementsPerPage: number): void {
+    this.numResults = elementsPerPage;
+    this.getPermissions(this.page);
+  }
+
+  /**
    * Obtiene el listado de permisos
    * @param page Página a la que se quiere ir
    * @param searchTerm Término de búsqueda
@@ -84,7 +93,7 @@ export class ListPermissionCardComponent implements OnInit {
       this.page = 1;
     } 
 
-    this.permissionService.getPermissions(page, this.search).subscribe({
+    this.permissionService.getPermissions(page, this.numResults, this.search).subscribe({
       next: (response: any) => {
         this.permissions = response.results;
         this.numGroups = response.count;

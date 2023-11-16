@@ -13,6 +13,8 @@
 
       <app-generic-table [columns]="columns" [data]="permissions"></app-generic-table>
 
+      <app-elements-per-page (elementsPerPageChangedEvent)="onEntriesPerPageChanged($event)" [totalElements]="numGroups"></app-elements-per-page>
+
       <app-pagination (pageEmitter)="goToPage($event)" [page]="page" [totalPages]="totalPages" [numItems]="numGroups"></app-pagination>
 
     </ng-container>

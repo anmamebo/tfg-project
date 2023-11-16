@@ -31,12 +31,13 @@ export class PermissionService {
    * @param searchTerm Término de búsqueda.
    * @returns Un observable que emite un objeto `any`.
    */
-  public getPermissions(page: number, searchTerm: string): Observable<any> {
+  public getPermissions(page: number, pageSize: number, searchTerm: string): Observable<any> {
     const headers = this.httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
     // Parámetros de la petición
     let params = new HttpParams().set('page', page.toString());
+    params = params.set('page_size', pageSize.toString());
 
     // Comprueba si se ha indicado un término de búsqueda
     if (searchTerm) {
