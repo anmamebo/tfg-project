@@ -29,6 +29,18 @@ export class PatientService {
   }
 
   /**
+   * Obtiene un paciente por su identificador.
+   * @param patient El identificador del paciente.
+   * @returns Un observable que emite un objeto `Patient`.
+   */
+  public getPatientById(id: number): Observable<Patient> {
+    const headers = this.httpCommonService.getCommonHeaders();
+    const httpOptions = { headers };
+
+    return this.http.get<Patient>(this.url + id + '/', httpOptions);
+  }
+
+  /**
    * Obtiene todos los pacientes.
    * @param page El número de página que se quiere obtener.
    * @param searchTerm Término de búsqueda.
