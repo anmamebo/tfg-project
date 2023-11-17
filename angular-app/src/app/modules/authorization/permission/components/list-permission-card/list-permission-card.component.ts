@@ -67,7 +67,7 @@ export class ListPermissionCardComponent implements OnInit {
    * Lanza el evento de búsqueda
    * @param searchTerm Término de búsqueda
    */
-  onSearchSubmitted(searchTerm: string): void {
+  public onSearchSubmitted(searchTerm: string): void {
     this.getPermissions(this.page, searchTerm);
   }
 
@@ -75,7 +75,7 @@ export class ListPermissionCardComponent implements OnInit {
    * Lanza el evento de cambio de número de resultados por página
    * @param elementsPerPage Número de resultados por página
    */
-  onEntriesPerPageChanged(elementsPerPage: number): void {
+  public onEntriesPerPageChanged(elementsPerPage: number): void {
     this.numResults = elementsPerPage;
     this.getPermissions(this.page);
   }
