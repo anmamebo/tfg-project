@@ -9,12 +9,6 @@ import { FlatpickrModule } from 'angularx-flatpickr';
 import { CalendarModule, DateAdapter } from "angular-calendar";
 import { adapterFactory } from "angular-calendar/date-adapters/date-fns"; 
 
-// Locale ES
-import { LOCALE_ID } from "@angular/core";
-import { registerLocaleData } from "@angular/common";
-import localeEs from "@angular/common/locales/es";
-registerLocaleData(localeEs);
-
 // Módulos
 import { ScheduleRoutingModule } from './schedule-routing.module';
 import { GenericPageModule } from "src/app/shared/components/generic-page/generic-page.module";
@@ -41,10 +35,7 @@ import { SchedulePageComponent } from './pages/schedule-page/schedule-page.compo
     GenericPageModule
   ],
   providers: [
-    {
-      provide: LOCALE_ID,
-      useValue: "es"
-    }
+
   ]
 })
 export class ScheduleModule { }

@@ -14,6 +14,12 @@ import { NgProgressRouterModule } from 'ngx-progressbar/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+// Locale ES
+import { LOCALE_ID } from "@angular/core";
+import { registerLocaleData } from "@angular/common";
+import localeEs from "@angular/common/locales/es";
+registerLocaleData(localeEs);
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -39,8 +45,11 @@ import { AppComponent } from './app.component';
         color: '#FF0000',
         speed: 250,
       }
+    },
+    {
+      provide: LOCALE_ID,
+      useValue: "es"
     }
-
   ],
   bootstrap: [AppComponent],
 })
