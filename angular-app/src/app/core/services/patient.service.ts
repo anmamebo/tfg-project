@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Observable, catchError } from 'rxjs';
 
 import { API_URL } from '../constants/API_URL';
@@ -26,6 +26,28 @@ export class PatientService {
     private httpCommonService: HttpCommonService,
   ) {
     this.url = API_URL.url + 'patients/patients/';
+  }
+
+  /**
+   * Obtiene todos los pacientes.
+   * @param page El número de página que se quiere obtener.
+   * @param searchTerm Término de búsqueda.
+   * @returns Un observable que emite un objeto `any`.
+   */
+  public getPatients(page: number, pageSize: number, searchTerm: string): Observable<any> {
+    const headers = this.httpCommonService.getCommonHeaders();
+    const httpOptions = { headers };
+
+    // Parámetros de la petición
+    let params = new HttpParams().set('page', page.toString());
+    params = params.set('page_size', pageSize.toString());
+
+    // Comprueba si se ha indicado un término de búsqueda
+    if (searchTerm) {
+      params = params.set('search', searchTerm);
+    }
+
+    return this.http.get<any>(this.url, { params, ...httpOptions });
   }
 
   /**
