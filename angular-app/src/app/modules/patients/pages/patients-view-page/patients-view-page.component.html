@@ -1,0 +1,30 @@
+<app-generic-page [pageTitle]="pageTitle" [pageDescription]="pageDescription" [breadcrumbData]="breadcrumbData">
+  <div class="page-content">
+    
+    <ng-container *ngIf="patient">
+
+      <section class="section">
+        <div class="row">
+          <div class="col-lg-8">
+              <app-view-basic-info-patients-card [patient]="patient" ></app-view-basic-info-patients-card>
+          </div>
+
+          <div class="col-lg-4">
+            <app-view-contact-info-patients-card [patient]="patient" ></app-view-contact-info-patients-card>
+          </div>
+
+          <ng-container *ngIf="patient.address">
+          
+            <div class="col-12">
+              <app-view-address-patients-card [address]="patient.address"></app-view-address-patients-card>
+            </div>
+
+          </ng-container>
+          
+        </div>
+      </section>
+
+    </ng-container>
+
+  </div>
+</app-generic-page>

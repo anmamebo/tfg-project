@@ -11,7 +11,7 @@
 
     <ng-container *ngIf="patients">
     
-      <app-generic-table [columns]="columns" [data]="patients" [actions]="true"></app-generic-table>
+      <app-generic-table [columns]="columns" [data]="patients" [actions]="true" [actionsUrls]="actionsUrls"></app-generic-table>
 
       <app-elements-per-page (elementsPerPageChangedEvent)="onEntriesPerPageChanged($event)" [totalElements]="numPatients"></app-elements-per-page>
 

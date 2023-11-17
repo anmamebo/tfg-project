@@ -10,18 +10,27 @@ import { GenericTableModule } from "src/app/shared/components/generic-table/gene
 import { PaginationModule } from "src/app/shared/components/pagination/pagination.module";
 import { ElementsPerPageModule } from "src/app/shared/components/elements-per-page/elements-per-page.module";
 import { SearchModule } from "src/app/shared/components/search/search.module";
+import { SharedModule } from "src/app/shared/shared.module";
 
 // Componentes páginas
 import { PatientsPageComponent } from './pages/patients-page/patients-page.component';
+import { PatientsViewPageComponent } from './pages/patients-view-page/patients-view-page.component';
 
 // Componentes tarjetas
 import { ListPatientsCardComponent } from './components/list-patients-card/list-patients-card.component';
+import { ViewBasicInfoPatientsCardComponent } from './components/view-basic-info-patients-card/view-basic-info-patients-card.component';
+import { ViewContactInfoPatientsCardComponent } from './components/view-contact-info-patients-card/view-contact-info-patients-card.component';
+import { ViewAddressPatientsCardComponent } from './components/view-address-patients-card/view-address-patients-card.component';
 
 
 @NgModule({
   declarations: [
     PatientsPageComponent,
-    ListPatientsCardComponent
+    ListPatientsCardComponent,
+    PatientsViewPageComponent,
+    ViewBasicInfoPatientsCardComponent,
+    ViewContactInfoPatientsCardComponent,
+    ViewAddressPatientsCardComponent,
   ],
   imports: [
     CommonModule,
@@ -33,6 +42,7 @@ import { ListPatientsCardComponent } from './components/list-patients-card/list-
     PaginationModule,
     ElementsPerPageModule,
     SearchModule,
+    SharedModule,
   ]
 })
 export class PatientsModule { }

@@ -41,3 +41,10 @@ export const breadcrumbPatientsData = [
   { label: 'Panel Principal', url: '/'},
   { label: 'Pacientes', url: ''}
 ]
+
+// Pacientes ver
+export const breadcrumbPatientsViewData = [
+  { label: 'Panel Principal', url: '/'},
+  { label: 'Pacientes', url: '/pacientes'},
+  { label: 'Ver paciente', url: ''}
+]

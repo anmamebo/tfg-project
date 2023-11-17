@@ -38,6 +38,7 @@ export const sidebarData = [
   },
   {
     name: 'Pacientes',
+    key: 'pacientes',
     url: '/pacientes',
     icon: 'people-fill',
     roles: [ROLES.ADMIN, ROLES.DOCTOR]
