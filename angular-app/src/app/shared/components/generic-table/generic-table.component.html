@@ -12,7 +12,7 @@
         <ng-container *ngIf="data && data.length > 0; else noData">
           <tr *ngFor="let item of data">
             <ng-container *ngFor="let column of columns">
-              <td>{{ item[column.field] }}</td>
+              <td>{{ getFieldValue(item, column.field) }}</td>
             </ng-container>
             
             <td *ngIf="actions">

@@ -27,6 +27,21 @@ export class GenericTableComponent {
   constructor() { }
 
   /**
+   * Obtiene el valor de un campo de un objeto.
+   * @param item Item del que se quiere obtener el valor.
+   * @param field Campo del que se quiere obtener el valor.
+   * @returns Valor del campo.
+   */
+  public getFieldValue(item: any, field: string): any {
+    const fields = field.split('.');
+    let value = item;
+    fields.forEach(field => {
+      value = value[field];
+    });
+    return value;
+  }
+
+  /**
    * Emite el evento onDeleteEvent.
    */
   public onDelete(id: number): void {
