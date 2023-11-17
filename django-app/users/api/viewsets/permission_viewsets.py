@@ -24,8 +24,6 @@ class PermissionViewSet(viewsets.GenericViewSet):
   model = Permission
   serializer_class = PermissionSerializer
   list_serializer_class = PermissionSerializer
-  search_fields = ['name', 'codename', 'content_type__model']
-  filter_backends = [filters.SearchFilter]
   queryset = Permission.objects.all()
   
   def get_object(self, pk):
