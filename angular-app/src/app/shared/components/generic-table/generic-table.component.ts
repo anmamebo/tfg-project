@@ -38,7 +38,8 @@ export class GenericTableComponent {
     fields.forEach(field => {
       value = value[field];
     });
-    return value;
+    
+    return value != null ? value : '--';
   }
 
   /**
