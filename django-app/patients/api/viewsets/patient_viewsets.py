@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.shortcuts import get_object_or_404
 
 from rest_framework.response import Response
@@ -49,6 +50,15 @@ class PatientViewSet(viewsets.GenericViewSet):
         Response: La respuesta que contiene la lista de pacientes.
     """
     patients = self.get_queryset()
+    
+    query = self.request.query_params.get('search', None)
+    
+    if query:
+      patients = patients.filter(
+        Q(user__name__icontains=query) | Q(user__last_name__icontains=query) | Q(dni__icontains=query) | 
+        Q(user__email__icontains=query) | Q(social_security__icontains=query) | Q(phone__icontains=query)
+      )
+      
     page = self.paginate_queryset(patients)
     if page is not None:
       patients_serializer = self.list_serializer_class(page, many=True)
