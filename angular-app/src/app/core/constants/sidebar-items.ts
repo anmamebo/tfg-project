@@ -37,8 +37,9 @@ export const sidebarData = [
     ]
   },
   {
-    name: 'Usuarios',
-    url: '',
-    icon: 'person-fill',
-  }
+    name: 'Pacientes',
+    url: '/pacientes',
+    icon: 'people-fill',
+    roles: [ROLES.ADMIN, ROLES.DOCTOR]
+  },
 ];

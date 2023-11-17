@@ -35,3 +35,9 @@ export const breadcrumbPermissionData = [
   { label: 'Panel Principal', url: '/'},
   { label: 'Permisos', url: ''}
 ]
+
+// Pacientes
+export const breadcrumbPatientsData = [
+  { label: 'Panel Principal', url: '/'},
+  { label: 'Pacientes', url: ''}
+]
