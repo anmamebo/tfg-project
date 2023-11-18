@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 // Servicios
 import { PatientService } from "src/app/core/services/patient.service";
+import { NotificationService } from "src/app/core/services/notification.service";
 
 // Modelos
 import { Patient } from 'src/app/core/models/patient.model';
@@ -14,7 +15,7 @@ import { Patient } from 'src/app/core/models/patient.model';
   selector: 'app-list-patients-card',
   templateUrl: './list-patients-card.component.html',
   styleUrls: ['./list-patients-card.component.scss'],
-  providers: [PatientService],
+  providers: [PatientService, NotificationService],
 })
 export class ListPatientsCardComponent implements OnInit {
   /** Título de la tarjeta. */
@@ -57,6 +58,7 @@ export class ListPatientsCardComponent implements OnInit {
 
   constructor(
     private patientService: PatientService,
+    private notificationService: NotificationService
   ) { }
 
   ngOnInit(): void {
@@ -111,6 +113,24 @@ export class ListPatientsCardComponent implements OnInit {
       error: (error: any) => {
         console.log(error);
       }
+    });
+  }
+
+  /**
+   * Elimina un paciente.
+   * @param id Identificador del paciente.
+   */
+  public deletePatient(id: string): void {
+    this.notificationService.showConfirmDeleteDialog(() => {
+
+      this.patientService.deletePatient(id).subscribe({
+        next: () => {
+          this.getPatients(this.page);
+        },
+        error: () => {
+          this.notificationService.showErrorToast('No se ha podido eliminar el paciente.');
+        }
+      });
     });
   }
 }
