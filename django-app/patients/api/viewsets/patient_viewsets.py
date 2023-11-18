@@ -4,6 +4,7 @@ from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import viewsets
+from rest_framework.decorators import action
 
 from patients.models import Patient
 from patients.api.serializers.patient_serializer import PatientSerializer
@@ -37,7 +38,7 @@ class PatientViewSet(viewsets.GenericViewSet):
     if self.queryset is None:
       self.queryset = self.model.objects\
                       .filter(state=True)\
-                      .all()
+                      .all().order_by('-created_date')
     return self.queryset
   
   def list(self, request):
@@ -119,4 +120,61 @@ class PatientViewSet(viewsets.GenericViewSet):
     return Response({
       'message': 'Hay errores en la actualización',
       'errors'  : patient_serializer.errors
+    }, status=status.HTTP_400_BAD_REQUEST)
+    
+  def destroy(self, request, pk=None):
+    """
+    Elimina un paciente existente, no lo borra de la base de datos, cambia su estado.
+
+    Args:
+        request (Request): La solicitud HTTP.
+        pk (int): El ID del paciente.
+
+    Returns:
+        Response: La respuesta que indica si el paciente se ha eliminado correctamente o si ha habido errores.
+    """
+    patient = self.get_queryset().filter(id=pk).first()
+    if patient:
+      user = patient.user
+      if user:
+        patient.state = False
+        patient.save()
+        user.is_active = False
+        user.save()
+        
+        address = patient.address
+        if address:
+          address.state = False
+          address.save()
+          
+        return Response({
+          'message': 'Paciente eliminado correctamente.'
+        }, status=status.HTTP_200_OK)
+    
+    return Response({
+      'message': 'No se ha encontrado el paciente.'
+    }, status=status.HTTP_400_BAD_REQUEST)
+    
+  @action(detail=True, methods=['put'])
+  def activate(self, request, pk=None):
+    patient = self.get_object(pk)
+    if patient:
+      user = patient.user
+      if user:
+        patient.state = True
+        patient.save()
+        user.is_active = True
+        user.save()
+        
+        address = patient.address
+        if address:
+          address.state = True
+          address.save()
+
+        return Response({
+          'message': 'Paciente eliminado correctamente.'
+        }, status=status.HTTP_200_OK)
+    
+    return Response({
+      'message': 'No se ha encontrado el paciente.'
     }, status=status.HTTP_400_BAD_REQUEST)
