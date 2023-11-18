@@ -75,4 +75,23 @@ export class PatientService {
 
     return this.http.put<any>(this.url + patient.id + '/', params, httpOptions);
   }
+
+  /**
+   * Elimina un paciente.
+   * @param id El identificador del paciente.
+   * @returns Un observable que emite un objeto `any`.
+   */
+  public deletePatient(id: string): Observable<any> {
+    const headers = this.httpCommonService.getCommonHeaders();
+    const httpOptions = { headers };
+
+    return this.http.delete<any>(this.url + id + '/', httpOptions);
+  }
+
+  public activatePatient(id: string): Observable<any> {
+    const headers = this.httpCommonService.getCommonHeaders();
+    const httpOptions = { headers };
+
+    return this.http.put<any>(this.url + id + '/activate/', {}, httpOptions);
+  }
 }
