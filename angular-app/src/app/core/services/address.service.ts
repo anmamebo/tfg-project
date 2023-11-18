@@ -29,6 +29,29 @@ export class AddressService {
   }
 
   /**
+   * Crea una dirección.
+   * @param address El objeto `Address` con los datos de la dirección.
+   * @returns Un observable que emite un objeto `any`.
+   */
+  public createAddress(address: Address): Observable<any> {
+    const headers = this.httpCommonService.getCommonHeaders();
+    const httpOptions = { headers };
+
+    let params = JSON.stringify(address);
+
+    return this.http.post<any>(this.url, params, httpOptions)
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          if (error.status === 400) {
+            let errorMessage = error.error.message;
+            throw new Error(errorMessage);
+          }
+          throw new Error('Ocurrió un error en el servidor. Inténtalo más tarde.');
+        })
+      );
+  }
+
+  /**
    * Actualiza los datos de una dirección.
    * @param address El objeto `Address` con los datos actualizados.
    * @returns Un observable que emite un objeto `any`.
