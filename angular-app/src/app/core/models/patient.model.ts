@@ -11,5 +11,6 @@ export class Patient {
     public social_security?: string | null,
     public address?: Address,
     public user?: User,
+    public state?: boolean,
   ) {}
 }
