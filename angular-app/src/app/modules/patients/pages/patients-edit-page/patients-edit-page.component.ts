@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { breadcrumbPatientsEditData } from "src/app/core/constants/breadcrumb-data";
 
@@ -34,6 +34,7 @@ export class PatientsEditPageComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private patientService: PatientService
   ) { }
 
@@ -55,7 +56,11 @@ export class PatientsEditPageComponent implements OnInit {
         this.patient = patient;
       },
       error: (error: any) => {
-        console.error(error);
+        if (error.status === 404) {
+          this.router.navigate(['**'], { replaceUrl: true }); 
+        } else {          
+          console.error(error);
+        }
       }
     });
   }
