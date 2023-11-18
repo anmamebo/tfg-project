@@ -71,9 +71,35 @@ export class NotificationService {
           icon: "success",
           confirmButtonColor: "#435ebe",
         });
+        onConfirm();
       }
-      
-      onConfirm();
+    });
+  }
+
+  /**
+   * Muestra un dialogo de confirmación para reactivar un registro y ejecuta la función `onConfirm` si se confirma.
+   * @param onConfirm Función que se ejecutará si se confirma la desactivación.
+   */
+  showConfirmReactivateDialog(onConfirm: () => void) {
+    Swal.fire({
+      title: "¿Estás seguro?",
+      text: "",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#435ebe",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sí, activar",
+      cancelButtonText: "Cancelar",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: "¡Activado!",
+          text: "El registro ha sido activado.",
+          icon: "success",
+          confirmButtonColor: "#435ebe",
+        });
+        onConfirm();
+      }
     });
   }
 }
