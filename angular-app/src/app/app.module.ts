@@ -1,6 +1,6 @@
 import { NgModule, importProvidersFrom } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
@@ -13,6 +13,8 @@ import { NgProgressRouterModule } from 'ngx-progressbar/router';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+
+import { ErrorHandlerInterceptor } from "src/app/core/interceptors/error-handler.interceptor";
 
 // Locale ES
 import { LOCALE_ID } from "@angular/core";
@@ -49,6 +51,11 @@ registerLocaleData(localeEs);
     {
       provide: LOCALE_ID,
       useValue: "es"
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorHandlerInterceptor,
+      multi: true
     }
   ],
   bootstrap: [AppComponent],

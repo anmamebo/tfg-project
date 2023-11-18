@@ -65,18 +65,7 @@ export class GroupService {
 
     let params = JSON.stringify(group);
 
-    return this.http.post<any>(this.url, params, httpOptions)
-      .pipe(
-        catchError((error: HttpErrorResponse) => {
-          if (error.status === 400) {
-            let errorMessage = error.error.message || 'Hay errores en la creación del grupo';
-            throw new Error(errorMessage);
-          }
-          throw new Error(
-            'Ocurrió un error en el servidor. Inténtalo más tarde.'
-          );
-        })
-      );
+    return this.http.post<any>(this.url, params, httpOptions);
   }
 
   /**
@@ -90,18 +79,7 @@ export class GroupService {
 
     let params = JSON.stringify(group);
 
-    return this.http.put<any>(this.url + group.id + '/', params, httpOptions)
-      .pipe(
-        catchError((error: HttpErrorResponse) => {
-          if (error.status === 400) {
-            let errorMessage = error.error.message || 'Hay errores en la actualización del grupo';
-            throw new Error(errorMessage);
-          }
-          throw new Error(
-            'Ocurrió un error en el servidor. Inténtalo más tarde.'
-          );
-        })
-      );
+    return this.http.put<any>(this.url + group.id + '/', params, httpOptions);
   }
 
   /**

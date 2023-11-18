@@ -53,19 +53,7 @@ export class UserService {
 
     let params = JSON.stringify(user);
 
-    return this.http.put<any>(this.url + user.id + '/', params, httpOptions)
-      .pipe(
-        catchError((error: HttpErrorResponse) => {
-          if (error.status === 400) {
-            let errorMessage =
-              error.error.message || 'Hay errores en la actualización';
-            throw new Error(errorMessage);
-          }
-          throw new Error(
-            'Ocurrió un error en el servidor. Inténtalo más tarde.'
-          );
-        })
-      );
+    return this.http.put<any>(this.url + user.id + '/', params, httpOptions);
   }
 
   /**
@@ -83,18 +71,6 @@ export class UserService {
 
     let params = JSON.stringify(data);
 
-    return this.http
-      .post<any>(this.url + user_id + '/set_password/', params, httpOptions)
-      .pipe(
-        catchError((error: HttpErrorResponse) => {
-          if (error.status === 400) {
-            let errorMessage = 'Contraseña actual incorrecta';
-            throw new Error(errorMessage);
-          }
-          throw new Error(
-            'Ocurrió un error en el servidor. Inténtalo más tarde.'
-          );
-        })
-      );
+    return this.http.post<any>(this.url + user_id + '/set_password/', params, httpOptions);
   }
 }

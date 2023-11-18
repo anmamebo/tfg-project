@@ -39,16 +39,7 @@ export class AddressService {
 
     let params = JSON.stringify(address);
 
-    return this.http.post<any>(this.url, params, httpOptions)
-      .pipe(
-        catchError((error: HttpErrorResponse) => {
-          if (error.status === 400) {
-            let errorMessage = error.error.message;
-            throw new Error(errorMessage);
-          }
-          throw new Error('Ocurrió un error en el servidor. Inténtalo más tarde.');
-        })
-      );
+    return this.http.post<any>(this.url, params, httpOptions);
   }
 
   /**
@@ -62,15 +53,6 @@ export class AddressService {
 
     let params = JSON.stringify(address);
 
-    return this.http.put<any>(this.url + address.id + '/', params, httpOptions)
-      .pipe(
-        catchError((error: HttpErrorResponse) => {
-          if (error.status === 400) {
-            let errorMessage = error.error.message;
-            throw new Error(errorMessage);
-          }
-          throw new Error('Ocurrió un error en el servidor. Inténtalo más tarde.');
-        })
-      );
+    return this.http.put<any>(this.url + address.id + '/', params, httpOptions);
   }
 }

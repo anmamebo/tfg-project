@@ -39,15 +39,6 @@ export class DoctorService {
 
     let params = JSON.stringify(doctor);
 
-    return this.http.put<any>(this.url + doctor.id + '/', params, httpOptions)
-      .pipe(
-        catchError((error: HttpErrorResponse) => {
-          if (error.status === 400) {
-            let errorMessage = error.error.message;
-            throw new Error(errorMessage);
-          }
-          throw new Error('Ocurrió un error en el servidor. Inténtalo más tarde.');
-        })
-      );
+    return this.http.put<any>(this.url + doctor.id + '/', params, httpOptions);
   }
 }

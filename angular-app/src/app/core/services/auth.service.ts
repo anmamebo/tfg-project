@@ -43,21 +43,7 @@ export class AuthService {
   public login(user: {username: string, password: string}): Observable<AuthResponse> {
     let params = JSON.stringify(user);
 
-    return this.http
-      .post<AuthResponse>(this.url + 'login/', params, httpOptions)
-      .pipe(
-        catchError((error: HttpErrorResponse) => {
-          if (error.status === 400) {
-            let errorMessage =
-              error.error.message ||
-              'Contraseña o nombre de usuario incorrectos';
-            throw new Error(errorMessage);
-          }
-          throw new Error(
-            'Ocurrió un error en el servidor. Inténtalo más tarde.'
-          );
-        })
-      );
+    return this.http.post<AuthResponse>(this.url + 'login/', params, httpOptions);
   }
 
   /**
@@ -85,18 +71,7 @@ export class AuthService {
     });
     const httpOptions = { headers };
 
-    return this.http.post<any>(this.url + 'logout/', user_id, httpOptions).pipe(
-      catchError((error: HttpErrorResponse) => {
-        if (error.status === 400) {
-          let errorMessage =
-            error.error.message || 'Ocurrió un error al cerrar sesión';
-          throw new Error(errorMessage);
-        }
-        throw new Error(
-          'Ocurrió un error en el servidor. Inténtalo más tarde.'
-        );
-      })
-    );
+    return this.http.post<any>(this.url + 'logout/', user_id, httpOptions);
   }
 
   /**
