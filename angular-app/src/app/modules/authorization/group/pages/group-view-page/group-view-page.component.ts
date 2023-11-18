@@ -1,13 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 import { breadcrumbGroupViewData } from "src/app/core/constants/breadcrumb-data";
 
 // Modelos
 import { Group } from "src/app/core/models/group.model";
-
-// Servicios
-import { GroupService } from "src/app/core/services/group.service";
 
 
 /**
@@ -17,7 +14,6 @@ import { GroupService } from "src/app/core/services/group.service";
   selector: 'app-group-view-page',
   templateUrl: './group-view-page.component.html',
   styleUrls: ['./group-view-page.component.scss'],
-  providers: [GroupService]
 })
 export class GroupViewPageComponent implements OnInit {
   /** Título de la página */
@@ -34,34 +30,9 @@ export class GroupViewPageComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
-    private groupService: GroupService
   ) { }
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
-      let id = params['id'];
-      
-      this.getGroup(id);
-    });
-  }
-
-  /**
-   * Obtiene un grupo por su id
-   * @param id Id del grupo
-   */
-  getGroup(id: number): void {
-    this.groupService.getGroupById(id).subscribe({
-      next: (group: Group) => {
-        this.group = group;
-      },
-      error: (error: any) => {
-        if (error.status === 404) {
-          this.router.navigate(['**'], { replaceUrl: true }); 
-        } else {
-          console.error(error);
-        }
-      }
-    });
+    this.group  = this.route.snapshot.data['data']; // Obtiene los datos del grupo desde el resolver
   }
 }

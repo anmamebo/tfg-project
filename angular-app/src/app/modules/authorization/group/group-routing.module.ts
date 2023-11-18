@@ -5,6 +5,8 @@ import { GroupPageComponent } from './pages/group-page/group-page.component';
 import { GroupEditPageComponent } from "./pages/group-edit-page/group-edit-page.component";
 import { GroupViewPageComponent } from "./pages/group-view-page/group-view-page.component";
 
+import { groupResolver } from "src/app/core/resolvers/group.resolver";
+
 const routes: Routes = [
   {
     path: '',
@@ -14,12 +16,18 @@ const routes: Routes = [
   {
     path: ':id',
     component: GroupViewPageComponent,
-    title: 'Ver grupo | HospitalSys'
+    title: 'Ver grupo | HospitalSys',
+    resolve: {
+      data: groupResolver // Resolver para obtener los datos del grupo
+    }
   },
   {
     path: 'editar/:id',
     component: GroupEditPageComponent,
-    title: 'Editar grupo | HospitalSys'
+    title: 'Editar grupo | HospitalSys',
+    resolve: {
+      data: groupResolver // Resolver para obtener los datos del grupo
+    }
   },
 ];
 

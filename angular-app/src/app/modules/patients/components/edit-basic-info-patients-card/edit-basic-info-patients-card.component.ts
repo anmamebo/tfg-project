@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { DatePipe } from "@angular/common";
 
@@ -48,9 +48,6 @@ export class EditBasicInfoPatientsCardComponent implements OnInit {
 
   /** Indica si se ha enviado el formulario */
   public submitted: Boolean = false;
-
-  /** Evento que se emite cuando se edita la información básica de un paciente */
-  @Output() public patientEditedEvent: EventEmitter<void> = new EventEmitter<void>(); 
 
   constructor(
     private formBuilder: FormBuilder,
@@ -109,7 +106,6 @@ export class EditBasicInfoPatientsCardComponent implements OnInit {
     this.patientService.updatePatient(updatedData).subscribe({
       next: (data) => {
         this.submitted = false;
-        this.patientEditedEvent.emit();
         this.notificationService.showSuccessToast(data.message);
       },
       error: (error) => {

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 // Servicios
@@ -32,9 +32,6 @@ export class EditGroupCardComponent implements OnInit {
 
   /** Indica si se ha enviado el formulario */
   public submitted: Boolean = false;
-
-  /** Evento que se emite cuando se edita un grupo */
-  @Output() public groupEditedEvent: EventEmitter<any> = new EventEmitter();
 
   constructor(
     private formBuilder: FormBuilder,
@@ -75,7 +72,6 @@ export class EditGroupCardComponent implements OnInit {
       next: (data) => {
         this.submitted = false;
         this.notificationService.showSuccessToast(data.message);
-        this.groupEditedEvent.emit(groupEdited.id);
       },
       error: (error) => {
         this.notificationService.showErrorToast(error);

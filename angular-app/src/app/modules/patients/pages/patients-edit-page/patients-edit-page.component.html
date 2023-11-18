@@ -6,18 +6,18 @@
       <section class="section">
         <div class="row">
           <div class="col-lg-8">
-            <app-edit-basic-info-patients-card [patient]="patient" (patientEditedEvent)="ngOnInit()"></app-edit-basic-info-patients-card>
+            <app-edit-basic-info-patients-card [patient]="patient"></app-edit-basic-info-patients-card>
           </div>
 
           <div class="col-lg-4">
-            <app-edit-contact-info-patients-card [patient]="patient" (patientEditedEvent)="ngOnInit()"></app-edit-contact-info-patients-card>
+            <app-edit-contact-info-patients-card [patient]="patient"></app-edit-contact-info-patients-card>
           </div>
         </div>
 
         <!-- <ng-container *ngIf="patient.address"> -->
         
           <div class="col-12">
-            <app-edit-address-patients-card [address]="patient.address" [patientId]="patient.id" (addressEditedEvent)="ngOnInit()"></app-edit-address-patients-card>
+            <app-edit-address-patients-card [address]="patient.address" [patientId]="patient.id"></app-edit-address-patients-card>
           </div>
 
         <!-- </ng-container> -->

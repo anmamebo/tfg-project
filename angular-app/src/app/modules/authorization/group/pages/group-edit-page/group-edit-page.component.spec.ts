@@ -3,25 +3,28 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ActivatedRoute } from '@angular/router';
 
 import { GroupEditPageComponent } from './group-edit-page.component';
-import { BehaviorSubject } from 'rxjs';
 
 
 describe('GroupEditPageComponent', () => {
   let component: GroupEditPageComponent;
   let fixture: ComponentFixture<GroupEditPageComponent>;
 
-  class ActivatedRouteStub {
-    private subject = new BehaviorSubject({ id: '1' });
-    params = this.subject.asObservable();
+  const activatedRouteStub = {
+    snapshot: {
+      data: {
+        data: {
+          id: 1
+        }
+      }
+    }
   }
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ GroupEditPageComponent ],
-      providers: [{ provide: ActivatedRoute, useClass: ActivatedRouteStub }],
+      providers: [{ provide: ActivatedRoute, useValue: activatedRouteStub }],
       imports: [HttpClientTestingModule]
-    })
-    .compileComponents();
+    }).compileComponents();
   });
 
   beforeEach(() => {

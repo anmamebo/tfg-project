@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { INTEGER_REGEXP } from "src/app/core/constants/reg-exp";
@@ -44,9 +44,6 @@ export class EditAddressPatientsCardComponent implements OnInit {
 
   /** Indica si se ha enviado el formulario */
   public submitted: Boolean = false;
-
-  /** Evento que se emite cuando se edita la dirección de un paciente */
-  @Output() public addressEditedEvent: EventEmitter<void> = new EventEmitter<void>(); 
 
   constructor(
     private formBuilder: FormBuilder,
@@ -102,7 +99,6 @@ export class EditAddressPatientsCardComponent implements OnInit {
       this.addressService.createAddress(address).subscribe({
         next: (data) => {
           this.submitted = false;
-          this.addressEditedEvent.emit();
           this.notificationService.showSuccessToast(data.message);
         },
         error: (error) => {
@@ -114,7 +110,6 @@ export class EditAddressPatientsCardComponent implements OnInit {
       this.addressService.updateAddress(address).subscribe({
         next: (data) => {
           this.submitted = false;
-          this.addressEditedEvent.emit();
           this.notificationService.showSuccessToast(data.message);
         },
         error: (error) => {

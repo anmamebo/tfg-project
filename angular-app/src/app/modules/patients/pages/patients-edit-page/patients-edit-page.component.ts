@@ -1,13 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 import { breadcrumbPatientsEditData } from "src/app/core/constants/breadcrumb-data";
 
 // Modelos
 import { Patient } from "src/app/core/models/patient.model";
-
-// Servicios
-import { PatientService } from "src/app/core/services/patient.service";
 
 
 /**
@@ -17,7 +14,6 @@ import { PatientService } from "src/app/core/services/patient.service";
   selector: 'app-patients-edit-page',
   templateUrl: './patients-edit-page.component.html',
   styleUrls: ['./patients-edit-page.component.scss'],
-  providers: [PatientService]
 })
 export class PatientsEditPageComponent implements OnInit {
   /** Título de la página. */
@@ -34,34 +30,9 @@ export class PatientsEditPageComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
-    private patientService: PatientService
   ) { }
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
-      let id = params['id'];
-      
-      this.getPatient(id);
-    });
-  }
-
-  /**
-   * Obtiene un paciente por su `id`.
-   * @param id `id` del paciente a obtener.
-   */
-  getPatient(id: number): void {
-    this.patientService.getPatientById(id).subscribe({
-      next: (patient: Patient) => {
-        this.patient = patient;
-      },
-      error: (error: any) => {
-        if (error.status === 404) {
-          this.router.navigate(['**'], { replaceUrl: true }); 
-        } else {          
-          console.error(error);
-        }
-      }
-    });
+    this.patient = this.route.snapshot.data['data']; // Obtiene los datos del paciente desde el resolver
   }
 }

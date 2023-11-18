@@ -5,6 +5,8 @@ import { PatientsPageComponent } from "./pages/patients-page/patients-page.compo
 import { PatientsEditPageComponent } from "./pages/patients-edit-page/patients-edit-page.component";
 import { PatientsViewPageComponent } from "./pages/patients-view-page/patients-view-page.component";
 
+import { patientResolver } from "src/app/core/resolvers/patient.resolver";
+
 const routes: Routes = [
   {
     path: '',
@@ -15,11 +17,17 @@ const routes: Routes = [
     path: ':id',
     component: PatientsViewPageComponent,
     title: 'Ver paciente | HospitalSys',
+    resolve: {
+      data: patientResolver // Resolver para obtener los datos del paciente
+    }
   },
   {
     path: 'editar/:id',
     component: PatientsEditPageComponent,
     title: 'Editar paciente | HospitalSys',
+    resolve: {
+      data: patientResolver // Resolver para obtener los datos del paciente
+    }
   }
 ];
 
