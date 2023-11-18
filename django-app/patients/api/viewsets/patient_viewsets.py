@@ -157,6 +157,16 @@ class PatientViewSet(viewsets.GenericViewSet):
     
   @action(detail=True, methods=['put'])
   def activate(self, request, pk=None):
+    """
+    Activa un paciente existente, cambia su estado.
+
+    Args:
+        request (Request): La solicitud HTTP.
+        pk (int): El ID del paciente.
+
+    Returns:
+        Response: La respuesta que indica si el paciente se ha activado correctamente o si ha habido errores.
+    """
     patient = self.get_object(pk)
     if patient:
       user = patient.user
