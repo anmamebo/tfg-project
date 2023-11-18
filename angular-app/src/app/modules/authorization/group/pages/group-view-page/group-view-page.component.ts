@@ -42,7 +42,7 @@ export class GroupViewPageComponent implements OnInit {
     this.route.params.subscribe(params => {
       let id = params['id'];
       
-      this.getProduct(id);
+      this.getGroup(id);
     });
   }
 
@@ -50,7 +50,7 @@ export class GroupViewPageComponent implements OnInit {
    * Obtiene un grupo por su id
    * @param id Id del grupo
    */
-  getProduct(id: number): void {
+  getGroup(id: number): void {
     this.groupService.getGroupById(id).subscribe({
       next: (group: Group) => {
         this.group = group;
