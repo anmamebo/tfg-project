@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import viewsets
 
-from patients.models import Address
+from patients.models import Address, Patient
 from patients.api.serializers.address_serializer import AddressSerializer
 
 
@@ -38,6 +38,36 @@ class AddressViewSet(viewsets.GenericViewSet):
                       .all()
     return self.queryset
   
+  def create(self, request):
+    """
+    Crea una nueva dirección.
+
+    Args:
+        request (Request): La solicitud HTTP.
+
+    Returns:
+        Response: La respuesta que indica si la dirección se ha creado correctamente o si ha habido errores.
+    """      
+    address_serializer = self.serializer_class(data=request.data)
+    if address_serializer.is_valid():
+      address = address_serializer.save() # Guarda la dirección creada
+      
+      # Relaciona la dirección con el paciente en caso de que se haya enviado el ID del paciente
+      patient_id = request.data.get('patient_id')
+      if patient_id:
+        patient = Patient.objects.get(id=patient_id)
+        patient.address = address
+        patient.save()
+            
+      return Response({
+        'message': 'Dirección creada correctamente.'
+      }, status=status.HTTP_201_CREATED)
+      
+    return Response({
+      'message': 'Hay errores en la información enviada.',
+      'errors': address_serializer.errors
+    }, status=status.HTTP_400_BAD_REQUEST)
+  
   def update(self, request, pk=None):
     """
     Actualiza los detalles de una dirección existente.
@@ -50,7 +80,6 @@ class AddressViewSet(viewsets.GenericViewSet):
         Response: La respuesta que indica si la dirección se ha actualizado correctamente o si ha habido errores.
     """
     address = self.get_object(pk)
-    print(address)
     address_serializer = self.serializer_class(address, data=request.data, partial=True)
     if address_serializer.is_valid():
       address_serializer.save()
