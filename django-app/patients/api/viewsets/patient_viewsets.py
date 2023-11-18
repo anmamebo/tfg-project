@@ -7,6 +7,7 @@ from rest_framework import viewsets
 
 from patients.models import Patient
 from patients.api.serializers.patient_serializer import PatientSerializer
+from users.api.serializers.user_serializer import UserSerializer
 
 
 class PatientViewSet(viewsets.GenericViewSet):
@@ -94,7 +95,21 @@ class PatientViewSet(viewsets.GenericViewSet):
         Response: La respuesta que indica si el paciente se ha actualizado correctamente o si ha habido errores.
     """
     patient = self.get_object(pk)
-    patient_serializer = self.serializer_class(patient, data=request.data, context={'request': request})
+    
+    # Actualiza los datos del usuario en caso de que se hayan enviado
+    user_data = request.data.pop('user', None)
+    if user_data:
+      user_serializer = UserSerializer(patient.user, data=user_data, partial=True)
+      if user_serializer.is_valid():
+        user_serializer.save()
+      else:
+        return Response({
+          'message': 'Hay errores en la actualización',
+          'errors'  : user_serializer.errors
+        }, status=status.HTTP_400_BAD_REQUEST)
+    
+    # Actualiza los datos del paciente
+    patient_serializer = self.serializer_class(patient, data=request.data, context={'request': request}, partial=True)
     if patient_serializer.is_valid():
       patient_serializer.save()
       return Response({
