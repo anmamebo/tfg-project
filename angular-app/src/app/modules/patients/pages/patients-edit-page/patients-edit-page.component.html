@@ -1,0 +1,29 @@
+<app-generic-page [pageTitle]="pageTitle" [pageDescription]="pageDescription" [breadcrumbData]="breadcrumbData">
+  <div class="page-content">
+
+    <ng-container *ngIf="patient">
+    
+      <section class="section">
+        <div class="row">
+          <div class="col-lg-8">
+            <app-edit-basic-info-patients-card [patient]="patient" (patientEditedEvent)="ngOnInit()"></app-edit-basic-info-patients-card>
+          </div>
+
+          <div class="col-lg-4">
+            <app-edit-contact-info-patients-card [patient]="patient" (patientEditedEvent)="ngOnInit()"></app-edit-contact-info-patients-card>
+          </div>
+        </div>
+
+        <!-- <ng-container *ngIf="patient.address"> -->
+        
+          <div class="col-12">
+            <app-edit-address-patients-card [address]="patient.address" [patientId]="patient.id" (addressEditedEvent)="ngOnInit()"></app-edit-address-patients-card>
+          </div>
+
+        <!-- </ng-container> -->
+      </section>
+    
+    </ng-container>
+
+  </div>
+</app-generic-page>

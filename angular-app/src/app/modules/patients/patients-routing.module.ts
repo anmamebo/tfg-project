@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { PatientsPageComponent } from "./pages/patients-page/patients-page.component";
+import { PatientsEditPageComponent } from "./pages/patients-edit-page/patients-edit-page.component";
 import { PatientsViewPageComponent } from "./pages/patients-view-page/patients-view-page.component";
 
 const routes: Routes = [
@@ -15,6 +16,11 @@ const routes: Routes = [
     component: PatientsViewPageComponent,
     title: 'Ver paciente | HospitalSys',
   },
+  {
+    path: 'editar/:id',
+    component: PatientsEditPageComponent,
+    title: 'Editar paciente | HospitalSys',
+  }
 ];
 
 @NgModule({
