@@ -7,7 +7,7 @@ from rest_framework import viewsets
 from rest_framework.decorators import action
 
 from patients.models import Patient
-from patients.api.serializers.patient_serializer import PatientSerializer
+from patients.api.serializers.patient_serializer import PatientSerializer, CreatePatientSerializer
 from users.api.serializers.user_serializer import UserSerializer
 
 
@@ -69,6 +69,28 @@ class PatientViewSet(viewsets.GenericViewSet):
       patients_serializer = self.list_serializer_class(patients, many=True)
       return Response(patients_serializer.data, status=status.HTTP_200_OK)
   
+  def create(self, request):
+    """
+    Crea un nuevo paciente.
+
+    Args:
+        request (Request): La solicitud HTTP.
+
+    Returns:
+        Response: La respuesta que indica si el paciente se ha creado correctamente o si ha habido errores.
+    """
+    patient_serializer = CreatePatientSerializer(data=request.data)
+    if patient_serializer.is_valid():
+      patient = patient_serializer.save()
+      return Response({
+        'message': 'Paciente creado correctamente.'
+      }, status=status.HTTP_201_CREATED)
+    
+    return Response({
+      'message': 'Hay errores en la creación',
+      'errors'  : patient_serializer.errors
+    }, status=status.HTTP_400_BAD_REQUEST)
+
   def retrieve(self, request, pk=None):
     """
     Recupera los detalles de un paciente específico.
