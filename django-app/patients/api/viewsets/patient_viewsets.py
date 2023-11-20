@@ -10,6 +10,8 @@ from patients.models import Patient
 from patients.api.serializers.patient_serializer import PatientSerializer, CreatePatientSerializer
 from users.api.serializers.user_serializer import UserSerializer
 
+from utilities.password_generator import generate_password
+
 
 class PatientViewSet(viewsets.GenericViewSet):
   """
@@ -79,6 +81,9 @@ class PatientViewSet(viewsets.GenericViewSet):
     Returns:
         Response: La respuesta que indica si el paciente se ha creado correctamente o si ha habido errores.
     """
+    request.data['user']['password'] = generate_password()
+    request.data['user']['username'] = request.data['dni']
+    
     patient_serializer = CreatePatientSerializer(data=request.data)
     if patient_serializer.is_valid():
       patient = patient_serializer.save()
