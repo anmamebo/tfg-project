@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.shortcuts import get_object_or_404
 
 from rest_framework.response import Response
@@ -33,7 +34,7 @@ class DoctorViewSet(viewsets.GenericViewSet):
     if self.queryset is None:
       self.queryset = self.model.objects\
                       .filter(state=True)\
-                      .all()
+                      .all().order_by('-created_date')
     return self.queryset
   
   def list(self, request):
@@ -47,6 +48,15 @@ class DoctorViewSet(viewsets.GenericViewSet):
         Response: La respuesta que contiene la lista de doctores.
     """
     doctors = self.get_queryset()
+    
+    query = self.request.query_params.get('search', None)
+    
+    if query:
+      doctors = doctors.filter(
+        Q(user__name__icontains=query) | Q(user__last_name__icontains=query) |
+        Q(user__email__icontains=query) | Q(collegiate_number__icontains=query)
+      )
+    
     page = self.paginate_queryset(doctors)
     if page is not None:
       doctors_serializer = self.list_serializer_class(page, many=True)
