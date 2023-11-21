@@ -77,6 +77,7 @@ export class ListPermissionCardComponent implements OnInit {
    */
   public onEntriesPerPageChanged(elementsPerPage: number): void {
     this.numResults = elementsPerPage;
+    this.page = 1;
     this.getPermissions(this.page);
   }
 

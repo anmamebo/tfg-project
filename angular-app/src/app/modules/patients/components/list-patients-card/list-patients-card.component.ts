@@ -88,6 +88,7 @@ export class ListPatientsCardComponent implements OnInit {
    */
   public onEntriesPerPageChanged(elementsPerPage: number): void {
     this.numResults = elementsPerPage;
+    this.page = 1;
     this.getPatients(this.page);
   }
 
