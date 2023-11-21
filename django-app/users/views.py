@@ -1,3 +1,4 @@
+from django.utils import timezone
 from django.contrib.auth import authenticate
 
 from rest_framework import status
@@ -44,6 +45,10 @@ class Login(TokenObtainPairView):
     if user:
       login_serializer = self.serializer_class(data=request.data)
       if login_serializer.is_valid():
+        
+        user.last_login = timezone.now()
+        user.save(update_fields=['last_login'])
+        
         user_serializer = CustomUserSerializer(user)
         return Response({
           'token': login_serializer.validated_data.get('access'),
