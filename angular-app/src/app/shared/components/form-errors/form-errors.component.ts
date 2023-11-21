@@ -10,10 +10,16 @@ import { AbstractControl } from '@angular/forms';
   templateUrl: './form-errors.component.html',
 })
 export class FormErrorsComponent {
+  /** Control del formulario */
   @Input() public control: AbstractControl | null = null;
 
+  /** Indica si el formulario ha sido enviado */
   @Input() public submitted: boolean = false;
 
+  /**
+   * Obtiene los mensajes de error del control
+   * @returns Mensajes de error
+   */
   public getErrorMessages(): string[] {
     const errors: string[] = [];
 
