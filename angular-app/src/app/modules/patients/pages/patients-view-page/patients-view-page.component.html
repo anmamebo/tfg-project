@@ -4,6 +4,10 @@
     <ng-container *ngIf="patient">
 
       <section class="section">
+        <app-buttons-patients-card [patientId]="patient.id" [isActive]="patient.state!" (refreshPatient)="onRefreshPatient()"></app-buttons-patients-card>
+      </section>
+
+      <section class="section">
         <div class="row">
           <div class="col-lg-8">
               <app-view-basic-info-patients-card [patient]="patient" ></app-view-basic-info-patients-card>

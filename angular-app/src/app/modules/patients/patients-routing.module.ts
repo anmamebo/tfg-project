@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { PatientsPageComponent } from "./pages/patients-page/patients-page.component";
 import { PatientsEditPageComponent } from "./pages/patients-edit-page/patients-edit-page.component";
 import { PatientsViewPageComponent } from "./pages/patients-view-page/patients-view-page.component";
+import { PatientsCreatePageComponent } from "./pages/patients-create-page/patients-create-page.component";
 
 import { patientResolver } from "src/app/core/resolvers/patient.resolver";
 
@@ -12,6 +13,11 @@ const routes: Routes = [
     path: '',
     component: PatientsPageComponent,
     title: 'Pacientes | HospitalSys',
+  },
+  {
+    path: 'crear',
+    component: PatientsCreatePageComponent,
+    title: 'Crear paciente | HospitalSys',
   },
   {
     path: ':id',

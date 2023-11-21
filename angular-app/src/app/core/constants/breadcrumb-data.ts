@@ -42,6 +42,13 @@ export const breadcrumbPatientsData = [
   { label: 'Pacientes', url: ''}
 ]
 
+// Pacientes crear
+export const breadcrumbPatientsCreateData = [
+  { label: 'Panel Principal', url: '/'},
+  { label: 'Pacientes', url: '/pacientes'},
+  { label: 'Crear paciente', url: ''}
+]
+
 // Pacientes editar
 export const breadcrumbPatientsEditData = [
   { label: 'Panel Principal', url: '/'},

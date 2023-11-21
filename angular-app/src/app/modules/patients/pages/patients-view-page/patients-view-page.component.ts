@@ -3,6 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 
 import { breadcrumbPatientsViewData } from "src/app/core/constants/breadcrumb-data";
 
+// Servicios
+import { PatientService } from "src/app/core/services/patient.service";
+
 // Modelos
 import { Patient } from "src/app/core/models/patient.model";
 
@@ -14,6 +17,7 @@ import { Patient } from "src/app/core/models/patient.model";
   selector: 'app-patients-view-page',
   templateUrl: './patients-view-page.component.html',
   styleUrls: ['./patients-view-page.component.scss'],
+  providers: [PatientService],
 })
 export class PatientsViewPageComponent implements OnInit {
   /** Título de la página */
@@ -30,9 +34,21 @@ export class PatientsViewPageComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private patientService: PatientService,
   ) { }
   
   ngOnInit(): void {
     this.patient = this.route.snapshot.data['data']; // Obtiene los datos del paciente desde el resolver
+  }
+
+  /**
+   * Actualiza los datos del paciente
+   */
+  onRefreshPatient(): void {
+    this.patientService.getPatientById(+this.patient!.id).subscribe({
+      next: (patient: Patient) => {
+        this.patient = patient;
+      },
+    });
   }
 }

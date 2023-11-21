@@ -20,6 +20,7 @@ import { SharedModule } from "src/app/shared/shared.module";
 import { PatientsPageComponent } from './pages/patients-page/patients-page.component';
 import { PatientsViewPageComponent } from './pages/patients-view-page/patients-view-page.component';
 import { PatientsEditPageComponent } from './pages/patients-edit-page/patients-edit-page.component';
+import { PatientsCreatePageComponent } from './pages/patients-create-page/patients-create-page.component';
 
 // Componentes tarjetas
 import { ListPatientsCardComponent } from './components/list-patients-card/list-patients-card.component';
@@ -29,6 +30,8 @@ import { ViewAddressPatientsCardComponent } from './components/view-address-pati
 import { EditBasicInfoPatientsCardComponent } from './components/edit-basic-info-patients-card/edit-basic-info-patients-card.component';
 import { EditContactInfoPatientsCardComponent } from './components/edit-contact-info-patients-card/edit-contact-info-patients-card.component';
 import { EditAddressPatientsCardComponent } from './components/edit-address-patients-card/edit-address-patients-card.component';
+import { ButtonsPatientsCardComponent } from './components/buttons-patients-card/buttons-patients-card.component';
+import { CreatePatientsCardComponent } from './components/create-patients-card/create-patients-card.component';
 
 
 @NgModule({
@@ -43,6 +46,9 @@ import { EditAddressPatientsCardComponent } from './components/edit-address-pati
     EditBasicInfoPatientsCardComponent,
     EditContactInfoPatientsCardComponent,
     EditAddressPatientsCardComponent,
+    ButtonsPatientsCardComponent,
+    PatientsCreatePageComponent,
+    CreatePatientsCardComponent,
   ],
   imports: [
     CommonModule,
