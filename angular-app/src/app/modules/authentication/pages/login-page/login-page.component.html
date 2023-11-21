@@ -14,25 +14,23 @@
           <!-- Usuario -->
           <div class="form-group position-relative has-icon-left mb-4">
             <input type="text" formControlName="username" class="form-control form-control-xl"
-              placeholder="Usuario" [ngClass]="{ 'is-invalid': submitted && form['username'].errors }">
+              placeholder="Usuario" [ngClass]="{ 'is-invalid': submitted && form.get('username')?.errors }">
             <div class="form-control-icon">
               <i class="bi bi-person"></i>
             </div>
-            <div *ngIf="submitted && form['username'].errors" class="invalid-feedback">
-              <div *ngIf="form['username'].errors['required']">El usuario es obligatorio</div>
-            </div>
+            
+            <app-form-errors [control]="form.get('username')" [submitted]="submitted"></app-form-errors>
           </div>
 
           <!-- Contraseña -->
           <div class="form-group position-relative has-icon-left mb-4">
             <input type="password" formControlName="password" class="form-control form-control-xl"
-              placeholder="Contraseña" [ngClass]="{ 'is-invalid': submitted && form['password'].errors }">
+              placeholder="Contraseña" [ngClass]="{ 'is-invalid': submitted && form.get('password')?.errors }">
             <div class="form-control-icon">
               <i class="bi bi-shield-lock"></i>
             </div>
-            <div *ngIf="submitted && form['password'].errors" class="invalid-feedback">
-              <div *ngIf="form['password'].errors['required']">La contraseña es obligatoria</div>
-            </div>
+            
+            <app-form-errors [control]="form.get('password')" [submitted]="submitted"></app-form-errors>
           </div>
 
           <!-- Mensajes de error -->

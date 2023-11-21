@@ -31,6 +31,9 @@ export class FormErrorsComponent {
           case 'pattern':
             errors.push('El campo no cumple con el formato requerido.');
             break;
+          case 'matching':
+            errors.push('Las contraseñas no coinciden.');
+            break;
           case 'passwordsDontMatch':
             errors.push('Las contraseñas no coinciden.');
             break;

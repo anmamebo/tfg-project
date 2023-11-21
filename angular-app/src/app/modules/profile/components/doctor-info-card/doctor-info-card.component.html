@@ -9,12 +9,9 @@
           <div class="form-group">
             <label for="collegiate_number">Número de colegiado*</label>
             <input type="text" formControlName="collegiate_number" id="collegiate_number" class="form-control" placeholder="Número de colegiado"
-              [ngClass]="{ 'is-invalid': submitted && form['collegiate_number'].errors }">
-            <div *ngIf="submitted && form['collegiate_number'].errors" class="invalid-feedback">
-              <div *ngIf="form['collegiate_number'].errors['required']">El DNI es obligatorio</div>
-              <div *ngIf="form['collegiate_number'].errors['maxlength']">Máx. {{ form['collegiate_number'].errors['maxlength']['requiredLength'] }} caracteres, actual {{ form['collegiate_number'].errors['maxlength']['actualLength'] }}</div>
-              <div *ngIf="form['collegiate_number'].errors['pattern']">Debe introducir un valor numérico</div>
-            </div>
+              [ngClass]="{ 'is-invalid': submitted && form.get('collegiate_number')?.errors }">
+            
+            <app-form-errors [control]="form.get('collegiate_number')" [submitted]="submitted"></app-form-errors>
           </div>
         </div>
 

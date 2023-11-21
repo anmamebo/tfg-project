@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 // Servicios
 import { UserService } from 'src/app/core/services/user.service';
@@ -26,15 +26,10 @@ export class BasicInfoCardComponent implements OnInit {
   @Input() public user: User = new User('', '', '', '');
 
   /** Formulario para actualizar los datos del usuario */
-  public updateUserDataForm: FormGroup = new FormGroup({
-    name: new FormControl(''),
-    last_name: new FormControl(''),
-    username: new FormControl(''),
-    email: new FormControl(''),
-  });
+  public updateUserDataForm: FormGroup = new FormGroup({});
 
   /** Indica si se ha enviado el formulario */
-  public submitted: Boolean = false;
+  public submitted: boolean = false;
 
   /** Evento que se emite cuando se actualizan los datos del usuario */
   @Output() public updatedUserEvent: EventEmitter<void> = new EventEmitter<void>();
@@ -55,13 +50,8 @@ export class BasicInfoCardComponent implements OnInit {
     });
   }
 
-  /**
-   * Obtiene los controles del formulario
-   * @returns Los controles del formulario
-   */
-  get form() {
-    return this.updateUserDataForm.controls;
-  }
+  /** Obtiene el formulario */
+  get form () { return this.updateUserDataForm; }
 
   /**
    * Maneja la acción de envio del formulario
@@ -69,17 +59,17 @@ export class BasicInfoCardComponent implements OnInit {
   public onSubmit(): void {
     this.submitted = true;
 
-    if (this.updateUserDataForm.invalid) {
+    if (this.form.invalid) {
       return;
     }
 
     const updateUser: User = new User(
       this.user.id,
-      this.updateUserDataForm.value.username,
+      this.form.value.username,
       '',
-      this.updateUserDataForm.value.email,
-      this.updateUserDataForm.value.name,
-      this.updateUserDataForm.value.last_name
+      this.form.value.email,
+      this.form.value.name,
+      this.form.value.last_name
     );
 
     // Envía la solicitud de actualización de usuario al servicio

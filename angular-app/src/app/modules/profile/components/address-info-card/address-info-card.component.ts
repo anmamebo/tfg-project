@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { INTEGER_REGEXP } from "src/app/core/constants/reg-exp";
 
@@ -28,18 +28,10 @@ export class AddressInfoCardComponent implements OnInit {
   @Input() public address: Address = new Address('', '', '', '', '', '', '');
 
   /** Formulario para actualizar los datos de la dirección */
-  public updateAddressDataForm: FormGroup = new FormGroup({
-    street: new FormControl(''),
-    number: new FormControl(''),
-    floor: new FormControl(''),
-    city: new FormControl(''),
-    province: new FormControl(''),
-    country: new FormControl(''),
-    postal_code: new FormControl(''),
-  });
+  public updateAddressDataForm: FormGroup = new FormGroup({});
 
   /** Indica si se ha enviado el formulario */
-  public submitted: Boolean = false;
+  public submitted: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -59,13 +51,8 @@ export class AddressInfoCardComponent implements OnInit {
     });
   }
 
-  /**
-   * Obtiene los controles del formulario
-   * @returns Los controles del formulario
-   */
-  get form() {
-    return this.updateAddressDataForm.controls;
-  }
+  /** Obtiene el formulario */
+  get form () { return this.updateAddressDataForm; }
 
   /**
    * Maneja la acción de envio del formulario
@@ -73,19 +60,19 @@ export class AddressInfoCardComponent implements OnInit {
   public onSubmit(): void {
     this.submitted = true;
 
-    if (this.updateAddressDataForm.invalid) {
+    if (this.form.invalid) {
       return;
     }
 
     const updateAddress: Address = new Address(
       this.address.id,
-      this.updateAddressDataForm.value.street,
-      this.updateAddressDataForm.value.number,
-      this.updateAddressDataForm.value.city,
-      this.updateAddressDataForm.value.province,
-      this.updateAddressDataForm.value.country,
-      this.updateAddressDataForm.value.postal_code,
-      this.updateAddressDataForm.value.floor != '' ? this.updateAddressDataForm.value.floor : null,
+      this.form.value.street,
+      this.form.value.number,
+      this.form.value.city,
+      this.form.value.province,
+      this.form.value.country,
+      this.form.value.postal_code,
+      this.form.value.floor != '' ? this.form.value.floor : null,
     );
 
     this.addressService.updateAddress(updateAddress).subscribe({

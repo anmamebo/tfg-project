@@ -29,14 +29,10 @@ export class EditContactInfoPatientsCardComponent implements OnInit {
   @Input() public patient: Patient | null = null;
 
   /** Formulario para editar la información de contacto de un paciente */
-  public editContactInfoPatientForm: FormGroup = new FormGroup({
-    username: new FormControl(''),
-    email: new FormControl(''),
-    phone: new FormControl('')
-  });
+  public editContactInfoPatientForm: FormGroup = new FormGroup({});
 
   /** Indica si se ha enviado el formulario */
-  public submitted: Boolean = false;
+  public submitted: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -52,13 +48,8 @@ export class EditContactInfoPatientsCardComponent implements OnInit {
     });
   }
 
-  /**
-   * Obtiene los controles del formulario
-   * @returns Los controles del formulario
-   */
-  get form() {
-    return this.editContactInfoPatientForm.controls;
-  }
+  /** Obtiene el formulario */
+  get form () { return this.editContactInfoPatientForm; }
 
   /**
    * Maneja la acción de enviar el formulario.
@@ -66,17 +57,17 @@ export class EditContactInfoPatientsCardComponent implements OnInit {
   public onSubmit(): void {
     this.submitted = true;
 
-    if (this.editContactInfoPatientForm.invalid) {
+    if (this.form.invalid) {
       return;
     }
 
     const updatedData: any = {
       id: this.patient?.id,
-      phone: this.editContactInfoPatientForm.value.phone,
+      phone: this.form.value.phone ? this.form.value.phone : null,
       user: {
         id: this.patient?.user?.id,
         username: this.patient?.user?.username,
-        email: this.editContactInfoPatientForm.value.email
+        email: this.form.value.email
       }
     };
 

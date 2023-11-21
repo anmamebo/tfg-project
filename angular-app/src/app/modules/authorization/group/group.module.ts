@@ -8,6 +8,7 @@ import { GenericTableModule } from "src/app/shared/components/generic-table/gene
 import { PaginationModule } from "src/app/shared/components/pagination/pagination.module";
 import { GenericPageModule } from "src/app/shared/components/generic-page/generic-page.module";
 import { GenericCardModule } from "src/app/shared/components/generic-card/generic-card.module";
+import { FormErrorsModule } from "src/app/shared/components/form-errors/form-errors.module";
 
 // Componentes páginas
 import { GroupPageComponent } from "./pages/group-page/group-page.component";
@@ -37,7 +38,8 @@ import { ViewGroupCardComponent } from './components/view-group-card/view-group-
     GenericTableModule,
     PaginationModule,
     GenericPageModule,
-    GenericCardModule
+    GenericCardModule,
+    FormErrorsModule
   ]
 })
 export class GroupModule { }

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 // Servicios
 import { GroupService } from "src/app/core/services/group.service";
@@ -26,12 +26,10 @@ export class EditGroupCardComponent implements OnInit {
   @Input() public group: Group = new Group('', '');
 
   /** Formulario para editar un grupo */
-  public editGroupForm: FormGroup = new FormGroup({
-    name: new FormControl('')
-  });
+  public editGroupForm: FormGroup = new FormGroup({});
 
   /** Indica si se ha enviado el formulario */
-  public submitted: Boolean = false;
+  public submitted: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -39,19 +37,14 @@ export class EditGroupCardComponent implements OnInit {
     private notificationService: NotificationService
   ) { }
 
-  ngOnInit(): void {    
+  ngOnInit(): void {
     this.editGroupForm = this.formBuilder.group({
       name: [this.group.name, Validators.required]
     });
   }
 
-  /**
-   * Obtiene los controles del formulario
-   * @returns Los controles del formulario
-   */
-  get form() {
-    return this.editGroupForm.controls;
-  }
+  /** Obtiene el formulario */
+  get form () { return this.editGroupForm; }
 
   /**
    * Maneja la acción de envio del formulario
@@ -59,13 +52,13 @@ export class EditGroupCardComponent implements OnInit {
   public onSubmit(): void {
     this.submitted = true;
 
-    if (this.editGroupForm.invalid) {
+    if (this.form.invalid) {
       return;
     }
 
     const groupEdited: Group = new Group(
       this.group.id,
-      this.editGroupForm.value.name  
+      this.form.value.name  
     );
 
     this.groupService.updateGroup(groupEdited).subscribe({

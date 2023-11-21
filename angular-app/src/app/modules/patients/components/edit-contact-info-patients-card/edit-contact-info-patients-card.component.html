@@ -10,10 +10,9 @@
             <div class="form-group">
               <label for="username">Nombre de usuario*</label>
               <input type="text" formControlName="username" class="form-control" id="username" [attr.readonly]="true" placeholder="Nombre de usuario" 
-                [value]="patient?.user?.username" [ngClass]="{ 'is-invalid': submitted && form['username'].errors }">
-              <div *ngIf="submitted && form['username'].errors" class="invalid-feedback">
-                <div *ngIf="form['username'].errors['required']">El nombre de usuario es obligatorio</div>
-              </div>
+                [ngClass]="{ 'is-invalid': submitted && form.get('username')?.errors }">
+              
+              <app-form-errors [control]="form.get('username')" [submitted]="submitted"></app-form-errors>
             </div>
           </div>
     
@@ -22,11 +21,9 @@
             <div class="form-group">
               <label for="email">Email*</label>
               <input type="text" formControlName="email" class="form-control" id="email" placeholder="Email" 
-                [value]="patient?.user?.email" [ngClass]="{ 'is-invalid': submitted && form['email'].errors }">
-              <div *ngIf="submitted && form['email'].errors" class="invalid-feedback">
-                <div *ngIf="form['email'].errors['required']">El nombre de usuario es obligatorio</div>
-                <div *ngIf="form['email'].errors['email']">Correo electrónico inválido</div>
-            </div>
+                [ngClass]="{ 'is-invalid': submitted && form.get('email')?.errors }">
+              
+              <app-form-errors [control]="form.get('email')" [submitted]="submitted"></app-form-errors>
             </div>
           </div>
     
@@ -35,10 +32,9 @@
             <div class="form-group">
               <label for="phone">Nº de teléfono</label>
               <input type="text" formControlName="phone" class="form-control" id="phone" placeholder="Nº de teléfono" 
-                [value]="patient?.phone" [ngClass]="{ 'is-invalid': submitted && form['phone'].errors }">
-              <div *ngIf="submitted && form['phone'].errors" class="invalid-feedback">
-                <div *ngIf="form['phone'].errors['pattern']">Formato incorrecto</div>
-              </div>
+                [ngClass]="{ 'is-invalid': submitted && form.get('phone')?.errors }">
+              
+              <app-form-errors [control]="form.get('phone')" [submitted]="submitted"></app-form-errors>
             </div>
           </div>
 

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { INTEGER_REGEXP } from "src/app/core/constants/reg-exp";
 
@@ -32,18 +32,10 @@ export class EditAddressPatientsCardComponent implements OnInit {
   @Input() public patientId: string = '';
 
   /** Formulario para editar la dirección de un paciente */
-  public editAddressPatientForm: FormGroup = new FormGroup({
-    street: new FormControl(''),
-    number: new FormControl(''),
-    floor: new FormControl(''),
-    city: new FormControl(''),
-    province: new FormControl(''),
-    country: new FormControl(''),
-    postal_code: new FormControl(''),
-  });
+  public editAddressPatientForm: FormGroup = new FormGroup({});
 
   /** Indica si se ha enviado el formulario */
-  public submitted: Boolean = false;
+  public submitted: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -63,13 +55,8 @@ export class EditAddressPatientsCardComponent implements OnInit {
     });
   }
 
-  /**
-   * Obtiene los controles del formulario
-   * @returns Los controles del formulario
-   */
-  get form() {
-    return this.editAddressPatientForm.controls;
-  }
+  /** Obtiene el formulario */
+  get form () { return this.editAddressPatientForm; }
 
   /**
    * Maneja la acción de envio del formulario
@@ -77,19 +64,19 @@ export class EditAddressPatientsCardComponent implements OnInit {
   public onSubmit(): void {
     this.submitted = true;
 
-    if (this.editAddressPatientForm.invalid) {
+    if (this.form.invalid) {
       return;
     }
 
     let address: any = {
       id: this.address?.id ? this.address?.id : '',
-      street: this.editAddressPatientForm.value.street,
-      number: this.editAddressPatientForm.value.number,
-      floor: this.editAddressPatientForm.value.floor ? this.editAddressPatientForm.value.floor : null,
-      city: this.editAddressPatientForm.value.city,
-      province: this.editAddressPatientForm.value.province,
-      country: this.editAddressPatientForm.value.country,
-      postal_code: this.editAddressPatientForm.value.postal_code,
+      street: this.form.value.street,
+      number: this.form.value.number,
+      floor: this.form.value.floor ? this.form.value.floor : null,
+      city: this.form.value.city,
+      province: this.form.value.province,
+      country: this.form.value.country,
+      postal_code: this.form.value.postal_code,
     };
 
     

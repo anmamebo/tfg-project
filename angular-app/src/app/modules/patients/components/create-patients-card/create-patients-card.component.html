@@ -22,11 +22,8 @@
                 <label for="email">Email*</label>
                 <input type="text" formControlName="email" class="form-control" id="email" placeholder="Email" 
                   [ngClass]="{ 'is-invalid': submitted && patientInfo?.get('email')?.errors }">
-                <!-- Errores -->
-                <div *ngIf="submitted && patientInfo?.get('email')?.errors" class="invalid-feedback">
-                  <div *ngIf="patientInfo?.get('email')?.hasError('required')">El correo electrónico es obligatorio</div>
-                  <div *ngIf="patientInfo?.get('email')?.hasError('email')">Correo electrónico inválido</div>
-              </div>
+                
+                <app-form-errors [control]="patientInfo!.get('email')" [submitted]="submitted"></app-form-errors>
               </div>
             </div>
 
@@ -36,10 +33,8 @@
                 <label for="name">Nombre*</label>
                 <input type="text" formControlName="name" class="form-control" id="name" placeholder="Nombre"
                   [ngClass]="{ 'is-invalid': submitted && patientInfo?.get('name')?.errors }">
-                <!-- Errores -->
-                <div *ngIf="submitted && patientInfo?.get('name')?.errors" class="invalid-feedback">
-                  <div *ngIf="patientInfo?.get('name')?.hasError('required')">El nombre es obligatorio</div>
-                </div>
+                
+                <app-form-errors [control]="patientInfo!.get('name')" [submitted]="submitted"></app-form-errors>
               </div>
             </div>
 
@@ -49,10 +44,8 @@
                 <label for="last_name">Apellidos*</label>
                 <input type="text" formControlName="last_name" class="form-control" id="last_name" placeholder="Apellidos"
                   [ngClass]="{ 'is-invalid': submitted && patientInfo?.get('last_name')?.errors }">
-                <!-- Errores -->
-                <div *ngIf="submitted && patientInfo?.get('last_name')?.errors" class="invalid-feedback">
-                  <div *ngIf="patientInfo?.get('last_name')?.hasError('required')">Los apellidos son obligatorios</div>
-                </div>
+                
+                <app-form-errors [control]="patientInfo!.get('last_name')" [submitted]="submitted"></app-form-errors>
               </div>
             </div>
 
@@ -62,14 +55,8 @@
                 <label for="dni">DNI*</label>
                 <input type="text" formControlName="dni" class="form-control" id="dni" placeholder="DNI"
                   [ngClass]="{ 'is-invalid': submitted && patientInfo?.get('dni')?.errors }">
-                <!-- Errores -->
-                <div *ngIf="submitted && patientInfo?.get('dni')?.errors" class="invalid-feedback">
-                  <div *ngIf="patientInfo?.get('dni')?.hasError('required')">El DNI es obligatorio</div>
-                  <div *ngIf="patientInfo?.get('dni')?.hasError('maxlength')">
-                    Máx. {{ patientInfo?.get('dni')?.getError('maxlength')?.requiredLength }} caracteres, 
-                    actual {{ patientInfo?.get('dni')?.getError('maxlength')?.actualLength }}
-                  </div>
-                </div>
+                
+                <app-form-errors [control]="patientInfo!.get('dni')" [submitted]="submitted"></app-form-errors>
               </div>
             </div>
 
@@ -79,13 +66,8 @@
                 <label for="social_security">Nº de la seguridad social</label>
                 <input type="text" formControlName="social_security" class="form-control" id="social_security" placeholder="Nº de la seguridad social"
                   [ngClass]="{ 'is-invalid': submitted && patientInfo?.get('social_security')?.errors }">
-                <!-- Errores -->
-                <div *ngIf="submitted && patientInfo?.get('social_security')?.errors" class="invalid-feedback">
-                  <div *ngIf="patientInfo?.get('social_security')?.hasError('maxlength')">
-                    Máx. {{ patientInfo?.get('social_security')?.getError('maxlength')?.requiredLength }} caracteres, 
-                    actual {{ patientInfo?.get('social_security')?.getError('maxlength')?.actualLength }}
-                  </div>
-                </div>
+                
+                <app-form-errors [control]="patientInfo!.get('social_security')" [submitted]="submitted"></app-form-errors>
               </div>
             </div>
 
@@ -96,8 +78,7 @@
                 <input type="text" formControlName="birthdate" id="birthdate" class="form-control" [ngClass]="{ 'is-invalid': submitted && patientInfo?.get('birthdate')?.errors }"
                   mwlFlatpickr [convertModelValue]="true" [locale]="locale" [maxDate]="'today'" [allowInput]="true" [dateFormat]="'d-m-Y'" 
                   [monthSelectorType]="'dropdown'" placeholder="Fecha de nacimiento">
-                <div *ngIf="submitted && patientInfo?.get('birthdate')?.errors" class="invalid-feedback">
-                </div>
+                <app-form-errors [control]="patientInfo!.get('birthdate')" [submitted]="submitted"></app-form-errors>
               </div>
             </div>
 
@@ -111,10 +92,8 @@
                     {{ option.text }}
                   </option>
                 </select>
-                <!-- Errores -->
-                <div *ngIf="submitted && patientInfo?.get('gender')?.errors" class="invalid-feedback">
-                  <div *ngIf="patientInfo?.get('gender')?.hasError('required')">El género es obligatorio</div>
-                </div>
+                
+                <app-form-errors [control]="patientInfo!.get('gender')" [submitted]="submitted"></app-form-errors>
               </fieldset>
             </div>
 
@@ -124,10 +103,8 @@
                 <label for="phone">Nº de teléfono</label>
                 <input type="text" formControlName="phone" class="form-control" id="phone" placeholder="Nº de teléfono" 
                   [ngClass]="{ 'is-invalid': submitted && patientInfo?.get('phone')?.errors }">
-                <!-- Errores -->
-                <div *ngIf="submitted && patientInfo?.get('phone')?.errors" class="invalid-feedback">
-                  <div *ngIf="patientInfo?.get('phone')?.hasError('pattern')">Formato incorrecto</div>
-                </div>
+                
+                <app-form-errors [control]="patientInfo!.get('phone')" [submitted]="submitted"></app-form-errors>
               </div>
             </div>
 
@@ -161,14 +138,8 @@
                   <label for="street">Calle*</label>
                   <input type="text" formControlName="street" id="street" class="form-control" placeholder="Calle"
                     [ngClass]="{ 'is-invalid': submitted && address?.get('street')?.errors }">
-                  <!-- Errores -->
-                  <div *ngIf="submitted && address?.get('street')?.errors" class="invalid-feedback">
-                    <div *ngIf="address?.get('street')?.hasError('required')">La calle es obligatoria</div>
-                    <div *ngIf="address?.get('street')?.hasError('maxlength')">
-                      Máx. {{ address?.get('street')?.getError('maxlength').requiredLength }} caracteres,
-                      actual {{ address?.get('street')?.getError('maxlength').actualLength }}
-                    </div>
-                  </div>
+                  
+                  <app-form-errors [control]="address!.get('street')" [submitted]="submitted"></app-form-errors>
                 </div>
               </div>
 
@@ -178,10 +149,8 @@
                   <label for="number">Número*</label>
                   <input type="text" formControlName="number" id="number" class="form-control" placeholder="Número"
                     [ngClass]="{ 'is-invalid': submitted && address?.get('number')?.errors }">
-                  <div *ngIf="submitted && address?.get('number')?.errors" class="invalid-feedback">
-                    <div *ngIf="address?.get('number')?.hasError('required')">El número es obligatorio</div>
-                    <div *ngIf="address?.get('number')?.hasError('pattern')">Debe introducir un valor numérico</div>
-                  </div>
+                  
+                  <app-form-errors [control]="address!.get('number')" [submitted]="submitted"></app-form-errors>
                 </div>
               </div>
 
@@ -191,12 +160,8 @@
                   <label for="floor">Piso</label>
                   <input type="text" formControlName="floor" id="floor" class="form-control" placeholder="Piso"
                     [ngClass]="{ 'is-invalid': submitted && address?.get('floor')?.errors }">
-                  <div *ngIf="submitted && address?.get('floor')?.errors" class="invalid-feedback">
-                    <div *ngIf="address?.get('floor')?.hasError('maxlength')">
-                      Máx. {{ address?.get('floor')?.getError('maxlength').requiredLength }} caracteres,
-                      actual {{ address?.get('floor')?.getError('maxlength').actualLength }}
-                    </div>
-                  </div>
+                  
+                  <app-form-errors [control]="address!.get('floor')" [submitted]="submitted"></app-form-errors>
                 </div>
               </div>
 
@@ -206,13 +171,8 @@
                   <label for="city">Ciudad*</label>
                   <input type="text" formControlName="city" id="city" class="form-control" placeholder="Ciudad"
                     [ngClass]="{ 'is-invalid': submitted && address?.get('city')?.errors }">
-                  <div *ngIf="submitted && address?.get('city')?.errors" class="invalid-feedback">
-                    <div *ngIf="address?.get('city')?.hasError('required')">La ciudad es obligatoria</div>
-                    <div *ngIf="address?.get('city')?.hasError('maxlength')">
-                      Máx. {{ address?.get('city')?.getError('maxlength').requiredLength }} caracteres,
-                      actual {{ address?.get('city')?.getError('maxlength').actualLength }}
-                    </div>
-                  </div>
+                  
+                  <app-form-errors [control]="address!.get('city')" [submitted]="submitted"></app-form-errors>
                 </div>
               </div>
 
@@ -222,14 +182,8 @@
                   <label for="postal_code">Código Postal*</label>
                   <input type="text" formControlName="postal_code" id="postal_code" class="form-control" placeholder="Código Postal"
                     [ngClass]="{ 'is-invalid': submitted && address?.get('postal_code')?.errors }">
-                  <div *ngIf="submitted && address?.get('postal_code')?.errors" class="invalid-feedback">
-                    <div *ngIf="address?.get('postal_code')?.hasError('required')">El código postal es obligatorio</div>
-                    <div *ngIf="address?.get('postal_code')?.hasError('pattern')">Debe introducir un valor numérico</div>
-                    <div *ngIf="address?.get('postal_code')?.hasError('maxlength')">
-                      Máx. {{ address?.get('postal_code')?.getError('maxlength').requiredLength }} caracteres,
-                      actual {{ address?.get('postal_code')?.getError('maxlength').actualLength }}
-                    </div>
-                  </div>
+                  
+                  <app-form-errors [control]="address!.get('postal_code')" [submitted]="submitted"></app-form-errors>
                 </div>
               </div>
 
@@ -239,13 +193,8 @@
                   <label for="province">Provincia*</label>
                   <input type="text" formControlName="province" id="province" class="form-control" placeholder="Provincia"
                     [ngClass]="{ 'is-invalid': submitted && address?.get('province')?.errors }">
-                  <div *ngIf="submitted && address?.get('province')?.errors" class="invalid-feedback">
-                    <div *ngIf="address?.get('province')?.hasError('required')">La provincia es obligatoria</div>
-                    <div *ngIf="address?.get('province')?.hasError('maxlength')">
-                      Máx. {{ address?.get('province')?.getError('maxlength').requiredLength }} caracteres,
-                      actual {{ address?.get('province')?.getError('maxlength').actualLength }}
-                    </div>
-                  </div>
+                  
+                  <app-form-errors [control]="address!.get('province')" [submitted]="submitted"></app-form-errors>
                 </div>
               </div>
 
@@ -255,13 +204,8 @@
                   <label for="country">País*</label>
                   <input type="text" formControlName="country" id="country" class="form-control" placeholder="País"
                     [ngClass]="{ 'is-invalid': submitted && address?.get('country')?.errors }">
-                  <div *ngIf="submitted && address?.get('country')?.errors" class="invalid-feedback">
-                    <div *ngIf="address?.get('country')?.hasError('required')">El país es obligatorio</div>
-                    <div *ngIf="address?.get('country')?.hasError('maxlength')">
-                      Máx. {{ address?.get('country')?.getError('maxlength').requiredLength }} caracteres,
-                      actual {{ address?.get('country')?.getError('maxlength').actualLength }}
-                    </div>
-                  </div>
+                  
+                  <app-form-errors [control]="address!.get('country')" [submitted]="submitted"></app-form-errors>
                 </div>
               </div>
 

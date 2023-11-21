@@ -1,5 +1,5 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, Output, EventEmitter } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 // Servicios
 import { GroupService } from "src/app/core/services/group.service";
@@ -18,17 +18,15 @@ import { Group } from "src/app/core/models/group.model";
   styleUrls: ['./create-group-card.component.scss'],
   providers: [GroupService],
 })
-export class CreateGroupCardComponent implements OnInit {
+export class CreateGroupCardComponent {
   /** Título de la tarjeta */
   public titleCard: string = 'Crear Grupo';
 
   /** Formulario para crear un grupo */
-  public createGroupForm: FormGroup = new FormGroup({
-    name: new FormControl('')
-  });
+  public createGroupForm: FormGroup = new FormGroup({});
 
   /** Indica si se ha enviado el formulario */
-  public submitted: Boolean = false;
+  public submitted: boolean = false;
 
   /** Evento que se emite cuando se crea un grupo */
   @Output() public groupCreated: EventEmitter<any> = new EventEmitter();
@@ -37,21 +35,14 @@ export class CreateGroupCardComponent implements OnInit {
     private formBuilder: FormBuilder,
     private groupService: GroupService,
     private notificationService: NotificationService
-  ) { }
-
-  ngOnInit(): void {
+  ) {
     this.createGroupForm = this.formBuilder.group({
       name: ['', Validators.required]
     });
   }
 
-  /**
-   * Obtiene los controles del formulario
-   * @returns Los controles del formulario
-   */
-  get form () {
-    return this.createGroupForm.controls;
-  }
+  /** Obtiene el formulario */
+  get form () { return this.createGroupForm; }
 
   /**
    * Maneja la acción de envio del formulario
@@ -59,13 +50,13 @@ export class CreateGroupCardComponent implements OnInit {
   public onSubmit(): void {
     this.submitted = true;
 
-    if (this.createGroupForm.invalid) {
+    if (this.form.invalid) {
       return;
     }
 
     const group: Group = new Group(
       '',
-      this.createGroupForm.value.name
+      this.form.value.name
     )
     
 

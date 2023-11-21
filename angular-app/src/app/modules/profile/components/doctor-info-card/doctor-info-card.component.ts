@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { INTEGER_REGEXP } from "src/app/core/constants/reg-exp";
 
@@ -28,13 +28,10 @@ export class DoctorInfoCardComponent implements OnInit {
   @Input() public doctor: Doctor = new Doctor('', '', false);
 
   /** Formulario para actualizar los datos del doctor */
-  public updateDoctorDataForm: FormGroup = new FormGroup({
-    collegiate_number: new FormControl(''),
-    is_available: new FormControl(''),
-  });
+  public updateDoctorDataForm: FormGroup = new FormGroup({});
 
   /** Indica si se ha enviado el formulario */
-  public submitted: Boolean = false;
+  public submitted: boolean = false;
 
   /** Evento que se emite cuando se actualizan los datos del doctor */
   @Output() public updatedDoctorEvent: EventEmitter<void> = new EventEmitter<void>();
@@ -52,13 +49,8 @@ export class DoctorInfoCardComponent implements OnInit {
     });
   }
 
-  /**
-   * Obtiene los controles del formulario
-   * @returns Los controles del formulario
-   */
-  get form() {
-    return this.updateDoctorDataForm.controls;
-  }
+  /** Obtiene el formulario */
+  get form () { return this.updateDoctorDataForm; }
 
   /**
    * Maneja la acción de envio del formulario
@@ -66,13 +58,13 @@ export class DoctorInfoCardComponent implements OnInit {
   public onSubmit(): void {
     this.submitted = true;
 
-    if (this.updateDoctorDataForm.invalid) {
+    if (this.form.invalid) {
       return;
     }
 
     const updateDoctor: Doctor = new Doctor(
       this.doctor.id,
-      this.updateDoctorDataForm.value.collegiate_number,
+      this.form.value.collegiate_number,
       this.doctor.is_available,
       this.doctor.user,
     );

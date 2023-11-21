@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DatePipe } from "@angular/common";
 
 import { Spanish } from "flatpickr/dist/l10n/es.js";
@@ -37,16 +37,10 @@ export class PatientInfoCardComponent implements OnInit {
   @Input() public patient: Patient = new Patient('', '');
 
   /** Formulario para actualizar los datos del paciente */
-  public updatePatientDataForm: FormGroup = new FormGroup({
-    dni: new FormControl(''),
-    social_security: new FormControl(''),
-    gender: new FormControl(''),
-    birthdate: new FormControl(''),
-    phone: new FormControl(''),
-  });
+  public updatePatientDataForm: FormGroup = new FormGroup({});
 
   /** Indica si se ha enviado el formulario */
-  public submitted: Boolean = false;
+  public submitted: boolean = false;
 
   /** Evento que se emite cuando se actualizan los datos del paciente */
   @Output() public updatedPatientEvent: EventEmitter<void> = new EventEmitter<void>();
@@ -68,13 +62,8 @@ export class PatientInfoCardComponent implements OnInit {
     });
   }
 
-  /**
-   * Obtiene los controles del formulario
-   * @returns Los controles del formulario
-   */
-  get form() {
-    return this.updatePatientDataForm.controls;
-  }
+  /** Obtiene el formulario */
+  get form () { return this.updatePatientDataForm; }
 
   /**
    * Maneja la acción de envio del formulario
@@ -82,22 +71,17 @@ export class PatientInfoCardComponent implements OnInit {
   public onSubmit(): void {
     this.submitted = true;
 
-    if (this.updatePatientDataForm.invalid) {
+    if (this.form.invalid) {
       return;
-    }
-
-    let birthdate = null;
-    if (this.updatePatientDataForm.value.birthdate) {
-      birthdate = this.datePipe.transform(new Date(this.updatePatientDataForm.value.birthdate), 'yyyy-MM-dd');
     }
 
     const updatePatient: Patient = new Patient(
       this.patient.id,
-      this.updatePatientDataForm.value.dni,
-      birthdate ? birthdate : null,
-      this.updatePatientDataForm.value.gender,
-      this.updatePatientDataForm.value.phone != '' ? this.updatePatientDataForm.value.phone : null,
-      this.updatePatientDataForm.value.social_security
+      this.form.value.dni,
+      this.form.value.birthdate ? this.datePipe.transform(new Date(this.form.value.birthdate), 'yyyy-MM-dd') : null,
+      this.form.value.gender,
+      this.form.value.phone != '' ? this.form.value.phone : null,
+      this.form.value.social_security
     );
 
     this.patientService.updatePatient(updatePatient).subscribe({

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DatePipe } from "@angular/common";
 
 import { Spanish } from "flatpickr/dist/l10n/es.js";
@@ -37,17 +37,10 @@ export class EditBasicInfoPatientsCardComponent implements OnInit {
   @Input() public patient: Patient | null = null;
 
   /** Formulario para editar la información básica de un paciente */
-  public editBasicInfoPatientForm: FormGroup = new FormGroup({
-    name: new FormControl(''),
-    last_name: new FormControl(''),
-    dni: new FormControl(''),
-    social_security: new FormControl(''),
-    birthdate: new FormControl(''),
-    gender: new FormControl('')
-  });
+  public editBasicInfoPatientForm: FormGroup = new FormGroup({});
 
   /** Indica si se ha enviado el formulario */
-  public submitted: Boolean = false;
+  public submitted: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -67,13 +60,8 @@ export class EditBasicInfoPatientsCardComponent implements OnInit {
     });
   }
 
-  /**
-   * Obtiene los controles del formulario
-   * @returns Los controles del formulario
-   */
-  get form() {
-    return this.editBasicInfoPatientForm.controls;
-  }
+  /** Obtiene el formulario */
+  get form () { return this.editBasicInfoPatientForm; }
 
   /**
    * Maneja la acción de envio del formulario
@@ -81,25 +69,20 @@ export class EditBasicInfoPatientsCardComponent implements OnInit {
   public onSubmit(): void {
     this.submitted = true;
 
-    if (this.editBasicInfoPatientForm.invalid) {
+    if (this.form.invalid) {
       return;
-    }
-
-    let birthdate = null;
-    if (this.editBasicInfoPatientForm.value.birthdate) {
-      birthdate = this.datePipe.transform(new Date(this.editBasicInfoPatientForm.value.birthdate), 'yyyy-MM-dd');
     }
 
     const updatedData: any = {
       id: this.patient?.id,
-      dni: this.editBasicInfoPatientForm.value.dni,
-      social_security: this.editBasicInfoPatientForm.value.social_security ? this.editBasicInfoPatientForm.value.social_security : null,
-      birthdate: birthdate ? birthdate : null,
-      gender: this.editBasicInfoPatientForm.value.gender,
+      dni: this.form.value.dni,
+      social_security: this.form.value.social_security ? this.form.value.social_security : null,
+      birthdate: this.form.value.birthdate ? this.datePipe.transform(new Date(this.form.value.birthdate), 'yyyy-MM-dd') : null,
+      gender: this.form.value.gender,
       user: {
         id: this.patient?.user?.id,
-        name: this.editBasicInfoPatientForm.value.name,
-        last_name: this.editBasicInfoPatientForm.value.last_name,
+        name: this.form.value.name,
+        last_name: this.form.value.last_name,
       }
     }
 

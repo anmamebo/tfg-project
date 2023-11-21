@@ -33,16 +33,16 @@ export class CreatePatientsCardComponent implements OnInit {
   public locale = Spanish;
 
   /** Formulario para la información del paciente */
-  public patientInfoForm: FormGroup;
+  public patientInfoForm: FormGroup = new FormGroup({});
   
   /** Formulario para la dirección */
-  public addressForm: FormGroup;
+  public addressForm: FormGroup = new FormGroup({});
   
   /** Formulario para la creación de un paciente */
-  public createPatientForm: FormGroup;
+  public createPatientForm: FormGroup = new FormGroup({});
 
   /** Indica si se ha enviado el formulario */
-  public submitted: Boolean = false;
+  public submitted: boolean = false;
 
   /** Suscripción al valor del campo DNI */
   private dniInputSubscription: Subscription = new Subscription();

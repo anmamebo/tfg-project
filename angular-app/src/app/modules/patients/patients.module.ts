@@ -15,6 +15,7 @@ import { PaginationModule } from "src/app/shared/components/pagination/paginatio
 import { ElementsPerPageModule } from "src/app/shared/components/elements-per-page/elements-per-page.module";
 import { SearchModule } from "src/app/shared/components/search/search.module";
 import { SharedModule } from "src/app/shared/shared.module";
+import { FormErrorsModule } from "src/app/shared/components/form-errors/form-errors.module";
 
 // Componentes páginas
 import { PatientsPageComponent } from './pages/patients-page/patients-page.component';
@@ -63,6 +64,7 @@ import { CreatePatientsCardComponent } from './components/create-patients-card/c
     ElementsPerPageModule,
     SearchModule,
     SharedModule,
+    FormErrorsModule,
   ]
 })
 export class PatientsModule { }
