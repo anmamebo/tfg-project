@@ -63,6 +63,20 @@ export class PatientService {
   }
 
   /**
+   * Crea un paciente.
+   * @param patient El objeto `Patient` con los datos del paciente.
+   * @returns Un observable que emite un objeto `any`.
+   */
+  public createPatient(patient: Patient): Observable<any> {
+    const headers = this.httpCommonService.getCommonHeaders();
+    const httpOptions = { headers };
+
+    let params = JSON.stringify(patient);
+
+    return this.http.post<any>(this.url, params, httpOptions);
+  }
+  
+  /**
    * Actualiza los datos de un paciente.
    * @param patient El objeto `Patient` con los datos actualizados.
    * @returns Un observable que emite un objeto `any`.
