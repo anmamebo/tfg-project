@@ -1,3 +1,5 @@
+from django.contrib.auth.models import Group
+
 from rest_framework import serializers
 
 from patients.api.serializers.address_serializer import AddressSerializer
@@ -61,6 +63,10 @@ class CreatePatientSerializer(serializers.ModelSerializer):
       user_serializer = UserPatientSerializer(data=user_data) # Se crea el serializador de usuario
       if user_serializer.is_valid(): # Si el serializador es valido
         user = user_serializer.save() # Se crea el usuario
+        
+        group_name = 'Paciente';
+        group, created = Group.objects.get_or_create(name=group_name) # Se obtiene el grupo de pacientes
+        user.groups.add(group) # Se agrega el usuario al grupo de pacientes
         
         address_data = validated_data.pop('address', None)
         if address_data: # Si hay datos de direccion
