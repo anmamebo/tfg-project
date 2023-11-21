@@ -65,6 +65,21 @@ class DoctorViewSet(viewsets.GenericViewSet):
       doctors_serializer = self.list_serializer_class(doctors, many=True)
       return Response(doctors_serializer.data, status=status.HTTP_200_OK)
     
+  def retrieve(self, request, pk=None):
+    """
+    Recupera un doctor.
+
+    Args:
+        request (Request): La solicitud HTTP.
+        pk (int): El identificador del doctor.
+
+    Returns:
+        Response: La respuesta que contiene el doctor.
+    """
+    doctor = self.get_object(pk)
+    doctor_serializer = self.serializer_class(doctor)
+    return Response(doctor_serializer.data, status=status.HTTP_200_OK)
+
   def update(self, request, pk=None):
     """
     Actualiza un doctor.
