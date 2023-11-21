@@ -13,10 +13,10 @@ import { breadcrumbPatientsCreateData } from "src/app/core/constants/breadcrumb-
 })
 export class PatientsCreatePageComponent {
   /** Título de la página. */
-  public pageTitle: string = 'Crear paciente';
+  public pageTitle: string = 'Alta paciente';
 
   /** Descripción de la página. */
-  public pageDescription: string = 'Aquí puedes crear un paciente.';
+  public pageDescription: string = 'Aquí puedes dar de alta a un paciente.';
 
   /** Datos para el componente `app-breadcrumb`. */
   public breadcrumbData = breadcrumbPatientsCreateData;

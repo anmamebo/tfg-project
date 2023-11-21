@@ -1,6 +1,10 @@
 import { Component, Input } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 
+
+/**
+ * Componente que representa los errores de un formulario
+ */
 @Component({
   selector: 'app-form-errors',
   templateUrl: './form-errors.component.html',

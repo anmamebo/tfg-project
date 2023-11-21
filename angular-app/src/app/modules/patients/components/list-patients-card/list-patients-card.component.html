@@ -2,13 +2,13 @@
   <div class="card-content">
 
     <div class="row mb-3 justify-content-between">
-      <div class="col-lg-4 col-md-6 col-12">
+      <div class="col-md-3 col-12">
+        <a [routerLink]="['/pacientes/crear/']" class="btn btn-primary w-100">Alta paciente</a>
+      </div>
+      <div class="col-lg-4 col-md-6 col-12 mt-md-0 mt-3">
 
         <app-search (searchSubmitted)="onSearchSubmitted($event)"></app-search>
 
-      </div>
-      <div class="col-md-3 col-12">
-        <a [routerLink]="['/pacientes/crear/']" class="btn btn-primary w-100">Crear paciente</a>
       </div>
     </div>
 
