@@ -140,7 +140,7 @@ class DoctorViewSet(viewsets.GenericViewSet):
         }, status=status.HTTP_400_BAD_REQUEST)
     
     # Actualiza los datos del doctor
-    doctor_serializer = self.serializer_class(doctor, data=request.data, context={'request': request})
+    doctor_serializer = self.serializer_class(doctor, data=request.data, context={'request': request}, partial=True)
     if doctor_serializer.is_valid():
       doctor_serializer.save()
       return Response({
