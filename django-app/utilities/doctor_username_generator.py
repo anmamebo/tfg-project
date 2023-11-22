@@ -5,7 +5,7 @@ from unidecode import unidecode
 def generate_doctor_username(name, last_name):
   # Quita los acentos y caracteres especiales
   name = unidecode(name)
-  last_name = unidecode(last_name)
+  last_name = unidecode(last_name).split()[0]
 
   # Obtiene las iniciales del nombre y apellido 
   names = name.split()
