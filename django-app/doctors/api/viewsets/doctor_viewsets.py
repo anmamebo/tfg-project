@@ -4,9 +4,11 @@ from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import viewsets
+from rest_framework.decorators import action
 
 from doctors.models import Doctor
 from doctors.api.serializers.doctor_serializer import DoctorSerializer
+from users.api.serializers.user_serializer import UserSerializer
 
 
 class DoctorViewSet(viewsets.GenericViewSet):
@@ -92,6 +94,19 @@ class DoctorViewSet(viewsets.GenericViewSet):
         Response: La respuesta que contiene el resultado de la actualización.
     """
     doctor = self.get_object(pk)
+    
+    user_data = request.data.pop('user', None)
+    if user_data:
+      user_serializer = UserSerializer(doctor.user, data=user_data, partial=True)
+      if user_serializer.is_valid():
+        user_serializer.save()
+      else:
+        return Response({
+          'message': 'Hay errores en la actualización',
+          'errors': user_serializer.errors
+        }, status=status.HTTP_400_BAD_REQUEST)
+    
+    # Actualiza los datos del doctor
     doctor_serializer = self.serializer_class(doctor, data=request.data, context={'request': request})
     if doctor_serializer.is_valid():
       doctor_serializer.save()
@@ -103,3 +118,60 @@ class DoctorViewSet(viewsets.GenericViewSet):
         'message': 'Hay errores en la actualización',
         'errors': doctor_serializer.errors
       }, status=status.HTTP_400_BAD_REQUEST)
+      
+  def destroy(self, request, pk=None):
+    """
+    Elimina un doctor.
+
+    Args:
+        request (Request): La solicitud HTTP.
+        pk (int): El identificador del doctor.
+
+    Returns:
+        Response: La respuesta que contiene el resultado de la eliminación.
+    """
+    doctor = self.get_queryset().filter(id=pk).first()
+    if doctor:
+      user = doctor.user
+      if user:
+        doctor.state = False
+        doctor.save()
+        user.is_active = False
+        user.save()
+            
+        return Response({
+          'message': 'Doctor eliminado correctamente.'
+        }, status=status.HTTP_200_OK)
+      
+    return Response({
+      'message': 'No se ha encontrado el doctor.'
+    }, status=status.HTTP_400_BAD_REQUEST)
+    
+  @action(detail=True, methods=['put'])
+  def activate(self, request, pk=None):
+    """
+    Activa un doctor.
+
+    Args:
+        request (Request): La solicitud HTTP.
+        pk (int): El identificador del doctor.
+
+    Returns:
+        Response: La respuesta que contiene el resultado de la activación.
+    """
+    doctor = self.get_object(pk)
+    if doctor:
+      user = doctor.user
+      if user:
+        doctor.state = True
+        doctor.save()
+        user.is_active = True
+        user.save()
+            
+        return Response({
+          'message': 'Doctor activado correctamente.'
+        }, status=status.HTTP_200_OK)
+    
+    return Response({
+      'message': 'No se ha encontrado el doctor.'
+    }, status=status.HTTP_400_BAD_REQUEST)
