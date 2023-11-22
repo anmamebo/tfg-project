@@ -7,8 +7,11 @@ from rest_framework import viewsets
 from rest_framework.decorators import action
 
 from doctors.models import Doctor
-from doctors.api.serializers.doctor_serializer import DoctorSerializer
+from doctors.api.serializers.doctor_serializer import DoctorSerializer, CreateDoctorSerializer
 from users.api.serializers.user_serializer import UserSerializer
+
+from utilities.password_generator import generate_password
+from utilities.doctor_username_generator import generate_doctor_username
 
 
 class DoctorViewSet(viewsets.GenericViewSet):
@@ -41,13 +44,13 @@ class DoctorViewSet(viewsets.GenericViewSet):
   
   def list(self, request):
     """
-    Lista todos los doctores.
+    Lista todos los médicos.
 
     Args:
         request (Request): La solicitud HTTP.
 
     Returns:
-        Response: La respuesta que contiene la lista de doctores.
+        Response: La respuesta que contiene la lista de médicos.
     """
     doctors = self.get_queryset()
     
@@ -67,16 +70,46 @@ class DoctorViewSet(viewsets.GenericViewSet):
       doctors_serializer = self.list_serializer_class(doctors, many=True)
       return Response(doctors_serializer.data, status=status.HTTP_200_OK)
     
+  def create(self, request):
+    """
+    Crea un nuevo médico.
+    
+    Args:
+        request (Request): La solicitud HTTP.
+        
+    Returns:
+        Response: La respuesta que contiene el resultado de la creación.
+    """
+    if 'user' in request.data and 'name' in request.data['user'] and 'last_name' in request.data['user']:
+      request.data['user']['password'] = generate_password()
+      request.data['user']['username'] = generate_doctor_username(request.data['user']['name'], request.data['user']['last_name'])
+      
+      doctor_serializer = CreateDoctorSerializer(data=request.data)
+      if doctor_serializer.is_valid():
+        doctor = doctor_serializer.save()
+        return Response({
+          'message': 'Médico creado correctamente.'
+        }, status=status.HTTP_201_CREATED)
+        
+      return Response({
+        'message': 'Hay errores en la creación',
+        'errors': doctor_serializer.errors
+      }, status=status.HTTP_400_BAD_REQUEST)
+    
+    return Response({
+      'message': 'No se ha enviado los datos del usuario'
+    }, status=status.HTTP_400_BAD_REQUEST)
+
   def retrieve(self, request, pk=None):
     """
-    Recupera un doctor.
+    Recupera un médico.
 
     Args:
         request (Request): La solicitud HTTP.
-        pk (int): El identificador del doctor.
+        pk (int): El identificador del médico.
 
     Returns:
-        Response: La respuesta que contiene el doctor.
+        Response: La respuesta que contiene el médico.
     """
     doctor = self.get_object(pk)
     doctor_serializer = self.serializer_class(doctor)
@@ -84,11 +117,11 @@ class DoctorViewSet(viewsets.GenericViewSet):
 
   def update(self, request, pk=None):
     """
-    Actualiza un doctor.
+    Actualiza un médico.
 
     Args:
         request (Request): La solicitud HTTP.
-        pk (int): El identificador del doctor.
+        pk (int): El identificador del médico.
 
     Returns:
         Response: La respuesta que contiene el resultado de la actualización.
@@ -111,7 +144,7 @@ class DoctorViewSet(viewsets.GenericViewSet):
     if doctor_serializer.is_valid():
       doctor_serializer.save()
       return Response({
-        'message': 'Doctor actualizado correctamente'
+        'message': 'Médico actualizado correctamente'
       }, status=status.HTTP_200_OK)
     else:
       return Response({
@@ -121,11 +154,11 @@ class DoctorViewSet(viewsets.GenericViewSet):
       
   def destroy(self, request, pk=None):
     """
-    Elimina un doctor.
+    Elimina un médico.
 
     Args:
         request (Request): La solicitud HTTP.
-        pk (int): El identificador del doctor.
+        pk (int): El identificador del médico.
 
     Returns:
         Response: La respuesta que contiene el resultado de la eliminación.
@@ -140,21 +173,21 @@ class DoctorViewSet(viewsets.GenericViewSet):
         user.save()
             
         return Response({
-          'message': 'Doctor eliminado correctamente.'
+          'message': 'Médico eliminado correctamente.'
         }, status=status.HTTP_200_OK)
       
     return Response({
-      'message': 'No se ha encontrado el doctor.'
+      'message': 'No se ha encontrado el médico.'
     }, status=status.HTTP_400_BAD_REQUEST)
     
   @action(detail=True, methods=['put'])
   def activate(self, request, pk=None):
     """
-    Activa un doctor.
+    Activa un médico.
 
     Args:
         request (Request): La solicitud HTTP.
-        pk (int): El identificador del doctor.
+        pk (int): El identificador del médico.
 
     Returns:
         Response: La respuesta que contiene el resultado de la activación.
@@ -169,9 +202,9 @@ class DoctorViewSet(viewsets.GenericViewSet):
         user.save()
             
         return Response({
-          'message': 'Doctor activado correctamente.'
+          'message': 'Médico activado correctamente.'
         }, status=status.HTTP_200_OK)
     
     return Response({
-      'message': 'No se ha encontrado el doctor.'
+      'message': 'No se ha encontrado el médico.'
     }, status=status.HTTP_400_BAD_REQUEST)
