@@ -81,7 +81,7 @@ class PatientViewSet(viewsets.GenericViewSet):
     Returns:
         Response: La respuesta que indica si el paciente se ha creado correctamente o si ha habido errores.
     """
-    if 'user' in request.data:
+    if 'user' in request.data and 'dni' in request.data:
       request.data['user']['password'] = generate_password()
       request.data['user']['username'] = request.data['dni']
       
