@@ -64,7 +64,7 @@ class CreatePatientSerializer(serializers.ModelSerializer):
       if user_serializer.is_valid(): # Si el serializador es valido
         user = user_serializer.save() # Se crea el usuario
         
-        group_name = 'Paciente';
+        group_name = 'Paciente'
         group, created = Group.objects.get_or_create(name=group_name) # Se obtiene el grupo de pacientes
         user.groups.add(group) # Se agrega el usuario al grupo de pacientes
         

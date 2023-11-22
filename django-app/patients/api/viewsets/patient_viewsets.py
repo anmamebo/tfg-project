@@ -81,19 +81,24 @@ class PatientViewSet(viewsets.GenericViewSet):
     Returns:
         Response: La respuesta que indica si el paciente se ha creado correctamente o si ha habido errores.
     """
-    request.data['user']['password'] = generate_password()
-    request.data['user']['username'] = request.data['dni']
-    
-    patient_serializer = CreatePatientSerializer(data=request.data)
-    if patient_serializer.is_valid():
-      patient = patient_serializer.save()
+    if 'user' in request.data:
+      request.data['user']['password'] = generate_password()
+      request.data['user']['username'] = request.data['dni']
+      
+      patient_serializer = CreatePatientSerializer(data=request.data)
+      if patient_serializer.is_valid():
+        patient = patient_serializer.save()
+        return Response({
+          'message': 'Paciente creado correctamente.'
+        }, status=status.HTTP_201_CREATED)
+      
       return Response({
-        'message': 'Paciente creado correctamente.'
-      }, status=status.HTTP_201_CREATED)
-    
+        'message': 'Hay errores en la creación',
+        'errors'  : patient_serializer.errors
+      }, status=status.HTTP_400_BAD_REQUEST)
+
     return Response({
-      'message': 'Hay errores en la creación',
-      'errors'  : patient_serializer.errors
+      'message': 'No se ha enviado el usuario',
     }, status=status.HTTP_400_BAD_REQUEST)
 
   def retrieve(self, request, pk=None):
