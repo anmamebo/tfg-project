@@ -22,8 +22,8 @@ class DepartmentViewSet(viewsets.GenericViewSet):
   """
   
   model = Department
-  serializer_class = DepartmentSerializer
-  list_serializer_class = DepartmentWithDoctorsSerializer
+  serializer_class = DepartmentWithDoctorsSerializer
+  list_serializer_class = DepartmentSerializer
   queryset = None
   
   def get_object(self, pk):
@@ -47,10 +47,5 @@ class DepartmentViewSet(viewsets.GenericViewSet):
         Response: La respuesta que contiene la lista de departamentos.
     """
     departments = self.get_queryset()
-    page = self.paginate_queryset(departments)
-    if page is not None:
-      departments_serializer = self.list_serializer_class(page, many=True)
-      return self.get_paginated_response(departments_serializer.data)
-    else:
-      departments_serializer = self.list_serializer_class(departments, many=True)
-      return Response(departments_serializer.data, status=status.HTTP_200_OK)
+    departments_serializer = self.list_serializer_class(departments, many=True)
+    return Response(departments_serializer.data, status=status.HTTP_200_OK)
