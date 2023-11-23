@@ -43,4 +43,11 @@ export const sidebarData = [
     icon: 'people-fill',
     roles: [ROLES.ADMIN, ROLES.DOCTOR]
   },
+  {
+    name: 'Médicos',
+    key: 'medicos',
+    url: '/medicos',
+    icon: 'people-fill',
+    roles: [ROLES.ADMIN]
+  },
 ];

@@ -1,0 +1,21 @@
+<app-generic-page [pageTitle]="pageTitle" [pageDescription]="pageDescription" [breadcrumbData]="breadcrumbData">
+  <div class="page-content">
+    
+    <ng-container *ngIf="doctor">
+    
+      <section class="section">
+        <div class="row">
+          <div class="col-lg-8">
+            <app-edit-basic-info-doctors-card [doctor]="doctor"></app-edit-basic-info-doctors-card>
+          </div>
+
+          <div class="col-lg-4">
+            <app-edit-contact-info-doctors-card [doctor]="doctor"></app-edit-contact-info-doctors-card>
+          </div>
+        </div>
+      </section>
+
+    </ng-container>
+
+  </div>
+</app-generic-page>

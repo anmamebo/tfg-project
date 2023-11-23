@@ -1,0 +1,26 @@
+<app-generic-card [title]="titleCard">
+  <div class="card-content">
+
+    <div class="row mb-3 justify-content-between">
+      <div class="col-md-3 col-12">
+        <a [routerLink]="['/medicos/crear/']" class="btn btn-primary w-100">Alta médico</a>
+      </div>
+      <div class="col-lg-4 col-md-6 col-12 mt-md-0 mt-3">
+        
+        <app-search (searchSubmitted)="onSearchSubmitted($event)"></app-search>
+
+      </div>
+    </div>
+
+    <ng-container *ngIf="doctors">
+    
+      <app-generic-table [columns]="columns" [data]="doctors" [actions]="true" [actionsUrls]="actionsUrls" (onDeleteEvent)="deleteDoctor($event)"></app-generic-table>
+
+      <app-elements-per-page (elementsPerPageChangedEvent)="onEntriesPerPageChanged($event)" [totalElements]="numDoctors"></app-elements-per-page>
+
+      <app-pagination (pageEmitter)="goToPage($event)" [page]="page" [totalPages]="totalPages" [numItems]="numDoctors"></app-pagination>
+    
+    </ng-container>
+
+  </div>
+</app-generic-card>

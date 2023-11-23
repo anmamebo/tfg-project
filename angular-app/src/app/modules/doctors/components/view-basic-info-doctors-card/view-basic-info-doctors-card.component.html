@@ -1,0 +1,59 @@
+<app-generic-card [title]="titleCard">
+  <div class="card-content">
+
+    <div class="row">
+
+      <div class="col-md-2">
+        <div class="form-group">
+          <label for="id">ID</label>
+          <input type="text" class="form-control" id="id" [attr.readonly]="true" [value]="doctor?.id">
+        </div>
+      </div>
+
+      <div class="col-md-5">
+        <div class="form-group">
+          <label for="name">Nombre</label>
+          <input type="text" class="form-control" id="name" [attr.readonly]="true" [value]="doctor?.user?.name">
+        </div>
+      </div>
+
+      <div class="col-md-5">
+        <div class="form-group">
+          <label for="last_name">Apellidos</label>
+          <input type="text" class="form-control" id="last_name" [attr.readonly]="true" [value]="doctor?.user?.last_name">
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="collegiate_number">Nº de Colegiado</label>
+          <input type="text" class="form-control" id="collegiate_number" [attr.readonly]="true" [value]="doctor?.collegiate_number">
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="is_available">Disponibilidad</label>
+          <br>
+          <span class="badge" [ngClass]="{ 'bg-light-success': doctor?.is_available, 'bg-light-danger': !doctor?.is_available}">{{ doctor?.is_available ? 'Disponible' : 'No disponible' }}</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row mt-3">
+
+      <div class="col-md-6">
+        <h6>Especialidades Médicas</h6>        
+        <app-generic-table [columns]="columnsMedicalSpecialty" [data]="doctor?.medical_specialties!"></app-generic-table>
+      </div>
+
+      <div class="col-md-6">
+        <h6>Departamentos</h6>
+        <app-generic-table [columns]="columnsDepartment" [data]="doctor?.departments!"></app-generic-table>
+      </div>
+
+    </div>
+
+  </div>
+</app-generic-card>

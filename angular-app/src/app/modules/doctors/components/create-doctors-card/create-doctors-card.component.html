@@ -1,0 +1,106 @@
+<app-generic-card [title]="titleCard">
+  <div class="card-content">
+
+    <form (ngSubmit)="onSubmit()" [formGroup]="createDoctorForm" class="form form-horizontal">
+      <div class="form-body">
+        <div class="row">
+
+          <!-- Email -->
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="email">Email*</label>
+              <input type="text" formControlName="email" class="form-control" id="email" placeholder="Email" 
+                [ngClass]="{ 'is-invalid': submitted && form.get('email')?.errors }">
+              
+              <app-form-errors [control]="form!.get('email')" [submitted]="submitted"></app-form-errors>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+          </div>
+
+          <!-- Nombre -->
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="name">Nombre*</label>
+              <input type="text" formControlName="name" class="form-control" id="name" placeholder="Nombre"
+                [ngClass]="{ 'is-invalid': submitted && form.get('name')?.errors }">
+              
+              <app-form-errors [control]="form!.get('name')" [submitted]="submitted"></app-form-errors>
+            </div>
+          </div>
+
+          <!-- Apellidos -->
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="last_name">Apellidos*</label>
+              <input type="text" formControlName="last_name" class="form-control" id="last_name" placeholder="Apellidos"
+                [ngClass]="{ 'is-invalid': submitted && form.get('last_name')?.errors }">
+              
+              <app-form-errors [control]="form!.get('last_name')" [submitted]="submitted"></app-form-errors>
+            </div>
+          </div>
+
+          <!-- Nº de colegiado -->
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="collegiate_number">Nº de colegiado*</label>
+              <input type="text" formControlName="collegiate_number" class="form-control" id="collegiate_number" placeholder="Nº de colegiado"
+                [ngClass]="{ 'is-invalid': submitted && form.get('collegiate_number')?.errors }">
+              
+              <app-form-errors [control]="form!.get('collegiate_number')" [submitted]="submitted"></app-form-errors>
+            </div>
+          </div>
+
+          <!-- Disponibilidad -->
+          <div class="col-sm-6 col-12">
+            <div class="form-group">
+                <label class="form-check-label" for="is_available">Disponibilidad*</label>
+                <div class="form-check form-switch">
+                  <input type="checkbox" formControlName="is_available" class="form-check-input" id="is_available">
+                </div>
+            </div>
+          </div>
+
+          <!-- Especialidad -->
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="specialty">Especialidad</label>
+              
+              <ng-multiselect-dropdown
+                [placeholder]="'Selecciona una/s especialidad/es'"
+                [settings]="dropdownSettings"
+                [data]="medicalSpecialties"
+                formControlName="medical_specialties"
+              ></ng-multiselect-dropdown>
+
+            </div>
+          </div>
+
+          <!-- Departamentos -->
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="department">Departamentos</label>
+              
+              <ng-multiselect-dropdown
+                [placeholder]="'Selecciona uno/s departamento/s'"
+                [settings]="dropdownSettings"
+                [data]="departments"
+                formControlName="departments"
+              ></ng-multiselect-dropdown>
+
+            </div>
+          </div>
+
+          <!-- Botones -->
+          <div class="col-12 d-flex justify-content-end">
+            <button type="reset" class="btn btn-outline-primary me-1">Limpiar</button>
+            <button type="submit" class="btn btn-primary">Crear</button>
+          </div>
+
+        </div>
+      </div>
+    </form>
+
+  </div>
+</app-generic-card>
