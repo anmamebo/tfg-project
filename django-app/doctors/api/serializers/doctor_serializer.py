@@ -65,7 +65,7 @@ class DoctorSerializer(serializers.ModelSerializer):
   
   class Meta:
     model = Doctor
-    exclude = ['state', 'created_date', 'modified_date', 'deleted_date']
+    exclude = ['created_date', 'modified_date', 'deleted_date']
     
   def get_user(self, obj):
     user = obj.user

@@ -143,6 +143,16 @@ class DoctorViewSet(viewsets.GenericViewSet):
     doctor_serializer = self.serializer_class(doctor, data=request.data, context={'request': request}, partial=True)
     if doctor_serializer.is_valid():
       doctor_serializer.save()
+      
+      departments = request.data.get('departments', None)
+      medical_specialties = request.data.get('medical_specialties', None)
+      
+      if departments is not None:
+        doctor.departments.set(departments)
+        
+      if medical_specialties is not None:
+        doctor.medical_specialties.set(medical_specialties)
+      
       return Response({
         'message': 'Médico actualizado correctamente'
       }, status=status.HTTP_200_OK)
@@ -168,6 +178,7 @@ class DoctorViewSet(viewsets.GenericViewSet):
       user = doctor.user
       if user:
         doctor.state = False
+        doctor.is_available = False
         doctor.save()
         user.is_active = False
         user.save()
@@ -197,6 +208,7 @@ class DoctorViewSet(viewsets.GenericViewSet):
       user = doctor.user
       if user:
         doctor.state = True
+        doctor.is_available = True
         doctor.save()
         user.is_active = True
         user.save()
