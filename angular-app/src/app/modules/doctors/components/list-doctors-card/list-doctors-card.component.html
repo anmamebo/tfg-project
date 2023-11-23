@@ -14,7 +14,7 @@
 
     <ng-container *ngIf="doctors">
     
-      <app-generic-table [columns]="columns" [data]="doctors" [actions]="true" [actionsUrls]="actionsUrls" (onDeleteEvent)="deleteDoctor($event)"></app-generic-table>
+      <app-generic-table [stripped]="true" [columns]="columns" [data]="doctors" [actions]="true" [actionsUrls]="actionsUrls" (onDeleteEvent)="deleteDoctor($event)"></app-generic-table>
 
       <app-elements-per-page (elementsPerPageChangedEvent)="onEntriesPerPageChanged($event)" [totalElements]="numDoctors"></app-elements-per-page>
 
