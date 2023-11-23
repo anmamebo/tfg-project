@@ -24,6 +24,9 @@ export class GenericTableComponent {
   /** Evento que se lanza al pulsar el botón de eliminar. */
   @Output() public onDeleteEvent: EventEmitter<any> = new EventEmitter<any>();
 
+  /** Booleano que indica si se muestran las filas de forma alterna. */
+  @Input() public stripped: boolean = false;
+
   constructor() { }
 
   /**
