@@ -10,5 +10,6 @@ export class Doctor {
     public user?: User,
     public medical_specialties?: MedicalSpecialty[],
     public departments?: Department[],
+    public state?: boolean,
   ) {}
 }
