@@ -34,7 +34,7 @@ class RoomViewSet(viewsets.GenericViewSet):
     if self.queryset is None:
       self.queryset = self.model.objects\
                       .filter(state=True)\
-                      .all()
+                      .all().order_by('-created_date')
     return self.queryset
   
   def list(self, request):
@@ -48,6 +48,21 @@ class RoomViewSet(viewsets.GenericViewSet):
         Response: La respuesta que contiene la lista de salas.
     """
     rooms = self.get_queryset()
+    
+    query = self.request.query_params.get('search', None)
+    if query:
+      rooms = rooms.filter(
+        Q(name__icontains=query) |  Q(type__icontains=query) | Q(location__icontains=query) | 
+        Q(department__name__icontains=query)
+      )
+    
+    paginate = self.request.query_params.get('paginate', None)
+    if paginate and paginate == 'true':
+      page = self.paginate_queryset(rooms)
+      if page is not None:
+        rooms_serializer = self.list_serializer_class(page, many=True)
+        return self.get_paginated_response(rooms_serializer.data)
+
     rooms_serializer = self.list_serializer_class(rooms, many=True)
     return Response(rooms_serializer.data, status=status.HTTP_200_OK)
   
@@ -157,11 +172,11 @@ class RoomViewSet(viewsets.GenericViewSet):
     return Response({
       'message': 'No se encontró la sala.',
     }, status=status.HTTP_400_BAD_REQUEST)
-  
+    
   @action(detail=False, methods=['get'])
-  def list_paginate(self, request):
+  def rooms_by_department(self, request):
     """
-    Lista todas las salas paginadas.
+    Lista todas las salas por departamento.
 
     Args:
         request (Request): La solicitud HTTP.
@@ -171,18 +186,23 @@ class RoomViewSet(viewsets.GenericViewSet):
     """
     rooms = self.get_queryset()
     
+    department_id = self.request.query_params.get('department', None)
+    if department_id:
+      rooms = rooms.filter(department__id=department_id)
+      
     query = self.request.query_params.get('search', None)
-    
     if query:
       rooms = rooms.filter(
         Q(name__icontains=query) |  Q(type__icontains=query) | Q(location__icontains=query) | 
-        Q(department__name__icontains=query)
+        Q(capacity__icontains=query)
       )
+      
+    paginate = self.request.query_params.get('paginate', None)
+    if paginate and paginate == 'true':  
+      page = self.paginate_queryset(rooms)
+      if page is not None:
+        rooms_serializer = BasicRoomSerializer(page, many=True)
+        return self.get_paginated_response(rooms_serializer.data)
     
-    page = self.paginate_queryset(rooms)
-    if page is not None:
-      rooms_serializer = self.list_serializer_class(page, many=True)
-      return self.get_paginated_response(rooms_serializer.data)
-    else:
-      rooms_serializer = self.list_serializer_class(rooms, many=True)
-      return Response(rooms_serializer.data, status=status.HTTP_200_OK)
+    rooms_serializer = BasicRoomSerializer(rooms, many=True)
+    return Response(rooms_serializer.data, status=status.HTTP_200_OK)
