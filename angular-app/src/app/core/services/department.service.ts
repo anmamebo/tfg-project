@@ -65,13 +65,14 @@ export class DepartmentService {
     // Parámetros de la petición
     let params = new HttpParams().set('page', page.toString());
     params = params.set('page_size', pageSize.toString());
+    params = params.set('paginate', 'true');
 
     // Comprueba si se ha indicado un término de búsqueda
     if (searchTerm) {
       params = params.set('search', searchTerm);
     }
 
-    return this.http.get<any>(this.url + 'list_paginate/', { params, ...httpOptions });
+    return this.http.get<any>(this.url, { params, ...httpOptions });
   }
 
   /**
