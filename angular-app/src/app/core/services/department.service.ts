@@ -29,13 +29,100 @@ export class DepartmentService {
   }
 
   /**
+   * Obtiene un departamento por su identificador.
+   * @param id El identificador del departamento.
+   * @returns Un observable que emite un objeto `Department`.
+   */
+  public getDepartmentById(id: number): Observable<Department> {
+    const headers = this.httpCommonService.getCommonHeaders();
+    const httpOptions = { headers };
+
+    return this.http.get<Department>(this.url + id + '/', httpOptions);
+  }
+
+  /**
    * Obtiene todos los departamentos.
    * @returns Un observable que emite un objeto `any`.
    */
-  getDepartments(): Observable<any> {
+  public getDepartments(): Observable<any> {
     const headers = this.httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
     return this.http.get<any>(this.url, httpOptions);
+  }
+
+  /**
+   * Obtiene los departamentos paginados.
+   * @param page Pagina actual.
+   * @param pageSize Tamaño de la pagina.
+   * @param searchTerm Termino de busqueda.
+   * @returns Un observable que emite un objeto `any`.
+   */
+  public getDepartmentsPaginate(page: number, pageSize: number, searchTerm: string): Observable<any> {
+    const headers = this.httpCommonService.getCommonHeaders();
+    const httpOptions = { headers };
+
+    // Parámetros de la petición
+    let params = new HttpParams().set('page', page.toString());
+    params = params.set('page_size', pageSize.toString());
+
+    // Comprueba si se ha indicado un término de búsqueda
+    if (searchTerm) {
+      params = params.set('search', searchTerm);
+    }
+
+    return this.http.get<any>(this.url + 'list_paginate/', { params, ...httpOptions });
+  }
+
+  /**
+   * Crea un nuevo departamento.
+   * @param department El objeto `Department` con los datos del nuevo departamento.
+   * @returns Un observable que emite un objeto `any`.
+   */
+  public createDepartment(department: Department): Observable<any> {
+    const headers = this.httpCommonService.getCommonHeaders();
+    const httpOptions = { headers };
+
+    let params = JSON.stringify(department);
+
+    return this.http.post<any>(this.url, params, httpOptions);
+  }
+
+  /**
+   * Actualiza los datos de un departamento.
+   * @param department El objeto `Department` con los datos actualizados.
+   * @returns Un observable que emite un objeto `any`.
+   */
+  public updateDepartment(department: Department): Observable<any> {
+    const headers = this.httpCommonService.getCommonHeaders();
+    const httpOptions = { headers };
+
+    let params = JSON.stringify(department);
+
+    return this.http.put<any>(this.url + department.id + '/', params, httpOptions);
+  }
+
+  /**
+   * Elimina un departamento.
+   * @param id El identificador del departamento.
+   * @returns Un observable que emite un objeto `any`.
+   */
+  public deleteDepartment(id: string): Observable<any> {
+    const headers = this.httpCommonService.getCommonHeaders();
+    const httpOptions = { headers };
+
+    return this.http.delete<any>(this.url + id + '/', httpOptions);
+  }
+
+  /**
+   * Activa un departamento.
+   * @param id El identificador del departamento.
+   * @returns Un observable que emite un objeto `any`.
+   */
+  public activateDepartment(id: string): Observable<any> {
+    const headers = this.httpCommonService.getCommonHeaders();
+    const httpOptions = { headers };
+
+    return this.http.patch<any>(this.url + id + '/activate/', {}, httpOptions);
   }
 }
