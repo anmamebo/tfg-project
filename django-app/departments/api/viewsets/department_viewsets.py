@@ -34,7 +34,7 @@ class DepartmentViewSet(viewsets.GenericViewSet):
     if self.queryset is None:
       self.queryset = self.model.objects\
                       .filter(state=True)\
-                      .all()
+                      .all().order_by('-created_date')
     return self.queryset
   
   def list(self, request):
@@ -48,6 +48,20 @@ class DepartmentViewSet(viewsets.GenericViewSet):
         Response: La respuesta que contiene la lista de departamentos.
     """
     departments = self.get_queryset()
+    
+    query = self.request.query_params.get('search', None)
+    if query:
+      departments = departments.filter(
+        Q(name__icontains=query) | Q(description__icontains=query)
+      )
+      
+    paginate = self.request.query_params.get('paginate', None)
+    if paginate and paginate == 'true':
+      page = self.paginate_queryset(departments)
+      if page is not None:
+        departments_serializer = self.list_serializer_class(page, many=True)
+        return self.get_paginated_response(departments_serializer.data)
+    
     departments_serializer = self.list_serializer_class(departments, many=True)
     return Response(departments_serializer.data, status=status.HTTP_200_OK)
   
@@ -155,30 +169,3 @@ class DepartmentViewSet(viewsets.GenericViewSet):
     return Response({
       'message': 'No se ha encontrado el departamento.'
     }, status=status.HTTP_400_BAD_REQUEST)
-    
-  @action(detail=False, methods=['get'])
-  def list_paginate(self, request):
-    """
-    Lista los departamentos paginados.
-
-    Args:
-        request (Request): La solicitud HTTP.
-
-    Returns:
-        Response: La respuesta que contiene la lista de departamentos paginados.
-    """
-    departments = self.get_queryset()
-    
-    query = self.request.query_params.get('search', None)
-    if query:
-      departments = departments.filter(
-        Q(name__icontains=query) | Q(description__icontains=query)
-      )
-    
-    page = self.paginate_queryset(departments)
-    if page is not None:
-      departments_serializer = self.list_serializer_class(page, many=True)
-      return self.get_paginated_response(departments_serializer.data)
-    
-    departments_serializer = self.list_serializer_class(departments, many=True)
-    return Response(departments_serializer.data, status=status.HTTP_200_OK)
