@@ -22,6 +22,7 @@
         [data]="entityData.items" 
         [actions]="entityData.actions.hasActions" 
         [actionsUrls]="entityData.actions.actions"
+        (onDeleteEvent)="delete($event)"
       >
       </app-generic-table>
 

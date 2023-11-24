@@ -97,4 +97,21 @@ export class GenericListCardComponent implements OnInit {
       }
     });
   }
+
+  /**
+   * Elimina un elemento de la entidad.
+   * @param id ID del elemento.
+   */
+  public delete(id: string): void {
+    this.notificationService.showConfirmDeleteDialog(() => {
+      this.entityData.service?.delete(+id).subscribe({
+        next: () => {
+          this.getItems(this.entityData.page);
+        },
+        error: () => {
+          this.notificationService.showErrorToast('No se ha podido eliminar el elemento.');
+        }
+      })
+    });
+  }
 }
