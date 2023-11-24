@@ -30,7 +30,7 @@ export class DoctorService {
 
   /**
    * Obtiene un médico por su identificador.
-   * @param doctor El identificador del médico.
+   * @param id El identificador del médico.
    * @returns Un observable que emite un objeto `Doctor`.
    */
   public getDoctorById(id: number): Observable<Doctor> {
@@ -43,6 +43,7 @@ export class DoctorService {
   /**
    * Obtiene todos los médicos.
    * @param page El número de página que se quiere obtener.
+   * @param pageSize El tamaño de la página.
    * @param searchTerm Término de búsqueda.
    * @returns Un observable que emite un objeto `any`.
    */
