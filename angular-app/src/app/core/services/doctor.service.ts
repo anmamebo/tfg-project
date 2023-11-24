@@ -114,4 +114,23 @@ export class DoctorService {
 
     return this.http.put<any>(this.url + id + '/activate/', {}, httpOptions);
   }
+
+  /**
+   * Obtiene listado de médicos de un departamento.
+   * @param id ID del departamento.
+   * @param page página actual.
+   * @param pageSize tamaño de la página.
+   * @returns Un observable que emite un objeto `any`.
+   */
+  public getDoctorsByDepartmentId(id: number, page: number, pageSize: number): Observable<any> {
+    const headers = this.httpCommonService.getCommonHeaders();
+    const httpOptions = { headers };
+
+    let params = new HttpParams().set('department', id.toString());
+    params = params.set('page', page.toString());
+    params = params.set('page_size', pageSize.toString());
+    params = params.set('paginate', 'true');
+
+    return this.http.get<any>(this.url + 'doctors_by_department', { params, ...httpOptions });
+  }
 }
