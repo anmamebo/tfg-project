@@ -16,6 +16,7 @@ import { ElementsPerPageModule } from "src/app/shared/components/elements-per-pa
 import { SearchModule } from "src/app/shared/components/search/search.module";
 import { SharedModule } from "src/app/shared/shared.module";
 import { FormErrorsModule } from "src/app/shared/components/form-errors/form-errors.module";
+import { GenericListCardModule } from "src/app/shared/components/generic-list-card/generic-list-card.module";
 
 // Componentes páginas
 import { PatientsPageComponent } from './pages/patients-page/patients-page.component';
@@ -24,7 +25,6 @@ import { PatientsEditPageComponent } from './pages/patients-edit-page/patients-e
 import { PatientsCreatePageComponent } from './pages/patients-create-page/patients-create-page.component';
 
 // Componentes tarjetas
-import { ListPatientsCardComponent } from './components/list-patients-card/list-patients-card.component';
 import { ViewBasicInfoPatientsCardComponent } from './components/view-basic-info-patients-card/view-basic-info-patients-card.component';
 import { ViewContactInfoPatientsCardComponent } from './components/view-contact-info-patients-card/view-contact-info-patients-card.component';
 import { ViewAddressPatientsCardComponent } from './components/view-address-patients-card/view-address-patients-card.component';
@@ -38,7 +38,6 @@ import { CreatePatientsCardComponent } from './components/create-patients-card/c
 @NgModule({
   declarations: [
     PatientsPageComponent,
-    ListPatientsCardComponent,
     PatientsViewPageComponent,
     ViewBasicInfoPatientsCardComponent,
     ViewContactInfoPatientsCardComponent,
@@ -65,6 +64,7 @@ import { CreatePatientsCardComponent } from './components/create-patients-card/c
     SearchModule,
     SharedModule,
     FormErrorsModule,
+    GenericListCardModule,
   ]
 })
 export class PatientsModule { }
