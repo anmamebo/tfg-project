@@ -116,3 +116,9 @@ export const breadcrumbDepartmentsViewData = [
   { label: 'Departamentos', url: '/departamentos'},
   { label: 'Ver departamento', url: ''}
 ]
+
+// Salas
+export const breadcrumbRoomsData = [
+  { label: 'Panel Principal', url: '/'},
+  { label: 'Salas', url: ''}
+]
