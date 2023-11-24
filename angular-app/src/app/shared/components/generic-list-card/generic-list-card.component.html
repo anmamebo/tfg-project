@@ -1,0 +1,45 @@
+<app-generic-card [title]="entityData.title">
+  <div class="card-content">
+
+    <div class="row mb-3 justify-content-between">
+      <div *ngIf="entityData.create.hasCreate" class="col-md-3 col-12">
+
+        <a [routerLink]="[entityData.create.create]" class="btn btn-primary w-100">{{ entityData.create.createText }}</a>
+
+      </div>
+      <div class="col-lg-4 col-md-6 col-12 mt-md-0 mt-3">
+
+        <app-search (searchSubmitted)="onSearchSubmitted($event)"></app-search>
+
+      </div>
+    </div>
+
+    <ng-container *ngIf="entityData.items">
+    
+      <app-generic-table 
+        [stripped]="true" 
+        [columns]="entityData.columns" 
+        [data]="entityData.items" 
+        [actions]="entityData.actions.hasActions" 
+        [actionsUrls]="entityData.actions.actions"
+      >
+      </app-generic-table>
+
+      <app-elements-per-page 
+        [totalElements]="entityData.numItems" 
+        (elementsPerPageChangedEvent)="onEntriesPerPageChanged($event)"
+      >
+      </app-elements-per-page>
+
+      <app-pagination 
+        [page]="entityData.page" 
+        [totalPages]="entityData.totalPages" 
+        [numItems]="entityData.numItems" 
+        (pageEmitter)="goToPage($event)"
+      >
+      </app-pagination>
+
+    </ng-container>
+
+  </div>
+</app-generic-card>
