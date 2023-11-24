@@ -50,4 +50,18 @@ export const sidebarData = [
     icon: 'people-fill',
     roles: [ROLES.ADMIN]
   },
+  {
+    name: 'Departamentos',
+    key: 'departamentos',
+    url: '/departamentos',
+    icon: 'building-fill',
+    roles: [ROLES.ADMIN],
+  },
+  // {
+  //   name: 'Salas',
+  //   key: 'salas',
+  //   url: '/salas',
+  //   icon: 'house-fill',
+  //   roles: [ROLES.ADMIN, ROLES.DOCTOR],
+  // },
 ];

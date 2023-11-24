@@ -1,0 +1,13 @@
+<app-generic-card [title]="titleCard">
+  <div class="card-content">
+
+    <div class="row">
+
+      <app-generic-table [columns]="columns" [data]="doctors" [stripped]="true"></app-generic-table>
+
+      <app-pagination (pageEmitter)="goToPage($event)" [page]="page" [totalPages]="totalPages" [numItems]="numDoctors"></app-pagination>
+
+    </div>
+
+  </div>
+</app-generic-card>

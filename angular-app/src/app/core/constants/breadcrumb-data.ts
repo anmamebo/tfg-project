@@ -89,3 +89,30 @@ export const breadcrumbDoctorsViewData = [
   { label: 'Médicos', url: '/medicos'},
   { label: 'Ver médico', url: ''}
 ]
+
+// Departamentos
+export const breadcrumbDepartmentsData = [
+  { label: 'Panel Principal', url: '/'},
+  { label: 'Departamentos', url: ''}
+]
+
+// Departamentos crear
+export const breadcrumbDepartmentsCreateData = [
+  { label: 'Panel Principal', url: '/'},
+  { label: 'Departamentos', url: '/departamentos'},
+  { label: 'Crear departamento', url: ''}
+]
+
+// Departamentos editar
+export const breadcrumbDepartmentsEditData = [
+  { label: 'Panel Principal', url: '/'},
+  { label: 'Departamentos', url: '/departamentos'},
+  { label: 'Editar departamento', url: ''}
+]
+
+// Departamentos ver
+export const breadcrumbDepartmentsViewData = [
+  { label: 'Panel Principal', url: '/'},
+  { label: 'Departamentos', url: '/departamentos'},
+  { label: 'Ver departamento', url: ''}
+]
