@@ -7,7 +7,7 @@ from rest_framework import viewsets
 from rest_framework.decorators import action
 
 from doctors.models import Doctor
-from doctors.api.serializers.doctor_serializer import DoctorSerializer, CreateDoctorSerializer
+from doctors.api.serializers.doctor_serializer import DoctorSerializer, CreateDoctorSerializer, DoctorInDepartmentListSerializer
 from users.api.serializers.user_serializer import UserSerializer
 
 from utilities.password_generator import generate_password
@@ -220,3 +220,37 @@ class DoctorViewSet(viewsets.GenericViewSet):
     return Response({
       'message': 'No se ha encontrado el médico.'
     }, status=status.HTTP_400_BAD_REQUEST)
+    
+  @action(detail=False, methods=['get'])
+  def doctors_by_department(self, request):
+    """
+    Lista todos los médicos por departamento.
+
+    Args:
+        request (Request): La solicitud HTTP.
+
+    Returns:
+        Response: La respuesta que contiene la lista de médicos.
+    """
+    doctors = self.get_queryset()
+    
+    department_id = self.request.query_params.get('department', None)
+    if department_id:
+      doctors = doctors.filter(departments__id=department_id)
+      
+    query = self.request.query_params.get('search', None)
+    if query:
+      doctors = doctors.filter(
+        Q(user__name__icontains=query) | Q(user__last_name__icontains=query) |
+        Q(user__email__icontains=query) | Q(collegiate_number__icontains=query)
+      )
+    
+    paginate = self.request.query_params.get('paginate', None)
+    if paginate and paginate == 'true':  
+      page = self.paginate_queryset(doctors)
+      if page is not None:
+        doctors_serializer = DoctorInDepartmentListSerializer(page, many=True)
+        return self.get_paginated_response(doctors_serializer.data)
+    
+    doctors_serializer = DoctorInDepartmentListSerializer(doctors, many=True)
+    return Response(doctors_serializer.data, status=status.HTTP_200_OK)
