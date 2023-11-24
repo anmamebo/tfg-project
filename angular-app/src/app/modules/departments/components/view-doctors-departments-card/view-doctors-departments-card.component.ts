@@ -47,6 +47,9 @@ export class ViewDoctorsDepartmentsCardComponent implements OnInit {
   /** Número de resultados por página. */
   public numResults: number = 5;
 
+  /** Término de búsqueda */
+  public search: string = '';
+
   constructor(
     private doctorService: DoctorService,
     private notificationService: NotificationService,
@@ -66,11 +69,26 @@ export class ViewDoctorsDepartmentsCardComponent implements OnInit {
   }
 
   /**
+   * Lanza el evento de búsqueda.
+   * @param searchTerm Término de búsqueda.
+   */
+  public onSearchSubmitted(searchTerm: string): void {
+    this.getDoctorsByDepartmentId(this.page, searchTerm);
+  }
+
+  /**
    * Obtiene los doctores de un departamento.
    * @param page Número de página.
    */
-  public getDoctorsByDepartmentId(page: number): void {
-    this.doctorService.getDoctorsByDepartmentId(+this.departmentId, page, this.numResults).subscribe({
+  public getDoctorsByDepartmentId(page: number, searchTerm?: string): void {
+    // Comprueba si el término de búsqueda ha cambiado
+    if (searchTerm != undefined && searchTerm != this.search) {      
+      this.search = searchTerm ? searchTerm : '';
+      page = 1;
+      this.page = 1;
+    }
+
+    this.doctorService.getDoctorsByDepartmentId(+this.departmentId, page, this.numResults, this.search).subscribe({
       next: (response: any) => {
         this.doctors = response.results;
         this.numDoctors = response.count;

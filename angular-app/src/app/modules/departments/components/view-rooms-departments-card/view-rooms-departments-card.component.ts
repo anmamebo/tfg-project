@@ -48,6 +48,9 @@ export class ViewRoomsDepartmentsCardComponent implements OnInit {
   /** Número de resultados por página. */
   public numResults: number = 5;
 
+  /** Término de búsqueda */
+  public search: string = '';
+
   constructor(
     private roomService: RoomService,
     private notificationService: NotificationService,
@@ -67,11 +70,26 @@ export class ViewRoomsDepartmentsCardComponent implements OnInit {
   }
 
   /**
+   * Lanza el evento de búsqueda.
+   * @param searchTerm Término de búsqueda.
+   */
+  public onSearchSubmitted(searchTerm: string): void {
+    this.getRoomsByDepartmentId(this.page, searchTerm);
+  }
+
+  /**
    * Obtiene las salas de un departamento.
    * @param page Número de página al que se quiere ir.
    */
-  public getRoomsByDepartmentId(page: number): void {
-    this.roomService.getRoomsByDepartmentId(+this.departmentId, page, this.numResults).subscribe({
+  public getRoomsByDepartmentId(page: number, searchTerm?: string): void {
+    // Comprueba si el término de búsqueda ha cambiado
+    if (searchTerm != undefined && searchTerm != this.search) {      
+      this.search = searchTerm ? searchTerm : '';
+      page = 1;
+      this.page = 1;
+    }
+
+    this.roomService.getRoomsByDepartmentId(+this.departmentId, page, this.numResults, this.search).subscribe({
       next: (response: any) => {
         this.rooms = response.results;
         this.numRooms = response.count;
