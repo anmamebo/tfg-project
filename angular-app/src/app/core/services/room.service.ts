@@ -2,9 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Observable } from "rxjs";
 
-import { API_URL } from '../constants/API_URL';
-
 // Servicios
+import { EntityService } from './entity.service';
 import { HttpCommonService } from "./http-common.service";
 
 // Modelos
@@ -17,15 +16,23 @@ import { Room } from "../models/room.model";
 @Injectable({
   providedIn: 'root'
 })
-export class RoomService {
-  /** URL base de la API. */
-  public url: string;
+export class RoomService extends EntityService<Room> {
+  /** Endpoint de la API. */
+  public endpoint = 'departments/rooms/';
 
   constructor(
-    private http: HttpClient,
-    private httpCommonService: HttpCommonService,
+    http: HttpClient,
+    httpCommonService: HttpCommonService,
   ) {
-    this.url = API_URL.url + 'departments/rooms/';
+    super(http, httpCommonService);
+  }
+
+  /**
+   * Obtiene la URL del endpoint.
+   * @returns La URL del endpoint.
+   */
+  public getEndpoint(): string {
+    return this.endpoint;
   }
 
   /**
@@ -49,6 +56,6 @@ export class RoomService {
       params = params.set('search', searchTerm);
     }
 
-    return this.http.get<any>(this.url + 'rooms_by_department', { params, ...httpOptions });
+    return this.http.get<any>(`${this.url}${this.endpoint}rooms_by_department`, { params, ...httpOptions });
   }
 }
