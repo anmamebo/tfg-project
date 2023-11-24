@@ -45,4 +45,6 @@ class Room(BaseModel):
     ]
     
   def __str__(self):
+    if self.department is None:
+      return self.name + ' (' + self.location + ')'
     return self.name + ' (' + self.location + ') - ' + self.department.name
