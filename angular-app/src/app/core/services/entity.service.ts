@@ -9,15 +9,15 @@ import { HttpCommonService } from "src/app/core/services/http-common.service";
 
 
 /**
- * Servicio genérico para obtener listados.
+ * Servicio genérico para entidades.
  */
 @Injectable({
   providedIn: 'root'
 })
-export abstract class ListService<T> {
+export abstract class EntityService<T> {
   /** URL base de la API. */
   protected url: string;
-
+  
   constructor(
     protected http: HttpClient,
     protected httpCommonService: HttpCommonService,
@@ -26,7 +26,13 @@ export abstract class ListService<T> {
   }
 
   /**
-   * Obtiene los elementos de la entidad.
+   * Obtiene el endpoint de la entidad.
+   * @returns El endpoint de la entidad.
+   */
+  abstract getEndpoint(): string;
+
+  /**
+   * Obtiene el listado de elementos de la entidad.
    * 
    * @param page Número de página.
    * @param numResults Número de resultados por página.
@@ -67,8 +73,14 @@ export abstract class ListService<T> {
   }
 
   /**
-   * Obtiene el endpoint de la entidad.
-   * @returns Endpoint de la entidad.
+   * Elimina un elemento de la entidad.
+   * @param id El identificador del elemento.
+   * @returns Un observable que emite un objeto `any`.
    */
-  abstract getEndpoint(): string;
+  public delete(id: number): Observable<any> {
+    const headers = this.httpCommonService.getCommonHeaders();
+    const httpOptions = { headers };
+
+    return this.http.delete(`${this.url}${this.getEndpoint()}${id}/`, httpOptions)
+  }
 }
