@@ -35,7 +35,7 @@ export class RoomService {
    * @param pageSize tamaño de la página.
    * @returns Un observable que emite un objeto `any`.
    */
-  public getRoomsByDepartmentId(id: number, page: number, pageSize:number): Observable<any> {
+  public getRoomsByDepartmentId(id: number, page: number, pageSize:number, searchTerm: string): Observable<any> {
     const headers = this.httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
@@ -43,6 +43,11 @@ export class RoomService {
     params = params.set('page', page.toString());
     params = params.set('page_size', pageSize.toString());
     params = params.set('paginate', 'true');    
+
+    // Comprueba si se ha indicado un término de búsqueda
+    if (searchTerm) {
+      params = params.set('search', searchTerm);
+    }
 
     return this.http.get<any>(this.url + 'rooms_by_department', { params, ...httpOptions });
   }
