@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
-import { Observable, catchError } from 'rxjs';
-
-import { API_URL } from '../constants/API_URL';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 // Servicios
+import { EntityService } from './entity.service';
 import { HttpCommonService } from "./http-common.service";
 
 // Modelos
@@ -17,15 +16,23 @@ import { Patient } from '../models/patient.model';
 @Injectable({
   providedIn: 'root'
 })
-export class PatientService {
-  /** URL base de la API. */
-  public url: string;
+export class PatientService extends EntityService<Patient> {
+  /** Endpoint de la API. */
+  public endpoint = 'patients/patients/';
 
   constructor(
-    private http: HttpClient,
-    private httpCommonService: HttpCommonService,
+    http: HttpClient,
+    httpCommonService: HttpCommonService,
   ) {
-    this.url = API_URL.url + 'patients/patients/';
+    super(http, httpCommonService);
+  }
+
+  /**
+   * Obtiene la URL del endpoint.
+   * @returns La URL del endpoint.
+   */
+  public getEndpoint(): string {
+    return this.endpoint;
   }
 
   /**
@@ -37,7 +44,7 @@ export class PatientService {
     const headers = this.httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
-    return this.http.get<Patient>(this.url + id + '/', httpOptions);
+    return this.http.get<Patient>(`${this.url}${this.endpoint}${id}/`, httpOptions);
   }
 
   /**
@@ -59,7 +66,7 @@ export class PatientService {
       params = params.set('search', searchTerm);
     }
 
-    return this.http.get<any>(this.url, { params, ...httpOptions });
+    return this.http.get<any>(`${this.url}${this.endpoint}`, { params, ...httpOptions });
   }
 
   /**
@@ -73,7 +80,7 @@ export class PatientService {
 
     let params = JSON.stringify(patient);
 
-    return this.http.post<any>(this.url, params, httpOptions);
+    return this.http.post<any>(`${this.url}${this.endpoint}`, params, httpOptions);
   }
   
   /**
@@ -87,7 +94,7 @@ export class PatientService {
 
     let params = JSON.stringify(patient);
 
-    return this.http.put<any>(this.url + patient.id + '/', params, httpOptions);
+    return this.http.put<any>(`${this.url}${this.endpoint}${patient.id}/`, params, httpOptions);
   }
 
   /**
@@ -99,7 +106,7 @@ export class PatientService {
     const headers = this.httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
-    return this.http.delete<any>(this.url + id + '/', httpOptions);
+    return this.http.delete<any>(`${this.url}${this.endpoint}${id}/`, httpOptions);
   }
 
   /**
@@ -111,6 +118,6 @@ export class PatientService {
     const headers = this.httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
-    return this.http.put<any>(this.url + id + '/activate/', {}, httpOptions);
+    return this.http.put<any>(`${this.url}${this.endpoint}${id}/activate/`, {}, httpOptions);
   }
 }
