@@ -39,7 +39,9 @@ export class GenericListCardComponent implements OnInit {
       totalPages: 1,
       numItems: 0,
       numResults: 10,
-      search: '',
+      search: {
+        hasSearch: false,
+      }
     };
   }
 
@@ -80,13 +82,13 @@ export class GenericListCardComponent implements OnInit {
    * @param searchTerm Término de búsqueda.
    */
   public getItems(page: number, searchTerm?: string): void {
-    if (searchTerm != undefined && searchTerm != this.entityData.search) {
-      this.entityData.search = searchTerm ? searchTerm : '';
+    if (searchTerm != undefined && searchTerm != this.entityData.search.search) {
+      this.entityData.search.search = searchTerm ? searchTerm : '';
       page = 1
       this.entityData.page = 1;
     }
 
-    this.entityData.service?.getItems(page, this.entityData.numResults, this.entityData.search, true).subscribe({
+    this.entityData.service?.getItems(page, this.entityData.numResults, this.entityData.search.search, true).subscribe({
       next: (response: any) => {
         this.entityData.items = response.results;
         this.entityData.numItems = response.count;

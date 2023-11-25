@@ -7,7 +7,7 @@
         <a [routerLink]="[entityData.create.create]" class="btn btn-primary w-100">{{ entityData.create.createText }}</a>
 
       </div>
-      <div class="col-lg-4 col-md-6 col-12 mt-md-0 mt-3">
+      <div *ngIf="entityData.search.hasSearch" class="col-lg-4 col-md-6 col-12 mt-md-0 mt-3">
 
         <app-search (searchSubmitted)="onSearchSubmitted($event)"></app-search>
 
