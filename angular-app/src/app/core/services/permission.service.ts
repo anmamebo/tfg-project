@@ -2,10 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Observable } from "rxjs";
 
-import { API_URL } from "../constants/API_URL";
-
 // Servicios
+import { EntityService } from "./entity.service";
 import { HttpCommonService } from "./http-common.service";
+
+// Modelos
+import { Permission } from "../models/permission.model";
 
 
 /**
@@ -14,15 +16,23 @@ import { HttpCommonService } from "./http-common.service";
 @Injectable({
   providedIn: 'root'
 })
-export class PermissionService {
-  /** URL base de la API. */
-  public url: string;
+export class PermissionService extends EntityService<Permission> {
+  /** Endpoint de la API. */
+  public endpoint = 'users/permissions/';
 
   constructor(
-    private http: HttpClient,
-    private httpCommonService: HttpCommonService
+    http: HttpClient,
+    httpCommonService: HttpCommonService
   ) {
-    this.url = API_URL.url + 'users/permissions/';
+    super(http, httpCommonService);
+  }
+
+  /**
+   * Obtiene la URL del endpoint.
+   * @returns La URL del endpoint.
+   */
+  public getEndpoint(): string {
+    return this.endpoint;
   }
 
   /**
@@ -44,6 +54,6 @@ export class PermissionService {
       params = params.set('search', searchTerm);
     }
 
-    return this.http.get<any>(this.url, { params, ...httpOptions });
+    return this.http.get<any>(`${this.url}${this.endpoint}`, { params, ...httpOptions });
   }
 }

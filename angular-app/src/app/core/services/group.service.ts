@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpParams } from "@angular/common/http";
-import { Observable, catchError } from "rxjs";
-
-import { API_URL } from "../constants/API_URL";
+import { HttpClient, HttpParams } from "@angular/common/http";
+import { Observable } from "rxjs";
 
 // Servicios
+import { EntityService } from './entity.service';
 import { HttpCommonService } from "./http-common.service";
 
 // Modelos
@@ -17,15 +16,23 @@ import { Group } from "../models/group.model";
 @Injectable({
   providedIn: 'root'
 })
-export class GroupService {
-  /** URL base de la API. */
-  public url: string;
+export class GroupService extends EntityService<Group> {
+  /** Endpoint de la API. */
+  public endpoint = 'users/groups/';
 
   constructor(
-    private http: HttpClient,
-    private httpCommonService: HttpCommonService
+    http: HttpClient,
+    httpCommonService: HttpCommonService
   ) {
-    this.url = API_URL.url + 'users/groups/';
+    super(http, httpCommonService);
+  }
+
+  /**
+   * Obtiene la URL del endpoint.
+   * @returns La URL del endpoint.
+   */
+  public getEndpoint(): string {
+    return this.endpoint;
   }
 
   /**
@@ -37,7 +44,7 @@ export class GroupService {
     const headers = this.httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
-    return this.http.get<Group>(this.url + id + '/', httpOptions);
+    return this.http.get<Group>(`${this.url}${this.endpoint}${id}/`, httpOptions);
   }
 
   /**
@@ -51,7 +58,7 @@ export class GroupService {
 
     const params = new HttpParams().set('page', page.toString());
 
-    return this.http.get<any>(this.url, { params, ...httpOptions });
+    return this.http.get<any>(`${this.url}${this.endpoint}`, { params, ...httpOptions });
   }
 
   /**
@@ -65,7 +72,7 @@ export class GroupService {
 
     let params = JSON.stringify(group);
 
-    return this.http.post<any>(this.url, params, httpOptions);
+    return this.http.post<any>(`${this.url}${this.endpoint}`, params, httpOptions);
   }
 
   /**
@@ -79,7 +86,7 @@ export class GroupService {
 
     let params = JSON.stringify(group);
 
-    return this.http.put<any>(this.url + group.id + '/', params, httpOptions);
+    return this.http.put<any>(`${this.url}${this.endpoint}${group.id}/`, params, httpOptions);
   }
 
   /**
@@ -91,6 +98,6 @@ export class GroupService {
     const headers = this.httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
-    return this.http.delete<any>(this.url + id + '/', httpOptions);
+    return this.http.delete<any>(`${this.url}${this.endpoint}${id}/`, httpOptions);
   }
 }

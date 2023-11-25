@@ -2,9 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Observable } from "rxjs";
 
-import { API_URL } from '../constants/API_URL';
-
 // Servicios
+import { EntityService } from "./entity.service";
 import { HttpCommonService } from "./http-common.service";
 
 // Modelos
@@ -17,15 +16,23 @@ import { Department } from "../models/department.model";
 @Injectable({
   providedIn: 'root'
 })
-export class DepartmentService {
-  /** URL base de la API. */
-  public url: string;
+export class DepartmentService extends EntityService<Department> {
+  /** Endpoint de la API. */
+  public endpoint = 'departments/departments/';
 
   constructor(
-    private http: HttpClient,
-    private httpCommonService: HttpCommonService,
+    http: HttpClient,
+    httpCommonService: HttpCommonService,
   ) {
-    this.url = API_URL.url + 'departments/departments/';
+    super(http, httpCommonService);
+  }
+
+  /**
+   * Obtiene la URL del endpoint.
+   * @returns La URL del endpoint.
+   */
+  public getEndpoint(): string {
+    return this.endpoint;
   }
 
   /**
@@ -37,7 +44,7 @@ export class DepartmentService {
     const headers = this.httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
-    return this.http.get<Department>(this.url + id + '/', httpOptions);
+    return this.http.get<Department>(`${this.url}${this.endpoint}${id}/`, httpOptions);
   }
 
   /**
@@ -72,7 +79,7 @@ export class DepartmentService {
       params = params.set('search', searchTerm);
     }
 
-    return this.http.get<any>(this.url, { params, ...httpOptions });
+    return this.http.get<any>(`${this.url}${this.endpoint}`, { params, ...httpOptions });
   }
 
   /**
@@ -86,7 +93,7 @@ export class DepartmentService {
 
     let params = JSON.stringify(department);
 
-    return this.http.post<any>(this.url, params, httpOptions);
+    return this.http.post<any>(`${this.url}${this.endpoint}`, params, httpOptions);
   }
 
   /**
@@ -100,7 +107,7 @@ export class DepartmentService {
 
     let params = JSON.stringify(department);
 
-    return this.http.put<any>(this.url + department.id + '/', params, httpOptions);
+    return this.http.put<any>(`${this.url}${this.endpoint}${department.id}/`, params, httpOptions);
   }
 
   /**
@@ -112,7 +119,7 @@ export class DepartmentService {
     const headers = this.httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
-    return this.http.delete<any>(this.url + id + '/', httpOptions);
+    return this.http.delete<any>(`${this.url}${this.endpoint}${id}/`, httpOptions);
   }
 
   /**
@@ -124,6 +131,6 @@ export class DepartmentService {
     const headers = this.httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
-    return this.http.patch<any>(this.url + id + '/activate/', {}, httpOptions);
+    return this.http.patch<any>(`${this.url}${this.endpoint}${id}/activate/`, {}, httpOptions);
   }
 }
