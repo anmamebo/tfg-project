@@ -46,6 +46,11 @@ export interface entityData {
   numItems: number,
   /** Número de resultados por página. */
   numResults: number,
-  /** Término de búsqueda. */
-  search: string,
+  /** Configuración de búsqueda. */
+  search: {
+    /** Indica si se mostrará la barra de búsqueda. */
+    hasSearch: boolean,
+    /** Texto de búsqueda. */
+    search?: string,
+  }
 }
