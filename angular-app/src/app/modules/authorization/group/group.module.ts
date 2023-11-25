@@ -9,6 +9,7 @@ import { PaginationModule } from "src/app/shared/components/pagination/paginatio
 import { GenericPageModule } from "src/app/shared/components/generic-page/generic-page.module";
 import { GenericCardModule } from "src/app/shared/components/generic-card/generic-card.module";
 import { FormErrorsModule } from "src/app/shared/components/form-errors/form-errors.module";
+import { GenericListCardModule } from "src/app/shared/components/generic-list-card/generic-list-card.module";
 
 // Componentes páginas
 import { GroupPageComponent } from "./pages/group-page/group-page.component";
@@ -17,7 +18,6 @@ import { GroupViewPageComponent } from './pages/group-view-page/group-view-page.
 
 // Componentes tarjetas
 import { CreateGroupCardComponent } from "./components/create-group-card/create-group-card.component";
-import { ListGroupCardComponent } from "./components/list-group-card/list-group-card.component";
 import { EditGroupCardComponent } from "./components/edit-group-card/edit-group-card.component";
 import { ViewGroupCardComponent } from './components/view-group-card/view-group-card.component';
 
@@ -25,7 +25,6 @@ import { ViewGroupCardComponent } from './components/view-group-card/view-group-
   declarations: [
     GroupPageComponent,
     CreateGroupCardComponent,
-    ListGroupCardComponent,
     GroupEditPageComponent,
     EditGroupCardComponent,
     GroupViewPageComponent,
@@ -39,7 +38,8 @@ import { ViewGroupCardComponent } from './components/view-group-card/view-group-
     PaginationModule,
     GenericPageModule,
     GenericCardModule,
-    FormErrorsModule
+    FormErrorsModule,
+    GenericListCardModule,
   ]
 })
 export class GroupModule { }

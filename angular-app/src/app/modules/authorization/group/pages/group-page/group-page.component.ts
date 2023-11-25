@@ -2,8 +2,14 @@ import { Component, ViewChild } from '@angular/core';
 
 import { breadcrumbGroupData } from "src/app/core/constants/breadcrumb-data";
 
+// Servicios
+import { GroupService } from "src/app/core/services/group.service";
+
+// Modelos
+import { entityData } from 'src/app/core/models/entityData.model';
+
 // Componentes
-import { ListGroupCardComponent } from "../../components/list-group-card/list-group-card.component";
+import { GenericListCardComponent } from "src/app/shared/components/generic-list-card/generic-list-card.component";
 
 
 /**
@@ -24,15 +30,49 @@ export class GroupPageComponent {
   /** Datos para el componente `app-breadcrumb`. */
   public breadcrumbData = breadcrumbGroupData;
 
-  /** Referencia al componente hijo `ListGroupCardComponent`. */
-  @ViewChild(ListGroupCardComponent) listGroupCardComponent!: ListGroupCardComponent;
+  /** Datos de la entidad. */
+  public entityData: entityData;
 
-  constructor() { }
+  /** Referencia al componente hijo `ListGroupCardComponent`. */
+  @ViewChild(GenericListCardComponent) listGroupCardComponent!: GenericListCardComponent;
+
+  constructor(
+    private groupService: GroupService,
+  ) {
+    this.entityData = {
+      title: 'Listado de Grupos',
+      entityPlural: 'Grupos',
+      entitySingular: 'Grupo',
+      columns: [
+        { header: 'ID', field: 'id' },  
+        { header: 'NOMBRE', field: 'name' },  
+      ],
+      create: {
+        hasCreate: false,
+      },
+      actions: {
+        hasActions: true,
+        actions: {
+          show: '/autorizacion/grupos',
+          edit: '/autorizacion/grupos/editar',
+        }
+      },
+      service: this.groupService,
+      items: null,
+      page: 1,
+      totalPages: 1,
+      numItems: 0,
+      numResults: 10,
+      search: {
+        hasSearch: false,
+      }
+    };
+  }
 
   /**
    * Actualiza la lista de grupos.
    */
   updateGroupList(): void {
-    this.listGroupCardComponent.getGroups(this.listGroupCardComponent.page);
+    this.listGroupCardComponent.getItems(this.entityData.page);
   }
 }

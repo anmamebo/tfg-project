@@ -11,6 +11,7 @@ import { GenericTableModule } from "src/app/shared/components/generic-table/gene
 import { ElementsPerPageModule } from "src/app/shared/components/elements-per-page/elements-per-page.module";
 import { PaginationModule } from "src/app/shared/components/pagination/pagination.module";
 import { FormErrorsModule } from "src/app/shared/components/form-errors/form-errors.module";
+import { GenericListCardModule } from "src/app/shared/components/generic-list-card/generic-list-card.module";
 
 // Módulos de terceros
 import { NgMultiSelectDropDownModule } from "ng-multiselect-dropdown";
@@ -22,7 +23,6 @@ import { DoctorsEditPageComponent } from './pages/doctors-edit-page/doctors-edit
 import { DoctorsCreatePageComponent } from './pages/doctors-create-page/doctors-create-page.component';
 
 // Componentes tarjetas
-import { ListDoctorsCardComponent } from './components/list-doctors-card/list-doctors-card.component';
 import { ViewBasicInfoDoctorsCardComponent } from './components/view-basic-info-doctors-card/view-basic-info-doctors-card.component';
 import { ViewContactInfoDoctorsCardComponent } from './components/view-contact-info-doctors-card/view-contact-info-doctors-card.component';
 import { EditBasicInfoDoctorsCardComponent } from './components/edit-basic-info-doctors-card/edit-basic-info-doctors-card.component';
@@ -34,7 +34,6 @@ import { ButtonsDoctorsCardComponent } from './components/buttons-doctors-card/b
 @NgModule({
   declarations: [
     DoctorsPageComponent,
-    ListDoctorsCardComponent,
     DoctorsViewPageComponent,
     ViewBasicInfoDoctorsCardComponent,
     ViewContactInfoDoctorsCardComponent,
@@ -58,6 +57,7 @@ import { ButtonsDoctorsCardComponent } from './components/buttons-doctors-card/b
     PaginationModule,
     FormErrorsModule,
     NgMultiSelectDropDownModule.forRoot(),
+    GenericListCardModule,
   ]
 })
 export class DoctorsModule { }

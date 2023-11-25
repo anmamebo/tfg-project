@@ -10,18 +10,18 @@ import { GenericPageModule } from "src/app/shared/components/generic-page/generi
 import { GenericCardModule } from "src/app/shared/components/generic-card/generic-card.module";
 import { SearchModule } from "src/app/shared/components/search/search.module";
 import { ElementsPerPageModule } from "src/app/shared/components/elements-per-page/elements-per-page.module";
+import { GenericListCardModule } from "src/app/shared/components/generic-list-card/generic-list-card.module";
 
 // Componentes páginas
 import { PermissionPageComponent } from "./pages/permission-page/permission-page.component";
 
 // Componentes tarjetas
-import { ListPermissionCardComponent } from './components/list-permission-card/list-permission-card.component';
+
 
 
 @NgModule({
   declarations: [
     PermissionPageComponent,
-    ListPermissionCardComponent
   ],
   imports: [
     CommonModule,
@@ -32,7 +32,8 @@ import { ListPermissionCardComponent } from './components/list-permission-card/l
     GenericPageModule,
     GenericCardModule,
     SearchModule,
-    ElementsPerPageModule
+    ElementsPerPageModule,
+    GenericListCardModule,
   ]
 })
 export class PermissionModule { }

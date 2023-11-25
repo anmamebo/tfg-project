@@ -2,6 +2,12 @@ import { Component } from '@angular/core';
 
 import { breadcrumbDoctorsData } from "src/app/core/constants/breadcrumb-data";
 
+// Servicios
+import { DoctorService } from "src/app/core/services/doctor.service";
+
+// Modelos
+import { entityData } from 'src/app/core/models/entityData.model';
+
 
 /**
  * Componente para la página de doctores.
@@ -21,5 +27,45 @@ export class DoctorsPageComponent {
   /** Datos para el componente `app-breadcrumb`. */
   public breadcrumbData = breadcrumbDoctorsData
 
-  constructor() { }
+  /** Datos de la entidad. */
+  public entityData: entityData;
+
+  constructor(
+    private doctorService: DoctorService,
+  ) { 
+    this.entityData = {
+      title: 'Listado de Médicos',
+      entityPlural: 'Médicos',
+      entitySingular: 'Médico',
+      columns: [
+        { header: 'Nº COLEGIADO', field: 'collegiate_number' },
+        { header: 'NOMBRE', field: 'user.name' },
+        { header: 'APELLIDOS', field: 'user.last_name' },
+        { header: 'EMAIL', field: 'user.email' },
+      ],
+      create: {
+        hasCreate: true,
+        createText: 'Alta Médico',
+        create: '/medicos/crear',
+      },
+      actions: {
+        hasActions: true,
+        actions: {
+          show: '/medicos',
+          edit: '/medicos/editar',
+        }
+      },
+      service: this.doctorService,
+      items: null,
+      page: 1,
+      totalPages: 1,
+      numItems: 0,
+      numResults: 10,
+      search: {
+        hasSearch: true,
+        search: '',
+      },
+    };
+  }
+
 }

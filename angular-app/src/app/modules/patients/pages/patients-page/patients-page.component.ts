@@ -63,7 +63,10 @@ export class PatientsPageComponent {
       totalPages: 1,
       numItems: 0,
       numResults: 10,
-      search: '',
+      search: {
+        hasSearch: true,
+        search: '',
+      },
     };
   }
 }
