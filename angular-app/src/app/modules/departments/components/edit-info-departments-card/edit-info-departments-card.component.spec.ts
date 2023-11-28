@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
-import { DepartmentsPageComponent } from './departments-page.component';
+import { EditInfoDepartmentsCardComponent } from './edit-info-departments-card.component';
 
-describe('DepartmentsPageComponent', () => {
-  let component: DepartmentsPageComponent;
-  let fixture: ComponentFixture<DepartmentsPageComponent>;
+describe('EditInfoDepartmentsCardComponent', () => {
+  let component: EditInfoDepartmentsCardComponent;
+  let fixture: ComponentFixture<EditInfoDepartmentsCardComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [DepartmentsPageComponent],
+      declarations: [EditInfoDepartmentsCardComponent],
       imports: [HttpClientTestingModule],
     });
-    fixture = TestBed.createComponent(DepartmentsPageComponent);
+    fixture = TestBed.createComponent(EditInfoDepartmentsCardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

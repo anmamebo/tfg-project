@@ -20,7 +20,7 @@
       <div class="col-lg-6">
         <div class="form-group">
           <label for="description">Descripción</label>
-          <input type="text" class="form-control" id="description" [attr.readonly]="true" [value]="department?.description">
+          <textarea  class="form-control" id="description" [attr.readonly]="true" rows="3">{{ department?.description }}</textarea>
         </div>
       </div>
 

@@ -1,0 +1,17 @@
+<app-generic-page [pageTitle]="pageTitle" [pageDescription]="pageDescription" [breadcrumbData]="breadcrumbData">
+  <div class="page-content">
+
+    <ng-container *ngIf="department">
+    
+      <section class="section">
+        <div class="row">
+          <div class="col-md-12">
+            <app-edit-info-departments-card [department]="department"></app-edit-info-departments-card>
+          </div>
+        </div>
+      </section>
+
+    </ng-container>
+
+  </div>
+</app-generic-page>
