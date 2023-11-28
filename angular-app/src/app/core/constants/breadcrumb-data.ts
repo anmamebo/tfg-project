@@ -122,3 +122,24 @@ export const breadcrumbRoomsData = [
   { label: 'Panel Principal', url: '/'},
   { label: 'Salas', url: ''}
 ]
+
+// Salas crear
+export const breadcrumbRoomsCreateData = [
+  { label: 'Panel Principal', url: '/'},
+  { label: 'Salas', url: '/salas'},
+  { label: 'Crear sala', url: ''}
+]
+
+// Salas editar
+export const breadcrumbRoomsEditData = [
+  { label: 'Panel Principal', url: '/'},
+  { label: 'Salas', url: '/salas'},
+  { label: 'Editar sala', url: ''}
+]
+
+// Salas ver
+export const breadcrumbRoomsViewData = [
+  { label: 'Panel Principal', url: '/'},
+  { label: 'Salas', url: '/salas'},
+  { label: 'Ver sala', url: ''}
+]

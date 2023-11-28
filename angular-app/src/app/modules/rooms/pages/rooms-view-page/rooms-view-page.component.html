@@ -1,0 +1,24 @@
+<app-generic-page [pageTitle]="pageTitle" [pageDescription]="pageDescription" [breadcrumbData]="breadcrumbData">
+  <div class="page-content">
+
+    <ng-container *ngIf="room">
+
+      <section class="section">
+        <app-buttons-rooms-card [roomId]="room.id" [isActive]="room.is_available!" (refreshRoom)="onRefreshRoom()"></app-buttons-rooms-card>
+      </section>
+
+      <section class="section">
+        <div class="row">
+          <div class="col-12">
+
+            <app-view-info-rooms-card [room]="room"></app-view-info-rooms-card>
+
+          </div>
+        </div>
+      </section>
+
+    </ng-container>
+
+
+  </div>
+</app-generic-page>

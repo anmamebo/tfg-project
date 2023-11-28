@@ -1,0 +1,67 @@
+
+<app-generic-card [title]="titleCard">
+  <div class="card-content">
+
+    <div class="row">
+      
+      <div class="col-lg-1 col-md-3">
+        <div class="form-group">
+          <label for="id">ID</label>
+          <input type="text" class="form-control" id="id" [attr.readonly]="true" [value]="room?.id">
+        </div>
+      </div>
+
+      <div class="col-lg-5 col-md-9">
+        <div class="form-group">
+          <label for="name">Nombre</label>
+          <input type="text" class="form-control" id="name" [attr.readonly]="true" [value]="room?.name">
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <div class="form-group">
+          <label for="description">Descripción</label>
+          <textarea  class="form-control" id="description" [attr.readonly]="true" rows="3">{{ room?.description }}</textarea>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="capacity">Capacidad</label>
+          <input type="text" class="form-control" id="capacity" [attr.readonly]="true" [value]="room?.capacity">
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="is_available">Disponibilidad</label>
+          <br>
+          <span class="badge" [ngClass]="{ 'bg-light-success': room?.is_available, 'bg-light-danger': !room?.is_available}">{{ room?.is_available ? 'Disponible' : 'No disponible' }}</span>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="type">Tipo</label>
+          <input type="text" class="form-control" id="type" [attr.readonly]="true" [value]="room?.type">
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="location">Localización</label>
+          <input type="text" class="form-control" id="location" [attr.readonly]="true" [value]="room?.location">
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="department">Departamento</label>
+          <input type="text" class="form-control" id="department" [attr.readonly]="true" [value]="room?.department?.name">
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</app-generic-card>

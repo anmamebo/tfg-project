@@ -41,6 +41,8 @@ export class RoomsPageComponent {
       columns: [
         { header: 'NOMBRE', field: 'name' },
         { header: 'DESCRIPCIÓN', field: 'description' },
+        { header: 'DEPARTAMENTO', field: 'department.name' },
+        { header: 'LOCALIZACIÓN', field: 'location'}
       ],
       create: {
         hasCreate: true,
