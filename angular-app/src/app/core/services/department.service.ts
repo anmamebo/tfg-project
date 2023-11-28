@@ -55,7 +55,7 @@ export class DepartmentService extends EntityService<Department> {
     const headers = this.httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
-    return this.http.get<any>(this.url, httpOptions);
+    return this.http.get<any>(`${this.url}${this.endpoint}`, httpOptions);
   }
 
   /**
