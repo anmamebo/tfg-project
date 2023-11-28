@@ -15,7 +15,7 @@ import { Department } from "src/app/core/models/department.model";
   templateUrl: './departments-edit-page.component.html',
   styleUrls: ['./departments-edit-page.component.scss']
 })
-export class DepartmentsEditPageComponent {
+export class DepartmentsEditPageComponent implements OnInit {
   /** Título de la página. */
   public pageTitle: string = 'Editar departamento';
 
