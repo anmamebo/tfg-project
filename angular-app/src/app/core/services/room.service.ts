@@ -36,6 +36,18 @@ export class RoomService extends EntityService<Room> {
   }
 
   /**
+   * Obtiene una sala por su identificador.
+   * @param id El identificador de la sala.
+   * @returns Un observable que emite un objeto `Room`.
+   */
+  public getRoomById(id: number): Observable<Room> {
+    const headers = this.httpCommonService.getCommonHeaders();
+    const httpOptions = { headers };
+
+    return this.http.get<Room>(`${this.url}${this.endpoint}${id}/`, httpOptions);
+  }
+  
+  /**
    * Obtiene listado de salas de un departamento.
    * @param id ID del departamento.
    * @param page página actual.
@@ -57,5 +69,57 @@ export class RoomService extends EntityService<Room> {
     }
 
     return this.http.get<any>(`${this.url}${this.endpoint}rooms_by_department`, { params, ...httpOptions });
+  }
+
+  /**
+   * Crea una sala.
+   * @param room El objeto `Room` con los datos a crear.
+   * @returns Un observable que emite un objeto `any`.
+   */
+  public createRoom(room: Room): Observable<any> {
+    const headers = this.httpCommonService.getCommonHeaders();
+    const httpOptions = { headers };
+
+    let params = JSON.stringify(room);
+
+    return this.http.post(`${this.url}${this.endpoint}`, params, httpOptions);
+  }
+
+  /**
+   * Actualiza una sala.
+   * @param room El objeto `Room` con los datos actualizados.
+   * @returns Un observable que emite un objeto `any`.
+   */
+  public updateRoom(room: Room): Observable<any> {
+    const headers = this.httpCommonService.getCommonHeaders();
+    const httpOptions = { headers };
+
+    let params = JSON.stringify(room);
+
+    return this.http.put(`${this.url}${this.endpoint}${room.id}/`, params, httpOptions);
+  }
+
+  /**
+   * Elimina una sala.
+   * @param id El identificador de la sala.
+   * @returns Un observable que emite un objeto `any`.
+   */
+  public deleteRoom(id: string): Observable<any> {
+    const headers = this.httpCommonService.getCommonHeaders();
+    const httpOptions = { headers };
+
+    return this.http.delete(`${this.url}${this.endpoint}${id}/`, httpOptions);
+  }
+
+  /**
+   * Activa una sala.
+   * @param id El identificador de la sala.
+   * @returns Un observable que emite un objeto `any`.
+   */
+  public activateRoom(id: string): Observable<any> {
+    const headers = this.httpCommonService.getCommonHeaders();
+    const httpOptions = { headers };
+
+    return this.http.put(`${this.url}${this.endpoint}${id}/activate/`, {}, httpOptions);
   }
 }
