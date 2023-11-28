@@ -35,6 +35,12 @@ export class FormErrorsComponent {
           case 'maxlength':
             errors.push(`Máx. ${this.control?.errors?.['maxlength']?.requiredLength} caracteres, actual ${this.control?.errors?.['maxlength']?.actualLength}.`);
             break;
+          case 'max':
+            errors.push(`Valor máximo ${this.control?.errors?.['max']?.max}.`);
+            break;
+          case 'min':
+            errors.push(`Valor mínimo ${this.control?.errors?.['min']?.min}.`);
+            break;
           case 'email':
             errors.push('Email inválido.');
             break;
