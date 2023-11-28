@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { GroupPageComponent } from './group-page.component';
 
@@ -8,7 +9,8 @@ describe('GroupPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ GroupPageComponent ]
+      declarations: [ GroupPageComponent ],
+      imports: [HttpClientTestingModule],
     })
     .compileComponents();
   });
