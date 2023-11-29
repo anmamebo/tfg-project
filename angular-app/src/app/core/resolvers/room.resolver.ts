@@ -13,7 +13,7 @@ export const roomResolver: ResolveFn<any> = (
 ): Observable<any> => {
   
   const roomId = route.params['id'];
-  return roomService.getRoomById(roomId)
+  return roomService.getItemById(roomId)
     .pipe(
       map(room => {
         if (room) {

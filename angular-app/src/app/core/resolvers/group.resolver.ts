@@ -13,7 +13,7 @@ export const groupResolver: ResolveFn<any> = (
 ): Observable<any> => {
   
   const groupId = route.params['id'];
-  return groupService.getGroupById(groupId)
+  return groupService.getItemById(groupId)
     .pipe(
       map(group => {
         if (group) {

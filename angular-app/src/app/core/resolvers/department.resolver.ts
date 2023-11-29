@@ -13,7 +13,7 @@ export const departmentResolver: ResolveFn<any> = (
 ): Observable<any> => {
   
   const departmentId = route.params['id'];
-  return departmentService.getDepartmentById(departmentId)
+  return departmentService.getItemById(departmentId)
     .pipe(
       map(department => {
         if (department) {

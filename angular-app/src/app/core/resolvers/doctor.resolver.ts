@@ -13,7 +13,7 @@ export const doctorResolver: ResolveFn<any> = (
 ): Observable<any> => {
   
   const doctorId = route.params['id'];
-  return doctorService.getDoctorById(doctorId)
+  return doctorService.getItemById(doctorId)
     .pipe(
       map(doctor => {
         if (doctor) {
