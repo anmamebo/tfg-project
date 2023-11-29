@@ -73,14 +73,66 @@ export abstract class EntityService<T> {
   }
 
   /**
+   * Obtiene un elemento de la entidad.
+   * @param id El identificador del elemento.
+   * @returns Un observable que emite un objeto `any`.
+   */
+  public getItemById(id: string): Observable<T> {
+    const headers = this.httpCommonService.getCommonHeaders();
+    const httpOptions = { headers };
+
+    return this.http.get<any>(`${this.url}${this.getEndpoint()}${id}/`, httpOptions);
+  }
+
+  /**
+   * Crea un elemento de la entidad.
+   * @param item El objeto con los datos del elemento.
+   * @returns Un observable que emite un objeto `any`.
+   */
+  public create(item: T): Observable<any> {
+    const headers = this.httpCommonService.getCommonHeaders();
+    const httpOptions = { headers };
+
+    let params = JSON.stringify(item);
+
+    return this.http.post(`${this.url}${this.getEndpoint()}`, params, httpOptions);
+  }
+
+  /**
+   * Actualiza un elemento de la entidad.
+   * @param item El objeto con los datos del elemento.
+   * @returns Un observable que emite un objeto `any`.
+   */
+  public update(id: string, item: T): Observable<any> {
+    const headers = this.httpCommonService.getCommonHeaders();
+    const httpOptions = { headers };
+
+    let params = JSON.stringify(item);
+
+    return this.http.put(`${this.url}${this.getEndpoint()}${id}/`, params, httpOptions);
+  }
+
+  /**
    * Elimina un elemento de la entidad.
    * @param id El identificador del elemento.
    * @returns Un observable que emite un objeto `any`.
    */
-  public delete(id: number): Observable<any> {
+  public delete(id: string): Observable<any> {
     const headers = this.httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
     return this.http.delete(`${this.url}${this.getEndpoint()}${id}/`, httpOptions)
+  }
+
+  /**
+   * Activa un elemento de la entidad.
+   * @param id El identificador del elemento.
+   * @returns Un observable que emite un objeto `any`.
+   */
+  public activate(id: string): Observable<any> {
+    const headers = this.httpCommonService.getCommonHeaders();
+    const httpOptions = { headers };
+
+    return this.http.put(`${this.url}${this.getEndpoint()}${id}/activate/`, {}, httpOptions);
   }
 }
