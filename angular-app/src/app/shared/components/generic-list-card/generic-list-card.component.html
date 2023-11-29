@@ -14,7 +14,7 @@
       </div>
     </div>
 
-    <ng-container *ngIf="entityData.items">
+    <ng-container *ngIf="entityData.items; else notItems">
     
       <app-generic-table 
         [stripped]="true" 
@@ -41,6 +41,10 @@
       </app-pagination>
 
     </ng-container>
+
+    <ng-template #notItems>
+      <app-loading-spinner></app-loading-spinner>
+    </ng-template>
 
   </div>
 </app-generic-card>
