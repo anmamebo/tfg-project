@@ -34,7 +34,9 @@ export class DoctorsPageComponent {
     private doctorService: DoctorService,
   ) { 
     this.entityData = {
-      title: 'Listado de Médicos',
+      title: {
+        hasTitle: false,
+      },
       entityPlural: 'Médicos',
       entitySingular: 'Médico',
       columns: [

@@ -34,7 +34,9 @@ export class DepartmentsPageComponent {
     private departmentService: DepartmentService,
   ) { 
     this.entityData = {
-      title: 'Listado de Departamentos',
+      title: {
+        hasTitle: false,
+      },
       entityPlural: 'Departamentos',
       entitySingular: 'Departamento',
       columns: [

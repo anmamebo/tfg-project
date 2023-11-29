@@ -35,7 +35,9 @@ export class RoomsPageComponent {
     private roomService: RoomService,
   ) {
     this.entityData = {
-      title: 'Listado de Salas',
+      title: {
+        hasTitle: false,
+      },
       entityPlural: 'Salas',
       entitySingular: 'Sala',
       columns: [

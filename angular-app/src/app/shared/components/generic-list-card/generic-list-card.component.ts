@@ -23,7 +23,9 @@ export class GenericListCardComponent implements OnInit {
     private notificationService: NotificationService,
   ) {
     this.entityData = {
-      title: '',
+      title: {
+        hasTitle: false,
+      },
       entityPlural: '',
       entitySingular: '',
       columns: [],

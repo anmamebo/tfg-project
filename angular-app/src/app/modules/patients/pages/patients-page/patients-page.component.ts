@@ -34,7 +34,9 @@ export class PatientsPageComponent {
     private patientService: PatientService,
   ) {
     this.entityData = {
-      title: 'Listado de Pacientes',
+      title: {
+        hasTitle: false,
+      },
       entityPlural: 'Pacientes',
       entitySingular: 'Paciente',
       columns: [

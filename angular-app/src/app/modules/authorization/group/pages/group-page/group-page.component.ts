@@ -40,7 +40,9 @@ export class GroupPageComponent {
     private groupService: GroupService,
   ) {
     this.entityData = {
-      title: 'Listado de Grupos',
+      title: {
+        hasTitle: false,
+      },
       entityPlural: 'Grupos',
       entitySingular: 'Grupo',
       columns: [

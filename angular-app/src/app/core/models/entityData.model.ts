@@ -6,7 +6,12 @@ import { EntityService } from "src/app/core/services/entity.service";
  */
 export interface entityData {
   /** Título de la entidad. */
-  title: string,
+  title: {
+    /** Indica si se mostrará el título. */
+    hasTitle: boolean,
+    /** Texto del título. */
+    title?: string,
+  },
   /** Nombre de la entidad en plural. */
   entityPlural: string,
   /** Nombre de la entidad en singular. */

@@ -34,7 +34,9 @@ export class PermissionPageComponent {
     private permissionService: PermissionService,
   ) {
     this.entityData = {
-      title: 'Listado de Permisos',
+      title: {
+        hasTitle: false,
+      },
       entityPlural: 'Permisos',
       entitySingular: 'Permiso',
       columns: [
