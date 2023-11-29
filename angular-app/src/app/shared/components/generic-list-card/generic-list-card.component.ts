@@ -106,7 +106,7 @@ export class GenericListCardComponent implements OnInit {
    */
   public delete(id: string): void {
     this.notificationService.showConfirmDeleteDialog(() => {
-      this.entityData.service?.delete(+id).subscribe({
+      this.entityData.service?.delete(id).subscribe({
         next: () => {
           this.getItems(this.entityData.page);
         },

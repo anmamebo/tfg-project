@@ -131,7 +131,7 @@ export class CreatePatientsCardComponent implements OnInit {
       }
     }
 
-    this.patientService.createPatient(patient).subscribe({
+    this.patientService.create(patient).subscribe({
       next: (data) => {
         this.createPatientForm.reset();
         this.submitted = false;

@@ -98,7 +98,7 @@ export class CreateDoctorsCardComponent implements OnInit {
       departments: this.form.value.departments.map((item: {item_id: String, item_text: String}) => item.item_id),
     };
     
-    this.doctorService.createDoctor(doctor).subscribe({
+    this.doctorService.create(doctor).subscribe({
       next: (data) => {
         this.form.reset();
         this.submitted = false;
@@ -131,7 +131,7 @@ export class CreateDoctorsCardComponent implements OnInit {
    * Obtiene los departamentos.
    */
   public getDepartments() {
-    this.departmentService.getDepartments().subscribe({
+    this.departmentService.getItems().subscribe({
       next: (data) => {
         this.departments = data.map((item: {id: String, name: String}) => ({
           item_id: item.id,

@@ -45,7 +45,7 @@ export class DepartmentsViewPageComponent implements OnInit {
    * Actualiza los datos del departamento
    */
   onRefreshDepartment(): void {
-    this.departmentService.getDepartmentById(+this.department!.id).subscribe({
+    this.departmentService.getItemById(this.department!.id).subscribe({
       next: (department: Department) => {
         this.department = department;
       },

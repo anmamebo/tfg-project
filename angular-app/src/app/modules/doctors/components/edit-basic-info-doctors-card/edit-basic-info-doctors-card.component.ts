@@ -113,7 +113,7 @@ export class EditBasicInfoDoctorsCardComponent implements OnInit {
       departments: this.form.value.departments.map((item: {item_id: String, item_text: String}) => item.item_id),
     }
 
-    this.doctorService.updateDoctor(updatedData).subscribe({
+    this.doctorService.update(this.doctor!.id, updatedData).subscribe({
       next: (data) => {
         this.submitted = false;
         this.notificationService.showSuccessToast(data.message);
@@ -145,7 +145,7 @@ export class EditBasicInfoDoctorsCardComponent implements OnInit {
    * Obtiene los departamentos.
    */
   public getDepartments() {
-    this.departmentService.getDepartments().subscribe({
+    this.departmentService.getItems().subscribe({
       next: (data) => {
         this.departments = data.map((item: {id: String, name: String}) => ({
           item_id: item.id,

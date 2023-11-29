@@ -58,10 +58,10 @@ export class EditGroupCardComponent implements OnInit {
 
     const groupEdited: Group = new Group(
       this.group.id,
-      this.form.value.name  
+      this.form.value.name
     );
 
-    this.groupService.updateGroup(groupEdited).subscribe({
+    this.groupService.update(this.group.id, groupEdited).subscribe({
       next: (data) => {
         this.submitted = false;
         this.notificationService.showSuccessToast(data.message);

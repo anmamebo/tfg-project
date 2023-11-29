@@ -84,7 +84,7 @@ export class PatientInfoCardComponent implements OnInit {
       this.form.value.social_security
     );
 
-    this.patientService.updatePatient(updatePatient).subscribe({
+    this.patientService.update(this.patient.id, updatePatient).subscribe({
       next: (data) => {
         this.submitted = false;
         this.updatedPatientEvent.emit();

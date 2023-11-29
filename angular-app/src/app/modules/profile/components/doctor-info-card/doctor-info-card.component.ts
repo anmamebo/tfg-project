@@ -69,7 +69,7 @@ export class DoctorInfoCardComponent implements OnInit {
       this.doctor.user,
     );
     
-    this.doctorService.updateDoctor(updateDoctor).subscribe({
+    this.doctorService.update(this.doctor.id, updateDoctor).subscribe({
       next: (data) => {
         this.submitted = false;
         this.notificationService.showSuccessToast(data.message);

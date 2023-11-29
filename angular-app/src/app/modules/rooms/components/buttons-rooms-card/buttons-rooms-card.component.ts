@@ -36,7 +36,7 @@ export class ButtonsRoomsCardComponent {
   public deleteRoom(id: string): void {
     this.notificationService.showConfirmDeleteDialog(() => {
 
-      this.roomService.deleteRoom(id).subscribe({
+      this.roomService.delete(id).subscribe({
         next: () => {
           this.refreshRoom.emit();
         },
@@ -54,7 +54,7 @@ export class ButtonsRoomsCardComponent {
   public activateRoom(id: string): void {
     this.notificationService.showConfirmReactivateDialog(() => {
 
-      this.roomService.activateRoom(id).subscribe({
+      this.roomService.activate(id).subscribe({
         next: () => {
           this.refreshRoom.emit();
         },

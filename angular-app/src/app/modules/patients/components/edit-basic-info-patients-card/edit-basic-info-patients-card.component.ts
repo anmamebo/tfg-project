@@ -86,7 +86,7 @@ export class EditBasicInfoPatientsCardComponent implements OnInit {
       }
     }
 
-    this.patientService.updatePatient(updatedData).subscribe({
+    this.patientService.update(this.patient!.id, updatedData).subscribe({
       next: (data) => {
         this.submitted = false;
         this.notificationService.showSuccessToast(data.message);

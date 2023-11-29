@@ -103,7 +103,7 @@ export class EditInfoRoomsCardComponent implements OnInit {
       department: this.form.value.department[0].item_id,
     };
 
-    this.roomService.updateRoom(updatedData).subscribe({
+    this.roomService.update(this.room!.id, updatedData).subscribe({
       next: (data: any) => {
         this.submitted = false;
         this.notificationService.showSuccessToast(data.message);
@@ -118,7 +118,7 @@ export class EditInfoRoomsCardComponent implements OnInit {
    * Obtiene los departamentos.
    */
   public getDepartments() {
-    this.departmentService.getDepartments().subscribe({
+    this.departmentService.getItems().subscribe({
       next: (data) => {
         this.departments = data.map((item: {id: String, name: String}) => ({
           item_id: item.id,

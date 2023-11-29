@@ -67,7 +67,7 @@ export class EditContactInfoDoctorsCardComponent implements OnInit {
       }
     };
 
-    this.doctorService.updateDoctor(updatedData).subscribe({
+    this.doctorService.update(this.doctor!.id, updatedData).subscribe({
       next: (data) => {
         this.submitted = false;
         this.notificationService.showSuccessToast(data.message);

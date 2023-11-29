@@ -53,7 +53,7 @@ export class CreateDepartmentsCardComponent {
       description: this.form.value.description ? this.form.value.description : null,
     };
 
-    this.departmentService.createDepartment(department).subscribe({
+    this.departmentService.create(department).subscribe({
       next: (data: any) => {
         this.form.reset();
         this.submitted = false;

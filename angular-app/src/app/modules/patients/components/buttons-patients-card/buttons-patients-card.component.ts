@@ -36,7 +36,7 @@ export class ButtonsPatientsCardComponent {
   public deletePatient(id: string): void {
     this.notificationService.showConfirmDeleteDialog(() => {
 
-      this.patientService.deletePatient(id).subscribe({
+      this.patientService.delete(id).subscribe({
         next: () => {
           this.refreshPatient.emit();
         },
@@ -54,7 +54,7 @@ export class ButtonsPatientsCardComponent {
   public activatePatient(id: string): void {
     this.notificationService.showConfirmReactivateDialog(() => {
 
-      this.patientService.activatePatient(id).subscribe({
+      this.patientService.activate(id).subscribe({
         next: () => {
           this.refreshPatient.emit();
         },

@@ -64,7 +64,7 @@ export class EditInfoDepartmentsCardComponent implements OnInit {
       description: this.form.value.description ? this.form.value.description : null,
     };
 
-    this.departmentService.updateDepartment(updatedData).subscribe({
+    this.departmentService.update(this.department!.id, updatedData).subscribe({
       next: (data: any) => {
         this.submitted = false;
         this.notificationService.showSuccessToast(data.message);

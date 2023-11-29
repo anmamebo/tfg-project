@@ -60,7 +60,7 @@ export class CreateGroupCardComponent {
     )
     
 
-    this.groupService.createGroup(group).subscribe({
+    this.groupService.create(group).subscribe({
       next: (response) => {
         this.submitted = false;
         this.notificationService.showSuccessToast(response.message);
