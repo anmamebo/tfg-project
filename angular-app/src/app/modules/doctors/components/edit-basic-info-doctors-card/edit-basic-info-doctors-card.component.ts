@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { IDropdownSettings } from "ng-multiselect-dropdown";
@@ -35,6 +35,9 @@ export class EditBasicInfoDoctorsCardComponent implements OnInit {
   
   /** Indica si se ha enviado el formulario */
   public submitted: boolean = false;
+
+  /** Evento para actualizar los datos del médico */
+  @Output() public refreshDoctor: EventEmitter<void> = new EventEmitter<void>();
   
   /** Especialidades médicas */
   public medicalSpecialties: any = [];
@@ -117,6 +120,7 @@ export class EditBasicInfoDoctorsCardComponent implements OnInit {
       next: (data) => {
         this.submitted = false;
         this.notificationService.showSuccessToast(data.message);
+        this.refreshDoctor.emit();
       },
       error: (error) => {
         this.notificationService.showErrorToast(error.message);

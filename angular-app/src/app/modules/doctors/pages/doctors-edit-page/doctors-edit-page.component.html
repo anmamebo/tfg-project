@@ -6,11 +6,11 @@
       <section class="section">
         <div class="row">
           <div class="col-lg-8">
-            <app-edit-basic-info-doctors-card [doctor]="doctor"></app-edit-basic-info-doctors-card>
+            <app-edit-basic-info-doctors-card [doctor]="doctor" (refreshDoctor)="onRefreshDoctor()"></app-edit-basic-info-doctors-card>
           </div>
 
           <div class="col-lg-4">
-            <app-edit-contact-info-doctors-card [doctor]="doctor"></app-edit-contact-info-doctors-card>
+            <app-edit-contact-info-doctors-card [doctor]="doctor" (refreshDoctor)="onRefreshDoctor()"></app-edit-contact-info-doctors-card>
           </div>
         </div>
       </section>

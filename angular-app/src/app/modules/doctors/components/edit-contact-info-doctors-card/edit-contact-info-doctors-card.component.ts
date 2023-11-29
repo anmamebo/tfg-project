@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
 // Servicios
@@ -31,6 +31,9 @@ export class EditContactInfoDoctorsCardComponent implements OnInit {
 
   /** Indica si se ha enviado el formulario */
   public submitted: boolean = false;
+
+  /** Evento para actualizar los datos del médico */
+  @Output() public refreshDoctor: EventEmitter<void> = new EventEmitter<void>();
 
   constructor(
     private formBuilder: FormBuilder,
@@ -71,6 +74,7 @@ export class EditContactInfoDoctorsCardComponent implements OnInit {
       next: (data) => {
         this.submitted = false;
         this.notificationService.showSuccessToast(data.message);
+        this.refreshDoctor.emit();
       },
       error: (error) => {
         this.notificationService.showErrorToast(error.message);

@@ -3,6 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 
 import { breadcrumbPatientsEditData } from "src/app/core/constants/breadcrumb-data";
 
+// Servicios
+import { PatientService } from "src/app/core/services/patient.service";
+
 // Modelos
 import { Patient } from "src/app/core/models/patient.model";
 
@@ -14,10 +17,11 @@ import { Patient } from "src/app/core/models/patient.model";
   selector: 'app-patients-edit-page',
   templateUrl: './patients-edit-page.component.html',
   styleUrls: ['./patients-edit-page.component.scss'],
+  providers: [PatientService],
 })
 export class PatientsEditPageComponent implements OnInit {
   /** Título de la página. */
-  public pageTitle: string = 'Editar paciente';
+  public pageTitle: string = 'Editar';
 
   /** Descripción de la página. */
   public pageDescription: string = 'Aquí puedes editar un paciente.';
@@ -30,9 +34,31 @@ export class PatientsEditPageComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private patientService: PatientService,
   ) { }
 
   ngOnInit(): void {
     this.patient = this.route.snapshot.data['data']; // Obtiene los datos del paciente desde el resolver
+    this.pageTitle += ` - ${this.patient?.user?.name} ${this.patient?.user?.last_name}`;
+  }
+
+  /**
+   * Actualiza los datos del paciente.
+   */
+  public onRefreshPatient(): void {
+    this.patientService.getItemById(this.patient!.id).subscribe({
+      next: (patient: Patient) => {
+        this.patient = patient;
+        this.refreshTitle();
+      }
+    });
+  }
+
+  /**
+   * Actualiza el título de la página.
+   */
+  private refreshTitle(): void {
+    let title = this.pageTitle.split(' - ');
+    this.pageTitle = `${title[0]} - ${this.patient?.user?.name} ${this.patient?.user?.last_name}`;
   }
 }

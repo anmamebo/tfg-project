@@ -21,7 +21,7 @@ import { Patient } from "src/app/core/models/patient.model";
 })
 export class PatientsViewPageComponent implements OnInit {
   /** Título de la página */
-  public pageTitle: string = 'Visualizar paciente';
+  public pageTitle: string = 'Visualizar';
 
   /** Descripción de la página */
   public pageDescription: string = 'Aquí puedes visualizar un paciente.';
@@ -39,6 +39,7 @@ export class PatientsViewPageComponent implements OnInit {
   
   ngOnInit(): void {
     this.patient = this.route.snapshot.data['data']; // Obtiene los datos del paciente desde el resolver
+    this.pageTitle += ` - ${this.patient?.user?.name} ${this.patient?.user?.last_name}`;
   }
 
   /**

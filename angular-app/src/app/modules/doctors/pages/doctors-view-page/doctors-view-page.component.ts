@@ -21,7 +21,7 @@ import { Doctor } from "src/app/core/models/doctor.model";
 })
 export class DoctorsViewPageComponent {
   /** Título de la página */
-  public pageTitle: string = 'Visualizar médico';
+  public pageTitle: string = 'Visualizar';
 
   /** Descripción de la página */
   public pageDescription: string = 'Aquí puedes visualizar un médico.';
@@ -37,6 +37,7 @@ export class DoctorsViewPageComponent {
     private doctorService: DoctorService,
   ) {
     this.doctor = this.route.snapshot.data['data']; // Obtiene los datos del médico desde el resolver
+    this.pageTitle += ` - ${this.doctor?.user?.name} ${this.doctor?.user?.last_name}`;
   }
 
   /**
