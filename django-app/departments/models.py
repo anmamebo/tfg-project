@@ -27,7 +27,7 @@ class Room(BaseModel):
   name = models.CharField(verbose_name='Nombre', max_length=50, unique=True)
   description = models.TextField(verbose_name='Descripción', max_length=255, blank=True, null=True)
   type = models.CharField(verbose_name='Tipo', max_length=50, blank=True, null=True)
-  location = models.CharField(verbose_name='Ubicación', max_length=50, blank=True, null=True)
+  location = models.CharField(verbose_name='Ubicación', max_length=50,)
   capacity = models.IntegerField(verbose_name='Capacidad', blank=True, null=True)
   is_available = models.BooleanField(verbose_name='Disponible', default=True)
   department = models.ForeignKey(Department, on_delete=models.CASCADE, verbose_name='Departamento', blank=True, null=True)
