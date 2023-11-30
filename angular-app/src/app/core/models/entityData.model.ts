@@ -57,5 +57,6 @@ export interface entityData {
     hasSearch: boolean,
     /** Texto de búsqueda. */
     search?: string,
-  }
+  },
+  hasStateFilter?: boolean,
 }
