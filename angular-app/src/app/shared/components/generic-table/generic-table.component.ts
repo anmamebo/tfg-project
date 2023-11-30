@@ -1,5 +1,9 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
+// Modelos
+import { SortEvent } from "src/app/core/models/sortEvent.model";
+
+
 /**
  * Componente que representa una tabla genérica.
  */
@@ -27,6 +31,15 @@ export class GenericTableComponent {
   /** Booleano que indica si se muestran las filas de forma alterna. */
   @Input() public stripped: boolean = false;
 
+  /** Columna por la que se ordena. */
+  public sortedColumn: string = '';
+
+  /** Booleano que indica si se ordena de forma inversa. */
+  public reverseSort: boolean = false;
+
+  /** Evento que se lanza al ordenar. */
+  @Output() public sortEvent: EventEmitter<any> = new EventEmitter<any>();
+
   constructor() { }
 
   /**
@@ -46,7 +59,27 @@ export class GenericTableComponent {
   }
 
   /**
-   * Emite el evento onDeleteEvent.
+   * Lanza el evento de ordenación.
+   * @param column Columna por la que se ordena.
+   */
+  public sortData(column: string): void {
+    if (this.sortedColumn === column) { // Si se ha pulsado sobre la misma columna
+        this.reverseSort = !this.reverseSort; // Invierte el orden
+    } else { // Si se ha pulsado sobre una columna diferente
+        this.sortedColumn = column; // Establece la columna por la que se ordena
+        this.reverseSort = false; // Establece el orden ascendente
+    }
+    const formattedColumn = this.sortedColumn.replace(/\./g, '__'); // Reemplaza los puntos por guiones bajos
+    const sortEvent: SortEvent = { 
+      column: formattedColumn,
+      order: this.reverseSort ? 'desc' : 'asc'
+    };
+    this.sortEvent.emit(sortEvent);
+  }
+
+  /**
+   * Lanza el evento de eliminar.
+   * @param id Id del elemento a eliminar.
    */
   public onDelete(id: number): void {
     this.onDeleteEvent.emit(id);

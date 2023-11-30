@@ -5,6 +5,7 @@ import { NotificationService } from "src/app/core/services/notification.service"
 
 // Modelos
 import { entityData } from 'src/app/core/models/entityData.model';
+import { SortEvent } from "src/app/core/models/sortEvent.model";
 
 
 /**
@@ -21,6 +22,12 @@ export class GenericListCardComponent implements OnInit {
 
   /** Filtro de estado. */
   public filterState: boolean | null = true;
+
+  /** Objeto con los datos de ordenación. */
+  public sort: SortEvent = {
+    column: '',
+    order: ''
+  };
 
   constructor(
     private notificationService: NotificationService,
@@ -65,6 +72,15 @@ export class GenericListCardComponent implements OnInit {
   }
 
   /**
+   * Ordena los elementos de la entidad.
+   * @param sortEvent Evento de ordenación.
+   */
+  public sortItems(sortEvent: SortEvent): void {
+    this.sort = sortEvent;
+    this.getItems(this.entityData.page);
+  }
+
+  /**
    * Obtiene los elementos de la entidad de la página indicada.
    * @param page Número de página.
    */
@@ -103,7 +119,7 @@ export class GenericListCardComponent implements OnInit {
       this.entityData.page = 1;
     }
 
-    this.entityData.service?.getItems(page, this.entityData.numResults, this.entityData.search.search, true, this.filterState).subscribe({
+    this.entityData.service?.getItems(page, this.entityData.numResults, this.entityData.search.search, true, this.filterState, this.sort.column, this.sort.order).subscribe({
       next: (response: any) => {
         this.entityData.items = response.results;
         this.entityData.numItems = response.count;

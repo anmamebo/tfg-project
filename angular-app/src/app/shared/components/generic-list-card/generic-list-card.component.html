@@ -32,6 +32,7 @@
         [data]="entityData.items" 
         [actions]="entityData.actions.hasActions" 
         [actionsUrls]="entityData.actions.actions"
+        (sortEvent)="sortItems($event)"
         (onDeleteEvent)="delete($event)"
       >
       </app-generic-table>

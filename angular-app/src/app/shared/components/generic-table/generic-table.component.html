@@ -3,7 +3,11 @@
       <thead>
           <tr>
               <ng-container *ngFor="let column of columns">
-                <th>{{ column.header }}</th>
+                <th (click)="sortData(column.field)" style="cursor: pointer;">
+                  {{ column.header }}
+                  <i *ngIf="column.field === sortedColumn && !reverseSort" class="bi bi-sort-up"></i>
+                  <i *ngIf="column.field === sortedColumn && reverseSort" class="bi bi-sort-down"></i>
+                </th>
               </ng-container>
               <th *ngIf="actions">ACCIÓN</th>
           </tr>
