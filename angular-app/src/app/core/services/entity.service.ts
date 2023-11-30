@@ -45,7 +45,9 @@ export abstract class EntityService<T> {
     numResults?: number,
     searchTerm?: string,
     paginated: boolean = false,
-    state?: boolean | null
+    state?: boolean | null,
+    sortBy?: string,
+    sortOrder?: string
   ): Observable<any> {
     const headers = this.httpCommonService.getCommonHeaders(); // Obtiene cabeceras comunes
     const httpOptions = { headers };
@@ -70,8 +72,12 @@ export abstract class EntityService<T> {
       params = params.set('search', searchTerm);
     }
 
-    if (state !== null && state !== undefined) {
+    if (state !== null && state !== undefined) { // Si se ha indicado un estado
       params = params.set('state', state.toString());
+    }
+
+    if (sortBy && sortOrder) { // Si se ha indicado un campo por el que ordenar
+      params = params.set('ordering', `${sortOrder === 'desc' ? '-' : ''}${sortBy}`)
     }
 
     return this.http.get<any>(`${this.url}${this.getEndpoint()}`, { params, ...httpOptions });
