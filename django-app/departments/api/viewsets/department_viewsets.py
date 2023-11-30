@@ -33,7 +33,6 @@ class DepartmentViewSet(viewsets.GenericViewSet):
   def get_queryset(self):
     if self.queryset is None:
       self.queryset = self.model.objects\
-                      .filter(state=True)\
                       .all().order_by('-created_date')
     return self.queryset
   
@@ -48,6 +47,11 @@ class DepartmentViewSet(viewsets.GenericViewSet):
         Response: La respuesta que contiene la lista de departamentos.
     """
     departments = self.get_queryset()
+    
+    state = self.request.query_params.get('state', None)
+    if state in ['true', 'false']:
+      state_boolean = state == 'true'
+      departments = departments.filter(state=state_boolean)
     
     query = self.request.query_params.get('search', None)
     if query:

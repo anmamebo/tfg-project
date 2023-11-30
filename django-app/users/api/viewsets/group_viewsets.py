@@ -46,6 +46,7 @@ class GroupViewSet(viewsets.GenericViewSet):
         Response: La respuesta que contiene la lista de grupos.
     """
     groups = self.get_queryset()
+    
     page = self.paginate_queryset(groups)
     if page is not None:
       groups_serializer = self.list_serializer_class(page, many=True)

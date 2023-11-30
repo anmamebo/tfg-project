@@ -38,7 +38,6 @@ class DoctorViewSet(viewsets.GenericViewSet):
   def get_queryset(self):
     if self.queryset is None:
       self.queryset = self.model.objects\
-                      .filter(state=True)\
                       .all().order_by('-created_date')
     return self.queryset
   
@@ -54,8 +53,12 @@ class DoctorViewSet(viewsets.GenericViewSet):
     """
     doctors = self.get_queryset()
     
-    query = self.request.query_params.get('search', None)
+    state = self.request.query_params.get('state', None)
+    if state in ['true', 'false']:
+      state_boolean = state == 'true'
+      doctors = doctors.filter(state=state_boolean)
     
+    query = self.request.query_params.get('search', None)
     if query:
       doctors = doctors.filter(
         Q(user__name__icontains=query) | Q(user__last_name__icontains=query) |
