@@ -56,6 +56,10 @@ class PermissionViewSet(viewsets.GenericViewSet):
         permissions = permissions.filter(
             Q(name__icontains=query) | Q(codename__icontains=query) | Q(content_type__model__icontains=query)
         )
+        
+    ordering = self.request.query_params.get('ordering', None)
+    if ordering:
+      permissions = permissions.order_by(ordering)
     
     page = self.paginate_queryset(permissions)
     if page is not None:

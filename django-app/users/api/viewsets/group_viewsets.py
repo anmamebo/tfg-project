@@ -47,6 +47,10 @@ class GroupViewSet(viewsets.GenericViewSet):
     """
     groups = self.get_queryset()
     
+    ordering = self.request.query_params.get('ordering', None)
+    if ordering:
+      groups = groups.order_by(ordering)
+    
     page = self.paginate_queryset(groups)
     if page is not None:
       groups_serializer = self.list_serializer_class(page, many=True)

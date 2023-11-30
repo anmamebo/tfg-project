@@ -58,6 +58,10 @@ class DepartmentViewSet(viewsets.GenericViewSet):
       departments = departments.filter(
         Q(name__icontains=query) | Q(description__icontains=query)
       )
+    
+    ordering = self.request.query_params.get('ordering', None)
+    if ordering:
+      departments = departments.order_by(ordering)
       
     paginate = self.request.query_params.get('paginate', None)
     if paginate and paginate == 'true':

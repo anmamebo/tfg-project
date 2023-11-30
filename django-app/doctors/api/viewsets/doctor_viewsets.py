@@ -64,6 +64,10 @@ class DoctorViewSet(viewsets.GenericViewSet):
         Q(user__name__icontains=query) | Q(user__last_name__icontains=query) |
         Q(user__email__icontains=query) | Q(collegiate_number__icontains=query)
       )
+      
+    ordering = self.request.query_params.get('ordering', None)
+    if ordering:
+      doctors = doctors.order_by(ordering)
     
     page = self.paginate_queryset(doctors)
     if page is not None:

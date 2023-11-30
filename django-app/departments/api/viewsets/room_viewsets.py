@@ -60,6 +60,10 @@ class RoomViewSet(viewsets.GenericViewSet):
         Q(department__name__icontains=query)
       )
     
+    ordering = self.request.query_params.get('ordering', None)
+    if ordering:
+      rooms = rooms.order_by(ordering)
+    
     paginate = self.request.query_params.get('paginate', None)
     if paginate and paginate == 'true':
       page = self.paginate_queryset(rooms)
