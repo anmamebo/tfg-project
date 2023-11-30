@@ -2,14 +2,24 @@
   <div class="card-content">
 
     <div class="row mb-3 justify-content-between">
-      <div *ngIf="entityData.create.hasCreate" class="col-md-3 col-12">
-
-        <a [routerLink]="[entityData.create.create]" class="btn btn-primary w-100">{{ entityData.create.createText }}</a>
-
-      </div>
       <div *ngIf="entityData.search.hasSearch" class="col-lg-4 col-md-6 col-12 mt-md-0 mt-3">
 
         <app-search (searchSubmitted)="onSearchSubmitted($event)"></app-search>
+
+      </div>
+      <div *ngIf="entityData.hasStateFilter" class="col-lg-5 col-md-6 mt-md-0 mt-2">
+
+        <button (click)="filterItems(null)" class="btn btn-sm btn-primary rounded-pill me-2"
+          [ngClass]="{'btn-primary': filterState === null, 'btn-outline-primary': filterState !== null}">Todos</button>
+        <button (click)="filterItems(true)" class="btn btn-sm btn-outline-primary rounded-pill me-2"
+          [ngClass]="{'btn-primary': filterState === true, 'btn-outline-primary': filterState !== true}">Activos</button>
+        <button (click)="filterItems(false)" class="btn btn-sm btn-outline-primary rounded-pill me-2"
+          [ngClass]="{'btn-primary': filterState === false, 'btn-outline-primary': filterState !== false}">Inactivos</button>
+
+      </div>
+      <div *ngIf="entityData.create.hasCreate" class="col-md-3 col-12 mt-md-0 mt-3">
+
+        <a [routerLink]="[entityData.create.create]" class="btn btn-primary w-100">{{ entityData.create.createText }}</a>
 
       </div>
     </div>

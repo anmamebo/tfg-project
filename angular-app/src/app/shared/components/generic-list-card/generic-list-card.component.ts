@@ -19,6 +19,9 @@ export class GenericListCardComponent implements OnInit {
   /** Datos de la entidad. */
   @Input() public entityData: entityData;
 
+  /** Filtro de estado. */
+  public filterState: boolean | null = true;
+
   constructor(
     private notificationService: NotificationService,
   ) {
@@ -43,11 +46,21 @@ export class GenericListCardComponent implements OnInit {
       numResults: 10,
       search: {
         hasSearch: false,
-      }
+      },
+      hasStateFilter: true
     };
   }
 
   ngOnInit(): void {
+    this.getItems(this.entityData.page);
+  }
+  
+  /**
+   * Filtra los elementos de la entidad.
+   * @param filterValue Valor del filtro.
+   */
+  public filterItems(filterValue: boolean | null) {
+    this.filterState = filterValue;
     this.getItems(this.entityData.page);
   }
 
@@ -90,7 +103,7 @@ export class GenericListCardComponent implements OnInit {
       this.entityData.page = 1;
     }
 
-    this.entityData.service?.getItems(page, this.entityData.numResults, this.entityData.search.search, true).subscribe({
+    this.entityData.service?.getItems(page, this.entityData.numResults, this.entityData.search.search, true, this.filterState).subscribe({
       next: (response: any) => {
         this.entityData.items = response.results;
         this.entityData.numItems = response.count;
