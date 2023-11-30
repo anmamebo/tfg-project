@@ -7,7 +7,7 @@ from doctors.api.serializers.doctor_serializer import DoctorInDepartmentListSeri
 class DepartmentSerializer(serializers.ModelSerializer):
   class Meta:
     model = Department
-    exclude = ['state', 'created_date', 'modified_date', 'deleted_date']
+    exclude = ['created_date', 'modified_date', 'deleted_date']
 
 class RoomForDepartmentSerializer(serializers.ModelSerializer):
   class Meta:
