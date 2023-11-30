@@ -66,6 +66,7 @@ export class DepartmentsPageComponent {
         hasSearch: true,
         search: '',
       },
+      hasStateFilter: true
     };
   }
 }

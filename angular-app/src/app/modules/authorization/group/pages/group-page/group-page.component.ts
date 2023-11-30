@@ -67,7 +67,8 @@ export class GroupPageComponent {
       numResults: 10,
       search: {
         hasSearch: false,
-      }
+      },
+      hasStateFilter: false,
     };
   }
 

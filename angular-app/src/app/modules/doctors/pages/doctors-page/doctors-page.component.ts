@@ -67,6 +67,7 @@ export class DoctorsPageComponent {
         hasSearch: true,
         search: '',
       },
+      hasStateFilter: true
     };
   }
 

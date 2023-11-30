@@ -68,6 +68,7 @@ export class RoomsPageComponent {
         hasSearch: true,
         search: '',
       },
+      hasStateFilter: true,
     };
   }
 }

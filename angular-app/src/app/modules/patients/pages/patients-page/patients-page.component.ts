@@ -69,6 +69,7 @@ export class PatientsPageComponent {
         hasSearch: true,
         search: '',
       },
+      hasStateFilter: true
     };
   }
 }

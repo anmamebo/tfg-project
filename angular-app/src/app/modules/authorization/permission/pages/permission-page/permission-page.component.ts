@@ -61,6 +61,7 @@ export class PermissionPageComponent {
         hasSearch: true,
         search: '',
       },
+      hasStateFilter: false
     };
   }
 }
