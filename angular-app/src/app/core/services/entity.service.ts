@@ -45,6 +45,7 @@ export abstract class EntityService<T> {
     numResults?: number,
     searchTerm?: string,
     paginated: boolean = false,
+    state?: boolean | null
   ): Observable<any> {
     const headers = this.httpCommonService.getCommonHeaders(); // Obtiene cabeceras comunes
     const httpOptions = { headers };
@@ -67,6 +68,10 @@ export abstract class EntityService<T> {
 
     if (searchTerm) { // Si se ha indicado un término de búsqueda
       params = params.set('search', searchTerm);
+    }
+
+    if (state !== null && state !== undefined) {
+      params = params.set('state', state.toString());
     }
 
     return this.http.get<any>(`${this.url}${this.getEndpoint()}`, { params, ...httpOptions });
