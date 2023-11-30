@@ -10,5 +10,6 @@ export class Room {
     public location?: string,
     public is_available?: boolean,
     public department?: Department,
+    public state?: boolean,
   ) {}
 }

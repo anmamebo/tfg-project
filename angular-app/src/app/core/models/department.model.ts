@@ -8,5 +8,6 @@ export class Department {
     public description?: string,
     public doctor_set?: Doctor[],
     public room_set?: Room[],
+    public state?: boolean,
   ) {}
 }
