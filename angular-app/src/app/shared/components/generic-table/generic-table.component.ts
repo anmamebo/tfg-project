@@ -29,7 +29,7 @@ export class GenericTableComponent {
   @Output() public onDeleteEvent: EventEmitter<any> = new EventEmitter<any>();
 
   /** Booleano que indica si se muestran las filas de forma alterna. */
-  @Input() public stripped: boolean = false;
+  @Input() public striped: boolean = false;
 
   /** Columna por la que se ordena. */
   public sortedColumn: string = '';
