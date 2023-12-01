@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DatePipe } from "@angular/common";
 
 import { Spanish } from "flatpickr/dist/l10n/es.js";
-import { GENDER_OPTIONS } from "src/app/core/constants/genders-options";
+import { GENDER_OPTIONS } from "src/app/core/constants/options/genders-options.constants";
 import { PHONENUMBER_REGEXP } from "src/app/core/constants/reg-exp";
 
 // Servicios
