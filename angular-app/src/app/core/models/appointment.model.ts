@@ -4,6 +4,20 @@ import { Doctor } from "./doctor.model";
 import { MedicalSpecialty } from "./medical-specialty.model";
 import { Schedule } from "./schedule.model";
 
+export interface StatusBadgeClasses {
+  [status: string]: string;
+}
+
+export const STATUS_BADGE_CLASSES: StatusBadgeClasses = {
+  pending: 'bg-secondary',
+  scheduled: 'bg-info',
+  in_progress: 'bg-warning',
+  completed: 'bg-success',
+  rescheduled: 'bg-primary',
+  no_show: 'bg-dark',
+  cancelled: 'bg-danger',
+};
+
 export class Appointment {
   constructor(
     public id: string,
