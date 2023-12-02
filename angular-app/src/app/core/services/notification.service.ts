@@ -50,6 +50,18 @@ export class NotificationService {
   }
 
   /**
+   * Muestra un toast de advertencia con un mensaje.
+   * @param message El mensaje que se mostrará en el toast de advertencia.
+   */
+  showWarningToast(message: string) {
+    Swal.fire({
+      icon: 'warning',
+      title: message,
+      ...this.toastOptions,
+    });
+  }
+
+  /**
    * Muestra un dialogo de confirmación para eliminar un registro y ejecuta la función `onConfirm` si se confirma.
    * @param onConfirm Función que se ejecutará si se confirma la eliminación.
    */
