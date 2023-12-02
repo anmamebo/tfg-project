@@ -30,7 +30,7 @@ export class GenericListCardComponent implements OnInit {
   };
 
   constructor(
-    private notificationService: NotificationService,
+    protected notificationService: NotificationService,
   ) {
     this.entityData = {
       title: {
