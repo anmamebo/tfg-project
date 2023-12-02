@@ -111,6 +111,7 @@ export abstract class EntityService<T> {
 
   /**
    * Actualiza un elemento de la entidad.
+   * @param id El identificador del elemento.
    * @param item El objeto con los datos del elemento.
    * @returns Un observable que emite un objeto `any`.
    */
