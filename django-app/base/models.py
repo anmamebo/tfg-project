@@ -1,3 +1,5 @@
+import uuid
+
 from django.db import models
 
 from simple_history.models import HistoricalRecords
@@ -6,7 +8,7 @@ from simple_history.models import HistoricalRecords
 class BaseModel(models.Model):
   """Model definition for BaseModel."""
   
-  id = models.AutoField(primary_key=True)
+  id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
   state = models.BooleanField(verbose_name='Estado', default=True)
   created_date = models.DateTimeField(verbose_name='Fecha de Creación', auto_now=False, auto_now_add=True)
   modified_date = models.DateTimeField(verbose_name='Fecha de Modificación', auto_now=True, auto_now_add=False)

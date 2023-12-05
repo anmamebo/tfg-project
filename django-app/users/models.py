@@ -1,5 +1,8 @@
+import uuid
+
 from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, PermissionsMixin
+
 from simple_history.models import HistoricalRecords
 
 
@@ -25,6 +28,7 @@ class UserManager(BaseUserManager):
     return self._create_user(username, email, name, last_name, password, True, True, **extra_fields)
 
 class User(AbstractBaseUser, PermissionsMixin):
+  id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
   username = models.CharField(verbose_name='Nombre de usuario', unique=True, max_length=255)
   email = models.CharField(verbose_name='Correo Electrónico', unique=True, max_length=255)
   name = models.CharField(verbose_name='Nombre', max_length=255, blank=True, null=True)
