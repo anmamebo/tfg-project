@@ -26,7 +26,6 @@ class DoctorViewSet(viewsets.GenericViewSet):
     list_serializer_class (Serializer): El serializador para representar los datos de una lista de médicos.
     queryset (QuerySet): El conjunto de datos que se utilizará para las consultas.
   """
-  
   model = Doctor
   serializer_class = DoctorSerializer
   list_serializer_class = DoctorSerializer
@@ -53,29 +52,17 @@ class DoctorViewSet(viewsets.GenericViewSet):
     """
     doctors = self.get_queryset()
     
-    state = self.request.query_params.get('state', None)
-    if state in ['true', 'false']:
-      state_boolean = state == 'true'
-      doctors = doctors.filter(state=state_boolean)
-    
-    query = self.request.query_params.get('search', None)
-    if query:
-      doctors = doctors.filter(
-        Q(user__name__icontains=query) | Q(user__last_name__icontains=query) |
-        Q(user__email__icontains=query) | Q(collegiate_number__icontains=query)
-      )
-      
-    ordering = self.request.query_params.get('ordering', None)
-    if ordering:
-      doctors = doctors.order_by(ordering)
+    doctors = self.filter_state_doctors(doctors) # Filtra los médicos por estado (activos / no activos)
+    doctors = self.filter_doctors(doctors) # Filtra los médicos
+    doctors = self.order_doctors(doctors) # Ordena los médicos
     
     page = self.paginate_queryset(doctors)
     if page is not None:
       doctors_serializer = self.list_serializer_class(page, many=True)
       return self.get_paginated_response(doctors_serializer.data)
-    else:
-      doctors_serializer = self.list_serializer_class(doctors, many=True)
-      return Response(doctors_serializer.data, status=status.HTTP_200_OK)
+    
+    doctors_serializer = self.list_serializer_class(doctors, many=True)
+    return Response(doctors_serializer.data, status=status.HTTP_200_OK)
     
   def create(self, request):
     """
@@ -87,24 +74,22 @@ class DoctorViewSet(viewsets.GenericViewSet):
     Returns:
         Response: La respuesta que contiene el resultado de la creación.
     """
-    if 'user' in request.data and 'name' in request.data['user'] and 'last_name' in request.data['user']:
-      request.data['user']['password'] = generate_password()
-      request.data['user']['username'] = generate_doctor_username(request.data['user']['name'], request.data['user']['last_name'])
+    if 'user' not in request.data or 'name' not in request.data['user'] or 'last_name' not in request.data['user']:
+      return Response({'message': 'No se ha enviado los datos del usuario'}, status=status.HTTP_400_BAD_REQUEST)
       
-      doctor_serializer = CreateDoctorSerializer(data=request.data)
-      if doctor_serializer.is_valid():
-        doctor = doctor_serializer.save()
-        return Response({
-          'message': 'Médico creado correctamente.'
-        }, status=status.HTTP_201_CREATED)
-        
-      return Response({
-        'message': 'Hay errores en la creación',
-        'errors': doctor_serializer.errors
-      }, status=status.HTTP_400_BAD_REQUEST)
+    request.data['user']['password'] = generate_password()
+    request.data['user']['username'] = generate_doctor_username(request.data['user']['name'], request.data['user']['last_name'])
     
+    doctor_serializer = CreateDoctorSerializer(data=request.data)
+    if doctor_serializer.is_valid():
+      doctor = doctor_serializer.save()
+      return Response({
+        'message': 'Médico creado correctamente.'
+      }, status=status.HTTP_201_CREATED)
+      
     return Response({
-      'message': 'No se ha enviado los datos del usuario'
+      'message': 'Hay errores en la creación',
+      'errors': doctor_serializer.errors
     }, status=status.HTTP_400_BAD_REQUEST)
 
   def retrieve(self, request, pk=None):
@@ -163,11 +148,11 @@ class DoctorViewSet(viewsets.GenericViewSet):
       return Response({
         'message': 'Médico actualizado correctamente'
       }, status=status.HTTP_200_OK)
-    else:
-      return Response({
-        'message': 'Hay errores en la actualización',
-        'errors': doctor_serializer.errors
-      }, status=status.HTTP_400_BAD_REQUEST)
+    
+    return Response({
+      'message': 'Hay errores en la actualización',
+      'errors': doctor_serializer.errors
+    }, status=status.HTTP_400_BAD_REQUEST)
       
   def destroy(self, request, pk=None):
     """
@@ -242,15 +227,11 @@ class DoctorViewSet(viewsets.GenericViewSet):
     doctors = self.get_queryset()
     
     department_id = self.request.query_params.get('department', None)
-    if department_id:
-      doctors = doctors.filter(departments__id=department_id)
+    if not department_id:
+      return Response({'message': 'No se ha enviado el departamento'}, status=status.HTTP_400_BAD_REQUEST)
       
-    query = self.request.query_params.get('search', None)
-    if query:
-      doctors = doctors.filter(
-        Q(user__name__icontains=query) | Q(user__last_name__icontains=query) |
-        Q(user__email__icontains=query) | Q(collegiate_number__icontains=query)
-      )
+    doctors = doctors.filter(departments__id=department_id) # Filtra los médicos por departamento  
+    doctors = self.filter_doctors(doctors) # Filtra los médicos
     
     paginate = self.request.query_params.get('paginate', None)
     if paginate and paginate == 'true':  
@@ -261,3 +242,56 @@ class DoctorViewSet(viewsets.GenericViewSet):
     
     doctors_serializer = DoctorInDepartmentListSerializer(doctors, many=True)
     return Response(doctors_serializer.data, status=status.HTTP_200_OK)
+  
+  
+  def filter_doctors(self, doctors):
+    """
+    Filtra los médicos por búsqueda.
+    
+    Args:
+        doctors (QuerySet): El conjunto de médicos.
+        
+    Returns:
+        QuerySet: El conjunto de médicos filtrados.
+    """
+    query = self.request.query_params.get('search', None)
+    if query:
+      doctors = doctors.filter(
+        Q(user__name__icontains=query) | Q(user__last_name__icontains=query) |
+        Q(user__email__icontains=query) | Q(collegiate_number__icontains=query)
+      )
+      
+    return doctors
+  
+  def order_doctors(self, doctors):
+    """
+    Ordena los médicos.
+    
+    Args:
+        doctors (QuerySet): El conjunto de médicos.
+        
+    Returns:
+        QuerySet: El conjunto de médicos ordenados.
+    """
+    ordering = self.request.query_params.get('ordering', None)
+    if ordering:
+      doctors = doctors.order_by(ordering)
+      
+    return doctors
+
+  def filter_state_doctors(self, doctors):
+    """
+    Filtra los médicos por estado (activos / no activos).
+    
+    Args:
+        doctors (QuerySet): El conjunto de médicos.
+        
+    Returns:
+        QuerySet: El conjunto de médicos filtrados.
+    """
+    state = self.request.query_params.get('state', None)
+    if state in ['true', 'false']:
+      state_boolean = state == 'true'
+      doctors = doctors.filter(state=state_boolean)
+      
+    return doctors
