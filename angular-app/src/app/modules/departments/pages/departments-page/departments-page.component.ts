@@ -40,7 +40,6 @@ export class DepartmentsPageComponent {
       entityPlural: 'Departamentos',
       entitySingular: 'Departamento',
       columns: [
-        { header: 'ID', field: 'id' },
         { header: 'NOMBRE', field: 'name' },
         { header: 'DESCRIPCIÓN', field: 'description' },
       ],
