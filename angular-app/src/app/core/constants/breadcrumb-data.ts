@@ -143,3 +143,16 @@ export const breadcrumbRoomsViewData = [
   { label: 'Salas', url: '/salas'},
   { label: 'Ver sala', url: ''}
 ]
+
+// Citas
+export const breadcrumbAppointmentsData = [
+  { label: 'Panel Principal', url: '/'},
+  { label: 'Citas', url: ''}
+]
+
+// Citas ver
+export const breadcrumbAppointmentsViewData = [
+  { label: 'Panel Principal', url: '/'},
+  { label: 'Citas', url: '/citas'},
+  { label: 'Ver cita', url: ''}
+]
