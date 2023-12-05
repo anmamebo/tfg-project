@@ -104,26 +104,19 @@ class TreatmentViewSet(viewsets.GenericViewSet):
         Response: La respuesta que contiene la lista de tratamientos.
     """
     appointment_id = self.request.query_params.get('appointment_id', None)
-    if appointment_id:
-      try:
-        appointment = Appointment.objects.get(pk=appointment_id)
-        treatments = self.get_queryset().filter(appointment_id=appointment_id)
-        
-        paginate = self.request.query_params.get('paginate', None)
-        if paginate and paginate == 'true':  
-          page = self.paginate_queryset(treatments)
-          if page is not None:
-            serializer = self.list_serializer_class(page, many=True)
-            return self.get_paginated_response(serializer.data)
-        
-        serializer = self.list_serializer_class(treatments, many=True)
-        return Response(serializer.data)
+    
+    if not appointment_id:
+      return Response({'message': 'No se ha especificado el identificador de la cita.'}, status=status.HTTP_400_BAD_REQUEST)
       
-      except Appointment.DoesNotExist:
-        return Response({
-          'message': 'No se ha encontrado la cita.'
-        }, status=status.HTTP_404_NOT_FOUND)
-      
-    return Response({
-      'message': 'No se ha especificado el identificador de la cita.'
-    }, status=status.HTTP_400_BAD_REQUEST)
+    appointment = get_object_or_404(Appointment, pk=appointment_id)
+    treatments = self.get_queryset().filter(appointment_id=appointment_id)
+    
+    paginate = self.request.query_params.get('paginate', None)
+    if paginate and paginate == 'true':  
+      page = self.paginate_queryset(treatments)
+      if page is not None:
+        serializer = self.list_serializer_class(page, many=True)
+        return self.get_paginated_response(serializer.data)
+    
+    serializer = self.list_serializer_class(treatments, many=True)
+    return Response(serializer.data)
