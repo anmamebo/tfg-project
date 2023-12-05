@@ -42,7 +42,7 @@ export class RoomService extends EntityService<Room> {
    * @param pageSize tamaño de la página.
    * @returns Un observable que emite un objeto `any`.
    */
-  public getRoomsByDepartmentId(id: number, page: number, pageSize:number, searchTerm: string): Observable<any> {
+  public getRoomsByDepartmentId(id: string, page: number, pageSize:number, searchTerm: string): Observable<any> {
     const headers = this.httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 

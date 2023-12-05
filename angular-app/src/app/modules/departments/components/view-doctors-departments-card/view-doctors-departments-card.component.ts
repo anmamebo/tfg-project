@@ -88,7 +88,7 @@ export class ViewDoctorsDepartmentsCardComponent implements OnInit {
       this.page = 1;
     }
 
-    this.doctorService.getDoctorsByDepartmentId(+this.departmentId, page, this.numResults, this.search).subscribe({
+    this.doctorService.getDoctorsByDepartmentId(this.departmentId, page, this.numResults, this.search).subscribe({
       next: (response: any) => {
         this.doctors = response.results;
         this.numDoctors = response.count;

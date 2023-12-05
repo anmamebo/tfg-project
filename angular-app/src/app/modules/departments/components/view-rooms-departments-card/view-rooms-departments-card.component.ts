@@ -89,7 +89,7 @@ export class ViewRoomsDepartmentsCardComponent implements OnInit {
       this.page = 1;
     }
 
-    this.roomService.getRoomsByDepartmentId(+this.departmentId, page, this.numResults, this.search).subscribe({
+    this.roomService.getRoomsByDepartmentId(this.departmentId, page, this.numResults, this.search).subscribe({
       next: (response: any) => {
         this.rooms = response.results;
         this.numRooms = response.count;

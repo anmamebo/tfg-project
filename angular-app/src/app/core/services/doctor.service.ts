@@ -42,7 +42,7 @@ export class DoctorService extends EntityService<Doctor> {
    * @param pageSize tamaño de la página.
    * @returns Un observable que emite un objeto `any`.
    */
-  public getDoctorsByDepartmentId(id: number, page: number, pageSize: number, searchTerm: string): Observable<any> {
+  public getDoctorsByDepartmentId(id: string, page: number, pageSize: number, searchTerm: string): Observable<any> {
     const headers = this.httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
