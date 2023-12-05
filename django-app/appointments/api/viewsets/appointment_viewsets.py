@@ -1,6 +1,7 @@
-from datetime import datetime, timezone
+from datetime import datetime
 import pytz
 
+from django.db.models import Q
 from django.shortcuts import get_object_or_404
 
 from rest_framework.response import Response
@@ -64,10 +65,7 @@ class AppointmentViewSet(viewsets.GenericViewSet):
     """
     appointments = self.get_queryset()
     
-    state = self.request.query_params.get('state', None)
-    if state in ['true', 'false']:
-      state_boolean = state == 'true'
-      appointments = appointments.filter(state=state_boolean)
+    appointments = self.filter_state_appointments(appointments)
       
     page = self.paginate_queryset(appointments)
     if page is not None:
@@ -88,24 +86,31 @@ class AppointmentViewSet(viewsets.GenericViewSet):
     Returns:
         Response: La respuesta que contiene la cita.
     """
-    if hasattr(request.user, 'doctor') and request.user.doctor:
-      doctor = request.user.doctor
-      appointment = self.get_object(pk)
-      if appointment.doctor == doctor:
-        serializer = self.serializer_class(appointment, data=request.data, partial=True)
-        if serializer.is_valid():
-          serializer.save()
-          return Response({
-            'message': 'La cita ha sido actualizada.'
-          }, status=status.HTTP_200_OK)
-        
-      return Response({
-        'message': 'La cita no pertenece al doctor.'
-      }, status=status.HTTP_400_BAD_REQUEST)
-      
-    return Response({
-      'message': 'El usuario no es un médico.'
-    }, status=status.HTTP_400_BAD_REQUEST)
+    doctor = getattr(request.user, 'doctor', None)
+    
+    if not doctor: # Si el usuario no es un médico
+      return Response({'message': 'El usuario no es un médico.'}, status=status.HTTP_400_BAD_REQUEST)
+    
+    appointment = self.get_object(pk)
+    
+    if appointment.doctor != doctor: # Si la cita no pertenece al médico
+      return Response({'message': 'La cita no pertenece al doctor.'}, status=status.HTTP_400_BAD_REQUEST)
+    
+    appointment_serializer = self.serializer_class(appointment, data=request.data, partial=True)
+    if appointment_serializer.is_valid():
+      appointment_serializer.save()
+      return Response(
+        {'message': 'La cita ha sido actualizada.'}, 
+        status=status.HTTP_200_OK
+      )
+    
+    return Response(
+      {
+        'message': 'Hay errores en la actualización',
+        'errors': appointment_serializer.errors
+      },
+      status=status.HTTP_400_BAD_REQUEST
+    )
   
   @action(detail=False, methods=['get'])
   def list_for_doctor(self, request):
@@ -119,25 +124,23 @@ class AppointmentViewSet(viewsets.GenericViewSet):
     Returns:
         Response: La respuesta que contiene la lista de citas.
     """
-    if hasattr(request.user, 'doctor') and request.user.doctor:
-      doctor = request.user.doctor  
-      appointments = self.get_queryset().filter(doctor=doctor).order_by('schedule__start_time')
-      
-      ordering = self.request.query_params.get('ordering', None)
-      if ordering:
-        appointments = appointments.order_by(ordering)
-      
-      page = self.paginate_queryset(appointments)
-      if page is not None:
-        appointments_serializer = self.list_serializer_class(page, many=True)
-        return self.get_paginated_response(appointments_serializer.data)
-      
-      appointments_serializer = self.list_serializer_class(appointments, many=True)
-      return Response(appointments_serializer.data, status=status.HTTP_200_OK)
+    doctor = getattr(request.user, 'doctor', None)
     
-    return Response({
-      'message': 'El usuario no es un médico.'
-    }, status=status.HTTP_400_BAD_REQUEST)
+    if not doctor: # Si el usuario no es un médico
+      return Response({'message': 'El usuario no es un médico.'}, status=status.HTTP_400_BAD_REQUEST)
+
+    appointments = self.get_queryset().filter(doctor=doctor).order_by('schedule__start_time') # Filtra las citas del doctor
+    
+    appointments = self.filter_appointments(appointments) # Filtra las citas
+    appointments = self.order_appointments(appointments) # Ordena las citas
+    
+    page = self.paginate_queryset(appointments) # Pagina las citas
+    if page is not None:
+      appointments_serializer = self.list_serializer_class(page, many=True)
+      return self.get_paginated_response(appointments_serializer.data)
+    
+    appointments_serializer = self.list_serializer_class(appointments, many=True)
+    return Response(appointments_serializer.data, status=status.HTTP_200_OK)
   
   @action(detail=True, methods=['get'])
   def retrieve_for_doctor(self, request, pk=None):
@@ -151,25 +154,24 @@ class AppointmentViewSet(viewsets.GenericViewSet):
     Returns:
         Response: La respuesta que contiene la cita.
     """
-    if hasattr(request.user, 'doctor') and request.user.doctor:
-      doctor = request.user.doctor
-      appointment = self.get_object(pk)
-      if appointment.doctor == doctor:
-        appointment_serializer = self.serializer_class(appointment)
-        return Response(appointment_serializer.data, status=status.HTTP_200_OK)
-      
-      return Response({
-        'message': 'La cita no pertenece al doctor.'
-      }, status=status.HTTP_400_BAD_REQUEST)
+    doctor = getattr(request.user, 'doctor', None)
     
-    return Response({
-      'message': 'El usuario no es un médico.'
-    }, status=status.HTTP_400_BAD_REQUEST)
+    if not doctor: # Si el usuario no es un médico
+      return Response({'message': 'El usuario no es un médico.'}, status=status.HTTP_400_BAD_REQUEST)
+    
+    appointment = self.get_object(pk)
+    
+    if appointment.doctor != doctor: # Si la cita no pertenece al médico
+      return Response({'message': 'La cita no pertenece al doctor.'}, status=status.HTTP_400_BAD_REQUEST)
+    
+    appointment_serializer = self.serializer_class(appointment)
+    return Response(appointment_serializer.data, status=status.HTTP_200_OK)
   
   @action(detail=True, methods=['put'])
   def update_status(self, request, pk=None):
     """
-    Actualiza el estado de una cita.
+    Actualiza el estado de una cita, siempre y cuando el usuario sea un médico,
+    la cita le pertenezca y la transición de estado sea válida.
     
     Args:
         request (Request): La solicitud HTTP.
@@ -178,40 +180,91 @@ class AppointmentViewSet(viewsets.GenericViewSet):
     Returns:
         Response: La respuesta que contiene la cita.
     """
-    if hasattr(request.user, 'doctor') and request.user.doctor: # Si el usuario es un doctor
-      doctor = request.user.doctor
-      appointment = self.get_object(pk)
-      if appointment.doctor == doctor: # Si la cita pertenece al doctor
-        new_status = request.data.get('status', None)
-        if new_status: # Si el estado es enviado
-          current_status = appointment.status
-          if new_status in self.status_transitions[current_status]: # Si el estado es válido
-            appointment.status = new_status
-            
-            if new_status == 'completed':
-              appointment.end_time = tz.localize(datetime.now()) # Se establece la hora de finalización
-              appointment.actual_duration = (appointment.end_time - appointment.time_patient_arrived).total_seconds() / 60 # Se calcula la duración real
-            elif new_status == 'in_progress':
-              appointment.time_patient_arrived = tz.localize(datetime.now()) # Se establece la hora de llegada del paciente
-            
-            appointment.save()
-            return Response({
-              'message': 'El estado de la cita ha sido actualizado.'
-            }, status=status.HTTP_200_OK)
-          
-          return Response({
-            'message': 'El estado no es válido.'
-          }, status=status.HTTP_400_BAD_REQUEST)
+    doctor = getattr(request.user, 'doctor', None)
+    
+    if not doctor: # Si el usuario no es un médico
+      return Response({'message': 'El usuario no es un médico.'}, status=status.HTTP_400_BAD_REQUEST)
+    
+    appointment = self.get_object(pk)
+    
+    if appointment.doctor != doctor: # Si la cita no pertenece al médico	
+      return Response({'message': 'La cita no pertenece al doctor.'}, status=status.HTTP_400_BAD_REQUEST)
+    
+    new_status = request.data.get('status', None)
+    
+    if not new_status: # Si no se envió el estado
+      return Response({'message': 'El estado es requerido.'}, status=status.HTTP_400_BAD_REQUEST)
+    
+    current_status = appointment.status
+    
+    if new_status not in self.status_transitions.get(current_status, []): # Si el estado no es válido
+      return Response({'message': 'El estado no es válido.'}, status=status.HTTP_400_BAD_REQUEST)
+    
+    appointment.status = new_status
+    
+    if new_status == 'completed':
+      appointment.end_time = tz.localize(datetime.now()) # Establece la hora de finalización
+      appointment.actual_duration = (appointment.end_time - appointment.time_patient_arrived).total_seconds() / 60 # Calcula la duración real
+    elif new_status == 'in_progress':
+      appointment.time_patient_arrived = tz.localize(datetime.now()) # Establece la hora de llegada del paciente
+      
+    appointment.save()
+    
+    return Response(
+      {'message': 'El estado de la cita ha sido actualizado.'},
+      status=status.HTTP_200_OK
+    )
+    
+  
+  def filter_appointments(self, appointments):
+    """
+    Filtra las citas.
+    
+    Args:
+        appointments (QuerySet): El conjunto de citas.
         
-        return Response({
-          'message': 'El estado es requerido.'
-        }, status=status.HTTP_400_BAD_REQUEST)
+    Returns:
+        QuerySet: El conjunto de citas filtradas.
+    """
+    query = self.request.query_params.get('search', None)
+    if query:
+      appointments = appointments.filter(
+        Q(patient__user__name__icontains=query) | Q(patient__user__last_name__icontains=query) |
+        Q(reason__icontains=query)
+      )
       
-      return Response({
-        'message': 'La cita no pertenece al doctor.'
-      }, status=status.HTTP_400_BAD_REQUEST)
+    return appointments
+  
+  def order_appointments(self, appointments):
+    """
+    Ordena las citas.
+    
+    Args:
+        appointments (QuerySet): El conjunto de citas.
+        
+    Returns:
+        QuerySet: El conjunto de citas ordenadas.
+    """
+    ordering = self.request.query_params.get('ordering', None)
+    if ordering:
+      appointments = appointments.order_by(ordering)
       
-    return Response({
-      'message': 'El usuario no es un médico.'
-    }, status=status.HTTP_400_BAD_REQUEST)
+    return appointments
+  
+  def filter_state_appointments(self, appointments):
+    """
+    Filtra las citas por estado (activas / no activas).
+    
+    Args:
+        appointments (QuerySet): El conjunto de citas.
+        
+    Returns:
+        QuerySet: El conjunto de citas filtradas.
+    """
+    state = self.request.query_params.get('state', None)
+    if state in ['true', 'false']:
+      state_boolean = state == 'true'
+      appointments = appointments.filter(state=state_boolean)
+      
+    return appointments
     
