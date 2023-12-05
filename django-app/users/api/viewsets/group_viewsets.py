@@ -32,7 +32,7 @@ class GroupViewSet(viewsets.GenericViewSet):
   def get_queryset(self):
     if self.queryset is None:
       self.queryset = self.model.objects\
-                      .all()
+                      .all().order_by('id')
     return self.queryset
   
   def list(self, request):
