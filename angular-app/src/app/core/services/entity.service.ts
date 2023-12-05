@@ -45,7 +45,7 @@ export abstract class EntityService<T> {
     numResults?: number,
     searchTerm?: string,
     paginated: boolean = false,
-    state?: boolean | null,
+    state: boolean | null = true,
     sortBy?: string,
     sortOrder?: string
   ): Observable<any> {
