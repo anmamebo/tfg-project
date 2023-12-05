@@ -1,0 +1,37 @@
+<app-generic-card [hasCardHeader]="entityData.title.hasTitle" [title]="entityData.title.title ? entityData.title.title : ''">
+  <div class="card-content">
+
+    <ng-container *ngIf="entityData.items; else noItems">
+
+      <app-table-appointments
+        [striped]="true"
+        [columns]="columns"
+        [data]="entityData.items"
+        [actions]="entityData.actions.hasActions"
+        [actionsUrls]="entityData.actions.actions"
+        (sortEvent)="sortItems($event)"
+      >
+      </app-table-appointments>
+
+      <app-elements-per-page
+        [totalElements]="entityData.numItems"
+        (elementsPerPageChangedEvent)="onEntriesPerPageChanged($event)"
+      >
+      </app-elements-per-page>
+
+      <app-pagination
+        [page]="entityData.page"
+        [totalPages]="entityData.totalPages"
+        [numItems]="entityData.numItems"
+        (pageEmitter)="goToPage($event)"
+      >
+      </app-pagination>
+
+    </ng-container>
+
+    <ng-template #noItems>
+      <app-loading-spinner></app-loading-spinner>
+    </ng-template>
+
+  </div>
+</app-generic-card>

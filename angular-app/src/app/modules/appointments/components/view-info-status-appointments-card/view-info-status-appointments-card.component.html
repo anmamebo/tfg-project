@@ -1,0 +1,60 @@
+<app-generic-card [hasCardHeader]="false">
+  <div *ngIf="appointment" class="card-content">
+
+    <div class="row align-items-center">
+      
+      <!-- Info cita -->
+      <div class="col-xxl-8">
+        <div class="form-group m-0">
+          <div class="row row-cols-auto">
+            <div class="col">
+              <label for="type">Tipo:</label>
+              <span class="ms-2 form-control-static" id="type">{{ appointment.type | typeAppointment }}</span>
+            </div>
+            <div class="col">
+              <label class="" for="estimated_duration">Tiempo estimado:</label>
+              <span class="ms-2 form-control-static" id="estimated_duration">{{ appointment.estimated_duration }} min.</span>
+            </div>
+            <div class="col">
+              <label class="" for="request_date">Fecha solicitud:</label>
+              <span class="ms-2 form-control-static" id="request_date">{{ appointment.request_date | date: 'dd/MM/yyyy' }}</span>
+            </div>
+            <div class="col">
+              <label class="" for="status">Estado:</label>
+              <span class="ms-2 form-control-static badge" id="status" [ngClass]="this.statusBadgeClasses[appointment.status]">
+                  {{ appointment.status | statusAppointment }}
+              </span>    
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Estados cita -->
+      <div class="col-xxl-4 text-xxl-end text-sm-start text-center mt-2 mt-xxl-0">
+        <button 
+          class="btn btn-success me-3" 
+          [ngClass]="{'disabled': appointment.status != 'scheduled' && appointment.status != 'rescheduled'}"
+          (click)="updateStatus('in_progress')"
+          >
+          Comenzar
+        </button>
+        <button 
+          class="btn btn-dark me-3" 
+          [ngClass]="{'disabled': appointment.status != 'scheduled' && appointment.status != 'rescheduled'}"
+          (click)="updateStatus('no_show')"
+          >
+          No presentado
+        </button>
+        <button 
+          class="btn btn-danger me-3" 
+          [ngClass]="{'disabled': appointment.status != 'in_progress'}"
+          (click)="updateStatus('completed')"
+          >
+          Finalizar
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+</app-generic-card>

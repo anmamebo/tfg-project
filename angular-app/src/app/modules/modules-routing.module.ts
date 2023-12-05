@@ -60,6 +60,13 @@ const routes: Routes = [
     canActivate: [roleGuard],
     data: { roles: [ROLES.ADMIN] },
   },
+  {
+    path: 'citas',
+    loadChildren: () =>
+      import('./appointments/appointments.module').then((m) => m.AppointmentsModule),
+      canActivate: [roleGuard],
+      data: { roles: [ROLES.ADMIN, ROLES.DOCTOR, ROLES.PATIENT] },
+  },
 ];
 
 @NgModule({

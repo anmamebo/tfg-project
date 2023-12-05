@@ -1,0 +1,71 @@
+<div class="accordion accordion-flush" id="accordionTreatments">
+  <div class="accordion-item" *ngFor="let treatment of treatments">
+    <h2 class="accordion-header" [attr.id]="'heading' + treatment.id">
+      <button class="accordion-button collapsed" type="button" [attr.data-bs-toggle]="'collapse'" [attr.data-bs-target]="'#collapse' + treatment.id" [attr.aria-expanded]="'false'" [attr.aria-controls]="'collapse' + treatment.id">
+        
+        <div class="form-group m-0">
+          <div class="row row-cols-auto">
+            <div class="col">
+              <span class="form-control-static badge" id="status" [ngClass]="this.statusBadgeClasses[treatment.status]">
+                {{ treatment.status | statusTreatment }}
+            </span>   
+            </div>
+            <div class="col">
+              <label for="start_date">Comienzo:</label>
+              <span class="ms-2 form-control-static" id="start_date">{{ treatment.start_date | date: 'dd/MM/yyyy' }}</span>
+            </div>
+            <div class="col">
+              <label for="description">Descripción:</label>
+              <span class="ms-2 form-control-static" id="description">{{ treatment.description }}</span>
+            </div>
+          </div>
+        </div>
+        
+      </button>
+    </h2>
+    <div [attr.id]="'collapse' + treatment.id" class="accordion-collapse collapse" [attr.aria-labelledby]="'heading' + treatment.id" data-bs-parent="#accordionTreatments">
+      <div class="accordion-body">
+
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="description">Descripción:</label>
+              <p class="form-control-static" id="description">{{ treatment.description ? treatment.description : '--' }}</p>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="comments">Comentarios:</label>
+              <p class="form-control-static" id="comments">{{ treatment.comments ? treatment.comments : '--' }}</p>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="duration">Duración:</label>
+              <p class="form-control-static" id="duration">{{ treatment.duration ? treatment.duration : '--' }}</p>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="application_frequency">Frecuencia de aplicación:</label>
+              <p class="form-control-static" id="application_frequency">{{ treatment.application_frequency ? treatment.application_frequency : '--' }}</p>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="recommended_dosage">Dosis recomendada:</label>
+              <p class="form-control-static" id="recommended_dosage">{{ treatment.recommended_dosage ? treatment.recommended_dosage : '--' }}</p>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="start_date">Fecha de comienzo:</label>
+              <p class="form-control-static" id="start_date">{{ treatment.start_date | date: 'dd, MMMM yyyy' }}</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

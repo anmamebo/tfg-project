@@ -1,0 +1,112 @@
+<app-generic-card [hasCardHeader]="false">
+  <div *ngIf="patient" class="card-content">
+
+    <div class="row justify-content-between">
+      <div class="col-8">
+        <h4 class="mb-4">Paciente</h4>
+      </div>
+      <div class="col-xxl-3 col-4">
+        <a [routerLink]="['/pacientes/editar/', patient.id]" class="btn btn-primary w-100">
+          <span class="d-none d-sm-block">Editar</span>
+          <span class="d-block d-sm-none"><i class="bi bi-pencil"></i></span>
+        </a>
+      </div>
+    </div>
+
+    <ul class="nav nav-tabs" id="patientTab" role="tablist">
+      <li class="nav-item" role="presentation">
+          <a class="nav-link active" id="basicInfo-tab" data-bs-toggle="tab" href="#basicInfo" role="tab" aria-controls="basicInfo" aria-selected="true">Datos Básicos</a>
+      </li>
+      <li class="nav-item" role="presentation">
+          <a class="nav-link" id="contactInfo-tab" data-bs-toggle="tab" href="#contactInfo" role="tab" aria-controls="contactInfo" aria-selected="false" tabindex="-1">Contacto</a>
+      </li>
+      <li class="nav-item" role="presentation">
+          <a class="nav-link" id="address-tab" data-bs-toggle="tab" href="#address" role="tab" aria-controls="address" aria-selected="false" tabindex="-1">Dirección</a>
+      </li>
+    </ul>
+    <div class="tab-content mt-3" id="patientTabContent">
+      <div class="tab-pane fade active show" id="basicInfo" role="tabpanel" aria-labelledby="basicInfo-tab">
+        
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="name">Nombre:</label>
+              <p class="form-control-static" id="name">{{ patient.user?.name }} {{ patient.user?.last_name }}</p>
+            </div>
+            <div class="form-group">
+              <label for="dni">DNI:</label>
+              <p class="form-control-static" id="dni">{{ patient.dni }}</p>
+            </div>
+            <div class="form-group">
+              <label for="social_security">Nº seguridad social:</label>
+              <p class="form-control-static" id="social_security">{{ patient.social_security ? patient.social_security : '--' }}</p>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="birthdate">Fecha nacimiento:</label>
+              <p class="form-control-static" id="birthdate">{{ patient.birthdate | date: 'dd, MMMM yyyy' }}</p>
+            </div>
+            <div class="form-group">
+              <label for="gender">Género:</label>
+              <p class="form-control-static" id="gender">{{ patient.gender | gender }}</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="tab-pane fade" id="contactInfo" role="tabpanel" aria-labelledby="contactInfo-tab">
+        
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="email">Email:</label>
+              <p class="form-control-static" id="email">{{ patient.user?.email }}</p>
+            </div>
+            <div class="form-group">
+              <label for="phone">Teléfono:</label>
+              <p class="form-control-static" id="phone">{{ patient.phone ? patient.phone : '--' }}</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="tab-pane fade" id="address" role="tabpanel" aria-labelledby="address-tab">
+        
+        <ng-container *ngIf="patient.address; else notAddress">
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="street">Calle:</label>
+                <p class="form-control-static" id="street">{{ patient.address.street }}, {{ patient.address.number }} {{ patient.address.floor ? patient.address.floor : '' }}</p>
+              </div>
+              <div class="form-group">
+                <label for="city">Ciudad:</label>
+                <p class="form-control-static" id="city">{{ patient.address.city }}</p>
+              </div>
+              <div class="form-group">
+                <label for="postal_code">Código Postal:</label>
+                <p class="form-control-static" id="postal_code">{{ patient.address.postal_code }}</p>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="province">Provincia:</label>
+                <p class="form-control-static" id="province">{{ patient.address.province }}</p>
+              </div>
+              <div class="form-group">
+                <label for="country">País:</label>
+                <p class="form-control-static" id="country">{{ patient.address.country }}</p>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+        <ng-template #notAddress>
+          No hay dirección registrada.
+        </ng-template>
+
+      </div>
+  </div>
+
+  </div>
+</app-generic-card>
