@@ -1,7 +1,7 @@
 <app-generic-page [pageTitle]="pageTitle" [pageDescription]="pageDescription" [breadcrumbData]="breadcrumbData">
   <div class="page-content">
 
-    <div *ngIf="events.length > 0; else loadingCalendar">
+    <!-- <div *ngIf="events.length > 0; else loadingCalendar"> -->
       <div class="row text-center">
         <div class="col-md-4">
           <div class="btn-group">
@@ -95,10 +95,10 @@
         >
         </mwl-calendar-day-view>
       </div>
-    </div>
+    <!-- </div>
     <ng-template #loadingCalendar>
       <app-loading-spinner></app-loading-spinner>
-    </ng-template>
+    </ng-template> -->
 
   </div>
 </app-generic-page>
