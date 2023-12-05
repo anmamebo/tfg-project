@@ -14,7 +14,7 @@ export class ElementsPerPageComponent {
   @Input() public totalElements: number = 0;
 
   /** Número de elementos por página */
-  public elementsPerPage: number = 10;
+  @Input() public elementsPerPage: number = 10;
 
   /** Evento que se emite cuando se cambia el número de elementos por página */
   @Output() public elementsPerPageChangedEvent: EventEmitter<number> = new EventEmitter<number>();
