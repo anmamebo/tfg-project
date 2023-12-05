@@ -12,9 +12,9 @@ class Treatment(BaseModel):
   ]
   
   status = models.CharField(verbose_name='Estado', max_length=50, choices=status, default='in_progress')
-  description = models.TextField(verbose_name='Descripción', max_length=255, blank=True, null=True)
-  duration = models.CharField(verbose_name='Duración', max_length=50, blank=True, null=True)
-  start_date = models.DateTimeField(verbose_name='Fecha de inicio', blank=True, null=True)
+  description = models.TextField(verbose_name='Descripción', max_length=255)
+  duration = models.CharField(verbose_name='Duración', max_length=50)
+  start_date = models.DateTimeField(verbose_name='Fecha de inicio')
   end_date = models.DateTimeField(verbose_name='Fecha de finalización', blank=True, null=True)
   comments = models.TextField(verbose_name='Comentarios', max_length=255, blank=True, null=True)
   application_frequency = models.CharField(verbose_name='Frecuencia de aplicación', max_length=50, blank=True, null=True)
