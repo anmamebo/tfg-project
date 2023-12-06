@@ -41,14 +41,14 @@ BASE_APPS = [
 ]
 
 LOCAL_APPS = [
-    'base',
-    'users',
-    'patients',
-    'doctors',
-    'schedules',
-    'departments',
-    'appointments',
-    'treatments',
+    'apps.base',
+    'apps.users',
+    'apps.patients',
+    'apps.doctors',
+    'apps.schedules',
+    'apps.departments',
+    'apps.appointments',
+    'apps.treatments',
 ]
 
 THIRD_APPS = [
@@ -187,7 +187,7 @@ SIMPLE_JWT = {
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
     'ROTATE_REFRESH_TOKENS': True,
     'BLACKLIST_AFTER_ROTATION': True,
-    'TOKEN_OBTAIN_SERIALIZER': 'users.api.serializers.user_serializer.CustomTokenObtainPairSerializer',
+    'TOKEN_OBTAIN_SERIALIZER': 'apps.users.api.serializers.user_serializer.CustomTokenObtainPairSerializer',
 }
 
 # Static files (CSS, JavaScript, Images)

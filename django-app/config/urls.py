@@ -27,7 +27,7 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )
 
-from users.views import Login, Logout
+from apps.users.views import Login, Logout
 
 
 schema_view = get_schema_view(
@@ -50,11 +50,11 @@ urlpatterns = [
     path('login/', Login.as_view(), name='login'),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view, name='token_refresh'),
-    path('users/', include('users.api.routers')),
-    path('patients/', include('patients.api.routers')),
-    path('doctors/', include('doctors.api.routers')),
-    path('schedules/', include('schedules.api.routers')),
-    path('departments/', include('departments.api.routers')),
-    path('appointments/', include('appointments.api.routers')),
-    path('treatments/', include('treatments.api.routers')),
+    path('users/', include('apps.users.api.routers')),
+    path('patients/', include('apps.patients.api.routers')),
+    path('doctors/', include('apps.doctors.api.routers')),
+    path('schedules/', include('apps.schedules.api.routers')),
+    path('departments/', include('apps.departments.api.routers')),
+    path('appointments/', include('apps.appointments.api.routers')),
+    path('treatments/', include('apps.treatments.api.routers')),
 ]
