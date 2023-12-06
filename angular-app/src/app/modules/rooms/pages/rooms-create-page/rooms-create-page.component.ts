@@ -8,7 +8,6 @@ import { breadcrumbRoomsCreateData } from 'src/app/core/constants/breadcrumb-dat
 @Component({
   selector: 'app-rooms-create-page',
   templateUrl: './rooms-create-page.component.html',
-  styleUrls: ['./rooms-create-page.component.scss'],
 })
 export class RoomsCreatePageComponent {
   /** Título de la página. */

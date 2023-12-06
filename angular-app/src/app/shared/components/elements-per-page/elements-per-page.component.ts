@@ -6,7 +6,6 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 @Component({
   selector: 'app-elements-per-page',
   templateUrl: './elements-per-page.component.html',
-  styleUrls: ['./elements-per-page.component.scss'],
 })
 export class ElementsPerPageComponent {
   /** Número de elementos totales */

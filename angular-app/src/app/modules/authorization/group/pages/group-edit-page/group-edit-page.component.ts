@@ -12,7 +12,6 @@ import { Group } from 'src/app/core/models/group.model';
 @Component({
   selector: 'app-group-edit-page',
   templateUrl: './group-edit-page.component.html',
-  styleUrls: ['./group-edit-page.component.scss'],
 })
 export class GroupEditPageComponent implements OnInit {
   /** Título de la página. */

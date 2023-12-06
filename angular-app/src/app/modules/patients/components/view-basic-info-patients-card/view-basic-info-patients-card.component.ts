@@ -10,7 +10,6 @@ import { Patient } from 'src/app/core/models/patient.model';
 @Component({
   selector: 'app-view-basic-info-patients-card',
   templateUrl: './view-basic-info-patients-card.component.html',
-  styleUrls: ['./view-basic-info-patients-card.component.scss'],
 })
 export class ViewBasicInfoPatientsCardComponent {
   /** Título de la tarjeta */

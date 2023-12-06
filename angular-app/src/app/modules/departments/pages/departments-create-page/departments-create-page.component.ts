@@ -8,7 +8,6 @@ import { breadcrumbDepartmentsCreateData } from 'src/app/core/constants/breadcru
 @Component({
   selector: 'app-departments-create-page',
   templateUrl: './departments-create-page.component.html',
-  styleUrls: ['./departments-create-page.component.scss'],
 })
 export class DepartmentsCreatePageComponent {
   /** Título de la página. */

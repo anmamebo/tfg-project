@@ -10,7 +10,6 @@ import { Address } from 'src/app/core/models/address.model';
 @Component({
   selector: 'app-view-address-patients-card',
   templateUrl: './view-address-patients-card.component.html',
-  styleUrls: ['./view-address-patients-card.component.scss'],
 })
 export class ViewAddressPatientsCardComponent {
   /** Título de la tarjeta */

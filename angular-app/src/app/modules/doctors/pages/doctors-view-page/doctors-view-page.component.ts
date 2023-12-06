@@ -15,7 +15,6 @@ import { Doctor } from 'src/app/core/models/doctor.model';
 @Component({
   selector: 'app-doctors-view-page',
   templateUrl: './doctors-view-page.component.html',
-  styleUrls: ['./doctors-view-page.component.scss'],
   providers: [DoctorService],
 })
 export class DoctorsViewPageComponent {

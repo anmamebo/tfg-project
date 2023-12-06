@@ -10,7 +10,6 @@ import { Department } from 'src/app/core/models/department.model';
 @Component({
   selector: 'app-view-info-departments-card',
   templateUrl: './view-info-departments-card.component.html',
-  styleUrls: ['./view-info-departments-card.component.scss'],
 })
 export class ViewInfoDepartmentsCardComponent {
   /** Título de la tarjeta */

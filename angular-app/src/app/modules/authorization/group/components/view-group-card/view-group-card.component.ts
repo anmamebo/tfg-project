@@ -9,7 +9,6 @@ import { Group } from 'src/app/core/models/group.model';
 @Component({
   selector: 'app-view-group-card',
   templateUrl: './view-group-card.component.html',
-  styleUrls: ['./view-group-card.component.scss'],
 })
 export class ViewGroupCardComponent {
   /** Título de la tarjeta */

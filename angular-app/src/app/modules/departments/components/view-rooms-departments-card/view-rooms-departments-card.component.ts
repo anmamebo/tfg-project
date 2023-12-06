@@ -14,7 +14,6 @@ import { Room } from 'src/app/core/models/room.model';
 @Component({
   selector: 'app-view-rooms-departments-card',
   templateUrl: './view-rooms-departments-card.component.html',
-  styleUrls: ['./view-rooms-departments-card.component.scss'],
   providers: [RoomService],
 })
 export class ViewRoomsDepartmentsCardComponent implements OnInit {

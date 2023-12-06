@@ -14,7 +14,6 @@ import { entityData } from 'src/app/core/models/entityData.model';
 @Component({
   selector: 'app-permission-page',
   templateUrl: './permission-page.component.html',
-  styleUrls: ['./permission-page.component.scss'],
 })
 export class PermissionPageComponent {
   /** Título de la página. */

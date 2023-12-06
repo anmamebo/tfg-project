@@ -10,7 +10,6 @@ import { TokenStorageService } from 'src/app/core/services/token-storage.service
 @Component({
   selector: 'app-user-dropdown',
   templateUrl: './user-dropdown.component.html',
-  styleUrls: ['./user-dropdown.component.scss'],
   providers: [AuthService, TokenStorageService],
 })
 export class UserDropdownComponent implements OnInit {

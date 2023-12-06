@@ -11,7 +11,6 @@ import { sidebarData } from 'src/app/core/constants/sidebar-items';
 @Component({
   selector: 'app-sidebar-menu',
   templateUrl: './sidebar-menu.component.html',
-  styleUrls: ['./sidebar-menu.component.scss'],
 })
 export class SidebarMenuComponent implements OnDestroy {
   /** Elementos del menú lateral. */

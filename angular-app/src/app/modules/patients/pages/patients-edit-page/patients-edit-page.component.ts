@@ -15,7 +15,6 @@ import { Patient } from 'src/app/core/models/patient.model';
 @Component({
   selector: 'app-patients-edit-page',
   templateUrl: './patients-edit-page.component.html',
-  styleUrls: ['./patients-edit-page.component.scss'],
   providers: [PatientService],
 })
 export class PatientsEditPageComponent implements OnInit {

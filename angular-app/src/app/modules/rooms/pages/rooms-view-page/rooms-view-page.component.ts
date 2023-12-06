@@ -15,7 +15,6 @@ import { Room } from 'src/app/core/models/room.model';
 @Component({
   selector: 'app-rooms-view-page',
   templateUrl: './rooms-view-page.component.html',
-  styleUrls: ['./rooms-view-page.component.scss'],
   providers: [RoomService],
 })
 export class RoomsViewPageComponent implements OnInit {

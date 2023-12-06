@@ -10,7 +10,6 @@ import { NotificationService } from 'src/app/core/services/notification.service'
 @Component({
   selector: 'app-buttons-patients-card',
   templateUrl: './buttons-patients-card.component.html',
-  styleUrls: ['./buttons-patients-card.component.scss'],
   providers: [PatientService, NotificationService],
 })
 export class ButtonsPatientsCardComponent {

@@ -9,7 +9,6 @@ import { User } from 'src/app/core/models/user.model';
 @Component({
   selector: 'app-avatar-card',
   templateUrl: './avatar-card.component.html',
-  styleUrls: ['./avatar-card.component.scss'],
 })
 export class AvatarCardComponent {
   /**

@@ -14,7 +14,6 @@ import { Group } from 'src/app/core/models/group.model';
 @Component({
   selector: 'app-create-group-card',
   templateUrl: './create-group-card.component.html',
-  styleUrls: ['./create-group-card.component.scss'],
   providers: [GroupService],
 })
 export class CreateGroupCardComponent {

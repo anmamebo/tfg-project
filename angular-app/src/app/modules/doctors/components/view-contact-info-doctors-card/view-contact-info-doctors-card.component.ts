@@ -10,7 +10,6 @@ import { Doctor } from 'src/app/core/models/doctor.model';
 @Component({
   selector: 'app-view-contact-info-doctors-card',
   templateUrl: './view-contact-info-doctors-card.component.html',
-  styleUrls: ['./view-contact-info-doctors-card.component.scss'],
 })
 export class ViewContactInfoDoctorsCardComponent {
   /** Título de la tarjeta */

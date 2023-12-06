@@ -15,7 +15,6 @@ import { Doctor } from 'src/app/core/models/doctor.model';
 @Component({
   selector: 'app-edit-contact-info-doctors-card',
   templateUrl: './edit-contact-info-doctors-card.component.html',
-  styleUrls: ['./edit-contact-info-doctors-card.component.scss'],
   providers: [DoctorService],
 })
 export class EditContactInfoDoctorsCardComponent implements OnInit {

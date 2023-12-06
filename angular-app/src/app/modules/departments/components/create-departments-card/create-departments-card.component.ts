@@ -11,7 +11,6 @@ import { NotificationService } from 'src/app/core/services/notification.service'
 @Component({
   selector: 'app-create-departments-card',
   templateUrl: './create-departments-card.component.html',
-  styleUrls: ['./create-departments-card.component.scss'],
   providers: [DepartmentService],
 })
 export class CreateDepartmentsCardComponent {

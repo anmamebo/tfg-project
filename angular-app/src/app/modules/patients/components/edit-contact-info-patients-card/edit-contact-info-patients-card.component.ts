@@ -17,7 +17,6 @@ import { Patient } from 'src/app/core/models/patient.model';
 @Component({
   selector: 'app-edit-contact-info-patients-card',
   templateUrl: './edit-contact-info-patients-card.component.html',
-  styleUrls: ['./edit-contact-info-patients-card.component.scss'],
   providers: [PatientService, NotificationService],
 })
 export class EditContactInfoPatientsCardComponent implements OnInit {

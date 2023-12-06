@@ -15,7 +15,6 @@ import { NotificationService } from 'src/app/core/services/notification.service'
 @Component({
   selector: 'app-create-rooms-card',
   templateUrl: './create-rooms-card.component.html',
-  styleUrls: ['./create-rooms-card.component.scss'],
   providers: [RoomService, DepartmentService],
 })
 export class CreateRoomsCardComponent implements OnInit {

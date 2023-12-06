@@ -15,7 +15,6 @@ import { Department } from 'src/app/core/models/department.model';
 @Component({
   selector: 'app-departments-view-page',
   templateUrl: './departments-view-page.component.html',
-  styleUrls: ['./departments-view-page.component.scss'],
   providers: [DepartmentService],
 })
 export class DepartmentsViewPageComponent implements OnInit {

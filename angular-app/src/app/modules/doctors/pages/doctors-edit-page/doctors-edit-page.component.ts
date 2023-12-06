@@ -15,7 +15,6 @@ import { Doctor } from 'src/app/core/models/doctor.model';
 @Component({
   selector: 'app-doctors-edit-page',
   templateUrl: './doctors-edit-page.component.html',
-  styleUrls: ['./doctors-edit-page.component.scss'],
   providers: [DoctorService],
 })
 export class DoctorsEditPageComponent implements OnInit {

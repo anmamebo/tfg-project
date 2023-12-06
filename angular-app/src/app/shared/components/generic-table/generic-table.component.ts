@@ -9,7 +9,6 @@ import { SortEvent } from 'src/app/core/models/sortEvent.model';
 @Component({
   selector: 'app-generic-table',
   templateUrl: './generic-table.component.html',
-  styleUrls: ['./generic-table.component.scss'],
 })
 export class GenericTableComponent {
   /** Array de columnas con formato { header: string, field: string } */

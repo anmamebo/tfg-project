@@ -13,7 +13,6 @@ import { SortEvent } from 'src/app/core/models/sortEvent.model';
 @Component({
   selector: 'app-generic-list-card',
   templateUrl: './generic-list-card.component.html',
-  styleUrls: ['./generic-list-card.component.scss'],
 })
 export class GenericListCardComponent implements OnInit {
   /** Datos de la entidad. */

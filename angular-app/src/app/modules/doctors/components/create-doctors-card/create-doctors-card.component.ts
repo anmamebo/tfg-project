@@ -15,7 +15,6 @@ import { NotificationService } from 'src/app/core/services/notification.service'
 @Component({
   selector: 'app-create-doctors-card',
   templateUrl: './create-doctors-card.component.html',
-  styleUrls: ['./create-doctors-card.component.scss'],
   providers: [DoctorService, MedicalspecialtyService, DepartmentService],
 })
 export class CreateDoctorsCardComponent implements OnInit {

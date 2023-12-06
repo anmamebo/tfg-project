@@ -19,7 +19,6 @@ import { Patient } from 'src/app/core/models/patient.model';
 @Component({
   selector: 'app-edit-basic-info-patients-card',
   templateUrl: './edit-basic-info-patients-card.component.html',
-  styleUrls: ['./edit-basic-info-patients-card.component.scss'],
   providers: [DatePipe, PatientService],
 })
 export class EditBasicInfoPatientsCardComponent implements OnInit {

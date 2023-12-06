@@ -17,7 +17,6 @@ import { GenericListCardComponent } from 'src/app/shared/components/generic-list
 @Component({
   selector: 'app-group-page',
   templateUrl: './group-page.component.html',
-  styleUrls: ['./group-page.component.scss'],
 })
 export class GroupPageComponent {
   /** Título de la página. */

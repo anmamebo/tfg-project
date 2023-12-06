@@ -16,7 +16,6 @@ import { Address } from 'src/app/core/models/address.model';
 @Component({
   selector: 'app-address-info-card',
   templateUrl: './address-info-card.component.html',
-  styleUrls: ['./address-info-card.component.scss'],
   providers: [AddressService, NotificationService],
 })
 export class AddressInfoCardComponent implements OnInit {

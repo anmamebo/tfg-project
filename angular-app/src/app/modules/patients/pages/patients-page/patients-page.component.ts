@@ -14,7 +14,6 @@ import { entityData } from 'src/app/core/models/entityData.model';
 @Component({
   selector: 'app-patients-page',
   templateUrl: './patients-page.component.html',
-  styleUrls: ['./patients-page.component.scss'],
 })
 export class PatientsPageComponent {
   /** Título de la página. */

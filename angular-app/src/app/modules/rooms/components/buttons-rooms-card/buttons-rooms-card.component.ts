@@ -10,7 +10,6 @@ import { NotificationService } from 'src/app/core/services/notification.service'
 @Component({
   selector: 'app-buttons-rooms-card',
   templateUrl: './buttons-rooms-card.component.html',
-  styleUrls: ['./buttons-rooms-card.component.scss'],
   providers: [RoomService],
 })
 export class ButtonsRoomsCardComponent {

@@ -16,7 +16,6 @@ import { Doctor } from 'src/app/core/models/doctor.model';
 @Component({
   selector: 'app-doctor-info-card',
   templateUrl: './doctor-info-card.component.html',
-  styleUrls: ['./doctor-info-card.component.scss'],
   providers: [DoctorService, NotificationService],
 })
 export class DoctorInfoCardComponent implements OnInit {

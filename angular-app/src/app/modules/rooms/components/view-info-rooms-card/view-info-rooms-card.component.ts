@@ -10,7 +10,6 @@ import { Room } from 'src/app/core/models/room.model';
 @Component({
   selector: 'app-view-info-rooms-card',
   templateUrl: './view-info-rooms-card.component.html',
-  styleUrls: ['./view-info-rooms-card.component.scss'],
 })
 export class ViewInfoRoomsCardComponent {
   /** Título de la tarjeta */

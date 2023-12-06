@@ -19,7 +19,6 @@ import { Room } from 'src/app/core/models/room.model';
 @Component({
   selector: 'app-edit-info-rooms-card',
   templateUrl: './edit-info-rooms-card.component.html',
-  styleUrls: ['./edit-info-rooms-card.component.scss'],
   providers: [RoomService, DepartmentService],
 })
 export class EditInfoRoomsCardComponent implements OnInit {

@@ -12,7 +12,6 @@ import { Department } from 'src/app/core/models/department.model';
 @Component({
   selector: 'app-departments-edit-page',
   templateUrl: './departments-edit-page.component.html',
-  styleUrls: ['./departments-edit-page.component.scss'],
 })
 export class DepartmentsEditPageComponent implements OnInit {
   /** Título de la página. */

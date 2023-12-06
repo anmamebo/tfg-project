@@ -12,7 +12,6 @@ import { Group } from 'src/app/core/models/group.model';
 @Component({
   selector: 'app-group-view-page',
   templateUrl: './group-view-page.component.html',
-  styleUrls: ['./group-view-page.component.scss'],
 })
 export class GroupViewPageComponent implements OnInit {
   /** Título de la página */

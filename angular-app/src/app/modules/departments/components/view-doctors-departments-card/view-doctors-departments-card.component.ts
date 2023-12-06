@@ -14,7 +14,6 @@ import { Doctor } from 'src/app/core/models/doctor.model';
 @Component({
   selector: 'app-view-doctors-departments-card',
   templateUrl: './view-doctors-departments-card.component.html',
-  styleUrls: ['./view-doctors-departments-card.component.scss'],
   providers: [DoctorService],
 })
 export class ViewDoctorsDepartmentsCardComponent implements OnInit {

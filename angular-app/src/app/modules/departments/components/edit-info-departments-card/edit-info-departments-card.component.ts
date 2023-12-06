@@ -15,7 +15,6 @@ import { Department } from 'src/app/core/models/department.model';
 @Component({
   selector: 'app-edit-info-departments-card',
   templateUrl: './edit-info-departments-card.component.html',
-  styleUrls: ['./edit-info-departments-card.component.scss'],
   providers: [DepartmentService],
 })
 export class EditInfoDepartmentsCardComponent implements OnInit {

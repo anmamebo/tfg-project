@@ -14,7 +14,6 @@ import Validation from 'src/app/core/validators/general.validator';
 @Component({
   selector: 'app-change-password-card',
   templateUrl: './change-password-card.component.html',
-  styleUrls: ['./change-password-card.component.scss'],
   providers: [UserService, NotificationService],
 })
 export class ChangePasswordCardComponent {

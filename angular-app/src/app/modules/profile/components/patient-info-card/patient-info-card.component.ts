@@ -19,7 +19,6 @@ import { Patient } from 'src/app/core/models/patient.model';
 @Component({
   selector: 'app-patient-info-card',
   templateUrl: './patient-info-card.component.html',
-  styleUrls: ['./patient-info-card.component.scss'],
   providers: [DatePipe, PatientService, NotificationService],
 })
 export class PatientInfoCardComponent implements OnInit {

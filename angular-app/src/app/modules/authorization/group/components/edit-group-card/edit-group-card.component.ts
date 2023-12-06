@@ -14,7 +14,6 @@ import { Group } from 'src/app/core/models/group.model';
 @Component({
   selector: 'app-edit-group-card',
   templateUrl: './edit-group-card.component.html',
-  styleUrls: ['./edit-group-card.component.scss'],
   providers: [GroupService],
 })
 export class EditGroupCardComponent implements OnInit {

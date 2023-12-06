@@ -17,7 +17,6 @@ import { Address } from 'src/app/core/models/address.model';
 @Component({
   selector: 'app-edit-address-patients-card',
   templateUrl: './edit-address-patients-card.component.html',
-  styleUrls: ['./edit-address-patients-card.component.scss'],
   providers: [AddressService],
 })
 export class EditAddressPatientsCardComponent implements OnInit {

@@ -12,7 +12,6 @@ import { Room } from 'src/app/core/models/room.model';
 @Component({
   selector: 'app-rooms-edit-page',
   templateUrl: './rooms-edit-page.component.html',
-  styleUrls: ['./rooms-edit-page.component.scss'],
 })
 export class RoomsEditPageComponent implements OnInit {
   /** Título de la página. */

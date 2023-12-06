@@ -14,7 +14,6 @@ import { User } from 'src/app/core/models/user.model';
 @Component({
   selector: 'app-basic-info-card',
   templateUrl: './basic-info-card.component.html',
-  styleUrls: ['./basic-info-card.component.scss'],
   providers: [UserService, NotificationService],
 })
 export class BasicInfoCardComponent implements OnInit {
