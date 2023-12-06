@@ -27,6 +27,7 @@ class AppointmentViewSet(viewsets.GenericViewSet):
     serializer_class (Serializer): El serializador para representar los datos de la cita.
     list_serializer_class (Serializer): El serializador para representar los datos de una lista de citas.
     queryset (QuerySet): El conjunto de datos que se utilizará para las consultas.
+    status_transitions (dict): Las transiciones de estado válidas para una cita.
   """
   model = Appointment
   serializer_class = AppointmentListSerializer
@@ -57,6 +58,9 @@ class AppointmentViewSet(viewsets.GenericViewSet):
     """
     Lista todas las citas.
     
+    Parámetros opcionales:
+      state (str): El estado de la cita (true: activas, false: no activas).
+    
     Args:
         request (Request): La solicitud HTTP.
         
@@ -77,7 +81,7 @@ class AppointmentViewSet(viewsets.GenericViewSet):
   
   def update(self, request, pk=None):
     """
-    Actualiza una cita.
+    Actualiza una cita siempre y cuando el usuario sea un médico y la cita le pertenezca.
     
     Args:
         request (Request): La solicitud HTTP.
@@ -115,7 +119,11 @@ class AppointmentViewSet(viewsets.GenericViewSet):
   @action(detail=False, methods=['get'])
   def list_for_doctor(self, request):
     """
-    Lista todas las citas de un doctor.
+    Lista todas las citas de un doctor ordenadas por fecha más cercana, el usuario debe ser un médico.
+    
+    Parámetros opcionales:
+      search (str): El texto a buscar.
+      ordering (str): El campo por el cual se ordenarán las citas.
     
     Args:
         request (Request): La solicitud HTTP.
@@ -145,7 +153,7 @@ class AppointmentViewSet(viewsets.GenericViewSet):
   @action(detail=True, methods=['get'])
   def retrieve_for_doctor(self, request, pk=None):
     """
-    Recupera una cita de un doctor.
+    Recupera una cita de un doctor, el usuario debe ser un médico y la cita le debe pertenecer.
     
     Args:
         request (Request): La solicitud HTTP.
