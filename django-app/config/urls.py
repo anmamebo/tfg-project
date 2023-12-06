@@ -32,9 +32,9 @@ from apps.users.views import Login, Logout
 
 schema_view = get_schema_view(
     openapi.Info(
-        title='Django Rest Api',
-        default_version='v1',
-        description='Django Rest Api',
+        title="Django Rest Api",
+        default_version="v1",
+        description="Django Rest Api",
         contact=openapi.Contact(email="anmamebo2001@gmail.com"),
     ),
     public=True,
@@ -42,19 +42,25 @@ schema_view = get_schema_view(
 )
 
 urlpatterns = [
-    path('swagger<format>/', schema_view.without_ui(cache_timeout=0), name='schema-json'),
-    path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
-    path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
-    path('admin/', admin.site.urls),
-    path('logout/', Logout.as_view(), name='logout'),
-    path('login/', Login.as_view(), name='login'),
-    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('api/token/refresh/', TokenRefreshView.as_view, name='token_refresh'),
-    path('users/', include('apps.users.api.routers')),
-    path('patients/', include('apps.patients.api.routers')),
-    path('doctors/', include('apps.doctors.api.routers')),
-    path('schedules/', include('apps.schedules.api.routers')),
-    path('departments/', include('apps.departments.api.routers')),
-    path('appointments/', include('apps.appointments.api.routers')),
-    path('treatments/', include('apps.treatments.api.routers')),
+    path(
+        "swagger<format>/", schema_view.without_ui(cache_timeout=0), name="schema-json"
+    ),
+    path(
+        "swagger/",
+        schema_view.with_ui("swagger", cache_timeout=0),
+        name="schema-swagger-ui",
+    ),
+    path("redoc/", schema_view.with_ui("redoc", cache_timeout=0), name="schema-redoc"),
+    path("admin/", admin.site.urls),
+    path("logout/", Logout.as_view(), name="logout"),
+    path("login/", Login.as_view(), name="login"),
+    path("api/token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
+    path("api/token/refresh/", TokenRefreshView.as_view, name="token_refresh"),
+    path("users/", include("apps.users.api.routers")),
+    path("patients/", include("apps.patients.api.routers")),
+    path("doctors/", include("apps.doctors.api.routers")),
+    path("schedules/", include("apps.schedules.api.routers")),
+    path("departments/", include("apps.departments.api.routers")),
+    path("appointments/", include("apps.appointments.api.routers")),
+    path("treatments/", include("apps.treatments.api.routers")),
 ]

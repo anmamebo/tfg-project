@@ -6,18 +6,19 @@ from apps.users.api.serializers.permission_serializer import PermissionSerialize
 
 
 class GroupSerializer(serializers.ModelSerializer):
-  permissions = PermissionSerializer(many=True, read_only=True)
-  
-  class Meta:
-    model = Group
-    fields = '__all__'
+    permissions = PermissionSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Group
+        fields = "__all__"
+
 
 class GroupListSerializer(serializers.ModelSerializer):
-  class Meta:
-    model = Group
-    
-  def to_representation(self, instance):
-    return {
-      'id': instance.id,
-      'name': instance.name,
-    }
+    class Meta:
+        model = Group
+
+    def to_representation(self, instance):
+        return {
+            "id": instance.id,
+            "name": instance.name,
+        }

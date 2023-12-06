@@ -5,7 +5,9 @@ from apps.doctors.api.viewsets.medicalspecialty_viewsets import MedicalSpecialty
 
 router = DefaultRouter()
 
-router.register(r'doctors', DoctorViewSet, basename="doctors")
-router.register(r'medicalspecialties', MedicalSpecialtyViewSet, basename="medicalspecialties")
+router.register(r"doctors", DoctorViewSet, basename="doctors")
+router.register(
+    r"medicalspecialties", MedicalSpecialtyViewSet, basename="medicalspecialties"
+)
 
 urlpatterns = router.urls

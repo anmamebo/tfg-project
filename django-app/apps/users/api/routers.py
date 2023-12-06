@@ -6,8 +6,8 @@ from apps.users.api.viewsets.permission_viewsets import PermissionViewSet
 
 router = DefaultRouter()
 
-router.register(r'users', UserViewSet, basename="users")
-router.register(r'groups', GroupViewSet, basename="groups")
-router.register(r'permissions', PermissionViewSet, basename="permissions")
+router.register(r"users", UserViewSet, basename="users")
+router.register(r"groups", GroupViewSet, basename="groups")
+router.register(r"permissions", PermissionViewSet, basename="permissions")
 
 urlpatterns = router.urls

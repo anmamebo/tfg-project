@@ -4,6 +4,6 @@ from apps.appointments.api.viewsets.appointment_viewsets import AppointmentViewS
 
 router = DefaultRouter()
 
-router.register(r'appointments', AppointmentViewSet, basename="appointments")
+router.register(r"appointments", AppointmentViewSet, basename="appointments")
 
 urlpatterns = router.urls

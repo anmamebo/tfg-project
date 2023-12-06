@@ -5,7 +5,7 @@ from apps.patients.api.viewsets.address_viewsets import AddressViewSet
 
 router = DefaultRouter()
 
-router.register(r'patients', PatientViewSet, basename="patients")
-router.register(r'addresses', AddressViewSet, basename="addresses")
+router.register(r"patients", PatientViewSet, basename="patients")
+router.register(r"addresses", AddressViewSet, basename="addresses")
 
 urlpatterns = router.urls

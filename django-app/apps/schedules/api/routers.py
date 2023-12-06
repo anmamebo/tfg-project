@@ -4,6 +4,6 @@ from apps.schedules.api.viewsets.schedule_viewsets import ScheduleViewSet
 
 router = DefaultRouter()
 
-router.register(r'schedules', ScheduleViewSet, basename="schedules")
+router.register(r"schedules", ScheduleViewSet, basename="schedules")
 
 urlpatterns = router.urls
