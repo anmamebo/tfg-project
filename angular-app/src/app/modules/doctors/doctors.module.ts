@@ -4,17 +4,17 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // Módulos
 import { DoctorsRoutingModule } from './doctors-routing.module';
-import { GenericPageModule } from "src/app/shared/components/generic-page/generic-page.module";
-import { GenericCardModule } from "src/app/shared/components/generic-card/generic-card.module";
-import { SearchModule } from "src/app/shared/components/search/search.module";
-import { GenericTableModule } from "src/app/shared/components/generic-table/generic-table.module";
-import { ElementsPerPageModule } from "src/app/shared/components/elements-per-page/elements-per-page.module";
-import { PaginationModule } from "src/app/shared/components/pagination/pagination.module";
-import { FormErrorsModule } from "src/app/shared/components/form-errors/form-errors.module";
-import { GenericListCardModule } from "src/app/shared/components/generic-list-card/generic-list-card.module";
+import { GenericPageModule } from 'src/app/shared/components/generic-page/generic-page.module';
+import { GenericCardModule } from 'src/app/shared/components/generic-card/generic-card.module';
+import { SearchModule } from 'src/app/shared/components/search/search.module';
+import { GenericTableModule } from 'src/app/shared/components/generic-table/generic-table.module';
+import { ElementsPerPageModule } from 'src/app/shared/components/elements-per-page/elements-per-page.module';
+import { PaginationModule } from 'src/app/shared/components/pagination/pagination.module';
+import { FormErrorsModule } from 'src/app/shared/components/form-errors/form-errors.module';
+import { GenericListCardModule } from 'src/app/shared/components/generic-list-card/generic-list-card.module';
 
 // Módulos de terceros
-import { NgMultiSelectDropDownModule } from "ng-multiselect-dropdown";
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 // Componentes páginas
 import { DoctorsPageComponent } from './pages/doctors-page/doctors-page.component';
@@ -29,7 +29,6 @@ import { EditBasicInfoDoctorsCardComponent } from './components/edit-basic-info-
 import { EditContactInfoDoctorsCardComponent } from './components/edit-contact-info-doctors-card/edit-contact-info-doctors-card.component';
 import { CreateDoctorsCardComponent } from './components/create-doctors-card/create-doctors-card.component';
 import { ButtonsDoctorsCardComponent } from './components/buttons-doctors-card/buttons-doctors-card.component';
-
 
 @NgModule({
   declarations: [
@@ -58,6 +57,6 @@ import { ButtonsDoctorsCardComponent } from './components/buttons-doctors-card/b
     FormErrorsModule,
     NgMultiSelectDropDownModule.forRoot(),
     GenericListCardModule,
-  ]
+  ],
 })
-export class DoctorsModule { }
+export class DoctorsModule {}

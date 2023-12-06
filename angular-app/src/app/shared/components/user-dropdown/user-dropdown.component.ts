@@ -4,7 +4,6 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { TokenStorageService } from 'src/app/core/services/token-storage.service';
 
-
 /**
  * Componente para el dropdown del usuario logueado.
  */

@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { DoctorsPageComponent } from "./pages/doctors-page/doctors-page.component";
-import { DoctorsViewPageComponent } from "./pages/doctors-view-page/doctors-view-page.component";
-import { DoctorsEditPageComponent } from "./pages/doctors-edit-page/doctors-edit-page.component";
-import { DoctorsCreatePageComponent } from "./pages/doctors-create-page/doctors-create-page.component";
+import { DoctorsPageComponent } from './pages/doctors-page/doctors-page.component';
+import { DoctorsViewPageComponent } from './pages/doctors-view-page/doctors-view-page.component';
+import { DoctorsEditPageComponent } from './pages/doctors-edit-page/doctors-edit-page.component';
+import { DoctorsCreatePageComponent } from './pages/doctors-create-page/doctors-create-page.component';
 
-import { doctorResolver } from "src/app/core/resolvers/doctor.resolver";
+import { doctorResolver } from 'src/app/core/resolvers/doctor.resolver';
 
 const routes: Routes = [
   {
@@ -24,21 +24,21 @@ const routes: Routes = [
     component: DoctorsViewPageComponent,
     title: 'Ver médico | HospitalSys',
     resolve: {
-      data: doctorResolver // Resolver para obtener los datos del médico
-    }
+      data: doctorResolver, // Resolver para obtener los datos del médico
+    },
   },
   {
     path: 'editar/:id',
     component: DoctorsEditPageComponent,
     title: 'Editar médico | HospitalSys',
     resolve: {
-      data: doctorResolver // Resolver para obtener los datos del médico
-    }
-  }
+      data: doctorResolver, // Resolver para obtener los datos del médico
+    },
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class DoctorsRoutingModule { }
+export class DoctorsRoutingModule {}

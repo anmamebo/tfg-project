@@ -1,28 +1,24 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
+import { HttpClient } from '@angular/common/http';
 
 // Servicios
-import { EntityService } from "./entity.service";
-import { HttpCommonService } from "./http-common.service";
+import { EntityService } from './entity.service';
+import { HttpCommonService } from './http-common.service';
 
 // Modelos
-import { Department } from "../models/department.model";
-
+import { Department } from '../models/department.model';
 
 /**
  * Servicio para interactuar con la API para la gestión de departamentos.
  */
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class DepartmentService extends EntityService<Department> {
   /** Endpoint de la API. */
   public endpoint = 'departments/departments/';
 
-  constructor(
-    http: HttpClient,
-    httpCommonService: HttpCommonService,
-  ) {
+  constructor(http: HttpClient, httpCommonService: HttpCommonService) {
     super(http, httpCommonService);
   }
 

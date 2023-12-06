@@ -8,9 +8,8 @@ describe('Error404PageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ Error404PageComponent ]
-    })
-    .compileComponents();
+      declarations: [Error404PageComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

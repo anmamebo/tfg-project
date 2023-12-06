@@ -1,13 +1,12 @@
 import { Component } from '@angular/core';
 
-import { breadcrumbRoomsData } from "src/app/core/constants/breadcrumb-data";
+import { breadcrumbRoomsData } from 'src/app/core/constants/breadcrumb-data';
 
 // Servicios
-import { RoomService } from "src/app/core/services/room.service";
+import { RoomService } from 'src/app/core/services/room.service';
 
 // Modelos
 import { entityData } from 'src/app/core/models/entityData.model';
-
 
 /**
  * Componente para la página de listado de salas.
@@ -15,10 +14,9 @@ import { entityData } from 'src/app/core/models/entityData.model';
 @Component({
   selector: 'app-rooms-page',
   templateUrl: './rooms-page.component.html',
-  styleUrls: ['./rooms-page.component.scss']
+  styleUrls: ['./rooms-page.component.scss'],
 })
 export class RoomsPageComponent {
-
   /** Título de la página. */
   public pageTitle: string = 'Salas';
 
@@ -31,9 +29,7 @@ export class RoomsPageComponent {
   /** Datos de la entidad. */
   public entityData: entityData;
 
-  constructor(
-    private roomService: RoomService,
-  ) {
+  constructor(private roomService: RoomService) {
     this.entityData = {
       title: {
         hasTitle: false,
@@ -44,7 +40,7 @@ export class RoomsPageComponent {
         { header: 'NOMBRE', field: 'name' },
         { header: 'DESCRIPCIÓN', field: 'description' },
         { header: 'DEPARTAMENTO', field: 'department.name' },
-        { header: 'LOCALIZACIÓN', field: 'location'}
+        { header: 'LOCALIZACIÓN', field: 'location' },
       ],
       create: {
         hasCreate: true,
@@ -56,7 +52,7 @@ export class RoomsPageComponent {
         actions: {
           show: '/salas',
           edit: '/salas/editar',
-        }
+        },
       },
       service: this.roomService,
       items: null,

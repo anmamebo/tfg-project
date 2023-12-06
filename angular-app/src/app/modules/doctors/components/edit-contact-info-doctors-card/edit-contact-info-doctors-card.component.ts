@@ -1,13 +1,12 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 // Servicios
-import { NotificationService } from "src/app/core/services/notification.service";
-import { DoctorService } from "src/app/core/services/doctor.service";
+import { NotificationService } from 'src/app/core/services/notification.service';
+import { DoctorService } from 'src/app/core/services/doctor.service';
 
 // Modelos
-import { Doctor } from "src/app/core/models/doctor.model";
-
+import { Doctor } from 'src/app/core/models/doctor.model';
 
 /**
  * Componente que representa la tarjeta de edición de la
@@ -17,7 +16,7 @@ import { Doctor } from "src/app/core/models/doctor.model";
   selector: 'app-edit-contact-info-doctors-card',
   templateUrl: './edit-contact-info-doctors-card.component.html',
   styleUrls: ['./edit-contact-info-doctors-card.component.scss'],
-  providers: [DoctorService]
+  providers: [DoctorService],
 })
 export class EditContactInfoDoctorsCardComponent implements OnInit {
   /** Título de la tarjeta */
@@ -44,12 +43,17 @@ export class EditContactInfoDoctorsCardComponent implements OnInit {
   ngOnInit(): void {
     this.editContactInfoDoctorForm = this.formBuilder.group({
       username: [this.doctor?.user?.username, Validators.required],
-      email: [this.doctor?.user?.email, [Validators.required, Validators.email]],
+      email: [
+        this.doctor?.user?.email,
+        [Validators.required, Validators.email],
+      ],
     });
   }
 
   /** Obtiene el formulario */
-  get form () { return this.editContactInfoDoctorForm; }
+  get form() {
+    return this.editContactInfoDoctorForm;
+  }
 
   /**
    * Maneja la acción de enviar el formulario.
@@ -66,8 +70,8 @@ export class EditContactInfoDoctorsCardComponent implements OnInit {
       user: {
         id: this.doctor?.user?.id,
         username: this.doctor?.user?.username,
-        email: this.form.value.email
-      }
+        email: this.form.value.email,
+      },
     };
 
     this.doctorService.update(this.doctor!.id, updatedData).subscribe({
@@ -78,7 +82,7 @@ export class EditContactInfoDoctorsCardComponent implements OnInit {
       },
       error: (error) => {
         this.notificationService.showErrorToast(error.message);
-      }
+      },
     });
   }
 }

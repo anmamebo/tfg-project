@@ -8,7 +8,6 @@ import { NotificationService } from 'src/app/core/services/notification.service'
 // Validadores
 import Validation from 'src/app/core/validators/general.validator';
 
-
 /**
  * Componente que representa un formulario para cambiar la contraseña del usuario.
  */
@@ -49,7 +48,9 @@ export class ChangePasswordCardComponent {
   }
 
   /** Obtiene el formulario */
-  get form () { return this.changePasswordForm; }
+  get form() {
+    return this.changePasswordForm;
+  }
 
   /**
    * Maneja la acción de envío del formulario de cambio de contraseña.
@@ -62,11 +63,12 @@ export class ChangePasswordCardComponent {
       return;
     }
 
-    const data: {old_password: string, password: string, password2: string} = {
-      old_password: this.form.value.current_password,
-      password: this.form.value.new_password,
-      password2: this.form.value.confirm_new_password,
-    };
+    const data: { old_password: string; password: string; password2: string } =
+      {
+        old_password: this.form.value.current_password,
+        password: this.form.value.new_password,
+        password2: this.form.value.confirm_new_password,
+      };
 
     this.userService.updatePassword(data).subscribe({
       next: (data) => {

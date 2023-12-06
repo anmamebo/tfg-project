@@ -4,7 +4,6 @@ import { ActivatedRoute } from '@angular/router';
 
 import { GroupViewPageComponent } from './group-view-page.component';
 
-
 describe('GroupViewPageComponent', () => {
   let component: GroupViewPageComponent;
   let fixture: ComponentFixture<GroupViewPageComponent>;
@@ -13,17 +12,17 @@ describe('GroupViewPageComponent', () => {
     snapshot: {
       data: {
         data: {
-          id: 1
-        }
-      }
-    }
-  }
+          id: 1,
+        },
+      },
+    },
+  };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ GroupViewPageComponent ],
+      declarations: [GroupViewPageComponent],
       providers: [{ provide: ActivatedRoute, useValue: activatedRouteStub }],
-      imports: [HttpClientTestingModule]
+      imports: [HttpClientTestingModule],
     }).compileComponents();
   });
 

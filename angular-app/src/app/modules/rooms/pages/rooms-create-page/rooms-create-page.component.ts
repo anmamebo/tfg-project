@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 
-import { breadcrumbRoomsCreateData } from "src/app/core/constants/breadcrumb-data";
-
+import { breadcrumbRoomsCreateData } from 'src/app/core/constants/breadcrumb-data';
 
 /**
  * Componente para la página de creación de una sala.
@@ -9,7 +8,7 @@ import { breadcrumbRoomsCreateData } from "src/app/core/constants/breadcrumb-dat
 @Component({
   selector: 'app-rooms-create-page',
   templateUrl: './rooms-create-page.component.html',
-  styleUrls: ['./rooms-create-page.component.scss']
+  styleUrls: ['./rooms-create-page.component.scss'],
 })
 export class RoomsCreatePageComponent {
   /** Título de la página. */

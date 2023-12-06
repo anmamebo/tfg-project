@@ -4,17 +4,9 @@ import { RouterModule } from '@angular/router';
 
 import { GenericTableComponent } from './generic-table.component';
 
-
 @NgModule({
-  declarations: [
-    GenericTableComponent
-  ],
-  imports: [
-    CommonModule,
-    RouterModule
-  ],
-  exports: [
-    GenericTableComponent
-  ]
+  declarations: [GenericTableComponent],
+  imports: [CommonModule, RouterModule],
+  exports: [GenericTableComponent],
 })
-export class GenericTableModule { }
+export class GenericTableModule {}

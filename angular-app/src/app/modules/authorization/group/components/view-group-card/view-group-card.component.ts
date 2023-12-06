@@ -1,8 +1,7 @@
 import { Component, Input } from '@angular/core';
 
 // Modelos
-import { Group } from "src/app/core/models/group.model";
-
+import { Group } from 'src/app/core/models/group.model';
 
 /**
  * Componente que representa la tarjeta de visualización de un grupo
@@ -10,7 +9,7 @@ import { Group } from "src/app/core/models/group.model";
 @Component({
   selector: 'app-view-group-card',
   templateUrl: './view-group-card.component.html',
-  styleUrls: ['./view-group-card.component.scss']
+  styleUrls: ['./view-group-card.component.scss'],
 })
 export class ViewGroupCardComponent {
   /** Título de la tarjeta */
@@ -21,10 +20,10 @@ export class ViewGroupCardComponent {
 
   /** Columnas que se visualizarán en la tabla de permisos asignados al grupo */
   public columns: any[] = [
-    { header: 'ID', field: 'id' },  
-    { header: 'NOMBRE', field: 'name' },  
-    { header: 'MODELO RELACIONADO', field: 'content_type' },  
-  ]
+    { header: 'ID', field: 'id' },
+    { header: 'NOMBRE', field: 'name' },
+    { header: 'MODELO RELACIONADO', field: 'content_type' },
+  ];
 
-  constructor() { }
+  constructor() {}
 }

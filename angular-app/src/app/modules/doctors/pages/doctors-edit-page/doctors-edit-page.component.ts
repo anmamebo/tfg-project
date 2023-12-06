@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { breadcrumbDoctorsEditData } from "src/app/core/constants/breadcrumb-data";
+import { breadcrumbDoctorsEditData } from 'src/app/core/constants/breadcrumb-data';
 
 // Servicios
-import { DoctorService } from "src/app/core/services/doctor.service";
+import { DoctorService } from 'src/app/core/services/doctor.service';
 
 // Modelos
-import { Doctor } from "src/app/core/models/doctor.model";
-
+import { Doctor } from 'src/app/core/models/doctor.model';
 
 /**
  * Componente para la página de edición de un médico.
@@ -34,8 +33,8 @@ export class DoctorsEditPageComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private doctorService: DoctorService,
-  ) { }
+    private doctorService: DoctorService
+  ) {}
 
   ngOnInit(): void {
     this.doctor = this.route.snapshot.data['data']; // Obtiene los datos del médico desde el resolver
@@ -50,7 +49,7 @@ export class DoctorsEditPageComponent implements OnInit {
       next: (doctor: Doctor) => {
         this.doctor = doctor;
         this.refreshTitle();
-      }
+      },
     });
   }
 

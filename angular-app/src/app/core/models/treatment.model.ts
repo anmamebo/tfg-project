@@ -1,6 +1,6 @@
-import { Patient } from "./patient.model";
-import { Doctor } from "./doctor.model";
-import { Appointment } from "./appointment.model";
+import { Patient } from './patient.model';
+import { Doctor } from './doctor.model';
+import { Appointment } from './appointment.model';
 
 export interface StatusBadgeClasses {
   [status: string]: string;
@@ -18,7 +18,7 @@ export class Treatment {
     public id: string,
     public status: string,
     public description: string,
-    public duration : string,
+    public duration: string,
     public start_date: Date,
     public end_date?: Date,
     public comments?: string,
@@ -26,6 +26,6 @@ export class Treatment {
     public recommended_dosage?: string,
     public patient?: Patient,
     public doctor?: Doctor,
-    public appointment?: Appointment,
+    public appointment?: Appointment
   ) {}
 }

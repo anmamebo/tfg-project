@@ -10,7 +10,7 @@ describe('AddressInfoCardComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [AddressInfoCardComponent],
-      imports: [HttpClientTestingModule]
+      imports: [HttpClientTestingModule],
     });
     fixture = TestBed.createComponent(AddressInfoCardComponent);
     component = fixture.componentInstance;

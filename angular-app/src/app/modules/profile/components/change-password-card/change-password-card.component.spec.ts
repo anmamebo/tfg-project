@@ -9,10 +9,9 @@ describe('ChangePasswordCardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ChangePasswordCardComponent ],
-      imports: [HttpClientTestingModule]
-    })
-    .compileComponents();
+      declarations: [ChangePasswordCardComponent],
+      imports: [HttpClientTestingModule],
+    }).compileComponents();
   });
 
   beforeEach(() => {

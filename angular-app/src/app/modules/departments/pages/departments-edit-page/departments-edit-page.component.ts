@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { breadcrumbDepartmentsEditData } from "src/app/core/constants/breadcrumb-data";
+import { breadcrumbDepartmentsEditData } from 'src/app/core/constants/breadcrumb-data';
 
 // Modelos
-import { Department } from "src/app/core/models/department.model";
-
+import { Department } from 'src/app/core/models/department.model';
 
 /**
  * Componente para la página de edición de un departamento.
@@ -13,7 +12,7 @@ import { Department } from "src/app/core/models/department.model";
 @Component({
   selector: 'app-departments-edit-page',
   templateUrl: './departments-edit-page.component.html',
-  styleUrls: ['./departments-edit-page.component.scss']
+  styleUrls: ['./departments-edit-page.component.scss'],
 })
 export class DepartmentsEditPageComponent implements OnInit {
   /** Título de la página. */
@@ -28,9 +27,7 @@ export class DepartmentsEditPageComponent implements OnInit {
   /** Departamento a editar. */
   public department: Department | null = null;
 
-  constructor(
-    private route: ActivatedRoute,
-  ) { }
+  constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.department = this.route.snapshot.data['data']; // Obtiene los datos del departamento desde el resolver

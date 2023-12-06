@@ -1,22 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from "@angular/forms";
+import { ReactiveFormsModule } from '@angular/forms';
 
 // Módulos de terceros
-import { SweetAlert2Module } from "@sweetalert2/ngx-sweetalert2";
-import { FlatpickrModule } from "angularx-flatpickr";
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { FlatpickrModule } from 'angularx-flatpickr';
 
 // Módulos
 import { AppointmentsRoutingModule } from './appointments-routing.module';
-import { SharedModule } from "src/app/shared/shared.module";
-import { GenericPageModule } from "src/app/shared/components/generic-page/generic-page.module";
-import { GenericCardModule } from "src/app/shared/components/generic-card/generic-card.module";
-import { LoadingSpinnerModule } from "src/app/shared/components/loading-spinner/loading-spinner.module";
-import { GenericTableModule } from "src/app/shared/components/generic-table/generic-table.module";
-import { ElementsPerPageModule } from "src/app/shared/components/elements-per-page/elements-per-page.module";
-import { PaginationModule } from "src/app/shared/components/pagination/pagination.module";
-import { FormErrorsModule } from "src/app/shared/components/form-errors/form-errors.module";
-import { SearchModule } from "src/app/shared/components/search/search.module";
+import { SharedModule } from 'src/app/shared/shared.module';
+import { GenericPageModule } from 'src/app/shared/components/generic-page/generic-page.module';
+import { GenericCardModule } from 'src/app/shared/components/generic-card/generic-card.module';
+import { LoadingSpinnerModule } from 'src/app/shared/components/loading-spinner/loading-spinner.module';
+import { GenericTableModule } from 'src/app/shared/components/generic-table/generic-table.module';
+import { ElementsPerPageModule } from 'src/app/shared/components/elements-per-page/elements-per-page.module';
+import { PaginationModule } from 'src/app/shared/components/pagination/pagination.module';
+import { FormErrorsModule } from 'src/app/shared/components/form-errors/form-errors.module';
+import { SearchModule } from 'src/app/shared/components/search/search.module';
 
 // Componentes Páginas
 import { AppointmentsPageComponent } from './pages/appointments-page/appointments-page.component';
@@ -34,7 +34,6 @@ import { TableAppointmentsComponent } from './components/table-appointments/tabl
 import { AccordionTreatmentsAppointmentsComponent } from './components/accordion-treatments-appointments/accordion-treatments-appointments.component';
 import { FormCreateTreatmentAppointmentsComponent } from './components/form-create-treatment-appointments/form-create-treatment-appointments.component';
 
-
 @NgModule({
   declarations: [
     AppointmentsPageComponent,
@@ -46,7 +45,7 @@ import { FormCreateTreatmentAppointmentsComponent } from './components/form-crea
     ViewReasonObservationsAppointmentsCardComponent,
     ViewTreatmentsAppointmentsCardComponent,
     AccordionTreatmentsAppointmentsComponent,
-    FormCreateTreatmentAppointmentsComponent
+    FormCreateTreatmentAppointmentsComponent,
   ],
   imports: [
     CommonModule,
@@ -63,6 +62,6 @@ import { FormCreateTreatmentAppointmentsComponent } from './components/form-crea
     SweetAlert2Module.forRoot(),
     FlatpickrModule.forRoot(),
     SearchModule,
-  ]
+  ],
 })
-export class AppointmentsModule { }
+export class AppointmentsModule {}

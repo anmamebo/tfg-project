@@ -1,28 +1,27 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-
 /**
  * Componente que representa la paginación
  */
 @Component({
   selector: 'app-pagination',
   templateUrl: './pagination.component.html',
-  styleUrls: ['./pagination.component.scss']
+  styleUrls: ['./pagination.component.scss'],
 })
 export class PaginationComponent {
   /** Página actual */
   @Input() public page: number = 1;
-  
+
   /** Número de páginas totales */
   @Input() public totalPages: number = 1;
-  
+
   /** Número de elementos totales */
   @Input() public numItems: number = 0;
-  
+
   /** Evento que se emite cuando se cambia de página */
   @Output() pageEmitter: EventEmitter<number> = new EventEmitter<number>();
 
-  constructor() { }
+  constructor() {}
 
   /**
    * Va a la página siguiente

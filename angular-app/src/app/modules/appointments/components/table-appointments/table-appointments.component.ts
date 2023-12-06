@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
-import { GenericTableComponent } from "src/app/shared/components/generic-table/generic-table.component";
+import { GenericTableComponent } from 'src/app/shared/components/generic-table/generic-table.component';
 
 // Modelos
-import { StatusBadgeClasses, STATUS_BADGE_CLASSES } from 'src/app/core/models/appointment.model';
-
+import {
+  StatusBadgeClasses,
+  STATUS_BADGE_CLASSES,
+} from 'src/app/core/models/appointment.model';
 
 /**
  * Componente que representa una tabla de citas.
@@ -15,7 +17,6 @@ import { StatusBadgeClasses, STATUS_BADGE_CLASSES } from 'src/app/core/models/ap
 export class TableAppointmentsComponent extends GenericTableComponent {
   /** Classes de los badges de estado. */
   public statusBadgeClasses: StatusBadgeClasses = STATUS_BADGE_CLASSES;
-
 
   constructor() {
     super();

@@ -1,9 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 // Servicios
-import { RoomService } from "src/app/core/services/room.service";
-import { NotificationService } from "src/app/core/services/notification.service";
-
+import { RoomService } from 'src/app/core/services/room.service';
+import { NotificationService } from 'src/app/core/services/notification.service';
 
 /**
  * Componente para los botones de la tarjeta de una sala
@@ -27,7 +26,7 @@ export class ButtonsRoomsCardComponent {
   constructor(
     private roomService: RoomService,
     private notificationService: NotificationService
-  ) { }
+  ) {}
 
   /**
    * Elimina una sala
@@ -35,14 +34,15 @@ export class ButtonsRoomsCardComponent {
    */
   public deleteRoom(id: string): void {
     this.notificationService.showConfirmDeleteDialog(() => {
-
       this.roomService.delete(id).subscribe({
         next: () => {
           this.refreshRoom.emit();
         },
         error: () => {
-          this.notificationService.showErrorToast('No se ha podido eliminar la sala.');
-        }
+          this.notificationService.showErrorToast(
+            'No se ha podido eliminar la sala.'
+          );
+        },
       });
     });
   }
@@ -53,14 +53,15 @@ export class ButtonsRoomsCardComponent {
    */
   public activateRoom(id: string): void {
     this.notificationService.showConfirmReactivateDialog(() => {
-
       this.roomService.activate(id).subscribe({
         next: () => {
           this.refreshRoom.emit();
         },
         error: () => {
-          this.notificationService.showErrorToast('No se ha podido activar la sala.');
-        }
+          this.notificationService.showErrorToast(
+            'No se ha podido activar la sala.'
+          );
+        },
       });
     });
   }

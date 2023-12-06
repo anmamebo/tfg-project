@@ -9,10 +9,9 @@ describe('PatientInfoCardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PatientInfoCardComponent ],
-      imports: [HttpClientTestingModule]
-    })
-    .compileComponents();
+      declarations: [PatientInfoCardComponent],
+      imports: [HttpClientTestingModule],
+    }).compileComponents();
   });
 
   beforeEach(() => {

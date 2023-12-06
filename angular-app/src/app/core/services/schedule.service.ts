@@ -5,17 +5,16 @@ import { Observable } from 'rxjs';
 import { API_URL } from '../constants/API_URL';
 
 // Servicios
-import { HttpCommonService } from "./http-common.service";
+import { HttpCommonService } from './http-common.service';
 
 // Modelos
-import { Schedule } from "../models/schedule.model";
-
+import { Schedule } from '../models/schedule.model';
 
 /**
  * Servicio para interactuar con la API para la gestión de horarios.
  */
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ScheduleService {
   /** URL base de la API. */

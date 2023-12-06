@@ -2,12 +2,11 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 // Servicios
-import { DepartmentService } from "src/app/core/services/department.service";
+import { DepartmentService } from 'src/app/core/services/department.service';
 import { NotificationService } from 'src/app/core/services/notification.service';
 
 // Modelos
-import { Department } from "src/app/core/models/department.model";
-
+import { Department } from 'src/app/core/models/department.model';
 
 /**
  * Componente que representa la tarjeta de edición de la
@@ -20,7 +19,7 @@ import { Department } from "src/app/core/models/department.model";
   providers: [DepartmentService],
 })
 export class EditInfoDepartmentsCardComponent implements OnInit {
-  /** Título de la tarjeta */	
+  /** Título de la tarjeta */
   public titleCard: string = 'Información Básica';
 
   /** Departamento que se editará */
@@ -28,10 +27,10 @@ export class EditInfoDepartmentsCardComponent implements OnInit {
 
   /** Formulario para editar la información básica de un departamento */
   public editInfoDepartmentForm: FormGroup = new FormGroup({});
-  
+
   /** Indica si se ha enviado el formulario */
   public submitted: boolean = false;
-  
+
   constructor(
     private formBuilder: FormBuilder,
     private departmentService: DepartmentService,
@@ -40,13 +39,18 @@ export class EditInfoDepartmentsCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.editInfoDepartmentForm = this.formBuilder.group({
-      name: [this.department?.name, [Validators.required, Validators.maxLength(50)]],
+      name: [
+        this.department?.name,
+        [Validators.required, Validators.maxLength(50)],
+      ],
       description: [this.department?.description, [Validators.maxLength(255)]],
     });
   }
 
   /** Obtiene el formulario */
-  get form() { return this.editInfoDepartmentForm; }
+  get form() {
+    return this.editInfoDepartmentForm;
+  }
 
   /**
    * Maneja la acción de envio del formulario
@@ -61,7 +65,9 @@ export class EditInfoDepartmentsCardComponent implements OnInit {
     const updatedData: any = {
       id: this.department?.id,
       name: this.form.value.name,
-      description: this.form.value.description ? this.form.value.description : null,
+      description: this.form.value.description
+        ? this.form.value.description
+        : null,
     };
 
     this.departmentService.update(this.department!.id, updatedData).subscribe({
@@ -71,7 +77,7 @@ export class EditInfoDepartmentsCardComponent implements OnInit {
       },
       error: (error: any) => {
         this.notificationService.showErrorToast(error.message);
-      }
-    })
+      },
+    });
   }
 }

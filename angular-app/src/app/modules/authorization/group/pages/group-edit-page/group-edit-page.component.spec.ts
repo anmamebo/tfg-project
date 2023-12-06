@@ -4,7 +4,6 @@ import { ActivatedRoute } from '@angular/router';
 
 import { GroupEditPageComponent } from './group-edit-page.component';
 
-
 describe('GroupEditPageComponent', () => {
   let component: GroupEditPageComponent;
   let fixture: ComponentFixture<GroupEditPageComponent>;
@@ -13,17 +12,17 @@ describe('GroupEditPageComponent', () => {
     snapshot: {
       data: {
         data: {
-          id: 1
-        }
-      }
-    }
-  }
+          id: 1,
+        },
+      },
+    },
+  };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ GroupEditPageComponent ],
+      declarations: [GroupEditPageComponent],
       providers: [{ provide: ActivatedRoute, useValue: activatedRouteStub }],
-      imports: [HttpClientTestingModule]
+      imports: [HttpClientTestingModule],
     }).compileComponents();
   });
 

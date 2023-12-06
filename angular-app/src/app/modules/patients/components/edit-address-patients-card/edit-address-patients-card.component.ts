@@ -1,18 +1,17 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { INTEGER_REGEXP } from "src/app/core/constants/reg-exp";
+import { INTEGER_REGEXP } from 'src/app/core/constants/reg-exp';
 
 // Servicios
-import { AddressService } from "src/app/core/services/address.service";
+import { AddressService } from 'src/app/core/services/address.service';
 import { NotificationService } from 'src/app/core/services/notification.service';
 
 // Modelos
-import { Address } from "src/app/core/models/address.model";
-
+import { Address } from 'src/app/core/models/address.model';
 
 /**
- * Componente que representa la tarjeta de edición de la 
+ * Componente que representa la tarjeta de edición de la
  * dirección de un paciente
  */
 @Component({
@@ -38,7 +37,8 @@ export class EditAddressPatientsCardComponent implements OnInit {
   public submitted: boolean = false;
 
   /** Evento para actualizar los datos del paciente */
-  @Output() public refreshPatient: EventEmitter<void> = new EventEmitter<void>();
+  @Output() public refreshPatient: EventEmitter<void> =
+    new EventEmitter<void>();
 
   constructor(
     private formBuilder: FormBuilder,
@@ -48,18 +48,42 @@ export class EditAddressPatientsCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.editAddressPatientForm = this.formBuilder.group({
-      street: [this.address?.street, [Validators.required, Validators.maxLength(255)]],
-      number: [this.address?.number, [Validators.required, Validators.pattern(INTEGER_REGEXP)]],
+      street: [
+        this.address?.street,
+        [Validators.required, Validators.maxLength(255)],
+      ],
+      number: [
+        this.address?.number,
+        [Validators.required, Validators.pattern(INTEGER_REGEXP)],
+      ],
       floor: [this.address?.floor, Validators.maxLength(10)],
-      city: [this.address?.city, [Validators.required, Validators.maxLength(255)]],
-      province: [this.address?.province, [Validators.required, Validators.maxLength(255)]],
-      country: [this.address?.country, [Validators.required, Validators.maxLength(255)]],
-      postal_code: [this.address?.postal_code, [Validators.required, Validators.pattern(INTEGER_REGEXP), Validators.maxLength(10)]],
+      city: [
+        this.address?.city,
+        [Validators.required, Validators.maxLength(255)],
+      ],
+      province: [
+        this.address?.province,
+        [Validators.required, Validators.maxLength(255)],
+      ],
+      country: [
+        this.address?.country,
+        [Validators.required, Validators.maxLength(255)],
+      ],
+      postal_code: [
+        this.address?.postal_code,
+        [
+          Validators.required,
+          Validators.pattern(INTEGER_REGEXP),
+          Validators.maxLength(10),
+        ],
+      ],
     });
   }
 
   /** Obtiene el formulario */
-  get form () { return this.editAddressPatientForm; }
+  get form() {
+    return this.editAddressPatientForm;
+  }
 
   /**
    * Maneja la acción de envio del formulario
@@ -82,8 +106,8 @@ export class EditAddressPatientsCardComponent implements OnInit {
       postal_code: this.form.value.postal_code,
     };
 
-    
-    if (this.address === null) { // Si el paciente no tiene dirección, se crea una nueva
+    if (this.address === null) {
+      // Si el paciente no tiene dirección, se crea una nueva
       address.patient_id = this.patientId;
 
       this.addressService.createAddress(address).subscribe({
@@ -94,10 +118,10 @@ export class EditAddressPatientsCardComponent implements OnInit {
         },
         error: (error) => {
           this.notificationService.showErrorToast(error.message);
-        }
+        },
       });
-      
-    } else { // Si el paciente tiene dirección, se actualiza
+    } else {
+      // Si el paciente tiene dirección, se actualiza
       this.addressService.updateAddress(address).subscribe({
         next: (data) => {
           this.submitted = false;
@@ -106,7 +130,7 @@ export class EditAddressPatientsCardComponent implements OnInit {
         },
         error: (error) => {
           this.notificationService.showErrorToast(error.message);
-        }
+        },
       });
     }
   }

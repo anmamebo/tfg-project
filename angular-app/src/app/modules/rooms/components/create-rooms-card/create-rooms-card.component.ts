@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { IDropdownSettings } from "ng-multiselect-dropdown";
-import { INTEGER_REGEXP } from "src/app/core/constants/reg-exp";
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { INTEGER_REGEXP } from 'src/app/core/constants/reg-exp';
 
 // Servicios
-import { RoomService } from "src/app/core/services/room.service";
-import { DepartmentService } from "src/app/core/services/department.service";
+import { RoomService } from 'src/app/core/services/room.service';
+import { DepartmentService } from 'src/app/core/services/department.service';
 import { NotificationService } from 'src/app/core/services/notification.service';
-
 
 /**
  * Componente que representa la tarjeta de creación de una sala
@@ -61,13 +60,15 @@ export class CreateRoomsCardComponent implements OnInit {
       noDataAvailablePlaceholderText: 'No hay datos disponibles',
       noFilteredDataAvailablePlaceholderText: 'No hay datos disponibles',
       itemsShowLimit: 6,
-      allowSearchFilter: true
+      allowSearchFilter: true,
     };
 
     this.getDepartments();
   }
 
-  get form() { return this.createRoomForm; }
+  get form() {
+    return this.createRoomForm;
+  }
 
   /**
    * Maneja la acción de enviar el formulario.
@@ -81,14 +82,16 @@ export class CreateRoomsCardComponent implements OnInit {
 
     const room: any = {
       name: this.form.value.name,
-      description: this.form.value.description ? this.form.value.description : null,
+      description: this.form.value.description
+        ? this.form.value.description
+        : null,
       capacity: this.form.value.capacity ? this.form.value.capacity : null,
       type: this.form.value.type ? this.form.value.type : null,
       is_available: this.form.value.is_available,
       location: this.form.value.location,
-      department: this.form.value.department[0].item_id
+      department: this.form.value.department[0].item_id,
     };
-    
+
     this.roomService.create(room).subscribe({
       next: (data) => {
         this.form.reset();
@@ -97,7 +100,7 @@ export class CreateRoomsCardComponent implements OnInit {
       },
       error: (error) => {
         this.notificationService.showErrorToast(error.message);
-      }
+      },
     });
   }
 
@@ -107,14 +110,14 @@ export class CreateRoomsCardComponent implements OnInit {
   public getDepartments() {
     this.departmentService.getItems().subscribe({
       next: (data) => {
-        this.departments = data.map((item: {id: String, name: String}) => ({
+        this.departments = data.map((item: { id: String; name: String }) => ({
           item_id: item.id,
-          item_text: item.name
-        }))
+          item_text: item.name,
+        }));
       },
       error: (error) => {
         this.notificationService.showErrorToast(error.message);
-      }
+      },
     });
   }
 }

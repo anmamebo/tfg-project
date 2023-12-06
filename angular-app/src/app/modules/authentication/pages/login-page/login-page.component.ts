@@ -6,7 +6,6 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { TokenStorageService } from 'src/app/core/services/token-storage.service';
 
-
 /**
  * Componente que representa la página de inicio de sesión.
  */
@@ -39,7 +38,9 @@ export class LoginPageComponent {
   }
 
   /** Obtiene el formulario */
-  get form () { return this.loginForm; }
+  get form() {
+    return this.loginForm;
+  }
 
   /**
    * Maneja la acción de envío del formulario de inicio de sesión.
@@ -52,11 +53,10 @@ export class LoginPageComponent {
       return;
     }
 
-    const user: {username: string, password: string} = {
+    const user: { username: string; password: string } = {
       username: this.form.value.username,
       password: this.form.value.password,
     };
-    
 
     this.authService.login(user).subscribe({
       next: (data) => {

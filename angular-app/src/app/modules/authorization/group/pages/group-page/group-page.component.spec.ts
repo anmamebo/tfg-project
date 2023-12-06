@@ -9,10 +9,9 @@ describe('GroupPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ GroupPageComponent ],
+      declarations: [GroupPageComponent],
       imports: [HttpClientTestingModule],
-    })
-    .compileComponents();
+    }).compileComponents();
   });
 
   beforeEach(() => {

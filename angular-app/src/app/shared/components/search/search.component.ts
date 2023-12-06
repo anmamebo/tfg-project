@@ -1,27 +1,25 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
-
 /**
  * Componente que representa un buscador.
  */
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
-  styleUrls: ['./search.component.scss']
+  styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent {
   /** Evento que se lanza al pulsar el botón de buscar. */
-  @Output() public searchSubmitted: EventEmitter<string> = new EventEmitter<string>();
+  @Output() public searchSubmitted: EventEmitter<string> =
+    new EventEmitter<string>();
 
   /** Formulario de búsqueda. */
   public formSearch: FormGroup;
 
-  constructor(
-    private formBuilder: FormBuilder
-  ) {
+  constructor(private formBuilder: FormBuilder) {
     this.formSearch = this.formBuilder.group({
-      searchTerm: ['']
+      searchTerm: [''],
     });
   }
 

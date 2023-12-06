@@ -2,9 +2,8 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 // Servicios
-import { DepartmentService } from "src/app/core/services/department.service";
+import { DepartmentService } from 'src/app/core/services/department.service';
 import { NotificationService } from 'src/app/core/services/notification.service';
-
 
 /**
  * Componente que representa la tarjeta de creación de un departamento
@@ -36,7 +35,9 @@ export class CreateDepartmentsCardComponent {
     });
   }
 
-  get form() { return this.createDepartmentForm; }
+  get form() {
+    return this.createDepartmentForm;
+  }
 
   /**
    * Maneja la acción de enviar el formulario.
@@ -50,7 +51,9 @@ export class CreateDepartmentsCardComponent {
 
     const department: any = {
       name: this.form.value.name,
-      description: this.form.value.description ? this.form.value.description : null,
+      description: this.form.value.description
+        ? this.form.value.description
+        : null,
     };
 
     this.departmentService.create(department).subscribe({
@@ -58,10 +61,10 @@ export class CreateDepartmentsCardComponent {
         this.form.reset();
         this.submitted = false;
         this.notificationService.showSuccessToast(data.message);
-      }, 
+      },
       error: (error: any) => {
         this.notificationService.showErrorToast(error.message);
-      }
+      },
     });
   }
 }

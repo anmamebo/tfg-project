@@ -8,7 +8,7 @@ describe('ElementsPerPageComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ElementsPerPageComponent]
+      declarations: [ElementsPerPageComponent],
     });
     fixture = TestBed.createComponent(ElementsPerPageComponent);
     component = fixture.componentInstance;

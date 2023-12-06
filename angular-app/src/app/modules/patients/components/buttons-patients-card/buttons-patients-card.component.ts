@@ -1,9 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 // Servicios
-import { PatientService } from "src/app/core/services/patient.service";
-import { NotificationService } from "src/app/core/services/notification.service";
-
+import { PatientService } from 'src/app/core/services/patient.service';
+import { NotificationService } from 'src/app/core/services/notification.service';
 
 /**
  * Componente para los botones de la tarjeta de un paciente
@@ -27,7 +26,7 @@ export class ButtonsPatientsCardComponent {
   constructor(
     private patientService: PatientService,
     private notificationService: NotificationService
-  ) { }
+  ) {}
 
   /**
    * Elimina un paciente
@@ -35,14 +34,15 @@ export class ButtonsPatientsCardComponent {
    */
   public deletePatient(id: string): void {
     this.notificationService.showConfirmDeleteDialog(() => {
-
       this.patientService.delete(id).subscribe({
         next: () => {
           this.refreshPatient.emit();
         },
         error: () => {
-          this.notificationService.showErrorToast('No se ha podido eliminar el paciente.');
-        }
+          this.notificationService.showErrorToast(
+            'No se ha podido eliminar el paciente.'
+          );
+        },
       });
     });
   }
@@ -53,14 +53,15 @@ export class ButtonsPatientsCardComponent {
    */
   public activatePatient(id: string): void {
     this.notificationService.showConfirmReactivateDialog(() => {
-
       this.patientService.activate(id).subscribe({
         next: () => {
           this.refreshPatient.emit();
         },
         error: () => {
-          this.notificationService.showErrorToast('No se ha podido activar el paciente.');
-        }
+          this.notificationService.showErrorToast(
+            'No se ha podido activar el paciente.'
+          );
+        },
       });
     });
   }

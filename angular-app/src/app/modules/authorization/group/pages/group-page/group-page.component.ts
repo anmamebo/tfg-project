@@ -1,16 +1,15 @@
 import { Component, ViewChild } from '@angular/core';
 
-import { breadcrumbGroupData } from "src/app/core/constants/breadcrumb-data";
+import { breadcrumbGroupData } from 'src/app/core/constants/breadcrumb-data';
 
 // Servicios
-import { GroupService } from "src/app/core/services/group.service";
+import { GroupService } from 'src/app/core/services/group.service';
 
 // Modelos
 import { entityData } from 'src/app/core/models/entityData.model';
 
 // Componentes
-import { GenericListCardComponent } from "src/app/shared/components/generic-list-card/generic-list-card.component";
-
+import { GenericListCardComponent } from 'src/app/shared/components/generic-list-card/generic-list-card.component';
 
 /**
  * Componente para la página de grupos.
@@ -18,15 +17,16 @@ import { GenericListCardComponent } from "src/app/shared/components/generic-list
 @Component({
   selector: 'app-group-page',
   templateUrl: './group-page.component.html',
-  styleUrls: ['./group-page.component.scss']
+  styleUrls: ['./group-page.component.scss'],
 })
 export class GroupPageComponent {
   /** Título de la página. */
   public pageTitle: string = 'Grupos (Roles)';
 
   /** Descripción de la página. */
-  public pageDescription: string = 'Aquí puedes ver los diferentes grupos (roles).';
-  
+  public pageDescription: string =
+    'Aquí puedes ver los diferentes grupos (roles).';
+
   /** Datos para el componente `app-breadcrumb`. */
   public breadcrumbData = breadcrumbGroupData;
 
@@ -34,11 +34,10 @@ export class GroupPageComponent {
   public entityData: entityData;
 
   /** Referencia al componente hijo `ListGroupCardComponent`. */
-  @ViewChild(GenericListCardComponent) listGroupCardComponent!: GenericListCardComponent;
+  @ViewChild(GenericListCardComponent)
+  listGroupCardComponent!: GenericListCardComponent;
 
-  constructor(
-    private groupService: GroupService,
-  ) {
+  constructor(private groupService: GroupService) {
     this.entityData = {
       title: {
         hasTitle: false,
@@ -46,8 +45,8 @@ export class GroupPageComponent {
       entityPlural: 'Grupos',
       entitySingular: 'Grupo',
       columns: [
-        { header: 'ID', field: 'id' },  
-        { header: 'NOMBRE', field: 'name' },  
+        { header: 'ID', field: 'id' },
+        { header: 'NOMBRE', field: 'name' },
       ],
       create: {
         hasCreate: false,
@@ -57,7 +56,7 @@ export class GroupPageComponent {
         actions: {
           show: '/autorizacion/grupos',
           edit: '/autorizacion/grupos/editar',
-        }
+        },
       },
       service: this.groupService,
       items: null,

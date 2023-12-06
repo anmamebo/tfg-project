@@ -2,12 +2,11 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 // Servicios
-import { GroupService } from "src/app/core/services/group.service";
+import { GroupService } from 'src/app/core/services/group.service';
 import { NotificationService } from 'src/app/core/services/notification.service';
 
 // Modelos
-import { Group } from "src/app/core/models/group.model";
-
+import { Group } from 'src/app/core/models/group.model';
 
 /**
  * Componente que representa la tarjeta para editar un grupo
@@ -35,16 +34,18 @@ export class EditGroupCardComponent implements OnInit {
     private formBuilder: FormBuilder,
     private groupService: GroupService,
     private notificationService: NotificationService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.editGroupForm = this.formBuilder.group({
-      name: [this.group.name, Validators.required]
+      name: [this.group.name, Validators.required],
     });
   }
 
   /** Obtiene el formulario */
-  get form () { return this.editGroupForm; }
+  get form() {
+    return this.editGroupForm;
+  }
 
   /**
    * Maneja la acción de envio del formulario
@@ -56,10 +57,7 @@ export class EditGroupCardComponent implements OnInit {
       return;
     }
 
-    const groupEdited: Group = new Group(
-      this.group.id,
-      this.form.value.name
-    );
+    const groupEdited: Group = new Group(this.group.id, this.form.value.name);
 
     this.groupService.update(this.group.id, groupEdited).subscribe({
       next: (data) => {

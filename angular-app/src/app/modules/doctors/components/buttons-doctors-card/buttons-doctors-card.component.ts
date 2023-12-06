@@ -1,9 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 // Servicios
-import { DoctorService } from "src/app/core/services/doctor.service";
-import { NotificationService } from "src/app/core/services/notification.service";
-
+import { DoctorService } from 'src/app/core/services/doctor.service';
+import { NotificationService } from 'src/app/core/services/notification.service';
 
 /**
  * Componente para los botones de la tarjeta de un médico
@@ -27,7 +26,7 @@ export class ButtonsDoctorsCardComponent {
   constructor(
     private doctorService: DoctorService,
     private notificationService: NotificationService
-  ) { }
+  ) {}
 
   /**
    * Elimina un médico
@@ -35,14 +34,15 @@ export class ButtonsDoctorsCardComponent {
    */
   public deleteDoctor(id: string): void {
     this.notificationService.showConfirmDeleteDialog(() => {
-
       this.doctorService.delete(id).subscribe({
         next: () => {
           this.refreshDoctor.emit();
         },
         error: () => {
-          this.notificationService.showErrorToast('No se ha podido eliminar el doctor.');
-        }
+          this.notificationService.showErrorToast(
+            'No se ha podido eliminar el doctor.'
+          );
+        },
       });
     });
   }
@@ -53,14 +53,15 @@ export class ButtonsDoctorsCardComponent {
    */
   public activateDoctor(id: string): void {
     this.notificationService.showConfirmReactivateDialog(() => {
-
       this.doctorService.activate(id).subscribe({
         next: () => {
           this.refreshDoctor.emit();
         },
         error: () => {
-          this.notificationService.showErrorToast('No se ha podido activar el médico.');
-        }
+          this.notificationService.showErrorToast(
+            'No se ha podido activar el médico.'
+          );
+        },
       });
     });
   }

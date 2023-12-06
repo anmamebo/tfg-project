@@ -1,21 +1,17 @@
 import { Injectable } from '@angular/core';
-import { HttpHeaders } from "@angular/common/http";
+import { HttpHeaders } from '@angular/common/http';
 
 // Servicios
-import { TokenStorageService } from "./token-storage.service";
-
+import { TokenStorageService } from './token-storage.service';
 
 /**
  * Servicio para la gestión de encabezados HTTP comunes.
  */
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class HttpCommonService {
-
-  constructor(
-    private tokenStorageService: TokenStorageService
-  ) { }
+  constructor(private tokenStorageService: TokenStorageService) {}
 
   /**
    * Obtiene los encabezados HTTP comunes.
@@ -29,7 +25,7 @@ export class HttpCommonService {
     const token = this.tokenStorageService.getToken();
     if (token) {
       headers = headers.append('Authorization', 'Bearer ' + token);
-    }    
+    }
 
     return headers;
   }

@@ -8,7 +8,6 @@ import { NotificationService } from 'src/app/core/services/notification.service'
 // Modelos
 import { User } from 'src/app/core/models/user.model';
 
-
 /**
  * Componente que representa la tarjeta de información básica del usuario
  */
@@ -32,7 +31,8 @@ export class BasicInfoCardComponent implements OnInit {
   public submitted: boolean = false;
 
   /** Evento que se emite cuando se actualizan los datos del usuario */
-  @Output() public updatedUserEvent: EventEmitter<void> = new EventEmitter<void>();
+  @Output() public updatedUserEvent: EventEmitter<void> =
+    new EventEmitter<void>();
 
   constructor(
     private formBuilder: FormBuilder,
@@ -51,7 +51,9 @@ export class BasicInfoCardComponent implements OnInit {
   }
 
   /** Obtiene el formulario */
-  get form () { return this.updateUserDataForm; }
+  get form() {
+    return this.updateUserDataForm;
+  }
 
   /**
    * Maneja la acción de envio del formulario

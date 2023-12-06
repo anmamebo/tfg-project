@@ -1,13 +1,12 @@
 import { Component } from '@angular/core';
 
-import { breadcrumbDoctorsData } from "src/app/core/constants/breadcrumb-data";
+import { breadcrumbDoctorsData } from 'src/app/core/constants/breadcrumb-data';
 
 // Servicios
-import { DoctorService } from "src/app/core/services/doctor.service";
+import { DoctorService } from 'src/app/core/services/doctor.service';
 
 // Modelos
 import { entityData } from 'src/app/core/models/entityData.model';
-
 
 /**
  * Componente para la página de doctores.
@@ -15,7 +14,7 @@ import { entityData } from 'src/app/core/models/entityData.model';
 @Component({
   selector: 'app-doctors-page',
   templateUrl: './doctors-page.component.html',
-  styleUrls: ['./doctors-page.component.scss']
+  styleUrls: ['./doctors-page.component.scss'],
 })
 export class DoctorsPageComponent {
   /** Título de la página. */
@@ -25,14 +24,12 @@ export class DoctorsPageComponent {
   public pageDescription: string = 'Aquí puedes ver a los médicos.';
 
   /** Datos para el componente `app-breadcrumb`. */
-  public breadcrumbData = breadcrumbDoctorsData
+  public breadcrumbData = breadcrumbDoctorsData;
 
   /** Datos de la entidad. */
   public entityData: entityData;
 
-  constructor(
-    private doctorService: DoctorService,
-  ) { 
+  constructor(private doctorService: DoctorService) {
     this.entityData = {
       title: {
         hasTitle: false,
@@ -55,7 +52,7 @@ export class DoctorsPageComponent {
         actions: {
           show: '/medicos',
           edit: '/medicos/editar',
-        }
+        },
       },
       service: this.doctorService,
       items: null,
@@ -67,8 +64,7 @@ export class DoctorsPageComponent {
         hasSearch: true,
         search: '',
       },
-      hasStateFilter: true
+      hasStateFilter: true,
     };
   }
-
 }

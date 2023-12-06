@@ -4,26 +4,22 @@ import { Observable } from 'rxjs';
 
 // Servicios
 import { EntityService } from './entity.service';
-import { HttpCommonService } from "./http-common.service";
+import { HttpCommonService } from './http-common.service';
 
 // Modelos
 import { Patient } from '../models/patient.model';
-
 
 /**
  * Servicio para interactuar con la API para la gestión de pacientes.
  */
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PatientService extends EntityService<Patient> {
   /** Endpoint de la API. */
   public endpoint = 'patients/patients/';
 
-  constructor(
-    http: HttpClient,
-    httpCommonService: HttpCommonService,
-  ) {
+  constructor(http: HttpClient, httpCommonService: HttpCommonService) {
     super(http, httpCommonService);
   }
 

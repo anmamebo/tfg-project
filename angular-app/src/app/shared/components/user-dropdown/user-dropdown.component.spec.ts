@@ -9,10 +9,9 @@ describe('UserDropdownComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ UserDropdownComponent ],
-      imports: [HttpClientTestingModule]
-    })
-    .compileComponents();
+      declarations: [UserDropdownComponent],
+      imports: [HttpClientTestingModule],
+    }).compileComponents();
   });
 
   beforeEach(() => {

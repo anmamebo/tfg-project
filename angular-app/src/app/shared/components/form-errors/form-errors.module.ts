@@ -3,16 +3,9 @@ import { CommonModule } from '@angular/common';
 
 import { FormErrorsComponent } from './form-errors.component';
 
-
 @NgModule({
-  declarations: [
-    FormErrorsComponent
-  ],
-  imports: [
-    CommonModule
-  ],
-  exports: [
-    FormErrorsComponent
-  ]
+  declarations: [FormErrorsComponent],
+  imports: [CommonModule],
+  exports: [FormErrorsComponent],
 })
-export class FormErrorsModule { }
+export class FormErrorsModule {}

@@ -10,7 +10,7 @@ describe('ViewInfoStatusAppointmentsCardComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [ViewInfoStatusAppointmentsCardComponent],
-      imports: [HttpClientTestingModule]
+      imports: [HttpClientTestingModule],
     });
     fixture = TestBed.createComponent(ViewInfoStatusAppointmentsCardComponent);
     component = fixture.componentInstance;

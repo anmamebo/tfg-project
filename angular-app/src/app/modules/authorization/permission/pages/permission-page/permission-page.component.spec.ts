@@ -9,10 +9,9 @@ describe('PermissionPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PermissionPageComponent ],
+      declarations: [PermissionPageComponent],
       imports: [HttpClientTestingModule],
-    })
-    .compileComponents();
+    }).compileComponents();
   });
 
   beforeEach(() => {

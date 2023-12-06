@@ -1,17 +1,16 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { IDropdownSettings } from "ng-multiselect-dropdown";
-import { INTEGER_REGEXP } from "src/app/core/constants/reg-exp";
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { INTEGER_REGEXP } from 'src/app/core/constants/reg-exp';
 
 // Servicios
-import { RoomService } from "src/app/core/services/room.service";
-import { DepartmentService } from "src/app/core/services/department.service";
+import { RoomService } from 'src/app/core/services/room.service';
+import { DepartmentService } from 'src/app/core/services/department.service';
 import { NotificationService } from 'src/app/core/services/notification.service';
 
 // Modelos
-import { Room } from "src/app/core/models/room.model";
-
+import { Room } from 'src/app/core/models/room.model';
 
 /**
  * Componente que representa la tarjeta de edición de la
@@ -24,7 +23,7 @@ import { Room } from "src/app/core/models/room.model";
   providers: [RoomService, DepartmentService],
 })
 export class EditInfoRoomsCardComponent implements OnInit {
-  /** Título de la tarjeta */	
+  /** Título de la tarjeta */
   public titleCard: string = 'Información Básica';
 
   /** Sala que se editará */
@@ -32,7 +31,7 @@ export class EditInfoRoomsCardComponent implements OnInit {
 
   /** Formulario para editar la información básica de una sala */
   public editInfoRoomForm: FormGroup = new FormGroup({});
-  
+
   /** Indica si se ha enviado el formulario */
   public submitted: boolean = false;
 
@@ -41,7 +40,7 @@ export class EditInfoRoomsCardComponent implements OnInit {
 
   /** Opciones del desplegable de seleccionar */
   dropdownSettings: IDropdownSettings = {};
-  
+
   constructor(
     private formBuilder: FormBuilder,
     private roomService: RoomService,
@@ -53,16 +52,25 @@ export class EditInfoRoomsCardComponent implements OnInit {
     this.editInfoRoomForm = this.formBuilder.group({
       name: [this.room?.name, [Validators.required, Validators.maxLength(50)]],
       description: [this.room?.description, [Validators.maxLength(255)]],
-      capacity: [this.room?.capacity, [Validators.min(1), Validators.pattern(INTEGER_REGEXP)]],
+      capacity: [
+        this.room?.capacity,
+        [Validators.min(1), Validators.pattern(INTEGER_REGEXP)],
+      ],
       type: [this.room?.type, [Validators.maxLength(50)]],
       is_available: [this.room?.is_available, Validators.required],
-      location: [this.room?.location, [Validators.required, Validators.maxLength(50)]],
-      department: [[
-        {
-          item_id: this.room?.department?.id,
-          item_text: this.room?.department?.name
-        }
-      ], [Validators.required]],
+      location: [
+        this.room?.location,
+        [Validators.required, Validators.maxLength(50)],
+      ],
+      department: [
+        [
+          {
+            item_id: this.room?.department?.id,
+            item_text: this.room?.department?.name,
+          },
+        ],
+        [Validators.required],
+      ],
     });
 
     this.dropdownSettings = {
@@ -73,14 +81,16 @@ export class EditInfoRoomsCardComponent implements OnInit {
       noDataAvailablePlaceholderText: 'No hay datos disponibles',
       noFilteredDataAvailablePlaceholderText: 'No hay datos disponibles',
       itemsShowLimit: 6,
-      allowSearchFilter: true
+      allowSearchFilter: true,
     };
 
     this.getDepartments();
   }
 
   /** Obtiene el formulario */
-  get form() { return this.editInfoRoomForm; }
+  get form() {
+    return this.editInfoRoomForm;
+  }
 
   /**
    * Maneja la acción de envio del formulario
@@ -95,7 +105,9 @@ export class EditInfoRoomsCardComponent implements OnInit {
     const updatedData: any = {
       id: this.room?.id,
       name: this.form.value.name,
-      description: this.form.value.description ? this.form.value.description : null,
+      description: this.form.value.description
+        ? this.form.value.description
+        : null,
       capacity: this.form.value.capacity ? this.form.value.capacity : null,
       is_available: this.room?.is_available,
       type: this.form.value.type ? this.form.value.type : null,
@@ -110,7 +122,7 @@ export class EditInfoRoomsCardComponent implements OnInit {
       },
       error: (error: any) => {
         this.notificationService.showErrorToast(error.message);
-      }
+      },
     });
   }
 
@@ -120,14 +132,14 @@ export class EditInfoRoomsCardComponent implements OnInit {
   public getDepartments() {
     this.departmentService.getItems().subscribe({
       next: (data) => {
-        this.departments = data.map((item: {id: String, name: String}) => ({
+        this.departments = data.map((item: { id: String; name: String }) => ({
           item_id: item.id,
-          item_text: item.name
-        }))
+          item_text: item.name,
+        }));
       },
       error: (error) => {
         this.notificationService.showErrorToast(error.message);
-      }
+      },
     });
   }
 }

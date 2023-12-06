@@ -1,5 +1,4 @@
-import { Doctor } from "./doctor.model";
-
+import { Doctor } from './doctor.model';
 
 export class Schedule {
   constructor(
@@ -8,6 +7,6 @@ export class Schedule {
     public end_time: Date,
     public date_only: Date,
     public day_of_week: Number,
-    public doctor?: Doctor,
+    public doctor?: Doctor
   ) {}
 }

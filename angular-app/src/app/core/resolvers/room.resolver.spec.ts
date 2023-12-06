@@ -4,8 +4,8 @@ import { ResolveFn } from '@angular/router';
 import { roomResolver } from './room.resolver';
 
 describe('roomResolver', () => {
-  const executeResolver: ResolveFn<boolean> = (...resolverParameters) => 
-      TestBed.runInInjectionContext(() => roomResolver(...resolverParameters));
+  const executeResolver: ResolveFn<boolean> = (...resolverParameters) =>
+    TestBed.runInInjectionContext(() => roomResolver(...resolverParameters));
 
   beforeEach(() => {
     TestBed.configureTestingModule({});

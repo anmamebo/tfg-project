@@ -6,12 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AuthorizationRoutingModule } from './authorization-routing.module';
 
 @NgModule({
-  declarations: [
-  ],
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    AuthorizationRoutingModule, 
-  ],
+  declarations: [],
+  imports: [CommonModule, ReactiveFormsModule, AuthorizationRoutingModule],
 })
 export class AuthorizationModule {}

@@ -4,17 +4,11 @@ import { AuthService } from 'src/app/core/services/auth.service';
 import { TemplateRef, ViewContainerRef } from '@angular/core';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
-
 describe('HasRoleDirective', () => {
   it('should create an instance', () => {
-
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [
-        AuthService,
-        TemplateRef,
-        ViewContainerRef
-      ]
+      providers: [AuthService, TemplateRef, ViewContainerRef],
     });
 
     // Crea una instancia de la directiva
@@ -23,10 +17,9 @@ describe('HasRoleDirective', () => {
       TestBed.inject(TemplateRef),
       TestBed.inject(ViewContainerRef)
     );
-    
+
     // Verifica si la instancia fue creada correctamente
     expect(directive).toBeTruthy();
-
 
     // const directive = new HasRoleDirective();
     // expect(directive).toBeTruthy();

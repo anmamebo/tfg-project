@@ -1,8 +1,11 @@
 import { Component, Input } from '@angular/core';
 
 // Modelos
-import { Treatment, StatusBadgeClasses, STATUS_BADGE_CLASSES } from "src/app/core/models/treatment.model";
-
+import {
+  Treatment,
+  StatusBadgeClasses,
+  STATUS_BADGE_CLASSES,
+} from 'src/app/core/models/treatment.model';
 
 /**
  * Componente que representa un acordeón de tratamientos de una cita.

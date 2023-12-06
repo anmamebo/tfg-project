@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 
-import { breadcrumbDepartmentsCreateData } from "src/app/core/constants/breadcrumb-data";
-
+import { breadcrumbDepartmentsCreateData } from 'src/app/core/constants/breadcrumb-data';
 
 /**
  * Componente para la página de creación de un departamento.
@@ -9,7 +8,7 @@ import { breadcrumbDepartmentsCreateData } from "src/app/core/constants/breadcru
 @Component({
   selector: 'app-departments-create-page',
   templateUrl: './departments-create-page.component.html',
-  styleUrls: ['./departments-create-page.component.scss']
+  styleUrls: ['./departments-create-page.component.scss'],
 })
 export class DepartmentsCreatePageComponent {
   /** Título de la página. */

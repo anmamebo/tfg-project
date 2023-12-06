@@ -1,18 +1,17 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { DatePipe } from "@angular/common";
+import { DatePipe } from '@angular/common';
 
-import { Spanish } from "flatpickr/dist/l10n/es.js";
-import { GENDER_OPTIONS } from "src/app/core/constants/options/genders-options.constants";
-import { PHONENUMBER_REGEXP } from "src/app/core/constants/reg-exp";
+import { Spanish } from 'flatpickr/dist/l10n/es.js';
+import { GENDER_OPTIONS } from 'src/app/core/constants/options/genders-options.constants';
+import { PHONENUMBER_REGEXP } from 'src/app/core/constants/reg-exp';
 
 // Servicios
-import { PatientService } from "src/app/core/services/patient.service";
-import { NotificationService } from "src/app/core/services/notification.service";
+import { PatientService } from 'src/app/core/services/patient.service';
+import { NotificationService } from 'src/app/core/services/notification.service';
 
 // Modelos
 import { Patient } from 'src/app/core/models/patient.model';
-
 
 /**
  * Componente que representa una tarjeta de información de paciente.
@@ -29,7 +28,7 @@ export class PatientInfoCardComponent implements OnInit {
 
   /** Opciones para el campo de género */
   public gender_options = GENDER_OPTIONS;
-  
+
   /** Opciones para el campo de fecha de nacimiento */
   public locale = Spanish;
 
@@ -43,14 +42,15 @@ export class PatientInfoCardComponent implements OnInit {
   public submitted: boolean = false;
 
   /** Evento que se emite cuando se actualizan los datos del paciente */
-  @Output() public updatedPatientEvent: EventEmitter<void> = new EventEmitter<void>();
+  @Output() public updatedPatientEvent: EventEmitter<void> =
+    new EventEmitter<void>();
 
   constructor(
     private formBuilder: FormBuilder,
     private datePipe: DatePipe,
     private patientService: PatientService,
     private notificationService: NotificationService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.updatePatientDataForm = this.formBuilder.group({
@@ -63,7 +63,9 @@ export class PatientInfoCardComponent implements OnInit {
   }
 
   /** Obtiene el formulario */
-  get form () { return this.updatePatientDataForm; }
+  get form() {
+    return this.updatePatientDataForm;
+  }
 
   /**
    * Maneja la acción de envio del formulario
@@ -78,7 +80,12 @@ export class PatientInfoCardComponent implements OnInit {
     const updatePatient: Patient = new Patient(
       this.patient.id,
       this.form.value.dni,
-      this.form.value.birthdate ? this.datePipe.transform(new Date(this.form.value.birthdate), 'yyyy-MM-dd') : null,
+      this.form.value.birthdate
+        ? this.datePipe.transform(
+            new Date(this.form.value.birthdate),
+            'yyyy-MM-dd'
+          )
+        : null,
       this.form.value.gender,
       this.form.value.phone != '' ? this.form.value.phone : null,
       this.form.value.social_security
@@ -92,7 +99,7 @@ export class PatientInfoCardComponent implements OnInit {
       },
       error: (error) => {
         this.notificationService.showErrorToast(error.message);
-      }
+      },
     });
   }
 }

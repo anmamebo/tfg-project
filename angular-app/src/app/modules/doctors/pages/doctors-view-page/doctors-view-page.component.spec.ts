@@ -12,19 +12,18 @@ describe('DoctorsViewPageComponent', () => {
     snapshot: {
       data: {
         data: {
-          id: 1
-        }
-      }
-    }
-  }
+          id: 1,
+        },
+      },
+    },
+  };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [DoctorsViewPageComponent],
       providers: [{ provide: ActivatedRoute, useValue: activatedRouteStub }],
       imports: [HttpClientTestingModule],
-    })
-    .compileComponents();
+    }).compileComponents();
   });
 
   beforeEach(() => {

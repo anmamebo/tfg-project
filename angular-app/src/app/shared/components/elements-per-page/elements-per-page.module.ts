@@ -4,17 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { ElementsPerPageComponent } from './elements-per-page.component';
 
-
 @NgModule({
-  declarations: [
-    ElementsPerPageComponent
-  ],
-  imports: [
-    CommonModule,
-    FormsModule
-  ],
-  exports: [
-    ElementsPerPageComponent
-  ]
+  declarations: [ElementsPerPageComponent],
+  imports: [CommonModule, FormsModule],
+  exports: [ElementsPerPageComponent],
 })
-export class ElementsPerPageModule { }
+export class ElementsPerPageModule {}

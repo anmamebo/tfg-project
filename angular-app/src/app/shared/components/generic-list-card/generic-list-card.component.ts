@@ -1,12 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 // Servicios
-import { NotificationService } from "src/app/core/services/notification.service";
+import { NotificationService } from 'src/app/core/services/notification.service';
 
 // Modelos
 import { entityData } from 'src/app/core/models/entityData.model';
-import { SortEvent } from "src/app/core/models/sortEvent.model";
-
+import { SortEvent } from 'src/app/core/models/sortEvent.model';
 
 /**
  * Componente que representa una tarjeta de listado genérica.
@@ -14,7 +13,7 @@ import { SortEvent } from "src/app/core/models/sortEvent.model";
 @Component({
   selector: 'app-generic-list-card',
   templateUrl: './generic-list-card.component.html',
-  styleUrls: ['./generic-list-card.component.scss']
+  styleUrls: ['./generic-list-card.component.scss'],
 })
 export class GenericListCardComponent implements OnInit {
   /** Datos de la entidad. */
@@ -26,12 +25,10 @@ export class GenericListCardComponent implements OnInit {
   /** Objeto con los datos de ordenación. */
   public sort: SortEvent = {
     column: '',
-    order: ''
+    order: '',
   };
 
-  constructor(
-    protected notificationService: NotificationService,
-  ) {
+  constructor(protected notificationService: NotificationService) {
     this.entityData = {
       title: {
         hasTitle: false,
@@ -54,14 +51,14 @@ export class GenericListCardComponent implements OnInit {
       search: {
         hasSearch: false,
       },
-      hasStateFilter: true
+      hasStateFilter: true,
     };
   }
 
   ngOnInit(): void {
     this.getItems(this.entityData.page);
   }
-  
+
   /**
    * Filtra los elementos de la entidad.
    * @param filterValue Valor del filtro.
@@ -113,22 +110,37 @@ export class GenericListCardComponent implements OnInit {
    * @param searchTerm Término de búsqueda.
    */
   public getItems(page: number, searchTerm?: string): void {
-    if (searchTerm != undefined && searchTerm != this.entityData.search.search) {
+    if (
+      searchTerm != undefined &&
+      searchTerm != this.entityData.search.search
+    ) {
       this.entityData.search.search = searchTerm ? searchTerm : '';
-      page = 1
+      page = 1;
       this.entityData.page = 1;
     }
 
-    this.entityData.service?.getItems(page, this.entityData.numResults, this.entityData.search.search, true, this.filterState, this.sort.column, this.sort.order).subscribe({
-      next: (response: any) => {
-        this.entityData.items = response.results;
-        this.entityData.numItems = response.count;
-        this.entityData.totalPages = Math.ceil(this.entityData.numItems / this.entityData.numResults);
-      },
-      error: (error: any) => {
-        this.notificationService.showErrorToast(error.message);
-      }
-    });
+    this.entityData.service
+      ?.getItems(
+        page,
+        this.entityData.numResults,
+        this.entityData.search.search,
+        true,
+        this.filterState,
+        this.sort.column,
+        this.sort.order
+      )
+      .subscribe({
+        next: (response: any) => {
+          this.entityData.items = response.results;
+          this.entityData.numItems = response.count;
+          this.entityData.totalPages = Math.ceil(
+            this.entityData.numItems / this.entityData.numResults
+          );
+        },
+        error: (error: any) => {
+          this.notificationService.showErrorToast(error.message);
+        },
+      });
   }
 
   /**
@@ -142,9 +154,11 @@ export class GenericListCardComponent implements OnInit {
           this.getItems(this.entityData.page);
         },
         error: () => {
-          this.notificationService.showErrorToast('No se ha podido eliminar el elemento.');
-        }
-      })
+          this.notificationService.showErrorToast(
+            'No se ha podido eliminar el elemento.'
+          );
+        },
+      });
     });
   }
 }

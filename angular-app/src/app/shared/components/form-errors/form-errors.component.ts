@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 
-
 /**
  * Componente que representa los errores de un formulario
  */
@@ -30,10 +29,14 @@ export class FormErrorsComponent {
             errors.push('Campo obligatorio.');
             break;
           case 'minlength':
-            errors.push(`Mín. ${this.control?.errors?.['minlength']?.requiredLength} caracteres, actual ${this.control?.errors?.['minlength']?.actualLength}.`);
+            errors.push(
+              `Mín. ${this.control?.errors?.['minlength']?.requiredLength} caracteres, actual ${this.control?.errors?.['minlength']?.actualLength}.`
+            );
             break;
           case 'maxlength':
-            errors.push(`Máx. ${this.control?.errors?.['maxlength']?.requiredLength} caracteres, actual ${this.control?.errors?.['maxlength']?.actualLength}.`);
+            errors.push(
+              `Máx. ${this.control?.errors?.['maxlength']?.requiredLength} caracteres, actual ${this.control?.errors?.['maxlength']?.actualLength}.`
+            );
             break;
           case 'max':
             errors.push(`Valor máximo ${this.control?.errors?.['max']?.max}.`);

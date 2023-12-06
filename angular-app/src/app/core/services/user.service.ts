@@ -5,12 +5,11 @@ import { Observable, catchError } from 'rxjs';
 import { API_URL } from '../constants/API_URL';
 
 // Servicios
-import { HttpCommonService } from "./http-common.service";
-import { TokenStorageService } from "./token-storage.service";
+import { HttpCommonService } from './http-common.service';
+import { TokenStorageService } from './token-storage.service';
 
 // Modelos
 import { User } from '../models/user.model';
-
 
 /**
  * Servicio para interactuar con la API para la gestión de usuarios.
@@ -61,7 +60,11 @@ export class UserService {
    * @param data - Los datos necesarios para actualizar la contraseña, como la nueva contraseña.
    * @returns Un Observable que se suscribe a la solicitud HTTP para actualizar la contraseña.
    */
-  public updatePassword(data: {old_password: string, password: string, password2: string}): Observable<any> {
+  public updatePassword(data: {
+    old_password: string;
+    password: string;
+    password2: string;
+  }): Observable<any> {
     const headers = this.httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
@@ -71,6 +74,10 @@ export class UserService {
 
     let params = JSON.stringify(data);
 
-    return this.http.post<any>(this.url + user_id + '/set_password/', params, httpOptions);
+    return this.http.post<any>(
+      this.url + user_id + '/set_password/',
+      params,
+      httpOptions
+    );
   }
 }

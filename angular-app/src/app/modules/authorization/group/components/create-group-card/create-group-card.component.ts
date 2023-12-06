@@ -2,12 +2,11 @@ import { Component, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 // Servicios
-import { GroupService } from "src/app/core/services/group.service";
+import { GroupService } from 'src/app/core/services/group.service';
 import { NotificationService } from 'src/app/core/services/notification.service';
 
 // Modelos
-import { Group } from "src/app/core/models/group.model";
-
+import { Group } from 'src/app/core/models/group.model';
 
 /**
  * Componente que representa la tarjeta para crear un grupo
@@ -37,12 +36,14 @@ export class CreateGroupCardComponent {
     private notificationService: NotificationService
   ) {
     this.createGroupForm = this.formBuilder.group({
-      name: ['', Validators.required]
+      name: ['', Validators.required],
     });
   }
 
   /** Obtiene el formulario */
-  get form () { return this.createGroupForm; }
+  get form() {
+    return this.createGroupForm;
+  }
 
   /**
    * Maneja la acción de envio del formulario
@@ -54,11 +55,7 @@ export class CreateGroupCardComponent {
       return;
     }
 
-    const group: Group = new Group(
-      '',
-      this.form.value.name
-    )
-    
+    const group: Group = new Group('', this.form.value.name);
 
     this.groupService.create(group).subscribe({
       next: (response) => {
@@ -69,7 +66,7 @@ export class CreateGroupCardComponent {
       },
       error: (error) => {
         this.notificationService.showErrorToast(error.message);
-      }
+      },
     });
   }
 }

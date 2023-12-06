@@ -1,9 +1,13 @@
-import { ActivatedRouteSnapshot, ResolveFn, Router, RouterStateSnapshot } from '@angular/router';
+import {
+  ActivatedRouteSnapshot,
+  ResolveFn,
+  Router,
+  RouterStateSnapshot,
+} from '@angular/router';
 import { Observable, catchError, map, of } from 'rxjs';
 import { inject } from '@angular/core';
 
-import { DepartmentService } from "../services/department.service";
-
+import { DepartmentService } from '../services/department.service';
 
 export const departmentResolver: ResolveFn<any> = (
   route: ActivatedRouteSnapshot,
@@ -11,21 +15,19 @@ export const departmentResolver: ResolveFn<any> = (
   departmentService: DepartmentService = inject(DepartmentService),
   router: Router = inject(Router)
 ): Observable<any> => {
-  
   const departmentId = route.params['id'];
-  return departmentService.getItemById(departmentId)
-    .pipe(
-      map(department => {
-        if (department) {
-          return department;
-        } else {
-          router.navigate(['**'], { replaceUrl: true });
-          return null; 
-        }
-      }),
-      catchError(() => {
-        router.navigate(['**'], { replaceUrl: true }); // Redirecciona a la página de error cuando la solicitud falla
-        return of(null);
-      })
-    );
+  return departmentService.getItemById(departmentId).pipe(
+    map((department) => {
+      if (department) {
+        return department;
+      } else {
+        router.navigate(['**'], { replaceUrl: true });
+        return null;
+      }
+    }),
+    catchError(() => {
+      router.navigate(['**'], { replaceUrl: true }); // Redirecciona a la página de error cuando la solicitud falla
+      return of(null);
+    })
+  );
 };

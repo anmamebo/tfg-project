@@ -8,7 +8,7 @@ describe('ViewInfoDepartmentsCardComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ViewInfoDepartmentsCardComponent]
+      declarations: [ViewInfoDepartmentsCardComponent],
     });
     fixture = TestBed.createComponent(ViewInfoDepartmentsCardComponent);
     component = fixture.componentInstance;

@@ -1,12 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 // Servicios
-import { RoomService } from "src/app/core/services/room.service";
-import { NotificationService } from "src/app/core/services/notification.service";
+import { RoomService } from 'src/app/core/services/room.service';
+import { NotificationService } from 'src/app/core/services/notification.service';
 
 // Modelos
-import { Room } from "src/app/core/models/room.model";
-
+import { Room } from 'src/app/core/models/room.model';
 
 /**
  * Componente que representa la tarjeta de visualización de las salas
@@ -21,20 +20,20 @@ import { Room } from "src/app/core/models/room.model";
 export class ViewRoomsDepartmentsCardComponent implements OnInit {
   /** Título de la tarjeta */
   public titleCard: string = 'Salas';
-  
+
   /** Identificador del departamento */
   @Input() public departmentId: string = '';
 
   /** Salas que se visualizarán */
   public rooms: Room[] = [];
-  
+
   /** Columnas que se mostrarán en la tabla. */
   public columns: any[] = [
     { header: 'NOMBRE', field: 'name' },
     { header: 'TIPO', field: 'type' },
     { header: 'UBICACIÓN', field: 'location' },
     { header: 'CAPACIDAD', field: 'capacity' },
-  ]
+  ];
 
   /** Página actual. */
   public page: number = 1;
@@ -53,7 +52,7 @@ export class ViewRoomsDepartmentsCardComponent implements OnInit {
 
   constructor(
     private roomService: RoomService,
-    private notificationService: NotificationService,
+    private notificationService: NotificationService
   ) {}
 
   ngOnInit(): void {
@@ -83,21 +82,28 @@ export class ViewRoomsDepartmentsCardComponent implements OnInit {
    */
   public getRoomsByDepartmentId(page: number, searchTerm?: string): void {
     // Comprueba si el término de búsqueda ha cambiado
-    if (searchTerm != undefined && searchTerm != this.search) {      
+    if (searchTerm != undefined && searchTerm != this.search) {
       this.search = searchTerm ? searchTerm : '';
       page = 1;
       this.page = 1;
     }
 
-    this.roomService.getRoomsByDepartmentId(this.departmentId, page, this.numResults, this.search).subscribe({
-      next: (response: any) => {
-        this.rooms = response.results;
-        this.numRooms = response.count;
-        this.totalPages = Math.ceil(this.numRooms / this.numResults);
-      },
-      error: (error: any) => {
-        this.notificationService.showErrorToast(error.message);
-      }
-    });
+    this.roomService
+      .getRoomsByDepartmentId(
+        this.departmentId,
+        page,
+        this.numResults,
+        this.search
+      )
+      .subscribe({
+        next: (response: any) => {
+          this.rooms = response.results;
+          this.numRooms = response.count;
+          this.totalPages = Math.ceil(this.numRooms / this.numResults);
+        },
+        error: (error: any) => {
+          this.notificationService.showErrorToast(error.message);
+        },
+      });
   }
 }

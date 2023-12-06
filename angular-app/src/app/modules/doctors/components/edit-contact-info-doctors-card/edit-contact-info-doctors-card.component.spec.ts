@@ -10,7 +10,7 @@ describe('EditContactInfoDoctorsCardComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [EditContactInfoDoctorsCardComponent],
-      imports: [HttpClientTestingModule]
+      imports: [HttpClientTestingModule],
     });
     fixture = TestBed.createComponent(EditContactInfoDoctorsCardComponent);
     component = fixture.componentInstance;

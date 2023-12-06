@@ -1,13 +1,12 @@
 import { Component } from '@angular/core';
 
-import { breadcrumbPermissionData } from "src/app/core/constants/breadcrumb-data";
+import { breadcrumbPermissionData } from 'src/app/core/constants/breadcrumb-data';
 
 // Servicios
-import { PermissionService } from "src/app/core/services/permission.service";
+import { PermissionService } from 'src/app/core/services/permission.service';
 
 // Modelos
 import { entityData } from 'src/app/core/models/entityData.model';
-
 
 /**
  * Componente para la página de permisos.
@@ -15,7 +14,7 @@ import { entityData } from 'src/app/core/models/entityData.model';
 @Component({
   selector: 'app-permission-page',
   templateUrl: './permission-page.component.html',
-  styleUrls: ['./permission-page.component.scss']
+  styleUrls: ['./permission-page.component.scss'],
 })
 export class PermissionPageComponent {
   /** Título de la página. */
@@ -30,9 +29,7 @@ export class PermissionPageComponent {
   /** Datos de la entidad. */
   public entityData: entityData;
 
-  constructor(
-    private permissionService: PermissionService,
-  ) {
+  constructor(private permissionService: PermissionService) {
     this.entityData = {
       title: {
         hasTitle: false,
@@ -61,7 +58,7 @@ export class PermissionPageComponent {
         hasSearch: true,
         search: '',
       },
-      hasStateFilter: false
+      hasStateFilter: false,
     };
   }
 }

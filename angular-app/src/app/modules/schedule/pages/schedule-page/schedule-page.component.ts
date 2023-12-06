@@ -1,17 +1,25 @@
-import { Component, ChangeDetectionStrategy, ChangeDetectorRef, OnInit } from '@angular/core';
-import { DatePipe } from "@angular/common";
-import { Subject } from "rxjs";
+import {
+  Component,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  OnInit,
+} from '@angular/core';
+import { DatePipe } from '@angular/common';
+import { Subject } from 'rxjs';
 
 // Calendario
-import { isSameDay, isSameMonth } from "date-fns";
-import { CalendarEvent, CalendarEventTimesChangedEvent, CalendarView } from "angular-calendar";
-import { EventColor } from "calendar-utils";
+import { isSameDay, isSameMonth } from 'date-fns';
+import {
+  CalendarEvent,
+  CalendarEventTimesChangedEvent,
+  CalendarView,
+} from 'angular-calendar';
+import { EventColor } from 'calendar-utils';
 
-import { breadcrumbScheduleData } from "src/app/core/constants/breadcrumb-data";
+import { breadcrumbScheduleData } from 'src/app/core/constants/breadcrumb-data';
 
 // Servicios
-import { ScheduleService } from "src/app/core/services/schedule.service";
-
+import { ScheduleService } from 'src/app/core/services/schedule.service';
 
 const colors: Record<string, EventColor> = {
   red: {
@@ -28,7 +36,6 @@ const colors: Record<string, EventColor> = {
   },
 };
 
-
 /**
  * Componente que representa la página de mi horario
  */
@@ -37,10 +44,9 @@ const colors: Record<string, EventColor> = {
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './schedule-page.component.html',
   styleUrls: ['./schedule-page.component.scss'],
-  providers: [ScheduleService, DatePipe]
+  providers: [ScheduleService, DatePipe],
 })
 export class SchedulePageComponent implements OnInit {
-
   /** Título de la página. */
   public pageTitle: string = 'Mi horario';
 
@@ -63,7 +69,7 @@ export class SchedulePageComponent implements OnInit {
   refresh = new Subject<void>();
 
   /** Lista de eventos del calendario. */
-  events: CalendarEvent[] = []
+  events: CalendarEvent[] = [];
 
   // events: CalendarEvent[] = [
   //   {
@@ -125,21 +131,23 @@ export class SchedulePageComponent implements OnInit {
   public getScheduleByDoctor(): void {
     this.scheduleService.getScheduleByDoctor().subscribe({
       next: (data) => {
-        this.events = data.map(schedule => ({
+        this.events = data.map((schedule) => ({
           start: new Date(schedule.start_time),
           end: new Date(schedule.end_time),
-          title: this.datePipe.transform(schedule.start_time, 'h:mm a') + ' - ' + this.datePipe.transform(schedule.end_time, 'h:mm a'),
+          title:
+            this.datePipe.transform(schedule.start_time, 'h:mm a') +
+            ' - ' +
+            this.datePipe.transform(schedule.end_time, 'h:mm a'),
           color: { ...colors['blue'] },
         }));
         this.cdr.detectChanges();
       },
       error: (error) => {
         console.error(error);
-      }
-    })
+      },
+    });
   }
 
-  
   /**
    * Maneja el clic en un día del calendario.
    * @param param - Objeto con la fecha y eventos asociados al día clicado.
@@ -160,14 +168,18 @@ export class SchedulePageComponent implements OnInit {
     }
   }
 
-/**
+  /**
    * Maneja el cambio en la hora de un evento del calendario.
    * @param param - Objeto con el evento y las nuevas fechas.
    * @param param.event - Evento del calendario.
    * @param param.newStart - Nueva fecha de inicio.
    * @param param.newEnd - Nueva fecha de fin.
    */
-  eventTimesChanged({ event, newStart, newEnd }: CalendarEventTimesChangedEvent): void {
+  eventTimesChanged({
+    event,
+    newStart,
+    newEnd,
+  }: CalendarEventTimesChangedEvent): void {
     this.events = this.events.map((iEvent) => {
       if (iEvent === event) {
         return {
@@ -181,7 +193,7 @@ export class SchedulePageComponent implements OnInit {
   }
 
   /**
-   * Settea la vista del calendario.  
+   * Settea la vista del calendario.
    * @param view Vista del calendario.
    */
   setView(view: CalendarView) {

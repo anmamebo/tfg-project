@@ -1,15 +1,14 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { INTEGER_REGEXP } from "src/app/core/constants/reg-exp";
+import { INTEGER_REGEXP } from 'src/app/core/constants/reg-exp';
 
 // Servicios
-import { DoctorService } from "src/app/core/services/doctor.service";
+import { DoctorService } from 'src/app/core/services/doctor.service';
 import { NotificationService } from 'src/app/core/services/notification.service';
 
 // Modelos
 import { Doctor } from 'src/app/core/models/doctor.model';
-
 
 /**
  * Componente que representa una tarjeta de información de doctor.
@@ -34,23 +33,33 @@ export class DoctorInfoCardComponent implements OnInit {
   public submitted: boolean = false;
 
   /** Evento que se emite cuando se actualizan los datos del doctor */
-  @Output() public updatedDoctorEvent: EventEmitter<void> = new EventEmitter<void>();
+  @Output() public updatedDoctorEvent: EventEmitter<void> =
+    new EventEmitter<void>();
 
   constructor(
     private formBuilder: FormBuilder,
     private doctorService: DoctorService,
-    private notificationService: NotificationService,
-  ) { }
-  
+    private notificationService: NotificationService
+  ) {}
+
   ngOnInit(): void {
     this.updateDoctorDataForm = this.formBuilder.group({
-      collegiate_number: [this.doctor.collegiate_number, [Validators.required, Validators.maxLength(10), Validators.pattern(INTEGER_REGEXP)]],
+      collegiate_number: [
+        this.doctor.collegiate_number,
+        [
+          Validators.required,
+          Validators.maxLength(10),
+          Validators.pattern(INTEGER_REGEXP),
+        ],
+      ],
       is_available: [this.doctor.is_available],
     });
   }
 
   /** Obtiene el formulario */
-  get form () { return this.updateDoctorDataForm; }
+  get form() {
+    return this.updateDoctorDataForm;
+  }
 
   /**
    * Maneja la acción de envio del formulario
@@ -66,9 +75,9 @@ export class DoctorInfoCardComponent implements OnInit {
       this.doctor.id,
       this.form.value.collegiate_number,
       this.doctor.is_available,
-      this.doctor.user,
+      this.doctor.user
     );
-    
+
     this.doctorService.update(this.doctor.id, updateDoctor).subscribe({
       next: (data) => {
         this.submitted = false;
@@ -77,7 +86,7 @@ export class DoctorInfoCardComponent implements OnInit {
       },
       error: (error) => {
         this.notificationService.showErrorToast(error.message);
-      }
+      },
     });
   }
 }

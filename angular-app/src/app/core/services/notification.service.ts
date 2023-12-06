@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 
 import Swal, { SweetAlertOptions } from 'sweetalert2';
 
-
 /**
  * Servicio para mostrar notificaciones estilo toast utilizando SweetAlert2.
  */
@@ -67,21 +66,21 @@ export class NotificationService {
    */
   showConfirmDeleteDialog(onConfirm: () => void) {
     Swal.fire({
-      title: "¿Estás seguro?",
-      text: "¡No podrás revertir esta acción!",
-      icon: "warning",
+      title: '¿Estás seguro?',
+      text: '¡No podrás revertir esta acción!',
+      icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: "#435ebe",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Sí, eliminar",
-      cancelButtonText: "Cancelar",
+      confirmButtonColor: '#435ebe',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar',
     }).then((result) => {
       if (result.isConfirmed) {
         Swal.fire({
-          title: "¡Eliminado!",
-          text: "El registro ha sido eliminado.",
-          icon: "success",
-          confirmButtonColor: "#435ebe",
+          title: '¡Eliminado!',
+          text: 'El registro ha sido eliminado.',
+          icon: 'success',
+          confirmButtonColor: '#435ebe',
         });
         onConfirm();
       }
@@ -94,21 +93,21 @@ export class NotificationService {
    */
   showConfirmReactivateDialog(onConfirm: () => void) {
     Swal.fire({
-      title: "¿Estás seguro?",
-      text: "",
-      icon: "warning",
+      title: '¿Estás seguro?',
+      text: '',
+      icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: "#435ebe",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Sí, activar",
-      cancelButtonText: "Cancelar",
+      confirmButtonColor: '#435ebe',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, activar',
+      cancelButtonText: 'Cancelar',
     }).then((result) => {
       if (result.isConfirmed) {
         Swal.fire({
-          title: "¡Activado!",
-          text: "El registro ha sido activado.",
-          icon: "success",
-          confirmButtonColor: "#435ebe",
+          title: '¡Activado!',
+          text: 'El registro ha sido activado.',
+          icon: 'success',
+          confirmButtonColor: '#435ebe',
         });
         onConfirm();
       }

@@ -1,13 +1,12 @@
 import { Component, Input } from '@angular/core';
 
-
 /**
  * Componente que representa un breadcrumb.
  */
 @Component({
   selector: 'app-breadcrumb',
   templateUrl: './breadcrumb.component.html',
-  styleUrls: ['./breadcrumb.component.scss']
+  styleUrls: ['./breadcrumb.component.scss'],
 })
 export class BreadcrumbComponent {
   /** Array de breadcrumbs con formato { label: string, url: string } */
@@ -16,5 +15,5 @@ export class BreadcrumbComponent {
   /** Booleano que indica si el breadcrumb último está activo. */
   @Input() public isLastActive: boolean = false;
 
-  constructor() { }
+  constructor() {}
 }

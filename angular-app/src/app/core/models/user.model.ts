@@ -1,6 +1,5 @@
-import { Doctor } from "./doctor.model";
-import { Patient } from "./patient.model";
-
+import { Doctor } from './doctor.model';
+import { Patient } from './patient.model';
 
 export class User {
   constructor(
@@ -13,6 +12,6 @@ export class User {
     public patient?: Patient,
     public doctor?: Doctor,
     public is_staff?: boolean,
-    public is_active?: boolean,
+    public is_active?: boolean
   ) {}
 }

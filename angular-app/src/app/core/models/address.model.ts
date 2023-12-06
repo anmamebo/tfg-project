@@ -7,6 +7,6 @@ export class Address {
     public province: string,
     public country: string,
     public postal_code: string,
-    public floor?: string | null,
+    public floor?: string | null
   ) {}
 }

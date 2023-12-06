@@ -4,8 +4,8 @@ import { ResolveFn } from '@angular/router';
 import { patientResolver } from './patient.resolver';
 
 describe('patientResolver', () => {
-  const executeResolver: ResolveFn<boolean> = (...resolverParameters) => 
-      TestBed.runInInjectionContext(() => patientResolver(...resolverParameters));
+  const executeResolver: ResolveFn<boolean> = (...resolverParameters) =>
+    TestBed.runInInjectionContext(() => patientResolver(...resolverParameters));
 
   beforeEach(() => {
     TestBed.configureTestingModule({});

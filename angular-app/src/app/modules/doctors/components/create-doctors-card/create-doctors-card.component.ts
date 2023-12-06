@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { IDropdownSettings } from "ng-multiselect-dropdown";
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 
 // Servicios
-import { DoctorService } from "src/app/core/services/doctor.service";
-import { MedicalspecialtyService } from "src/app/core/services/medicalspecialty.service";
-import { DepartmentService } from "src/app/core/services/department.service";
+import { DoctorService } from 'src/app/core/services/doctor.service';
+import { MedicalspecialtyService } from 'src/app/core/services/medicalspecialty.service';
+import { DepartmentService } from 'src/app/core/services/department.service';
 import { NotificationService } from 'src/app/core/services/notification.service';
-
 
 /**
  * Componente que representa la tarjeta de creación de un médico
@@ -34,10 +33,10 @@ export class CreateDoctorsCardComponent implements OnInit {
 
   /** Departamentos */
   public departments: any = [];
-  
+
   /** Opciones del desplegable de seleccionar */
   dropdownSettings: IDropdownSettings = {};
-  
+
   constructor(
     private formBuilder: FormBuilder,
     private doctorService: DoctorService,
@@ -67,14 +66,16 @@ export class CreateDoctorsCardComponent implements OnInit {
       noDataAvailablePlaceholderText: 'No hay datos disponibles',
       noFilteredDataAvailablePlaceholderText: 'No hay datos disponibles',
       itemsShowLimit: 6,
-      allowSearchFilter: true
+      allowSearchFilter: true,
     };
-    
+
     this.getMedicalSpecialties();
     this.getDepartments();
   }
 
-  get form() { return this.createDoctorForm; }
+  get form() {
+    return this.createDoctorForm;
+  }
 
   /**
    * Maneja la acción de enviar el formulario.
@@ -90,14 +91,18 @@ export class CreateDoctorsCardComponent implements OnInit {
       user: {
         name: this.form.value.name,
         last_name: this.form.value.last_name,
-        email: this.form.value.email
+        email: this.form.value.email,
       },
       collegiate_number: this.form.value.collegiate_number,
       is_available: this.form.value.is_available,
-      medical_specialties: this.form.value.medical_specialties.map((item: {item_id: String, item_text: String}) => item.item_id),
-      departments: this.form.value.departments.map((item: {item_id: String, item_text: String}) => item.item_id),
+      medical_specialties: this.form.value.medical_specialties.map(
+        (item: { item_id: String; item_text: String }) => item.item_id
+      ),
+      departments: this.form.value.departments.map(
+        (item: { item_id: String; item_text: String }) => item.item_id
+      ),
     };
-    
+
     this.doctorService.create(doctor).subscribe({
       next: (data) => {
         this.form.reset();
@@ -106,7 +111,7 @@ export class CreateDoctorsCardComponent implements OnInit {
       },
       error: (error) => {
         this.notificationService.showErrorToast(error.message);
-      }
+      },
     });
   }
 
@@ -116,14 +121,16 @@ export class CreateDoctorsCardComponent implements OnInit {
   public getMedicalSpecialties() {
     this.medicalSpecialtyService.getMedicalSpecialties().subscribe({
       next: (data) => {
-        this.medicalSpecialties = data.map((item: {id: String, name: String}) => ({
-          item_id: item.id,
-          item_text: item.name
-        }))
+        this.medicalSpecialties = data.map(
+          (item: { id: String; name: String }) => ({
+            item_id: item.id,
+            item_text: item.name,
+          })
+        );
       },
       error: (error) => {
         this.notificationService.showErrorToast(error.message);
-      }
+      },
     });
   }
 
@@ -133,14 +140,14 @@ export class CreateDoctorsCardComponent implements OnInit {
   public getDepartments() {
     this.departmentService.getItems().subscribe({
       next: (data) => {
-        this.departments = data.map((item: {id: String, name: String}) => ({
+        this.departments = data.map((item: { id: String; name: String }) => ({
           item_id: item.id,
-          item_text: item.name
-        }))
+          item_text: item.name,
+        }));
       },
       error: (error) => {
         this.notificationService.showErrorToast(error.message);
-      }
+      },
     });
   }
 }

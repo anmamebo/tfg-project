@@ -5,17 +5,16 @@ import { Observable, catchError } from 'rxjs';
 import { API_URL } from '../constants/API_URL';
 
 // Servicios
-import { HttpCommonService } from "./http-common.service";
+import { HttpCommonService } from './http-common.service';
 
 // Modelos
 import { Address } from '../models/address.model';
-
 
 /**
  * Servicio para la gestión de direcciones.
  */
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AddressService {
   /** URL base de la API. */
@@ -23,8 +22,8 @@ export class AddressService {
 
   constructor(
     private http: HttpClient,
-    private httpCommonService: HttpCommonService,
-  ) { 
+    private httpCommonService: HttpCommonService
+  ) {
     this.url = API_URL.url + 'patients/addresses/';
   }
 

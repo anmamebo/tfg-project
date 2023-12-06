@@ -5,5 +5,5 @@ export const STATUS_APPOINTMENT_OPTIONS = [
   { value: 'completed', text: 'Completada' },
   { value: 'rescheduled', text: 'Reprogramada' },
   { value: 'no_show', text: 'No presentado' },
-  { value: 'cancelled', text: 'Cancelada'},
+  { value: 'cancelled', text: 'Cancelada' },
 ];

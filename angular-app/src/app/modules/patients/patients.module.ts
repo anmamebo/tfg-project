@@ -3,20 +3,20 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
 // Módulos de terceros
-import { FlatpickrModule } from "angularx-flatpickr";
+import { FlatpickrModule } from 'angularx-flatpickr';
 
 // Módulos
 import { PatientsRoutingModule } from './patients-routing.module';
-import { GenericPageModule } from "src/app/shared/components/generic-page/generic-page.module";
-import { GenericCardModule } from "src/app/shared/components/generic-card/generic-card.module";
-import { LoadingSpinnerModule } from "src/app/shared/components/loading-spinner/loading-spinner.module";
-import { GenericTableModule } from "src/app/shared/components/generic-table/generic-table.module";
-import { PaginationModule } from "src/app/shared/components/pagination/pagination.module";
-import { ElementsPerPageModule } from "src/app/shared/components/elements-per-page/elements-per-page.module";
-import { SearchModule } from "src/app/shared/components/search/search.module";
-import { SharedModule } from "src/app/shared/shared.module";
-import { FormErrorsModule } from "src/app/shared/components/form-errors/form-errors.module";
-import { GenericListCardModule } from "src/app/shared/components/generic-list-card/generic-list-card.module";
+import { GenericPageModule } from 'src/app/shared/components/generic-page/generic-page.module';
+import { GenericCardModule } from 'src/app/shared/components/generic-card/generic-card.module';
+import { LoadingSpinnerModule } from 'src/app/shared/components/loading-spinner/loading-spinner.module';
+import { GenericTableModule } from 'src/app/shared/components/generic-table/generic-table.module';
+import { PaginationModule } from 'src/app/shared/components/pagination/pagination.module';
+import { ElementsPerPageModule } from 'src/app/shared/components/elements-per-page/elements-per-page.module';
+import { SearchModule } from 'src/app/shared/components/search/search.module';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { FormErrorsModule } from 'src/app/shared/components/form-errors/form-errors.module';
+import { GenericListCardModule } from 'src/app/shared/components/generic-list-card/generic-list-card.module';
 
 // Componentes páginas
 import { PatientsPageComponent } from './pages/patients-page/patients-page.component';
@@ -33,7 +33,6 @@ import { EditContactInfoPatientsCardComponent } from './components/edit-contact-
 import { EditAddressPatientsCardComponent } from './components/edit-address-patients-card/edit-address-patients-card.component';
 import { ButtonsPatientsCardComponent } from './components/buttons-patients-card/buttons-patients-card.component';
 import { CreatePatientsCardComponent } from './components/create-patients-card/create-patients-card.component';
-
 
 @NgModule({
   declarations: [
@@ -65,6 +64,6 @@ import { CreatePatientsCardComponent } from './components/create-patients-card/c
     SharedModule,
     FormErrorsModule,
     GenericListCardModule,
-  ]
+  ],
 })
-export class PatientsModule { }
+export class PatientsModule {}

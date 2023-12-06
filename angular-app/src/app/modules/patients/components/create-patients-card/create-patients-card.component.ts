@@ -1,17 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { DatePipe } from "@angular/common";
+import { DatePipe } from '@angular/common';
 import { Subscription } from 'rxjs';
 
-import { Spanish } from "flatpickr/dist/l10n/es.js";
-import { GENDER_OPTIONS } from "src/app/core/constants/options/genders-options.constants";
-import { PHONENUMBER_REGEXP } from "src/app/core/constants/reg-exp";
-import { INTEGER_REGEXP } from "src/app/core/constants/reg-exp";
+import { Spanish } from 'flatpickr/dist/l10n/es.js';
+import { GENDER_OPTIONS } from 'src/app/core/constants/options/genders-options.constants';
+import { PHONENUMBER_REGEXP } from 'src/app/core/constants/reg-exp';
+import { INTEGER_REGEXP } from 'src/app/core/constants/reg-exp';
 
 // Servicios
-import { PatientService } from "src/app/core/services/patient.service";
+import { PatientService } from 'src/app/core/services/patient.service';
 import { NotificationService } from 'src/app/core/services/notification.service';
-
 
 /**
  * Componente que representa la tarjeta de creación de un paciente
@@ -34,10 +33,10 @@ export class CreatePatientsCardComponent implements OnInit {
 
   /** Formulario para la información del paciente */
   public patientInfoForm: FormGroup = new FormGroup({});
-  
+
   /** Formulario para la dirección */
   public addressForm: FormGroup = new FormGroup({});
-  
+
   /** Formulario para la creación de un paciente */
   public createPatientForm: FormGroup = new FormGroup({});
 
@@ -80,21 +79,31 @@ export class CreatePatientsCardComponent implements OnInit {
 
     this.createPatientForm = this.formBuilder.group({
       patientInfoForm: this.patientInfoForm,
-      addressForm: this.addressForm
+      addressForm: this.addressForm,
     });
   }
 
   ngOnInit(): void {
-    this.dniInputSubscription = this.createPatientForm.get('patientInfoForm')!.get('dni')!.valueChanges.subscribe((value: string) => {
-      this.createPatientForm.get('patientInfoForm')!.get('username')!.setValue(value);
-    });
+    this.dniInputSubscription = this.createPatientForm
+      .get('patientInfoForm')!
+      .get('dni')!
+      .valueChanges.subscribe((value: string) => {
+        this.createPatientForm
+          .get('patientInfoForm')!
+          .get('username')!
+          .setValue(value);
+      });
   }
 
   /** Obtiene los controles del formulario de información del paciente */
-  get patientInfo() { return this.createPatientForm.get('patientInfoForm'); }
+  get patientInfo() {
+    return this.createPatientForm.get('patientInfoForm');
+  }
 
   /** Obtiene los controles del formulario de dirección */
-  get address() { return this.createPatientForm.get('addressForm'); }
+  get address() {
+    return this.createPatientForm.get('addressForm');
+  }
 
   /**
    * Maneja la acción de enviar el formulario.
@@ -110,14 +119,23 @@ export class CreatePatientsCardComponent implements OnInit {
       user: {
         name: this.patientInfo?.value.name,
         last_name: this.patientInfo?.value.last_name,
-        email: this.patientInfo?.value.email
+        email: this.patientInfo?.value.email,
       },
       dni: this.patientInfo?.value.dni,
-      social_security: this.patientInfo?.value.social_security ? this.patientInfo?.value.social_security : null,
-      birthdate: this.patientInfo?.value.birthdate ? this.datePipe.transform(new Date(this.patientInfo?.value.birthdate), 'yyyy-MM-dd') : null,
-      phone: this.patientInfo?.value.phone ? this.patientInfo?.value.phone : null,
-      gender: this.patientInfo?.value.gender
-    }
+      social_security: this.patientInfo?.value.social_security
+        ? this.patientInfo?.value.social_security
+        : null,
+      birthdate: this.patientInfo?.value.birthdate
+        ? this.datePipe.transform(
+            new Date(this.patientInfo?.value.birthdate),
+            'yyyy-MM-dd'
+          )
+        : null,
+      phone: this.patientInfo?.value.phone
+        ? this.patientInfo?.value.phone
+        : null,
+      gender: this.patientInfo?.value.gender,
+    };
 
     if (this.showAddressInputs) {
       patient.address = {
@@ -128,7 +146,7 @@ export class CreatePatientsCardComponent implements OnInit {
         province: this.address?.value.province,
         country: this.address?.value.country,
         postal_code: this.address?.value.postal_code,
-      }
+      };
     }
 
     this.patientService.create(patient).subscribe({
@@ -139,7 +157,7 @@ export class CreatePatientsCardComponent implements OnInit {
       },
       error: (error) => {
         this.notificationService.showErrorToast(error.message);
-      }
+      },
     });
   }
 
@@ -157,29 +175,43 @@ export class CreatePatientsCardComponent implements OnInit {
   private initAddressValidators(): void {
     this.submitted = false;
 
-    const fields = ['street', 'number', 'floor', 'city', 'province', 'country', 'postal_code'];
+    const fields = [
+      'street',
+      'number',
+      'floor',
+      'city',
+      'province',
+      'country',
+      'postal_code',
+    ];
     const address = this.address;
 
     if (!this.showAddressInputs && address) {
-      fields.forEach((field) => { // Se eliminan los validadores de los campos de dirección
-        const control = address.get(field); 
-        if (control) { 
+      fields.forEach((field) => {
+        // Se eliminan los validadores de los campos de dirección
+        const control = address.get(field);
+        if (control) {
           control.clearValidators(); // Se eliminan los validadores
           control.updateValueAndValidity(); // Se actualiza el valor y la validez
         }
       });
     } else if (address) {
-      const validators = { 
+      const validators = {
         street: [Validators.required, Validators.maxLength(255)],
         number: [Validators.required, Validators.pattern(INTEGER_REGEXP)],
         floor: [Validators.maxLength(10)],
         city: [Validators.required, Validators.maxLength(255)],
         province: [Validators.required, Validators.maxLength(255)],
         country: [Validators.required, Validators.maxLength(255)],
-        postal_code: [Validators.required, Validators.pattern(INTEGER_REGEXP), Validators.maxLength(10)]
+        postal_code: [
+          Validators.required,
+          Validators.pattern(INTEGER_REGEXP),
+          Validators.maxLength(10),
+        ],
       };
-      
-      fields.forEach((field) => { // Se añaden los validadores de los campos de dirección
+
+      fields.forEach((field) => {
+        // Se añaden los validadores de los campos de dirección
         const control = address.get(field);
         if (control && validators[field as keyof typeof validators]) {
           control.setValidators(validators[field as keyof typeof validators]); // Se añaden los validadores

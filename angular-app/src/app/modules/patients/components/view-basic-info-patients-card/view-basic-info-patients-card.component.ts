@@ -1,11 +1,10 @@
 import { Component, Input } from '@angular/core';
 
 // Modelos
-import { Patient } from "src/app/core/models/patient.model";
-
+import { Patient } from 'src/app/core/models/patient.model';
 
 /**
- * Componente que representa la tarjeta de visualización de la 
+ * Componente que representa la tarjeta de visualización de la
  * información básica de un paciente
  */
 @Component({

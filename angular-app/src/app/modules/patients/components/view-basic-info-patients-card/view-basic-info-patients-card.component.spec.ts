@@ -9,10 +9,7 @@ describe('ViewBasicInfoPatientsCardComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        ViewBasicInfoPatientsCardComponent,
-        GenderPipe
-      ]
+      declarations: [ViewBasicInfoPatientsCardComponent, GenderPipe],
     });
     fixture = TestBed.createComponent(ViewBasicInfoPatientsCardComponent);
     component = fixture.componentInstance;

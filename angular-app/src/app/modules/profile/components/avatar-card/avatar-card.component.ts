@@ -1,8 +1,7 @@
 import { Component, Input } from '@angular/core';
 
-// Models 
+// Models
 import { User } from 'src/app/core/models/user.model';
-
 
 /**
  * Componente que representa una tarjeta de avatar de usuario.

@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute } from '@angular/router';
 
-import { breadcrumbDepartmentsViewData } from "src/app/core/constants/breadcrumb-data";
+import { breadcrumbDepartmentsViewData } from 'src/app/core/constants/breadcrumb-data';
 
 // Servicios
-import { DepartmentService } from "src/app/core/services/department.service";
+import { DepartmentService } from 'src/app/core/services/department.service';
 
 // Modelos
-import { Department } from "src/app/core/models/department.model";
-
+import { Department } from 'src/app/core/models/department.model';
 
 /**
  * Componente para la página de visualización de un departamento
@@ -34,9 +33,9 @@ export class DepartmentsViewPageComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private departmentService: DepartmentService,
-  ) { }
-  
+    private departmentService: DepartmentService
+  ) {}
+
   ngOnInit(): void {
     this.department = this.route.snapshot.data['data']; // Obtiene los datos del departamento desde el resolver
   }

@@ -8,7 +8,7 @@ describe('ViewPatientAppointmentsCardComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ViewPatientAppointmentsCardComponent]
+      declarations: [ViewPatientAppointmentsCardComponent],
     });
     fixture = TestBed.createComponent(ViewPatientAppointmentsCardComponent);
     component = fixture.componentInstance;

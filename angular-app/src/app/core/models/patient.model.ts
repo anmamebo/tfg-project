@@ -1,5 +1,5 @@
-import { Address } from "./address.model";
-import { User } from "./user.model";
+import { Address } from './address.model';
+import { User } from './user.model';
 
 export class Patient {
   constructor(
@@ -11,6 +11,6 @@ export class Patient {
     public social_security?: string | null,
     public address?: Address,
     public user?: User,
-    public state?: boolean,
+    public state?: boolean
   ) {}
 }

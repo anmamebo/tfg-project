@@ -12,19 +12,18 @@ describe('AppointmentsViewPageComponent', () => {
     snapshot: {
       data: {
         data: {
-          id: 1
-        }
-      }
-    }
-  }
+          id: 1,
+        },
+      },
+    },
+  };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [AppointmentsViewPageComponent],
       providers: [{ provide: ActivatedRoute, useValue: activatedRouteStub }],
       imports: [HttpClientTestingModule],
-    })
-    .compileComponents();
+    }).compileComponents();
   });
 
   beforeEach(() => {

@@ -5,22 +5,21 @@ import { Observable } from 'rxjs';
 import { API_URL } from '../constants/API_URL';
 
 // Servicios
-import { HttpCommonService } from "./http-common.service";
+import { HttpCommonService } from './http-common.service';
 
 // Modelos
-import { Treatment } from "../models/treatment.model";
-
+import { Treatment } from '../models/treatment.model';
 
 /**
  * Servicio para interactuar con la API para la gestión de tratamientos.
  */
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TreatmentService {
   /** URL base de la API. */
   public url: string;
-  
+
   constructor(
     private http: HttpClient,
     private httpCommonService: HttpCommonService
@@ -50,7 +49,6 @@ export class TreatmentService {
     let params = new HttpParams();
 
     if (paginated) {
-
       if (page) {
         params = params.append('page', page.toString());
       }
@@ -64,7 +62,10 @@ export class TreatmentService {
 
     params = params.append('appointment_id', appointmentId);
 
-    return this.http.get<any>(`${this.url}list_for_appointment/`, { params, ...httpOptions })
+    return this.http.get<any>(`${this.url}list_for_appointment/`, {
+      params,
+      ...httpOptions,
+    });
   }
 
   /**

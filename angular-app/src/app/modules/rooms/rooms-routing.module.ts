@@ -6,7 +6,7 @@ import { RoomsViewPageComponent } from './pages/rooms-view-page/rooms-view-page.
 import { RoomsEditPageComponent } from './pages/rooms-edit-page/rooms-edit-page.component';
 import { RoomsCreatePageComponent } from './pages/rooms-create-page/rooms-create-page.component';
 
-import { roomResolver } from "src/app/core/resolvers/room.resolver";
+import { roomResolver } from 'src/app/core/resolvers/room.resolver';
 
 const routes: Routes = [
   {
@@ -24,21 +24,21 @@ const routes: Routes = [
     component: RoomsViewPageComponent,
     title: 'Ver sala | HospitalSys',
     resolve: {
-      data: roomResolver // Resolver para obtener los datos de la sala
-    }
+      data: roomResolver, // Resolver para obtener los datos de la sala
+    },
   },
   {
     path: 'editar/:id',
     component: RoomsEditPageComponent,
     title: 'Editar sala | HospitalSys',
     resolve: {
-      data: roomResolver // Resolver para obtener los datos de la sala
-    }
-  }
+      data: roomResolver, // Resolver para obtener los datos de la sala
+    },
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class RoomsRoutingModule { }
+export class RoomsRoutingModule {}

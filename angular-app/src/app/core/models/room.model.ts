@@ -1,4 +1,4 @@
-import { Department } from "./department.model";
+import { Department } from './department.model';
 
 export class Room {
   constructor(
@@ -10,6 +10,6 @@ export class Room {
     public location?: string,
     public is_available?: boolean,
     public department?: Department,
-    public state?: boolean,
+    public state?: boolean
   ) {}
 }

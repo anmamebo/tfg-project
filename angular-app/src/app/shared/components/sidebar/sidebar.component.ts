@@ -22,7 +22,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.initTheme();    
+    this.initTheme();
   }
 
   ngAfterViewInit(): void {

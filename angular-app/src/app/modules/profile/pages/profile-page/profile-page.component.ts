@@ -7,8 +7,7 @@ import { UserService } from 'src/app/core/services/user.service';
 // Modelos
 import { User } from 'src/app/core/models/user.model';
 
-import { breadcrumbProfileData } from "src/app/core/constants/breadcrumb-data";
-
+import { breadcrumbProfileData } from 'src/app/core/constants/breadcrumb-data';
 
 /**
  * Componente que representa la página de perfil de usuario.
@@ -24,13 +23,14 @@ export class ProfilePageComponent implements OnInit {
   public pageTitle: string = 'Mi Perfil';
 
   /** Descripción de la página. */
-  public pageDescription: string = 'Aquí puedes ver y editar tu perfil de usuario.';
+  public pageDescription: string =
+    'Aquí puedes ver y editar tu perfil de usuario.';
 
   /** Objeto `User` que almacena los datos del usuario actual. */
   public user: User | null = null;
 
   /** Datos para el componente `app-breadcrumb`. */
-  public breadcrumbData = breadcrumbProfileData
+  public breadcrumbData = breadcrumbProfileData;
 
   constructor(
     private tokenStorageService: TokenStorageService,

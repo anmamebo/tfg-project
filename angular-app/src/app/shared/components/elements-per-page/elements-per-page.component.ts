@@ -6,10 +6,9 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 @Component({
   selector: 'app-elements-per-page',
   templateUrl: './elements-per-page.component.html',
-  styleUrls: ['./elements-per-page.component.scss']
+  styleUrls: ['./elements-per-page.component.scss'],
 })
 export class ElementsPerPageComponent {
-
   /** Número de elementos totales */
   @Input() public totalElements: number = 0;
 
@@ -17,7 +16,8 @@ export class ElementsPerPageComponent {
   @Input() public elementsPerPage: number = 10;
 
   /** Evento que se emite cuando se cambia el número de elementos por página */
-  @Output() public elementsPerPageChangedEvent: EventEmitter<number> = new EventEmitter<number>();
+  @Output() public elementsPerPageChangedEvent: EventEmitter<number> =
+    new EventEmitter<number>();
 
   /** Opciones de cantidad de elementos por página */
   public quantityOptions: number[] = [5, 10, 20, 50, 100];

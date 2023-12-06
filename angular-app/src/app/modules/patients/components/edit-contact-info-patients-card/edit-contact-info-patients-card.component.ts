@@ -1,15 +1,14 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { PHONENUMBER_REGEXP } from "src/app/core/constants/reg-exp";
+import { PHONENUMBER_REGEXP } from 'src/app/core/constants/reg-exp';
 
 // Servicios
-import { NotificationService } from "src/app/core/services/notification.service";
-import { PatientService } from "src/app/core/services/patient.service";
+import { NotificationService } from 'src/app/core/services/notification.service';
+import { PatientService } from 'src/app/core/services/patient.service';
 
 // Modelos
-import { Patient } from "src/app/core/models/patient.model";
-
+import { Patient } from 'src/app/core/models/patient.model';
 
 /**
  * Componente que representa la tarjeta de edición de la
@@ -19,7 +18,7 @@ import { Patient } from "src/app/core/models/patient.model";
   selector: 'app-edit-contact-info-patients-card',
   templateUrl: './edit-contact-info-patients-card.component.html',
   styleUrls: ['./edit-contact-info-patients-card.component.scss'],
-  providers: [PatientService, NotificationService]
+  providers: [PatientService, NotificationService],
 })
 export class EditContactInfoPatientsCardComponent implements OnInit {
   /** Título de la tarjeta */
@@ -35,7 +34,8 @@ export class EditContactInfoPatientsCardComponent implements OnInit {
   public submitted: boolean = false;
 
   /** Evento para actualizar los datos del paciente */
-  @Output() public refreshPatient: EventEmitter<void> = new EventEmitter<void>();
+  @Output() public refreshPatient: EventEmitter<void> =
+    new EventEmitter<void>();
 
   constructor(
     private formBuilder: FormBuilder,
@@ -46,13 +46,18 @@ export class EditContactInfoPatientsCardComponent implements OnInit {
   ngOnInit(): void {
     this.editContactInfoPatientForm = this.formBuilder.group({
       username: [this.patient?.user?.username, Validators.required],
-      email: [this.patient?.user?.email, [Validators.required, Validators.email]],
-      phone: [this.patient?.phone, [Validators.pattern(PHONENUMBER_REGEXP)]]
+      email: [
+        this.patient?.user?.email,
+        [Validators.required, Validators.email],
+      ],
+      phone: [this.patient?.phone, [Validators.pattern(PHONENUMBER_REGEXP)]],
     });
   }
 
   /** Obtiene el formulario */
-  get form () { return this.editContactInfoPatientForm; }
+  get form() {
+    return this.editContactInfoPatientForm;
+  }
 
   /**
    * Maneja la acción de enviar el formulario.
@@ -70,8 +75,8 @@ export class EditContactInfoPatientsCardComponent implements OnInit {
       user: {
         id: this.patient?.user?.id,
         username: this.patient?.user?.username,
-        email: this.form.value.email
-      }
+        email: this.form.value.email,
+      },
     };
 
     this.patientService.update(this.patient!.id, updatedData).subscribe({
@@ -82,7 +87,7 @@ export class EditContactInfoPatientsCardComponent implements OnInit {
       },
       error: (error) => {
         this.notificationService.showErrorToast(error.message);
-      }
+      },
     });
   }
 }

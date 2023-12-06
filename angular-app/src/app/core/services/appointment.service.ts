@@ -5,17 +5,16 @@ import { Observable } from 'rxjs';
 import { API_URL } from '../constants/API_URL';
 
 // Servicios
-import { HttpCommonService } from "./http-common.service";
+import { HttpCommonService } from './http-common.service';
 
 // Modelos
 import { Appointment } from '../models/appointment.model';
-
 
 /**
  * Servicio para interactuar con la API para la gestión de citas.
  */
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AppointmentService {
   /** URL base de la API. */
@@ -52,7 +51,10 @@ export class AppointmentService {
     const headers = this.httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
-    return this.http.get<Appointment>(`${this.url}${id}/retrieve_for_doctor/`, httpOptions);
+    return this.http.get<Appointment>(
+      `${this.url}${id}/retrieve_for_doctor/`,
+      httpOptions
+    );
   }
 
   /**
@@ -72,34 +74,45 @@ export class AppointmentService {
     const httpOptions = { headers };
 
     let params = new HttpParams();
-    
-    if (paginated) { // Si se quiere paginar
 
-      if (page) { // Si se ha indicado la página
+    if (paginated) {
+      // Si se quiere paginar
+
+      if (page) {
+        // Si se ha indicado la página
         params = params.set('page', page.toString());
       }
 
-      if (numResults) { // Si se ha indicado el número de resultados por página
+      if (numResults) {
+        // Si se ha indicado el número de resultados por página
         params = params.set('page_size', numResults.toString());
       }
 
       params = params.set('paginate', 'true'); // Indica que se quiere paginar
-
     }
 
-    if (searchTerm) { // Si se ha indicado un término de búsqueda
+    if (searchTerm) {
+      // Si se ha indicado un término de búsqueda
       params = params.set('search', searchTerm);
     }
 
-    if (state !== null && state !== undefined) { // Si se ha indicado un estado
+    if (state !== null && state !== undefined) {
+      // Si se ha indicado un estado
       params = params.set('state', state.toString());
     }
 
-    if (sortBy && sortOrder) { // Si se ha indicado un campo por el que ordenar
-      params = params.set('ordering', `${sortOrder === 'desc' ? '-' : ''}${sortBy}`)
+    if (sortBy && sortOrder) {
+      // Si se ha indicado un campo por el que ordenar
+      params = params.set(
+        'ordering',
+        `${sortOrder === 'desc' ? '-' : ''}${sortBy}`
+      );
     }
 
-    return this.http.get<any>(`${this.url}list_for_doctor/`, { params, ...httpOptions });
+    return this.http.get<any>(`${this.url}list_for_doctor/`, {
+      params,
+      ...httpOptions,
+    });
   }
 
   /**
@@ -112,6 +125,10 @@ export class AppointmentService {
     const headers = this.httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
-    return this.http.put<any>(`${this.url}${id}/update_status/`, { status }, httpOptions);
+    return this.http.put<any>(
+      `${this.url}${id}/update_status/`,
+      { status },
+      httpOptions
+    );
   }
 }

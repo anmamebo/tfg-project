@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 
-import { breadcrumbAppointmentsData } from "src/app/core/constants/breadcrumb-data";
+import { breadcrumbAppointmentsData } from 'src/app/core/constants/breadcrumb-data';
 
 // Modelos
 import { entityData } from 'src/app/core/models/entityData.model';
-
 
 /**
  * Componente para la página de citas.
@@ -21,12 +20,12 @@ export class AppointmentsPageComponent {
   public pageDescription: string = 'Aquí puedes ver las citas.';
 
   /** Datos para el componente `app-breadcrumb`. */
-  public breadcrumbData = breadcrumbAppointmentsData
+  public breadcrumbData = breadcrumbAppointmentsData;
 
   /** Datos de la entidad. */
   public entityData: entityData;
 
-  constructor() { 
+  constructor() {
     this.entityData = {
       title: {
         hasTitle: false,
@@ -50,7 +49,7 @@ export class AppointmentsPageComponent {
         hasSearch: true,
         search: '',
       },
-      hasStateFilter: false
+      hasStateFilter: false,
     };
   }
 }

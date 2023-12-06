@@ -10,9 +10,11 @@ describe('ViewReasonObservationsAppointmentsCardComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [ViewReasonObservationsAppointmentsCardComponent],
-      imports: [HttpClientTestingModule]
+      imports: [HttpClientTestingModule],
     });
-    fixture = TestBed.createComponent(ViewReasonObservationsAppointmentsCardComponent);
+    fixture = TestBed.createComponent(
+      ViewReasonObservationsAppointmentsCardComponent
+    );
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

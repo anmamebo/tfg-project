@@ -1,14 +1,13 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute } from '@angular/router';
 
-import { breadcrumbAppointmentsViewData } from "src/app/core/constants/breadcrumb-data";
+import { breadcrumbAppointmentsViewData } from 'src/app/core/constants/breadcrumb-data';
 
 // Servicios
-import { AppointmentService } from "src/app/core/services/appointment.service";
+import { AppointmentService } from 'src/app/core/services/appointment.service';
 
 // Modelos
-import { Appointment } from "src/app/core/models/appointment.model";
-
+import { Appointment } from 'src/app/core/models/appointment.model';
 
 /**
  * Componente para la página de visualización de una cita
@@ -33,10 +32,12 @@ export class AppointmentsViewPageComponent {
 
   constructor(
     private route: ActivatedRoute,
-    private appointmentService: AppointmentService,
+    private appointmentService: AppointmentService
   ) {
     this.appointment = this.route.snapshot.data['data']; // Obtiene los datos de la cita desde el resolver
-    const formattedDate = this.appointment?.schedule?.start_time ? new Date(this.appointment.schedule.start_time).toLocaleString() : '';
+    const formattedDate = this.appointment?.schedule?.start_time
+      ? new Date(this.appointment.schedule.start_time).toLocaleString()
+      : '';
     this.pageTitle = `${this.appointment?.patient?.user?.name} ${this.appointment?.patient?.user?.last_name} - (${formattedDate})`;
   }
 
@@ -44,10 +45,12 @@ export class AppointmentsViewPageComponent {
    * Actualiza los datos de la cita
    */
   public onRefreshAppointment(): void {
-    this.appointmentService.getAppointmentByIdByDoctor(this.appointment!.id).subscribe({
-      next: (appointment: Appointment) => {
-        this.appointment = appointment;
-      },
-    });
+    this.appointmentService
+      .getAppointmentByIdByDoctor(this.appointment!.id)
+      .subscribe({
+        next: (appointment: Appointment) => {
+          this.appointment = appointment;
+        },
+      });
   }
 }

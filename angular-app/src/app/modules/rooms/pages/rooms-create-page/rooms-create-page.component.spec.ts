@@ -8,7 +8,7 @@ describe('RoomsCreatePageComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [RoomsCreatePageComponent]
+      declarations: [RoomsCreatePageComponent],
     });
     fixture = TestBed.createComponent(RoomsCreatePageComponent);
     component = fixture.componentInstance;

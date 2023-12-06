@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 
-import { breadcrumbDoctorsCreateData } from "src/app/core/constants/breadcrumb-data";
-
+import { breadcrumbDoctorsCreateData } from 'src/app/core/constants/breadcrumb-data';
 
 /**
  * Componente para la página de creación de un médico.
@@ -9,7 +8,7 @@ import { breadcrumbDoctorsCreateData } from "src/app/core/constants/breadcrumb-d
 @Component({
   selector: 'app-doctors-create-page',
   templateUrl: './doctors-create-page.component.html',
-  styleUrls: ['./doctors-create-page.component.scss']
+  styleUrls: ['./doctors-create-page.component.scss'],
 })
 export class DoctorsCreatePageComponent {
   /** Título de la página. */

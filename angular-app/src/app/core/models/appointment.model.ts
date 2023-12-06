@@ -1,8 +1,8 @@
-import { Patient } from "./patient.model";
-import { Room } from "./room.model";
-import { Doctor } from "./doctor.model";
-import { MedicalSpecialty } from "./medical-specialty.model";
-import { Schedule } from "./schedule.model";
+import { Patient } from './patient.model';
+import { Room } from './room.model';
+import { Doctor } from './doctor.model';
+import { MedicalSpecialty } from './medical-specialty.model';
+import { Schedule } from './schedule.model';
 
 export interface StatusBadgeClasses {
   [status: string]: string;
@@ -35,6 +35,6 @@ export class Appointment {
     public room?: Room,
     public doctor?: Doctor,
     public specialty?: MedicalSpecialty,
-    public schedule?: Schedule,
+    public schedule?: Schedule
   ) {}
 }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { Observable, catchError } from 'rxjs';
-import { jwtDecode } from "jwt-decode";
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { jwtDecode } from 'jwt-decode';
 
 import { API_URL } from '../constants/API_URL';
 
@@ -9,14 +9,12 @@ import { API_URL } from '../constants/API_URL';
 import { TokenStorageService } from './token-storage.service';
 
 // Modelos
-import { User } from '../models/user.model';
 import { AuthResponse } from '../models/auth-response.model';
 
 // Configuración de encabezados HTTP
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
 };
-
 
 /**
  * Servicio para la gestión de la autenticación y la interacción con la API de autenticación.
@@ -40,10 +38,17 @@ export class AuthService {
    * @param user Credenciales de usuario.
    * @returns Un observable que emite un objeto `AuthResponse`.
    */
-  public login(user: {username: string, password: string}): Observable<AuthResponse> {
+  public login(user: {
+    username: string;
+    password: string;
+  }): Observable<AuthResponse> {
     let params = JSON.stringify(user);
 
-    return this.http.post<AuthResponse>(this.url + 'login/', params, httpOptions);
+    return this.http.post<AuthResponse>(
+      this.url + 'login/',
+      params,
+      httpOptions
+    );
   }
 
   /**
@@ -75,7 +80,7 @@ export class AuthService {
   }
 
   /**
-   * Obtiene los roles del usuario actual a partir del token de autenticación. 
+   * Obtiene los roles del usuario actual a partir del token de autenticación.
    * @returns Lista de roles del usuario actual.
    */
   public getRolesFromToken(): string[] {

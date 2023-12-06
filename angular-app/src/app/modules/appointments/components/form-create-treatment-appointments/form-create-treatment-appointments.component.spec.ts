@@ -10,7 +10,7 @@ describe('FormCreateTreatmentAppointmentsComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [FormCreateTreatmentAppointmentsComponent],
-      imports: [HttpClientTestingModule]
+      imports: [HttpClientTestingModule],
     });
     fixture = TestBed.createComponent(FormCreateTreatmentAppointmentsComponent);
     component = fixture.componentInstance;

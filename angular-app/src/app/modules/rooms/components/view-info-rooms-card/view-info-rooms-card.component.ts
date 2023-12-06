@@ -1,8 +1,7 @@
 import { Component, Input } from '@angular/core';
 
 // Modelos
-import { Room } from "src/app/core/models/room.model";
-
+import { Room } from 'src/app/core/models/room.model';
 
 /**
  * Componente que representa la tarjeta de visualización de la
@@ -11,7 +10,7 @@ import { Room } from "src/app/core/models/room.model";
 @Component({
   selector: 'app-view-info-rooms-card',
   templateUrl: './view-info-rooms-card.component.html',
-  styleUrls: ['./view-info-rooms-card.component.scss']
+  styleUrls: ['./view-info-rooms-card.component.scss'],
 })
 export class ViewInfoRoomsCardComponent {
   /** Título de la tarjeta */

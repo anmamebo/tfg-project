@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { roleGuard } from "src/app/core/guards/role.guard";
-import { ROLES } from "src/app/core/constants/roles.constants";
+import { roleGuard } from 'src/app/core/guards/role.guard';
+import { ROLES } from 'src/app/core/constants/roles.constants';
 
 const routes: Routes = [
   {
@@ -28,7 +28,9 @@ const routes: Routes = [
   {
     path: 'autorizacion',
     loadChildren: () =>
-      import('./authorization/authorization.module').then((m) => m.AuthorizationModule),
+      import('./authorization/authorization.module').then(
+        (m) => m.AuthorizationModule
+      ),
     canActivate: [roleGuard],
     data: { roles: [ROLES.ADMIN] },
   },
@@ -49,7 +51,9 @@ const routes: Routes = [
   {
     path: 'departamentos',
     loadChildren: () =>
-      import('./departments/departments.module').then((m) => m.DepartmentsModule),
+      import('./departments/departments.module').then(
+        (m) => m.DepartmentsModule
+      ),
     canActivate: [roleGuard],
     data: { roles: [ROLES.ADMIN] },
   },
@@ -63,9 +67,11 @@ const routes: Routes = [
   {
     path: 'citas',
     loadChildren: () =>
-      import('./appointments/appointments.module').then((m) => m.AppointmentsModule),
-      canActivate: [roleGuard],
-      data: { roles: [ROLES.ADMIN, ROLES.DOCTOR, ROLES.PATIENT] },
+      import('./appointments/appointments.module').then(
+        (m) => m.AppointmentsModule
+      ),
+    canActivate: [roleGuard],
+    data: { roles: [ROLES.ADMIN, ROLES.DOCTOR, ROLES.PATIENT] },
   },
 ];
 

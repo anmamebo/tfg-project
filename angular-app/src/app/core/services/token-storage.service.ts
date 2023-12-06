@@ -6,7 +6,6 @@ const TOKEN_KEY = 'auth-token';
 /** Clave para almacenar los datos del usuario en el almacenamiento de sesión. */
 const USER_KEY = 'auth-user';
 
-
 /**
  * Servicio para el almacenamiento y gestión de tokens de autenticación y datos de usuario en el almacenamiento de sesión.
  */
@@ -73,8 +72,12 @@ export class TokenStorageService {
    */
   public updateUser(userUpdated: any) {
     let user = this.getUser();
-    
-    if (user.user.email != userUpdated.email || user.user.name != userUpdated.name || user.user.last_name != userUpdated.last_name) {
+
+    if (
+      user.user.email != userUpdated.email ||
+      user.user.name != userUpdated.name ||
+      user.user.last_name != userUpdated.last_name
+    ) {
       user.user.email = userUpdated.email;
       user.user.name = userUpdated.name;
       user.user.last_name = userUpdated.last_name;

@@ -4,26 +4,22 @@ import { Observable } from 'rxjs';
 
 // Servicios
 import { EntityService } from './entity.service';
-import { HttpCommonService } from "./http-common.service";
+import { HttpCommonService } from './http-common.service';
 
 // Modelos
-import { Doctor } from "../models/doctor.model";
-
+import { Doctor } from '../models/doctor.model';
 
 /**
  * Servicio para interactuar con la API para la gestión de médicos.
  */
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class DoctorService extends EntityService<Doctor> {
   /** Endpoint de la API. */
   public endpoint = 'doctors/doctors/';
 
-  constructor(
-    http: HttpClient,
-    httpCommonService: HttpCommonService,
-  ) {
+  constructor(http: HttpClient, httpCommonService: HttpCommonService) {
     super(http, httpCommonService);
   }
 
@@ -42,7 +38,12 @@ export class DoctorService extends EntityService<Doctor> {
    * @param pageSize tamaño de la página.
    * @returns Un observable que emite un objeto `any`.
    */
-  public getDoctorsByDepartmentId(id: string, page: number, pageSize: number, searchTerm: string): Observable<any> {
+  public getDoctorsByDepartmentId(
+    id: string,
+    page: number,
+    pageSize: number,
+    searchTerm: string
+  ): Observable<any> {
     const headers = this.httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
@@ -56,6 +57,9 @@ export class DoctorService extends EntityService<Doctor> {
       params = params.set('search', searchTerm);
     }
 
-    return this.http.get<any>(`${this.url}${this.endpoint}doctors_by_department/`, { params, ...httpOptions });
+    return this.http.get<any>(
+      `${this.url}${this.endpoint}doctors_by_department/`,
+      { params, ...httpOptions }
+    );
   }
 }

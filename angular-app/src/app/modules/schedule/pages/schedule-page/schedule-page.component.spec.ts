@@ -10,7 +10,7 @@ describe('SchedulePageComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [SchedulePageComponent],
-      imports: [HttpClientTestingModule]
+      imports: [HttpClientTestingModule],
     });
     fixture = TestBed.createComponent(SchedulePageComponent);
     component = fixture.componentInstance;

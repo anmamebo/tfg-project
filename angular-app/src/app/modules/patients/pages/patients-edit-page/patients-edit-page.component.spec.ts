@@ -4,7 +4,6 @@ import { ActivatedRoute } from '@angular/router';
 
 import { PatientsEditPageComponent } from './patients-edit-page.component';
 
-
 describe('PatientsEditPageComponent', () => {
   let component: PatientsEditPageComponent;
   let fixture: ComponentFixture<PatientsEditPageComponent>;
@@ -13,19 +12,18 @@ describe('PatientsEditPageComponent', () => {
     snapshot: {
       data: {
         data: {
-          id: 1
-        }
-      }
-    }
-  }
+          id: 1,
+        },
+      },
+    },
+  };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [PatientsEditPageComponent],
       providers: [{ provide: ActivatedRoute, useValue: activatedRouteStub }],
       imports: [HttpClientTestingModule],
-    })
-    .compileComponents();
+    }).compileComponents();
   });
 
   beforeEach(() => {

@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute } from '@angular/router';
 
-import { breadcrumbRoomsViewData } from "src/app/core/constants/breadcrumb-data";
+import { breadcrumbRoomsViewData } from 'src/app/core/constants/breadcrumb-data';
 
 // Servicios
-import { RoomService } from "src/app/core/services/room.service";
+import { RoomService } from 'src/app/core/services/room.service';
 
 // Modelos
-import { Room } from "src/app/core/models/room.model";
-
+import { Room } from 'src/app/core/models/room.model';
 
 /**
  * Componente para la página de visualización de una sala
@@ -34,9 +33,9 @@ export class RoomsViewPageComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private roomService: RoomService,
-  ) { }
-  
+    private roomService: RoomService
+  ) {}
+
   ngOnInit(): void {
     this.room = this.route.snapshot.data['data']; // Obtiene los datos de la sala desde el resolver
   }

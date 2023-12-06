@@ -1,20 +1,19 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { DatePipe } from "@angular/common";
+import { DatePipe } from '@angular/common';
 
-import { Spanish } from "flatpickr/dist/l10n/es.js";
-import { GENDER_OPTIONS } from "src/app/core/constants/options/genders-options.constants";
+import { Spanish } from 'flatpickr/dist/l10n/es.js';
+import { GENDER_OPTIONS } from 'src/app/core/constants/options/genders-options.constants';
 
 // Servicios
-import { PatientService } from "src/app/core/services/patient.service";
+import { PatientService } from 'src/app/core/services/patient.service';
 import { NotificationService } from 'src/app/core/services/notification.service';
 
 // Modelos
-import { Patient } from "src/app/core/models/patient.model";
-
+import { Patient } from 'src/app/core/models/patient.model';
 
 /**
- * Componente que representa la tarjeta de edición de la 
+ * Componente que representa la tarjeta de edición de la
  * información básica de un paciente
  */
 @Component({
@@ -43,7 +42,8 @@ export class EditBasicInfoPatientsCardComponent implements OnInit {
   public submitted: boolean = false;
 
   /** Evento para actualizar los datos del paciente */
-  @Output() public refreshPatient: EventEmitter<void> = new EventEmitter<void>();
+  @Output() public refreshPatient: EventEmitter<void> =
+    new EventEmitter<void>();
 
   constructor(
     private formBuilder: FormBuilder,
@@ -57,14 +57,19 @@ export class EditBasicInfoPatientsCardComponent implements OnInit {
       name: [this.patient?.user?.name, Validators.required],
       last_name: [this.patient?.user?.last_name, Validators.required],
       dni: [this.patient?.dni, [Validators.required, Validators.maxLength(9)]],
-      social_security: [this.patient?.social_security, Validators.maxLength(12)],
+      social_security: [
+        this.patient?.social_security,
+        Validators.maxLength(12),
+      ],
       birthdate: [this.patient?.birthdate],
-      gender: [this.patient?.gender, Validators.required]
+      gender: [this.patient?.gender, Validators.required],
     });
   }
 
   /** Obtiene el formulario */
-  get form () { return this.editBasicInfoPatientForm; }
+  get form() {
+    return this.editBasicInfoPatientForm;
+  }
 
   /**
    * Maneja la acción de envio del formulario
@@ -79,15 +84,22 @@ export class EditBasicInfoPatientsCardComponent implements OnInit {
     const updatedData: any = {
       id: this.patient?.id,
       dni: this.form.value.dni,
-      social_security: this.form.value.social_security ? this.form.value.social_security : null,
-      birthdate: this.form.value.birthdate ? this.datePipe.transform(new Date(this.form.value.birthdate), 'yyyy-MM-dd') : null,
+      social_security: this.form.value.social_security
+        ? this.form.value.social_security
+        : null,
+      birthdate: this.form.value.birthdate
+        ? this.datePipe.transform(
+            new Date(this.form.value.birthdate),
+            'yyyy-MM-dd'
+          )
+        : null,
       gender: this.form.value.gender,
       user: {
         id: this.patient?.user?.id,
         name: this.form.value.name,
         last_name: this.form.value.last_name,
-      }
-    }
+      },
+    };
 
     this.patientService.update(this.patient!.id, updatedData).subscribe({
       next: (data) => {
@@ -97,7 +109,7 @@ export class EditBasicInfoPatientsCardComponent implements OnInit {
       },
       error: (error) => {
         this.notificationService.showErrorToast(error.message);
-      }
+      },
     });
   }
 }

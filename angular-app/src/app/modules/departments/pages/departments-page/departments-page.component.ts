@@ -1,13 +1,12 @@
 import { Component } from '@angular/core';
 
-import { breadcrumbDepartmentsData } from "src/app/core/constants/breadcrumb-data";
+import { breadcrumbDepartmentsData } from 'src/app/core/constants/breadcrumb-data';
 
 // Servicios
-import { DepartmentService } from "src/app/core/services/department.service";
+import { DepartmentService } from 'src/app/core/services/department.service';
 
 // Modelos
 import { entityData } from 'src/app/core/models/entityData.model';
-
 
 /**
  * Componente para la página de departamentos.
@@ -15,7 +14,7 @@ import { entityData } from 'src/app/core/models/entityData.model';
 @Component({
   selector: 'app-departments-page',
   templateUrl: './departments-page.component.html',
-  styleUrls: ['./departments-page.component.scss']
+  styleUrls: ['./departments-page.component.scss'],
 })
 export class DepartmentsPageComponent {
   /** Título de la página. */
@@ -25,14 +24,12 @@ export class DepartmentsPageComponent {
   public pageDescription: string = 'Aquí puedes ver a los departamentos.';
 
   /** Datos para el componente `app-breadcrumb`. */
-  public breadcrumbData = breadcrumbDepartmentsData
+  public breadcrumbData = breadcrumbDepartmentsData;
 
   /** Datos de la entidad. */
   public entityData: entityData;
 
-  constructor(
-    private departmentService: DepartmentService,
-  ) { 
+  constructor(private departmentService: DepartmentService) {
     this.entityData = {
       title: {
         hasTitle: false,
@@ -53,7 +50,7 @@ export class DepartmentsPageComponent {
         actions: {
           show: '/departamentos',
           edit: '/departamentos/editar',
-        }
+        },
       },
       service: this.departmentService,
       items: null,
@@ -65,7 +62,7 @@ export class DepartmentsPageComponent {
         hasSearch: true,
         search: '',
       },
-      hasStateFilter: true
+      hasStateFilter: true,
     };
   }
 }

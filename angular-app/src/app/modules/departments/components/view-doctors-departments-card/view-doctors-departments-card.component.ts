@@ -1,12 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 // Servicios
-import { DoctorService } from "src/app/core/services/doctor.service";
-import { NotificationService } from "src/app/core/services/notification.service";
+import { DoctorService } from 'src/app/core/services/doctor.service';
+import { NotificationService } from 'src/app/core/services/notification.service';
 
 // Modelos
-import { Doctor } from "src/app/core/models/doctor.model";
-
+import { Doctor } from 'src/app/core/models/doctor.model';
 
 /**
  * Componente que representa la tarjeta de visualización de los médicos
@@ -21,19 +20,19 @@ import { Doctor } from "src/app/core/models/doctor.model";
 export class ViewDoctorsDepartmentsCardComponent implements OnInit {
   /** Título de la tarjeta */
   public titleCard: string = 'Médicos';
-  
+
   /** Identificador del departamento */
   @Input() public departmentId: string = '';
 
   /** Doctores que se visualizarán */
   public doctors: Doctor[] = [];
-  
+
   /** Columnas que se mostrarán en la tabla. */
   public columns: any[] = [
     { header: 'NOMBRE', field: 'user.name' },
     { header: 'APELLIDOS', field: 'user.last_name' },
     { header: 'EMAIL', field: 'user.email' },
-  ]
+  ];
 
   /** Página actual. */
   public page: number = 1;
@@ -52,7 +51,7 @@ export class ViewDoctorsDepartmentsCardComponent implements OnInit {
 
   constructor(
     private doctorService: DoctorService,
-    private notificationService: NotificationService,
+    private notificationService: NotificationService
   ) {}
 
   ngOnInit(): void {
@@ -82,22 +81,28 @@ export class ViewDoctorsDepartmentsCardComponent implements OnInit {
    */
   public getDoctorsByDepartmentId(page: number, searchTerm?: string): void {
     // Comprueba si el término de búsqueda ha cambiado
-    if (searchTerm != undefined && searchTerm != this.search) {      
+    if (searchTerm != undefined && searchTerm != this.search) {
       this.search = searchTerm ? searchTerm : '';
       page = 1;
       this.page = 1;
     }
 
-    this.doctorService.getDoctorsByDepartmentId(this.departmentId, page, this.numResults, this.search).subscribe({
-      next: (response: any) => {
-        this.doctors = response.results;
-        this.numDoctors = response.count;
-        this.totalPages = Math.ceil(this.numDoctors / this.numResults);
-      },
-      error: (error: any) => {
-        this.notificationService.showErrorToast(error.message);
-      }
-    });
+    this.doctorService
+      .getDoctorsByDepartmentId(
+        this.departmentId,
+        page,
+        this.numResults,
+        this.search
+      )
+      .subscribe({
+        next: (response: any) => {
+          this.doctors = response.results;
+          this.numDoctors = response.count;
+          this.totalPages = Math.ceil(this.numDoctors / this.numResults);
+        },
+        error: (error: any) => {
+          this.notificationService.showErrorToast(error.message);
+        },
+      });
   }
-
 }

@@ -1,5 +1,5 @@
-import { Doctor } from "./doctor.model";
-import { Room } from "./room.model";
+import { Doctor } from './doctor.model';
+import { Room } from './room.model';
 
 export class Department {
   constructor(
@@ -8,6 +8,6 @@ export class Department {
     public description?: string,
     public doctor_set?: Doctor[],
     public room_set?: Room[],
-    public state?: boolean,
+    public state?: boolean
   ) {}
 }

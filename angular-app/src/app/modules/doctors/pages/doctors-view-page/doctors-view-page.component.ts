@@ -1,14 +1,13 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute } from '@angular/router';
 
-import { breadcrumbDoctorsViewData } from "src/app/core/constants/breadcrumb-data";
+import { breadcrumbDoctorsViewData } from 'src/app/core/constants/breadcrumb-data';
 
 // Servicios
-import { DoctorService } from "src/app/core/services/doctor.service";
+import { DoctorService } from 'src/app/core/services/doctor.service';
 
 // Modelos
-import { Doctor } from "src/app/core/models/doctor.model";
-
+import { Doctor } from 'src/app/core/models/doctor.model';
 
 /**
  * Componente para la página de visualización de un médico
@@ -34,7 +33,7 @@ export class DoctorsViewPageComponent {
 
   constructor(
     private route: ActivatedRoute,
-    private doctorService: DoctorService,
+    private doctorService: DoctorService
   ) {
     this.doctor = this.route.snapshot.data['data']; // Obtiene los datos del médico desde el resolver
     this.pageTitle += ` - ${this.doctor?.user?.name} ${this.doctor?.user?.last_name}`;

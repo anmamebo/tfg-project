@@ -4,7 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 // Módulos
 import { AuthenticationRoutingModule } from './authentication-routing.module';
-import { FormErrorsModule } from "src/app/shared/components/form-errors/form-errors.module";
+import { FormErrorsModule } from 'src/app/shared/components/form-errors/form-errors.module';
 
 // Componentes
 import { LoginPageComponent } from './pages/login-page/login-page.component';
@@ -12,10 +12,10 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
 @NgModule({
   declarations: [LoginPageComponent],
   imports: [
-    CommonModule, 
-    AuthenticationRoutingModule, 
+    CommonModule,
+    AuthenticationRoutingModule,
     ReactiveFormsModule,
-    FormErrorsModule
+    FormErrorsModule,
   ],
 })
 export class AuthenticationModule {}

@@ -8,11 +8,11 @@ const routes: Routes = [
     path: '',
     component: SchedulePageComponent,
     title: 'Mi Horario | HospitalSys',
-  }
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class ScheduleRoutingModule { }
+export class ScheduleRoutingModule {}

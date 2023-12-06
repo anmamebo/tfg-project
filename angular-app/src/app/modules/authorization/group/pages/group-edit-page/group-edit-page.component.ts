@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { breadcrumbGroupEditData } from "src/app/core/constants/breadcrumb-data";
+import { breadcrumbGroupEditData } from 'src/app/core/constants/breadcrumb-data';
 
 // Modelos
-import { Group } from "src/app/core/models/group.model";
-
+import { Group } from 'src/app/core/models/group.model';
 
 /**
  * Componente para la página de edición de un grupo.
@@ -28,9 +27,7 @@ export class GroupEditPageComponent implements OnInit {
   /** Grupo a editar. */
   public group: Group | null = null;
 
-  constructor(
-    private route: ActivatedRoute,
-  ) { }
+  constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.group = this.route.snapshot.data['data']; // Obtiene los datos del grupo desde el resolver

@@ -8,9 +8,8 @@ describe('ViewGroupCardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ViewGroupCardComponent ]
-    })
-    .compileComponents();
+      declarations: [ViewGroupCardComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

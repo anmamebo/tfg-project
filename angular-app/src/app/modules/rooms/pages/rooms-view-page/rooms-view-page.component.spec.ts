@@ -12,19 +12,18 @@ describe('RoomsViewPageComponent', () => {
     snapshot: {
       data: {
         data: {
-          id: 1
-        }
-      }
-    }
-  }
+          id: 1,
+        },
+      },
+    },
+  };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [RoomsViewPageComponent],
       providers: [{ provide: ActivatedRoute, useValue: activatedRouteStub }],
       imports: [HttpClientTestingModule],
-    })
-    .compileComponents();
+    }).compileComponents();
   });
 
   beforeEach(() => {
