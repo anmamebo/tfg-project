@@ -26,22 +26,22 @@ export const sidebarData = [
     submenu: [
       {
         name: 'Agenda',
-        url: '/citas/agenda',
+        url: '/m/citas/agenda',
         roles: [ROLES.ADMIN, ROLES.DOCTOR],
       },
       {
         name: 'Citas',
-        url: '/citas',
+        url: '/m/citas',
         roles: [ROLES.ADMIN, ROLES.DOCTOR],
       },
       {
         name: 'Historial',
-        url: '/citas/historial',
+        url: '/m/citas/historial',
         roles: [ROLES.ADMIN, ROLES.DOCTOR],
       },
       {
         name: 'Reportes y estadísticas',
-        url: '/citas/reportes',
+        url: '/m/citas/reportes',
         roles: [ROLES.ADMIN, ROLES.DOCTOR],
       },
     ],

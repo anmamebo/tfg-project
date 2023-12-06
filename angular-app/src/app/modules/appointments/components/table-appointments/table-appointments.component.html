@@ -25,7 +25,7 @@
       <ng-container *ngIf="data && data.length > 0; else noData">
         <tr
           *ngFor="let item of data"
-          [routerLink]="['/citas', item.id]"
+          [routerLink]="['/m/citas', item.id]"
           style="cursor: pointer"
         >
           <td>

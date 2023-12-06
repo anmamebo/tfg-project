@@ -153,6 +153,6 @@ export const breadcrumbAppointmentsData = [
 // Citas ver
 export const breadcrumbAppointmentsViewData = [
   { label: 'Panel Principal', url: '/' },
-  { label: 'Citas', url: '/citas' },
+  { label: 'Citas', url: '/m/citas' },
   { label: 'Ver cita', url: '' },
 ];
