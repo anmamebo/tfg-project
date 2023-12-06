@@ -47,7 +47,8 @@ export class AppointmentsPageComponent {
       numItems: 0,
       numResults: 10,
       search: {
-        hasSearch: false,
+        hasSearch: true,
+        search: '',
       },
       hasStateFilter: false
     };

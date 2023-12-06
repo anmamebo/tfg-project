@@ -16,6 +16,7 @@ import { GenericTableModule } from "src/app/shared/components/generic-table/gene
 import { ElementsPerPageModule } from "src/app/shared/components/elements-per-page/elements-per-page.module";
 import { PaginationModule } from "src/app/shared/components/pagination/pagination.module";
 import { FormErrorsModule } from "src/app/shared/components/form-errors/form-errors.module";
+import { SearchModule } from "src/app/shared/components/search/search.module";
 
 // Componentes Páginas
 import { AppointmentsPageComponent } from './pages/appointments-page/appointments-page.component';
@@ -61,6 +62,7 @@ import { FormCreateTreatmentAppointmentsComponent } from './components/form-crea
     FormErrorsModule,
     SweetAlert2Module.forRoot(),
     FlatpickrModule.forRoot(),
+    SearchModule,
   ]
 })
 export class AppointmentsModule { }
