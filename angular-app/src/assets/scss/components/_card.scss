@@ -3,13 +3,13 @@
   border: none;
 
   &.card-statistic {
-    box-shadow: 1px 2px 5px rgba(#2FAAF4, .5);
+    box-shadow: 1px 2px 5px rgba(#2faaf4, 0.5);
     background: linear-gradient(to bottom, #25a6f1, #54b9ff);
 
     .card-title {
       text-transform: uppercase;
       color: rgba(255, 255, 255, 0.651);
-      letter-spacing: .8px;
+      letter-spacing: 0.8px;
       font-weight: 400;
       font-size: 1.3rem;
       margin-bottom: 0;
@@ -24,11 +24,11 @@
       }
 
       span.green {
-        color: rgb(111, 255, 111)
+        color: rgb(111, 255, 111);
       }
 
       span.red {
-        color: rgb(255, 121, 121)
+        color: rgb(255, 121, 121);
       }
     }
 
@@ -45,7 +45,7 @@
       font-weight: bold;
     }
 
-    &~.card-body {
+    & ~ .card-body {
       padding-top: 0;
     }
   }
@@ -64,7 +64,7 @@
   }
 
   .card-img-overlay {
-    background-color: rgba(0, 0, 0, .6);
+    background-color: rgba(0, 0, 0, 0.6);
 
     p {
       color: #eee;
@@ -74,6 +74,4 @@
       color: #fff;
     }
   }
-
-
 }

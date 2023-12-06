@@ -11,7 +11,7 @@
   display: block !important;
 }
 
-.navbar-fixed>header {
+.navbar-fixed > header {
   display: unset;
   height: var(--navbar-height);
 }
@@ -34,7 +34,7 @@
 
   .user-menu img {
     width: 39px;
-    height: 39px
+    height: 39px;
   }
 
   &.navbar-header {
@@ -43,11 +43,11 @@
       align-items: center;
 
       &.nav-icon {
-        margin-right: .4rem;
+        margin-right: 0.4rem;
 
         .nav-link {
           display: block;
-          padding: .4rem;
+          padding: 0.4rem;
           border-radius: 50%;
 
           &:hover {
@@ -57,7 +57,7 @@
       }
     }
 
-    .dropdown>a {
+    .dropdown > a {
       color: $gray-600;
       font-weight: 600;
 
@@ -79,7 +79,7 @@
   }
 
   .notification-item {
-    margin-bottom: .4rem;
+    margin-bottom: 0.4rem;
 
     a {
       color: $body-color;
@@ -112,7 +112,7 @@
 
   .header-top {
     background-color: $horizontal-header-bg;
-    padding: 1.1rem .4rem;
+    padding: 1.1rem 0.4rem;
 
     .container {
       display: flex;
@@ -126,7 +126,7 @@
     }
 
     .logo img {
-      height: 20px
+      height: 20px;
     }
   }
 
@@ -155,20 +155,20 @@
         display: flex;
         position: relative;
         flex-direction: row;
-        padding: .4rem 0;
-        gap: .5rem;
+        padding: 0.4rem 0;
+        gap: 0.5rem;
         align-items: center;
 
         span {
           height: 20px;
 
-          &>i {
+          & > i {
             margin-right: 3px;
           }
         }
       }
 
-      &>.menu-item {
+      & > .menu-item {
         position: relative;
 
         .menu-link {
@@ -203,7 +203,6 @@
             top: 100%;
           }
         }
-
       }
     }
 
@@ -216,7 +215,7 @@
 
       .submenu-group {
         display: table-cell;
-        padding: .5rem .3rem .3rem .5rem;
+        padding: 0.5rem 0.3rem 0.3rem 0.5rem;
         flex-wrap: wrap;
         max-height: 200px;
         min-width: 200px;
@@ -225,7 +224,7 @@
           position: relative;
 
           &.active .submenu-link {
-            color: var(--bs-primary)
+            color: var(--bs-primary);
           }
 
           &.has-sub {
@@ -245,13 +244,13 @@
           }
 
           a {
-            padding: .6rem;
+            padding: 0.6rem;
             padding-right: 2rem;
             color: $horizontal-submenu-link-color;
             display: block;
 
             &:hover {
-              color: $horizontal-submenu-link-hover-color
+              color: $horizontal-submenu-link-hover-color;
             }
           }
 
@@ -272,9 +271,9 @@
       top: 1rem;
       left: 100%;
       display: flex;
-      padding: .5rem;
+      padding: 0.5rem;
       flex-direction: column;
-      border-radius: .3rem;
+      border-radius: 0.3rem;
       min-width: 200px;
     }
 
@@ -308,7 +307,7 @@
 
       .submenu {
         @include submenu-responsive;
-        transition: all .2s;
+        transition: all 0.2s;
         padding-top: 0;
         display: none;
         padding-bottom: 0;

@@ -2,15 +2,16 @@
 @import "./assets/scss/variables";
 
 // Bootstrap + Icons
-$bootstrap-icons-font-src: url('~bootstrap-icons/font/fonts/bootstrap-icons.woff2') format("woff") !default;
+$bootstrap-icons-font-src: url("~bootstrap-icons/font/fonts/bootstrap-icons.woff2")
+  format("woff") !default;
 @import "node_modules/bootstrap/scss/bootstrap";
 @import "node_modules/bootstrap-icons/font/bootstrap-icons";
 
 // Fix icon placement
 body .bi::before,
-[class^=bi-]::before,
+[class^="bi-"]::before,
 [class*=" bi-"]::before {
-    vertical-align: sub;
+  vertical-align: sub;
 }
 
 // Imports fonts
@@ -19,10 +20,9 @@ body .bi::before,
 // Customize CSS
 @import "./assets/scss/customized-components";
 
-
-// 
+//
 // DARK
-// 
+//
 @import "node_modules/bootstrap/scss/functions";
 @import "node_modules/bootstrap/scss/variables";
 @import "node_modules/bootstrap/scss/variables-dark";
@@ -31,110 +31,109 @@ body .bi::before,
 @import "./assets/scss/themes/dark/root";
 
 html[data-bs-theme="dark"] {
-    // Bootstrap 
-    @import "node_modules/bootstrap/scss/maps";
-    @import "node_modules/bootstrap/scss/utilities";
-    @import "node_modules/bootstrap/scss/reboot";
-    @import "node_modules/bootstrap/scss/type";
-    @import "node_modules/bootstrap/scss/images";
-    @import "node_modules/bootstrap/scss/containers";
-    @import "node_modules/bootstrap/scss/grid";
-    @import "node_modules/bootstrap/scss/tables";
-    @import "node_modules/bootstrap/scss/forms";
-    @import "node_modules/bootstrap/scss/buttons";
-    @import "node_modules/bootstrap/scss/transitions";
-    @import "node_modules/bootstrap/scss/dropdown";
-    @import "node_modules/bootstrap/scss/button-group";
-    @import "node_modules/bootstrap/scss/nav";
-    @import "node_modules/bootstrap/scss/navbar";
-    @import "node_modules/bootstrap/scss/card";
-    @import "node_modules/bootstrap/scss/accordion";
-    @import "node_modules/bootstrap/scss/breadcrumb";
-    @import "node_modules/bootstrap/scss/pagination";
-    @import "node_modules/bootstrap/scss/badge";
-    @import "node_modules/bootstrap/scss/alert";
-    @import "node_modules/bootstrap/scss/progress";
-    @import "node_modules/bootstrap/scss/list-group";
-    @import "node_modules/bootstrap/scss/close";
-    @import "node_modules/bootstrap/scss/toasts";
-    @import "node_modules/bootstrap/scss/modal";
-    @import "node_modules/bootstrap/scss/tooltip";
-    @import "node_modules/bootstrap/scss/popover";
-    @import "node_modules/bootstrap/scss/carousel";
-    @import "node_modules/bootstrap/scss/spinners";
-    @import "node_modules/bootstrap/scss/offcanvas";
-    @import "node_modules/bootstrap/scss/placeholders";
+  // Bootstrap
+  @import "node_modules/bootstrap/scss/maps";
+  @import "node_modules/bootstrap/scss/utilities";
+  @import "node_modules/bootstrap/scss/reboot";
+  @import "node_modules/bootstrap/scss/type";
+  @import "node_modules/bootstrap/scss/images";
+  @import "node_modules/bootstrap/scss/containers";
+  @import "node_modules/bootstrap/scss/grid";
+  @import "node_modules/bootstrap/scss/tables";
+  @import "node_modules/bootstrap/scss/forms";
+  @import "node_modules/bootstrap/scss/buttons";
+  @import "node_modules/bootstrap/scss/transitions";
+  @import "node_modules/bootstrap/scss/dropdown";
+  @import "node_modules/bootstrap/scss/button-group";
+  @import "node_modules/bootstrap/scss/nav";
+  @import "node_modules/bootstrap/scss/navbar";
+  @import "node_modules/bootstrap/scss/card";
+  @import "node_modules/bootstrap/scss/accordion";
+  @import "node_modules/bootstrap/scss/breadcrumb";
+  @import "node_modules/bootstrap/scss/pagination";
+  @import "node_modules/bootstrap/scss/badge";
+  @import "node_modules/bootstrap/scss/alert";
+  @import "node_modules/bootstrap/scss/progress";
+  @import "node_modules/bootstrap/scss/list-group";
+  @import "node_modules/bootstrap/scss/close";
+  @import "node_modules/bootstrap/scss/toasts";
+  @import "node_modules/bootstrap/scss/modal";
+  @import "node_modules/bootstrap/scss/tooltip";
+  @import "node_modules/bootstrap/scss/popover";
+  @import "node_modules/bootstrap/scss/carousel";
+  @import "node_modules/bootstrap/scss/spinners";
+  @import "node_modules/bootstrap/scss/offcanvas";
+  @import "node_modules/bootstrap/scss/placeholders";
 
+  // Import fonts
+  @import "./assets/scss/fonts";
 
-    // Import fonts
-    @import "./assets/scss/fonts";
+  // Mazer CSS
+  @import "./assets/scss/customized-components";
 
-    // Mazer CSS
-    @import "./assets/scss/customized-components";
-
-    // Additional dark-mode CSS
-    // @import "./mazer-dark";
-    @import "node_modules/bootstrap/scss/utilities";
+  // Additional dark-mode CSS
+  // @import "./mazer-dark";
+  @import "node_modules/bootstrap/scss/utilities";
 }
 
 /* angular-cli file: src/styles.css */
 @import "../node_modules/angular-calendar/css/angular-calendar.css";
 
 .cal-month-view .cal-open-day-events {
-    background-color: $light !important;
-    box-shadow: inset 0 0 15px 0 rgba(0, 0, 0, 0.1) !important;
+  background-color: $light !important;
+  box-shadow: inset 0 0 15px 0 rgba(0, 0, 0, 0.1) !important;
 }
 
 .cal-month-view .cal-day-badge {
-    background-color: $primary !important;
+  background-color: $primary !important;
 }
 
 .multiselect-dropdown {
-    .dropdown-btn {
-        border: 1px solid #dce7f1 !important;
+  .dropdown-btn {
+    border: 1px solid #dce7f1 !important;
+
+    span {
+      color: #adb5bd !important;
+    }
+
+    .selected-item-container {
+      .selected-item {
+        background-color: #435ebe !important;
+        max-width: 300px !important;
 
         span {
-            color: #adb5bd !important;
+          color: white !important;
         }
+      }
+    }
+  }
 
-        .selected-item-container {
-            .selected-item {
-                background-color: #435ebe !important;
-                max-width: 300px !important;
-                
-                span {
-                    color: white !important;
-                }
-            }
-        }
+  .multiselect-item-checkbox {
+    input[type="checkbox"]:checked + div::before {
+      background-color: #435ebe !important;
     }
 
-    .multiselect-item-checkbox {
-        input[type="checkbox"]:checked + div::before {
-            background-color: #435ebe !important;
-        }
-
-        div::before {
-            border-color: #435ebe !important;
-            border-radius: 25%;
-            -webkit-border-radius: 25%;
-            -moz-border-radius: 25%;
-            -ms-border-radius: 25%;
-            -o-border-radius: 25%;
-        }
+    div::before {
+      border-color: #435ebe !important;
+      border-radius: 25%;
+      -webkit-border-radius: 25%;
+      -moz-border-radius: 25%;
+      -ms-border-radius: 25%;
+      -o-border-radius: 25%;
     }
+  }
 
-    .no-filtered-data {
-        h5 {
-            color: #435ebe !important;
-            font-size: 12pt !important;
-        }
+  .no-filtered-data {
+    h5 {
+      color: #435ebe !important;
+      font-size: 12pt !important;
     }
+  }
 
-    .no-data {
-        h5 {
-            color: #435ebe !important;
-            font-size: 12pt !important;
-        }
+  .no-data {
+    h5 {
+      color: #435ebe !important;
+      font-size: 12pt !important;
     }
+  }
 }

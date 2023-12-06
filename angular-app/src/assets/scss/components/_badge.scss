@@ -1,11 +1,11 @@
 .btn {
   .badge {
-      border-radius: 50%;
-      margin-left: 5px;
-      &.bg-transparent {
-          background-color: rgba(255,255,255,.25) !important;
-          color: #fff;
-      }
+    border-radius: 50%;
+    margin-left: 5px;
+    &.bg-transparent {
+      background-color: rgba(255, 255, 255, 0.25) !important;
+      color: #fff;
+    }
   }
 }
 
@@ -13,8 +13,4 @@
   position: absolute;
   right: 20px;
   padding: 3px;
-}
-
-a.badge:hover {
-  
 }

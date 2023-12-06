@@ -14,21 +14,21 @@ const calculateChildrenHeight = (el, deep = false) => {
   let height = 0;
   for (let i = 0; i < el.childElementCount; i++) {
     const child = children[i];
-    height += child.querySelector('.submenu-link').clientHeight;
+    height += child.querySelector(".submenu-link").clientHeight;
 
     // 2-level menu
-    if (deep && child.classList.contains('has-sub')) {
-      const subsubmenu = child.querySelector('.submenu');
+    if (deep && child.classList.contains("has-sub")) {
+      const subsubmenu = child.querySelector(".submenu");
 
-      if (subsubmenu.classList.contains('submenu-open')) {
+      if (subsubmenu.classList.contains("submenu-open")) {
         const childrenHeight = ~~[
-          ...subsubmenu.querySelectorAll('.submenu-link'),
+          ...subsubmenu.querySelectorAll(".submenu-link"),
         ].reduce((acc, curr) => acc + curr.clientHeight, 0);
         height += childrenHeight;
       }
     }
   }
-  el.style.setProperty('--submenu-height', height + 'px');
+  el.style.setProperty("--submenu-height", height + "px");
   return height;
 };
 
@@ -51,42 +51,42 @@ class Sidebar {
   init() {
     // add event listener to sidebar
     document
-      .querySelectorAll('.burger-btn')
-      .forEach((el) => el.addEventListener('click', this.toggle.bind(this)));
+      .querySelectorAll(".burger-btn")
+      .forEach((el) => el.addEventListener("click", this.toggle.bind(this)));
     document
-      .querySelectorAll('.sidebar-hide')
-      .forEach((el) => el.addEventListener('click', this.toggle.bind(this)));
-    window.addEventListener('resize', this.onResize.bind(this));
+      .querySelectorAll(".sidebar-hide")
+      .forEach((el) => el.addEventListener("click", this.toggle.bind(this)));
+    window.addEventListener("resize", this.onResize.bind(this));
 
     const toggleSubmenu = (el) => {
-      if (el.classList.contains('submenu-open')) {
-        el.classList.remove('submenu-open');
-        el.classList.add('submenu-closed');
+      if (el.classList.contains("submenu-open")) {
+        el.classList.remove("submenu-open");
+        el.classList.add("submenu-closed");
       } else {
-        el.classList.remove('submenu-closed');
-        el.classList.add('submenu-open');
+        el.classList.remove("submenu-closed");
+        el.classList.add("submenu-open");
       }
     };
 
-    let sidebarItems = document.querySelectorAll('.sidebar-item.has-sub');
+    let sidebarItems = document.querySelectorAll(".sidebar-item.has-sub");
     for (var i = 0; i < sidebarItems.length; i++) {
       let sidebarItem = sidebarItems[i];
 
       sidebarItems[i]
-        .querySelector('.sidebar-link')
-        .addEventListener('click', (e) => {
+        .querySelector(".sidebar-link")
+        .addEventListener("click", (e) => {
           e.preventDefault();
-          let submenu = sidebarItem.querySelector('.submenu');
+          let submenu = sidebarItem.querySelector(".submenu");
           toggleSubmenu(submenu);
         });
 
       // If submenu has submenu
       const submenuItems = sidebarItem.querySelectorAll(
-        '.submenu-item.has-sub'
+        ".submenu-item.has-sub"
       );
       submenuItems.forEach((item) => {
-        item.addEventListener('click', () => {
-          const submenuLevelTwo = item.querySelector('.submenu');
+        item.addEventListener("click", () => {
+          const submenuLevelTwo = item.querySelector(".submenu");
           toggleSubmenu(submenuLevelTwo);
 
           // Pass second .submenu
@@ -120,10 +120,10 @@ class Sidebar {
    */
   onResize() {
     if (isDesktop(window)) {
-      this.sidebarEL.classList.add('active');
-      this.sidebarEL.classList.remove('inactive');
+      this.sidebarEL.classList.add("active");
+      this.sidebarEL.classList.remove("inactive");
     } else {
-      this.sidebarEL.classList.remove('active');
+      this.sidebarEL.classList.remove("active");
     }
 
     // reset
@@ -135,7 +135,7 @@ class Sidebar {
    * Toggle Sidebar
    */
   toggle() {
-    const sidebarState = this.sidebarEL.classList.contains('active');
+    const sidebarState = this.sidebarEL.classList.contains("active");
     if (sidebarState) {
       this.hide();
     } else {
@@ -147,8 +147,8 @@ class Sidebar {
    * Show Sidebar
    */
   show() {
-    this.sidebarEL.classList.add('active');
-    this.sidebarEL.classList.remove('inactive');
+    this.sidebarEL.classList.add("active");
+    this.sidebarEL.classList.remove("inactive");
     this.createBackdrop();
     this.toggleOverflowBody();
   }
@@ -157,8 +157,8 @@ class Sidebar {
    * Hide Sidebar
    */
   hide() {
-    this.sidebarEL.classList.remove('active');
-    this.sidebarEL.classList.add('inactive');
+    this.sidebarEL.classList.remove("active");
+    this.sidebarEL.classList.add("inactive");
     this.deleteBackdrop();
     this.toggleOverflowBody();
   }
@@ -169,9 +169,9 @@ class Sidebar {
   createBackdrop() {
     if (isDesktop(window)) return;
     this.deleteBackdrop();
-    const backdrop = document.createElement('div');
-    backdrop.classList.add('sidebar-backdrop');
-    backdrop.addEventListener('click', this.hide.bind(this));
+    const backdrop = document.createElement("div");
+    backdrop.classList.add("sidebar-backdrop");
+    backdrop.addEventListener("click", this.hide.bind(this));
     document.body.appendChild(backdrop);
   }
 
@@ -179,7 +179,7 @@ class Sidebar {
    * Delete Sidebar Backdrop
    */
   deleteBackdrop() {
-    const backdrop = document.querySelector('.sidebar-backdrop');
+    const backdrop = document.querySelector(".sidebar-backdrop");
     if (backdrop) {
       backdrop.remove();
     }
@@ -190,12 +190,12 @@ class Sidebar {
    */
   toggleOverflowBody(active) {
     if (isDesktop(window)) return;
-    const sidebarState = this.sidebarEL.classList.contains('active');
-    const body = document.querySelector('body');
-    if (typeof active == 'undefined') {
-      body.style.overflowY = sidebarState ? 'hidden' : 'auto';
+    const sidebarState = this.sidebarEL.classList.contains("active");
+    const body = document.querySelector("body");
+    if (typeof active == "undefined") {
+      body.style.overflowY = sidebarState ? "hidden" : "auto";
     } else {
-      body.style.overflowY = active ? 'auto' : 'hidden';
+      body.style.overflowY = active ? "auto" : "hidden";
     }
   }
 
@@ -206,7 +206,7 @@ class Sidebar {
       rect.top >= 0 &&
       rect.left >= 0 &&
       rect.bottom <=
-      (window.innerHeight || document.documentElement.clientHeight) &&
+        (window.innerHeight || document.documentElement.clientHeight) &&
       rect.right <= (window.innerWidth || document.documentElement.clientWidth)
     );
   }
@@ -218,27 +218,27 @@ class Sidebar {
   }
 }
 
-let sidebarEl = document.getElementById('sidebar');
+let sidebarEl = document.getElementById("sidebar");
 /**
  * On First Load
  */
 const onFirstLoad = (sidebarEL) => {
   if (!sidebarEl) return;
   if (isDesktop(window)) {
-    sidebarEL.classList.add('active');
-    sidebarEL.classList.add('sidebar-desktop');
+    sidebarEL.classList.add("active");
+    sidebarEL.classList.add("sidebar-desktop");
   }
 
   // Get submenus size
-  let submenus = document.querySelectorAll('.sidebar-item.has-sub .submenu');
+  let submenus = document.querySelectorAll(".sidebar-item.has-sub .submenu");
   for (var i = 0; i < submenus.length; i++) {
     let submenu = submenus[i];
     const sidebarItem = submenu.parentElement;
     const height = submenu.clientHeight;
 
-    if (sidebarItem.classList.contains('active'))
-      submenu.classList.add('submenu-open');
-    else submenu.classList.add('submenu-closed');
+    if (sidebarItem.classList.contains("active"))
+      submenu.classList.add("submenu-open");
+    else submenu.classList.add("submenu-closed");
     setTimeout(() => {
       const height = calculateChildrenHeight(submenu, true);
     }, 50);
@@ -249,25 +249,25 @@ const reInit_SubMenuHeight = (sidebarEl) => {
   if (!sidebarEl) return;
 
   // Get submenus size
-  let submenus = document.querySelectorAll('.sidebar-item.has-sub .submenu');
+  let submenus = document.querySelectorAll(".sidebar-item.has-sub .submenu");
   for (var i = 0; i < submenus.length; i++) {
     let submenu = submenus[i];
     const sidebarItem = submenu.parentElement;
     const height = submenu.clientHeight;
 
-    if (sidebarItem.classList.contains('active'))
-      submenu.classList.add('submenu-open');
-    else submenu.classList.add('submenu-closed');
+    if (sidebarItem.classList.contains("active"))
+      submenu.classList.add("submenu-open");
+    else submenu.classList.add("submenu-closed");
     setTimeout(() => {
       const height = calculateChildrenHeight(submenu, true);
     }, 50);
   }
 };
 
-if (document.readyState !== 'loading') {
+if (document.readyState !== "loading") {
   onFirstLoad(sidebarEl);
 } else {
-  window.addEventListener('DOMContentLoaded', () => onFirstLoad(sidebarEl));
+  window.addEventListener("DOMContentLoaded", () => onFirstLoad(sidebarEl));
 }
 /**
  * Create Sidebar Wrapper
@@ -283,8 +283,7 @@ if (sidebarEl) {
 
 // NOTE use this to reinitialize sidebar with recalculate height
 // NOTE fixed dropdown smooth animation
-/* 
-const sidebar = new window.Sidebar(document.getElementById("sidebar"), {
-  recalculateHeight: true
-}) 
-*/
+
+// const sidebar = new window.Sidebar(document.getElementById("sidebar"), {
+//   recalculateHeight: true,
+// });
