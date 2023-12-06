@@ -40,7 +40,7 @@ class ScheduleViewSet(viewsets.GenericViewSet):
   @action(detail=False, methods=['get'])
   def get_by_doctor(self, request):
     """
-    Recupera los horarios de un médico.
+    Recupera los horarios de un médico, siempre y cuando el usuario sea un médico.
     
     Args:
         request (Request): La solicitud HTTP.
@@ -48,12 +48,11 @@ class ScheduleViewSet(viewsets.GenericViewSet):
     Returns:
         Response: La respuesta que contiene los horarios del médico.
     """
-    if hasattr(request.user, 'doctor') and request.user.doctor:
-      doctor = request.user.doctor
-      schedules = self.get_queryset().filter(doctor=doctor).order_by('start_time')
-      serializer = self.get_serializer(schedules, many=True)
-      return Response(serializer.data, status=status.HTTP_200_OK)
+    doctor = getattr(request.user, 'doctor', None)
     
-    return Response({
-      'message': 'El usuario no es un médico.'
-    }, status=status.HTTP_400_BAD_REQUEST)
+    if not doctor:
+      return Response({'message': 'El usuario no es un médico.'}, status=status.HTTP_400_BAD_REQUEST)
+    
+    schedules = self.get_queryset().filter(doctor=doctor).order_by('start_time')
+    serializer = self.get_serializer(schedules, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)

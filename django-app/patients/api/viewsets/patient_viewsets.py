@@ -25,7 +25,6 @@ class PatientViewSet(viewsets.GenericViewSet):
     list_serializer_class (Serializer): El serializador para representar los datos de una lista de pacientes.
     queryset (QuerySet): El conjunto de datos que se utilizará para las consultas.
   """
-  
   model = Patient
   serializer_class = PatientSerializer
   list_serializer_class = PatientSerializer
@@ -54,21 +53,9 @@ class PatientViewSet(viewsets.GenericViewSet):
     """
     patients = self.get_queryset()
     
-    state = self.request.query_params.get('state', None)
-    if state in ['true', 'false']:
-      state_boolean = state == 'true'
-      patients = patients.filter(state=state_boolean)
-    
-    query = self.request.query_params.get('search', None)
-    if query:
-      patients = patients.filter(
-        Q(user__name__icontains=query) | Q(user__last_name__icontains=query) | Q(dni__icontains=query) | 
-        Q(user__email__icontains=query) | Q(social_security__icontains=query) | Q(phone__icontains=query)
-      )
-    
-    ordering = self.request.query_params.get('ordering', None)
-    if ordering:
-      patients = patients.order_by(ordering)
+    patients = self.filter_state_patients(patients) # Filtra los pacientes por estado.
+    patients = self.filter_patients(patients) # Filtra los pacientes.
+    patients = self.order_patients(patients) # Ordena los pacientes.
       
     page = self.paginate_queryset(patients)
     if page is not None:
@@ -80,7 +67,7 @@ class PatientViewSet(viewsets.GenericViewSet):
   
   def create(self, request):
     """
-    Crea un nuevo paciente.
+    Crea un nuevo paciente con usuario y contraseña generados automáticamente.
 
     Args:
         request (Request): La solicitud HTTP.
@@ -88,24 +75,22 @@ class PatientViewSet(viewsets.GenericViewSet):
     Returns:
         Response: La respuesta que indica si el paciente se ha creado correctamente o si ha habido errores.
     """
-    if 'user' in request.data and 'dni' in request.data:
-      request.data['user']['password'] = generate_password()
-      request.data['user']['username'] = request.data['dni']
-      
-      patient_serializer = CreatePatientSerializer(data=request.data)
-      if patient_serializer.is_valid():
-        patient = patient_serializer.save()
-        return Response({
-          'message': 'Paciente creado correctamente.'
-        }, status=status.HTTP_201_CREATED)
-      
+    if 'user' not in request.data or 'dni' not in request.data:
+      return Response({'message': 'No se ha enviado los datos del usuario'}, status=status.HTTP_400_BAD_REQUEST)
+    
+    request.data['user']['password'] = generate_password()
+    request.data['user']['username'] = request.data['dni']
+    
+    patient_serializer = CreatePatientSerializer(data=request.data)
+    if patient_serializer.is_valid():
+      patient = patient_serializer.save()
       return Response({
-        'message': 'Hay errores en la creación',
-        'errors'  : patient_serializer.errors
-      }, status=status.HTTP_400_BAD_REQUEST)
-
+        'message': 'Paciente creado correctamente.'
+      }, status=status.HTTP_201_CREATED)
+    
     return Response({
-      'message': 'No se ha enviado el usuario',
+      'message': 'Hay errores en la creación',
+      'errors'  : patient_serializer.errors
     }, status=status.HTTP_400_BAD_REQUEST)
 
   def retrieve(self, request, pk=None):
@@ -125,7 +110,8 @@ class PatientViewSet(viewsets.GenericViewSet):
 
   def update(self, request, pk=None):
     """
-    Actualiza los detalles de un paciente existente.
+    Actualiza los detalles de un paciente existente, primero actualiza los datos del usuario 
+    y luego los del paciente.
 
     Args:
         request (Request): La solicitud HTTP.
@@ -163,7 +149,7 @@ class PatientViewSet(viewsets.GenericViewSet):
     
   def destroy(self, request, pk=None):
     """
-    Elimina un paciente existente, no lo borra de la base de datos, cambia su estado.
+    Elimina un paciente cambiando su estado a False.
 
     Args:
         request (Request): La solicitud HTTP.
@@ -173,31 +159,29 @@ class PatientViewSet(viewsets.GenericViewSet):
         Response: La respuesta que indica si el paciente se ha eliminado correctamente o si ha habido errores.
     """
     patient = self.get_queryset().filter(id=pk).first()
-    if patient:
-      user = patient.user
-      if user:
-        patient.state = False
-        patient.save()
-        user.is_active = False
-        user.save()
-        
-        address = patient.address
-        if address:
-          address.state = False
-          address.save()
-          
-        return Response({
-          'message': 'Paciente eliminado correctamente.'
-        }, status=status.HTTP_200_OK)
+    if not patient:
+      return Response({'message': 'No se ha encontrado el paciente.'}, status=status.HTTP_400_BAD_REQUEST)
     
-    return Response({
-      'message': 'No se ha encontrado el paciente.'
-    }, status=status.HTTP_400_BAD_REQUEST)
+    user = patient.user
+    if user:
+      patient.state = False
+      patient.save()
+      user.is_active = False
+      user.save()
+      
+      address = patient.address
+      if address:
+        address.state = False
+        address.save()
+        
+      return Response({
+        'message': 'Paciente eliminado correctamente.'
+      }, status=status.HTTP_200_OK)
     
   @action(detail=True, methods=['put'])
   def activate(self, request, pk=None):
     """
-    Activa un paciente existente, cambia su estado.
+    Activa un paciente cambiando su estado a True.
 
     Args:
         request (Request): La solicitud HTTP.
@@ -207,23 +191,74 @@ class PatientViewSet(viewsets.GenericViewSet):
         Response: La respuesta que indica si el paciente se ha activado correctamente o si ha habido errores.
     """
     patient = self.get_object(pk)
-    if patient:
-      user = patient.user
-      if user:
-        patient.state = True
-        patient.save()
-        user.is_active = True
-        user.save()
-        
-        address = patient.address
-        if address:
-          address.state = True
-          address.save()
-
-        return Response({
-          'message': 'Paciente eliminado correctamente.'
-        }, status=status.HTTP_200_OK)
+    if not patient:
+      return Response({'message': 'No se ha encontrado el paciente.'}, status=status.HTTP_400_BAD_REQUEST)
     
-    return Response({
-      'message': 'No se ha encontrado el paciente.'
-    }, status=status.HTTP_400_BAD_REQUEST)
+    user = patient.user
+    if user:
+      patient.state = True
+      patient.save()
+      user.is_active = True
+      user.save()
+      
+      address = patient.address
+      if address:
+        address.state = True
+        address.save()
+
+      return Response({
+        'message': 'Paciente eliminado correctamente.'
+      }, status=status.HTTP_200_OK)
+  
+  
+  def filter_patients(self, patients):
+    """
+    Filtra los pacientes por búsqueda.
+    
+    Args:
+        patients (QuerySet): El conjunto de pacientes.
+        
+    Returns:
+        QuerySet: El conjunto de pacientes filtrados.
+    """
+    query = self.request.query_params.get('search', None)
+    if query:
+      patients = patients.filter(
+        Q(user__name__icontains=query) | Q(user__last_name__icontains=query) | Q(dni__icontains=query) | 
+        Q(user__email__icontains=query) | Q(social_security__icontains=query) | Q(phone__icontains=query)
+      )
+      
+    return patients
+  
+  def order_patients(self, patients):
+    """
+    Ordena los pacientes.
+    
+    Args:
+        patients (QuerySet): El conjunto de pacientes.
+        
+    Returns:
+        QuerySet: El conjunto de pacientes ordenados.
+    """
+    ordering = self.request.query_params.get('ordering', None)
+    if ordering:
+      patients = patients.order_by(ordering)
+      
+    return patients
+    
+  def filter_state_patients(self, patients):
+    """
+    Filtra los pacientes por estado.
+
+    Args:
+        patients (QuerySet): El conjunto de pacientes.
+
+    Returns:
+        QuerySet: El conjunto de pacientes filtrados.
+    """
+    state = self.request.query_params.get('state', None)
+    if state in ['true', 'false']:
+      state_boolean = state == 'true'
+      patients = patients.filter(state=state_boolean)
+      
+    return patients

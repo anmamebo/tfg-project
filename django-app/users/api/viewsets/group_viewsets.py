@@ -1,8 +1,7 @@
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import Group
 
-from rest_framework import status
-from rest_framework import viewsets
+from rest_framework import status, viewsets
 from rest_framework.response import Response
 
 from users.api.serializers.group_serializer import  (GroupSerializer, GroupListSerializer)
@@ -20,7 +19,6 @@ class GroupViewSet(viewsets.GenericViewSet):
     list_serializer_class (Serializer): El serializador para representar los datos de una lista de grupos.
     queryset (QuerySet): El conjunto de datos que se utilizará para las consultas.
   """
-  
   model = Group
   serializer_class = GroupSerializer
   list_serializer_class = GroupListSerializer
@@ -47,17 +45,15 @@ class GroupViewSet(viewsets.GenericViewSet):
     """
     groups = self.get_queryset()
     
-    ordering = self.request.query_params.get('ordering', None)
-    if ordering:
-      groups = groups.order_by(ordering)
+    groups = self.order_groups(groups) # Ordenar grupos
     
     page = self.paginate_queryset(groups)
     if page is not None:
       groups_serializer = self.list_serializer_class(page, many=True)
       return self.get_paginated_response(groups_serializer.data)
-    else:
-      groups_serializer = self.list_serializer_class(groups, many=True)
-      return Response(groups_serializer.data, status=status.HTTP_200_OK)
+    
+    groups_serializer = self.list_serializer_class(groups, many=True)
+    return Response(groups_serializer.data, status=status.HTTP_200_OK)
   
   def create(self, request):
     """
@@ -136,3 +132,21 @@ class GroupViewSet(viewsets.GenericViewSet):
     return Response({
       'message': 'Grupo eliminado correctamente.'
     }, status=status.HTTP_200_OK)
+    
+
+
+  def order_groups(self, groups):
+    """
+    Ordena los grupos.
+
+    Args:
+        groups (QuerySet): El conjunto de grupos.
+
+    Returns:
+        QuerySet: El conjunto de grupos ordenados.
+    """
+    ordering = self.request.query_params.get('ordering', None)
+    if ordering:
+      groups = groups.order_by(ordering)
+    
+    return groups

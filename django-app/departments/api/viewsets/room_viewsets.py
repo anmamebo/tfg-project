@@ -21,7 +21,6 @@ class RoomViewSet(viewsets.GenericViewSet):
     list_serializer_class (Serializer): El serializador para representar los datos de una lista de salas.
     queryset (QuerySet): El conjunto de datos que se utilizará para las consultas.
   """
-  
   model = Room
   serializer_class = RoomSerializer
   list_serializer_class = RoomSerializer
@@ -39,6 +38,12 @@ class RoomViewSet(viewsets.GenericViewSet):
   def list(self, request):
     """
     Lista todas las salas.
+    
+    Parámetros opcionales:
+      state (bool): El estado de las salas a listar.
+      search (str): Una cadena de texto para buscar salas.
+      ordering (str): El campo por el que se ordenarán las salas.
+      paginate (bool): Indica si se desea paginar los resultados.
 
     Args:
         request (Request): La solicitud HTTP.
@@ -48,21 +53,9 @@ class RoomViewSet(viewsets.GenericViewSet):
     """
     rooms = self.get_queryset()
     
-    state = self.request.query_params.get('state', None)
-    if state in ['true', 'false']:
-      state_boolean = state == 'true'
-      rooms = rooms.filter(state=state_boolean)
-    
-    query = self.request.query_params.get('search', None)
-    if query:
-      rooms = rooms.filter(
-        Q(name__icontains=query) |  Q(type__icontains=query) | Q(location__icontains=query) | 
-        Q(department__name__icontains=query)
-      )
-    
-    ordering = self.request.query_params.get('ordering', None)
-    if ordering:
-      rooms = rooms.order_by(ordering)
+    rooms = self.filter_state_rooms(rooms) # Filtra las salas por estado.
+    rooms = self.filter_rooms(rooms) # Filtra las salas.
+    rooms = self.order_rooms(rooms) # Ordena las salas.
     
     paginate = self.request.query_params.get('paginate', None)
     if paginate and paginate == 'true':
@@ -91,7 +84,10 @@ class RoomViewSet(viewsets.GenericViewSet):
         'message': 'Sala creada correctamente.',
       }, status=status.HTTP_201_CREATED)
     
-    return Response(room_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    return Response({
+      'message': 'Hay errores en la creación.',
+      'errors': room_serializer.errors
+    }, status=status.HTTP_400_BAD_REQUEST)
   
   def retrieve(self, request, pk=None):
     """
@@ -134,7 +130,7 @@ class RoomViewSet(viewsets.GenericViewSet):
   
   def destroy(self, request, pk=None):
     """
-    Elimina una sala.
+    Elimina una sala cambiando su estado a False.
 
     Args:
         request (Request): La solicitud HTTP.
@@ -144,22 +140,20 @@ class RoomViewSet(viewsets.GenericViewSet):
         Response: La respuesta que contiene el resultado de la eliminación.
     """
     room = self.get_queryset().filter(id=pk).first()
-    if room:
-      room.state = False
-      room.is_available = False
-      room.save()
-      return Response({
-        'message': 'Sala eliminada correctamente.',
-      }, status=status.HTTP_200_OK)
-      
+    if not room:
+      return Response({'message': 'No se encontró la sala.',}, status=status.HTTP_400_BAD_REQUEST)  
+    
+    room.state = False
+    room.is_available = False
+    room.save()
     return Response({
-      'message': 'No se encontró la sala.',
-    }, status=status.HTTP_400_BAD_REQUEST)
+      'message': 'Sala eliminada correctamente.',
+    }, status=status.HTTP_200_OK)
   
   @action(detail=True, methods=['put'])
   def activate(self, request, pk=None):
     """
-    Activa una sala.
+    Activa una sala cambiando su estado a True.
 
     Args:
         request (Request): La solicitud HTTP.
@@ -169,22 +163,27 @@ class RoomViewSet(viewsets.GenericViewSet):
         Response: La respuesta que contiene el resultado de la activación.
     """
     room = self.get_object(pk)
-    if room:
-      room.state = True
-      room.is_available = True
-      room.save()
-      return Response({
-        'message': 'Sala activada correctamente.',
-      }, status=status.HTTP_200_OK)
-      
+    if not room:
+      return Response({'message': 'No se encontró la sala.'}, status=status.HTTP_400_BAD_REQUEST)
+  
+    room.state = True
+    room.is_available = True
+    room.save()
     return Response({
-      'message': 'No se encontró la sala.',
-    }, status=status.HTTP_400_BAD_REQUEST)
+      'message': 'Sala activada correctamente.',
+    }, status=status.HTTP_200_OK)    
     
   @action(detail=False, methods=['get'])
   def rooms_by_department(self, request):
     """
     Lista todas las salas por departamento.
+    
+    Parámetros:
+      department (string): El id del departamento.
+      
+    Parámetros opcionales:
+      search (str): Una cadena de texto para buscar salas.
+      paginate (bool): Indica si se desea paginar los resultados.
 
     Args:
         request (Request): La solicitud HTTP.
@@ -195,15 +194,11 @@ class RoomViewSet(viewsets.GenericViewSet):
     rooms = self.get_queryset()
     
     department_id = self.request.query_params.get('department', None)
-    if department_id:
-      rooms = rooms.filter(department__id=department_id)
-      
-    query = self.request.query_params.get('search', None)
-    if query:
-      rooms = rooms.filter(
-        Q(name__icontains=query) |  Q(type__icontains=query) | Q(location__icontains=query) | 
-        Q(capacity__icontains=query)
-      )
+    if not department_id: # Si no se envía el id del departamento.
+      return Response({'message': 'No se encontró el departamento.'}, status=status.HTTP_400_BAD_REQUEST)
+
+    rooms = rooms.filter(department__id=department_id) # Filtra las salas por departamento.
+    rooms = self.filter_rooms(rooms) # Filtra las salas.
       
     paginate = self.request.query_params.get('paginate', None)
     if paginate and paginate == 'true':  
@@ -214,3 +209,56 @@ class RoomViewSet(viewsets.GenericViewSet):
     
     rooms_serializer = BasicRoomSerializer(rooms, many=True)
     return Response(rooms_serializer.data, status=status.HTTP_200_OK)
+  
+  
+  def filter_rooms(self, rooms):
+    """
+    Filtra las salas.
+
+    Args:
+        rooms (QuerySet): El conjunto de datos a filtrar.
+
+    Returns:
+        QuerySet: El conjunto de datos filtrado.
+    """
+    query = self.request.query_params.get('search', None)
+    if query:
+      rooms = rooms.filter(
+        Q(name__icontains=query) |  Q(type__icontains=query) | Q(location__icontains=query) | 
+        Q(department__name__icontains=query) | Q(capacity__icontains=query)
+      )
+      
+    return rooms
+  
+  def order_rooms(self, rooms):
+    """
+    Ordena las salas.
+
+    Args:
+        rooms (QuerySet): El conjunto de datos a ordenar.
+
+    Returns:
+        QuerySet: El conjunto de datos ordenado.
+    """
+    ordering = self.request.query_params.get('ordering', None)
+    if ordering:
+      rooms = rooms.order_by(ordering)
+      
+    return rooms
+  
+  def filter_state_rooms(self, rooms):
+    """
+    Filtra las salas por estado.
+
+    Args:
+        rooms (QuerySet): El conjunto de datos a filtrar.
+
+    Returns:
+        QuerySet: El conjunto de datos filtrado.
+    """
+    state = self.request.query_params.get('state', None)
+    if state in ['true', 'false']:
+      state_boolean = state == 'true'
+      rooms = rooms.filter(state=state_boolean)
+      
+    return rooms

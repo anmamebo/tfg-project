@@ -43,6 +43,11 @@ class DoctorViewSet(viewsets.GenericViewSet):
   def list(self, request):
     """
     Lista todos los médicos.
+    
+    Parámetros opcionales:
+      state (bool): El estado de los médicos a listar.
+      search (str): Una cadena de texto para buscar médicos.
+      ordering (str): El campo por el que se ordenarán los médicos.
 
     Args:
         request (Request): La solicitud HTTP.
@@ -66,7 +71,7 @@ class DoctorViewSet(viewsets.GenericViewSet):
     
   def create(self, request):
     """
-    Crea un nuevo médico.
+    Crea un nuevo médico con usuario y contraseña generados automáticamente.
     
     Args:
         request (Request): La solicitud HTTP.
@@ -109,7 +114,9 @@ class DoctorViewSet(viewsets.GenericViewSet):
 
   def update(self, request, pk=None):
     """
-    Actualiza un médico.
+    Actualiza un médico, primero actualiza los datos del usuario 
+    y luego los datos del médico, también actualiza los departamentos 
+    y especialidades médicas del médico.
 
     Args:
         request (Request): La solicitud HTTP.
@@ -156,7 +163,7 @@ class DoctorViewSet(viewsets.GenericViewSet):
       
   def destroy(self, request, pk=None):
     """
-    Elimina un médico.
+    Elimina un médico cambiando su estado a False.
 
     Args:
         request (Request): La solicitud HTTP.
@@ -166,27 +173,25 @@ class DoctorViewSet(viewsets.GenericViewSet):
         Response: La respuesta que contiene el resultado de la eliminación.
     """
     doctor = self.get_queryset().filter(id=pk).first()
-    if doctor:
-      user = doctor.user
-      if user:
-        doctor.state = False
-        doctor.is_available = False
-        doctor.save()
-        user.is_active = False
-        user.save()
-            
-        return Response({
-          'message': 'Médico eliminado correctamente.'
-        }, status=status.HTTP_200_OK)
+    if not doctor:
+      return Response({'message': 'No se ha encontrado el médico.'}, status=status.HTTP_400_BAD_REQUEST)  
       
-    return Response({
-      'message': 'No se ha encontrado el médico.'
-    }, status=status.HTTP_400_BAD_REQUEST)
+    user = doctor.user
+    if user:
+      doctor.state = False
+      doctor.is_available = False
+      doctor.save()
+      user.is_active = False
+      user.save()
+          
+      return Response({
+        'message': 'Médico eliminado correctamente.'
+      }, status=status.HTTP_200_OK)
     
   @action(detail=True, methods=['put'])
   def activate(self, request, pk=None):
     """
-    Activa un médico.
+    Activa un médico cambiando su estado a True.
 
     Args:
         request (Request): La solicitud HTTP.
@@ -196,27 +201,32 @@ class DoctorViewSet(viewsets.GenericViewSet):
         Response: La respuesta que contiene el resultado de la activación.
     """
     doctor = self.get_object(pk)
-    if doctor:
-      user = doctor.user
-      if user:
-        doctor.state = True
-        doctor.is_available = True
-        doctor.save()
-        user.is_active = True
-        user.save()
-            
-        return Response({
-          'message': 'Médico activado correctamente.'
-        }, status=status.HTTP_200_OK)
+    if not doctor:
+      return Response({'message': 'No se ha encontrado el médico.'}, status=status.HTTP_400_BAD_REQUEST)
     
-    return Response({
-      'message': 'No se ha encontrado el médico.'
-    }, status=status.HTTP_400_BAD_REQUEST)
-    
+    user = doctor.user
+    if user:
+      doctor.state = True
+      doctor.is_available = True
+      doctor.save()
+      user.is_active = True
+      user.save()
+          
+      return Response({
+        'message': 'Médico activado correctamente.'
+      }, status=status.HTTP_200_OK)
+
   @action(detail=False, methods=['get'])
   def doctors_by_department(self, request):
     """
     Lista todos los médicos por departamento.
+    
+    Parámetros:
+      department (string): El id del departamento.
+      
+    Parámetros opcionales:
+      search (str): Una cadena de texto para buscar médicos.
+      paginate (bool): Indica si se desea paginar los resultados.
 
     Args:
         request (Request): La solicitud HTTP.

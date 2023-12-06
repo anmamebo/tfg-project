@@ -54,7 +54,10 @@ class TreatmentViewSet(viewsets.GenericViewSet):
         'message': 'Tratamiento creado correctamente.',  
       }, status=status.HTTP_201_CREATED)
     
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    return Response({
+      'message': 'Ha ocurrido un error al crear el tratamiento.',
+      'errors': serializer.errors
+    }, status=status.HTTP_400_BAD_REQUEST)
   
   def retrieve(self, request, pk=None):
     """
@@ -90,12 +93,18 @@ class TreatmentViewSet(viewsets.GenericViewSet):
         'message': 'Tratamiento actualizado correctamente.',  
       }, status=status.HTTP_200_OK)
     
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    return Response({
+      'message': 'Ha ocurrido un error al actualizar el tratamiento.',
+      'errors': serializer.errors
+    }, status=status.HTTP_400_BAD_REQUEST)
   
   @action(detail=False, methods=['get'])
   def list_for_appointment(self, request):
     """
     Lista todos los tratamientos de una cita.
+    
+    Parámetros:
+      appointment_id (str): El identificador de la cita.
     
     Args:
         request (Request): La solicitud HTTP.

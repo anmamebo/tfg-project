@@ -66,6 +66,7 @@ class UserViewSet(viewsets.GenericViewSet):
       return Response({
         'message': 'Contraseña actualizada correctamente'
       })
+      
     return Response({
       'message': 'Hay errores en la información enviada',
       'errors': password_serializer.errors
@@ -84,14 +85,12 @@ class UserViewSet(viewsets.GenericViewSet):
     Permissions:
       - users.list_user: Permite listar usuarios.
     """
-    if request.user.has_perm('users.list_user'):
-      users = self.get_queryset()
-      users_serializer = self.list_serializer_class(users, many=True)
-      return Response(users_serializer.data, status=status.HTTP_200_OK)
+    if not request.user.has_perm('users.list_user'):
+      return Response({'detail': 'No tiene permisos para listar usuarios'}, status=status.HTTP_403_FORBIDDEN)
     
-    return Response({
-        'detail': 'No tiene permisos para listar usuarios'
-      }, status=status.HTTP_403_FORBIDDEN)
+    users = self.get_queryset()
+    users_serializer = self.list_serializer_class(users, many=True)
+    return Response(users_serializer.data, status=status.HTTP_200_OK)
   
   def create(self, request):
     """
@@ -106,22 +105,20 @@ class UserViewSet(viewsets.GenericViewSet):
     Permissions:
       - users.add_user: Permite crear usuarios.
     """
-    if request.user.has_perm('users.add_user'):
-      user_serializer = self.serializer_class(data=request.data)
-      if user_serializer.is_valid():
-        user = user_serializer.save()
-        return Response({
-          'message': 'Usuario registrado correctamente.',
-        }, status=status.HTTP_201_CREATED)
-      
+    if not request.user.has_perm('users.add_user'):
+      return Response({'detail': 'No tiene permisos para registrar usuarios'}, status=status.HTTP_403_FORBIDDEN)
+    
+    user_serializer = self.serializer_class(data=request.data)
+    if user_serializer.is_valid():
+      user = user_serializer.save()
       return Response({
-        'message': 'Hay errores en el registro',
-        'errors': user_serializer.errors
-      }, status=status.HTTP_400_BAD_REQUEST)
+        'message': 'Usuario registrado correctamente.',
+      }, status=status.HTTP_201_CREATED)
     
     return Response({
-        'detail': 'No tiene permisos para registrar usuarios'
-      }, status=status.HTTP_403_FORBIDDEN)
+      'message': 'Hay errores en el registro',
+      'errors': user_serializer.errors
+    }, status=status.HTTP_400_BAD_REQUEST)
   
   def retrieve(self, request, pk=None):
     """
@@ -137,14 +134,12 @@ class UserViewSet(viewsets.GenericViewSet):
     Permissions:
       - users.get_user: Permite ver un usuario.
     """
-    if request.user.has_perm('users.get_user'):
-      user = self.get_object(pk)
-      user_serializer = self.serializer_class(user)
-      return Response(user_serializer.data)
+    if not request.user.has_perm('users.get_user'):
+      return Response({'detail': 'No tiene permisos para ver este usuario'}, status=status.HTTP_403_FORBIDDEN)
     
-    return Response({
-      'detail': 'No tiene permisos para ver este usuario'
-    }, status=status.HTTP_403_FORBIDDEN)
+    user = self.get_object(pk)
+    user_serializer = self.serializer_class(user)
+    return Response(user_serializer.data)
   
   def update(self, request, pk=None):
     """
@@ -160,23 +155,21 @@ class UserViewSet(viewsets.GenericViewSet):
     Permissions:
       - users.change_user: Permite actualizar un usuario.
     """
-    if request.user.has_perm('users.change_user'):
-      user = self.get_object(pk)
-      user_serializer = UpdateUserSerializer(user, data=request.data)
-      if user_serializer.is_valid():
-        user_serializer.save()
-        return Response({
-          'message': 'Usuario actualizado correctamente'
-        }, status=status.HTTP_200_OK)
-      
+    if not request.user.has_perm('users.change_user'):
+      return Response({'detail': 'No tiene permisos para actualizar este usuario'}, status=status.HTTP_403_FORBIDDEN)
+    
+    user = self.get_object(pk)
+    user_serializer = UpdateUserSerializer(user, data=request.data)
+    if user_serializer.is_valid():
+      user_serializer.save()
       return Response({
-        'message': 'Hay errores en la actualización',
-        'errors': user_serializer.errors
-      }, status=status.HTTP_400_BAD_REQUEST)
+        'message': 'Usuario actualizado correctamente'
+      }, status=status.HTTP_200_OK)
     
     return Response({
-      'detail': 'No tiene permisos para actualizar este usuario'
-    }, status=status.HTTP_403_FORBIDDEN)
+      'message': 'Hay errores en la actualización',
+      'errors': user_serializer.errors
+    }, status=status.HTTP_400_BAD_REQUEST)
   
   def destroy(self, request, pk=None):
     """
@@ -192,17 +185,16 @@ class UserViewSet(viewsets.GenericViewSet):
     Permissions:
       - users.delete_user: Permite eliminar un usuario.
     """
-    if request.user.has_perm('users.delete_user'):
-      user_destroy = self.model.objects.filter(id=pk).update(is_active=False)
-      if user_destroy == 1: # Verifica si se eliminó el usuario
-        return Response({
-          'message': 'Usuario eliminado correctamente'
-        })
-      
+    if not request.user.has_perm('users.delete_user'):
+      return Response({'detail': 'No tiene permisos para eliminar este usuario'}, status=status.HTTP_403_FORBIDDEN)
+    
+    user_destroy = self.model.objects.filter(id=pk).update(is_active=False)
+    if user_destroy == 1: # Verifica si se eliminó el usuario
       return Response({
-        'message': 'No existe el usuario que desea eliminar'
-      }, status=status.HTTP_404_NOT_FOUND)
+        'message': 'Usuario eliminado correctamente'
+      })
     
     return Response({
-      'detail': 'No tiene permisos para eliminar este usuario'
-    }, status=status.HTTP_403_FORBIDDEN)
+      'message': 'No existe el usuario que desea eliminar'
+    }, status=status.HTTP_404_NOT_FOUND)
+

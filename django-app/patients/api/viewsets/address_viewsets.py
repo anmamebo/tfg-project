@@ -20,7 +20,6 @@ class AddressViewSet(viewsets.GenericViewSet):
     list_serializer_class (Serializer): El serializador para representar los datos de una lista de direcciones.
     queryset (QuerySet): El conjunto de datos que se utilizará para las consultas.
   """
-  
   model = Address
   serializer_class = AddressSerializer
   list_serializer_class = AddressSerializer
@@ -40,25 +39,27 @@ class AddressViewSet(viewsets.GenericViewSet):
   
   def create(self, request):
     """
-    Crea una nueva dirección.
+    Crea una nueva dirección y la asocia a un paciente, 
+    para ello se debe enviar el ID del paciente.
 
     Args:
         request (Request): La solicitud HTTP.
 
     Returns:
         Response: La respuesta que indica si la dirección se ha creado correctamente o si ha habido errores.
-    """      
+    """ 
+    patient_id = request.data.get('patient_id')
+    
+    if not patient_id:
+      return Response({'message': 'No se ha enviado el ID del paciente.'}, status=status.HTTP_400_BAD_REQUEST)
+    
+    patient = get_object_or_404(Patient, pk=patient_id)
+    
     address_serializer = self.serializer_class(data=request.data)
     if address_serializer.is_valid():
       address = address_serializer.save() # Guarda la dirección creada
-      
-      # Relaciona la dirección con el paciente en caso de que se haya enviado el ID del paciente
-      patient_id = request.data.get('patient_id')
-      if patient_id:
-        patient = Patient.objects.get(id=patient_id)
-        patient.address = address
-        patient.save()
-            
+      patient.address = address
+      patient.save()    
       return Response({
         'message': 'Dirección creada correctamente.'
       }, status=status.HTTP_201_CREATED)
