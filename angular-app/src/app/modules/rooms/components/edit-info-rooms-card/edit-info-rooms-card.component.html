@@ -1,18 +1,31 @@
 <app-generic-card [title]="titleCard">
   <div class="card-content">
-
-    <form (ngSubmit)="onSubmit()" [formGroup]="editInfoRoomForm" class="form form-horizontal">
+    <form
+      (ngSubmit)="onSubmit()"
+      [formGroup]="editInfoRoomForm"
+      class="form form-horizontal"
+    >
       <div class="form-body">
         <div class="row">
-
           <!-- Nombre -->
           <div class="col-md-6">
             <div class="form-group">
               <label for="name">Nombre*</label>
-              <input type="text" formControlName="name" class="form-control" id="name" placeholder="Nombre"
-                [ngClass]="{ 'is-invalid': submitted && form.get('name')?.errors }">
-              
-              <app-form-errors [control]="form.get('name')" [submitted]="submitted"></app-form-errors>
+              <input
+                type="text"
+                formControlName="name"
+                class="form-control"
+                id="name"
+                placeholder="Nombre"
+                [ngClass]="{
+                  'is-invalid': submitted && form.get('name')?.errors
+                }"
+              />
+
+              <app-form-errors
+                [control]="form.get('name')"
+                [submitted]="submitted"
+              ></app-form-errors>
             </div>
           </div>
 
@@ -20,10 +33,20 @@
           <div class="col-md-6">
             <div class="form-group">
               <label for="description">Descripción</label>
-              <textarea formControlName="description" class="form-control" id="description" rows="5"
-                [ngClass]="{ 'is-invalid': submitted && form.get('description')?.errors }"></textarea>
+              <textarea
+                formControlName="description"
+                class="form-control"
+                id="description"
+                rows="5"
+                [ngClass]="{
+                  'is-invalid': submitted && form.get('description')?.errors
+                }"
+              ></textarea>
 
-              <app-form-errors [control]="form.get('description')" [submitted]="submitted"></app-form-errors>
+              <app-form-errors
+                [control]="form.get('description')"
+                [submitted]="submitted"
+              ></app-form-errors>
             </div>
           </div>
 
@@ -31,20 +54,39 @@
           <div class="col-md-6">
             <div class="form-group">
               <label for="capacity">Capacidad</label>
-              <input type="text" formControlName="capacity" class="form-control" id="capacity" placeholder="Capacidad"
-                [ngClass]="{ 'is-invalid': submitted && form.get('capacity')?.errors }">
-              
-              <app-form-errors [control]="form.get('capacity')" [submitted]="submitted"></app-form-errors>
+              <input
+                type="text"
+                formControlName="capacity"
+                class="form-control"
+                id="capacity"
+                placeholder="Capacidad"
+                [ngClass]="{
+                  'is-invalid': submitted && form.get('capacity')?.errors
+                }"
+              />
+
+              <app-form-errors
+                [control]="form.get('capacity')"
+                [submitted]="submitted"
+              ></app-form-errors>
             </div>
           </div>
 
           <!-- Disponibilidad -->
           <div class="col-sm-6 col-12">
             <div class="form-group">
-                <label class="form-check-label" for="is_available">Disponibilidad*</label>
-                <div class="form-check form-switch">
-                  <input type="checkbox" formControlName="is_available" class="form-check-input" id="is_available" [checked]="room?.is_available">
-                </div>
+              <label class="form-check-label" for="is_available"
+                >Disponibilidad*</label
+              >
+              <div class="form-check form-switch">
+                <input
+                  type="checkbox"
+                  formControlName="is_available"
+                  class="form-check-input"
+                  id="is_available"
+                  [checked]="room?.is_available"
+                />
+              </div>
             </div>
           </div>
 
@@ -52,10 +94,21 @@
           <div class="col-md-6">
             <div class="form-group">
               <label for="type">Tipo</label>
-              <input type="text" formControlName="type" class="form-control" id="type" placeholder="Tipo"
-                [ngClass]="{ 'is-invalid': submitted && form.get('type')?.errors }">
-              
-              <app-form-errors [control]="form.get('type')" [submitted]="submitted"></app-form-errors>
+              <input
+                type="text"
+                formControlName="type"
+                class="form-control"
+                id="type"
+                placeholder="Tipo"
+                [ngClass]="{
+                  'is-invalid': submitted && form.get('type')?.errors
+                }"
+              />
+
+              <app-form-errors
+                [control]="form.get('type')"
+                [submitted]="submitted"
+              ></app-form-errors>
             </div>
           </div>
 
@@ -63,10 +116,21 @@
           <div class="col-md-6">
             <div class="form-group">
               <label for="location">Localización*</label>
-              <input type="text" formControlName="location" class="form-control" id="location" placeholder="Localización"
-                [ngClass]="{ 'is-invalid': submitted && form.get('location')?.errors }">
-              
-              <app-form-errors [control]="form.get('location')" [submitted]="submitted"></app-form-errors>
+              <input
+                type="text"
+                formControlName="location"
+                class="form-control"
+                id="location"
+                placeholder="Localización"
+                [ngClass]="{
+                  'is-invalid': submitted && form.get('location')?.errors
+                }"
+              />
+
+              <app-form-errors
+                [control]="form.get('location')"
+                [submitted]="submitted"
+              ></app-form-errors>
             </div>
           </div>
 
@@ -74,7 +138,7 @@
           <div class="col-md-6">
             <div class="form-group">
               <label for="department">Departamento</label>
-              
+
               <ng-multiselect-dropdown
                 [placeholder]="'Selecciona un departamento'"
                 [settings]="dropdownSettings"
@@ -82,18 +146,21 @@
                 formControlName="department"
               ></ng-multiselect-dropdown>
 
-              <app-form-errors [control]="form.get('department')" [submitted]="submitted"></app-form-errors>
+              <app-form-errors
+                [control]="form.get('department')"
+                [submitted]="submitted"
+              ></app-form-errors>
             </div>
           </div>
-          
+
           <!-- Botones -->
           <div class="col-12 d-flex justify-content-end">
-            <button type="submit" class="btn btn-primary me-1 mb-1">Actualizar</button>
+            <button type="submit" class="btn btn-primary me-1 mb-1">
+              Actualizar
+            </button>
           </div>
-
         </div>
       </div>
     </form>
-
   </div>
 </app-generic-card>

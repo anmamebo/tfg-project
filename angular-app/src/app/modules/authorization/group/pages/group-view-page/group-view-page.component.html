@@ -1,19 +1,17 @@
-<app-generic-page [pageTitle]="pageTitle" [pageDescription]="pageDescription" [breadcrumbData]="breadcrumbData">
+<app-generic-page
+  [pageTitle]="pageTitle"
+  [pageDescription]="pageDescription"
+  [breadcrumbData]="breadcrumbData"
+>
   <div class="page-content">
-
     <section class="section">
       <div class="row">
         <div class="col-12">
-  
           <ng-container *ngIf="group">
-            
-            <app-view-group-card [group]="group" ></app-view-group-card>
-  
+            <app-view-group-card [group]="group"></app-view-group-card>
           </ng-container>
-  
         </div>
       </div>
     </section>
-
   </div>
 </app-generic-page>

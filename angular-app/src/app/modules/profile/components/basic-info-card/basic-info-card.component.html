@@ -1,17 +1,26 @@
 <app-generic-card [title]="titleCard">
   <div class="card-content">
-
     <form (ngSubmit)="onSubmit()" [formGroup]="updateUserDataForm" class="form">
       <div class="row">
-
         <!-- Nombre -->
         <div class="col-md-6 col-12">
           <div class="form-group">
             <label for="first-name-column">Nombre</label>
-            <input type="text" formControlName="name" id="first-name-column" class="form-control" placeholder="Nombre"
-              [ngClass]="{ 'is-invalid': submitted && form.get('name')?.errors }">
-              
-            <app-form-errors [control]="form.get('name')" [submitted]="submitted"></app-form-errors>
+            <input
+              type="text"
+              formControlName="name"
+              id="first-name-column"
+              class="form-control"
+              placeholder="Nombre"
+              [ngClass]="{
+                'is-invalid': submitted && form.get('name')?.errors
+              }"
+            />
+
+            <app-form-errors
+              [control]="form.get('name')"
+              [submitted]="submitted"
+            ></app-form-errors>
           </div>
         </div>
 
@@ -19,10 +28,21 @@
         <div class="col-md-6 col-12">
           <div class="form-group">
             <label for="last-name-column">Apellidos</label>
-            <input type="text" formControlName="last_name" id="last-name-column" class="form-control" placeholder="Apellidos"
-              [ngClass]="{ 'is-invalid': submitted && form.get('last_name')?.errors }">
-              
-            <app-form-errors [control]="form.get('last_name')" [submitted]="submitted"></app-form-errors>
+            <input
+              type="text"
+              formControlName="last_name"
+              id="last-name-column"
+              class="form-control"
+              placeholder="Apellidos"
+              [ngClass]="{
+                'is-invalid': submitted && form.get('last_name')?.errors
+              }"
+            />
+
+            <app-form-errors
+              [control]="form.get('last_name')"
+              [submitted]="submitted"
+            ></app-form-errors>
           </div>
         </div>
 
@@ -30,11 +50,27 @@
         <div class="col-md-6 col-12">
           <div class="form-group">
             <label for="username-column">Nombre de usuario*</label>
-            <input type="text" formControlName="username" id="username-column" class="form-control" placeholder="Nombre de usuario" 
-              [ngClass]="{ 'is-invalid': submitted && form.get('username')?.errors }" readonly="readonly">
-            <p><small class="text-muted">No se puede editar el nombre de usuario.</small></p>
-            
-            <app-form-errors [control]="form.get('username')" [submitted]="submitted"></app-form-errors>
+            <input
+              type="text"
+              formControlName="username"
+              id="username-column"
+              class="form-control"
+              placeholder="Nombre de usuario"
+              [ngClass]="{
+                'is-invalid': submitted && form.get('username')?.errors
+              }"
+              readonly="readonly"
+            />
+            <p>
+              <small class="text-muted"
+                >No se puede editar el nombre de usuario.</small
+              >
+            </p>
+
+            <app-form-errors
+              [control]="form.get('username')"
+              [submitted]="submitted"
+            ></app-form-errors>
           </div>
         </div>
 
@@ -42,19 +78,31 @@
         <div class="col-md-6 col-12">
           <div class="form-group">
             <label for="email-column">Correo Electrónico*</label>
-            <input type="text" formControlName="email" id="email-column" class="form-control" placeholder="Correo Electrónico"
-              [ngClass]="{ 'is-invalid': submitted && form.get('email')?.errors }">
+            <input
+              type="text"
+              formControlName="email"
+              id="email-column"
+              class="form-control"
+              placeholder="Correo Electrónico"
+              [ngClass]="{
+                'is-invalid': submitted && form.get('email')?.errors
+              }"
+            />
 
-            <app-form-errors [control]="form.get('email')" [submitted]="submitted"></app-form-errors>
+            <app-form-errors
+              [control]="form.get('email')"
+              [submitted]="submitted"
+            ></app-form-errors>
           </div>
         </div>
 
         <!-- Botón -->
         <div class="col-12 d-flex justify-content-end">
-          <button type="submit" class="btn btn-primary me-1 mb-1">Actualizar</button>
+          <button type="submit" class="btn btn-primary me-1 mb-1">
+            Actualizar
+          </button>
         </div>
       </div>
     </form>
-
   </div>
 </app-generic-card>

@@ -1,14 +1,18 @@
-<app-generic-card [hasCardHeader]="entityData.title.hasTitle" [title]="entityData.title.title ? entityData.title.title : ''">
+<app-generic-card
+  [hasCardHeader]="entityData.title.hasTitle"
+  [title]="entityData.title.title ? entityData.title.title : ''"
+>
   <div class="card-content">
-
     <div class="row mb-3 justify-content-between">
-      <div *ngIf="entityData.search.hasSearch" class="col-lg-4 col-md-6 col-12 mt-md-0 mt-3">
+      <div
+        *ngIf="entityData.search.hasSearch"
+        class="col-lg-4 col-md-6 col-12 mt-md-0 mt-3"
+      >
         <app-search (searchSubmitted)="onSearchSubmitted($event)"></app-search>
       </div>
     </div>
 
     <ng-container *ngIf="entityData.items; else noItems">
-
       <app-table-appointments
         [striped]="true"
         [columns]="columns"
@@ -32,12 +36,10 @@
         (pageEmitter)="goToPage($event)"
       >
       </app-pagination>
-
     </ng-container>
 
     <ng-template #noItems>
       <app-loading-spinner></app-loading-spinner>
     </ng-template>
-
   </div>
 </app-generic-card>

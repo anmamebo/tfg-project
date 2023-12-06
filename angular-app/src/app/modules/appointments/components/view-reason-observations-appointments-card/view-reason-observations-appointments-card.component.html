@@ -1,19 +1,25 @@
 <app-generic-card [hasCardHeader]="false">
   <div *ngIf="appointment" class="card-content">
-
     <div class="row justify-content-between">
       <div class="col-12 mb-5">
-
         <h4 class="mb-3">Motivo de la cita</h4>
-        <textarea  class="form-control" id="reason" [attr.readonly]="true" rows="2" style="resize: none;">{{ appointment.reason }}</textarea>
-
+        <textarea
+          class="form-control"
+          id="reason"
+          [attr.readonly]="true"
+          rows="2"
+          style="resize: none"
+          >{{ appointment.reason }}</textarea
+        >
       </div>
       <div class="col-12">
-
-        <form (ngSubmit)="onSubmit()" [formGroup]="observationsForm" class="form form-horizontal">
+        <form
+          (ngSubmit)="onSubmit()"
+          [formGroup]="observationsForm"
+          class="form form-horizontal"
+        >
           <div class="form-body">
             <div class="row">
-              
               <!-- Observaciones -->
               <div class="col-12">
                 <div class="form-group">
@@ -23,24 +29,36 @@
                       <h4 class="mb-3">Observaciones</h4>
                     </div>
                     <div class="col text-end">
-                      <button type="submit" class="btn btn-primary">Añadir</button>
+                      <button type="submit" class="btn btn-primary">
+                        Añadir
+                      </button>
                     </div>
                   </div>
                   <!-- Textarea -->
-                  <textarea formControlName="observations" class="form-control" id="observations" rows="3" placeholder="Añadir observaciones"
-                    [ngClass]="{ 'is-invalid': submitted && form.get('observations')?.errors }">{{ appointment.observations }}</textarea>
+                  <textarea
+                    formControlName="observations"
+                    class="form-control"
+                    id="observations"
+                    rows="3"
+                    placeholder="Añadir observaciones"
+                    [ngClass]="{
+                      'is-invalid':
+                        submitted && form.get('observations')?.errors
+                    }"
+                    >{{ appointment.observations }}</textarea
+                  >
 
                   <!-- Errores -->
-                  <app-form-errors [control]="form.get('observations')" [submitted]="submitted"></app-form-errors>
+                  <app-form-errors
+                    [control]="form.get('observations')"
+                    [submitted]="submitted"
+                  ></app-form-errors>
                 </div>
               </div>
-
             </div>
           </div>
         </form>
-        
       </div>
     </div>
-
   </div>
 </app-generic-card>

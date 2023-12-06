@@ -1,6 +1,5 @@
 <app-generic-card [hasCardHeader]="entityData.title.hasTitle">
   <div class="card-content">
-
     <div class="row justify-content-between">
       <div class="col-sm-8">
         <h4 class="mb-4">Tratamientos</h4>
@@ -17,19 +16,23 @@
       [showCancelButton]="false"
       [showConfirmButton]="false"
       [width]="'1000px'"
-      >
+    >
       <div *swalPortal="swalTargets.title">
         <h4 class="mb-4 text-start text-uppercase">Nuevo tratamiento</h4>
       </div>
       <div *swalPortal="swalTargets.content">
-        <app-form-create-treatment-appointments [appointment]="appointment" (createdTreatment)="getItems(this.entityData.page)"></app-form-create-treatment-appointments>
+        <app-form-create-treatment-appointments
+          [appointment]="appointment"
+          (createdTreatment)="getItems(this.entityData.page)"
+        ></app-form-create-treatment-appointments>
       </div>
     </swal>
 
     <ng-container *ngIf="entityData.items; else noItems">
-
       <ng-container *ngIf="entityData.items.length > 0; else lenghtZero">
-        <app-accordion-treatments-appointments [treatments]="entityData.items"></app-accordion-treatments-appointments>
+        <app-accordion-treatments-appointments
+          [treatments]="entityData.items"
+        ></app-accordion-treatments-appointments>
 
         <app-elements-per-page
           [totalElements]="entityData.numItems"
@@ -46,15 +49,11 @@
         >
         </app-pagination>
       </ng-container>
-      <ng-template #lenghtZero>
-        No hay tratamientos para mostrar.
-      </ng-template>
-
+      <ng-template #lenghtZero> No hay tratamientos para mostrar. </ng-template>
     </ng-container>
 
     <ng-template #noItems>
       <app-loading-spinner></app-loading-spinner>
     </ng-template>
-
   </div>
 </app-generic-card>

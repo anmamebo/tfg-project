@@ -1,25 +1,33 @@
-<app-generic-page [pageTitle]="pageTitle" [pageDescription]="pageDescription" [breadcrumbData]="breadcrumbData">
+<app-generic-page
+  [pageTitle]="pageTitle"
+  [pageDescription]="pageDescription"
+  [breadcrumbData]="breadcrumbData"
+>
   <div class="page-content">
-
     <ng-container *ngIf="doctor">
-
       <section class="section">
-        <app-buttons-doctors-card [doctorId]="doctor.id" [isActive]="doctor.state!" (refreshDoctor)="onRefreshDoctor()"></app-buttons-doctors-card>
+        <app-buttons-doctors-card
+          [doctorId]="doctor.id"
+          [isActive]="doctor.state!"
+          (refreshDoctor)="onRefreshDoctor()"
+        ></app-buttons-doctors-card>
       </section>
-    
+
       <section class="section">
         <div class="row">
           <div class="col-lg-8">
-            <app-view-basic-info-doctors-card [doctor]="doctor"></app-view-basic-info-doctors-card>
+            <app-view-basic-info-doctors-card
+              [doctor]="doctor"
+            ></app-view-basic-info-doctors-card>
           </div>
 
           <div class="col-lg-4">
-            <app-view-contact-info-doctors-card [doctor]="doctor"></app-view-contact-info-doctors-card>
+            <app-view-contact-info-doctors-card
+              [doctor]="doctor"
+            ></app-view-contact-info-doctors-card>
           </div>
         </div>
       </section>
-
     </ng-container>
-
   </div>
 </app-generic-page>

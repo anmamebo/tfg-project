@@ -1,58 +1,96 @@
 <app-generic-card [title]="titleCard">
   <div class="card-content">
-
     <div class="row">
-
       <div class="col-md-6">
         <div class="form-group">
           <label for="street">Calle</label>
-          <input type="text" class="form-control" id="street" [attr.readonly]="true" [value]="address?.street">
+          <input
+            type="text"
+            class="form-control"
+            id="street"
+            [attr.readonly]="true"
+            [value]="address?.street"
+          />
         </div>
       </div>
 
       <div class="col-md-3">
         <div class="form-group">
           <label for="number">Número</label>
-          <input type="text" class="form-control" id="number" [attr.readonly]="true" [value]="address?.number">
+          <input
+            type="text"
+            class="form-control"
+            id="number"
+            [attr.readonly]="true"
+            [value]="address?.number"
+          />
         </div>
       </div>
 
       <div class="col-md-3">
         <div class="form-group">
           <label for="floor">Piso</label>
-          <input type="text" class="form-control" id="floor" [attr.readonly]="true" [value]="address?.floor">
+          <input
+            type="text"
+            class="form-control"
+            id="floor"
+            [attr.readonly]="true"
+            [value]="address?.floor"
+          />
         </div>
       </div>
 
       <div class="col-md-6">
         <div class="form-group">
           <label for="city">Ciudad</label>
-          <input type="text" class="form-control" id="city" [attr.readonly]="true" [value]="address?.city">
+          <input
+            type="text"
+            class="form-control"
+            id="city"
+            [attr.readonly]="true"
+            [value]="address?.city"
+          />
         </div>
       </div>
 
       <div class="col-md-6">
         <div class="form-group">
           <label for="postal_code">Código Postal</label>
-          <input type="text" class="form-control" id="postal_code" [attr.readonly]="true" [value]="address?.postal_code">
+          <input
+            type="text"
+            class="form-control"
+            id="postal_code"
+            [attr.readonly]="true"
+            [value]="address?.postal_code"
+          />
         </div>
       </div>
 
       <div class="col-md-6">
         <div class="form-group">
           <label for="province">Provincia</label>
-          <input type="text" class="form-control" id="province" [attr.readonly]="true" [value]="address?.province">
+          <input
+            type="text"
+            class="form-control"
+            id="province"
+            [attr.readonly]="true"
+            [value]="address?.province"
+          />
         </div>
       </div>
 
       <div class="col-md-6">
         <div class="form-group">
           <label for="country">País</label>
-          <input type="text" class="form-control" id="country" [attr.readonly]="true" [value]="address?.country">
+          <input
+            type="text"
+            class="form-control"
+            id="country"
+            [attr.readonly]="true"
+            [value]="address?.country"
+          />
         </div>
       </div>
-
     </div>
-
   </div>
 </app-generic-card>

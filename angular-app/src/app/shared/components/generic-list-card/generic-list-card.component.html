@@ -1,61 +1,91 @@
-<app-generic-card [hasCardHeader]="entityData.title.hasTitle" [title]="entityData.title.title ? entityData.title.title : ''">
+<app-generic-card
+  [hasCardHeader]="entityData.title.hasTitle"
+  [title]="entityData.title.title ? entityData.title.title : ''"
+>
   <div class="card-content">
-
     <div class="row mb-3 justify-content-between">
-      <div *ngIf="entityData.search.hasSearch" class="col-lg-4 col-md-6 col-12 mt-md-0 mt-3">
-
+      <div
+        *ngIf="entityData.search.hasSearch"
+        class="col-lg-4 col-md-6 col-12 mt-md-0 mt-3"
+      >
         <app-search (searchSubmitted)="onSearchSubmitted($event)"></app-search>
-
       </div>
-      <div *ngIf="entityData.hasStateFilter" class="col-lg-5 col-md-6 mt-md-0 mt-2">
-
-        <button (click)="filterItems(null)" class="btn btn-sm btn-primary rounded-pill me-2"
-          [ngClass]="{'btn-primary': filterState === null, 'btn-outline-primary': filterState !== null}">Todos</button>
-        <button (click)="filterItems(true)" class="btn btn-sm btn-outline-primary rounded-pill me-2"
-          [ngClass]="{'btn-primary': filterState === true, 'btn-outline-primary': filterState !== true}">Activos</button>
-        <button (click)="filterItems(false)" class="btn btn-sm btn-outline-primary rounded-pill me-2"
-          [ngClass]="{'btn-primary': filterState === false, 'btn-outline-primary': filterState !== false}">Inactivos</button>
-
+      <div
+        *ngIf="entityData.hasStateFilter"
+        class="col-lg-5 col-md-6 mt-md-0 mt-2"
+      >
+        <button
+          (click)="filterItems(null)"
+          class="btn btn-sm btn-primary rounded-pill me-2"
+          [ngClass]="{
+            'btn-primary': filterState === null,
+            'btn-outline-primary': filterState !== null
+          }"
+        >
+          Todos
+        </button>
+        <button
+          (click)="filterItems(true)"
+          class="btn btn-sm btn-outline-primary rounded-pill me-2"
+          [ngClass]="{
+            'btn-primary': filterState === true,
+            'btn-outline-primary': filterState !== true
+          }"
+        >
+          Activos
+        </button>
+        <button
+          (click)="filterItems(false)"
+          class="btn btn-sm btn-outline-primary rounded-pill me-2"
+          [ngClass]="{
+            'btn-primary': filterState === false,
+            'btn-outline-primary': filterState !== false
+          }"
+        >
+          Inactivos
+        </button>
       </div>
-      <div *ngIf="entityData.create.hasCreate" class="col-md-3 col-12 mt-md-0 mt-3">
-
-        <a [routerLink]="[entityData.create.create]" class="btn btn-primary w-100">{{ entityData.create.createText }}</a>
-
+      <div
+        *ngIf="entityData.create.hasCreate"
+        class="col-md-3 col-12 mt-md-0 mt-3"
+      >
+        <a
+          [routerLink]="[entityData.create.create]"
+          class="btn btn-primary w-100"
+          >{{ entityData.create.createText }}</a
+        >
       </div>
     </div>
 
     <ng-container *ngIf="entityData.items; else notItems">
-    
-      <app-generic-table 
-        [striped]="true" 
-        [columns]="entityData.columns" 
-        [data]="entityData.items" 
-        [actions]="entityData.actions.hasActions" 
+      <app-generic-table
+        [striped]="true"
+        [columns]="entityData.columns"
+        [data]="entityData.items"
+        [actions]="entityData.actions.hasActions"
         [actionsUrls]="entityData.actions.actions"
         (sortEvent)="sortItems($event)"
         (onDeleteEvent)="delete($event)"
       >
       </app-generic-table>
 
-      <app-elements-per-page 
-        [totalElements]="entityData.numItems" 
+      <app-elements-per-page
+        [totalElements]="entityData.numItems"
         (elementsPerPageChangedEvent)="onEntriesPerPageChanged($event)"
       >
       </app-elements-per-page>
 
-      <app-pagination 
-        [page]="entityData.page" 
-        [totalPages]="entityData.totalPages" 
-        [numItems]="entityData.numItems" 
+      <app-pagination
+        [page]="entityData.page"
+        [totalPages]="entityData.totalPages"
+        [numItems]="entityData.numItems"
         (pageEmitter)="goToPage($event)"
       >
       </app-pagination>
-
     </ng-container>
 
     <ng-template #notItems>
       <app-loading-spinner></app-loading-spinner>
     </ng-template>
-
   </div>
 </app-generic-card>

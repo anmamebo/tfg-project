@@ -1,12 +1,17 @@
-<app-generic-page [pageTitle]="pageTitle" [pageDescription]="pageDescription" [breadcrumbData]="breadcrumbData">
+<app-generic-page
+  [pageTitle]="pageTitle"
+  [pageDescription]="pageDescription"
+  [breadcrumbData]="breadcrumbData"
+>
   <div class="page-content">
-
     <ng-container *ngIf="appointment && appointment.patient">
-    
       <section class="section">
         <div class="row">
           <div class="col-12">
-            <app-view-info-status-appointments-card [appointment]="appointment" (refreshAppointment)="onRefreshAppointment()"></app-view-info-status-appointments-card>
+            <app-view-info-status-appointments-card
+              [appointment]="appointment"
+              (refreshAppointment)="onRefreshAppointment()"
+            ></app-view-info-status-appointments-card>
           </div>
         </div>
       </section>
@@ -14,18 +19,23 @@
       <section class="section">
         <div class="row">
           <div class="col-lg-6">
-            <app-view-patient-appointments-card [patient]="appointment.patient"></app-view-patient-appointments-card>
+            <app-view-patient-appointments-card
+              [patient]="appointment.patient"
+            ></app-view-patient-appointments-card>
           </div>
           <div class="col-lg-6">
-            <app-view-reason-observations-appointments-card [appointment]="appointment" (refreshAppointment)="onRefreshAppointment()"></app-view-reason-observations-appointments-card>
+            <app-view-reason-observations-appointments-card
+              [appointment]="appointment"
+              (refreshAppointment)="onRefreshAppointment()"
+            ></app-view-reason-observations-appointments-card>
           </div>
         </div>
         <div class="col-md-8">
-          <app-view-treatments-appointments-card [appointment]="appointment"></app-view-treatments-appointments-card>
+          <app-view-treatments-appointments-card
+            [appointment]="appointment"
+          ></app-view-treatments-appointments-card>
         </div>
       </section>
-
     </ng-container>
-
   </div>
 </app-generic-page>

@@ -1,17 +1,28 @@
 <app-generic-card [title]="titleCard">
   <div class="card-content">
-
-    <form (ngSubmit)="onSubmit()" [formGroup]="updatePatientDataForm" class="form">
+    <form
+      (ngSubmit)="onSubmit()"
+      [formGroup]="updatePatientDataForm"
+      class="form"
+    >
       <div class="row">
-
         <!-- DNI -->
         <div class="col-md-6 col-12">
           <div class="form-group">
             <label for="dni">DNI*</label>
-            <input type="text" formControlName="dni" id="dni" class="form-control" placeholder="DNI"
-              [ngClass]="{ 'is-invalid': submitted && form.get('dni')?.errors }">
-              
-            <app-form-errors [control]="form.get('dni')" [submitted]="submitted"></app-form-errors>
+            <input
+              type="text"
+              formControlName="dni"
+              id="dni"
+              class="form-control"
+              placeholder="DNI"
+              [ngClass]="{ 'is-invalid': submitted && form.get('dni')?.errors }"
+            />
+
+            <app-form-errors
+              [control]="form.get('dni')"
+              [submitted]="submitted"
+            ></app-form-errors>
           </div>
         </div>
 
@@ -19,24 +30,49 @@
         <div class="col-md-6 col-12">
           <div class="form-group">
             <label for="social_security">Número seguridad social</label>
-            <input type="text" formControlName="social_security" id="social_security" class="form-control" placeholder="Número seguridad social"
-              [ngClass]="{ 'is-invalid': submitted && form.get('social_security')?.errors }">
+            <input
+              type="text"
+              formControlName="social_security"
+              id="social_security"
+              class="form-control"
+              placeholder="Número seguridad social"
+              [ngClass]="{
+                'is-invalid': submitted && form.get('social_security')?.errors
+              }"
+            />
 
-            <app-form-errors [control]="form.get('social_security')" [submitted]="submitted"></app-form-errors>
+            <app-form-errors
+              [control]="form.get('social_security')"
+              [submitted]="submitted"
+            ></app-form-errors>
           </div>
         </div>
 
         <!-- Género -->
         <div class="col-md-6">
           <fieldset class="form-group">
-              <label for="gender">Género*</label>
-              <select class="form-select" formControlName="gender" id="gender" [ngClass]="{ 'is-invalid': submitted && form.get('gender')?.errors }">
-                  <option *ngFor="let option of gender_options" [value]="option.value" [attr.selected]="option.value === patient.gender ? true : null">
-                    {{ option.text }}
-                  </option>
-              </select>
+            <label for="gender">Género*</label>
+            <select
+              class="form-select"
+              formControlName="gender"
+              id="gender"
+              [ngClass]="{
+                'is-invalid': submitted && form.get('gender')?.errors
+              }"
+            >
+              <option
+                *ngFor="let option of gender_options"
+                [value]="option.value"
+                [attr.selected]="option.value === patient.gender ? true : null"
+              >
+                {{ option.text }}
+              </option>
+            </select>
 
-              <app-form-errors [control]="form.get('gender')" [submitted]="submitted"></app-form-errors>
+            <app-form-errors
+              [control]="form.get('gender')"
+              [submitted]="submitted"
+            ></app-form-errors>
           </fieldset>
         </div>
 
@@ -44,10 +80,27 @@
         <div class="col-md-6 col-12">
           <div class="form-group">
             <label for="birthdate">Fecha de nacimiento</label>
-            <input type="text" formControlName="birthdate" id="birthdate" class="form-control" [ngClass]="{ 'is-invalid': submitted && form.get('birthdate')?.errors }"
-              mwlFlatpickr [altInput]="true" [convertModelValue]="true" [defaultValue]="patient.birthdate" [locale]="locale" [maxDate]="'today'" [dateFormat]="'Y-m-d'">
-            
-            <app-form-errors [control]="form.get('birthdate')" [submitted]="submitted"></app-form-errors>
+            <input
+              type="text"
+              formControlName="birthdate"
+              id="birthdate"
+              class="form-control"
+              [ngClass]="{
+                'is-invalid': submitted && form.get('birthdate')?.errors
+              }"
+              mwlFlatpickr
+              [altInput]="true"
+              [convertModelValue]="true"
+              [defaultValue]="patient.birthdate"
+              [locale]="locale"
+              [maxDate]="'today'"
+              [dateFormat]="'Y-m-d'"
+            />
+
+            <app-form-errors
+              [control]="form.get('birthdate')"
+              [submitted]="submitted"
+            ></app-form-errors>
           </div>
         </div>
 
@@ -55,19 +108,31 @@
         <div class="col-md-6 col-12">
           <div class="form-group">
             <label for="phone">Número de teléfono</label>
-            <input type="text" formControlName="phone" id="phone" class="form-control" placeholder="Número de teléfono"
-              [ngClass]="{ 'is-invalid': submitted && form.get('phone')?.errors }">
-            
-            <app-form-errors [control]="form.get('phone')" [submitted]="submitted"></app-form-errors>
+            <input
+              type="text"
+              formControlName="phone"
+              id="phone"
+              class="form-control"
+              placeholder="Número de teléfono"
+              [ngClass]="{
+                'is-invalid': submitted && form.get('phone')?.errors
+              }"
+            />
+
+            <app-form-errors
+              [control]="form.get('phone')"
+              [submitted]="submitted"
+            ></app-form-errors>
           </div>
         </div>
 
         <!-- Botón -->
         <div class="col-12 d-flex justify-content-end">
-          <button type="submit" class="btn btn-primary me-1 mb-1">Actualizar</button>
+          <button type="submit" class="btn btn-primary me-1 mb-1">
+            Actualizar
+          </button>
         </div>
       </div>
     </form>
-
   </div>
 </app-generic-card>

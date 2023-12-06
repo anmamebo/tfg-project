@@ -1,19 +1,29 @@
 <app-generic-card [title]="titleCard">
   <div class="card-content">
-
     <div class="row">
-        
       <div class="col-md-6">
         <div class="form-group">
           <label for="id">ID</label>
-          <input type="text" class="form-control" id="id" [attr.readonly]="true" [value]="group?.id">
+          <input
+            type="text"
+            class="form-control"
+            id="id"
+            [attr.readonly]="true"
+            [value]="group?.id"
+          />
         </div>
       </div>
 
       <div class="col-md-6">
         <div class="form-group">
           <label for="name">Nombre</label>
-          <input type="text" class="form-control" id="name" [attr.readonly]="true" [value]="group?.name">
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            [attr.readonly]="true"
+            [value]="group?.name"
+          />
         </div>
       </div>
 
@@ -21,19 +31,22 @@
         <div class="form-group">
           <label for="staticInput">Permisos vinculados</label>
 
-          <ng-container *ngIf="group?.permissions!.length > 0; else notPermissions">
-
-            <app-generic-table [columns]="columns" [data]="group?.permissions || []" [actions]="false"></app-generic-table>
-
+          <ng-container
+            *ngIf="(group?.permissions)!.length > 0; else notPermissions"
+          >
+            <app-generic-table
+              [columns]="columns"
+              [data]="group?.permissions || []"
+              [actions]="false"
+            ></app-generic-table>
           </ng-container>
           <ng-template #notPermissions>
-            <p class="form-control-static" id="staticInput">No hay permisos vinculados.</p>
+            <p class="form-control-static" id="staticInput">
+              No hay permisos vinculados.
+            </p>
           </ng-template>
-
         </div>
       </div>
-
     </div>
-
   </div>
 </app-generic-card>

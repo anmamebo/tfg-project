@@ -1,3 +1,7 @@
-<div *ngIf="control && control.errors && submitted" class="invalid-feedback" style="display: block;">
+<div
+  *ngIf="control && control.errors && submitted"
+  class="invalid-feedback"
+  style="display: block"
+>
   <div *ngFor="let error of getErrorMessages()">{{ error }}</div>
 </div>

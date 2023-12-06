@@ -1,27 +1,53 @@
-<form (ngSubmit)="onSubmit()" [formGroup]="createTreatmentForm" class="form form-horizontal">
+<form
+  (ngSubmit)="onSubmit()"
+  [formGroup]="createTreatmentForm"
+  class="form form-horizontal"
+>
   <div class="form-body text-start">
-
     <div class="row w-100">
-      
       <!-- Descripción -->
       <div class="col-md-6">
         <div class="form-group">
           <label for="description">Descripción*</label>
-          <textarea formControlName="description" class="form-control" id="description" rows="5" placeholder="Descripción"
-            [ngClass]="{ 'is-invalid': submitted && form.get('description')?.errors }" style="resize: none;"></textarea>
-          
-          <app-form-errors [control]="form.get('description')" [submitted]="submitted"></app-form-errors>
+          <textarea
+            formControlName="description"
+            class="form-control"
+            id="description"
+            rows="5"
+            placeholder="Descripción"
+            [ngClass]="{
+              'is-invalid': submitted && form.get('description')?.errors
+            }"
+            style="resize: none"
+          ></textarea>
+
+          <app-form-errors
+            [control]="form.get('description')"
+            [submitted]="submitted"
+          ></app-form-errors>
         </div>
       </div>
-  
+
       <!-- Comentarios -->
       <div class="col-md-6">
         <div class="form-group">
           <label for="comments">Comentarios</label>
-          <textarea formControlName="comments" class="form-control" id="comments" rows="5" placeholder="Comentarios"
-            [ngClass]="{ 'is-invalid': submitted && form.get('comments')?.errors }" style="resize: none;"></textarea>
-          
-          <app-form-errors [control]="form.get('comments')" [submitted]="submitted"></app-form-errors>
+          <textarea
+            formControlName="comments"
+            class="form-control"
+            id="comments"
+            rows="5"
+            placeholder="Comentarios"
+            [ngClass]="{
+              'is-invalid': submitted && form.get('comments')?.errors
+            }"
+            style="resize: none"
+          ></textarea>
+
+          <app-form-errors
+            [control]="form.get('comments')"
+            [submitted]="submitted"
+          ></app-form-errors>
         </div>
       </div>
 
@@ -29,10 +55,21 @@
       <div class="col-md-6">
         <div class="form-group">
           <label for="duration">Duración*</label>
-          <input type="text" formControlName="duration" class="form-control" id="duration" placeholder="Duración"
-            [ngClass]="{ 'is-invalid': submitted && form.get('duration')?.errors }">
-          
-          <app-form-errors [control]="form.get('duration')" [submitted]="submitted"></app-form-errors>
+          <input
+            type="text"
+            formControlName="duration"
+            class="form-control"
+            id="duration"
+            placeholder="Duración"
+            [ngClass]="{
+              'is-invalid': submitted && form.get('duration')?.errors
+            }"
+          />
+
+          <app-form-errors
+            [control]="form.get('duration')"
+            [submitted]="submitted"
+          ></app-form-errors>
         </div>
       </div>
 
@@ -40,10 +77,22 @@
       <div class="col-md-6">
         <div class="form-group">
           <label for="application_frequency">Frecuencia de aplicación</label>
-          <input type="text" formControlName="application_frequency" class="form-control" id="application_frequency" placeholder="Frecuencia de aplicación"
-            [ngClass]="{ 'is-invalid': submitted && form.get('application_frequency')?.errors }">
-          
-          <app-form-errors [control]="form.get('application_frequency')" [submitted]="submitted"></app-form-errors>
+          <input
+            type="text"
+            formControlName="application_frequency"
+            class="form-control"
+            id="application_frequency"
+            placeholder="Frecuencia de aplicación"
+            [ngClass]="{
+              'is-invalid':
+                submitted && form.get('application_frequency')?.errors
+            }"
+          />
+
+          <app-form-errors
+            [control]="form.get('application_frequency')"
+            [submitted]="submitted"
+          ></app-form-errors>
         </div>
       </div>
 
@@ -51,10 +100,21 @@
       <div class="col-md-6">
         <div class="form-group">
           <label for="recommended_dosage">Dosis recomendada</label>
-          <input type="text" formControlName="recommended_dosage" class="form-control" id="recommended_dosage" placeholder="Dosis recomendada"
-            [ngClass]="{ 'is-invalid': submitted && form.get('recommended_dosage')?.errors }">
-          
-          <app-form-errors [control]="form.get('recommended_dosage')" [submitted]="submitted"></app-form-errors>
+          <input
+            type="text"
+            formControlName="recommended_dosage"
+            class="form-control"
+            id="recommended_dosage"
+            placeholder="Dosis recomendada"
+            [ngClass]="{
+              'is-invalid': submitted && form.get('recommended_dosage')?.errors
+            }"
+          />
+
+          <app-form-errors
+            [control]="form.get('recommended_dosage')"
+            [submitted]="submitted"
+          ></app-form-errors>
         </div>
       </div>
 
@@ -62,33 +122,38 @@
       <div class="col-md-6 col-12">
         <div class="form-group">
           <label for="start_date">Fecha de comienzo*</label>
-          <input 
-            type="text" 
-            formControlName="start_date" 
-            id="start_date" 
-            class="form-control" 
-            [ngClass]="{ 'is-invalid': submitted && form.get('start_date')?.errors }"
-            mwlFlatpickr 
-            [convertModelValue]="true" 
-            [locale]="locale" 
-            [allowInput]="true" 
+          <input
+            type="text"
+            formControlName="start_date"
+            id="start_date"
+            class="form-control"
+            [ngClass]="{
+              'is-invalid': submitted && form.get('start_date')?.errors
+            }"
+            mwlFlatpickr
+            [convertModelValue]="true"
+            [locale]="locale"
+            [allowInput]="true"
             [minDate]="'today'"
-            [dateFormat]="'d-m-Y'" 
-            [monthSelectorType]="'dropdown'" 
+            [dateFormat]="'d-m-Y'"
+            [monthSelectorType]="'dropdown'"
             placeholder="Fecha de comienzo"
-            >
-          
-          <app-form-errors [control]="form.get('start_date')" [submitted]="submitted"></app-form-errors>
+          />
+
+          <app-form-errors
+            [control]="form.get('start_date')"
+            [submitted]="submitted"
+          ></app-form-errors>
         </div>
       </div>
 
       <!-- Botones -->
       <div class="col-12 d-flex justify-content-end">
-        <button type="reset" class="btn btn-outline-primary me-1">Limpiar</button>
+        <button type="reset" class="btn btn-outline-primary me-1">
+          Limpiar
+        </button>
         <button type="submit" class="btn btn-primary">Crear</button>
       </div>
-
     </div>
-
   </div>
 </form>

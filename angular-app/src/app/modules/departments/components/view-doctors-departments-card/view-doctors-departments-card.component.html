@@ -1,21 +1,24 @@
 <app-generic-card [title]="titleCard">
   <div class="card-content">
-
     <div class="row justify-content-start">
       <div class="col-md-6">
-
         <app-search (searchSubmitted)="onSearchSubmitted($event)"></app-search>
-
       </div>
     </div>
-    
+
     <div class="row">
+      <app-generic-table
+        [columns]="columns"
+        [data]="doctors"
+        [striped]="true"
+      ></app-generic-table>
 
-      <app-generic-table [columns]="columns" [data]="doctors" [striped]="true"></app-generic-table>
-
-      <app-pagination (pageEmitter)="goToPage($event)" [page]="page" [totalPages]="totalPages" [numItems]="numDoctors"></app-pagination>
-
+      <app-pagination
+        (pageEmitter)="goToPage($event)"
+        [page]="page"
+        [totalPages]="totalPages"
+        [numItems]="numDoctors"
+      ></app-pagination>
     </div>
-
   </div>
 </app-generic-card>

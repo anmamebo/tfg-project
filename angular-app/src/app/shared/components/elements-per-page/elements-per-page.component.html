@@ -1,8 +1,15 @@
 <div class="row mt-2">
   <div class="col-lg-1 col-2">
     <div class="form-group row">
-      <select id="entriesPerPage" class="form-select col-6" [(ngModel)]="elementsPerPage" (change)="onSelectChanged()">
-        <option *ngFor="let number of quantityOptions" [value]="number">{{ number }}</option>
+      <select
+        id="entriesPerPage"
+        class="form-select col-6"
+        [(ngModel)]="elementsPerPage"
+        (change)="onSelectChanged()"
+      >
+        <option *ngFor="let number of quantityOptions" [value]="number">
+          {{ number }}
+        </option>
       </select>
     </div>
   </div>

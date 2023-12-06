@@ -1,25 +1,31 @@
-<app-generic-page [pageTitle]="pageTitle" [pageDescription]="pageDescription" [breadcrumbData]="breadcrumbData">
+<app-generic-page
+  [pageTitle]="pageTitle"
+  [pageDescription]="pageDescription"
+  [breadcrumbData]="breadcrumbData"
+>
   <div class="page-content">
-
     <ng-container *ngIf="department">
-    
       <section class="section">
         <div class="row">
           <div class="col-12">
-            <app-view-info-departments-card [department]="department"></app-view-info-departments-card>
+            <app-view-info-departments-card
+              [department]="department"
+            ></app-view-info-departments-card>
           </div>
 
           <div class="col-xxl-6">
-            <app-view-rooms-departments-card [departmentId]="department.id"></app-view-rooms-departments-card>
+            <app-view-rooms-departments-card
+              [departmentId]="department.id"
+            ></app-view-rooms-departments-card>
           </div>
 
           <div class="col-xxl-6">
-            <app-view-doctors-departments-card [departmentId]="department.id"></app-view-doctors-departments-card>
+            <app-view-doctors-departments-card
+              [departmentId]="department.id"
+            ></app-view-doctors-departments-card>
           </div>
         </div>
       </section>
-
     </ng-container>
-
   </div>
 </app-generic-page>
