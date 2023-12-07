@@ -220,10 +220,12 @@ class AppointmentViewSet(viewsets.GenericViewSet):
         appointments = self.filter_appointments(appointments)  # Filtra las citas
         appointments = self.order_appointments(appointments)  # Ordena las citas
 
-        page = self.paginate_queryset(appointments)  # Pagina las citas
-        if page is not None:
-            appointments_serializer = self.list_serializer_class(page, many=True)
-            return self.get_paginated_response(appointments_serializer.data)
+        paginate = self.request.query_params.get("paginate", None)
+        if paginate and paginate == "true":
+            page = self.paginate_queryset(appointments)  # Pagina las citas
+            if page is not None:
+                appointments_serializer = self.list_serializer_class(page, many=True)
+                return self.get_paginated_response(appointments_serializer.data)
 
         appointments_serializer = self.list_serializer_class(appointments, many=True)
         return Response(appointments_serializer.data, status=status.HTTP_200_OK)
