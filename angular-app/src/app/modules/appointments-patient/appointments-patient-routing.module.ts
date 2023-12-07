@@ -3,8 +3,14 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AppointmentsPatientPageComponent } from './pages/appointments-patient-page/appointments-patient-page.component';
 import { AppointmentsHistoricalPatientPageComponent } from './pages/appointments-historical-patient-page/appointments-historical-patient-page.component';
+import { AppointmentsCalendarPatientPageComponent } from './pages/appointments-calendar-patient-page/appointments-calendar-patient-page.component';
 
 const routes: Routes = [
+  {
+    path: 'agenda',
+    component: AppointmentsCalendarPatientPageComponent,
+    title: 'Agenda | HospitalSys',
+  },
   {
     path: 'mis-citas',
     component: AppointmentsPatientPageComponent,

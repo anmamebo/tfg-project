@@ -1,6 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+// Calendario
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+
 // Módulos
 import { AppointmentsPatientRoutingModule } from './appointments-patient-routing.module';
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -13,6 +17,7 @@ import { ElementsPerPageModule } from 'src/app/shared/components/elements-per-pa
 // Componentes Páginas
 import { AppointmentsPatientPageComponent } from './pages/appointments-patient-page/appointments-patient-page.component';
 import { AppointmentsHistoricalPatientPageComponent } from './pages/appointments-historical-patient-page/appointments-historical-patient-page.component';
+import { AppointmentsCalendarPatientPageComponent } from './pages/appointments-calendar-patient-page/appointments-calendar-patient-page.component';
 
 // Componentes Tarjetas
 import { ListAppointmentsPatientCardComponent } from './components/list-appointments-patient-card/list-appointments-patient-card.component';
@@ -26,6 +31,7 @@ import { ListAppointmentsHistoricalPatientCardComponent } from './components/lis
     ViewAppointmentsPatientCardComponent,
     AppointmentsHistoricalPatientPageComponent,
     ListAppointmentsHistoricalPatientCardComponent,
+    AppointmentsCalendarPatientPageComponent,
   ],
   imports: [
     CommonModule,
@@ -36,6 +42,10 @@ import { ListAppointmentsHistoricalPatientCardComponent } from './components/lis
     LoadingSpinnerModule,
     PaginationModule,
     ElementsPerPageModule,
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory,
+    }),
   ],
 })
 export class AppointmentsPatientModule {}
