@@ -1,0 +1,155 @@
+<app-generic-card *ngIf="appointment" [hasCardHeader]="false">
+  <div class="card-content">
+    <!-- Título -->
+    <div id="title" class="row mb-4">
+      <div class="col-auto">
+        <span class="badge" [ngClass]="statusBadgeClasses[appointment.status]">
+          {{ appointment.status | statusAppointment }}
+        </span>
+      </div>
+      <div class="col-md col-12">
+        <h4 class="card-title">{{ cardTitle }}</h4>
+      </div>
+      <div class="col-auto">
+        <div class="dropdown">
+          <span
+            class="dropdown-toggle"
+            type="button"
+            id="dropdownMenuButton"
+            data-bs-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <i class="bi bi-three-dots"></i>
+          </span>
+          <div
+            class="dropdown-menu dropdown-menu-dark"
+            aria-labelledby="dropdownMenuButton"
+          >
+            <a
+              *ngIf="
+                appointment.status == 'pending' ||
+                appointment.status == 'scheduled' ||
+                appointment.status == 'rescheduled'
+              "
+              class="dropdown-item"
+              style="cursor: pointer"
+              (click)="cancelAppointment()"
+            >
+              <i class="bi bi-x-circle me-2"></i>
+              Cancelar Cita
+            </a>
+            <!-- <div class="dropdown-divider"></div>
+            <a class="dropdown-item" style="cursor: pointer">
+              <i class="bi bi-file-earmark-arrow-down me-2"></i>
+              Descargar PDF
+            </a>
+            <a class="dropdown-item" style="cursor: pointer">
+              <i class="bi bi-printer me-2"></i>
+              Imprimir
+            </a> -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contenido -->
+    <div id="content" class="row">
+      <!-- Información cita -->
+      <div class="col-md-6">
+        <div class="row mb-3">
+          <div class="col-12">
+            <h5>Información de la cita</h5>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-12">
+            <p>
+              <strong>Motivo:</strong>
+              {{ appointment.reason ? appointment.reason : "--" }}
+            </p>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-12">
+            <p>
+              <strong>Tipo de cita:</strong>
+              {{ appointment.type | typeAppointment }}
+            </p>
+          </div>
+        </div>
+        <div class="row mb-1" *ngIf="appointment.specialty">
+          <div class="col-12">
+            <p>
+              <strong>Especialidad médica:</strong>
+              {{ appointment.specialty.name }}
+            </p>
+          </div>
+        </div>
+        <div class="row mb-1" *ngIf="appointment.room">
+          <div class="col-12">
+            <p>
+              <strong>Sala:</strong>
+              {{ appointment.room.name }} - {{ appointment.room.location }}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Información médico -->
+      <div
+        class="col-md-6"
+        *ngIf="appointment.doctor && appointment.doctor.user"
+      >
+        <div class="row mb-3">
+          <div class="col-12">
+            <h5>Información del médico</h5>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-12">
+            <p>
+              <strong>Nombre:</strong>
+              {{ appointment.doctor.user.name }}
+              {{ appointment.doctor.user.last_name }}
+            </p>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-12">
+            <p>
+              <strong>Correo electrónico:</strong>
+              {{ appointment.doctor.user.email }}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fechas -->
+      <div class="col-12 mt-4">
+        <div class="row">
+          <div class="col-md-3" *ngIf="appointment.schedule">
+            <p>
+              <i class="bi bi-calendar2-check me-2"></i>
+              <strong>Fecha:</strong>
+            </p>
+            <p>
+              {{
+                appointment.schedule.start_time | date : " HH:mm - dd/MM/yyyy"
+              }}
+            </p>
+          </div>
+          <div class="col-md-3">
+            <p>
+              <i class="bi bi-calendar-week me-2"></i>
+              <strong>Fecha solicitud:</strong>
+            </p>
+            <p>
+              {{ appointment.request_date | date : " HH:mm - dd/MM/yyyy" }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-generic-card>

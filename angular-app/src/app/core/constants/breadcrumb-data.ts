@@ -156,3 +156,15 @@ export const breadcrumbAppointmentsViewData = [
   { label: 'Citas', url: '/m/citas' },
   { label: 'Ver cita', url: '' },
 ];
+
+// Citas paciente
+export const breadcrumbAppointmentsPatientData = [
+  { label: 'Panel Principal', url: '/' },
+  { label: 'Mis Citas', url: '' },
+];
+
+// Citas historial paciente
+export const breadcrumbAppointmentsHistoricalPatientData = [
+  { label: 'Panel Principal', url: '/' },
+  { label: 'Historial de Citas', url: '' },
+];

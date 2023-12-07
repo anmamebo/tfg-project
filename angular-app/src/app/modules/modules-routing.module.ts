@@ -73,6 +73,15 @@ const routes: Routes = [
     canActivate: [roleGuard],
     data: { roles: [ROLES.ADMIN, ROLES.DOCTOR] },
   },
+  {
+    path: 'citas',
+    loadChildren: () =>
+      import('./appointments-patient/appointments-patient.module').then(
+        (m) => m.AppointmentsPatientModule
+      ),
+    canActivate: [roleGuard],
+    data: { roles: [ROLES.PATIENT] },
+  },
 ];
 
 @NgModule({

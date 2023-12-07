@@ -19,8 +19,31 @@ export const sidebarData = [
     roles: [ROLES.DOCTOR],
   },
   {
-    name: 'Citas',
+    name: 'Mis Citas',
     key: 'citas',
+    icon: 'journal-medical',
+    roles: [ROLES.PATIENT],
+    submenu: [
+      {
+        name: 'Agenda',
+        url: '/citas/agenda',
+        roles: [ROLES.PATIENT],
+      },
+      {
+        name: 'Próximas Citas',
+        url: '/citas/mis-citas',
+        roles: [ROLES.PATIENT],
+      },
+      {
+        name: 'Historial',
+        url: '/citas/historial',
+        roles: [ROLES.PATIENT],
+      },
+    ],
+  },
+  {
+    name: 'Citas',
+    key: 'm/citas',
     icon: 'journal-medical',
     roles: [ROLES.ADMIN, ROLES.DOCTOR],
     submenu: [
