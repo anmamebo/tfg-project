@@ -99,12 +99,12 @@ class Appointment(BaseModel):
         ]
 
     def __str__(self):
-        return (
-            self.patient.user.name
-            + " - "
-            + self.specialty.name
-            + " - "
-            + self.doctor.user.name
-            + " - "
-            + self.room.name
-        )
+        str = self.patient.user.name + " - " + self.specialty.name
+
+        if self.doctor:
+            str += " - " + self.doctor.user.name
+
+        if self.room:
+            str += " - " + self.room.name
+
+        return str
