@@ -8,11 +8,11 @@ $bootstrap-icons-font-src: url("~bootstrap-icons/font/fonts/bootstrap-icons.woff
 @import "node_modules/bootstrap-icons/font/bootstrap-icons";
 
 // Fix icon placement
-body .bi::before,
-[class^="bi-"]::before,
-[class*=" bi-"]::before {
-  vertical-align: sub;
-}
+// body .bi::before,
+// [class^="bi-"]::before,
+// [class*=" bi-"]::before {
+//   vertical-align: sub;
+// }
 
 // Imports fonts
 @import "./assets/scss/fonts";
