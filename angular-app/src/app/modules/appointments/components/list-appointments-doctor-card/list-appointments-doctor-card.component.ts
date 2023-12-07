@@ -48,6 +48,7 @@ export class ListAppointmentsDoctorCardComponent extends GenericListCardComponen
 
     this.appointmentService
       .getAppointmentsByDoctor(
+        ['scheduled', 'rescheduled', 'in_progress'],
         page,
         this.entityData.numResults,
         this.entityData.search.search,

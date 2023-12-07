@@ -62,6 +62,7 @@ export class AppointmentService {
    * @returns Un observable que emite la respuesta del servidor.
    */
   public getAppointmentsByDoctor(
+    statuses: string[] | null,
     page?: number,
     numResults?: number,
     searchTerm?: string,
@@ -74,6 +75,13 @@ export class AppointmentService {
     const httpOptions = { headers };
 
     let params = new HttpParams();
+
+    if (statuses) {
+      // Si se han indicado los estados
+      statuses.forEach((status) => {
+        params = params.append('status', status);
+      });
+    }
 
     if (paginated) {
       // Si se quiere paginar
