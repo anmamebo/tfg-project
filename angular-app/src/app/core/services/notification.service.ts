@@ -113,4 +113,39 @@ export class NotificationService {
       }
     });
   }
+
+  /**
+   * Muestra un dialogo de confirmación genérico y ejecuta la función `onConfirm` si se confirma.
+   * @param onConfirm Función que se ejecutará si se confirma.
+   */
+  showConfirmGenericDialog(
+    title: string,
+    text: string,
+    confirmButtonText: string,
+    successTitle: string,
+    successText: string,
+    cancelButtonText: string = 'Cancelar',
+    onConfirm: () => void
+  ) {
+    Swal.fire({
+      title: title,
+      text: text,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#435ebe',
+      cancelButtonColor: '#d33',
+      confirmButtonText: confirmButtonText,
+      cancelButtonText: cancelButtonText,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: successTitle,
+          text: successText,
+          icon: 'success',
+          confirmButtonColor: '#435ebe',
+        });
+        onConfirm();
+      }
+    });
+  }
 }
