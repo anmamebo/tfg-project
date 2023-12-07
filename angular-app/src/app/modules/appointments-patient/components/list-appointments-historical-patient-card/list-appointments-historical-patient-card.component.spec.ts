@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { ListAppointmentsHistoricalPatientCardComponent } from './list-appointments-historical-patient-card.component';
 
@@ -8,9 +9,12 @@ describe('ListAppointmentsHistoricalPatientCardComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ListAppointmentsHistoricalPatientCardComponent]
+      declarations: [ListAppointmentsHistoricalPatientCardComponent],
+      imports: [HttpClientTestingModule],
     });
-    fixture = TestBed.createComponent(ListAppointmentsHistoricalPatientCardComponent);
+    fixture = TestBed.createComponent(
+      ListAppointmentsHistoricalPatientCardComponent
+    );
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
