@@ -99,7 +99,7 @@ class Appointment(BaseModel):
         ]
 
     def __str__(self):
-        str = self.patient.user.name + " - " + self.specialty.name
+        str = self.reason + " - " + self.patient.user.name + " - " + self.specialty.name
 
         if self.doctor:
             str += " - " + self.doctor.user.name
