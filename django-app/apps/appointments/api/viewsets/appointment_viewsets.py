@@ -1,7 +1,7 @@
 from datetime import datetime
 import pytz
 
-from django.db.models import Q
+from django.db.models import Q, F
 from django.shortcuts import get_object_or_404
 
 from rest_framework.response import Response
@@ -143,7 +143,6 @@ class AppointmentViewSet(viewsets.GenericViewSet):
 
         Args:
             request (Request): La solicitud HTTP.
-            doctor_id (int): El identificador del doctor.
 
         Returns:
             Response: La respuesta que contiene la lista de citas.
@@ -159,6 +158,64 @@ class AppointmentViewSet(viewsets.GenericViewSet):
         appointments = (
             self.get_queryset().filter(doctor=doctor).order_by("schedule__start_time")
         )  # Filtra las citas del doctor
+
+        desired_statuses = request.GET.getlist("status", None)
+        if desired_statuses:
+            appointments = appointments.filter(
+                status__in=desired_statuses
+            )  # Filtra las citas por estados
+
+        appointments = self.filter_appointments(appointments)  # Filtra las citas
+        appointments = self.order_appointments(appointments)  # Ordena las citas
+
+        page = self.paginate_queryset(appointments)  # Pagina las citas
+        if page is not None:
+            appointments_serializer = self.list_serializer_class(page, many=True)
+            return self.get_paginated_response(appointments_serializer.data)
+
+        appointments_serializer = self.list_serializer_class(appointments, many=True)
+        return Response(appointments_serializer.data, status=status.HTTP_200_OK)
+
+    @action(detail=False, methods=["get"])
+    def list_for_patient(self, request):
+        """
+        Lista todas las citas de un paciente ordenadas por fecha más cercana, el usuario debe ser un paciente.
+
+        Parámetros opcionales:
+            search (str): El texto a buscar.
+            ordering (str): El campo por el cual se ordenarán las citas.
+
+        Args:
+            request (Request): La solicitud HTTP.
+
+        Returns:
+            Response: La respuesta que contiene la lista de citas.
+        """
+        patient = getattr(request.user, "patient", None)
+
+        if not patient:  # Si el usuario no es un paciente
+            return Response(
+                {"message": "El usuario no es un paciente."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        # Filtra las citas del paciente y ordena las citas, primero muestra las
+        # más cercanas que tienen horario y luego las que no tienen horario por
+        # fecha de solicitud más reciente
+        appointments = (
+            self.get_queryset()
+            .filter(patient=patient)
+            .order_by(
+                F("schedule__start_time").asc(nulls_last=True),
+                "-request_date",
+            )
+        )
+
+        desired_statuses = request.GET.getlist("status", None)
+        if desired_statuses:
+            appointments = appointments.filter(
+                status__in=desired_statuses
+            )  # Filtra las citas por estados
 
         appointments = self.filter_appointments(appointments)  # Filtra las citas
         appointments = self.order_appointments(appointments)  # Ordena las citas
@@ -215,22 +272,6 @@ class AppointmentViewSet(viewsets.GenericViewSet):
         Returns:
             Response: La respuesta que contiene la cita.
         """
-        doctor = getattr(request.user, "doctor", None)
-
-        if not doctor:  # Si el usuario no es un médico
-            return Response(
-                {"message": "El usuario no es un médico."},
-                status=status.HTTP_400_BAD_REQUEST,
-            )
-
-        appointment = self.get_object(pk)
-
-        if appointment.doctor != doctor:  # Si la cita no pertenece al médico
-            return Response(
-                {"message": "La cita no pertenece al doctor."},
-                status=status.HTTP_400_BAD_REQUEST,
-            )
-
         new_status = request.data.get("status", None)
 
         if not new_status:  # Si no se envió el estado
@@ -239,6 +280,7 @@ class AppointmentViewSet(viewsets.GenericViewSet):
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
+        appointment = self.get_object(pk)
         current_status = appointment.status
 
         if new_status not in self.status_transitions.get(
