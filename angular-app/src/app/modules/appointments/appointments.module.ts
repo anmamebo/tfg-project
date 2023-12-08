@@ -21,6 +21,7 @@ import { SearchModule } from 'src/app/shared/components/search/search.module';
 // Componentes Páginas
 import { AppointmentsPageComponent } from './pages/appointments-page/appointments-page.component';
 import { AppointmentsViewPageComponent } from './pages/appointments-view-page/appointments-view-page.component';
+import { AppointmentsHistoricalViewPageComponent } from './pages/appointments-historical-view-page/appointments-historical-view-page.component';
 
 // Componentes Tarjetas
 import { ListAppointmentsDoctorCardComponent } from './components/list-appointments-doctor-card/list-appointments-doctor-card.component';
@@ -28,6 +29,7 @@ import { ViewPatientAppointmentsCardComponent } from './components/view-patient-
 import { ViewInfoStatusAppointmentsCardComponent } from './components/view-info-status-appointments-card/view-info-status-appointments-card.component';
 import { ViewReasonObservationsAppointmentsCardComponent } from './components/view-reason-observations-appointments-card/view-reason-observations-appointments-card.component';
 import { ViewTreatmentsAppointmentsCardComponent } from './components/view-treatments-appointments-card/view-treatments-appointments-card.component';
+import { ListAppointmentsHistoricalDoctorCardComponent } from './components/list-appointments-historical-doctor-card/list-appointments-historical-doctor-card.component';
 
 // Componentes
 import { TableAppointmentsComponent } from './components/table-appointments/table-appointments.component';
@@ -46,6 +48,8 @@ import { FormCreateTreatmentAppointmentsComponent } from './components/form-crea
     ViewTreatmentsAppointmentsCardComponent,
     AccordionTreatmentsAppointmentsComponent,
     FormCreateTreatmentAppointmentsComponent,
+    AppointmentsHistoricalViewPageComponent,
+    ListAppointmentsHistoricalDoctorCardComponent,
   ],
   imports: [
     CommonModule,

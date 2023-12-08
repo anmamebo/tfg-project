@@ -150,10 +150,15 @@ export const breadcrumbAppointmentsData = [
   { label: 'Citas', url: '' },
 ];
 
+// Citas historial
+export const breadcrumbAppointmentsHistoricalData = [
+  { label: 'Panel Principal', url: '/' },
+  { label: 'Historial de citas', url: '' },
+];
+
 // Citas ver
 export const breadcrumbAppointmentsViewData = [
   { label: 'Panel Principal', url: '/' },
-  { label: 'Citas', url: '/m/citas' },
   { label: 'Ver cita', url: '' },
 ];
 

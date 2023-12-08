@@ -48,13 +48,8 @@ export const sidebarData = [
     roles: [ROLES.ADMIN, ROLES.DOCTOR],
     submenu: [
       {
-        name: 'Agenda',
-        url: '/m/citas/agenda',
-        roles: [ROLES.ADMIN, ROLES.DOCTOR],
-      },
-      {
         name: 'Citas',
-        url: '/m/citas',
+        url: '/m/citas/mis-citas',
         roles: [ROLES.ADMIN, ROLES.DOCTOR],
       },
       {
