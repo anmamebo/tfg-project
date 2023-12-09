@@ -33,22 +33,16 @@ class Treatment(BaseModel):
         "doctors.Doctor",
         on_delete=models.CASCADE,
         verbose_name="Médico",
-        blank=True,
-        null=True,
     )
     patient = models.ForeignKey(
         "patients.Patient",
         on_delete=models.CASCADE,
         verbose_name="Paciente",
-        blank=True,
-        null=True,
     )
     appointment = models.ForeignKey(
         "appointments.Appointment",
         on_delete=models.CASCADE,
         verbose_name="Cita",
-        blank=True,
-        null=True,
     )
 
     class Meta:
