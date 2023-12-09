@@ -179,3 +179,8 @@ export const breadcrumbAppointmentsHistoricalPatientData = [
   { label: 'Panel Principal', url: '/' },
   { label: 'Historial de Citas', url: '' },
 ];
+
+export const breadCrumbTreatmentsPatientData = [
+  { label: 'Panel Principal', url: '/' },
+  { label: 'Mis Tratamientos', url: '' },
+];

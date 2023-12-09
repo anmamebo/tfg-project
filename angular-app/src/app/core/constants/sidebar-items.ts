@@ -42,6 +42,24 @@ export const sidebarData = [
     ],
   },
   {
+    name: 'Mis tratamientos',
+    key: 'tratamientos',
+    icon: 'capsule',
+    roles: [ROLES.PATIENT],
+    submenu: [
+      {
+        name: 'Tratamientos',
+        url: '/tratamientos/mis-tratamientos',
+        roles: [ROLES.PATIENT],
+      },
+      {
+        name: 'Historial',
+        url: '/tratamientos/historial',
+        roles: [ROLES.PATIENT],
+      },
+    ],
+  },
+  {
     name: 'Citas',
     key: 'm/citas',
     icon: 'journal-medical',

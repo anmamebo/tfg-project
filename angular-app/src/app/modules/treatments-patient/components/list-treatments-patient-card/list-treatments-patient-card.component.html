@@ -1,0 +1,44 @@
+<!-- Comprueba si se han cargado los tratamientos -->
+<ng-container *ngIf="entityData.items; else noItems">
+  <!-- Comprueba que hayan tratamientos -->
+  <ng-container *ngIf="entityData.items.length > 0; else lengthZero">
+    <!-- Recorre los tratamientos -->
+    <ng-container *ngFor="let treatment of entityData.items">
+      <app-view-treatments-patient-card
+        [treatment]="treatment"
+        (statusChanged)="getItems(entityData.page)"
+      ></app-view-treatments-patient-card>
+    </ng-container>
+
+    <!-- Selector elementos por página -->
+    <app-elements-per-page
+      [totalElements]="entityData.numItems"
+      [elementsPerPage]="entityData.numResults"
+      (elementsPerPageChangedEvent)="onEntriesPerPageChanged($event)"
+    >
+    </app-elements-per-page>
+
+    <!-- Paginación -->
+    <app-pagination
+      [page]="entityData.page"
+      [totalPages]="entityData.totalPages"
+      [numItems]="entityData.numItems"
+      (pageEmitter)="goToPage($event)"
+    >
+    </app-pagination>
+  </ng-container>
+
+  <!-- No hay tratamientos -->
+  <ng-template #lengthZero>
+    <app-generic-card [hasCardHeader]="false">
+      <div class="card-content">No hay citas próximas.</div>
+    </app-generic-card>
+  </ng-template>
+</ng-container>
+
+<!-- Cargando tratamientos -->
+<ng-template #noItems>
+  <app-generic-card [hasCardHeader]="false">
+    <div class="card-content"><app-loading-spinner></app-loading-spinner></div>
+  </app-generic-card>
+</ng-template>

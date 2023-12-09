@@ -1,0 +1,136 @@
+<app-generic-card *ngIf="treatment" [hasCardHeader]="false">
+  <div class="card-content">
+    <!-- Título -->
+    <div id="title" class="row mb-4">
+      <div class="col-auto">
+        <span class="badge" [ngClass]="statusBadgeClasses[treatment.status]">
+          {{ treatment.status | statusTreatment }}
+        </span>
+      </div>
+      <div class="col-md col-12">
+        <h4 class="card-title">{{ cardTitle }}</h4>
+      </div>
+      <div class="col-auto">
+        <div class="dropdown">
+          <span
+            class="dropdown-toggle"
+            type="button"
+            id="dropdownMenuButton"
+            data-bs-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <i class="bi bi-three-dots"></i>
+          </span>
+          <div
+            class="dropdown-menu dropdown-menu-dark"
+            aria-labelledby="dropdownMenuButton"
+          >
+            <a
+              *ngIf="treatment.status == 'in_progress'"
+              class="dropdown-item"
+              style="cursor: pointer"
+              (click)="completeTreatment()"
+            >
+              <i class="bi bi-check-circle me-2"></i>
+              Completar
+            </a>
+            <a
+              *ngIf="treatment.status == 'in_progress'"
+              class="dropdown-item"
+              style="cursor: pointer"
+              (click)="interruptTreatment()"
+            >
+              <i class="bi bi-exclamation-circle me-2"></i>
+              Interrumpir
+            </a>
+            <a
+              *ngIf="treatment.status == 'in_progress'"
+              class="dropdown-item"
+              style="cursor: pointer"
+              (click)="cancelTreatment()"
+            >
+              <i class="bi bi-x-circle me-2"></i>
+              Cancelar
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contenido -->
+    <div id="content" class="row">
+      <div class="col-md-8">
+        <div class="row mb-3">
+          <div class="col-12">
+            <h5>Información</h5>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-md-6">
+            <p>
+              <strong>Descripción:</strong>
+              {{ treatment.description }}
+            </p>
+            <p>
+              <strong>Comentarios:</strong>
+              {{ treatment.comments ? treatment.comments : "--" }}
+            </p>
+          </div>
+
+          <div class="col-md-6">
+            <p>
+              <strong>Duración:</strong>
+              {{ treatment.duration ? treatment.duration : "--" }}
+            </p>
+            <p>
+              <strong>Frecuencia de aplicación:</strong>
+              {{
+                treatment.application_frequency
+                  ? treatment.application_frequency
+                  : "--"
+              }}
+            </p>
+            <p>
+              <strong>Dosis recomendada:</strong>
+              {{
+                treatment.recommended_dosage
+                  ? treatment.recommended_dosage
+                  : "--"
+              }}
+            </p>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="treatment.doctor && treatment.doctor.user" class="col-md-4">
+        <div class="row mb-3">
+          <div class="col-12">
+            <h5>Información del médico</h5>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-12">
+            <p>
+              <strong>Nombre:</strong>
+              {{ treatment.doctor.user.name }}
+              {{ treatment.doctor.user.last_name }}
+            </p>
+            <p>
+              <strong>Email:</strong>
+              {{ treatment.doctor.user.email }}
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-12">
+        <p>
+          <i class="bi bi-calendar-week me-2"></i>
+          <strong>Fecha comienzo:</strong>
+        </p>
+        <p>
+          {{ treatment.start_date | date : "dd/MM/yyyy" }}
+        </p>
+      </div>
+    </div>
+  </div>
+</app-generic-card>
