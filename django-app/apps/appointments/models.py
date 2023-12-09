@@ -47,15 +47,13 @@ class Appointment(BaseModel):
         verbose_name="Hora de finalización", blank=True, null=True
     )
     request_date = models.DateTimeField(
-        verbose_name="Fecha de solicitud", blank=True, null=True
+        verbose_name="Fecha de solicitud", auto_now_add=True
     )
     priority = models.IntegerField(verbose_name="Prioridad", blank=True, null=True)
     patient = models.ForeignKey(
         "patients.Patient",
         on_delete=models.CASCADE,
         verbose_name="Paciente",
-        blank=True,
-        null=True,
     )
     room = models.ForeignKey(
         "departments.Room",
@@ -75,8 +73,6 @@ class Appointment(BaseModel):
         "doctors.MedicalSpecialty",
         on_delete=models.CASCADE,
         verbose_name="Especialidad",
-        blank=True,
-        null=True,
     )
     schedule = models.ForeignKey(
         "schedules.Schedule",
@@ -99,12 +95,27 @@ class Appointment(BaseModel):
         ]
 
     def __str__(self):
-        str = self.reason + " - " + self.patient.user.name + " - " + self.specialty.name
+        info = []
 
-        if self.doctor:
-            str += " - " + self.doctor.user.name
+        if self.status:
+            info.append(self.status)
+
+        if self.request_date:
+            info.append(self.request_date.strftime("%H:%M , %d/%m/%Y"))
+
+        if self.reason:
+            info.append(self.reason)
+
+        if self.patient and self.patient.user:
+            info.append(self.patient.user.name + " " + self.patient.user.last_name)
+
+        if self.specialty:
+            info.append(self.specialty.name)
+
+        if self.doctor and self.doctor.user:
+            info.append(self.doctor.user.name + " " + self.doctor.user.last_name)
 
         if self.room:
-            str += " - " + self.room.name
+            info.append(self.room.name)
 
-        return str
+        return " - ".join(info)
