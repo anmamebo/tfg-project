@@ -138,6 +138,7 @@ class AppointmentViewSet(viewsets.GenericViewSet):
         Lista todas las citas de un doctor ordenadas por fecha más cercana, el usuario debe ser un médico.
 
         Parámetros opcionales:
+            status (list): Los estados de las citas a filtrar.
             search (str): El texto a buscar.
             ordering (str): El campo por el cual se ordenarán las citas.
 
@@ -182,8 +183,10 @@ class AppointmentViewSet(viewsets.GenericViewSet):
         Lista todas las citas de un paciente ordenadas por fecha más cercana, el usuario debe ser un paciente.
 
         Parámetros opcionales:
+            status (list): Los estados de las citas a filtrar.
             search (str): El texto a buscar.
             ordering (str): El campo por el cual se ordenarán las citas.
+            paginate (str): Indica si se debe paginar los resultados.
 
         Args:
             request (Request): La solicitud HTTP.
@@ -264,8 +267,8 @@ class AppointmentViewSet(viewsets.GenericViewSet):
     @action(detail=True, methods=["put"])
     def update_status(self, request, pk=None):
         """
-        Actualiza el estado de una cita, siempre y cuando el usuario sea un médico,
-        la cita le pertenezca y la transición de estado sea válida.
+        Actualiza el estado de una cita, siempre y cuando
+        la transición de estado sea válida.
 
         Args:
             request (Request): La solicitud HTTP.
