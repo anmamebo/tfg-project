@@ -68,6 +68,62 @@ export class TreatmentService {
     });
   }
 
+  public getTreatmentsByPatient(
+    statuses: string[] | null,
+    page?: number,
+    numResults?: number,
+    searchTerm?: string,
+    paginated: boolean = false,
+    sortBy?: string,
+    sortOrder?: string
+  ): Observable<any> {
+    const headers = this.httpCommonService.getCommonHeaders();
+    const httpOptions = { headers };
+
+    let params = new HttpParams();
+
+    if (statuses) {
+      // Si se han indicado los estados
+      statuses.forEach((status) => {
+        params = params.append('status', status);
+      });
+    }
+
+    if (paginated) {
+      // Si se quiere paginar
+
+      if (page) {
+        // Si se ha indicado la página
+        params = params.set('page', page.toString());
+      }
+
+      if (numResults) {
+        // Si se ha indicado el número de resultados por página
+        params = params.set('page_size', numResults.toString());
+      }
+
+      params = params.set('paginate', 'true'); // Indica que se quiere paginar
+    }
+
+    if (searchTerm) {
+      // Si se ha indicado un término de búsqueda
+      params = params.set('search', searchTerm);
+    }
+
+    if (sortBy && sortOrder) {
+      // Si se ha indicado un campo por el que ordenar
+      params = params.set(
+        'ordering',
+        `${sortOrder === 'desc' ? '-' : ''}${sortBy}`
+      );
+    }
+
+    return this.http.get<any>(`${this.url}list_for_patient/`, {
+      params,
+      ...httpOptions,
+    });
+  }
+
   /**
    * Crear un tratamiento.
    * @param treatment El tratamiento a crear.
@@ -80,5 +136,22 @@ export class TreatmentService {
     let params = JSON.stringify(treatment);
 
     return this.http.post<any>(`${this.url}`, params, httpOptions);
+  }
+
+  /**
+   * Actualiza el estado de un tratamiento.
+   * @param id ID del tratamiento.
+   * @param status Estado del tratamiento.
+   * @returns Un observable que emite la respuesta del servidor.
+   */
+  public updateStatus(id: string, status: string): Observable<any> {
+    const headers = this.httpCommonService.getCommonHeaders();
+    const httpOptions = { headers };
+
+    return this.http.put<any>(
+      `${this.url}${id}/update_status/`,
+      { status },
+      httpOptions
+    );
   }
 }
