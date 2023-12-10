@@ -60,13 +60,20 @@ export class BasicInfoCardComponent implements OnInit {
   public onSubmit(): void {
     this.submitted = true;
 
+    if (!this.user || !this.user.id) {
+      this.notificationService.showErrorToast(
+        'No se puede actualizar la información del usuario'
+      );
+      return;
+    }
+
     if (this.form.invalid) {
       return;
     }
 
     const updateUser: any = {
-      id: this.user?.id,
-      username: this.user?.username,
+      id: this.user.id,
+      username: this.user.username,
       email: this.form.value.email,
       name: this.form.value.name,
       last_name: this.form.value.last_name,

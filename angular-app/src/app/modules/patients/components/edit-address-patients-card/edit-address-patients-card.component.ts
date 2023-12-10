@@ -95,10 +95,10 @@ export class EditAddressPatientsCardComponent implements OnInit {
     }
 
     let address: any = {
-      id: this.address?.id ? this.address?.id : '',
+      id: this.address?.id ?? '',
       street: this.form.value.street,
       number: this.form.value.number,
-      floor: this.form.value.floor ? this.form.value.floor : null,
+      floor: this.form.value.floor || null,
       city: this.form.value.city,
       province: this.form.value.province,
       country: this.form.value.country,

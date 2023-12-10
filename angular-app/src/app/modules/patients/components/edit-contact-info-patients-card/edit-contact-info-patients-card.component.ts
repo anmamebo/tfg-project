@@ -64,21 +64,33 @@ export class EditContactInfoPatientsCardComponent implements OnInit {
   public onSubmit(): void {
     this.submitted = true;
 
+    if (
+      !this.patient ||
+      !this.patient.id ||
+      !this.patient.user ||
+      !this.patient.user.id
+    ) {
+      this.notificationService.showErrorToast(
+        'No se ha podido obtener el paciente.'
+      );
+      return;
+    }
+
     if (this.form.invalid) {
       return;
     }
 
     const updatedData: any = {
-      id: this.patient?.id,
-      phone: this.form.value.phone ? this.form.value.phone : null,
+      id: this.patient.id,
+      phone: this.form.value.phone || null,
       user: {
-        id: this.patient?.user?.id,
-        username: this.patient?.user?.username,
+        id: this.patient.user.id,
+        username: this.patient.user.username,
         email: this.form.value.email,
       },
     };
 
-    this.patientService.update(this.patient!.id, updatedData).subscribe({
+    this.patientService.update(this.patient.id, updatedData).subscribe({
       next: (data) => {
         this.submitted = false;
         this.notificationService.showSuccessToast(data.message);

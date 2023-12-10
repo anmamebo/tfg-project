@@ -31,7 +31,7 @@ export class ListAppointmentsPatientCardComponent extends GenericListCardCompone
       searchTerm != undefined &&
       searchTerm != this.entityData.search.search
     ) {
-      this.entityData.search.search = searchTerm ? searchTerm : '';
+      this.entityData.search.search = searchTerm || '';
       page = 1;
       this.entityData.page = 1;
     }

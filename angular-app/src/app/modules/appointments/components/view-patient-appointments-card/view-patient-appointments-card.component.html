@@ -77,7 +77,7 @@
             <div class="form-group">
               <label for="social_security">Nº seguridad social:</label>
               <p class="form-control-static" id="social_security">
-                {{ patient.social_security ? patient.social_security : "--" }}
+                {{ patient.social_security || "--" }}
               </p>
             </div>
           </div>
@@ -114,7 +114,7 @@
             <div class="form-group">
               <label for="phone">Teléfono:</label>
               <p class="form-control-static" id="phone">
-                {{ patient.phone ? patient.phone : "--" }}
+                {{ patient.phone || "--" }}
               </p>
             </div>
           </div>
@@ -133,7 +133,7 @@
                 <label for="street">Calle:</label>
                 <p class="form-control-static" id="street">
                   {{ patient.address.street }}, {{ patient.address.number }}
-                  {{ patient.address.floor ? patient.address.floor : "" }}
+                  {{ patient.address.floor || "" }}
                 </p>
               </div>
               <div class="form-group">

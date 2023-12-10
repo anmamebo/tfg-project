@@ -76,16 +76,26 @@ export class EditBasicInfoPatientsCardComponent implements OnInit {
   public onSubmit(): void {
     this.submitted = true;
 
+    if (
+      !this.patient ||
+      !this.patient.id ||
+      !this.patient.user ||
+      !this.patient.user.id
+    ) {
+      this.notificationService.showErrorToast(
+        'No se ha podido obtener el paciente.'
+      );
+      return;
+    }
+
     if (this.form.invalid) {
       return;
     }
 
     const updatedData: any = {
-      id: this.patient?.id,
+      id: this.patient.id,
       dni: this.form.value.dni,
-      social_security: this.form.value.social_security
-        ? this.form.value.social_security
-        : null,
+      social_security: this.form.value.social_security || null,
       birthdate: this.form.value.birthdate
         ? this.datePipe.transform(
             new Date(this.form.value.birthdate),
@@ -94,7 +104,7 @@ export class EditBasicInfoPatientsCardComponent implements OnInit {
         : null,
       gender: this.form.value.gender,
       user: {
-        id: this.patient?.user?.id,
+        id: this.patient.user.id,
         name: this.form.value.name,
         last_name: this.form.value.last_name,
       },

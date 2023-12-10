@@ -37,7 +37,10 @@ export class PatientsEditPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.patient = this.route.snapshot.data['data']; // Obtiene los datos del paciente desde el resolver
-    this.pageTitle += ` - ${this.patient?.user?.name} ${this.patient?.user?.last_name}`;
+
+    if (this.patient && this.patient.user) {
+      this.pageTitle += ` - ${this.patient.user.name} ${this.patient.user.last_name}`;
+    }
   }
 
   /**
@@ -57,6 +60,9 @@ export class PatientsEditPageComponent implements OnInit {
    */
   private refreshTitle(): void {
     let title = this.pageTitle.split(' - ');
-    this.pageTitle = `${title[0]} - ${this.patient?.user?.name} ${this.patient?.user?.last_name}`;
+
+    if (this.patient && this.patient.user) {
+      this.pageTitle = `${title[0]} - ${this.patient.user.name} ${this.patient.user.last_name}`;
+    }
   }
 }

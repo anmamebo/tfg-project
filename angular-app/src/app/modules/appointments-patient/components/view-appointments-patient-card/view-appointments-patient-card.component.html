@@ -66,7 +66,7 @@
           <div class="col-12">
             <p>
               <strong>Motivo:</strong>
-              {{ appointment.reason ? appointment.reason : "--" }}
+              {{ appointment.reason || "--" }}
             </p>
           </div>
         </div>

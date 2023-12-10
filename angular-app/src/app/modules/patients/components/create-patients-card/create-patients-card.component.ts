@@ -110,41 +110,37 @@ export class CreatePatientsCardComponent implements OnInit {
   public onSubmit(): void {
     this.submitted = true;
 
-    if (this.createPatientForm.invalid) {
+    if (this.createPatientForm.invalid || !this.patientInfo) {
       return;
     }
 
     let patient: any = {
       user: {
-        name: this.patientInfo?.value.name,
-        last_name: this.patientInfo?.value.last_name,
-        email: this.patientInfo?.value.email,
+        name: this.patientInfo.value.name,
+        last_name: this.patientInfo.value.last_name,
+        email: this.patientInfo.value.email,
       },
-      dni: this.patientInfo?.value.dni,
-      social_security: this.patientInfo?.value.social_security
-        ? this.patientInfo?.value.social_security
-        : null,
-      birthdate: this.patientInfo?.value.birthdate
+      dni: this.patientInfo.value.dni,
+      social_security: this.patientInfo.value.social_security || null,
+      birthdate: this.patientInfo.value.birthdate
         ? this.datePipe.transform(
-            new Date(this.patientInfo?.value.birthdate),
+            new Date(this.patientInfo.value.birthdate),
             'yyyy-MM-dd'
           )
         : null,
-      phone: this.patientInfo?.value.phone
-        ? this.patientInfo?.value.phone
-        : null,
-      gender: this.patientInfo?.value.gender,
+      phone: this.patientInfo.value.phone || null,
+      gender: this.patientInfo.value.gender,
     };
 
-    if (this.showAddressInputs) {
+    if (this.showAddressInputs && this.address) {
       patient.address = {
-        street: this.address?.value.street,
-        number: this.address?.value.number,
-        floor: this.address?.value.floor ? this.address?.value.floor : null,
-        city: this.address?.value.city,
-        province: this.address?.value.province,
-        country: this.address?.value.country,
-        postal_code: this.address?.value.postal_code,
+        street: this.address.value.street,
+        number: this.address.value.number,
+        floor: this.address.value.floor || null,
+        city: this.address.value.city,
+        province: this.address.value.province,
+        country: this.address.value.country,
+        postal_code: this.address.value.postal_code,
       };
     }
 

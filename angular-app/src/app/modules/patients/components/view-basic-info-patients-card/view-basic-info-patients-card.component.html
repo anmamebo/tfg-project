@@ -1,6 +1,6 @@
 <app-generic-card [title]="titleCard">
   <div class="card-content">
-    <div class="row">
+    <div *ngIf="patient && patient.user" class="row">
       <div class="col-md-2">
         <div class="form-group">
           <label for="id">ID</label>
@@ -9,7 +9,7 @@
             class="form-control"
             id="id"
             [attr.readonly]="true"
-            [value]="patient?.id"
+            [value]="patient.id"
           />
         </div>
       </div>
@@ -22,7 +22,7 @@
             class="form-control"
             id="name"
             [attr.readonly]="true"
-            [value]="patient?.user?.name"
+            [value]="patient.user.name"
           />
         </div>
       </div>
@@ -35,7 +35,7 @@
             class="form-control"
             id="last_name"
             [attr.readonly]="true"
-            [value]="patient?.user?.last_name"
+            [value]="patient.user.last_name"
           />
         </div>
       </div>
@@ -48,7 +48,7 @@
             class="form-control"
             id="dni"
             [attr.readonly]="true"
-            [value]="patient?.dni"
+            [value]="patient.dni"
           />
         </div>
       </div>
@@ -61,7 +61,7 @@
             class="form-control"
             id="social_security"
             [attr.readonly]="true"
-            [value]="patient?.social_security"
+            [value]="patient.social_security"
           />
         </div>
       </div>
@@ -74,7 +74,7 @@
             class="form-control"
             id="birthdate"
             [attr.readonly]="true"
-            [value]="patient?.birthdate | date : 'd MMMM, y'"
+            [value]="patient.birthdate | date : 'd MMMM, y'"
           />
         </div>
       </div>
@@ -87,7 +87,7 @@
             class="form-control"
             id="gender"
             [attr.readonly]="true"
-            [value]="patient?.gender | gender"
+            [value]="patient.gender | gender"
           />
         </div>
       </div>

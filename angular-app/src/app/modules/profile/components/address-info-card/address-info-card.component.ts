@@ -94,7 +94,7 @@ export class AddressInfoCardComponent implements OnInit {
       this.form.value.province,
       this.form.value.country,
       this.form.value.postal_code,
-      this.form.value.floor != '' ? this.form.value.floor : null
+      this.form.value.floor || null
     );
 
     this.addressService.updateAddress(updateAddress).subscribe({

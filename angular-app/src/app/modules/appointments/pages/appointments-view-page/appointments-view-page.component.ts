@@ -35,10 +35,19 @@ export class AppointmentsViewPageComponent {
     private appointmentService: AppointmentService
   ) {
     this.appointment = this.route.snapshot.data['data']; // Obtiene los datos de la cita desde el resolver
-    const formattedDate = this.appointment?.schedule?.start_time
-      ? new Date(this.appointment.schedule.start_time).toLocaleString()
-      : '';
-    this.pageTitle = `${this.appointment?.patient?.user?.name} ${this.appointment?.patient?.user?.last_name} - (${formattedDate})`;
+
+    if (this.appointment) {
+      const formattedDate = this.appointment?.schedule?.start_time
+        ? new Date(this.appointment.schedule.start_time).toLocaleString()
+        : '';
+
+      const patientName = this.appointment?.patient?.user?.name ?? '';
+      const patientLastName = this.appointment?.patient?.user?.last_name ?? '';
+
+      this.pageTitle = `${patientName} ${patientLastName} - (${formattedDate})`;
+    } else {
+      this.pageTitle = 'Detalle de Cita';
+    }
   }
 
   /**

@@ -81,11 +81,9 @@ export class CreateRoomsCardComponent implements OnInit {
 
     const room: any = {
       name: this.form.value.name,
-      description: this.form.value.description
-        ? this.form.value.description
-        : null,
-      capacity: this.form.value.capacity ? this.form.value.capacity : null,
-      type: this.form.value.type ? this.form.value.type : null,
+      description: this.form.value.description || null,
+      capacity: this.form.value.capacity || null,
+      type: this.form.value.type || null,
       is_available: this.form.value.is_available,
       location: this.form.value.location,
       department: this.form.value.department[0].item_id,

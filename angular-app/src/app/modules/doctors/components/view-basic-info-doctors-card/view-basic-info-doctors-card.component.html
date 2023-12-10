@@ -1,6 +1,6 @@
 <app-generic-card [title]="titleCard">
   <div class="card-content">
-    <div class="row">
+    <div *ngIf="doctor && doctor.user" class="row">
       <div class="col-md-2">
         <div class="form-group">
           <label for="id">ID</label>
@@ -9,7 +9,7 @@
             class="form-control"
             id="id"
             [attr.readonly]="true"
-            [value]="doctor?.id"
+            [value]="doctor.id"
           />
         </div>
       </div>
@@ -22,7 +22,7 @@
             class="form-control"
             id="name"
             [attr.readonly]="true"
-            [value]="doctor?.user?.name"
+            [value]="doctor.user.name"
           />
         </div>
       </div>
@@ -35,7 +35,7 @@
             class="form-control"
             id="last_name"
             [attr.readonly]="true"
-            [value]="doctor?.user?.last_name"
+            [value]="doctor.user.last_name"
           />
         </div>
       </div>
@@ -48,7 +48,7 @@
             class="form-control"
             id="collegiate_number"
             [attr.readonly]="true"
-            [value]="doctor?.collegiate_number"
+            [value]="doctor.collegiate_number"
           />
         </div>
       </div>
@@ -60,10 +60,10 @@
           <span
             class="badge"
             [ngClass]="{
-              'bg-light-success': doctor?.is_available,
-              'bg-light-danger': !doctor?.is_available
+              'bg-light-success': doctor.is_available,
+              'bg-light-danger': !doctor.is_available
             }"
-            >{{ doctor?.is_available ? "Disponible" : "No disponible" }}</span
+            >{{ doctor.is_available ? "Disponible" : "No disponible" }}</span
           >
         </div>
       </div>
@@ -74,7 +74,7 @@
         <h6>Especialidades Médicas</h6>
         <app-generic-table
           [columns]="columnsMedicalSpecialty"
-          [data]="doctor?.medical_specialties!"
+          [data]="doctor?.medical_specialties ?? []"
         ></app-generic-table>
       </div>
 
@@ -82,7 +82,7 @@
         <h6>Departamentos</h6>
         <app-generic-table
           [columns]="columnsDepartment"
-          [data]="doctor?.departments!"
+          [data]="doctor?.departments ?? []"
         ></app-generic-table>
       </div>
     </div>

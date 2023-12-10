@@ -1,4 +1,4 @@
-<app-generic-card [hasCardHeader]="false">
+<app-generic-card *ngIf="user" [hasCardHeader]="false">
   <div class="card-content">
     <div class="d-flex flex-column flex-md-row text-center text-md-start mb-3">
       <div class="avatar avatar-xl me-4 flex-shrink-0">
@@ -10,7 +10,7 @@
         />
       </div>
       <div class="flex-fill">
-        <h5 class="mb-3">{{ user?.name }}</h5>
+        <h5 class="mb-3">{{ user.name }}</h5>
         <button class="btn btn-primary me-2">Cambiar avatar</button>
         <button
           class="btn btn-outline-danger btn-icon"

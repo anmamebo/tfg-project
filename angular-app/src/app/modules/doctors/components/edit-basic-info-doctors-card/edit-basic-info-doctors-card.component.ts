@@ -107,16 +107,28 @@ export class EditBasicInfoDoctorsCardComponent implements OnInit {
   public onSubmit(): void {
     this.submitted = true;
 
+    if (
+      !this.doctor ||
+      !this.doctor.id ||
+      !this.doctor.user ||
+      !this.doctor.user.id
+    ) {
+      this.notificationService.showErrorToast(
+        'No se ha podido obtener el médico.'
+      );
+      return;
+    }
+
     if (this.form.invalid) {
       return;
     }
 
     const updatedData: any = {
-      id: this.doctor?.id,
+      id: this.doctor.id,
       collegiate_number: this.form.value.collegiate_number,
       is_available: this.form.value.is_available,
       user: {
-        id: this.doctor?.user?.id,
+        id: this.doctor.user.id,
         name: this.form.value.name,
         last_name: this.form.value.last_name,
       },
@@ -128,7 +140,7 @@ export class EditBasicInfoDoctorsCardComponent implements OnInit {
       ),
     };
 
-    this.doctorService.update(this.doctor!.id, updatedData).subscribe({
+    this.doctorService.update(this.doctor.id, updatedData).subscribe({
       next: (data) => {
         this.submitted = false;
         this.notificationService.showSuccessToast(data.message);

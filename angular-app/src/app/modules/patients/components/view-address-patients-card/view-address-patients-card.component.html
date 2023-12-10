@@ -1,6 +1,6 @@
 <app-generic-card [title]="titleCard">
   <div class="card-content">
-    <div class="row">
+    <div *ngIf="address" class="row">
       <div class="col-md-6">
         <div class="form-group">
           <label for="street">Calle</label>
@@ -9,7 +9,7 @@
             class="form-control"
             id="street"
             [attr.readonly]="true"
-            [value]="address?.street"
+            [value]="address.street"
           />
         </div>
       </div>
@@ -22,7 +22,7 @@
             class="form-control"
             id="number"
             [attr.readonly]="true"
-            [value]="address?.number"
+            [value]="address.number"
           />
         </div>
       </div>
@@ -35,7 +35,7 @@
             class="form-control"
             id="floor"
             [attr.readonly]="true"
-            [value]="address?.floor"
+            [value]="address.floor"
           />
         </div>
       </div>
@@ -48,7 +48,7 @@
             class="form-control"
             id="city"
             [attr.readonly]="true"
-            [value]="address?.city"
+            [value]="address.city"
           />
         </div>
       </div>
@@ -61,7 +61,7 @@
             class="form-control"
             id="postal_code"
             [attr.readonly]="true"
-            [value]="address?.postal_code"
+            [value]="address.postal_code"
           />
         </div>
       </div>
@@ -74,7 +74,7 @@
             class="form-control"
             id="province"
             [attr.readonly]="true"
-            [value]="address?.province"
+            [value]="address.province"
           />
         </div>
       </div>
@@ -87,7 +87,7 @@
             class="form-control"
             id="country"
             [attr.readonly]="true"
-            [value]="address?.country"
+            [value]="address.country"
           />
         </div>
       </div>

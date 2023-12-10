@@ -75,12 +75,19 @@ export class PatientInfoCardComponent implements OnInit {
   public onSubmit(): void {
     this.submitted = true;
 
+    if (!this.patient || !this.patient.id) {
+      this.notificationService.showErrorToast(
+        'No se puede actualizar la información del paciente'
+      );
+      return;
+    }
+
     if (this.form.invalid) {
       return;
     }
 
     const updatePatient: any = {
-      id: this.patient?.id,
+      id: this.patient.id,
       din: this.form.value.dni,
       birthdate: this.form.value.birthdate
         ? this.datePipe.transform(
@@ -89,13 +96,11 @@ export class PatientInfoCardComponent implements OnInit {
           )
         : null,
       gender: this.form.value.gender,
-      phone: this.form.value.phone != '' ? this.form.value.phone : null,
-      social_security: this.form.value.social_security
-        ? this.form.value.social_security
-        : null,
+      phone: this.form.value.phone || null,
+      social_security: this.form.value.social_security || null,
     };
 
-    this.patientService.update(this.patient!.id, updatePatient).subscribe({
+    this.patientService.update(this.patient.id, updatePatient).subscribe({
       next: (data) => {
         this.submitted = false;
         this.updatedPatientEvent.emit();

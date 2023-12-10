@@ -61,24 +61,32 @@ export class FormCreateTreatmentAppointmentsComponent {
   public onSubmit(): void {
     this.submitted = true;
 
+    if (
+      !this.appointment ||
+      !this.appointment.id ||
+      !this.appointment.doctor ||
+      !this.appointment.patient
+    ) {
+      this.notificationService.showErrorToast(
+        'No se ha podido obtener la cita.'
+      );
+      return;
+    }
+
     if (this.form.invalid) {
       return;
     }
 
     let treatment: any = {
       description: this.form.value.description,
-      comments: this.form.value.comments ? this.form.value.comments : null,
+      comments: this.form.value.comments || null,
       duration: this.form.value.duration,
-      application_frequency: this.form.value.application_frequency
-        ? this.form.value.application_frequency
-        : null,
-      recommended_dosage: this.form.value.recommended_dosage
-        ? this.form.value.recommended_dosage
-        : null,
+      application_frequency: this.form.value.application_frequency || null,
+      recommended_dosage: this.form.value.recommended_dosage || null,
       start_date: this.form.value.start_date,
-      doctor: this.appointment?.doctor?.id,
-      patient: this.appointment?.patient?.id,
-      appointment: this.appointment?.id,
+      doctor: this.appointment.doctor.id,
+      patient: this.appointment.patient.id,
+      appointment: this.appointment.id,
     };
 
     this.treatmentService.createTreatment(treatment).subscribe({

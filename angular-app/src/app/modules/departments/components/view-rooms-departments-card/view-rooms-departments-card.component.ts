@@ -82,7 +82,7 @@ export class ViewRoomsDepartmentsCardComponent implements OnInit {
   public getRoomsByDepartmentId(page: number, searchTerm?: string): void {
     // Comprueba si el término de búsqueda ha cambiado
     if (searchTerm != undefined && searchTerm != this.search) {
-      this.search = searchTerm ? searchTerm : '';
+      this.search = searchTerm || '';
       page = 1;
       this.page = 1;
     }

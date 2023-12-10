@@ -33,7 +33,7 @@ export class ListAppointmentsHistoricalPatientCardComponent extends GenericListC
       searchTerm != undefined &&
       searchTerm != this.entityData.search.search
     ) {
-      this.entityData.search.search = searchTerm ? searchTerm : '';
+      this.entityData.search.search = searchTerm || '';
       page = 1;
       this.entityData.page = 1;
     }

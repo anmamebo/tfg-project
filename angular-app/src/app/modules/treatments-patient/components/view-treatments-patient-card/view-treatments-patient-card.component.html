@@ -74,30 +74,22 @@
             </p>
             <p>
               <strong>Comentarios:</strong>
-              {{ treatment.comments ? treatment.comments : "--" }}
+              {{ treatment.comments || "--" }}
             </p>
           </div>
 
           <div class="col-md-6">
             <p>
               <strong>Duración:</strong>
-              {{ treatment.duration ? treatment.duration : "--" }}
+              {{ treatment.duration || "--" }}
             </p>
             <p>
               <strong>Frecuencia de aplicación:</strong>
-              {{
-                treatment.application_frequency
-                  ? treatment.application_frequency
-                  : "--"
-              }}
+              {{ treatment.application_frequency || "--" }}
             </p>
             <p>
               <strong>Dosis recomendada:</strong>
-              {{
-                treatment.recommended_dosage
-                  ? treatment.recommended_dosage
-                  : "--"
-              }}
+              {{ treatment.recommended_dosage || "--" }}
             </p>
           </div>
         </div>

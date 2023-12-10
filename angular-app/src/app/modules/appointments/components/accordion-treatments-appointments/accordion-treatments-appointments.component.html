@@ -28,9 +28,9 @@
             </div>
             <div class="col">
               <label for="description">Descripción:</label>
-              <span class="ms-2 form-control-static" id="description">{{
-                treatment.description
-              }}</span>
+              <span class="ms-2 form-control-static" id="description">
+                {{ treatment.description || "--" }}
+              </span>
             </div>
           </div>
         </div>
@@ -48,7 +48,7 @@
             <div class="form-group">
               <label for="description">Descripción:</label>
               <p class="form-control-static" id="description">
-                {{ treatment.description ? treatment.description : "--" }}
+                {{ treatment.description || "--" }}
               </p>
             </div>
           </div>
@@ -56,7 +56,7 @@
             <div class="form-group">
               <label for="comments">Comentarios:</label>
               <p class="form-control-static" id="comments">
-                {{ treatment.comments ? treatment.comments : "--" }}
+                {{ treatment.comments || "--" }}
               </p>
             </div>
           </div>
@@ -64,7 +64,7 @@
             <div class="form-group">
               <label for="duration">Duración:</label>
               <p class="form-control-static" id="duration">
-                {{ treatment.duration ? treatment.duration : "--" }}
+                {{ treatment.duration || "--" }}
               </p>
             </div>
           </div>
@@ -74,11 +74,7 @@
                 >Frecuencia de aplicación:</label
               >
               <p class="form-control-static" id="application_frequency">
-                {{
-                  treatment.application_frequency
-                    ? treatment.application_frequency
-                    : "--"
-                }}
+                {{ treatment.application_frequency || "--" }}
               </p>
             </div>
           </div>
@@ -86,11 +82,7 @@
             <div class="form-group">
               <label for="recommended_dosage">Dosis recomendada:</label>
               <p class="form-control-static" id="recommended_dosage">
-                {{
-                  treatment.recommended_dosage
-                    ? treatment.recommended_dosage
-                    : "--"
-                }}
+                {{ treatment.recommended_dosage || "--" }}
               </p>
             </div>
           </div>

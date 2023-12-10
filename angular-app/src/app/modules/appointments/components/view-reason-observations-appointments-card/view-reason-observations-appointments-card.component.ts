@@ -53,6 +53,13 @@ export class ViewReasonObservationsAppointmentsCardComponent implements OnInit {
   public onSubmit(): void {
     this.submitted = true;
 
+    if (!this.appointment || !this.appointment.id) {
+      this.notificationService.showErrorToast(
+        'No se ha podido obtener la cita.'
+      );
+      return;
+    }
+
     if (this.form.invalid) {
       return;
     }
@@ -65,24 +72,22 @@ export class ViewReasonObservationsAppointmentsCardComponent implements OnInit {
     }
 
     const appointment: any = {
-      id: this.appointment?.id,
+      id: this.appointment.id,
       observations: this.form.value.observations
         ? this.form.value.observations
         : null,
     };
 
-    this.appointmentService
-      .update(this.appointment!.id, appointment)
-      .subscribe({
-        next: (response: any) => {
-          this.notificationService.showSuccessToast(
-            'Observaciones actualizadas correctamente.'
-          );
-          this.refreshAppointment.emit();
-        },
-        error: (error: any) => {
-          this.notificationService.showErrorToast(error.message);
-        },
-      });
+    this.appointmentService.update(this.appointment.id, appointment).subscribe({
+      next: (response: any) => {
+        this.notificationService.showSuccessToast(
+          'Observaciones actualizadas correctamente.'
+        );
+        this.refreshAppointment.emit();
+      },
+      error: (error: any) => {
+        this.notificationService.showErrorToast(error.message);
+      },
+    });
   }
 }

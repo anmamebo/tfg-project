@@ -1,6 +1,6 @@
 <app-generic-card
   [hasCardHeader]="entityData.title.hasTitle"
-  [title]="entityData.title.title ? entityData.title.title : ''"
+  [title]="entityData.title.title || ''"
 >
   <div class="card-content">
     <div class="row mb-3 justify-content-between">

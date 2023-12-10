@@ -40,7 +40,7 @@
               {{ item.status | statusAppointment }}
             </span>
           </td>
-          <td>{{ item.reason ? item.reason : "--" }}</td>
+          <td>{{ item.reason || "--" }}</td>
           <td>{{ item.schedule.start_time | date : "dd/MM/yyyy HH:mm" }}</td>
 
           <td *ngIf="actions">

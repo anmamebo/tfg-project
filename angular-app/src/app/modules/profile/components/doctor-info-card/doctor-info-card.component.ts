@@ -66,18 +66,25 @@ export class DoctorInfoCardComponent implements OnInit {
   public onSubmit(): void {
     this.submitted = true;
 
+    if (!this.doctor || !this.doctor.id) {
+      this.notificationService.showErrorToast(
+        'No se puede actualizar la información del doctor'
+      );
+      return;
+    }
+
     if (this.form.invalid) {
       return;
     }
 
     const updateDoctor: any = {
-      id: this.doctor?.id,
+      id: this.doctor.id,
       collegiate_number: this.form.value.collegiate_number,
-      is_available: this.doctor?.is_available,
-      user: this.doctor?.user,
+      is_available: this.doctor.is_available,
+      user: this.doctor.user,
     };
 
-    this.doctorService.update(this.doctor!.id, updateDoctor).subscribe({
+    this.doctorService.update(this.doctor.id, updateDoctor).subscribe({
       next: (data) => {
         this.submitted = false;
         this.notificationService.showSuccessToast(data.message);

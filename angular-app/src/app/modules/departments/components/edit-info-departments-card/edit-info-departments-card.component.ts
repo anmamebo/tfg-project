@@ -57,19 +57,24 @@ export class EditInfoDepartmentsCardComponent implements OnInit {
   public onSubmit(): void {
     this.submitted = true;
 
+    if (!this.department || !this.department.id) {
+      this.notificationService.showErrorToast(
+        'No se ha podido obtener el departamento.'
+      );
+      return;
+    }
+
     if (this.form.invalid) {
       return;
     }
 
     const updatedData: any = {
-      id: this.department?.id,
+      id: this.department.id,
       name: this.form.value.name,
-      description: this.form.value.description
-        ? this.form.value.description
-        : null,
+      description: this.form.value.description || null,
     };
 
-    this.departmentService.update(this.department!.id, updatedData).subscribe({
+    this.departmentService.update(this.department.id, updatedData).subscribe({
       next: (data: any) => {
         this.submitted = false;
         this.notificationService.showSuccessToast(data.message);

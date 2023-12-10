@@ -113,13 +113,17 @@ export class GenericListCardComponent implements OnInit {
       searchTerm != undefined &&
       searchTerm != this.entityData.search.search
     ) {
-      this.entityData.search.search = searchTerm ? searchTerm : '';
+      this.entityData.search.search = searchTerm || '';
       page = 1;
       this.entityData.page = 1;
     }
 
+    if (this.entityData.service == null) {
+      return;
+    }
+
     this.entityData.service
-      ?.getItems(
+      .getItems(
         page,
         this.entityData.numResults,
         this.entityData.search.search,
@@ -148,7 +152,13 @@ export class GenericListCardComponent implements OnInit {
    */
   public delete(id: string): void {
     this.notificationService.showConfirmDeleteDialog(() => {
-      this.entityData.service?.delete(id).subscribe({
+      if (this.entityData.service == null) {
+        this.notificationService.showErrorToast(
+          'No se ha podido eliminar el elemento.'
+        );
+        return;
+      }
+      this.entityData.service.delete(id).subscribe({
         next: () => {
           this.getItems(this.entityData.page);
         },

@@ -1,6 +1,6 @@
 <app-generic-card [title]="titleCard">
   <div class="card-content">
-    <div class="row">
+    <div *ngIf="department" class="row">
       <div class="col-lg-1 col-md-3">
         <div class="form-group">
           <label for="id">ID</label>
@@ -9,7 +9,7 @@
             class="form-control"
             id="id"
             [attr.readonly]="true"
-            [value]="department?.id"
+            [value]="department.id"
           />
         </div>
       </div>
@@ -22,7 +22,7 @@
             class="form-control"
             id="name"
             [attr.readonly]="true"
-            [value]="department?.name"
+            [value]="department.name"
           />
         </div>
       </div>
@@ -35,7 +35,7 @@
             id="description"
             [attr.readonly]="true"
             rows="3"
-            >{{ department?.description }}</textarea
+            >{{ department.description || "--" }}</textarea
           >
         </div>
       </div>

@@ -50,9 +50,7 @@ export class CreateDepartmentsCardComponent {
 
     const department: any = {
       name: this.form.value.name,
-      description: this.form.value.description
-        ? this.form.value.description
-        : null,
+      description: this.form.value.description || null,
     };
 
     this.departmentService.create(department).subscribe({

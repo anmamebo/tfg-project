@@ -37,7 +37,10 @@ export class PatientsViewPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.patient = this.route.snapshot.data['data']; // Obtiene los datos del paciente desde el resolver
-    this.pageTitle += ` - ${this.patient?.user?.name} ${this.patient?.user?.last_name}`;
+
+    if (this.patient && this.patient.user) {
+      this.pageTitle += ` - ${this.patient.user.name} ${this.patient.user.last_name}`;
+    }
   }
 
   /**

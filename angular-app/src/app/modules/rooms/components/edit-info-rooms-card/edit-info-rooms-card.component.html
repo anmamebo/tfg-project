@@ -1,6 +1,7 @@
 <app-generic-card [title]="titleCard">
   <div class="card-content">
     <form
+      *ngIf="room"
       (ngSubmit)="onSubmit()"
       [formGroup]="editInfoRoomForm"
       class="form form-horizontal"
@@ -84,7 +85,7 @@
                   formControlName="is_available"
                   class="form-check-input"
                   id="is_available"
-                  [checked]="room?.is_available"
+                  [checked]="room.is_available"
                 />
               </div>
             </div>

@@ -1,6 +1,6 @@
 <app-generic-card [title]="titleCard">
   <div class="card-content">
-    <div class="row">
+    <div *ngIf="patient && patient.user" class="row">
       <div class="col-12">
         <div class="form-group">
           <label for="username">Nombre de usuario</label>
@@ -9,7 +9,7 @@
             class="form-control"
             id="username"
             [attr.readonly]="true"
-            [value]="patient?.user?.username"
+            [value]="patient.user.username"
           />
         </div>
       </div>
@@ -22,7 +22,7 @@
             class="form-control"
             id="email"
             [attr.readonly]="true"
-            [value]="patient?.user?.email"
+            [value]="patient.user.email"
           />
         </div>
       </div>
@@ -35,7 +35,7 @@
             class="form-control"
             id="phone"
             [attr.readonly]="true"
-            [value]="patient?.phone"
+            [value]="patient.phone"
           />
         </div>
       </div>

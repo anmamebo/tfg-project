@@ -97,24 +97,29 @@ export class EditInfoRoomsCardComponent implements OnInit {
   public onSubmit(): void {
     this.submitted = true;
 
+    if (!this.room || !this.room.id) {
+      this.notificationService.showErrorToast(
+        'No se ha podido obtener la sala.'
+      );
+      return;
+    }
+
     if (this.form.invalid) {
       return;
     }
 
     const updatedData: any = {
-      id: this.room?.id,
+      id: this.room.id,
       name: this.form.value.name,
-      description: this.form.value.description
-        ? this.form.value.description
-        : null,
-      capacity: this.form.value.capacity ? this.form.value.capacity : null,
-      is_available: this.room?.is_available,
-      type: this.form.value.type ? this.form.value.type : null,
+      description: this.form.value.description || null,
+      capacity: this.form.value.capacity || null,
+      is_available: this.room.is_available,
+      type: this.form.value.type || null,
       location: this.form.value.location,
       department: this.form.value.department[0].item_id,
     };
 
-    this.roomService.update(this.room!.id, updatedData).subscribe({
+    this.roomService.update(this.room.id, updatedData).subscribe({
       next: (data: any) => {
         this.submitted = false;
         this.notificationService.showSuccessToast(data.message);

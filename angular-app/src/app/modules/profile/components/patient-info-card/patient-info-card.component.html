@@ -1,6 +1,7 @@
 <app-generic-card [title]="titleCard">
   <div class="card-content">
     <form
+      *ngIf="patient"
       (ngSubmit)="onSubmit()"
       [formGroup]="updatePatientDataForm"
       class="form"
@@ -63,7 +64,7 @@
               <option
                 *ngFor="let option of gender_options"
                 [value]="option.value"
-                [attr.selected]="option.value === patient?.gender ? true : null"
+                [attr.selected]="option.value === patient.gender ? true : null"
               >
                 {{ option.text }}
               </option>
@@ -91,7 +92,7 @@
               mwlFlatpickr
               [altInput]="true"
               [convertModelValue]="true"
-              [defaultValue]="patient?.birthdate"
+              [defaultValue]="patient.birthdate"
               [locale]="locale"
               [maxDate]="'today'"
               [dateFormat]="'Y-m-d'"

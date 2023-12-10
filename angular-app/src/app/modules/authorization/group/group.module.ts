@@ -10,6 +10,7 @@ import { GenericPageModule } from 'src/app/shared/components/generic-page/generi
 import { GenericCardModule } from 'src/app/shared/components/generic-card/generic-card.module';
 import { FormErrorsModule } from 'src/app/shared/components/form-errors/form-errors.module';
 import { GenericListCardModule } from 'src/app/shared/components/generic-list-card/generic-list-card.module';
+import { LoadingSpinnerModule } from 'src/app/shared/components/loading-spinner/loading-spinner.module';
 
 // Componentes páginas
 import { GroupPageComponent } from './pages/group-page/group-page.component';
@@ -40,6 +41,7 @@ import { ViewGroupCardComponent } from './components/view-group-card/view-group-
     GenericCardModule,
     FormErrorsModule,
     GenericListCardModule,
+    LoadingSpinnerModule,
   ],
 })
 export class GroupModule {}

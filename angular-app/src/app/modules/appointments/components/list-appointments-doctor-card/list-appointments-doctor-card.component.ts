@@ -41,7 +41,7 @@ export class ListAppointmentsDoctorCardComponent extends GenericListCardComponen
       searchTerm != undefined &&
       searchTerm != this.entityData.search.search
     ) {
-      this.entityData.search.search = searchTerm ? searchTerm : '';
+      this.entityData.search.search = searchTerm || '';
       page = 1;
       this.entityData.page = 1;
     }
