@@ -20,12 +20,12 @@ export class Treatment {
     public description: string,
     public duration: string,
     public start_date: Date,
+    public patient: Patient,
+    public doctor: Doctor,
+    public appointment: Appointment,
     public end_date?: Date,
     public comments?: string,
     public application_frequency?: string,
-    public recommended_dosage?: string,
-    public patient?: Patient,
-    public doctor?: Doctor,
-    public appointment?: Appointment
+    public recommended_dosage?: string
   ) {}
 }

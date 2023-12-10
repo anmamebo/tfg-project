@@ -23,7 +23,7 @@ export class DoctorInfoCardComponent implements OnInit {
   public titleCard: string = 'Información Doctor';
 
   /** Doctor que se mostrará */
-  @Input() public doctor: Doctor = new Doctor('', '', false);
+  @Input() public doctor: Doctor | null = null;
 
   /** Formulario para actualizar los datos del doctor */
   public updateDoctorDataForm: FormGroup = new FormGroup({});
@@ -44,14 +44,14 @@ export class DoctorInfoCardComponent implements OnInit {
   ngOnInit(): void {
     this.updateDoctorDataForm = this.formBuilder.group({
       collegiate_number: [
-        this.doctor.collegiate_number,
+        this.doctor?.collegiate_number,
         [
           Validators.required,
           Validators.maxLength(10),
           Validators.pattern(INTEGER_REGEXP),
         ],
       ],
-      is_available: [this.doctor.is_available],
+      is_available: [this.doctor?.is_available],
     });
   }
 
@@ -70,14 +70,14 @@ export class DoctorInfoCardComponent implements OnInit {
       return;
     }
 
-    const updateDoctor: Doctor = new Doctor(
-      this.doctor.id,
-      this.form.value.collegiate_number,
-      this.doctor.is_available,
-      this.doctor.user
-    );
+    const updateDoctor: any = {
+      id: this.doctor?.id,
+      collegiate_number: this.form.value.collegiate_number,
+      is_available: this.doctor?.is_available,
+      user: this.doctor?.user,
+    };
 
-    this.doctorService.update(this.doctor.id, updateDoctor).subscribe({
+    this.doctorService.update(this.doctor!.id, updateDoctor).subscribe({
       next: (data) => {
         this.submitted = false;
         this.notificationService.showSuccessToast(data.message);

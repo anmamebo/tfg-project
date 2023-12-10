@@ -21,7 +21,7 @@ export class BasicInfoCardComponent implements OnInit {
   public titleCard: string = 'Información Básica';
 
   /** Usuario que se mostrará */
-  @Input() public user: User = new User('', '', '', '');
+  @Input() public user: User | null = null;
 
   /** Formulario para actualizar los datos del usuario */
   public updateUserDataForm: FormGroup = new FormGroup({});
@@ -42,10 +42,10 @@ export class BasicInfoCardComponent implements OnInit {
   ngOnInit(): void {
     // Inicializa el formulario con las validaciones
     this.updateUserDataForm = this.formBuilder.group({
-      name: [this.user.name, Validators.required],
-      last_name: [this.user.last_name, Validators.required],
-      username: [this.user.username, Validators.required],
-      email: [this.user.email, [Validators.required, Validators.email]],
+      name: [this.user?.name, Validators.required],
+      last_name: [this.user?.last_name, Validators.required],
+      username: [this.user?.username, Validators.required],
+      email: [this.user?.email, [Validators.required, Validators.email]],
     });
   }
 
@@ -64,14 +64,13 @@ export class BasicInfoCardComponent implements OnInit {
       return;
     }
 
-    const updateUser: User = new User(
-      this.user.id,
-      this.form.value.username,
-      '',
-      this.form.value.email,
-      this.form.value.name,
-      this.form.value.last_name
-    );
+    const updateUser: any = {
+      id: this.user?.id,
+      username: this.user?.username,
+      email: this.form.value.email,
+      name: this.form.value.name,
+      last_name: this.form.value.last_name,
+    };
 
     // Envía la solicitud de actualización de usuario al servicio
     this.userService.updateUser(updateUser).subscribe({

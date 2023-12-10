@@ -7,11 +7,11 @@ export class User {
     public username: string,
     public password: string,
     public email: string,
-    public name?: string,
-    public last_name?: string,
+    public name: string,
+    public last_name: string,
+    public is_staff: boolean,
+    public is_active: boolean,
     public patient?: Patient,
-    public doctor?: Doctor,
-    public is_staff?: boolean,
-    public is_active?: boolean
+    public doctor?: Doctor
   ) {}
 }

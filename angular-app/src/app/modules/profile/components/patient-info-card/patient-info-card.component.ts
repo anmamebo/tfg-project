@@ -32,7 +32,7 @@ export class PatientInfoCardComponent implements OnInit {
   public locale = Spanish;
 
   /** Paciente que se mostrará */
-  @Input() public patient: Patient = new Patient('', '');
+  @Input() public patient: Patient | null = null;
 
   /** Formulario para actualizar los datos del paciente */
   public updatePatientDataForm: FormGroup = new FormGroup({});
@@ -53,11 +53,14 @@ export class PatientInfoCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.updatePatientDataForm = this.formBuilder.group({
-      dni: [this.patient.dni, [Validators.required, Validators.maxLength(9)]],
-      social_security: [this.patient.social_security, Validators.maxLength(12)],
-      gender: [this.patient.gender, Validators.required],
-      birthdate: [this.patient.birthdate],
-      phone: [this.patient.phone, [Validators.pattern(PHONENUMBER_REGEXP)]],
+      dni: [this.patient?.dni, [Validators.required, Validators.maxLength(9)]],
+      social_security: [
+        this.patient?.social_security,
+        Validators.maxLength(12),
+      ],
+      gender: [this.patient?.gender, Validators.required],
+      birthdate: [this.patient?.birthdate],
+      phone: [this.patient?.phone, [Validators.pattern(PHONENUMBER_REGEXP)]],
     });
   }
 
@@ -76,21 +79,23 @@ export class PatientInfoCardComponent implements OnInit {
       return;
     }
 
-    const updatePatient: Patient = new Patient(
-      this.patient.id,
-      this.form.value.dni,
-      this.form.value.birthdate
+    const updatePatient: any = {
+      id: this.patient?.id,
+      din: this.form.value.dni,
+      birthdate: this.form.value.birthdate
         ? this.datePipe.transform(
             new Date(this.form.value.birthdate),
             'yyyy-MM-dd'
           )
         : null,
-      this.form.value.gender,
-      this.form.value.phone != '' ? this.form.value.phone : null,
-      this.form.value.social_security
-    );
+      gender: this.form.value.gender,
+      phone: this.form.value.phone != '' ? this.form.value.phone : null,
+      social_security: this.form.value.social_security
+        ? this.form.value.social_security
+        : null,
+    };
 
-    this.patientService.update(this.patient.id, updatePatient).subscribe({
+    this.patientService.update(this.patient!.id, updatePatient).subscribe({
       next: (data) => {
         this.submitted = false;
         this.updatedPatientEvent.emit();

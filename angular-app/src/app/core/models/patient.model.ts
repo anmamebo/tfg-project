@@ -5,12 +5,12 @@ export class Patient {
   constructor(
     public id: string,
     public dni: string,
+    public gender: string,
+    public user: User,
     public birthdate?: string | null,
-    public gender?: string,
     public phone?: string | null,
     public social_security?: string | null,
     public address?: Address,
-    public user?: User,
     public state?: boolean
   ) {}
 }

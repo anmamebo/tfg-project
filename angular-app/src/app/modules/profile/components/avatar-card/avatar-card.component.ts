@@ -14,7 +14,7 @@ export class AvatarCardComponent {
   /**
    * Propiedad de entrada que recibe un objeto `User` para mostrar su avatar y detalles.
    */
-  @Input() user: User = new User('', '', '', '');
+  @Input() user: User | null = null;
 
   constructor() {}
 }

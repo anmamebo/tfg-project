@@ -7,7 +7,7 @@ export class Doctor {
     public id: string,
     public collegiate_number: string,
     public is_available: boolean,
-    public user?: User,
+    public user: User,
     public medical_specialties?: MedicalSpecialty[],
     public departments?: Department[],
     public state?: boolean
