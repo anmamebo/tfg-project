@@ -27,6 +27,8 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
         } else if (error.status === 404) {
           errorMessage =
             error.error.message || 'No se encontró el recurso solicitado.';
+        } else if (error.status === 403) {
+          errorMessage = error.error.message || 'No tienes permisos.';
         } else if (error.status === 0) {
           errorMessage = 'Erro de conexión. Comprueba tu conexión a internet.';
         }
