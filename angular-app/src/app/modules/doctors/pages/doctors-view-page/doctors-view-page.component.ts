@@ -45,7 +45,9 @@ export class DoctorsViewPageComponent {
    * Actualiza los datos del médico
    */
   onRefreshDoctor(): void {
-    this.doctorService.getItemById(this.doctor!.id).subscribe({
+    if (!this.doctor) return;
+
+    this.doctorService.getItemById(this.doctor.id).subscribe({
       next: (doctor: Doctor) => {
         this.doctor = doctor;
       },

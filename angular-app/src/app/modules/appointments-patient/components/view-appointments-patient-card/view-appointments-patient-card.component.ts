@@ -49,6 +49,13 @@ export class ViewAppointmentsPatientCardComponent implements OnInit {
    * Cancela la cita.
    */
   public cancelAppointment() {
+    if (!this.appointment) {
+      this.notificationService.showErrorToast(
+        'No se ha podido cancelar la cita.'
+      );
+      return;
+    }
+
     this.notificationService.showConfirmGenericDialog(
       '¿Estás seguro de que quieres cancelar la cita?',
       'Esta acción no se puede deshacer.',
@@ -57,8 +64,10 @@ export class ViewAppointmentsPatientCardComponent implements OnInit {
       'La cita ha sido cancelada correctamente.',
       'Cancelar',
       () => {
+        if (!this.appointment) return;
+
         this.appointmentService
-          .updateStatus(this.appointment!.id, 'cancelled')
+          .updateStatus(this.appointment.id, 'cancelled')
           .subscribe({
             next: (response: any) => {
               this.appointmentCancelled.emit();

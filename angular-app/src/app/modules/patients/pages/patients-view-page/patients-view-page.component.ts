@@ -47,7 +47,9 @@ export class PatientsViewPageComponent implements OnInit {
    * Actualiza los datos del paciente
    */
   onRefreshPatient(): void {
-    this.patientService.getItemById(this.patient!.id).subscribe({
+    if (!this.patient) return;
+
+    this.patientService.getItemById(this.patient.id).subscribe({
       next: (patient: Patient) => {
         this.patient = patient;
       },

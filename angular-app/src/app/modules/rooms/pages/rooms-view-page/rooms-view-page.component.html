@@ -7,8 +7,9 @@
     <ng-container *ngIf="room">
       <section class="section">
         <app-buttons-rooms-card
+          *ngIf="room.id && room.is_available"
           [roomId]="room.id"
-          [isActive]="room.is_available!"
+          [isActive]="room.is_available"
           (refreshRoom)="onRefreshRoom()"
         ></app-buttons-rooms-card>
       </section>

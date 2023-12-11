@@ -7,7 +7,7 @@
       class="form form-horizontal"
     >
       <div class="form-body">
-        <div formGroupName="patientInfoForm">
+        <div *ngIf="patientInfo" formGroupName="patientInfoForm">
           <div class="row">
             <!-- Nombre de usuario -->
             <div class="col-md-6">
@@ -38,12 +38,12 @@
                   id="email"
                   placeholder="Email"
                   [ngClass]="{
-                    'is-invalid': submitted && patientInfo?.get('email')?.errors
+                    'is-invalid': submitted && patientInfo.get('email')?.errors
                   }"
                 />
 
                 <app-form-errors
-                  [control]="patientInfo!.get('email')"
+                  [control]="patientInfo.get('email')"
                   [submitted]="submitted"
                 ></app-form-errors>
               </div>
@@ -60,12 +60,12 @@
                   id="name"
                   placeholder="Nombre"
                   [ngClass]="{
-                    'is-invalid': submitted && patientInfo?.get('name')?.errors
+                    'is-invalid': submitted && patientInfo.get('name')?.errors
                   }"
                 />
 
                 <app-form-errors
-                  [control]="patientInfo!.get('name')"
+                  [control]="patientInfo.get('name')"
                   [submitted]="submitted"
                 ></app-form-errors>
               </div>
@@ -83,12 +83,12 @@
                   placeholder="Apellidos"
                   [ngClass]="{
                     'is-invalid':
-                      submitted && patientInfo?.get('last_name')?.errors
+                      submitted && patientInfo.get('last_name')?.errors
                   }"
                 />
 
                 <app-form-errors
-                  [control]="patientInfo!.get('last_name')"
+                  [control]="patientInfo.get('last_name')"
                   [submitted]="submitted"
                 ></app-form-errors>
               </div>
@@ -105,12 +105,12 @@
                   id="dni"
                   placeholder="DNI"
                   [ngClass]="{
-                    'is-invalid': submitted && patientInfo?.get('dni')?.errors
+                    'is-invalid': submitted && patientInfo.get('dni')?.errors
                   }"
                 />
 
                 <app-form-errors
-                  [control]="patientInfo!.get('dni')"
+                  [control]="patientInfo.get('dni')"
                   [submitted]="submitted"
                 ></app-form-errors>
               </div>
@@ -128,12 +128,12 @@
                   placeholder="Nº de la seguridad social"
                   [ngClass]="{
                     'is-invalid':
-                      submitted && patientInfo?.get('social_security')?.errors
+                      submitted && patientInfo.get('social_security')?.errors
                   }"
                 />
 
                 <app-form-errors
-                  [control]="patientInfo!.get('social_security')"
+                  [control]="patientInfo.get('social_security')"
                   [submitted]="submitted"
                 ></app-form-errors>
               </div>
@@ -150,7 +150,7 @@
                   class="form-control"
                   [ngClass]="{
                     'is-invalid':
-                      submitted && patientInfo?.get('birthdate')?.errors
+                      submitted && patientInfo.get('birthdate')?.errors
                   }"
                   mwlFlatpickr
                   [convertModelValue]="true"
@@ -162,7 +162,7 @@
                   placeholder="Fecha de nacimiento"
                 />
                 <app-form-errors
-                  [control]="patientInfo!.get('birthdate')"
+                  [control]="patientInfo.get('birthdate')"
                   [submitted]="submitted"
                 ></app-form-errors>
               </div>
@@ -177,8 +177,7 @@
                   formControlName="gender"
                   id="gender"
                   [ngClass]="{
-                    'is-invalid':
-                      submitted && patientInfo?.get('gender')?.errors
+                    'is-invalid': submitted && patientInfo.get('gender')?.errors
                   }"
                 >
                   <option value="" selected>--</option>
@@ -191,7 +190,7 @@
                 </select>
 
                 <app-form-errors
-                  [control]="patientInfo!.get('gender')"
+                  [control]="patientInfo.get('gender')"
                   [submitted]="submitted"
                 ></app-form-errors>
               </fieldset>
@@ -208,12 +207,12 @@
                   id="phone"
                   placeholder="Nº de teléfono"
                   [ngClass]="{
-                    'is-invalid': submitted && patientInfo?.get('phone')?.errors
+                    'is-invalid': submitted && patientInfo.get('phone')?.errors
                   }"
                 />
 
                 <app-form-errors
-                  [control]="patientInfo!.get('phone')"
+                  [control]="patientInfo.get('phone')"
                   [submitted]="submitted"
                 ></app-form-errors>
               </div>
@@ -238,7 +237,7 @@
         </div>
 
         <ng-container *ngIf="showAddressInputs">
-          <div formGroupName="addressForm">
+          <div *ngIf="address" formGroupName="addressForm">
             <div class="row">
               <!-- Calle -->
               <div class="col-xl-6 col-12">
@@ -251,12 +250,12 @@
                     class="form-control"
                     placeholder="Calle"
                     [ngClass]="{
-                      'is-invalid': submitted && address?.get('street')?.errors
+                      'is-invalid': submitted && address.get('street')?.errors
                     }"
                   />
 
                   <app-form-errors
-                    [control]="address!.get('street')"
+                    [control]="address.get('street')"
                     [submitted]="submitted"
                   ></app-form-errors>
                 </div>
@@ -273,12 +272,12 @@
                     class="form-control"
                     placeholder="Número"
                     [ngClass]="{
-                      'is-invalid': submitted && address?.get('number')?.errors
+                      'is-invalid': submitted && address.get('number')?.errors
                     }"
                   />
 
                   <app-form-errors
-                    [control]="address!.get('number')"
+                    [control]="address.get('number')"
                     [submitted]="submitted"
                   ></app-form-errors>
                 </div>
@@ -295,12 +294,12 @@
                     class="form-control"
                     placeholder="Piso"
                     [ngClass]="{
-                      'is-invalid': submitted && address?.get('floor')?.errors
+                      'is-invalid': submitted && address.get('floor')?.errors
                     }"
                   />
 
                   <app-form-errors
-                    [control]="address!.get('floor')"
+                    [control]="address.get('floor')"
                     [submitted]="submitted"
                   ></app-form-errors>
                 </div>
@@ -317,12 +316,12 @@
                     class="form-control"
                     placeholder="Ciudad"
                     [ngClass]="{
-                      'is-invalid': submitted && address?.get('city')?.errors
+                      'is-invalid': submitted && address.get('city')?.errors
                     }"
                   />
 
                   <app-form-errors
-                    [control]="address!.get('city')"
+                    [control]="address.get('city')"
                     [submitted]="submitted"
                   ></app-form-errors>
                 </div>
@@ -340,12 +339,12 @@
                     placeholder="Código Postal"
                     [ngClass]="{
                       'is-invalid':
-                        submitted && address?.get('postal_code')?.errors
+                        submitted && address.get('postal_code')?.errors
                     }"
                   />
 
                   <app-form-errors
-                    [control]="address!.get('postal_code')"
+                    [control]="address.get('postal_code')"
                     [submitted]="submitted"
                   ></app-form-errors>
                 </div>
@@ -362,13 +361,12 @@
                     class="form-control"
                     placeholder="Provincia"
                     [ngClass]="{
-                      'is-invalid':
-                        submitted && address?.get('province')?.errors
+                      'is-invalid': submitted && address.get('province')?.errors
                     }"
                   />
 
                   <app-form-errors
-                    [control]="address!.get('province')"
+                    [control]="address.get('province')"
                     [submitted]="submitted"
                   ></app-form-errors>
                 </div>
@@ -385,12 +383,12 @@
                     class="form-control"
                     placeholder="País"
                     [ngClass]="{
-                      'is-invalid': submitted && address?.get('country')?.errors
+                      'is-invalid': submitted && address.get('country')?.errors
                     }"
                   />
 
                   <app-form-errors
-                    [control]="address!.get('country')"
+                    [control]="address.get('country')"
                     [submitted]="submitted"
                   ></app-form-errors>
                 </div>

@@ -41,8 +41,15 @@ export class ViewInfoStatusAppointmentsCardComponent {
    * @param status Nuevo estado de la cita
    */
   public updateStatus(status: string): void {
+    if (!this.appointment) {
+      this.notificationService.showErrorToast(
+        'No se ha podido actualizar el estado de la cita.'
+      );
+      return;
+    }
+
     this.appointmentService
-      .updateStatus(this.appointment!.id, status)
+      .updateStatus(this.appointment.id, status)
       .subscribe({
         next: (response: any) => {
           this.notificationService.showSuccessToast(response.message);

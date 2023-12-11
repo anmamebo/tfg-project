@@ -43,7 +43,9 @@ export class RoomsViewPageComponent implements OnInit {
    * Actualiza los datos de la sala
    */
   onRefreshRoom(): void {
-    this.roomService.getItemById(this.room!.id).subscribe({
+    if (!this.room) return;
+
+    this.roomService.getItemById(this.room.id).subscribe({
       next: (room: Room) => {
         this.room = room;
       },

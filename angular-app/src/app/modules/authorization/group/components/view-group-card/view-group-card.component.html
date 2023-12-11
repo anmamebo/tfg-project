@@ -32,7 +32,10 @@
           <label for="staticInput">Permisos vinculados</label>
 
           <ng-container
-            *ngIf="group.permissions!.length > 0; else notPermissions"
+            *ngIf="
+              group.permissions && group.permissions.length > 0;
+              else notPermissions
+            "
           >
             <app-generic-table
               [columns]="columns"

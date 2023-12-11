@@ -47,7 +47,10 @@ export class DoctorsEditPageComponent implements OnInit {
    * Actualiza los datos del médico.
    */
   public onRefreshDoctor(): void {
-    this.doctorService.getItemById(this.doctor!.id).subscribe({
+    if (!this.doctor) {
+      return;
+    }
+    this.doctorService.getItemById(this.doctor.id).subscribe({
       next: (doctor: Doctor) => {
         this.doctor = doctor;
         this.refreshTitle();

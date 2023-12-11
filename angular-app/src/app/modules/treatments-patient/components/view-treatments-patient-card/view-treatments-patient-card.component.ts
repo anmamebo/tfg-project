@@ -60,6 +60,13 @@ export class ViewTreatmentsPatientCardComponent implements OnInit {
    * Completa el tratamiento.
    */
   public completeTreatment() {
+    if (!this.treatment) {
+      this.notificationService.showErrorToast(
+        'No se ha podido completar el tratamiento.'
+      );
+      return;
+    }
+
     this.notificationService.showConfirmGenericDialog(
       '¿Estás seguro de que quieres completar el tratamiento?',
       '',
@@ -68,8 +75,10 @@ export class ViewTreatmentsPatientCardComponent implements OnInit {
       'El tratamiento ha sido completado correctamente.',
       'Cancelar',
       () => {
+        if (!this.treatment) return;
+
         this.treatmentService
-          .updateStatus(this.treatment!.id, 'completed')
+          .updateStatus(this.treatment.id, 'completed')
           .subscribe({
             next: () => {
               this.statusChanged.emit();
@@ -86,6 +95,13 @@ export class ViewTreatmentsPatientCardComponent implements OnInit {
    * Interrumpe el tratamiento.
    */
   public interruptTreatment() {
+    if (!this.treatment) {
+      this.notificationService.showErrorToast(
+        'No se ha podido interrumpir el tratamiento.'
+      );
+      return;
+    }
+
     this.notificationService.showConfirmGenericDialog(
       '¿Estás seguro de que quieres interrumpir el tratamiento?',
       '',
@@ -94,8 +110,10 @@ export class ViewTreatmentsPatientCardComponent implements OnInit {
       'El tratamiento ha sido interrumpido correctamente.',
       'Cancelar',
       () => {
+        if (!this.treatment) return;
+
         this.treatmentService
-          .updateStatus(this.treatment!.id, 'interrupted')
+          .updateStatus(this.treatment.id, 'interrupted')
           .subscribe({
             next: () => {
               this.statusChanged.emit();
@@ -112,6 +130,13 @@ export class ViewTreatmentsPatientCardComponent implements OnInit {
    * Cancela el tratamiento.
    */
   public cancelTreatment() {
+    if (!this.treatment) {
+      this.notificationService.showErrorToast(
+        'No se ha podido cancelar el tratamiento.'
+      );
+      return;
+    }
+
     this.notificationService.showConfirmGenericDialog(
       '¿Estás seguro de que quieres cancelar el tratamiento?',
       'Esta acción no se puede deshacer.',
@@ -120,8 +145,10 @@ export class ViewTreatmentsPatientCardComponent implements OnInit {
       'El tratamiento ha sido cancelado correctamente.',
       'Cancelar',
       () => {
+        if (!this.treatment) return;
+
         this.treatmentService
-          .updateStatus(this.treatment!.id, 'cancelled')
+          .updateStatus(this.treatment.id, 'cancelled')
           .subscribe({
             next: () => {
               this.statusChanged.emit();

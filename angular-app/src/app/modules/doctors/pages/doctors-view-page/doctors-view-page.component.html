@@ -7,8 +7,9 @@
     <ng-container *ngIf="doctor">
       <section class="section">
         <app-buttons-doctors-card
+          *ngIf="doctor.id && doctor.state"
           [doctorId]="doctor.id"
-          [isActive]="doctor.state!"
+          [isActive]="doctor.state"
           (refreshDoctor)="onRefreshDoctor()"
         ></app-buttons-doctors-card>
       </section>

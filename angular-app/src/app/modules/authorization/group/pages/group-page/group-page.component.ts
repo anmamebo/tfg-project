@@ -33,8 +33,8 @@ export class GroupPageComponent {
   public entityData: entityData;
 
   /** Referencia al componente hijo `ListGroupCardComponent`. */
-  @ViewChild(GenericListCardComponent)
-  listGroupCardComponent!: GenericListCardComponent;
+  @ViewChild(GenericListCardComponent, { static: false })
+  listGroupCardComponent?: GenericListCardComponent;
 
   constructor(private groupService: GroupService) {
     this.entityData = {
@@ -74,6 +74,9 @@ export class GroupPageComponent {
    * Actualiza la lista de grupos.
    */
   updateGroupList(): void {
+    if (!this.listGroupCardComponent) {
+      return;
+    }
     this.listGroupCardComponent.getItems(this.entityData.page);
   }
 }

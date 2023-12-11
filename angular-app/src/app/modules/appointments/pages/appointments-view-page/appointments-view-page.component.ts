@@ -54,8 +54,12 @@ export class AppointmentsViewPageComponent {
    * Actualiza los datos de la cita
    */
   public onRefreshAppointment(): void {
+    if (!this.appointment) {
+      return;
+    }
+
     this.appointmentService
-      .getAppointmentByIdByDoctor(this.appointment!.id)
+      .getAppointmentByIdByDoctor(this.appointment.id)
       .subscribe({
         next: (appointment: Appointment) => {
           this.appointment = appointment;
