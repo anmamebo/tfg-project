@@ -41,6 +41,9 @@ class GroupViewSet(viewsets.GenericViewSet):
         """
         Lista todos los grupos.
 
+        Permisos requeridos:
+            - El usuario debe ser administrador.
+
         Args:
             request (Request): La solicitud HTTP.
 
@@ -63,6 +66,9 @@ class GroupViewSet(viewsets.GenericViewSet):
     def create(self, request):
         """
         Crea un nuevo grupo.
+
+        Permisos requeridos:
+            - El usuario debe ser administrador.
 
         Args:
             request (Request): La solicitud HTTP.
@@ -91,6 +97,9 @@ class GroupViewSet(viewsets.GenericViewSet):
         """
         Recupera los detalles de un grupo específico.
 
+        Permisos requeridos:
+            - El usuario debe ser administrador.
+
         Args:
             request (Request): La solicitud HTTP.
             pk (int): El ID del grupo.
@@ -106,6 +115,9 @@ class GroupViewSet(viewsets.GenericViewSet):
     def update(self, request, pk=None):
         """
         Actualiza los detalles de un grupo existente.
+
+        Permisos requeridos:
+            - El usuario debe ser administrador.
 
         Args:
             request (Request): La solicitud HTTP.
@@ -135,6 +147,9 @@ class GroupViewSet(viewsets.GenericViewSet):
     def destroy(self, request, pk=None):
         """
         Elimina un grupo existente.
+
+        Permisos requeridos:
+            - El usuario debe ser administrador.
 
         Args:
             request (Request): La solicitud HTTP.

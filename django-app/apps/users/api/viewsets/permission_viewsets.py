@@ -39,6 +39,9 @@ class PermissionViewSet(viewsets.GenericViewSet):
         """
         Lista todos los permisos.
 
+        Permisos requeridos:
+            - El usuario debe ser administrador.
+
         Parámetros opcionales:
             search (str): Una cadena de texto para buscar permisos.
             ordering (str): El campo por el que se ordenarán los permisos.

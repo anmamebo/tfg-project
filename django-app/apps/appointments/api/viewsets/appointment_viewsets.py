@@ -1,6 +1,7 @@
 from datetime import datetime
 
 import pytz
+from apps.appointments.api.permissions.appointment_permissions import IsAppointmentOwner
 from apps.appointments.api.serializers.appointment_serializer import (
     AppointmentListSerializer,
 )
@@ -71,6 +72,9 @@ class AppointmentViewSet(viewsets.GenericViewSet):
         """
         Lista todas las citas.
 
+        Permisos requeridos:
+            - El usuario debe ser un administrador.
+
         Parámetros opcionales:
             state (str): El estado de la cita (true: activas, false: no activas).
 
@@ -92,10 +96,14 @@ class AppointmentViewSet(viewsets.GenericViewSet):
         appointments_serializer = self.list_serializer_class(appointments, many=True)
         return Response(appointments_serializer.data, status=status.HTTP_200_OK)
 
-    @method_permission_classes([IsAdministratorOrDoctor])
+    @method_permission_classes([IsDoctor, IsAppointmentOwner])
     def update(self, request, pk=None):
         """
         Actualiza una cita.
+
+        Permisos requeridos:
+            - El usuario debe ser un médico.
+            - El usuario debe ser el médico de la cita.
 
         Args:
             request (Request): La solicitud HTTP.
@@ -105,14 +113,6 @@ class AppointmentViewSet(viewsets.GenericViewSet):
             Response: La respuesta que contiene la cita.
         """
         appointment = self.get_object(pk)
-        doctor = getattr(request.user, "doctor", None)
-
-        if appointment.doctor != doctor:  # Si la cita no pertenece al médico
-            return Response(
-                {"message": "La cita no pertenece al doctor."},
-                status=status.HTTP_400_BAD_REQUEST,
-            )
-
         appointment_serializer = self.serializer_class(
             appointment, data=request.data, partial=True
         )
@@ -134,7 +134,10 @@ class AppointmentViewSet(viewsets.GenericViewSet):
     @action(detail=False, methods=["get"])
     def list_for_doctor(self, request):
         """
-        Lista todas las citas de un doctor ordenadas por fecha más cercana, el usuario debe ser un médico.
+        Lista todas las citas de un doctor ordenadas por fecha más cercana.
+
+        Permisos requeridos:
+            - El usuario debe ser un médico.
 
         Parámetros opcionales:
             status (list): Los estados de las citas a filtrar.
@@ -173,7 +176,10 @@ class AppointmentViewSet(viewsets.GenericViewSet):
     @action(detail=False, methods=["get"])
     def list_for_patient(self, request):
         """
-        Lista todas las citas de un paciente ordenadas por fecha más cercana, el usuario debe ser un paciente.
+        Lista todas las citas de un paciente ordenadas por fecha más cercana.
+
+        Permisos requeridos:
+            - El usuario debe ser un paciente.
 
         Parámetros opcionales:
             status (list): Los estados de las citas a filtrar.
@@ -220,11 +226,15 @@ class AppointmentViewSet(viewsets.GenericViewSet):
         appointments_serializer = self.list_serializer_class(appointments, many=True)
         return Response(appointments_serializer.data, status=status.HTTP_200_OK)
 
-    @method_permission_classes([IsDoctor])
+    @method_permission_classes([IsDoctor, IsAppointmentOwner])
     @action(detail=True, methods=["get"])
     def retrieve_for_doctor(self, request, pk=None):
         """
-        Recupera una cita de un doctor, el usuario debe ser un médico y la cita le debe pertenecer.
+        Recupera una cita de un doctor.
+
+        Permisos requeridos:
+            - El usuario debe ser un médico.
+            - El usuario debe ser el médico de la cita.
 
         Args:
             request (Request): La solicitud HTTP.
@@ -234,14 +244,6 @@ class AppointmentViewSet(viewsets.GenericViewSet):
             Response: La respuesta que contiene la cita.
         """
         appointment = self.get_object(pk)
-        doctor = getattr(request.user, "doctor", None)
-
-        if appointment.doctor != doctor:  # Si la cita no pertenece al médico
-            return Response(
-                {"message": "La cita no pertenece al doctor."},
-                status=status.HTTP_400_BAD_REQUEST,
-            )
-
         appointment_serializer = self.serializer_class(appointment)
         return Response(appointment_serializer.data, status=status.HTTP_200_OK)
 

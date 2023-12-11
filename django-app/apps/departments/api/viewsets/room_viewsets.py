@@ -43,6 +43,9 @@ class RoomViewSet(viewsets.GenericViewSet):
         """
         Lista todas las salas.
 
+        Permisos requeridos:
+            - El usuario debe ser administrador o doctor.
+
         Parámetros opcionales:
             state (bool): El estado de las salas a listar.
             search (str): Una cadena de texto para buscar salas.
@@ -76,6 +79,9 @@ class RoomViewSet(viewsets.GenericViewSet):
         """
         Crea una sala.
 
+        Permisos requeridos:
+            - El usuario debe ser administrador.
+
         Args:
             request (Request): La solicitud HTTP.
 
@@ -105,6 +111,9 @@ class RoomViewSet(viewsets.GenericViewSet):
         """
         Recupera una sala.
 
+        Permisos requeridos:
+            - El usuario debe ser administrador o doctor.
+
         Args:
             request (Request): La solicitud HTTP.
             pk (int): El identificador de la sala.
@@ -120,6 +129,9 @@ class RoomViewSet(viewsets.GenericViewSet):
     def update(self, request, pk=None):
         """
         Actualiza una sala.
+
+        Permisos requeridos:
+            - El usuario debe ser administrador.
 
         Args:
             request (Request): La solicitud HTTP.
@@ -151,6 +163,9 @@ class RoomViewSet(viewsets.GenericViewSet):
     def destroy(self, request, pk=None):
         """
         Elimina una sala cambiando su estado a False.
+
+        Permisos requeridos:
+            - El usuario debe ser administrador.
 
         Args:
             request (Request): La solicitud HTTP.
@@ -184,6 +199,9 @@ class RoomViewSet(viewsets.GenericViewSet):
         """
         Activa una sala cambiando su estado a True.
 
+        Permisos requeridos:
+            - El usuario debe ser administrador.
+
         Args:
             request (Request): La solicitud HTTP.
             pk (int): El identificador de la sala.
@@ -213,6 +231,9 @@ class RoomViewSet(viewsets.GenericViewSet):
     def rooms_by_department(self, request):
         """
         Lista todas las salas por departamento.
+
+        Permisos requeridos:
+            - El usuario debe ser administrador o doctor.
 
         Parámetros:
             department (string): El id del departamento.

@@ -1,3 +1,4 @@
+from apps.users.api.permissions.user_permissions import IsUserOwner
 from apps.users.api.serializers.user_serializer import (
     PasswordSerializer,
     UpdateUserSerializer,
@@ -49,10 +50,13 @@ class UserViewSet(viewsets.GenericViewSet):
     # detail=True si es para un solo objeto, detail=False si es para todos los objetos
     # si se usa url_path se debe especificar la url completa
     @method_permission_classes([IsAdministratorOrDoctorOrPatient])
-    @action(detail=True, methods=["post"])
-    def set_password(self, request, pk=None):
+    @action(detail=False, methods=["post"])
+    def set_password(self, request):
         """
         Establece una nueva contraseña para el usuario.
+
+        Permisos requeridos:
+            - El usuario debe ser administrador, médico o paciente.
 
         Args:
             request (Request): La solicitud HTTP.
@@ -61,7 +65,7 @@ class UserViewSet(viewsets.GenericViewSet):
         Returns:
             Response: La respuesta que indica si se ha actualizado la contraseña con éxito o si ha habido errores.
         """
-        user = self.get_object(pk)
+        user = self.request.user
         password_serializer = PasswordSerializer(
             data=request.data, context={"request": request}
         )
@@ -83,6 +87,9 @@ class UserViewSet(viewsets.GenericViewSet):
         """
         Lista todos los usuarios disponibles.
 
+        Permisos requeridos:
+            - El usuario debe ser administrador.
+
         Args:
             request (Request): La solicitud HTTP.
 
@@ -92,12 +99,6 @@ class UserViewSet(viewsets.GenericViewSet):
         Permissions:
             - users.list_user: Permite listar usuarios.
         """
-        if not request.user.has_perm("users.list_user"):
-            return Response(
-                {"detail": "No tiene permisos para listar usuarios"},
-                status=status.HTTP_403_FORBIDDEN,
-            )
-
         users = self.get_queryset()
         users_serializer = self.list_serializer_class(users, many=True)
         return Response(users_serializer.data, status=status.HTTP_200_OK)
@@ -106,6 +107,9 @@ class UserViewSet(viewsets.GenericViewSet):
     def create(self, request):
         """
         Crea un nuevo usuario.
+
+        Permisos requeridos:
+            - El usuario debe ser administrador.
 
         Args:
             request (Request): La solicitud HTTP.
@@ -116,12 +120,6 @@ class UserViewSet(viewsets.GenericViewSet):
         Permissions:
             - users.add_user: Permite crear usuarios.
         """
-        if not request.user.has_perm("users.add_user"):
-            return Response(
-                {"detail": "No tiene permisos para registrar usuarios"},
-                status=status.HTTP_403_FORBIDDEN,
-            )
-
         user_serializer = self.serializer_class(data=request.data)
         if user_serializer.is_valid():
             user = user_serializer.save()
@@ -137,10 +135,14 @@ class UserViewSet(viewsets.GenericViewSet):
             status=status.HTTP_400_BAD_REQUEST,
         )
 
-    @method_permission_classes([IsAdministratorOrDoctorOrPatient])
+    @method_permission_classes([IsAdministratorOrDoctorOrPatient, IsUserOwner])
     def retrieve(self, request, pk=None):
         """
         Recupera los detalles de un usuario específico.
+
+        Permisos requeridos:
+            - El usuario debe ser administrador, médico o paciente.
+            - El usuario debe ser el dueño del usuario (en el caso de paciente y de médico).
 
         Args:
             request (Request): La solicitud HTTP.
@@ -152,20 +154,18 @@ class UserViewSet(viewsets.GenericViewSet):
         Permissions:
             - users.get_user: Permite ver un usuario.
         """
-        if not request.user.has_perm("users.get_user"):
-            return Response(
-                {"detail": "No tiene permisos para ver este usuario"},
-                status=status.HTTP_403_FORBIDDEN,
-            )
-
         user = self.get_object(pk)
         user_serializer = self.serializer_class(user)
         return Response(user_serializer.data)
 
-    @method_permission_classes([IsAdministratorOrDoctorOrPatient])
+    @method_permission_classes([IsAdministratorOrDoctorOrPatient, IsUserOwner])
     def update(self, request, pk=None):
         """
         Actualiza los detalles de un usuario existente.
+
+        Permisos requeridos:
+            - El usuario debe ser administrador, médico o paciente.
+            - El usuario debe ser el dueño del usuario (en el caso de paciente y de médico).
 
         Args:
             request (Request): La solicitud HTTP.
@@ -177,12 +177,6 @@ class UserViewSet(viewsets.GenericViewSet):
         Permissions:
             - users.change_user: Permite actualizar un usuario.
         """
-        if not request.user.has_perm("users.change_user"):
-            return Response(
-                {"detail": "No tiene permisos para actualizar este usuario"},
-                status=status.HTTP_403_FORBIDDEN,
-            )
-
         user = self.get_object(pk)
         user_serializer = UpdateUserSerializer(user, data=request.data)
         if user_serializer.is_valid():
@@ -205,6 +199,9 @@ class UserViewSet(viewsets.GenericViewSet):
         """
         Elimina un usuario existente.
 
+        Permisos requeridos:
+            - El usuario debe ser administrador.
+
         Args:
             request (Request): La solicitud HTTP.
             pk (int): El ID del usuario a eliminar.
@@ -215,12 +212,6 @@ class UserViewSet(viewsets.GenericViewSet):
         Permissions:
             - users.delete_user: Permite eliminar un usuario.
         """
-        if not request.user.has_perm("users.delete_user"):
-            return Response(
-                {"detail": "No tiene permisos para eliminar este usuario"},
-                status=status.HTTP_403_FORBIDDEN,
-            )
-
         user_destroy = self.model.objects.filter(id=pk).update(is_active=False)
         if user_destroy == 1:  # Verifica si se eliminó el usuario
             return Response({"message": "Usuario eliminado correctamente"})

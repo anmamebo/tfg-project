@@ -1,6 +1,6 @@
 from apps.schedules.api.serializers.schedule_serializer import ScheduleSerializer
 from apps.schedules.models import Schedule
-from config.permissions import IsAdministratorOrDoctor
+from config.permissions import IsDoctor
 from django.shortcuts import get_object_or_404
 from rest_framework import status, viewsets
 from rest_framework.decorators import action
@@ -34,11 +34,14 @@ class ScheduleViewSet(viewsets.GenericViewSet):
             self.queryset = self.model.objects.filter(state=True).all()
         return self.queryset
 
-    @method_permission_classes([IsAdministratorOrDoctor])
+    @method_permission_classes([IsDoctor])
     @action(detail=False, methods=["get"])
     def get_by_doctor(self, request):
         """
         Recupera los horarios de un médico, siempre y cuando el usuario sea un médico.
+
+        Permisos requeridos:
+            - El usuario debe ser médico.
 
         Args:
             request (Request): La solicitud HTTP.
@@ -47,12 +50,6 @@ class ScheduleViewSet(viewsets.GenericViewSet):
             Response: La respuesta que contiene los horarios del médico.
         """
         doctor = getattr(request.user, "doctor", None)
-
-        if not doctor:
-            return Response(
-                {"message": "El usuario no es un médico."},
-                status=status.HTTP_400_BAD_REQUEST,
-            )
 
         schedules = self.get_queryset().filter(doctor=doctor).order_by("start_time")
         serializer = self.get_serializer(schedules, many=True)

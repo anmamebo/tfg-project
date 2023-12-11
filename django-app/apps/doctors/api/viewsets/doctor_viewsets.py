@@ -1,3 +1,4 @@
+from apps.doctors.api.permissions.doctor_permissions import IsSelfDoctor
 from apps.doctors.api.serializers.doctor_serializer import (
     CreateDoctorSerializer,
     DoctorInDepartmentListSerializer,
@@ -47,6 +48,9 @@ class DoctorViewSet(viewsets.GenericViewSet):
         """
         Lista todos los médicos.
 
+        Permisos requeridos:
+            - El usuario debe ser administrador o médico.
+
         Parámetros opcionales:
             state (bool): El estado de los médicos a listar.
             search (str): Una cadena de texto para buscar médicos.
@@ -78,6 +82,9 @@ class DoctorViewSet(viewsets.GenericViewSet):
     def create(self, request):
         """
         Crea un nuevo médico con usuario y contraseña generados automáticamente.
+
+        Permisos requeridos:
+            - El usuario debe ser administrador.
 
         Args:
             request (Request): La solicitud HTTP.
@@ -116,10 +123,14 @@ class DoctorViewSet(viewsets.GenericViewSet):
             status=status.HTTP_400_BAD_REQUEST,
         )
 
-    @method_permission_classes([IsAdministratorOrDoctor])
+    @method_permission_classes([IsAdministratorOrDoctor, IsSelfDoctor])
     def retrieve(self, request, pk=None):
         """
         Recupera un médico.
+
+        Permisos requeridos:
+            - El usuario debe ser administrador o médico.
+            - El usuario debe ser el mismo médico (en el caso de ser médico).
 
         Args:
             request (Request): La solicitud HTTP.
@@ -132,12 +143,16 @@ class DoctorViewSet(viewsets.GenericViewSet):
         doctor_serializer = self.serializer_class(doctor)
         return Response(doctor_serializer.data, status=status.HTTP_200_OK)
 
-    @method_permission_classes([IsAdministratorOrDoctor])
+    @method_permission_classes([IsAdministratorOrDoctor, IsSelfDoctor])
     def update(self, request, pk=None):
         """
         Actualiza un médico, primero actualiza los datos del usuario
         y luego los datos del médico, también actualiza los departamentos
         y especialidades médicas del médico.
+
+        Permisos requeridos:
+            - El usuario debe ser administrador o médico.
+            - El usuario debe ser el mismo médico (en el caso de ser médico).
 
         Args:
             request (Request): La solicitud HTTP.
@@ -196,6 +211,9 @@ class DoctorViewSet(viewsets.GenericViewSet):
         """
         Elimina un médico cambiando su estado a False.
 
+        Permisos requeridos:
+            - El usuario debe ser administrador.
+
         Args:
             request (Request): La solicitud HTTP.
             pk (int): El identificador del médico.
@@ -229,6 +247,9 @@ class DoctorViewSet(viewsets.GenericViewSet):
         """
         Activa un médico cambiando su estado a True.
 
+        Permisos requeridos:
+            - El usuario debe ser administrador.
+
         Args:
             request (Request): La solicitud HTTP.
             pk (int): El identificador del médico.
@@ -260,6 +281,9 @@ class DoctorViewSet(viewsets.GenericViewSet):
     def doctors_by_department(self, request):
         """
         Lista todos los médicos por departamento.
+
+        Permisos requeridos:
+            - El usuario debe ser administrador o médico.
 
         Parámetros:
             department (string): El id del departamento.

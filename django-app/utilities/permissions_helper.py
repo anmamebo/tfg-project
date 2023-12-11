@@ -48,6 +48,11 @@ def method_permission_classes(classes):
             """
             self.permission_classes = classes
             self.check_permissions(self.request)
+
+            if "pk" in kwargs:
+                obj = self.get_object(kwargs["pk"])
+                self.check_object_permissions(self.request, obj)
+
             return func(self, *args, **kwargs)
 
         return decorator_func

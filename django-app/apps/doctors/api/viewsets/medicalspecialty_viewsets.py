@@ -42,6 +42,9 @@ class MedicalSpecialtyViewSet(viewsets.GenericViewSet):
         """
         Lista todas las especialidades médicas.
 
+        Permisos requeridos:
+            - El usuario debe ser administrador o doctor.
+
         Args:
             request (Request): La solicitud HTTP.
 

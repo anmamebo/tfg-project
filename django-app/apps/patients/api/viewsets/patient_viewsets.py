@@ -1,3 +1,4 @@
+from apps.patients.api.permissions.patient_permissions import IsSelfPatient
 from apps.patients.api.serializers.patient_serializer import (
     CreatePatientSerializer,
     PatientSerializer,
@@ -8,7 +9,6 @@ from config.permissions import (
     IsAdministrator,
     IsAdministratorOrDoctor,
     IsAdministratorOrDoctorOrPatient,
-    IsAdministratorOrPatient,
 )
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
@@ -52,6 +52,9 @@ class PatientViewSet(viewsets.GenericViewSet):
         """
         Lista todos los pacientes.
 
+        Permisos requeridos:
+            - El usuario debe ser administrador o doctor.
+
         Args:
             request (Request): La solicitud HTTP.
 
@@ -78,6 +81,9 @@ class PatientViewSet(viewsets.GenericViewSet):
     def create(self, request):
         """
         Crea un nuevo paciente con usuario y contraseña generados automáticamente.
+
+        Permisos requeridos:
+            - El usuario debe ser administrador o doctor.
 
         Args:
             request (Request): La solicitud HTTP.
@@ -110,10 +116,14 @@ class PatientViewSet(viewsets.GenericViewSet):
             status=status.HTTP_400_BAD_REQUEST,
         )
 
-    @method_permission_classes([IsAdministratorOrDoctorOrPatient])
+    @method_permission_classes([IsAdministratorOrDoctorOrPatient, IsSelfPatient])
     def retrieve(self, request, pk=None):
         """
         Recupera los detalles de un paciente específico.
+
+        Permisos requeridos:
+            - El usuario debe ser administrador, doctor o paciente.
+            - El usuario debe ser el paciente que se está consultando (en el caso de paciente).
 
         Args:
             request (Request): La solicitud HTTP.
@@ -126,11 +136,15 @@ class PatientViewSet(viewsets.GenericViewSet):
         patient_serializer = self.serializer_class(patient)
         return Response(patient_serializer.data)
 
-    @method_permission_classes([IsAdministratorOrDoctorOrPatient])
+    @method_permission_classes([IsAdministratorOrDoctorOrPatient, IsSelfPatient])
     def update(self, request, pk=None):
         """
         Actualiza los detalles de un paciente existente, primero actualiza los datos del usuario
         y luego los del paciente.
+
+        Permisos requeridos:
+            - El usuario debe ser administrador, doctor o paciente.
+            - El usuario debe ser el paciente que se está consultando (en el caso de paciente).
 
         Args:
             request (Request): La solicitud HTTP.
@@ -180,6 +194,9 @@ class PatientViewSet(viewsets.GenericViewSet):
         """
         Elimina un paciente cambiando su estado a False.
 
+        Permisos requeridos:
+            - El usuario debe ser administrador.
+
         Args:
             request (Request): La solicitud HTTP.
             pk (int): El ID del paciente.
@@ -216,6 +233,9 @@ class PatientViewSet(viewsets.GenericViewSet):
     def activate(self, request, pk=None):
         """
         Activa un paciente cambiando su estado a True.
+
+        Permisos requeridos:
+            - El usuario debe ser administrador.
 
         Args:
             request (Request): La solicitud HTTP.

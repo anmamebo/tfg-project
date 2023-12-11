@@ -43,6 +43,9 @@ class DepartmentViewSet(viewsets.GenericViewSet):
         """
         Lista todos los departamentos.
 
+        Permisos requeridos:
+            - El usuario debe ser administrador o doctor.
+
         Parámetros opcionales:
             state (bool): El estado de los departamentos a listar.
             search (str): Una cadena de texto para buscar departamentos.
@@ -78,6 +81,9 @@ class DepartmentViewSet(viewsets.GenericViewSet):
         """
         Crea un departamento.
 
+        Permisos requeridos:
+            - El usuario debe ser administrador.
+
         Args:
             request (Request): La solicitud HTTP.
 
@@ -105,6 +111,9 @@ class DepartmentViewSet(viewsets.GenericViewSet):
         """
         Obtiene un departamento.
 
+        Permisos requeridos:
+            - El usuario debe ser administrador o doctor.
+
         Args:
             request (Request): La solicitud HTTP.
             pk (int): El id del departamento a obtener.
@@ -120,6 +129,9 @@ class DepartmentViewSet(viewsets.GenericViewSet):
     def update(self, request, pk=None):
         """
         Actualiza un departamento.
+
+        Permisos requeridos:
+            - El usuario debe ser administrador.
 
         Args:
             request (Request): La solicitud HTTP.
@@ -150,6 +162,9 @@ class DepartmentViewSet(viewsets.GenericViewSet):
         """
         Elimina un departamento cambiando su estado a False.
 
+        Permisos requeridos:
+            - El usuario debe ser administrador.
+
         Args:
             request (Request): La solicitud HTTP.
             pk (int): El id del departamento a eliminar.
@@ -176,6 +191,9 @@ class DepartmentViewSet(viewsets.GenericViewSet):
     def activate(self, request, pk=None):
         """
         Activa un departamento cambiando su estado a True.
+
+        Permisos requeridos:
+            - El usuario debe ser administrador.
 
         Args:
             request (Request): La solicitud HTTP.

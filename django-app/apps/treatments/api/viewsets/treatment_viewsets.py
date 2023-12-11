@@ -1,10 +1,17 @@
+from apps.appointments.api.permissions.appointment_permissions import (
+    IsAppointmentPatient,
+)
 from apps.appointments.models import Appointment
+from apps.treatments.api.permissions.treatment_permissions import (
+    IsTreatmentPatient,
+    isTreatmentDoctor,
+)
 from apps.treatments.api.serializers.treatment_serializer import (
     TreatmentListSerializer,
     TreatmentSerializer,
 )
 from apps.treatments.models import Treatment
-from config.permissions import IsAdministratorOrDoctorOrPatient, IsDoctor
+from config.permissions import IsAdministratorOrDoctorOrPatient, IsDoctor, IsPatient
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from rest_framework import status, viewsets
@@ -52,6 +59,9 @@ class TreatmentViewSet(viewsets.GenericViewSet):
         """
         Crea un tratamiento.
 
+        Permisos requeridos:
+            - El usuario debe ser médico.
+
         Args:
             request (Request): La solicitud HTTP.
 
@@ -76,10 +86,14 @@ class TreatmentViewSet(viewsets.GenericViewSet):
             status=status.HTTP_400_BAD_REQUEST,
         )
 
-    @method_permission_classes([IsAdministratorOrDoctorOrPatient])
+    @method_permission_classes([IsAdministratorOrDoctorOrPatient, IsTreatmentPatient])
     def retrieve(self, request, pk=None):
         """
         Recupera un tratamiento.
+
+        Permisos requeridos:
+            - El usuario debe ser administrador, médico o paciente.
+            - El usuario debe ser el paciente del tratamiento (en el caso de paciente).
 
         Args:
             request (Request): La solicitud HTTP.
@@ -92,10 +106,14 @@ class TreatmentViewSet(viewsets.GenericViewSet):
         serializer = self.serializer_class(treatment)
         return Response(serializer.data)
 
-    @method_permission_classes([IsDoctor])
+    @method_permission_classes([IsDoctor, isTreatmentDoctor])
     def update(self, request, pk=None):
         """
         Actualiza un tratamiento.
+
+        Permisos requeridos:
+            - El usuario debe ser médico.
+            - El usuario debe ser el médico del tratamiento.
 
         Args:
             request (Request): La solicitud HTTP.
@@ -123,11 +141,15 @@ class TreatmentViewSet(viewsets.GenericViewSet):
             status=status.HTTP_400_BAD_REQUEST,
         )
 
-    @method_permission_classes([IsAdministratorOrDoctorOrPatient])
+    @method_permission_classes([IsAdministratorOrDoctorOrPatient, IsAppointmentPatient])
     @action(detail=False, methods=["get"])
     def list_for_appointment(self, request):
         """
         Lista todos los tratamientos de una cita.
+
+        Permisos requeridos:
+            - El usuario debe ser administrador, médico o paciente.
+            - El usuario debe ser el paciente de la cita (en el caso de paciente).
 
         Parámetros:
             appointment_id (str): El identificador de la cita.
@@ -162,11 +184,14 @@ class TreatmentViewSet(viewsets.GenericViewSet):
         serializer = self.list_serializer_class(treatments, many=True)
         return Response(serializer.data)
 
-    @method_permission_classes([IsAdministratorOrDoctorOrPatient])
+    @method_permission_classes([IsPatient])
     @action(detail=False, methods=["get"])
     def list_for_patient(self, request):
         """
         Lista todos los tratamientos de un paciente.
+
+        Permisos requeridos:
+            - El usuario debe ser paciente.
 
         Parámetros opcionales:
             status (list): La lista de estados de los tratamientos.
@@ -181,13 +206,6 @@ class TreatmentViewSet(viewsets.GenericViewSet):
             Response: La respuesta que contiene la lista de tratamientos.
         """
         patient = getattr(request.user, "patient", None)
-
-        if not patient:
-            return Response(
-                {"message": "El usuario no es un paciente."},
-                status=status.HTTP_400_BAD_REQUEST,
-            )
-
         treatments = self.get_queryset().filter(patient=patient).order_by("start_date")
 
         desired_statuses = request.GET.getlist("status", None)
@@ -207,12 +225,16 @@ class TreatmentViewSet(viewsets.GenericViewSet):
         serializer = self.list_serializer_class(treatments, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-    @method_permission_classes([IsAdministratorOrDoctorOrPatient])
+    @method_permission_classes([IsAdministratorOrDoctorOrPatient, IsTreatmentPatient])
     @action(detail=True, methods=["put"])
     def update_status(self, request, pk=None):
         """
         Actualiza el estado de un tratamiento, siempre y cuando
         la transición de estado sea válida.
+
+        Permisos requeridos:
+            - El usuario debe ser administrador, médico o paciente.
+            - El usuario debe ser el paciente del tratamiento (en el caso de paciente).
 
         Args:
             request (Request): La solicitud HTTP.

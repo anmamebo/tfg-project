@@ -1,3 +1,4 @@
+from apps.patients.api.permissions.address_permissions import IsAddressOwner
 from apps.patients.api.serializers.address_serializer import AddressSerializer
 from apps.patients.models import Address, Patient
 from config.permissions import IsAdministratorOrDoctorOrPatient
@@ -41,6 +42,9 @@ class AddressViewSet(viewsets.GenericViewSet):
         Crea una nueva dirección y la asocia a un paciente,
         para ello se debe enviar el ID del paciente.
 
+        Permisos requeridos:
+            - El usuario debe ser administrador, médico o paciente.
+
         Args:
             request (Request): La solicitud HTTP.
 
@@ -75,10 +79,14 @@ class AddressViewSet(viewsets.GenericViewSet):
             status=status.HTTP_400_BAD_REQUEST,
         )
 
-    @method_permission_classes([IsAdministratorOrDoctorOrPatient])
+    @method_permission_classes([IsAdministratorOrDoctorOrPatient, IsAddressOwner])
     def update(self, request, pk=None):
         """
         Actualiza los detalles de una dirección existente.
+
+        Permisos requeridos:
+            - El usuario debe ser administrador, médico o paicente.
+            - El usuario debe ser el dueño de la dirección (en el caso de paciente).
 
         Args:
             request (Request): La solicitud HTTP.
