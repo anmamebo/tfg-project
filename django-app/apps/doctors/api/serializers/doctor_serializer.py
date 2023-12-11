@@ -1,10 +1,8 @@
-from django.contrib.auth.models import Group
-
-from rest_framework import serializers
-
+from apps.departments.models import Department
 from apps.doctors.models import Doctor, MedicalSpecialty
 from apps.users.models import User
-from apps.departments.models import Department
+from django.contrib.auth.models import Group
+from rest_framework import serializers
 
 
 class UserDoctorSerializer(serializers.ModelSerializer):

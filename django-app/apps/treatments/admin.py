@@ -1,6 +1,5 @@
-from django.contrib import admin
-
 from apps.treatments.models import Treatment
+from django.contrib import admin
 
 
 class TreatmentAdmin(admin.ModelAdmin):

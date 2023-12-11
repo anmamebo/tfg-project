@@ -1,13 +1,12 @@
-from rest_framework import serializers
-
 from apps.appointments.models import Appointment
-from apps.schedules.models import Schedule
-from apps.patients.api.serializers.patient_serializer import PatientSerializer
+from apps.departments.api.serializers.room_serializer import RoomSerializer
 from apps.doctors.api.serializers.doctor_serializer import DoctorSerializer
 from apps.doctors.api.serializers.medicalspecialty_serializer import (
     MedicalSpecialtySerializer,
 )
-from apps.departments.api.serializers.room_serializer import RoomSerializer
+from apps.patients.api.serializers.patient_serializer import PatientSerializer
+from apps.schedules.models import Schedule
+from rest_framework import serializers
 
 
 class ScheduleAppointmentSerializer(serializers.ModelSerializer):

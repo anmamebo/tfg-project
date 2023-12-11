@@ -1,7 +1,6 @@
-from rest_framework import serializers
-
-from apps.schedules.models import Schedule
 from apps.doctors.models import Doctor
+from apps.schedules.models import Schedule
+from rest_framework import serializers
 
 
 class DoctorScheduleSerializer(serializers.ModelSerializer):

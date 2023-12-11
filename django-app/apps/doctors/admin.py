@@ -1,6 +1,5 @@
-from django.contrib import admin
-
 from apps.doctors.models import Doctor, MedicalSpecialty
+from django.contrib import admin
 
 
 class MedicalSpecialtyFilter(admin.SimpleListFilter):

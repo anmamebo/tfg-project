@@ -1,6 +1,5 @@
+from apps.patients.models import Address, Patient
 from django.contrib import admin
-
-from apps.patients.models import Patient, Address
 
 
 class AddressAdmin(admin.ModelAdmin):

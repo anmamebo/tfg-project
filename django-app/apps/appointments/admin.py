@@ -1,6 +1,5 @@
-from django.contrib import admin
-
 from apps.appointments.models import Appointment
+from django.contrib import admin
 
 
 class AppointmentAdmin(admin.ModelAdmin):

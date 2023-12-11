@@ -1,6 +1,5 @@
-from django.contrib import admin
-
 from apps.departments.models import Department, Room
+from django.contrib import admin
 
 
 class DepartmentAdmin(admin.ModelAdmin):

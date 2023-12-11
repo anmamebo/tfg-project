@@ -1,6 +1,5 @@
-from rest_framework.routers import DefaultRouter
-
 from apps.schedules.api.viewsets.schedule_viewsets import ScheduleViewSet
+from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
 

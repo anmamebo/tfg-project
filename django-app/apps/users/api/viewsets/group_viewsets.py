@@ -1,17 +1,13 @@
-from django.shortcuts import get_object_or_404
+from apps.users.api.serializers.group_serializer import (
+    GroupListSerializer,
+    GroupSerializer,
+)
+from config.permissions import IsAdministrator
 from django.contrib.auth.models import Group
-
+from django.shortcuts import get_object_or_404
 from rest_framework import status, viewsets
 from rest_framework.response import Response
-
 from utilities.permissions_helper import method_permission_classes
-
-from config.permissions import IsAdministrator
-
-from apps.users.api.serializers.group_serializer import (
-    GroupSerializer,
-    GroupListSerializer,
-)
 
 
 class GroupViewSet(viewsets.GenericViewSet):

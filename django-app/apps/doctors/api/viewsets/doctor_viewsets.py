@@ -1,24 +1,19 @@
-from django.db.models import Q
-from django.shortcuts import get_object_or_404
-
-from rest_framework.response import Response
-from rest_framework import status
-from rest_framework import viewsets
-from rest_framework.decorators import action
-
-from config.permissions import IsAdministrator, IsAdministratorOrDoctor
-
-from utilities.permissions_helper import method_permission_classes
-from utilities.password_generator import generate_password
-from utilities.doctor_username_generator import generate_doctor_username
-
-from apps.doctors.models import Doctor
 from apps.doctors.api.serializers.doctor_serializer import (
-    DoctorSerializer,
     CreateDoctorSerializer,
     DoctorInDepartmentListSerializer,
+    DoctorSerializer,
 )
+from apps.doctors.models import Doctor
 from apps.users.api.serializers.user_serializer import UserSerializer
+from config.permissions import IsAdministrator, IsAdministratorOrDoctor
+from django.db.models import Q
+from django.shortcuts import get_object_or_404
+from rest_framework import status, viewsets
+from rest_framework.decorators import action
+from rest_framework.response import Response
+from utilities.doctor_username_generator import generate_doctor_username
+from utilities.password_generator import generate_password
+from utilities.permissions_helper import method_permission_classes
 
 
 class DoctorViewSet(viewsets.GenericViewSet):

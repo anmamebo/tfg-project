@@ -1,7 +1,6 @@
-from rest_framework.routers import DefaultRouter
-
 from apps.departments.api.viewsets.department_viewsets import DepartmentViewSet
 from apps.departments.api.viewsets.room_viewsets import RoomViewSet
+from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
 

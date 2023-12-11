@@ -1,16 +1,13 @@
-from django.utils import timezone
-from django.contrib.auth import authenticate
-
-from rest_framework import status
-from rest_framework.response import Response
-from rest_framework.generics import GenericAPIView
-
-from apps.users.models import User
 from apps.users.api.serializers.user_serializer import (
     CustomTokenObtainPairSerializer,
     CustomUserSerializer,
 )
-
+from apps.users.models import User
+from django.contrib.auth import authenticate
+from django.utils import timezone
+from rest_framework import status
+from rest_framework.generics import GenericAPIView
+from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import TokenObtainPairView
 

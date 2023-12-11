@@ -1,8 +1,7 @@
-from rest_framework import serializers
-
-from apps.treatments.models import Treatment
 from apps.doctors.models import Doctor
+from apps.treatments.models import Treatment
 from apps.users.models import User
+from rest_framework import serializers
 
 
 class TreatmentSerializer(serializers.ModelSerializer):

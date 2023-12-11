@@ -1,15 +1,10 @@
-from django.shortcuts import get_object_or_404
-
-from rest_framework.response import Response
-from rest_framework import status
-from rest_framework import viewsets
-
-from utilities.permissions_helper import method_permission_classes
-
-from config.permissions import IsAdministratorOrDoctorOrPatient
-
-from apps.patients.models import Address, Patient
 from apps.patients.api.serializers.address_serializer import AddressSerializer
+from apps.patients.models import Address, Patient
+from config.permissions import IsAdministratorOrDoctorOrPatient
+from django.shortcuts import get_object_or_404
+from rest_framework import status, viewsets
+from rest_framework.response import Response
+from utilities.permissions_helper import method_permission_classes
 
 
 class AddressViewSet(viewsets.GenericViewSet):

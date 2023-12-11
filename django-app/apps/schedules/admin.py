@@ -1,6 +1,5 @@
-from django.contrib import admin
-
 from apps.schedules.models import Schedule
+from django.contrib import admin
 
 
 class ScheduleAdmin(admin.ModelAdmin):

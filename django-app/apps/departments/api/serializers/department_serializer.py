@@ -1,9 +1,8 @@
-from rest_framework import serializers
-
 from apps.departments.models import Department, Room
 from apps.doctors.api.serializers.doctor_serializer import (
     DoctorInDepartmentListSerializer,
 )
+from rest_framework import serializers
 
 
 class DepartmentSerializer(serializers.ModelSerializer):

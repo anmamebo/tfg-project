@@ -1,15 +1,11 @@
+from apps.users.api.serializers.permission_serializer import PermissionSerializer
+from config.permissions import IsAdministrator
+from django.contrib.auth.models import Permission
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
-from django.contrib.auth.models import Permission
-
 from rest_framework import status, viewsets
 from rest_framework.response import Response
-
 from utilities.permissions_helper import method_permission_classes
-
-from config.permissions import IsAdministrator
-
-from apps.users.api.serializers.permission_serializer import PermissionSerializer
 
 
 class PermissionViewSet(viewsets.GenericViewSet):

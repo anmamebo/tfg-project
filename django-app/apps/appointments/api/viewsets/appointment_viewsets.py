@@ -1,28 +1,23 @@
 from datetime import datetime
+
 import pytz
-
-from django.db.models import Q, F
-from django.shortcuts import get_object_or_404
-
-from rest_framework.response import Response
-from rest_framework import status, viewsets
-from rest_framework.decorators import action
-
-from config.settings import TIME_ZONE
-from config.permissions import (
-    IsAdministrator,
-    IsDoctor,
-    IsPatient,
-    IsAdministratorOrDoctor,
-)
-
-from utilities.permissions_helper import method_permission_classes
-
-from apps.appointments.models import Appointment
 from apps.appointments.api.serializers.appointment_serializer import (
     AppointmentListSerializer,
 )
-
+from apps.appointments.models import Appointment
+from config.permissions import (
+    IsAdministrator,
+    IsAdministratorOrDoctor,
+    IsDoctor,
+    IsPatient,
+)
+from config.settings import TIME_ZONE
+from django.db.models import F, Q
+from django.shortcuts import get_object_or_404
+from rest_framework import status, viewsets
+from rest_framework.decorators import action
+from rest_framework.response import Response
+from utilities.permissions_helper import method_permission_classes
 
 tz = pytz.timezone(TIME_ZONE)  # Zona horaria de la aplicación
 

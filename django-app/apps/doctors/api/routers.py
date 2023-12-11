@@ -1,7 +1,6 @@
-from rest_framework.routers import DefaultRouter
-
 from apps.doctors.api.viewsets.doctor_viewsets import DoctorViewSet
 from apps.doctors.api.viewsets.medicalspecialty_viewsets import MedicalSpecialtyViewSet
+from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
 

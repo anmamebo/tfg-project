@@ -1,27 +1,22 @@
-from django.db.models import Q
-from django.shortcuts import get_object_or_404
-
-from rest_framework.response import Response
-from rest_framework import status
-from rest_framework import viewsets
-from rest_framework.decorators import action
-
+from apps.patients.api.serializers.patient_serializer import (
+    CreatePatientSerializer,
+    PatientSerializer,
+)
+from apps.patients.models import Patient
+from apps.users.api.serializers.user_serializer import UserSerializer
 from config.permissions import (
     IsAdministrator,
-    IsAdministratorOrPatient,
     IsAdministratorOrDoctor,
     IsAdministratorOrDoctorOrPatient,
+    IsAdministratorOrPatient,
 )
-
-from utilities.permissions_helper import method_permission_classes
+from django.db.models import Q
+from django.shortcuts import get_object_or_404
+from rest_framework import status, viewsets
+from rest_framework.decorators import action
+from rest_framework.response import Response
 from utilities.password_generator import generate_password
-
-from apps.patients.models import Patient
-from apps.patients.api.serializers.patient_serializer import (
-    PatientSerializer,
-    CreatePatientSerializer,
-)
-from apps.users.api.serializers.user_serializer import UserSerializer
+from utilities.permissions_helper import method_permission_classes
 
 
 class PatientViewSet(viewsets.GenericViewSet):

@@ -1,25 +1,16 @@
-from django.shortcuts import get_object_or_404
+from apps.appointments.models import Appointment
+from apps.treatments.api.serializers.treatment_serializer import (
+    TreatmentListSerializer,
+    TreatmentSerializer,
+)
+from apps.treatments.models import Treatment
+from config.permissions import IsAdministratorOrDoctorOrPatient, IsDoctor
 from django.db.models import Q
-
-from rest_framework.response import Response
+from django.shortcuts import get_object_or_404
 from rest_framework import status, viewsets
 from rest_framework.decorators import action
-
+from rest_framework.response import Response
 from utilities.permissions_helper import method_permission_classes
-
-from config.permissions import (
-    IsDoctor,
-    IsAdministratorOrDoctor,
-    IsAdministratorOrDoctorOrPatient,
-    IsPatient,
-)
-
-from apps.treatments.models import Treatment
-from apps.treatments.api.serializers.treatment_serializer import (
-    TreatmentSerializer,
-    TreatmentListSerializer,
-)
-from apps.appointments.models import Appointment
 
 
 class TreatmentViewSet(viewsets.GenericViewSet):

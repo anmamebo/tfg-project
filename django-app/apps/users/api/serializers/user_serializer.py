@@ -1,14 +1,10 @@
-from django.contrib.auth.hashers import check_password
-
-from rest_framework import serializers
-
-from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-
-from apps.users.models import User
-
-from apps.patients.api.serializers.patient_serializer import PatientSerializer
 from apps.doctors.api.serializers.doctor_serializer import DoctorSerializer
+from apps.patients.api.serializers.patient_serializer import PatientSerializer
 from apps.users.api.serializers.group_serializer import GroupSerializer
+from apps.users.models import User
+from django.contrib.auth.hashers import check_password
+from rest_framework import serializers
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 # Toma la estructura del modelo para convertirlo en JSON
 # ObjecetSerializer(object, many=True) -> Lista de objetos

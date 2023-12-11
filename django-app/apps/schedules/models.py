@@ -1,7 +1,6 @@
-from django.db import models
-
 from apps.base.models import BaseModel
 from apps.doctors.models import Doctor
+from django.db import models
 
 
 class Schedule(BaseModel):

@@ -1,6 +1,5 @@
-from rest_framework import serializers
-
 from apps.patients.models import Address
+from rest_framework import serializers
 
 
 class AddressSerializer(serializers.ModelSerializer):

@@ -1,22 +1,17 @@
-from django.shortcuts import get_object_or_404
-
-from rest_framework.permissions import DjangoModelPermissions
-from rest_framework import status
-from rest_framework.response import Response
-from rest_framework.decorators import action
-from rest_framework import viewsets
-
-from utilities.permissions_helper import method_permission_classes
-
-from config.permissions import IsAdministratorOrDoctorOrPatient, IsAdministrator
-
-from apps.users.models import User
 from apps.users.api.serializers.user_serializer import (
-    UserSerializer,
-    UserListSerializer,
-    UpdateUserSerializer,
     PasswordSerializer,
+    UpdateUserSerializer,
+    UserListSerializer,
+    UserSerializer,
 )
+from apps.users.models import User
+from config.permissions import IsAdministrator, IsAdministratorOrDoctorOrPatient
+from django.shortcuts import get_object_or_404
+from rest_framework import status, viewsets
+from rest_framework.decorators import action
+from rest_framework.permissions import DjangoModelPermissions
+from rest_framework.response import Response
+from utilities.permissions_helper import method_permission_classes
 
 
 class UserViewSet(viewsets.GenericViewSet):

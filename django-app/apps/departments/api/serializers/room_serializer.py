@@ -1,7 +1,6 @@
-from rest_framework import serializers
-
-from apps.departments.models import Room
 from apps.departments.api.serializers.department_serializer import DepartmentSerializer
+from apps.departments.models import Room
+from rest_framework import serializers
 
 
 class BasicRoomSerializer(serializers.ModelSerializer):

@@ -1,16 +1,11 @@
-from django.shortcuts import get_object_or_404
-
-from rest_framework import status
-from rest_framework.response import Response
-from rest_framework.decorators import action
-from rest_framework import viewsets
-
-from utilities.permissions_helper import method_permission_classes
-
-from config.permissions import IsAdministratorOrDoctor
-
-from apps.schedules.models import Schedule
 from apps.schedules.api.serializers.schedule_serializer import ScheduleSerializer
+from apps.schedules.models import Schedule
+from config.permissions import IsAdministratorOrDoctor
+from django.shortcuts import get_object_or_404
+from rest_framework import status, viewsets
+from rest_framework.decorators import action
+from rest_framework.response import Response
+from utilities.permissions_helper import method_permission_classes
 
 
 class ScheduleViewSet(viewsets.GenericViewSet):

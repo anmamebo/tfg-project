@@ -1,19 +1,15 @@
-from django.db.models import Q
-from django.shortcuts import get_object_or_404
-
-from rest_framework.response import Response
-from rest_framework import status, viewsets
-from rest_framework.decorators import action
-
-from config.permissions import IsAdministrator, IsAdministratorOrDoctor
-
-from utilities.permissions_helper import method_permission_classes
-
-from apps.departments.models import Department
 from apps.departments.api.serializers.department_serializer import (
     DepartmentSerializer,
     DepartmentWithDoctorsSerializer,
 )
+from apps.departments.models import Department
+from config.permissions import IsAdministrator, IsAdministratorOrDoctor
+from django.db.models import Q
+from django.shortcuts import get_object_or_404
+from rest_framework import status, viewsets
+from rest_framework.decorators import action
+from rest_framework.response import Response
+from utilities.permissions_helper import method_permission_classes
 
 
 class DepartmentViewSet(viewsets.GenericViewSet):
