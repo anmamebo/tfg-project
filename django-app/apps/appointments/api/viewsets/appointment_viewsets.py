@@ -9,6 +9,14 @@ from rest_framework import status, viewsets
 from rest_framework.decorators import action
 
 from config.settings import TIME_ZONE
+from config.permissions import (
+    IsAdministrator,
+    IsDoctor,
+    IsPatient,
+    IsAdministratorOrDoctor,
+)
+
+from utilities.permissions_helper import method_permission_classes
 
 from apps.appointments.models import Appointment
 from apps.appointments.api.serializers.appointment_serializer import (
@@ -63,6 +71,7 @@ class AppointmentViewSet(viewsets.GenericViewSet):
             self.queryset = self.model.objects.all().order_by("-created_date")
         return self.queryset
 
+    @method_permission_classes([IsAdministrator])
     def list(self, request):
         """
         Lista todas las citas.
@@ -88,9 +97,10 @@ class AppointmentViewSet(viewsets.GenericViewSet):
         appointments_serializer = self.list_serializer_class(appointments, many=True)
         return Response(appointments_serializer.data, status=status.HTTP_200_OK)
 
+    @method_permission_classes([IsAdministratorOrDoctor])
     def update(self, request, pk=None):
         """
-        Actualiza una cita siempre y cuando el usuario sea un médico y la cita le pertenezca.
+        Actualiza una cita.
 
         Args:
             request (Request): La solicitud HTTP.
@@ -99,15 +109,8 @@ class AppointmentViewSet(viewsets.GenericViewSet):
         Returns:
             Response: La respuesta que contiene la cita.
         """
-        doctor = getattr(request.user, "doctor", None)
-
-        if not doctor:  # Si el usuario no es un médico
-            return Response(
-                {"message": "El usuario no es un médico."},
-                status=status.HTTP_400_BAD_REQUEST,
-            )
-
         appointment = self.get_object(pk)
+        doctor = getattr(request.user, "doctor", None)
 
         if appointment.doctor != doctor:  # Si la cita no pertenece al médico
             return Response(
@@ -132,6 +135,7 @@ class AppointmentViewSet(viewsets.GenericViewSet):
             status=status.HTTP_400_BAD_REQUEST,
         )
 
+    @method_permission_classes([IsDoctor])
     @action(detail=False, methods=["get"])
     def list_for_doctor(self, request):
         """
@@ -149,13 +153,6 @@ class AppointmentViewSet(viewsets.GenericViewSet):
             Response: La respuesta que contiene la lista de citas.
         """
         doctor = getattr(request.user, "doctor", None)
-
-        if not doctor:  # Si el usuario no es un médico
-            return Response(
-                {"message": "El usuario no es un médico."},
-                status=status.HTTP_400_BAD_REQUEST,
-            )
-
         appointments = (
             self.get_queryset().filter(doctor=doctor).order_by("schedule__start_time")
         )  # Filtra las citas del doctor
@@ -177,6 +174,7 @@ class AppointmentViewSet(viewsets.GenericViewSet):
         appointments_serializer = self.list_serializer_class(appointments, many=True)
         return Response(appointments_serializer.data, status=status.HTTP_200_OK)
 
+    @method_permission_classes([IsPatient])
     @action(detail=False, methods=["get"])
     def list_for_patient(self, request):
         """
@@ -195,12 +193,6 @@ class AppointmentViewSet(viewsets.GenericViewSet):
             Response: La respuesta que contiene la lista de citas.
         """
         patient = getattr(request.user, "patient", None)
-
-        if not patient:  # Si el usuario no es un paciente
-            return Response(
-                {"message": "El usuario no es un paciente."},
-                status=status.HTTP_400_BAD_REQUEST,
-            )
 
         # Filtra las citas del paciente y ordena las citas, primero muestra las
         # más cercanas que tienen horario y luego las que no tienen horario por
@@ -233,6 +225,7 @@ class AppointmentViewSet(viewsets.GenericViewSet):
         appointments_serializer = self.list_serializer_class(appointments, many=True)
         return Response(appointments_serializer.data, status=status.HTTP_200_OK)
 
+    @method_permission_classes([IsDoctor])
     @action(detail=True, methods=["get"])
     def retrieve_for_doctor(self, request, pk=None):
         """
@@ -245,15 +238,8 @@ class AppointmentViewSet(viewsets.GenericViewSet):
         Returns:
             Response: La respuesta que contiene la cita.
         """
-        doctor = getattr(request.user, "doctor", None)
-
-        if not doctor:  # Si el usuario no es un médico
-            return Response(
-                {"message": "El usuario no es un médico."},
-                status=status.HTTP_400_BAD_REQUEST,
-            )
-
         appointment = self.get_object(pk)
+        doctor = getattr(request.user, "doctor", None)
 
         if appointment.doctor != doctor:  # Si la cita no pertenece al médico
             return Response(

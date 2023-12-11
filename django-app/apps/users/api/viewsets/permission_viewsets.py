@@ -5,6 +5,10 @@ from django.contrib.auth.models import Permission
 from rest_framework import status, viewsets
 from rest_framework.response import Response
 
+from utilities.permissions_helper import method_permission_classes
+
+from config.permissions import IsAdministrator
+
 from apps.users.api.serializers.permission_serializer import PermissionSerializer
 
 
@@ -34,6 +38,7 @@ class PermissionViewSet(viewsets.GenericViewSet):
             self.queryset = self.model.objects.all()
         return self.queryset
 
+    @method_permission_classes([IsAdministrator])
     def list(self, request):
         """
         Lista todos los permisos.

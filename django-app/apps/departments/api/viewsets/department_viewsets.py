@@ -5,6 +5,10 @@ from rest_framework.response import Response
 from rest_framework import status, viewsets
 from rest_framework.decorators import action
 
+from config.permissions import IsAdministrator, IsAdministratorOrDoctor
+
+from utilities.permissions_helper import method_permission_classes
+
 from apps.departments.models import Department
 from apps.departments.api.serializers.department_serializer import (
     DepartmentSerializer,
@@ -38,6 +42,7 @@ class DepartmentViewSet(viewsets.GenericViewSet):
             self.queryset = self.model.objects.all().order_by("-created_date")
         return self.queryset
 
+    @method_permission_classes([IsAdministratorOrDoctor])
     def list(self, request):
         """
         Lista todos los departamentos.
@@ -72,6 +77,7 @@ class DepartmentViewSet(viewsets.GenericViewSet):
         departments_serializer = self.list_serializer_class(departments, many=True)
         return Response(departments_serializer.data, status=status.HTTP_200_OK)
 
+    @method_permission_classes([IsAdministrator])
     def create(self, request):
         """
         Crea un departamento.
@@ -98,6 +104,7 @@ class DepartmentViewSet(viewsets.GenericViewSet):
             status=status.HTTP_400_BAD_REQUEST,
         )
 
+    @method_permission_classes([IsAdministratorOrDoctor])
     def retrieve(self, request, pk=None):
         """
         Obtiene un departamento.
@@ -113,6 +120,7 @@ class DepartmentViewSet(viewsets.GenericViewSet):
         department_serializer = self.serializer_class(department)
         return Response(department_serializer.data, status=status.HTTP_200_OK)
 
+    @method_permission_classes([IsAdministrator])
     def update(self, request, pk=None):
         """
         Actualiza un departamento.
@@ -141,6 +149,7 @@ class DepartmentViewSet(viewsets.GenericViewSet):
             status=status.HTTP_400_BAD_REQUEST,
         )
 
+    @method_permission_classes([IsAdministrator])
     def destroy(self, request, pk=None):
         """
         Elimina un departamento cambiando su estado a False.
@@ -166,6 +175,7 @@ class DepartmentViewSet(viewsets.GenericViewSet):
             status=status.HTTP_200_OK,
         )
 
+    @method_permission_classes([IsAdministrator])
     @action(detail=True, methods=["put"])
     def activate(self, request, pk=None):
         """

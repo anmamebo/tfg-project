@@ -5,6 +5,15 @@ from rest_framework.response import Response
 from rest_framework import status, viewsets
 from rest_framework.decorators import action
 
+from utilities.permissions_helper import method_permission_classes
+
+from config.permissions import (
+    IsDoctor,
+    IsAdministratorOrDoctor,
+    IsAdministratorOrDoctorOrPatient,
+    IsPatient,
+)
+
 from apps.treatments.models import Treatment
 from apps.treatments.api.serializers.treatment_serializer import (
     TreatmentSerializer,
@@ -47,6 +56,7 @@ class TreatmentViewSet(viewsets.GenericViewSet):
             self.queryset = self.model.objects.all().order_by("-created_date")
         return self.queryset
 
+    @method_permission_classes([IsDoctor])
     def create(self, request):
         """
         Crea un tratamiento.
@@ -75,6 +85,7 @@ class TreatmentViewSet(viewsets.GenericViewSet):
             status=status.HTTP_400_BAD_REQUEST,
         )
 
+    @method_permission_classes([IsAdministratorOrDoctorOrPatient])
     def retrieve(self, request, pk=None):
         """
         Recupera un tratamiento.
@@ -90,6 +101,7 @@ class TreatmentViewSet(viewsets.GenericViewSet):
         serializer = self.serializer_class(treatment)
         return Response(serializer.data)
 
+    @method_permission_classes([IsDoctor])
     def update(self, request, pk=None):
         """
         Actualiza un tratamiento.
@@ -120,6 +132,7 @@ class TreatmentViewSet(viewsets.GenericViewSet):
             status=status.HTTP_400_BAD_REQUEST,
         )
 
+    @method_permission_classes([IsAdministratorOrDoctorOrPatient])
     @action(detail=False, methods=["get"])
     def list_for_appointment(self, request):
         """
@@ -158,6 +171,7 @@ class TreatmentViewSet(viewsets.GenericViewSet):
         serializer = self.list_serializer_class(treatments, many=True)
         return Response(serializer.data)
 
+    @method_permission_classes([IsAdministratorOrDoctorOrPatient])
     @action(detail=False, methods=["get"])
     def list_for_patient(self, request):
         """
@@ -202,6 +216,7 @@ class TreatmentViewSet(viewsets.GenericViewSet):
         serializer = self.list_serializer_class(treatments, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+    @method_permission_classes([IsAdministratorOrDoctorOrPatient])
     @action(detail=True, methods=["put"])
     def update_status(self, request, pk=None):
         """

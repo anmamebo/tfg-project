@@ -6,6 +6,12 @@ from rest_framework import status
 from rest_framework import viewsets
 from rest_framework.decorators import action
 
+from config.permissions import IsAdministrator, IsAdministratorOrDoctor
+
+from utilities.permissions_helper import method_permission_classes
+from utilities.password_generator import generate_password
+from utilities.doctor_username_generator import generate_doctor_username
+
 from apps.doctors.models import Doctor
 from apps.doctors.api.serializers.doctor_serializer import (
     DoctorSerializer,
@@ -13,9 +19,6 @@ from apps.doctors.api.serializers.doctor_serializer import (
     DoctorInDepartmentListSerializer,
 )
 from apps.users.api.serializers.user_serializer import UserSerializer
-
-from utilities.password_generator import generate_password
-from utilities.doctor_username_generator import generate_doctor_username
 
 
 class DoctorViewSet(viewsets.GenericViewSet):
@@ -44,6 +47,7 @@ class DoctorViewSet(viewsets.GenericViewSet):
             self.queryset = self.model.objects.all().order_by("-created_date")
         return self.queryset
 
+    @method_permission_classes([IsAdministratorOrDoctor])
     def list(self, request):
         """
         Lista todos los médicos.
@@ -75,6 +79,7 @@ class DoctorViewSet(viewsets.GenericViewSet):
         doctors_serializer = self.list_serializer_class(doctors, many=True)
         return Response(doctors_serializer.data, status=status.HTTP_200_OK)
 
+    @method_permission_classes([IsAdministrator])
     def create(self, request):
         """
         Crea un nuevo médico con usuario y contraseña generados automáticamente.
@@ -116,6 +121,7 @@ class DoctorViewSet(viewsets.GenericViewSet):
             status=status.HTTP_400_BAD_REQUEST,
         )
 
+    @method_permission_classes([IsAdministratorOrDoctor])
     def retrieve(self, request, pk=None):
         """
         Recupera un médico.
@@ -131,6 +137,7 @@ class DoctorViewSet(viewsets.GenericViewSet):
         doctor_serializer = self.serializer_class(doctor)
         return Response(doctor_serializer.data, status=status.HTTP_200_OK)
 
+    @method_permission_classes([IsAdministratorOrDoctor])
     def update(self, request, pk=None):
         """
         Actualiza un médico, primero actualiza los datos del usuario
@@ -189,6 +196,7 @@ class DoctorViewSet(viewsets.GenericViewSet):
             status=status.HTTP_400_BAD_REQUEST,
         )
 
+    @method_permission_classes([IsAdministrator])
     def destroy(self, request, pk=None):
         """
         Elimina un médico cambiando su estado a False.
@@ -220,6 +228,7 @@ class DoctorViewSet(viewsets.GenericViewSet):
                 status=status.HTTP_200_OK,
             )
 
+    @method_permission_classes([IsAdministrator])
     @action(detail=True, methods=["put"])
     def activate(self, request, pk=None):
         """
@@ -251,6 +260,7 @@ class DoctorViewSet(viewsets.GenericViewSet):
                 {"message": "Médico activado correctamente."}, status=status.HTTP_200_OK
             )
 
+    @method_permission_classes([IsAdministratorOrDoctor])
     @action(detail=False, methods=["get"])
     def doctors_by_department(self, request):
         """

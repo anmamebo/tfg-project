@@ -1,10 +1,13 @@
 from django.shortcuts import get_object_or_404
-from django.core.exceptions import ObjectDoesNotExist
 
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from rest_framework import viewsets
+
+from utilities.permissions_helper import method_permission_classes
+
+from config.permissions import IsAdministratorOrDoctor
 
 from apps.schedules.models import Schedule
 from apps.schedules.api.serializers.schedule_serializer import ScheduleSerializer
@@ -36,6 +39,7 @@ class ScheduleViewSet(viewsets.GenericViewSet):
             self.queryset = self.model.objects.filter(state=True).all()
         return self.queryset
 
+    @method_permission_classes([IsAdministratorOrDoctor])
     @action(detail=False, methods=["get"])
     def get_by_doctor(self, request):
         """

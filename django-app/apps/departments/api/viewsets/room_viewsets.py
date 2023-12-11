@@ -5,6 +5,10 @@ from rest_framework.response import Response
 from rest_framework import status, viewsets
 from rest_framework.decorators import action
 
+from config.permissions import IsAdministrator, IsAdministratorOrDoctor
+
+from utilities.permissions_helper import method_permission_classes
+
 from apps.departments.models import Room
 from apps.departments.api.serializers.room_serializer import (
     RoomSerializer,
@@ -38,6 +42,7 @@ class RoomViewSet(viewsets.GenericViewSet):
             self.queryset = self.model.objects.all().order_by("-created_date")
         return self.queryset
 
+    @method_permission_classes([IsAdministratorOrDoctor])
     def list(self, request):
         """
         Lista todas las salas.
@@ -70,6 +75,7 @@ class RoomViewSet(viewsets.GenericViewSet):
         rooms_serializer = self.list_serializer_class(rooms, many=True)
         return Response(rooms_serializer.data, status=status.HTTP_200_OK)
 
+    @method_permission_classes([IsAdministrator])
     def create(self, request):
         """
         Crea una sala.
@@ -98,6 +104,7 @@ class RoomViewSet(viewsets.GenericViewSet):
             status=status.HTTP_400_BAD_REQUEST,
         )
 
+    @method_permission_classes([IsAdministratorOrDoctor])
     def retrieve(self, request, pk=None):
         """
         Recupera una sala.
@@ -113,6 +120,7 @@ class RoomViewSet(viewsets.GenericViewSet):
         room_serializer = self.serializer_class(room)
         return Response(room_serializer.data, status=status.HTTP_200_OK)
 
+    @method_permission_classes([IsAdministrator])
     def update(self, request, pk=None):
         """
         Actualiza una sala.
@@ -143,6 +151,7 @@ class RoomViewSet(viewsets.GenericViewSet):
             status=status.HTTP_400_BAD_REQUEST,
         )
 
+    @method_permission_classes([IsAdministrator])
     def destroy(self, request, pk=None):
         """
         Elimina una sala cambiando su estado a False.
@@ -173,6 +182,7 @@ class RoomViewSet(viewsets.GenericViewSet):
             status=status.HTTP_200_OK,
         )
 
+    @method_permission_classes([IsAdministrator])
     @action(detail=True, methods=["put"])
     def activate(self, request, pk=None):
         """
@@ -202,6 +212,7 @@ class RoomViewSet(viewsets.GenericViewSet):
             status=status.HTTP_200_OK,
         )
 
+    @method_permission_classes([IsAdministratorOrDoctor])
     @action(detail=False, methods=["get"])
     def rooms_by_department(self, request):
         """

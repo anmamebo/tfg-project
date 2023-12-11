@@ -4,6 +4,10 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import viewsets
 
+from utilities.permissions_helper import method_permission_classes
+
+from config.permissions import IsAdministratorOrDoctorOrPatient
+
 from apps.patients.models import Address, Patient
 from apps.patients.api.serializers.address_serializer import AddressSerializer
 
@@ -36,6 +40,7 @@ class AddressViewSet(viewsets.GenericViewSet):
             self.queryset = self.model.objects.filter(state=True).all()
         return self.queryset
 
+    @method_permission_classes([IsAdministratorOrDoctorOrPatient])
     def create(self, request):
         """
         Crea una nueva dirección y la asocia a un paciente,
@@ -75,6 +80,7 @@ class AddressViewSet(viewsets.GenericViewSet):
             status=status.HTTP_400_BAD_REQUEST,
         )
 
+    @method_permission_classes([IsAdministratorOrDoctorOrPatient])
     def update(self, request, pk=None):
         """
         Actualiza los detalles de una dirección existente.

@@ -4,6 +4,10 @@ from django.contrib.auth.models import Group
 from rest_framework import status, viewsets
 from rest_framework.response import Response
 
+from utilities.permissions_helper import method_permission_classes
+
+from config.permissions import IsAdministrator
+
 from apps.users.api.serializers.group_serializer import (
     GroupSerializer,
     GroupListSerializer,
@@ -36,6 +40,7 @@ class GroupViewSet(viewsets.GenericViewSet):
             self.queryset = self.model.objects.all().order_by("id")
         return self.queryset
 
+    @method_permission_classes([IsAdministrator])
     def list(self, request):
         """
         Lista todos los grupos.
@@ -58,6 +63,7 @@ class GroupViewSet(viewsets.GenericViewSet):
         groups_serializer = self.list_serializer_class(groups, many=True)
         return Response(groups_serializer.data, status=status.HTTP_200_OK)
 
+    @method_permission_classes([IsAdministrator])
     def create(self, request):
         """
         Crea un nuevo grupo.
@@ -84,6 +90,7 @@ class GroupViewSet(viewsets.GenericViewSet):
             status=status.HTTP_400_BAD_REQUEST,
         )
 
+    @method_permission_classes([IsAdministrator])
     def retrieve(self, request, pk=None):
         """
         Recupera los detalles de un grupo específico.
@@ -99,6 +106,7 @@ class GroupViewSet(viewsets.GenericViewSet):
         group_serializer = self.serializer_class(group)
         return Response(group_serializer.data, status=status.HTTP_200_OK)
 
+    @method_permission_classes([IsAdministrator])
     def update(self, request, pk=None):
         """
         Actualiza los detalles de un grupo existente.
@@ -127,6 +135,7 @@ class GroupViewSet(viewsets.GenericViewSet):
             status=status.HTTP_400_BAD_REQUEST,
         )
 
+    @method_permission_classes([IsAdministrator])
     def destroy(self, request, pk=None):
         """
         Elimina un grupo existente.

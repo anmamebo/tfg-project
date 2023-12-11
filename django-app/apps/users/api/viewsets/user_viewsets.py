@@ -6,6 +6,10 @@ from rest_framework.response import Response
 from rest_framework.decorators import action
 from rest_framework import viewsets
 
+from utilities.permissions_helper import method_permission_classes
+
+from config.permissions import IsAdministratorOrDoctorOrPatient, IsAdministrator
+
 from apps.users.models import User
 from apps.users.api.serializers.user_serializer import (
     UserSerializer,
@@ -49,6 +53,7 @@ class UserViewSet(viewsets.GenericViewSet):
 
     # detail=True si es para un solo objeto, detail=False si es para todos los objetos
     # si se usa url_path se debe especificar la url completa
+    @method_permission_classes([IsAdministratorOrDoctorOrPatient])
     @action(detail=True, methods=["post"])
     def set_password(self, request, pk=None):
         """
@@ -78,6 +83,7 @@ class UserViewSet(viewsets.GenericViewSet):
             status=status.HTTP_400_BAD_REQUEST,
         )
 
+    @method_permission_classes([IsAdministrator])
     def list(self, request):
         """
         Lista todos los usuarios disponibles.
@@ -101,6 +107,7 @@ class UserViewSet(viewsets.GenericViewSet):
         users_serializer = self.list_serializer_class(users, many=True)
         return Response(users_serializer.data, status=status.HTTP_200_OK)
 
+    @method_permission_classes([IsAdministrator])
     def create(self, request):
         """
         Crea un nuevo usuario.
@@ -135,6 +142,7 @@ class UserViewSet(viewsets.GenericViewSet):
             status=status.HTTP_400_BAD_REQUEST,
         )
 
+    @method_permission_classes([IsAdministratorOrDoctorOrPatient])
     def retrieve(self, request, pk=None):
         """
         Recupera los detalles de un usuario específico.
@@ -159,6 +167,7 @@ class UserViewSet(viewsets.GenericViewSet):
         user_serializer = self.serializer_class(user)
         return Response(user_serializer.data)
 
+    @method_permission_classes([IsAdministratorOrDoctorOrPatient])
     def update(self, request, pk=None):
         """
         Actualiza los detalles de un usuario existente.
@@ -196,6 +205,7 @@ class UserViewSet(viewsets.GenericViewSet):
             status=status.HTTP_400_BAD_REQUEST,
         )
 
+    @method_permission_classes([IsAdministrator])
     def destroy(self, request, pk=None):
         """
         Elimina un usuario existente.

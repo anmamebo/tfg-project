@@ -6,14 +6,22 @@ from rest_framework import status
 from rest_framework import viewsets
 from rest_framework.decorators import action
 
+from config.permissions import (
+    IsAdministrator,
+    IsAdministratorOrPatient,
+    IsAdministratorOrDoctor,
+    IsAdministratorOrDoctorOrPatient,
+)
+
+from utilities.permissions_helper import method_permission_classes
+from utilities.password_generator import generate_password
+
 from apps.patients.models import Patient
 from apps.patients.api.serializers.patient_serializer import (
     PatientSerializer,
     CreatePatientSerializer,
 )
 from apps.users.api.serializers.user_serializer import UserSerializer
-
-from utilities.password_generator import generate_password
 
 
 class PatientViewSet(viewsets.GenericViewSet):
@@ -44,6 +52,7 @@ class PatientViewSet(viewsets.GenericViewSet):
             self.queryset = self.model.objects.all().order_by("-created_date")
         return self.queryset
 
+    @method_permission_classes([IsAdministratorOrDoctor])
     def list(self, request):
         """
         Lista todos los pacientes.
@@ -70,6 +79,7 @@ class PatientViewSet(viewsets.GenericViewSet):
             patients_serializer = self.list_serializer_class(patients, many=True)
             return Response(patients_serializer.data, status=status.HTTP_200_OK)
 
+    @method_permission_classes([IsAdministratorOrDoctor])
     def create(self, request):
         """
         Crea un nuevo paciente con usuario y contraseña generados automáticamente.
@@ -105,6 +115,7 @@ class PatientViewSet(viewsets.GenericViewSet):
             status=status.HTTP_400_BAD_REQUEST,
         )
 
+    @method_permission_classes([IsAdministratorOrDoctorOrPatient])
     def retrieve(self, request, pk=None):
         """
         Recupera los detalles de un paciente específico.
@@ -120,6 +131,7 @@ class PatientViewSet(viewsets.GenericViewSet):
         patient_serializer = self.serializer_class(patient)
         return Response(patient_serializer.data)
 
+    @method_permission_classes([IsAdministratorOrDoctorOrPatient])
     def update(self, request, pk=None):
         """
         Actualiza los detalles de un paciente existente, primero actualiza los datos del usuario
@@ -168,6 +180,7 @@ class PatientViewSet(viewsets.GenericViewSet):
             status=status.HTTP_400_BAD_REQUEST,
         )
 
+    @method_permission_classes([IsAdministrator])
     def destroy(self, request, pk=None):
         """
         Elimina un paciente cambiando su estado a False.
@@ -203,6 +216,7 @@ class PatientViewSet(viewsets.GenericViewSet):
                 status=status.HTTP_200_OK,
             )
 
+    @method_permission_classes([IsAdministrator])
     @action(detail=True, methods=["put"])
     def activate(self, request, pk=None):
         """

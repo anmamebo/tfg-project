@@ -3,6 +3,10 @@ from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
 from rest_framework import status, viewsets
 
+from config.permissions import IsAdministratorOrDoctor
+
+from utilities.permissions_helper import method_permission_classes
+
 from apps.doctors.models import MedicalSpecialty
 from apps.doctors.api.serializers.medicalspecialty_serializer import (
     MedicalSpecialtySerializer,
@@ -37,6 +41,7 @@ class MedicalSpecialtyViewSet(viewsets.GenericViewSet):
             )
         return self.queryset
 
+    @method_permission_classes([IsAdministratorOrDoctor])
     def list(self, request):
         """
         Lista todas las especialidades médicas.
