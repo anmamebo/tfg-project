@@ -74,10 +74,6 @@ export class UserService {
 
     let params = JSON.stringify(data);
 
-    return this.http.post<any>(
-      this.url + user_id + '/set_password/',
-      params,
-      httpOptions
-    );
+    return this.http.post<any>(this.url + 'set_password/', params, httpOptions);
   }
 }
