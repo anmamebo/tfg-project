@@ -180,7 +180,14 @@ export const breadcrumbAppointmentsHistoricalPatientData = [
   { label: 'Historial de Citas', url: '' },
 ];
 
+// Tratamientos paciente
 export const breadCrumbTreatmentsPatientData = [
   { label: 'Panel Principal', url: '/' },
   { label: 'Mis Tratamientos', url: '' },
+];
+
+// Tratamientos historial paciente
+export const breadcrumbTreatmentsHistoricalPatientData = [
+  { label: 'Panel Principal', url: '/' },
+  { label: 'Historial de Tratamientos', url: '' },
 ];

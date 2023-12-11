@@ -12,16 +12,20 @@ import { SharedModule } from 'src/app/shared/shared.module';
 
 // Componentes Páginas
 import { TreatmentsPatientPageComponent } from './pages/treatments-patient-page/treatments-patient-page.component';
+import { TreatmentsHistoricalPatientPageComponent } from './pages/treatments-historical-patient-page/treatments-historical-patient-page.component';
 
 // Componentes Tarjetas
 import { ListTreatmentsPatientCardComponent } from './components/list-treatments-patient-card/list-treatments-patient-card.component';
 import { ViewTreatmentsPatientCardComponent } from './components/view-treatments-patient-card/view-treatments-patient-card.component';
+import { ListTreatmentsHistoricalPatientCardComponent } from './components/list-treatments-historical-patient-card/list-treatments-historical-patient-card.component';
 
 @NgModule({
   declarations: [
     TreatmentsPatientPageComponent,
     ListTreatmentsPatientCardComponent,
     ViewTreatmentsPatientCardComponent,
+    TreatmentsHistoricalPatientPageComponent,
+    ListTreatmentsHistoricalPatientCardComponent,
   ],
   imports: [
     CommonModule,
