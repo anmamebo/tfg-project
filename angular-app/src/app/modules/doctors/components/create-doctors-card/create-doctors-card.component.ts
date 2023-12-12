@@ -94,12 +94,16 @@ export class CreateDoctorsCardComponent implements OnInit {
       },
       collegiate_number: this.form.value.collegiate_number,
       is_available: this.form.value.is_available,
-      medical_specialties: this.form.value.medical_specialties.map(
-        (item: { item_id: String; item_text: String }) => item.item_id
-      ),
-      departments: this.form.value.departments.map(
-        (item: { item_id: String; item_text: String }) => item.item_id
-      ),
+      medical_specialties: this.form.value.medical_specialties
+        ? this.form.value.medical_specialties.map(
+            (item: { item_id: String; item_text: String }) => item.item_id
+          )
+        : [],
+      departments: this.form.value.departments
+        ? this.form.value.departments.map(
+            (item: { item_id: String; item_text: String }) => item.item_id
+          )
+        : [],
     };
 
     this.doctorService.create(doctor).subscribe({
