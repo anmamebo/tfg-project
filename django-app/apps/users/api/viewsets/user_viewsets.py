@@ -35,7 +35,6 @@ class UserViewSet(viewsets.GenericViewSet):
     serializer_class = UserSerializer
     list_serializer_class = UserListSerializer
     queryset = None
-    permission_classes = (DjangoModelPermissions,)
 
     # Recupera el objeto basado en el identificador en la URL
     def get_object(self, pk):
@@ -95,9 +94,6 @@ class UserViewSet(viewsets.GenericViewSet):
 
         Returns:
             Response: La respuesta que contiene la lista de usuarios o un mensaje de error si no tiene permisos.
-
-        Permissions:
-            - users.list_user: Permite listar usuarios.
         """
         users = self.get_queryset()
         users_serializer = self.list_serializer_class(users, many=True)
@@ -116,9 +112,6 @@ class UserViewSet(viewsets.GenericViewSet):
 
         Returns:
             Response: La respuesta que indica si el usuario se ha registrado correctamente o si ha habido errores.
-
-        Permissions:
-            - users.add_user: Permite crear usuarios.
         """
         user_serializer = self.serializer_class(data=request.data)
         if user_serializer.is_valid():
@@ -150,9 +143,6 @@ class UserViewSet(viewsets.GenericViewSet):
 
         Returns:
             Response: La respuesta que contiene los detalles del usuario o un mensaje de error si no tiene permisos.
-
-        Permissions:
-            - users.get_user: Permite ver un usuario.
         """
         user = self.get_object(pk)
         user_serializer = self.serializer_class(user)
@@ -173,9 +163,6 @@ class UserViewSet(viewsets.GenericViewSet):
 
         Returns:
             Response: La respuesta que indica si el usuario se ha actualizado correctamente o si ha habido errores.
-
-        Permissions:
-            - users.change_user: Permite actualizar un usuario.
         """
         user = self.get_object(pk)
         user_serializer = UpdateUserSerializer(user, data=request.data)
@@ -209,8 +196,6 @@ class UserViewSet(viewsets.GenericViewSet):
         Returns:
             Response: La respuesta que indica si el usuario se ha eliminado correctamente o si ha habido errores.
 
-        Permissions:
-            - users.delete_user: Permite eliminar un usuario.
         """
         user_destroy = self.model.objects.filter(id=pk).update(is_active=False)
         if user_destroy == 1:  # Verifica si se eliminó el usuario
