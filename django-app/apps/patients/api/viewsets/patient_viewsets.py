@@ -15,6 +15,7 @@ from django.shortcuts import get_object_or_404
 from rest_framework import status, viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
+from utilities.email_utils import send_welcome_email
 from utilities.password_generator import generate_password
 from utilities.permissions_helper import method_permission_classes
 
@@ -103,6 +104,9 @@ class PatientViewSet(viewsets.GenericViewSet):
         patient_serializer = CreatePatientSerializer(data=request.data)
         if patient_serializer.is_valid():
             patient = patient_serializer.save()
+
+            send_welcome_email(patient.user, request.data["user"]["password"])
+
             return Response(
                 {"message": "Paciente creado correctamente."},
                 status=status.HTTP_201_CREATED,

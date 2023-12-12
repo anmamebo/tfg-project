@@ -13,6 +13,7 @@ from rest_framework import status, viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from utilities.doctor_username_generator import generate_doctor_username
+from utilities.email_utils import send_welcome_email
 from utilities.password_generator import generate_password
 from utilities.permissions_helper import method_permission_classes
 
@@ -110,6 +111,9 @@ class DoctorViewSet(viewsets.GenericViewSet):
         doctor_serializer = CreateDoctorSerializer(data=request.data)
         if doctor_serializer.is_valid():
             doctor = doctor_serializer.save()
+
+            send_welcome_email(doctor.user, request.data["user"]["password"])
+
             return Response(
                 {"message": "Médico creado correctamente."},
                 status=status.HTTP_201_CREATED,
