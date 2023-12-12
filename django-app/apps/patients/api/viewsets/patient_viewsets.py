@@ -105,7 +105,13 @@ class PatientViewSet(viewsets.GenericViewSet):
         if patient_serializer.is_valid():
             patient = patient_serializer.save()
 
-            send_welcome_email(patient.user, request.data["user"]["password"])
+            if not send_welcome_email(patient.user, request.data["user"]["password"]):
+                return Response(
+                    {
+                        "message": "Paciente creado correctamente pero no se ha podido enviar el correo electrónico.",
+                    },
+                    status=status.HTTP_201_CREATED,
+                )
 
             return Response(
                 {"message": "Paciente creado correctamente."},

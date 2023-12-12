@@ -112,7 +112,13 @@ class DoctorViewSet(viewsets.GenericViewSet):
         if doctor_serializer.is_valid():
             doctor = doctor_serializer.save()
 
-            send_welcome_email(doctor.user, request.data["user"]["password"])
+            if not send_welcome_email(doctor.user, request.data["user"]["password"]):
+                return Response(
+                    {
+                        "message": "Médico creado correctamente pero no se ha podido enviar el correo electrónico."
+                    },
+                    status=status.HTTP_201_CREATED,
+                )
 
             return Response(
                 {"message": "Médico creado correctamente."},
