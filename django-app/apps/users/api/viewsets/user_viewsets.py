@@ -1,8 +1,11 @@
+import os
+
 from apps.users.api.permissions.user_permissions import IsUserOwner
 from apps.users.api.serializers.user_serializer import (
     PasswordSerializer,
     UpdateUserSerializer,
     UserListSerializer,
+    UserProfilePictureSerializer,
     UserSerializer,
 )
 from apps.users.models import User
@@ -10,7 +13,6 @@ from config.permissions import IsAdministrator, IsAdministratorOrDoctorOrPatient
 from django.shortcuts import get_object_or_404
 from rest_framework import status, viewsets
 from rest_framework.decorators import action
-from rest_framework.permissions import DjangoModelPermissions
 from rest_framework.response import Response
 from utilities.permissions_helper import method_permission_classes
 
@@ -165,7 +167,7 @@ class UserViewSet(viewsets.GenericViewSet):
             Response: La respuesta que indica si el usuario se ha actualizado correctamente o si ha habido errores.
         """
         user = self.get_object(pk)
-        user_serializer = UpdateUserSerializer(user, data=request.data)
+        user_serializer = UpdateUserSerializer(user, data=request.data, partial=True)
         if user_serializer.is_valid():
             user_serializer.save()
             return Response(
@@ -204,4 +206,96 @@ class UserViewSet(viewsets.GenericViewSet):
         return Response(
             {"message": "No existe el usuario que desea eliminar"},
             status=status.HTTP_404_NOT_FOUND,
+        )
+
+    @method_permission_classes([IsAdministratorOrDoctorOrPatient, IsUserOwner])
+    @action(detail=False, methods=["get"])
+    def profile_picture(self, request):
+        """
+        Recupera la foto de perfil de un usuario específico.
+
+        Permisos requeridos:
+            - El usuario debe ser administrador, médico o paciente.
+            - El usuario debe ser el dueño del usuario (en el caso de paciente y de médico).
+
+        Args:
+            request (Request): La solicitud HTTP.
+
+        Returns:
+            Response: La respuesta que contiene la foto de perfil del usuario o un mensaje de error si no tiene permisos.
+        """
+        user = self.get_object(request.user.id)
+        serializer = UserProfilePictureSerializer(user)
+        return Response(serializer.data)
+
+    @method_permission_classes([IsAdministratorOrDoctorOrPatient, IsUserOwner])
+    @action(detail=True, methods=["put"])
+    def update_profile_picture(self, request, pk=None):
+        """
+        Actualiza la foto de perfil de un usuario existente.
+
+        Permisos requeridos:
+            - El usuario debe ser administrador, médico o paciente.
+            - El usuario debe ser el dueño del usuario (en el caso de paciente y de médico).
+
+        Args:
+            request (Request): La solicitud HTTP.
+            pk (int): El ID del usuario.
+
+        Returns:
+            Response: La respuesta que indica si la foto de perfil se ha actualizado correctamente o si ha habido errores.
+        """
+        user = self.get_object(pk)
+        user_serializer = UpdateUserSerializer(user, data=request.data, partial=True)
+        if user_serializer.is_valid():
+            user_serializer.save()
+            return Response(
+                {
+                    "profile_picture_url": user_serializer.data["profile_picture"],
+                    "message": "Foto de perfil actualizada correctamente",
+                },
+                status=status.HTTP_200_OK,
+            )
+
+        return Response(
+            {
+                "message": "Hay errores en la actualización",
+                "errors": user_serializer.errors,
+            },
+            status=status.HTTP_400_BAD_REQUEST,
+        )
+
+    @method_permission_classes([IsAdministratorOrDoctorOrPatient, IsUserOwner])
+    @action(detail=False, methods=["delete"])
+    def delete_profile_picture(self, request):
+        """
+        Elimina la foto de perfil de un usuario existente.
+
+        Permisos requeridos:
+            - El usuario debe ser administrador, médico o paciente.
+            - El usuario debe ser el dueño del usuario (en el caso de paciente y de médico).
+
+        Args:
+            request (Request): La solicitud HTTP.
+
+        Returns:
+            Response: La respuesta que indica si la foto de perfil se ha eliminado correctamente o si ha habido errores.
+        """
+        user = self.get_object(request.user.id)
+        if user.profile_picture:
+            image_path = user.profile_picture.path
+            user.profile_picture.delete(save=False)
+            user.save()
+
+            if os.path.exists(image_path):
+                os.remove(image_path)
+
+            return Response(
+                {"message": "Foto de perfil eliminada correctamente"},
+                status=status.HTTP_200_OK,
+            )
+
+        return Response(
+            {"message": "El usuario no tiene foto de perfil"},
+            status=status.HTTP_400_BAD_REQUEST,
         )
