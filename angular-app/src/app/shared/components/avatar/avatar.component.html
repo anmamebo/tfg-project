@@ -1,0 +1,12 @@
+<div class="avatar" [ngClass]="extraClasses">
+  <img
+    *ngIf="profile_picture; else noPicture"
+    [src]="API_URL + profile_picture"
+    alt="Imagen de perfil"
+    class="hoverZoomLink"
+  />
+  <ng-template #noPicture>
+    <span class="avatar-content"> {{ getFirstLetter() }} </span>
+  </ng-template>
+  <span *ngIf="status" class="avatar-status bg-success"></span>
+</div>
