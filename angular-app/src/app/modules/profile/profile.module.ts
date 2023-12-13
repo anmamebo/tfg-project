@@ -12,6 +12,7 @@ import { GenericPageModule } from 'src/app/shared/components/generic-page/generi
 import { GenericCardModule } from 'src/app/shared/components/generic-card/generic-card.module';
 import { LoadingSpinnerModule } from 'src/app/shared/components/loading-spinner/loading-spinner.module';
 import { FormErrorsModule } from 'src/app/shared/components/form-errors/form-errors.module';
+import { AvatarModule } from 'src/app/shared/components/avatar/avatar.module';
 
 // Componentes páginas
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
@@ -44,6 +45,7 @@ import { DoctorInfoCardComponent } from './components/doctor-info-card/doctor-in
     GenericPageModule,
     GenericCardModule,
     FormErrorsModule,
+    AvatarModule,
   ],
 })
 export class ProfileModule {}
