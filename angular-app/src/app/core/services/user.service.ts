@@ -76,4 +76,50 @@ export class UserService {
 
     return this.http.post<any>(this.url + 'set_password/', params, httpOptions);
   }
+
+  /**
+   * Actualiza la imagen de perfil del usuario.
+   * @param userId - El ID del usuario.
+   * @param file - El archivo de imagen de perfil.
+   * @returns Un Observable que se suscribe a la solicitud HTTP para actualizar la imagen de perfil.
+   */
+  public updateProfilePicture(userId: string, file: File): Observable<any> {
+    let headers = this.httpCommonService.getCommonHeaders();
+    headers = headers.delete('Content-Type');
+    const httpOptions = { headers };
+
+    let formData = new FormData();
+    formData.append('profile_picture', file);
+
+    return this.http.put<any>(
+      `${this.url}${userId}/update_profile_picture/`,
+      formData,
+      httpOptions
+    );
+  }
+
+  /**
+   * Obtiene la imagen de perfil del usuario.
+   * @returns Un Observable que se suscribe a la solicitud HTTP para obtener la imagen de perfil.
+   */
+  public getProfilePicture(): Observable<any> {
+    const headers = this.httpCommonService.getCommonHeaders();
+    const httpOptions = { headers };
+
+    return this.http.get<any>(`${this.url}profile_picture/`, httpOptions);
+  }
+
+  /**
+   * Elimina la imagen de perfil del usuario.
+   * @returns Un Observable que se suscribe a la solicitud HTTP para eliminar la imagen de perfil.
+   */
+  public deleteProfilePicture(): Observable<any> {
+    const headers = this.httpCommonService.getCommonHeaders();
+    const httpOptions = { headers };
+
+    return this.http.delete<any>(
+      `${this.url}delete_profile_picture/`,
+      httpOptions
+    );
+  }
 }
