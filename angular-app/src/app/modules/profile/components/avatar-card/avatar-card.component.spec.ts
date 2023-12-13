@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { AvatarCardComponent } from './avatar-card.component';
 
@@ -9,6 +10,7 @@ describe('AvatarCardComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [AvatarCardComponent],
+      imports: [HttpClientTestingModule],
     }).compileComponents();
   });
 

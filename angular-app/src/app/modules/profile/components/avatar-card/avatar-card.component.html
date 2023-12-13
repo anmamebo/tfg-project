@@ -1,22 +1,25 @@
 <app-generic-card *ngIf="user" [hasCardHeader]="false">
   <div class="card-content">
     <div class="d-flex flex-column flex-md-row text-center text-md-start mb-3">
-      <div class="avatar avatar-xl me-4 flex-shrink-0">
-        <img
-          [src]="'/assets/images/avatar/1.jpg'"
-          alt=""
-          srcset=""
-          class="hoverZoomLink"
-        />
-      </div>
+      <app-avatar
+        [name]="user.name"
+        [extraClasses]="['avatar-xl', 'me-4', 'flex-shrink-0']"
+      ></app-avatar>
       <div class="flex-fill">
         <h5 class="mb-3">{{ user.name }}</h5>
-        <button class="btn btn-primary me-2">Cambiar avatar</button>
+        <button
+          [swal]="changeAvatar"
+          (click)="this.avatarForm.reset()"
+          class="btn btn-primary me-2"
+        >
+          Cambiar avatar
+        </button>
         <button
           class="btn btn-outline-danger btn-icon"
           data-bs-toggle="tooltip"
           title
           data-bs-original-title="Eliminar avatar"
+          (click)="onDeleteProfilePicture()"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -41,4 +44,71 @@
       </div>
     </div>
   </div>
+  <swal
+    #changeAvatar
+    [showCloseButton]="true"
+    [showCancelButton]="false"
+    [showConfirmButton]="false"
+    width="800px"
+  >
+    <div *swalPortal="swalTargets.title">
+      <h4 class="mb-4 text-start text-uppercase">Cambiar avatar</h4>
+    </div>
+    <div *swalPortal="swalTargets.content">
+      <form
+        (ngSubmit)="onSubmit()"
+        [formGroup]="avatarForm"
+        class="form form-horizontal"
+      >
+        <div class="form-body">
+          <div class="row w-100">
+            <div class="col-md-12">
+              <div class="form-group">
+                <app-avatar
+                  [name]="user.name"
+                  [extraClasses]="['avatar-xl', 'me-4', 'flex-shrink-0']"
+                ></app-avatar>
+                <div class="flex-fill">
+                  <h5 class="mb-3">{{ user.name }}</h5>
+                  <input
+                    type="file"
+                    class="form-control"
+                    id="avatar"
+                    name="avatar"
+                    accept="image/*"
+                    formControlName="file"
+                    (change)="onFileChange($event)"
+                    [ngClass]="{
+                      'is-invalid': submitted && form.get('file')?.errors
+                    }"
+                  />
+                  <app-form-errors
+                    [control]="form.get('file')"
+                    [submitted]="submitted"
+                  ></app-form-errors>
+                  <p class="small text-muted mt-3">
+                    Para obtener los mejores resultados, use una imagen cuadrada
+                    de al menos 256px de ancho y de alto, y en formato .jpg o
+                    .png.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn btn-outline-primary me-1">
+            Guardar
+          </button>
+          <button
+            type="reset"
+            class="btn btn-outline-danger"
+            (click)="closeChangeAvatar()"
+          >
+            Cancelar
+          </button>
+        </div>
+      </form>
+    </div>
+  </swal>
 </app-generic-card>

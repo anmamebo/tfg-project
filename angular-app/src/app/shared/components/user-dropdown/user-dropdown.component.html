@@ -6,10 +6,11 @@
     data-bs-toggle="dropdown"
     aria-expanded="false"
   >
-    <div class="avatar avatar-md2">
-      <img [src]="'/assets/images/avatar/1.jpg'" alt="Avatar" />
-      <span class="avatar-status bg-success"></span>
-    </div>
+    <app-avatar
+      [name]="username"
+      [status]="true"
+      [extraClasses]="['avatar-md2']"
+    ></app-avatar>
     <div class="text">
       <h6 class="user-dropdown-name">{{ username }}</h6>
       <p class="user-dropdown-status text-sm text-muted"></p>
