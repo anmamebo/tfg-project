@@ -20,7 +20,7 @@ import { Doctor } from 'src/app/core/models/doctor.model';
 })
 export class DoctorInfoCardComponent implements OnInit {
   /** Título de la tarjeta */
-  public titleCard: string = 'Información Doctor';
+  public titleCard: string = 'Información Médico';
 
   /** Doctor que se mostrará */
   @Input() public doctor: Doctor | null = null;
