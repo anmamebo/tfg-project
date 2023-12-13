@@ -246,9 +246,18 @@ class UserViewSet(viewsets.GenericViewSet):
             Response: La respuesta que indica si la foto de perfil se ha actualizado correctamente o si ha habido errores.
         """
         user = self.get_object(pk)
+
+        image_path = None
+        if user.profile_picture:
+            image_path = user.profile_picture.path
+
         user_serializer = UpdateUserSerializer(user, data=request.data, partial=True)
         if user_serializer.is_valid():
             user_serializer.save()
+
+            if image_path and os.path.exists(image_path):
+                os.remove(image_path)
+
             return Response(
                 {
                     "profile_picture_url": user_serializer.data["profile_picture"],
