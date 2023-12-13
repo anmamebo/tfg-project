@@ -13,24 +13,22 @@ import os
 from datetime import timedelta
 from pathlib import Path
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+# Directorio base del proyecto
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
+# Clave secreta para Django (debería estar en una variable de entorno en producción)
 SECRET_KEY = "django-insecure-y@%chtd@b_$v69g(&^3(+-w+df@&4bxe4wsuaednx0nn!(@ff="
 
-# SECURITY WARNING: don't run with debug turned on in production!
+# Entorno de desarrollo - DEBUG activado
 DEBUG = True
 
+# Lista de hosts permitidos en producción (debería especificarse en producción)
 ALLOWED_HOSTS = []
 
 
-# Application definition
+# Aplicaciones instaladas en el proyecto
 
+# Apps base de Django
 BASE_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -40,6 +38,7 @@ BASE_APPS = [
     "django.contrib.staticfiles",
 ]
 
+# Apps locales del proyecto
 LOCAL_APPS = [
     "apps.base",
     "apps.users",
@@ -51,6 +50,7 @@ LOCAL_APPS = [
     "apps.treatments",
 ]
 
+# Apps de terceros instaladas en el proyecto
 THIRD_APPS = [
     "corsheaders",
     "rest_framework",
@@ -61,12 +61,15 @@ THIRD_APPS = [
     "drf_yasg",
 ]
 
+# Lista de aplicaciones instaladas
 INSTALLED_APPS = BASE_APPS + THIRD_APPS + LOCAL_APPS
 
+# Configuración de Swagger
 SWAGGER_SETTINGS = {
     "DOC_EXPANSION": "none",
 }
 
+# Configuración de REST Framework
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework_simplejwt.authentication.JWTAuthentication",
@@ -76,6 +79,7 @@ REST_FRAMEWORK = {
     "PAGE_SIZE": 10,
 }
 
+# Middleware utilizado en el proyecto
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
@@ -88,11 +92,11 @@ MIDDLEWARE = [
     "simple_history.middleware.HistoryRequestMiddleware",
 ]
 
+# Configuración de CORS
 CORS_ORIGIN_ALLOW_ALL = False
 CORS_ORIGIN_WHITELIST = ("http://localhost:4200",)
 
-ROOT_URLCONF = "config.urls"
-
+# Configuración de plantillas
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
@@ -109,20 +113,16 @@ TEMPLATES = [
     },
 ]
 
+#  Configuración de urls
+ROOT_URLCONF = "config.urls"
+
+# Configuración de la aplicación WSGI
 WSGI_APPLICATION = "config.wsgi.application"
 
 
-# Database
-# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
+# Configuración de la base de datos
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
-# DOCKER
+# Configuración para trabajar con Docker
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.mysql',
@@ -134,7 +134,7 @@ WSGI_APPLICATION = "config.wsgi.application"
 #     }
 # }
 
-# MI PC
+# Configuración para trabajar en entorno local
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
@@ -146,9 +146,7 @@ DATABASES = {
     }
 }
 
-# Password validation
-# https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
-
+# Configuración de validación de contraseñas
 AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
@@ -164,20 +162,16 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
-# Internationalization
-# https://docs.djangoproject.com/en/4.2/topics/i18n/
-
+# Configuración de internacionalización
 LANGUAGE_CODE = "es-es"
-
 TIME_ZONE = "Europe/Madrid"
-
 USE_I18N = True
-
 USE_TZ = True
 
+# Modelo personalizado de usuario
 AUTH_USER_MODEL = "users.User"
 
+# Configuración de JWT
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(days=1),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
@@ -186,16 +180,17 @@ SIMPLE_JWT = {
     "TOKEN_OBTAIN_SERIALIZER": "apps.users.api.serializers.user_serializer.CustomTokenObtainPairSerializer",
 }
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.2/howto/static-files/
-
+# Configuración de archivos estáticos y multimedia
 STATIC_URL = "static/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_URL = "/media/"
 
-# Default primary key field type
-# https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
-
+# Configuraciçon de auto field
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+# Configuración de envío de emails
+
+# Configuración para trabajar con Gmail
 # EMAIL_HOST = "smtp.gmail.com"
 # EMAIL_PORT = 587
 # EMAIL_HOST_USER = ""
@@ -203,12 +198,10 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # EMAIL_USE_TLS = True
 # EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 
+# Configuración para trabajar con Mailtrap
 EMAIL_HOST = "sandbox.smtp.mailtrap.io"
 EMAIL_HOST_USER = "369703b0b004e5"
 EMAIL_HOST_PASSWORD = "766859eee6a844"
 EMAIL_PORT = "2525"
 EMAIL_USE_TLS = True
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
-MEDIA_URL = "/media/"
