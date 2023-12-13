@@ -66,7 +66,7 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
 class CustomUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ("id", "username", "email", "name", "last_name")
+        fields = ("id", "username", "email", "name", "last_name", "profile_picture")
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -93,7 +93,7 @@ class UserSerializer(serializers.ModelSerializer):
 class UpdateUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ("username", "email", "name", "last_name")
+        fields = ("username", "email", "name", "last_name", "profile_picture")
 
 
 class PasswordSerializer(serializers.Serializer):
@@ -127,7 +127,14 @@ class UserListSerializer(serializers.ModelSerializer):
             "name": instance.name,
             "username": instance.username,
             "email": instance.email,
+            "profile_picture": instance.profile_picture,
             "groups": instance.groups.all().values_list(
                 "name", flat=True
             ),  # flat=True para que devuelva una lista de valores en vez de una lista de tuplas
         }
+
+
+class UserProfilePictureSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ("profile_picture",)

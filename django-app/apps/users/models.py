@@ -1,3 +1,4 @@
+import os
 import uuid
 
 from django.contrib.auth.models import (
@@ -7,6 +8,12 @@ from django.contrib.auth.models import (
 )
 from django.db import models
 from simple_history.models import HistoricalRecords
+
+
+def user_directory_path(instance, filename):
+    ext = filename.split(".")[-1]
+    filename = f"{uuid.uuid4()}.{ext}"
+    return os.path.join("profile_pictures", str(instance.id), filename)
 
 
 class UserManager(BaseUserManager):
@@ -51,6 +58,9 @@ class UserManager(BaseUserManager):
 
 class User(AbstractBaseUser, PermissionsMixin):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    profile_picture = models.ImageField(
+        upload_to=user_directory_path, blank=True, null=True
+    )
     username = models.CharField(
         verbose_name="Nombre de usuario", unique=True, max_length=255
     )
