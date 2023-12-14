@@ -10,6 +10,7 @@ export class Patient {
     public birthdate?: string | null,
     public phone?: string | null,
     public social_security?: string | null,
+    public nationality?: string | null,
     public address?: Address,
     public state?: boolean
   ) {}
