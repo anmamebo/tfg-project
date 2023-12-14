@@ -1,0 +1,30 @@
+.stats-icon {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.5rem;
+  background-color: black;
+  float: right;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  i {
+    color: #fff;
+    font-size: 1.7rem;
+  }
+  &.purple {
+    background-color: #9694ff;
+  }
+  &.blue {
+    background-color: #57caeb;
+  }
+  &.red {
+    background-color: #ff7976;
+  }
+  &.green {
+    background-color: #5ddab4;
+  }
+  @media (max-width: 767px) {
+    float: left;
+    margin-bottom: 0.4rem;
+  }
+}
