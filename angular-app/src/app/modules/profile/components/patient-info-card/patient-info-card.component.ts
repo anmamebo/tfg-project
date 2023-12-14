@@ -7,7 +7,7 @@ import { Spanish } from 'flatpickr/dist/l10n/es.js';
 
 // Constantes
 import { GENDER_OPTIONS } from 'src/app/core/constants/options/genders-options.constants';
-import { PHONENUMBER_REGEXP } from 'src/app/core/constants/reg-exp';
+import { DNI_REGEXP, PHONENUMBER_REGEXP } from 'src/app/core/constants/reg-exp';
 
 // Servicios
 import { PatientService } from 'src/app/core/services/patient.service';
@@ -64,7 +64,14 @@ export class PatientInfoCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.updatePatientDataForm = this._fb.group({
-      dni: [this.patient?.dni, [Validators.required, Validators.maxLength(9)]],
+      dni: [
+        this.patient?.dni,
+        [
+          Validators.required,
+          Validators.maxLength(9),
+          Validators.pattern(DNI_REGEXP),
+        ],
+      ],
       social_security: [
         this.patient?.social_security,
         Validators.maxLength(12),
