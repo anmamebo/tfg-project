@@ -37,12 +37,12 @@ export class ViewAppointmentsPatientCardComponent implements OnInit {
     new EventEmitter<void>();
 
   constructor(
-    private appointmentService: AppointmentService,
-    private notificationService: NotificationService
+    private _appointmentService: AppointmentService,
+    private _notificationService: NotificationService
   ) {}
 
   ngOnInit(): void {
-    this.generateTitle();
+    this._generateTitle();
   }
 
   /**
@@ -50,13 +50,13 @@ export class ViewAppointmentsPatientCardComponent implements OnInit {
    */
   public cancelAppointment() {
     if (!this.appointment) {
-      this.notificationService.showErrorToast(
+      this._notificationService.showErrorToast(
         'No se ha podido cancelar la cita.'
       );
       return;
     }
 
-    this.notificationService.showConfirmGenericDialog(
+    this._notificationService.showConfirmGenericDialog(
       '¿Estás seguro de que quieres cancelar la cita?',
       'Esta acción no se puede deshacer.',
       'Confirmar cancelación',
@@ -66,14 +66,14 @@ export class ViewAppointmentsPatientCardComponent implements OnInit {
       () => {
         if (!this.appointment) return;
 
-        this.appointmentService
+        this._appointmentService
           .updateStatus(this.appointment.id, 'cancelled')
           .subscribe({
             next: (response: any) => {
               this.appointmentCancelled.emit();
             },
             error: (error: any) => {
-              this.notificationService.showErrorToast(error.message);
+              this._notificationService.showErrorToast(error.message);
             },
           });
       }
@@ -83,7 +83,7 @@ export class ViewAppointmentsPatientCardComponent implements OnInit {
   /**
    * Genera el título de la tarjeta.
    */
-  private generateTitle() {
+  private _generateTitle() {
     if (
       this.appointment &&
       this.appointment.schedule &&

@@ -30,11 +30,11 @@ export class ChangePasswordCardComponent {
   public errorMessage: string = '';
 
   constructor(
-    private formBuilder: FormBuilder,
-    private userService: UserService,
-    private notificationService: NotificationService
+    private _fb: FormBuilder,
+    private _userService: UserService,
+    private _notificationService: NotificationService
   ) {
-    this.changePasswordForm = this.formBuilder.group(
+    this.changePasswordForm = this._fb.group(
       {
         current_password: ['', Validators.required],
         new_password: ['', Validators.required],
@@ -69,15 +69,15 @@ export class ChangePasswordCardComponent {
         password2: this.form.value.confirm_new_password,
       };
 
-    this.userService.updatePassword(data).subscribe({
+    this._userService.updatePassword(data).subscribe({
       next: (data) => {
         this.submitted = false;
         this.form.reset();
-        this.notificationService.showSuccessToast(data.message);
+        this._notificationService.showSuccessToast(data.message);
       },
       error: (error) => {
         this.submitted = false;
-        this.notificationService.showErrorToast(error.message);
+        this._notificationService.showErrorToast(error.message);
       },
     });
   }

@@ -36,18 +36,18 @@ export class ViewTreatmentsPatientCardComponent implements OnInit {
   @Output() public statusChanged: EventEmitter<void> = new EventEmitter<void>();
 
   constructor(
-    private treatmentService: TreatmentService,
-    private notificationService: NotificationService
+    private _treatmentService: TreatmentService,
+    private _notificationService: NotificationService
   ) {}
 
   ngOnInit(): void {
-    this.generateTitle();
+    this._generateTitle();
   }
 
   /**
    * Genera el título de la tarjeta.
    */
-  private generateTitle() {
+  private _generateTitle() {
     if (this.treatment) {
       const start_date = new Date(this.treatment.start_date);
       const date = format(start_date, 'dd, MMMM yyyy', { locale: es });
@@ -61,13 +61,13 @@ export class ViewTreatmentsPatientCardComponent implements OnInit {
    */
   public completeTreatment() {
     if (!this.treatment) {
-      this.notificationService.showErrorToast(
+      this._notificationService.showErrorToast(
         'No se ha podido completar el tratamiento.'
       );
       return;
     }
 
-    this.notificationService.showConfirmGenericDialog(
+    this._notificationService.showConfirmGenericDialog(
       '¿Estás seguro de que quieres completar el tratamiento?',
       '',
       'Confirmar',
@@ -77,14 +77,14 @@ export class ViewTreatmentsPatientCardComponent implements OnInit {
       () => {
         if (!this.treatment) return;
 
-        this.treatmentService
+        this._treatmentService
           .updateStatus(this.treatment.id, 'completed')
           .subscribe({
             next: () => {
               this.statusChanged.emit();
             },
             error: (error: any) => {
-              this.notificationService.showErrorToast(error.message);
+              this._notificationService.showErrorToast(error.message);
             },
           });
       }
@@ -96,13 +96,13 @@ export class ViewTreatmentsPatientCardComponent implements OnInit {
    */
   public interruptTreatment() {
     if (!this.treatment) {
-      this.notificationService.showErrorToast(
+      this._notificationService.showErrorToast(
         'No se ha podido interrumpir el tratamiento.'
       );
       return;
     }
 
-    this.notificationService.showConfirmGenericDialog(
+    this._notificationService.showConfirmGenericDialog(
       '¿Estás seguro de que quieres interrumpir el tratamiento?',
       '',
       'Confirmar',
@@ -112,14 +112,14 @@ export class ViewTreatmentsPatientCardComponent implements OnInit {
       () => {
         if (!this.treatment) return;
 
-        this.treatmentService
+        this._treatmentService
           .updateStatus(this.treatment.id, 'interrupted')
           .subscribe({
             next: () => {
               this.statusChanged.emit();
             },
             error: (error: any) => {
-              this.notificationService.showErrorToast(error.message);
+              this._notificationService.showErrorToast(error.message);
             },
           });
       }
@@ -131,13 +131,13 @@ export class ViewTreatmentsPatientCardComponent implements OnInit {
    */
   public cancelTreatment() {
     if (!this.treatment) {
-      this.notificationService.showErrorToast(
+      this._notificationService.showErrorToast(
         'No se ha podido cancelar el tratamiento.'
       );
       return;
     }
 
-    this.notificationService.showConfirmGenericDialog(
+    this._notificationService.showConfirmGenericDialog(
       '¿Estás seguro de que quieres cancelar el tratamiento?',
       'Esta acción no se puede deshacer.',
       'Confirmar',
@@ -147,14 +147,14 @@ export class ViewTreatmentsPatientCardComponent implements OnInit {
       () => {
         if (!this.treatment) return;
 
-        this.treatmentService
+        this._treatmentService
           .updateStatus(this.treatment.id, 'cancelled')
           .subscribe({
             next: () => {
               this.statusChanged.emit();
             },
             error: (error: any) => {
-              this.notificationService.showErrorToast(error.message);
+              this._notificationService.showErrorToast(error.message);
             },
           });
       }

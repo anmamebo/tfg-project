@@ -37,13 +37,13 @@ export class CreateDoctorsCardComponent implements OnInit {
   dropdownSettings: IDropdownSettings = {};
 
   constructor(
-    private formBuilder: FormBuilder,
-    private doctorService: DoctorService,
-    private medicalSpecialtyService: MedicalspecialtyService,
-    private departmentService: DepartmentService,
-    private notificationService: NotificationService
+    private _fb: FormBuilder,
+    private _doctorService: DoctorService,
+    private _medicalSpecialtyService: MedicalspecialtyService,
+    private _departmentService: DepartmentService,
+    private _notificationService: NotificationService
   ) {
-    this.createDoctorForm = this.formBuilder.group({
+    this.createDoctorForm = this._fb.group({
       name: ['', Validators.required],
       last_name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -106,14 +106,14 @@ export class CreateDoctorsCardComponent implements OnInit {
         : [],
     };
 
-    this.doctorService.create(doctor).subscribe({
+    this._doctorService.create(doctor).subscribe({
       next: (data) => {
         this.form.reset();
         this.submitted = false;
-        this.notificationService.showSuccessToast(data.message);
+        this._notificationService.showSuccessToast(data.message);
       },
       error: (error) => {
-        this.notificationService.showErrorToast(error.message);
+        this._notificationService.showErrorToast(error.message);
       },
     });
   }
@@ -122,7 +122,7 @@ export class CreateDoctorsCardComponent implements OnInit {
    * Obtiene las especialidades médicas.
    */
   public getMedicalSpecialties() {
-    this.medicalSpecialtyService.getMedicalSpecialties().subscribe({
+    this._medicalSpecialtyService.getMedicalSpecialties().subscribe({
       next: (data) => {
         this.medicalSpecialties = data.map(
           (item: { id: String; name: String }) => ({
@@ -132,7 +132,7 @@ export class CreateDoctorsCardComponent implements OnInit {
         );
       },
       error: (error) => {
-        this.notificationService.showErrorToast(error.message);
+        this._notificationService.showErrorToast(error.message);
       },
     });
   }
@@ -141,7 +141,7 @@ export class CreateDoctorsCardComponent implements OnInit {
    * Obtiene los departamentos.
    */
   public getDepartments() {
-    this.departmentService.getItems().subscribe({
+    this._departmentService.getItems().subscribe({
       next: (data) => {
         this.departments = data.map((item: { id: String; name: String }) => ({
           item_id: item.id,
@@ -149,7 +149,7 @@ export class CreateDoctorsCardComponent implements OnInit {
         }));
       },
       error: (error) => {
-        this.notificationService.showErrorToast(error.message);
+        this._notificationService.showErrorToast(error.message);
       },
     });
   }

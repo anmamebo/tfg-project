@@ -21,8 +21,8 @@ export class TreatmentService {
   public url: string;
 
   constructor(
-    private http: HttpClient,
-    private httpCommonService: HttpCommonService
+    private _http: HttpClient,
+    private _httpCommonService: HttpCommonService
   ) {
     this.url = API_URL.url + 'treatments/treatments/';
   }
@@ -43,7 +43,7 @@ export class TreatmentService {
     searchTerm?: string,
     paginated: boolean = false
   ): Observable<any> {
-    const headers = this.httpCommonService.getCommonHeaders();
+    const headers = this._httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
     let params = new HttpParams();
@@ -62,7 +62,7 @@ export class TreatmentService {
 
     params = params.append('appointment_id', appointmentId);
 
-    return this.http.get<any>(`${this.url}list_for_appointment/`, {
+    return this._http.get<any>(`${this.url}list_for_appointment/`, {
       params,
       ...httpOptions,
     });
@@ -77,7 +77,7 @@ export class TreatmentService {
     sortBy?: string,
     sortOrder?: string
   ): Observable<any> {
-    const headers = this.httpCommonService.getCommonHeaders();
+    const headers = this._httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
     let params = new HttpParams();
@@ -118,7 +118,7 @@ export class TreatmentService {
       );
     }
 
-    return this.http.get<any>(`${this.url}list_for_patient/`, {
+    return this._http.get<any>(`${this.url}list_for_patient/`, {
       params,
       ...httpOptions,
     });
@@ -130,12 +130,12 @@ export class TreatmentService {
    * @returns Un observable que emite la respuesta del servidor.
    */
   public createTreatment(treatment: Treatment): Observable<any> {
-    const headers = this.httpCommonService.getCommonHeaders();
+    const headers = this._httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
     let params = JSON.stringify(treatment);
 
-    return this.http.post<any>(`${this.url}`, params, httpOptions);
+    return this._http.post<any>(`${this.url}`, params, httpOptions);
   }
 
   /**
@@ -145,10 +145,10 @@ export class TreatmentService {
    * @returns Un observable que emite la respuesta del servidor.
    */
   public updateStatus(id: string, status: string): Observable<any> {
-    const headers = this.httpCommonService.getCommonHeaders();
+    const headers = this._httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
-    return this.http.put<any>(
+    return this._http.put<any>(
       `${this.url}${id}/update_status/`,
       { status },
       httpOptions

@@ -32,8 +32,8 @@ export class ViewInfoStatusAppointmentsCardComponent {
   public statusBadgeClasses: StatusBadgeClasses = STATUS_BADGE_CLASSES;
 
   constructor(
-    private appointmentService: AppointmentService,
-    private notificationService: NotificationService
+    private _appointmentService: AppointmentService,
+    private _notificationService: NotificationService
   ) {}
 
   /**
@@ -42,21 +42,21 @@ export class ViewInfoStatusAppointmentsCardComponent {
    */
   public updateStatus(status: string): void {
     if (!this.appointment) {
-      this.notificationService.showErrorToast(
+      this._notificationService.showErrorToast(
         'No se ha podido actualizar el estado de la cita.'
       );
       return;
     }
 
-    this.appointmentService
+    this._appointmentService
       .updateStatus(this.appointment.id, status)
       .subscribe({
         next: (response: any) => {
-          this.notificationService.showSuccessToast(response.message);
+          this._notificationService.showSuccessToast(response.message);
           this.refreshAppointment.emit();
         },
         error: (error: any) => {
-          this.notificationService.showErrorToast(error.message);
+          this._notificationService.showErrorToast(error.message);
         },
       });
   }

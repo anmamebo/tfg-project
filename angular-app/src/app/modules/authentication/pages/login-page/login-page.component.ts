@@ -26,12 +26,12 @@ export class LoginPageComponent {
   public errorMessage: string = '';
 
   constructor(
-    private authService: AuthService,
-    private tokenStorageService: TokenStorageService,
-    private formBuilder: FormBuilder,
-    private router: Router
+    private _authService: AuthService,
+    private _tokenStorageService: TokenStorageService,
+    private _fb: FormBuilder,
+    private _router: Router
   ) {
-    this.loginForm = this.formBuilder.group({
+    this.loginForm = this._fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
     });
@@ -58,12 +58,12 @@ export class LoginPageComponent {
       password: this.form.value.password,
     };
 
-    this.authService.login(user).subscribe({
+    this._authService.login(user).subscribe({
       next: (data) => {
         this.errorMessage = '';
-        this.tokenStorageService.saveSingIn(data);
+        this._tokenStorageService.saveSingIn(data);
         // TODO: no se hace así
-        this.router.navigate(['/']);
+        this._router.navigate(['/']);
       },
       error: (e) => {
         this.errorMessage = e.message;

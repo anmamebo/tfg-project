@@ -21,8 +21,8 @@ export class AppointmentService {
   public url: string;
 
   constructor(
-    private http: HttpClient,
-    private httpCommonService: HttpCommonService
+    private _http: HttpClient,
+    private _httpCommonService: HttpCommonService
   ) {
     this.url = API_URL.url + 'appointments/appointments/';
   }
@@ -34,12 +34,12 @@ export class AppointmentService {
    * @returns Un observable que emite la respuesta del servidor.
    */
   public update(id: string, item: Appointment): Observable<any> {
-    const headers = this.httpCommonService.getCommonHeaders();
+    const headers = this._httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
     let params = JSON.stringify(item);
 
-    return this.http.put<any>(`${this.url}${id}/`, params, httpOptions);
+    return this._http.put<any>(`${this.url}${id}/`, params, httpOptions);
   }
 
   /**
@@ -48,10 +48,10 @@ export class AppointmentService {
    * @returns Un observable que emite la respuesta del servidor.
    */
   public getAppointmentByIdByDoctor(id: string): Observable<Appointment> {
-    const headers = this.httpCommonService.getCommonHeaders();
+    const headers = this._httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
-    return this.http.get<Appointment>(
+    return this._http.get<Appointment>(
       `${this.url}${id}/retrieve_for_doctor/`,
       httpOptions
     );
@@ -71,7 +71,7 @@ export class AppointmentService {
     sortBy?: string,
     sortOrder?: string
   ): Observable<any> {
-    const headers = this.httpCommonService.getCommonHeaders();
+    const headers = this._httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
     let params = new HttpParams();
@@ -117,7 +117,7 @@ export class AppointmentService {
       );
     }
 
-    return this.http.get<any>(`${this.url}list_for_doctor/`, {
+    return this._http.get<any>(`${this.url}list_for_doctor/`, {
       params,
       ...httpOptions,
     });
@@ -137,7 +137,7 @@ export class AppointmentService {
     sortBy?: string,
     sortOrder?: string
   ): Observable<any> {
-    const headers = this.httpCommonService.getCommonHeaders();
+    const headers = this._httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
     let params = new HttpParams();
@@ -183,7 +183,7 @@ export class AppointmentService {
       );
     }
 
-    return this.http.get<any>(`${this.url}list_for_patient/`, {
+    return this._http.get<any>(`${this.url}list_for_patient/`, {
       params,
       ...httpOptions,
     });
@@ -196,10 +196,10 @@ export class AppointmentService {
    * @returns Un observable que emite la respuesta del servidor.
    */
   public updateStatus(id: string, status: string): Observable<any> {
-    const headers = this.httpCommonService.getCommonHeaders();
+    const headers = this._httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
-    return this.http.put<any>(
+    return this._http.put<any>(
       `${this.url}${id}/update_status/`,
       { status },
       httpOptions

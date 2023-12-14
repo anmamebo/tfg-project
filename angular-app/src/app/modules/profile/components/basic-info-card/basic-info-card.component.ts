@@ -34,14 +34,14 @@ export class BasicInfoCardComponent implements OnInit {
     new EventEmitter<void>();
 
   constructor(
-    private formBuilder: FormBuilder,
-    private userService: UserService,
-    private notificationService: NotificationService
+    private _fb: FormBuilder,
+    private _userService: UserService,
+    private _notificationService: NotificationService
   ) {}
 
   ngOnInit(): void {
     // Inicializa el formulario con las validaciones
-    this.updateUserDataForm = this.formBuilder.group({
+    this.updateUserDataForm = this._fb.group({
       name: [this.user?.name, Validators.required],
       last_name: [this.user?.last_name, Validators.required],
       username: [this.user?.username, Validators.required],
@@ -61,7 +61,7 @@ export class BasicInfoCardComponent implements OnInit {
     this.submitted = true;
 
     if (!this.user || !this.user.id) {
-      this.notificationService.showErrorToast(
+      this._notificationService.showErrorToast(
         'No se puede actualizar la información del usuario'
       );
       return;
@@ -80,16 +80,16 @@ export class BasicInfoCardComponent implements OnInit {
     };
 
     // Envía la solicitud de actualización de usuario al servicio
-    this.userService.updateUser(updateUser).subscribe({
+    this._userService.updateUser(updateUser).subscribe({
       next: (data) => {
         this.submitted = false;
         this.updatedUserEvent.emit();
         // Muestra un toast de éxito
-        this.notificationService.showSuccessToast(data.message);
+        this._notificationService.showSuccessToast(data.message);
       },
       error: (error) => {
         // Muestra un toast de error
-        this.notificationService.showErrorToast(error.message);
+        this._notificationService.showErrorToast(error.message);
       },
     });
   }

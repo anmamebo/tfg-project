@@ -28,7 +28,7 @@ export class PermissionPageComponent {
   /** Datos de la entidad. */
   public entityData: entityData;
 
-  constructor(private permissionService: PermissionService) {
+  constructor(private _permissionService: PermissionService) {
     this.entityData = {
       title: {
         hasTitle: false,
@@ -47,7 +47,7 @@ export class PermissionPageComponent {
       actions: {
         hasActions: false,
       },
-      service: this.permissionService,
+      service: this._permissionService,
       items: null,
       page: 1,
       totalPages: 1,

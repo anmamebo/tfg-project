@@ -30,13 +30,13 @@ export class EditGroupCardComponent implements OnInit {
   public submitted: boolean = false;
 
   constructor(
-    private formBuilder: FormBuilder,
-    private groupService: GroupService,
-    private notificationService: NotificationService
+    private _fb: FormBuilder,
+    private _groupService: GroupService,
+    private _notificationService: NotificationService
   ) {}
 
   ngOnInit(): void {
-    this.editGroupForm = this.formBuilder.group({
+    this.editGroupForm = this._fb.group({
       name: [this.group.name, Validators.required],
     });
   }
@@ -58,13 +58,13 @@ export class EditGroupCardComponent implements OnInit {
 
     const groupEdited: Group = new Group(this.group.id, this.form.value.name);
 
-    this.groupService.update(this.group.id, groupEdited).subscribe({
+    this._groupService.update(this.group.id, groupEdited).subscribe({
       next: (data) => {
         this.submitted = false;
-        this.notificationService.showSuccessToast(data.message);
+        this._notificationService.showSuccessToast(data.message);
       },
       error: (error) => {
-        this.notificationService.showErrorToast(error);
+        this._notificationService.showErrorToast(error);
       },
     });
   }

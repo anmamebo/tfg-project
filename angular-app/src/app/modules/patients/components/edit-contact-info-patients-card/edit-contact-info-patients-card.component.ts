@@ -37,13 +37,13 @@ export class EditContactInfoPatientsCardComponent implements OnInit {
     new EventEmitter<void>();
 
   constructor(
-    private formBuilder: FormBuilder,
-    private patientService: PatientService,
-    private notificationService: NotificationService
+    private _fb: FormBuilder,
+    private _patientService: PatientService,
+    private _notificationService: NotificationService
   ) {}
 
   ngOnInit(): void {
-    this.editContactInfoPatientForm = this.formBuilder.group({
+    this.editContactInfoPatientForm = this._fb.group({
       username: [this.patient?.user?.username, Validators.required],
       email: [
         this.patient?.user?.email,
@@ -70,7 +70,7 @@ export class EditContactInfoPatientsCardComponent implements OnInit {
       !this.patient.user ||
       !this.patient.user.id
     ) {
-      this.notificationService.showErrorToast(
+      this._notificationService.showErrorToast(
         'No se ha podido obtener el paciente.'
       );
       return;
@@ -90,14 +90,14 @@ export class EditContactInfoPatientsCardComponent implements OnInit {
       },
     };
 
-    this.patientService.update(this.patient.id, updatedData).subscribe({
+    this._patientService.update(this.patient.id, updatedData).subscribe({
       next: (data) => {
         this.submitted = false;
-        this.notificationService.showSuccessToast(data.message);
+        this._notificationService.showSuccessToast(data.message);
         this.refreshPatient.emit();
       },
       error: (error) => {
-        this.notificationService.showErrorToast(error.message);
+        this._notificationService.showErrorToast(error.message);
       },
     });
   }

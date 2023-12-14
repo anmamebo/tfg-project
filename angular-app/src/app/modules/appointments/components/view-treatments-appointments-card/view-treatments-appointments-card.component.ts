@@ -23,7 +23,7 @@ export class ViewTreatmentsAppointmentsCardComponent extends GenericListCardComp
   @Input() public appointment: Appointment | null = null;
 
   constructor(
-    private treatmentService: TreatmentService,
+    private _treatmentService: TreatmentService,
     notificationService: NotificationService,
     public readonly swalTargets: SwalPortalTargets
   ) {
@@ -49,7 +49,7 @@ export class ViewTreatmentsAppointmentsCardComponent extends GenericListCardComp
       this.entityData.page = 1;
     }
 
-    this.treatmentService
+    this._treatmentService
       .getTreatmentsByAppointment(
         this.appointment.id,
         page,

@@ -26,9 +26,9 @@ export class GroupEditPageComponent implements OnInit {
   /** Grupo a editar. */
   public group: Group | null = null;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private _route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.group = this.route.snapshot.data['data']; // Obtiene los datos del grupo desde el resolver
+    this.group = this._route.snapshot.data['data']; // Obtiene los datos del grupo desde el resolver
   }
 }

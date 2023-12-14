@@ -28,7 +28,7 @@ export class DepartmentsPageComponent {
   /** Datos de la entidad. */
   public entityData: entityData;
 
-  constructor(private departmentService: DepartmentService) {
+  constructor(private _departmentService: DepartmentService) {
     this.entityData = {
       title: {
         hasTitle: false,
@@ -51,7 +51,7 @@ export class DepartmentsPageComponent {
           edit: '/departamentos/editar',
         },
       },
-      service: this.departmentService,
+      service: this._departmentService,
       items: null,
       page: 1,
       totalPages: 1,

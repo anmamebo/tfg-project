@@ -32,13 +32,13 @@ export class AddressInfoCardComponent implements OnInit {
   public submitted: boolean = false;
 
   constructor(
-    private formBuilder: FormBuilder,
-    private addressService: AddressService,
-    private notificationService: NotificationService
+    private _fb: FormBuilder,
+    private _addressService: AddressService,
+    private _notificationService: NotificationService
   ) {}
 
   ngOnInit(): void {
-    this.updateAddressDataForm = this.formBuilder.group({
+    this.updateAddressDataForm = this._fb.group({
       street: [
         this.address.street,
         [Validators.required, Validators.maxLength(255)],
@@ -97,13 +97,13 @@ export class AddressInfoCardComponent implements OnInit {
       this.form.value.floor || null
     );
 
-    this.addressService.updateAddress(updateAddress).subscribe({
+    this._addressService.updateAddress(updateAddress).subscribe({
       next: (data) => {
         this.submitted = false;
-        this.notificationService.showSuccessToast(data.message);
+        this._notificationService.showSuccessToast(data.message);
       },
       error: (error) => {
-        this.notificationService.showErrorToast(error.message);
+        this._notificationService.showErrorToast(error.message);
       },
     });
   }

@@ -23,8 +23,8 @@ export class ButtonsPatientsCardComponent {
   @Output() public refreshPatient: EventEmitter<void> = new EventEmitter();
 
   constructor(
-    private patientService: PatientService,
-    private notificationService: NotificationService
+    private _patientService: PatientService,
+    private _notificationService: NotificationService
   ) {}
 
   /**
@@ -32,13 +32,13 @@ export class ButtonsPatientsCardComponent {
    * @param id Identificador del paciente
    */
   public deletePatient(id: string): void {
-    this.notificationService.showConfirmDeleteDialog(() => {
-      this.patientService.delete(id).subscribe({
+    this._notificationService.showConfirmDeleteDialog(() => {
+      this._patientService.delete(id).subscribe({
         next: () => {
           this.refreshPatient.emit();
         },
         error: () => {
-          this.notificationService.showErrorToast(
+          this._notificationService.showErrorToast(
             'No se ha podido eliminar el paciente.'
           );
         },
@@ -51,13 +51,13 @@ export class ButtonsPatientsCardComponent {
    * @param id Identificador del paciente
    */
   public activatePatient(id: string): void {
-    this.notificationService.showConfirmReactivateDialog(() => {
-      this.patientService.activate(id).subscribe({
+    this._notificationService.showConfirmReactivateDialog(() => {
+      this._patientService.activate(id).subscribe({
         next: () => {
           this.refreshPatient.emit();
         },
         error: () => {
-          this.notificationService.showErrorToast(
+          this._notificationService.showErrorToast(
             'No se ha podido activar el paciente.'
           );
         },

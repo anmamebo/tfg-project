@@ -59,9 +59,9 @@ export class SchedulePageComponent implements OnInit {
   activeDayIsOpen: boolean = false;
 
   constructor(
-    private scheduleService: ScheduleService,
-    private cdr: ChangeDetectorRef,
-    private datePipe: DatePipe
+    private _scheduleService: ScheduleService,
+    private _cdr: ChangeDetectorRef,
+    private _datePipe: DatePipe
   ) {}
 
   ngOnInit(): void {
@@ -72,17 +72,17 @@ export class SchedulePageComponent implements OnInit {
    * Obtiene los horarios del doctor y actualiza la lista de eventos del calendario.
    */
   public getScheduleByDoctor(): void {
-    this.scheduleService.getScheduleByDoctor().subscribe({
+    this._scheduleService.getScheduleByDoctor().subscribe({
       next: (data) => {
         this.events = data.map((schedule) => ({
           start: new Date(schedule.start_time),
           end: new Date(schedule.end_time),
           title:
-            this.datePipe.transform(schedule.start_time, 'h:mm a') +
+            this._datePipe.transform(schedule.start_time, 'h:mm a') +
             ' - ' +
-            this.datePipe.transform(schedule.end_time, 'h:mm a'),
+            this._datePipe.transform(schedule.end_time, 'h:mm a'),
         }));
-        this.cdr.detectChanges();
+        this._cdr.detectChanges();
       },
       error: (error) => {
         console.error(error);

@@ -24,11 +24,11 @@ export class CreateDepartmentsCardComponent {
   public submitted: boolean = false;
 
   constructor(
-    private formBuilder: FormBuilder,
-    private departmentService: DepartmentService,
-    private notificationService: NotificationService
+    private _fb: FormBuilder,
+    private _departmentService: DepartmentService,
+    private _notificationService: NotificationService
   ) {
-    this.createDepartmentForm = this.formBuilder.group({
+    this.createDepartmentForm = this._fb.group({
       name: ['', [Validators.required, Validators.maxLength(50)]],
       description: ['', [Validators.maxLength(255)]],
     });
@@ -53,14 +53,14 @@ export class CreateDepartmentsCardComponent {
       description: this.form.value.description || null,
     };
 
-    this.departmentService.create(department).subscribe({
+    this._departmentService.create(department).subscribe({
       next: (data: any) => {
         this.form.reset();
         this.submitted = false;
-        this.notificationService.showSuccessToast(data.message);
+        this._notificationService.showSuccessToast(data.message);
       },
       error: (error: any) => {
-        this.notificationService.showErrorToast(error.message);
+        this._notificationService.showErrorToast(error.message);
       },
     });
   }

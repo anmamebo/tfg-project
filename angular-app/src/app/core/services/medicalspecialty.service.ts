@@ -1,14 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { API_URL } from '../constants/API_URL';
 
 // Servicios
 import { HttpCommonService } from './http-common.service';
-
-// Modelos
-import { MedicalSpecialty } from '../models/medical-specialty.model';
 
 /**
  * Servicio para interactuar con la API para la gestión de especialidades médicas.
@@ -21,8 +18,8 @@ export class MedicalspecialtyService {
   public url: string;
 
   constructor(
-    private http: HttpClient,
-    private httpCommonService: HttpCommonService
+    private _http: HttpClient,
+    private _httpCommonService: HttpCommonService
   ) {
     this.url = API_URL.url + 'doctors/medicalspecialties/';
   }
@@ -32,9 +29,9 @@ export class MedicalspecialtyService {
    * @returns Un observable que emite un objeto `any`.
    */
   getMedicalSpecialties(): Observable<any> {
-    const headers = this.httpCommonService.getCommonHeaders();
+    const headers = this._httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
-    return this.http.get<any>(this.url, httpOptions);
+    return this._http.get<any>(this.url, httpOptions);
   }
 }

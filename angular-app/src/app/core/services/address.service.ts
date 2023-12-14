@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable, catchError } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 import { API_URL } from '../constants/API_URL';
 
@@ -21,8 +21,8 @@ export class AddressService {
   public url: string;
 
   constructor(
-    private http: HttpClient,
-    private httpCommonService: HttpCommonService
+    private _http: HttpClient,
+    private _httpCommonService: HttpCommonService
   ) {
     this.url = API_URL.url + 'patients/addresses/';
   }
@@ -33,12 +33,12 @@ export class AddressService {
    * @returns Un observable que emite un objeto `any`.
    */
   public createAddress(address: Address): Observable<any> {
-    const headers = this.httpCommonService.getCommonHeaders();
+    const headers = this._httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
     let params = JSON.stringify(address);
 
-    return this.http.post<any>(this.url, params, httpOptions);
+    return this._http.post<any>(this.url, params, httpOptions);
   }
 
   /**
@@ -47,11 +47,15 @@ export class AddressService {
    * @returns Un observable que emite un objeto `any`.
    */
   public updateAddress(address: Address): Observable<any> {
-    const headers = this.httpCommonService.getCommonHeaders();
+    const headers = this._httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
     let params = JSON.stringify(address);
 
-    return this.http.put<any>(this.url + address.id + '/', params, httpOptions);
+    return this._http.put<any>(
+      this.url + address.id + '/',
+      params,
+      httpOptions
+    );
   }
 }

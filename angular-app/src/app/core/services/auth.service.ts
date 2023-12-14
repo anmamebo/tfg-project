@@ -27,8 +27,8 @@ export class AuthService {
   public url: string;
 
   constructor(
-    private http: HttpClient,
-    private tokenStorageService: TokenStorageService
+    private _http: HttpClient,
+    private _tokenStorageService: TokenStorageService
   ) {
     this.url = API_URL.url;
   }
@@ -44,7 +44,7 @@ export class AuthService {
   }): Observable<AuthResponse> {
     let params = JSON.stringify(user);
 
-    return this.http.post<AuthResponse>(
+    return this._http.post<AuthResponse>(
       this.url + 'login/',
       params,
       httpOptions
@@ -56,7 +56,7 @@ export class AuthService {
    * @returns `true` si el usuario ha iniciado sesión, de lo contrario `false`.
    */
   public isLogin(): boolean {
-    if (this.tokenStorageService.getToken()) {
+    if (this._tokenStorageService.getToken()) {
       return true;
     } else {
       return false;
@@ -68,7 +68,7 @@ export class AuthService {
    * @returns Un observable que emite un objeto `any`.
    */
   public logOut(): Observable<any> {
-    let user = this.tokenStorageService.signOut();
+    let user = this._tokenStorageService.signOut();
     let user_id = { user: user.user.id };
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -76,7 +76,7 @@ export class AuthService {
     });
     const httpOptions = { headers };
 
-    return this.http.post<any>(this.url + 'logout/', user_id, httpOptions);
+    return this._http.post<any>(this.url + 'logout/', user_id, httpOptions);
   }
 
   /**
@@ -84,7 +84,7 @@ export class AuthService {
    * @returns Lista de roles del usuario actual.
    */
   public getRolesFromToken(): string[] {
-    const token: string = this.tokenStorageService.getToken();
+    const token: string = this._tokenStorageService.getToken();
     const decodedToken: any = jwtDecode(token);
     const roles = decodedToken.groups || [];
     return roles;

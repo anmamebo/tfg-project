@@ -36,11 +36,11 @@ export class FormCreateTreatmentAppointmentsComponent {
     new EventEmitter<void>();
 
   constructor(
-    private formBuilder: FormBuilder,
-    private treatmentService: TreatmentService,
-    private notificationService: NotificationService
+    private _fb: FormBuilder,
+    private _treatmentService: TreatmentService,
+    private _notificationService: NotificationService
   ) {
-    this.createTreatmentForm = this.formBuilder.group({
+    this.createTreatmentForm = this._fb.group({
       description: ['', [Validators.required, Validators.maxLength(255)]],
       comments: ['', [Validators.maxLength(255)]],
       duration: ['', [Validators.required, Validators.maxLength(50)]],
@@ -67,7 +67,7 @@ export class FormCreateTreatmentAppointmentsComponent {
       !this.appointment.doctor ||
       !this.appointment.patient
     ) {
-      this.notificationService.showErrorToast(
+      this._notificationService.showErrorToast(
         'No se ha podido obtener la cita.'
       );
       return;
@@ -89,15 +89,15 @@ export class FormCreateTreatmentAppointmentsComponent {
       appointment: this.appointment.id,
     };
 
-    this.treatmentService.createTreatment(treatment).subscribe({
+    this._treatmentService.createTreatment(treatment).subscribe({
       next: (response: any) => {
         this.createTreatmentForm.reset();
         this.submitted = false;
         this.createdTreatment.emit();
-        this.notificationService.showSuccessToast(response.message);
+        this._notificationService.showSuccessToast(response.message);
       },
       error: (error: any) => {
-        this.notificationService.showErrorToast(error.message);
+        this._notificationService.showErrorToast(error.message);
       },
     });
   }

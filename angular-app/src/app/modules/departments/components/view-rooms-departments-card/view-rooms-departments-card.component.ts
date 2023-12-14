@@ -50,8 +50,8 @@ export class ViewRoomsDepartmentsCardComponent implements OnInit {
   public search: string = '';
 
   constructor(
-    private roomService: RoomService,
-    private notificationService: NotificationService
+    private _roomService: RoomService,
+    private _notificationService: NotificationService
   ) {}
 
   ngOnInit(): void {
@@ -87,7 +87,7 @@ export class ViewRoomsDepartmentsCardComponent implements OnInit {
       this.page = 1;
     }
 
-    this.roomService
+    this._roomService
       .getRoomsByDepartmentId(
         this.departmentId,
         page,
@@ -101,7 +101,7 @@ export class ViewRoomsDepartmentsCardComponent implements OnInit {
           this.totalPages = Math.ceil(this.numRooms / this.numResults);
         },
         error: (error: any) => {
-          this.notificationService.showErrorToast(error.message);
+          this._notificationService.showErrorToast(error.message);
         },
       });
   }

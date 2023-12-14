@@ -31,12 +31,12 @@ export class RoomsViewPageComponent implements OnInit {
   public room: Room | null = null;
 
   constructor(
-    private route: ActivatedRoute,
-    private roomService: RoomService
+    private _route: ActivatedRoute,
+    private _roomService: RoomService
   ) {}
 
   ngOnInit(): void {
-    this.room = this.route.snapshot.data['data']; // Obtiene los datos de la sala desde el resolver
+    this.room = this._route.snapshot.data['data']; // Obtiene los datos de la sala desde el resolver
   }
 
   /**
@@ -45,7 +45,7 @@ export class RoomsViewPageComponent implements OnInit {
   onRefreshRoom(): void {
     if (!this.room) return;
 
-    this.roomService.getItemById(this.room.id).subscribe({
+    this._roomService.getItemById(this.room.id).subscribe({
       next: (room: Room) => {
         this.room = room;
       },

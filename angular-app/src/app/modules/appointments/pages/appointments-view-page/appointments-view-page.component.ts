@@ -31,10 +31,10 @@ export class AppointmentsViewPageComponent {
   public appointment: Appointment | null = null;
 
   constructor(
-    private route: ActivatedRoute,
-    private appointmentService: AppointmentService
+    private _route: ActivatedRoute,
+    private _appointmentService: AppointmentService
   ) {
-    this.appointment = this.route.snapshot.data['data']; // Obtiene los datos de la cita desde el resolver
+    this.appointment = this._route.snapshot.data['data']; // Obtiene los datos de la cita desde el resolver
 
     if (this.appointment) {
       const formattedDate = this.appointment?.schedule?.start_time
@@ -58,7 +58,7 @@ export class AppointmentsViewPageComponent {
       return;
     }
 
-    this.appointmentService
+    this._appointmentService
       .getAppointmentByIdByDoctor(this.appointment.id)
       .subscribe({
         next: (appointment: Appointment) => {

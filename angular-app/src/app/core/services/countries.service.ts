@@ -11,7 +11,7 @@ export class CountriesService {
   /** URL base de la API. */
   public url: string;
 
-  constructor(private http: HttpClient) {
+  constructor(private _http: HttpClient) {
     this.url = 'https://restcountries.com/v3.1/';
   }
 
@@ -20,6 +20,6 @@ export class CountriesService {
    * @returns Un observable que emite un objeto `any`.
    */
   public getCountries() {
-    return this.http.get(`${this.url}all?fields=name,translations`);
+    return this._http.get(`${this.url}all?fields=name,translations`);
   }
 }

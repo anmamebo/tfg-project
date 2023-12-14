@@ -11,7 +11,7 @@ import { TokenStorageService } from './token-storage.service';
   providedIn: 'root',
 })
 export class HttpCommonService {
-  constructor(private tokenStorageService: TokenStorageService) {}
+  constructor(private _tokenStorageService: TokenStorageService) {}
 
   /**
    * Obtiene los encabezados HTTP comunes.
@@ -22,7 +22,7 @@ export class HttpCommonService {
       'Content-Type': 'application/json',
     });
 
-    const token = this.tokenStorageService.getToken();
+    const token = this._tokenStorageService.getToken();
     if (token) {
       headers = headers.append('Authorization', 'Bearer ' + token);
     }

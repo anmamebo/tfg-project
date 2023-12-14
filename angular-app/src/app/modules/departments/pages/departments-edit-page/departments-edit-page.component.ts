@@ -26,9 +26,9 @@ export class DepartmentsEditPageComponent implements OnInit {
   /** Departamento a editar. */
   public department: Department | null = null;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private _route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.department = this.route.snapshot.data['data']; // Obtiene los datos del departamento desde el resolver
+    this.department = this._route.snapshot.data['data']; // Obtiene los datos del departamento desde el resolver
   }
 }

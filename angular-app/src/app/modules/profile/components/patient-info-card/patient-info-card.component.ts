@@ -55,15 +55,15 @@ export class PatientInfoCardComponent implements OnInit {
     new EventEmitter<void>();
 
   constructor(
-    private formBuilder: FormBuilder,
-    private datePipe: DatePipe,
-    private patientService: PatientService,
-    private countriesService: CountriesService,
-    private notificationService: NotificationService
+    private _fb: FormBuilder,
+    private _datePipe: DatePipe,
+    private _patientService: PatientService,
+    private _countriesService: CountriesService,
+    private _notificationService: NotificationService
   ) {}
 
   ngOnInit(): void {
-    this.updatePatientDataForm = this.formBuilder.group({
+    this.updatePatientDataForm = this._fb.group({
       dni: [this.patient?.dni, [Validators.required, Validators.maxLength(9)]],
       social_security: [
         this.patient?.social_security,
@@ -95,7 +95,7 @@ export class PatientInfoCardComponent implements OnInit {
       allowSearchFilter: true,
     };
 
-    this.getCountries();
+    this._getCountries();
   }
 
   /** Obtiene el formulario */
@@ -110,7 +110,7 @@ export class PatientInfoCardComponent implements OnInit {
     this.submitted = true;
 
     if (!this.patient || !this.patient.id) {
-      this.notificationService.showErrorToast(
+      this._notificationService.showErrorToast(
         'No se puede actualizar la información del paciente'
       );
       return;
@@ -124,7 +124,7 @@ export class PatientInfoCardComponent implements OnInit {
       id: this.patient.id,
       din: this.form.value.dni,
       birthdate: this.form.value.birthdate
-        ? this.datePipe.transform(
+        ? this._datePipe.transform(
             new Date(this.form.value.birthdate),
             'yyyy-MM-dd'
           )
@@ -135,14 +135,14 @@ export class PatientInfoCardComponent implements OnInit {
       nationality: this.form.value.nationality[0]?.item_text || null,
     };
 
-    this.patientService.update(this.patient.id, updatePatient).subscribe({
+    this._patientService.update(this.patient.id, updatePatient).subscribe({
       next: (data) => {
         this.submitted = false;
         this.updatedPatientEvent.emit();
-        this.notificationService.showSuccessToast(data.message);
+        this._notificationService.showSuccessToast(data.message);
       },
       error: (error) => {
-        this.notificationService.showErrorToast(error.message);
+        this._notificationService.showErrorToast(error.message);
       },
     });
   }
@@ -150,8 +150,8 @@ export class PatientInfoCardComponent implements OnInit {
   /**
    * Obtiene los países.
    */
-  private getCountries(): void {
-    this.countriesService.getCountries().subscribe({
+  private _getCountries(): void {
+    this._countriesService.getCountries().subscribe({
       next: (data: any) => {
         this.nationalities = data.map((item: any) => ({
           item_id: item.translations.spa.common,
@@ -172,7 +172,7 @@ export class PatientInfoCardComponent implements OnInit {
         });
       },
       error: (error: any) => {
-        this.notificationService.showErrorToast(error.message);
+        this._notificationService.showErrorToast(error.message);
       },
     });
   }

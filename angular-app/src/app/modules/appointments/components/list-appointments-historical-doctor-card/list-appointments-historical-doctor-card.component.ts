@@ -24,7 +24,7 @@ export class ListAppointmentsHistoricalDoctorCardComponent extends GenericListCa
   ];
 
   constructor(
-    private appointmentService: AppointmentService,
+    private _appointmentService: AppointmentService,
     notificationService: NotificationService
   ) {
     super(notificationService);
@@ -46,7 +46,7 @@ export class ListAppointmentsHistoricalDoctorCardComponent extends GenericListCa
       this.entityData.page = 1;
     }
 
-    this.appointmentService
+    this._appointmentService
       .getAppointmentsByDoctor(
         ['completed', 'no_show', 'cancelled'],
         page,

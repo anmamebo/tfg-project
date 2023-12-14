@@ -31,13 +31,13 @@ export class EditInfoDepartmentsCardComponent implements OnInit {
   public submitted: boolean = false;
 
   constructor(
-    private formBuilder: FormBuilder,
-    private departmentService: DepartmentService,
-    private notificationService: NotificationService
+    private _fb: FormBuilder,
+    private _departmentService: DepartmentService,
+    private _notificationService: NotificationService
   ) {}
 
   ngOnInit(): void {
-    this.editInfoDepartmentForm = this.formBuilder.group({
+    this.editInfoDepartmentForm = this._fb.group({
       name: [
         this.department?.name,
         [Validators.required, Validators.maxLength(50)],
@@ -58,7 +58,7 @@ export class EditInfoDepartmentsCardComponent implements OnInit {
     this.submitted = true;
 
     if (!this.department || !this.department.id) {
-      this.notificationService.showErrorToast(
+      this._notificationService.showErrorToast(
         'No se ha podido obtener el departamento.'
       );
       return;
@@ -74,13 +74,13 @@ export class EditInfoDepartmentsCardComponent implements OnInit {
       description: this.form.value.description || null,
     };
 
-    this.departmentService.update(this.department.id, updatedData).subscribe({
+    this._departmentService.update(this.department.id, updatedData).subscribe({
       next: (data: any) => {
         this.submitted = false;
-        this.notificationService.showSuccessToast(data.message);
+        this._notificationService.showSuccessToast(data.message);
       },
       error: (error: any) => {
-        this.notificationService.showErrorToast(error.message);
+        this._notificationService.showErrorToast(error.message);
       },
     });
   }

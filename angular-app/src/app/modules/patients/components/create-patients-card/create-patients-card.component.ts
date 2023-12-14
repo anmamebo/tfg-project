@@ -47,7 +47,7 @@ export class CreatePatientsCardComponent implements OnInit {
   public submitted: boolean = false;
 
   /** Suscripción al valor del campo DNI */
-  private dniInputSubscription: Subscription = new Subscription();
+  private _dniInputSubscription: Subscription = new Subscription();
 
   /** Indica si se muestran los campos de dirección */
   public showAddressInputs: boolean = false;
@@ -59,13 +59,13 @@ export class CreatePatientsCardComponent implements OnInit {
   dropdownSettings: IDropdownSettings = {};
 
   constructor(
-    private formBuilder: FormBuilder,
-    private datePipe: DatePipe,
-    private patientService: PatientService,
-    private countriesService: CountriesService,
-    private notificationService: NotificationService
+    private _fb: FormBuilder,
+    private _datePipe: DatePipe,
+    private _patientService: PatientService,
+    private _countriesService: CountriesService,
+    private _notificationService: NotificationService
   ) {
-    this.patientInfoForm = this.formBuilder.group({
+    this.patientInfoForm = this._fb.group({
       username: [''],
       name: ['', Validators.required],
       last_name: ['', Validators.required],
@@ -78,7 +78,7 @@ export class CreatePatientsCardComponent implements OnInit {
       nationality: [''],
     });
 
-    this.addressForm = this.formBuilder.group({
+    this.addressForm = this._fb.group({
       street: [''],
       number: [''],
       floor: [''],
@@ -88,7 +88,7 @@ export class CreatePatientsCardComponent implements OnInit {
       postal_code: [''],
     });
 
-    this.createPatientForm = this.formBuilder.group({
+    this.createPatientForm = this._fb.group({
       patientInfoForm: this.patientInfoForm,
       addressForm: this.addressForm,
     });
@@ -106,9 +106,9 @@ export class CreatePatientsCardComponent implements OnInit {
       allowSearchFilter: true,
     };
 
-    this.getCountries();
+    this._getCountries();
 
-    this.dniInputSubscription = this.createPatientForm
+    this._dniInputSubscription = this.createPatientForm
       .get('patientInfoForm')!
       .get('dni')!
       .valueChanges.subscribe((value: string) => {
@@ -148,7 +148,7 @@ export class CreatePatientsCardComponent implements OnInit {
       dni: this.patientInfo.value.dni,
       social_security: this.patientInfo.value.social_security || null,
       birthdate: this.patientInfo.value.birthdate
-        ? this.datePipe.transform(
+        ? this._datePipe.transform(
             new Date(this.patientInfo.value.birthdate),
             'yyyy-MM-dd'
           )
@@ -170,14 +170,14 @@ export class CreatePatientsCardComponent implements OnInit {
       };
     }
 
-    this.patientService.create(patient).subscribe({
+    this._patientService.create(patient).subscribe({
       next: (data) => {
         this.createPatientForm.reset();
         this.submitted = false;
-        this.notificationService.showSuccessToast(data.message);
+        this._notificationService.showSuccessToast(data.message);
       },
       error: (error) => {
-        this.notificationService.showErrorToast(error.message);
+        this._notificationService.showErrorToast(error.message);
       },
     });
   }
@@ -187,13 +187,13 @@ export class CreatePatientsCardComponent implements OnInit {
    */
   public toggleAddressInputs(): void {
     this.showAddressInputs = !this.showAddressInputs;
-    this.initAddressValidators();
+    this._initAddressValidators();
   }
 
   /**
    * Inicializa los validadores de los campos de dirección en función de si se muestran o no.
    */
-  private initAddressValidators(): void {
+  private _initAddressValidators(): void {
     this.submitted = false;
 
     const fields = [
@@ -245,8 +245,8 @@ export class CreatePatientsCardComponent implements OnInit {
   /**
    * Obtiene los países.
    */
-  private getCountries(): void {
-    this.countriesService.getCountries().subscribe({
+  private _getCountries(): void {
+    this._countriesService.getCountries().subscribe({
       next: (data: any) => {
         this.nationalities = data.map((item: any) => ({
           item_id: item.translations.spa.common,
@@ -267,7 +267,7 @@ export class CreatePatientsCardComponent implements OnInit {
         });
       },
       error: (error) => {
-        this.notificationService.showErrorToast(error.message);
+        this._notificationService.showErrorToast(error.message);
       },
     });
   }

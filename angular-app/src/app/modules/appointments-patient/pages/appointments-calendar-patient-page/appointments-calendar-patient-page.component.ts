@@ -63,10 +63,10 @@ export class AppointmentsCalendarPatientPageComponent implements OnInit {
   activeDayIsOpen: boolean = false;
 
   constructor(
-    private appointmentService: AppointmentService,
-    private notificationService: NotificationService,
-    private datePipe: DatePipe,
-    private cdr: ChangeDetectorRef
+    private _appointmentService: AppointmentService,
+    private _notificationService: NotificationService,
+    private _datePipe: DatePipe,
+    private _cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -77,7 +77,7 @@ export class AppointmentsCalendarPatientPageComponent implements OnInit {
    * Obtiene las citas del paciente.
    */
   public getAppointments() {
-    this.appointmentService
+    this._appointmentService
       .getAppointmentsByPatient(
         ['scheduled', 'in_progress', 'completed', 'rescheduled'],
         0,
@@ -87,11 +87,11 @@ export class AppointmentsCalendarPatientPageComponent implements OnInit {
       )
       .subscribe({
         next: (data: any) => {
-          this.events = this.formatData(data);
-          this.cdr.detectChanges();
+          this.events = this._formatData(data);
+          this._cdr.detectChanges();
         },
         error: (error: any) => {
-          this.notificationService.showErrorToast(error.message);
+          this._notificationService.showErrorToast(error.message);
         },
       });
   }
@@ -101,7 +101,7 @@ export class AppointmentsCalendarPatientPageComponent implements OnInit {
    * @param appointments - Lista de citas.
    * @returns Lista de eventos del calendario.
    */
-  private formatData(appointments: Appointment[]): CalendarEvent[] {
+  private _formatData(appointments: Appointment[]): CalendarEvent[] {
     return appointments.map((appointment: Appointment) => {
       const scheduleStartTime = appointment.schedule?.start_time;
       const doctorName = appointment.doctor?.user?.name;
@@ -113,7 +113,7 @@ export class AppointmentsCalendarPatientPageComponent implements OnInit {
 
       if (scheduleStartTime) {
         titleParts.push(
-          this.datePipe.transform(scheduleStartTime, 'HH:mm') || ''
+          this._datePipe.transform(scheduleStartTime, 'HH:mm') || ''
         );
       }
 

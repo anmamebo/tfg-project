@@ -17,19 +17,19 @@ export class UserDropdownComponent implements OnInit {
   public username: string = '';
 
   constructor(
-    private authService: AuthService,
-    private tokenStorageService: TokenStorageService
+    private _authService: AuthService,
+    private _tokenStorageService: TokenStorageService
   ) {}
 
   ngOnInit(): void {
-    this.getUser();
+    this._getUser();
   }
 
   /**
    * Método para cerrar la sesión del usuario.
    */
   public logout(): void {
-    this.authService.logOut().subscribe({
+    this._authService.logOut().subscribe({
       next: (data) => {
         // Recargar la página después del cierre de sesión.
         window.location.reload();
@@ -43,8 +43,8 @@ export class UserDropdownComponent implements OnInit {
   /**
    * Método para obtener el usuario logueado y actualizar el nombre de usuario.
    */
-  private getUser(): void {
-    let user = this.tokenStorageService.getUser();
+  private _getUser(): void {
+    let user = this._tokenStorageService.getUser();
     if (user && user.user && user.user.username) {
       this.username = user.user.name;
     }

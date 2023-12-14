@@ -28,13 +28,13 @@ export class ViewReasonObservationsAppointmentsCardComponent implements OnInit {
     new EventEmitter<void>();
 
   constructor(
-    private formBuilder: FormBuilder,
-    private appointmentService: AppointmentService,
-    private notificationService: NotificationService
+    private _fb: FormBuilder,
+    private _appointmentService: AppointmentService,
+    private _notificationService: NotificationService
   ) {}
 
   ngOnInit(): void {
-    this.observationsForm = this.formBuilder.group({
+    this.observationsForm = this._fb.group({
       observations: [
         this.appointment?.observations,
         [Validators.maxLength(255)],
@@ -54,7 +54,7 @@ export class ViewReasonObservationsAppointmentsCardComponent implements OnInit {
     this.submitted = true;
 
     if (!this.appointment || !this.appointment.id) {
-      this.notificationService.showErrorToast(
+      this._notificationService.showErrorToast(
         'No se ha podido obtener la cita.'
       );
       return;
@@ -65,7 +65,7 @@ export class ViewReasonObservationsAppointmentsCardComponent implements OnInit {
     }
 
     if (this.form.value.observations === this.appointment?.observations) {
-      this.notificationService.showWarningToast(
+      this._notificationService.showWarningToast(
         'No ha introducido ninguna observación nueva.'
       );
       return;
@@ -78,16 +78,18 @@ export class ViewReasonObservationsAppointmentsCardComponent implements OnInit {
         : null,
     };
 
-    this.appointmentService.update(this.appointment.id, appointment).subscribe({
-      next: (response: any) => {
-        this.notificationService.showSuccessToast(
-          'Observaciones actualizadas correctamente.'
-        );
-        this.refreshAppointment.emit();
-      },
-      error: (error: any) => {
-        this.notificationService.showErrorToast(error.message);
-      },
-    });
+    this._appointmentService
+      .update(this.appointment.id, appointment)
+      .subscribe({
+        next: (response: any) => {
+          this._notificationService.showSuccessToast(
+            'Observaciones actualizadas correctamente.'
+          );
+          this.refreshAppointment.emit();
+        },
+        error: (error: any) => {
+          this._notificationService.showErrorToast(error.message);
+        },
+      });
   }
 }

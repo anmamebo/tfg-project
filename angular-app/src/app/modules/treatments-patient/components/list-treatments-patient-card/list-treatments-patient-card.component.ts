@@ -14,7 +14,7 @@ import { NotificationService } from 'src/app/core/services/notification.service'
 })
 export class ListTreatmentsPatientCardComponent extends GenericListCardComponent {
   constructor(
-    private treatmentService: TreatmentService,
+    private _treatmentService: TreatmentService,
     notificationService: NotificationService
   ) {
     super(notificationService);
@@ -36,7 +36,7 @@ export class ListTreatmentsPatientCardComponent extends GenericListCardComponent
       this.entityData.page = 1;
     }
 
-    this.treatmentService
+    this._treatmentService
       .getTreatmentsByPatient(
         ['in_progress'],
         page,

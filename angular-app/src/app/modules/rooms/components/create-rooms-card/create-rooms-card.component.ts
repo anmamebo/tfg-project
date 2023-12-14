@@ -34,12 +34,12 @@ export class CreateRoomsCardComponent implements OnInit {
   dropdownSettings: IDropdownSettings = {};
 
   constructor(
-    private formBuilder: FormBuilder,
-    private roomService: RoomService,
-    private departmentService: DepartmentService,
-    private notificationService: NotificationService
+    private _fb: FormBuilder,
+    private _roomService: RoomService,
+    private _departmentService: DepartmentService,
+    private _notificationService: NotificationService
   ) {
-    this.createRoomForm = this.formBuilder.group({
+    this.createRoomForm = this._fb.group({
       name: ['', [Validators.required, Validators.maxLength(50)]],
       description: ['', [Validators.maxLength(255)]],
       capacity: ['', [Validators.min(1), Validators.pattern(INTEGER_REGEXP)]],
@@ -89,14 +89,14 @@ export class CreateRoomsCardComponent implements OnInit {
       department: this.form.value.department[0].item_id,
     };
 
-    this.roomService.create(room).subscribe({
+    this._roomService.create(room).subscribe({
       next: (data) => {
         this.form.reset();
         this.submitted = false;
-        this.notificationService.showSuccessToast(data.message);
+        this._notificationService.showSuccessToast(data.message);
       },
       error: (error) => {
-        this.notificationService.showErrorToast(error.message);
+        this._notificationService.showErrorToast(error.message);
       },
     });
   }
@@ -105,7 +105,7 @@ export class CreateRoomsCardComponent implements OnInit {
    * Obtiene los departamentos.
    */
   public getDepartments() {
-    this.departmentService.getItems().subscribe({
+    this._departmentService.getItems().subscribe({
       next: (data) => {
         this.departments = data.map((item: { id: String; name: String }) => ({
           item_id: item.id,
@@ -113,7 +113,7 @@ export class CreateRoomsCardComponent implements OnInit {
         }));
       },
       error: (error) => {
-        this.notificationService.showErrorToast(error.message);
+        this._notificationService.showErrorToast(error.message);
       },
     });
   }

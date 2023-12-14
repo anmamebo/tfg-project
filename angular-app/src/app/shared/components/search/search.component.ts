@@ -16,8 +16,8 @@ export class SearchComponent {
   /** Formulario de búsqueda. */
   public formSearch: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {
-    this.formSearch = this.formBuilder.group({
+  constructor(private _fb: FormBuilder) {
+    this.formSearch = this._fb.group({
       searchTerm: [''],
     });
   }

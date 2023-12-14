@@ -31,12 +31,12 @@ export class DepartmentsViewPageComponent implements OnInit {
   public department: Department | null = null;
 
   constructor(
-    private route: ActivatedRoute,
-    private departmentService: DepartmentService
+    private _route: ActivatedRoute,
+    private _departmentService: DepartmentService
   ) {}
 
   ngOnInit(): void {
-    this.department = this.route.snapshot.data['data']; // Obtiene los datos del departamento desde el resolver
+    this.department = this._route.snapshot.data['data']; // Obtiene los datos del departamento desde el resolver
   }
 
   /**
@@ -46,7 +46,7 @@ export class DepartmentsViewPageComponent implements OnInit {
     if (!this.department) {
       return;
     }
-    this.departmentService.getItemById(this.department.id).subscribe({
+    this._departmentService.getItemById(this.department.id).subscribe({
       next: (department: Department) => {
         this.department = department;
       },

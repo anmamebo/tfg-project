@@ -26,9 +26,9 @@ export class RoomsEditPageComponent implements OnInit {
   /** Sala a editar. */
   public room: Room | null = null;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private _route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.room = this.route.snapshot.data['data']; // Obtiene los datos de la sala desde el resolver
+    this.room = this._route.snapshot.data['data']; // Obtiene los datos de la sala desde el resolver
   }
 }

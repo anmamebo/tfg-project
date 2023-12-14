@@ -14,7 +14,7 @@ import { NotificationService } from 'src/app/core/services/notification.service'
 })
 export class ListAppointmentsHistoricalPatientCardComponent extends GenericListCardComponent {
   constructor(
-    private appointmentService: AppointmentService,
+    private _appointmentService: AppointmentService,
     notificationService: NotificationService
   ) {
     super(notificationService);
@@ -38,7 +38,7 @@ export class ListAppointmentsHistoricalPatientCardComponent extends GenericListC
       this.entityData.page = 1;
     }
 
-    this.appointmentService
+    this._appointmentService
       .getAppointmentsByPatient(
         ['completed', 'no_show', 'cancelled'],
         page,

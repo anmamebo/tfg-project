@@ -36,7 +36,7 @@ export class GroupPageComponent {
   @ViewChild(GenericListCardComponent, { static: false })
   listGroupCardComponent?: GenericListCardComponent;
 
-  constructor(private groupService: GroupService) {
+  constructor(private _groupService: GroupService) {
     this.entityData = {
       title: {
         hasTitle: false,
@@ -57,7 +57,7 @@ export class GroupPageComponent {
           edit: '/autorizacion/grupos/editar',
         },
       },
-      service: this.groupService,
+      service: this._groupService,
       items: null,
       page: 1,
       totalPages: 1,

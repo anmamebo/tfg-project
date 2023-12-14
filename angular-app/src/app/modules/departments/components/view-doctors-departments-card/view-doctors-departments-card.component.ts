@@ -49,8 +49,8 @@ export class ViewDoctorsDepartmentsCardComponent implements OnInit {
   public search: string = '';
 
   constructor(
-    private doctorService: DoctorService,
-    private notificationService: NotificationService
+    private _doctorService: DoctorService,
+    private _notificationService: NotificationService
   ) {}
 
   ngOnInit(): void {
@@ -86,7 +86,7 @@ export class ViewDoctorsDepartmentsCardComponent implements OnInit {
       this.page = 1;
     }
 
-    this.doctorService
+    this._doctorService
       .getDoctorsByDepartmentId(
         this.departmentId,
         page,
@@ -100,7 +100,7 @@ export class ViewDoctorsDepartmentsCardComponent implements OnInit {
           this.totalPages = Math.ceil(this.numDoctors / this.numResults);
         },
         error: (error: any) => {
-          this.notificationService.showErrorToast(error.message);
+          this._notificationService.showErrorToast(error.message);
         },
       });
   }

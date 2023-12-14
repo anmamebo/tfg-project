@@ -23,8 +23,8 @@ export class ButtonsRoomsCardComponent {
   @Output() public refreshRoom: EventEmitter<void> = new EventEmitter();
 
   constructor(
-    private roomService: RoomService,
-    private notificationService: NotificationService
+    private _roomService: RoomService,
+    private _notificationService: NotificationService
   ) {}
 
   /**
@@ -32,13 +32,13 @@ export class ButtonsRoomsCardComponent {
    * @param id Identificador de la sala
    */
   public deleteRoom(id: string): void {
-    this.notificationService.showConfirmDeleteDialog(() => {
-      this.roomService.delete(id).subscribe({
+    this._notificationService.showConfirmDeleteDialog(() => {
+      this._roomService.delete(id).subscribe({
         next: () => {
           this.refreshRoom.emit();
         },
         error: () => {
-          this.notificationService.showErrorToast(
+          this._notificationService.showErrorToast(
             'No se ha podido eliminar la sala.'
           );
         },
@@ -51,13 +51,13 @@ export class ButtonsRoomsCardComponent {
    * @param id Identificador de la sala
    */
   public activateRoom(id: string): void {
-    this.notificationService.showConfirmReactivateDialog(() => {
-      this.roomService.activate(id).subscribe({
+    this._notificationService.showConfirmReactivateDialog(() => {
+      this._roomService.activate(id).subscribe({
         next: () => {
           this.refreshRoom.emit();
         },
         error: () => {
-          this.notificationService.showErrorToast(
+          this._notificationService.showErrorToast(
             'No se ha podido activar la sala.'
           );
         },

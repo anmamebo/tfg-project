@@ -28,7 +28,7 @@ export class DoctorsPageComponent {
   /** Datos de la entidad. */
   public entityData: entityData;
 
-  constructor(private doctorService: DoctorService) {
+  constructor(private _doctorService: DoctorService) {
     this.entityData = {
       title: {
         hasTitle: false,
@@ -53,7 +53,7 @@ export class DoctorsPageComponent {
           edit: '/medicos/editar',
         },
       },
-      service: this.doctorService,
+      service: this._doctorService,
       items: null,
       page: 1,
       totalPages: 1,

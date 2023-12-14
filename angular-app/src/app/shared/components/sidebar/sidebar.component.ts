@@ -15,10 +15,10 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   /** Referencia al elemento HTML del sidebar. */
   sidebarEL: HTMLElement | null = null;
 
-  constructor(private elementRef: ElementRef) {}
+  constructor(private _elementRef: ElementRef) {}
 
   ngOnInit(): void {
-    this.initTheme();
+    this._initTheme();
   }
 
   ngAfterViewInit(): void {
@@ -30,7 +30,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
 
       toggler.addEventListener('input', (e) => {
         if (!e.target) return;
-        this.setTheme(
+        this._setTheme(
           (<HTMLInputElement>e.target).checked ? 'dark' : 'light',
           true
         );
@@ -38,25 +38,25 @@ export class SidebarComponent implements OnInit, AfterViewInit {
     }
 
     // Obtiene el elemento HTML del sidebar.
-    this.sidebarEL = this.elementRef.nativeElement.querySelector('#sidebar');
-    this.onFirstLoad(); // Ejecuta el método onFirstLoad() para inicializar el sidebar.
-    this.initializeEventListeners(); // Inicializa los eventos del sidebar.
+    this.sidebarEL = this._elementRef.nativeElement.querySelector('#sidebar');
+    this._onFirstLoad(); // Ejecuta el método onFirstLoad() para inicializar el sidebar.
+    this._initializeEventListeners(); // Inicializa los eventos del sidebar.
   }
 
   /**
    * Verifica si el ancho de la ventana es mayor a 1200px.
    * @returns boolean true si el ancho de la ventana es mayor a 1200px, false en caso contrario.
    */
-  private isDesktop(): boolean {
+  private _isDesktop(): boolean {
     return window.innerWidth > 1200;
   }
 
   /**
    * Inicializa el sidebar.
    */
-  private onFirstLoad(): void {
+  private _onFirstLoad(): void {
     if (!this.sidebarEL) return;
-    if (this.isDesktop()) {
+    if (this._isDesktop()) {
       this.sidebarEL.classList.add('active');
       this.sidebarEL.classList.add('sidebar-desktop');
     }
@@ -75,7 +75,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
       }
 
       setTimeout(() => {
-        const height = this.calculateChildrenHeight(submenu, true);
+        const height = this._calculateChildrenHeight(submenu, true);
       }, 50);
     });
   }
@@ -83,16 +83,16 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   /**
    * Inicializa los eventos del sidebar.
    */
-  private initializeEventListeners(): void {
+  private _initializeEventListeners(): void {
     if (!this.sidebarEL) return;
 
     document
       .querySelectorAll('.burger-btn')
-      .forEach((el) => el.addEventListener('click', this.toggle.bind(this)));
+      .forEach((el) => el.addEventListener('click', this._toggle.bind(this)));
     document
       .querySelectorAll('.sidebar-hide')
-      .forEach((el) => el.addEventListener('click', this.toggle.bind(this)));
-    window.addEventListener('resize', this.onResize.bind(this));
+      .forEach((el) => el.addEventListener('click', this._toggle.bind(this)));
+    window.addEventListener('resize', this._onResize.bind(this));
 
     const toggleSubmenu = (el: HTMLElement) => {
       if (el.classList.contains('submenu-open')) {
@@ -130,7 +130,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
           if (submenuLevelTwo) {
             toggleSubmenu(submenuLevelTwo);
 
-            const height = this.calculateChildrenHeight(
+            const height = this._calculateChildrenHeight(
               item.parentElement as HTMLElement,
               true
             );
@@ -143,70 +143,70 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   /**
    * Evento que se ejecuta cuando se redimensiona la ventana.
    */
-  private onResize(): void {
+  private _onResize(): void {
     if (!this.sidebarEL) return;
-    if (this.isDesktop()) {
+    if (this._isDesktop()) {
       this.sidebarEL.classList.add('active');
       this.sidebarEL.classList.remove('inactive');
     } else {
       this.sidebarEL.classList.remove('active');
     }
 
-    this.deleteBackdrop();
-    this.toggleOverFlowBody(true);
+    this._deleteBackdrop();
+    this._toggleOverFlowBody(true);
   }
 
   /**
    * Muestra u oculta el sidebar.
    */
-  private toggle(): void {
+  private _toggle(): void {
     if (!this.sidebarEL) return;
     const sidebarState = this.sidebarEL.classList.contains('active');
     if (sidebarState) {
-      this.hide();
+      this._hide();
     } else {
-      this.show();
+      this._show();
     }
   }
 
   /**
    * Muestra el sidebar.
    */
-  private show(): void {
+  private _show(): void {
     if (!this.sidebarEL) return;
     this.sidebarEL.classList.add('active');
     this.sidebarEL.classList.remove('inactive');
-    this.createBackdrop();
-    this.toggleOverFlowBody();
+    this._createBackdrop();
+    this._toggleOverFlowBody();
   }
 
   /**
    * Oculta el sidebar.
    */
-  private hide(): void {
+  private _hide(): void {
     if (!this.sidebarEL) return;
     this.sidebarEL.classList.remove('active');
     this.sidebarEL.classList.add('inactive');
-    this.deleteBackdrop();
-    this.toggleOverFlowBody();
+    this._deleteBackdrop();
+    this._toggleOverFlowBody();
   }
 
   /**
    * Crea el backdrop del sidebar.
    */
-  private createBackdrop(): void {
-    if (this.isDesktop()) return;
-    this.deleteBackdrop();
+  private _createBackdrop(): void {
+    if (this._isDesktop()) return;
+    this._deleteBackdrop();
     const backdrop = document.createElement('div');
     backdrop.classList.add('sidebar-backdrop');
-    backdrop.addEventListener('click', this.hide.bind(this));
+    backdrop.addEventListener('click', this._hide.bind(this));
     document.body.appendChild(backdrop);
   }
 
   /**
    * Elimina el backdrop del sidebar.
    */
-  private deleteBackdrop(): void {
+  private _deleteBackdrop(): void {
     const backdrop = document.querySelector('.sidebar-backdrop');
     if (backdrop) {
       backdrop.remove();
@@ -217,7 +217,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
    * Muestra u oculta el overflow del body.
    * @param active boolean true para mostrar el overflow del body, false para ocultarlo.
    */
-  private toggleOverFlowBody(active?: boolean): void {
+  private _toggleOverFlowBody(active?: boolean): void {
     const body = document.querySelector('body');
     if (!this.sidebarEL || !body) return;
     const sidebarState = this.sidebarEL.classList.contains('active');
@@ -234,7 +234,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
    * @param deep boolean true para calcular la altura de los hijos de los hijos del sidebar, false para calcular la altura de los hijos directos del sidebar.
    * @returns number altura de los hijos del sidebar.
    */
-  private calculateChildrenHeight(el: HTMLElement, deep = false): number {
+  private _calculateChildrenHeight(el: HTMLElement, deep = false): number {
     let height = 0;
     const children = Array.from(el.children);
 
@@ -274,7 +274,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
    * @param theme string tema de la aplicación.
    * @param persist boolean true para persistir el tema en el localStorage, false en caso contrario.
    */
-  private setTheme(theme: string, persist = false): void {
+  private _setTheme(theme: string, persist = false): void {
     document.body.classList.add(theme);
     document.documentElement.setAttribute('data-bs-theme', theme);
 
@@ -286,11 +286,11 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   /**
    * Inicializa el tema de la aplicación.
    */
-  private initTheme(): void {
+  private _initTheme(): void {
     //If the user manually set a theme, we'll load that
     const storedTheme = localStorage.getItem(this.THEME_KEY);
     if (storedTheme) {
-      return this.setTheme(storedTheme);
+      return this._setTheme(storedTheme);
     }
     //Detect if the user set his preferred color scheme to dark
     if (!window.matchMedia) {
@@ -302,8 +302,8 @@ export class SidebarComponent implements OnInit, AfterViewInit {
 
     //Register change listener
     mediaQuery.addEventListener('change', (e) =>
-      this.setTheme(e.matches ? 'dark' : 'light', true)
+      this._setTheme(e.matches ? 'dark' : 'light', true)
     );
-    return this.setTheme(mediaQuery.matches ? 'dark' : 'light', true);
+    return this._setTheme(mediaQuery.matches ? 'dark' : 'light', true);
   }
 }

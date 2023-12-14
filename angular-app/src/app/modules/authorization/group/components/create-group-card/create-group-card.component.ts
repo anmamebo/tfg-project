@@ -30,11 +30,11 @@ export class CreateGroupCardComponent {
   @Output() public groupCreated: EventEmitter<any> = new EventEmitter();
 
   constructor(
-    private formBuilder: FormBuilder,
-    private groupService: GroupService,
-    private notificationService: NotificationService
+    private _fb: FormBuilder,
+    private _groupService: GroupService,
+    private _notificationService: NotificationService
   ) {
-    this.createGroupForm = this.formBuilder.group({
+    this.createGroupForm = this._fb.group({
       name: ['', Validators.required],
     });
   }
@@ -56,15 +56,15 @@ export class CreateGroupCardComponent {
 
     const group: Group = new Group('', this.form.value.name);
 
-    this.groupService.create(group).subscribe({
+    this._groupService.create(group).subscribe({
       next: (response) => {
         this.submitted = false;
-        this.notificationService.showSuccessToast(response.message);
+        this._notificationService.showSuccessToast(response.message);
         this.groupCreated.emit();
         this.createGroupForm.reset();
       },
       error: (error) => {
-        this.notificationService.showErrorToast(error.message);
+        this._notificationService.showErrorToast(error.message);
       },
     });
   }

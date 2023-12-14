@@ -40,13 +40,13 @@ export class EditAddressPatientsCardComponent implements OnInit {
     new EventEmitter<void>();
 
   constructor(
-    private formBuilder: FormBuilder,
-    private addressService: AddressService,
-    private notificationService: NotificationService
+    private _fb: FormBuilder,
+    private _addressService: AddressService,
+    private _notificationService: NotificationService
   ) {}
 
   ngOnInit(): void {
-    this.editAddressPatientForm = this.formBuilder.group({
+    this.editAddressPatientForm = this._fb.group({
       street: [
         this.address?.street,
         [Validators.required, Validators.maxLength(255)],
@@ -109,26 +109,26 @@ export class EditAddressPatientsCardComponent implements OnInit {
       // Si el paciente no tiene dirección, se crea una nueva
       address.patient_id = this.patientId;
 
-      this.addressService.createAddress(address).subscribe({
+      this._addressService.createAddress(address).subscribe({
         next: (data) => {
           this.submitted = false;
-          this.notificationService.showSuccessToast(data.message);
+          this._notificationService.showSuccessToast(data.message);
           this.refreshPatient.emit();
         },
         error: (error) => {
-          this.notificationService.showErrorToast(error.message);
+          this._notificationService.showErrorToast(error.message);
         },
       });
     } else {
       // Si el paciente tiene dirección, se actualiza
-      this.addressService.updateAddress(address).subscribe({
+      this._addressService.updateAddress(address).subscribe({
         next: (data) => {
           this.submitted = false;
-          this.notificationService.showSuccessToast(data.message);
+          this._notificationService.showSuccessToast(data.message);
           this.refreshPatient.emit();
         },
         error: (error) => {
-          this.notificationService.showErrorToast(error.message);
+          this._notificationService.showErrorToast(error.message);
         },
       });
     }

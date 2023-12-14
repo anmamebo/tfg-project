@@ -31,12 +31,12 @@ export class PatientsViewPageComponent implements OnInit {
   public patient: Patient | null = null;
 
   constructor(
-    private route: ActivatedRoute,
-    private patientService: PatientService
+    private _route: ActivatedRoute,
+    private _patientService: PatientService
   ) {}
 
   ngOnInit(): void {
-    this.patient = this.route.snapshot.data['data']; // Obtiene los datos del paciente desde el resolver
+    this.patient = this._route.snapshot.data['data']; // Obtiene los datos del paciente desde el resolver
 
     if (this.patient && this.patient.user) {
       this.pageTitle += ` - ${this.patient.user.name} ${this.patient.user.last_name}`;
@@ -46,10 +46,10 @@ export class PatientsViewPageComponent implements OnInit {
   /**
    * Actualiza los datos del paciente
    */
-  onRefreshPatient(): void {
+  public onRefreshPatient(): void {
     if (!this.patient) return;
 
-    this.patientService.getItemById(this.patient.id).subscribe({
+    this._patientService.getItemById(this.patient.id).subscribe({
       next: (patient: Patient) => {
         this.patient = patient;
       },

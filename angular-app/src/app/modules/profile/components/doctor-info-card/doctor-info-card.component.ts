@@ -36,13 +36,13 @@ export class DoctorInfoCardComponent implements OnInit {
     new EventEmitter<void>();
 
   constructor(
-    private formBuilder: FormBuilder,
-    private doctorService: DoctorService,
-    private notificationService: NotificationService
+    private _fb: FormBuilder,
+    private _doctorService: DoctorService,
+    private _notificationService: NotificationService
   ) {}
 
   ngOnInit(): void {
-    this.updateDoctorDataForm = this.formBuilder.group({
+    this.updateDoctorDataForm = this._fb.group({
       collegiate_number: [
         this.doctor?.collegiate_number,
         [
@@ -67,7 +67,7 @@ export class DoctorInfoCardComponent implements OnInit {
     this.submitted = true;
 
     if (!this.doctor || !this.doctor.id) {
-      this.notificationService.showErrorToast(
+      this._notificationService.showErrorToast(
         'No se puede actualizar la información del doctor'
       );
       return;
@@ -84,14 +84,14 @@ export class DoctorInfoCardComponent implements OnInit {
       user: this.doctor.user,
     };
 
-    this.doctorService.update(this.doctor.id, updateDoctor).subscribe({
+    this._doctorService.update(this.doctor.id, updateDoctor).subscribe({
       next: (data) => {
         this.submitted = false;
-        this.notificationService.showSuccessToast(data.message);
+        this._notificationService.showSuccessToast(data.message);
         this.updatedDoctorEvent.emit();
       },
       error: (error) => {
-        this.notificationService.showErrorToast(error.message);
+        this._notificationService.showErrorToast(error.message);
       },
     });
   }

@@ -47,15 +47,15 @@ export class EditBasicInfoDoctorsCardComponent implements OnInit {
   dropdownSettings: IDropdownSettings = {};
 
   constructor(
-    private formBuilder: FormBuilder,
-    private doctorService: DoctorService,
-    private medicalSpecialtyService: MedicalspecialtyService,
-    private departmentService: DepartmentService,
-    private notificationService: NotificationService
+    private _fb: FormBuilder,
+    private _doctorService: DoctorService,
+    private _medicalSpecialtyService: MedicalspecialtyService,
+    private _departmentService: DepartmentService,
+    private _notificationService: NotificationService
   ) {}
 
   ngOnInit(): void {
-    this.editBasicInfoDoctorForm = this.formBuilder.group({
+    this.editBasicInfoDoctorForm = this._fb.group({
       name: [this.doctor?.user?.name, Validators.required],
       last_name: [this.doctor?.user?.last_name, Validators.required],
       collegiate_number: [
@@ -113,7 +113,7 @@ export class EditBasicInfoDoctorsCardComponent implements OnInit {
       !this.doctor.user ||
       !this.doctor.user.id
     ) {
-      this.notificationService.showErrorToast(
+      this._notificationService.showErrorToast(
         'No se ha podido obtener el médico.'
       );
       return;
@@ -140,14 +140,14 @@ export class EditBasicInfoDoctorsCardComponent implements OnInit {
       ),
     };
 
-    this.doctorService.update(this.doctor.id, updatedData).subscribe({
+    this._doctorService.update(this.doctor.id, updatedData).subscribe({
       next: (data) => {
         this.submitted = false;
-        this.notificationService.showSuccessToast(data.message);
+        this._notificationService.showSuccessToast(data.message);
         this.refreshDoctor.emit();
       },
       error: (error) => {
-        this.notificationService.showErrorToast(error.message);
+        this._notificationService.showErrorToast(error.message);
       },
     });
   }
@@ -156,7 +156,7 @@ export class EditBasicInfoDoctorsCardComponent implements OnInit {
    * Obtiene las especialidades médicas.
    */
   public getMedicalSpecialties() {
-    this.medicalSpecialtyService.getMedicalSpecialties().subscribe({
+    this._medicalSpecialtyService.getMedicalSpecialties().subscribe({
       next: (data) => {
         this.medicalSpecialties = data.map(
           (item: { id: String; name: String }) => ({
@@ -166,7 +166,7 @@ export class EditBasicInfoDoctorsCardComponent implements OnInit {
         );
       },
       error: (error) => {
-        this.notificationService.showErrorToast(error.message);
+        this._notificationService.showErrorToast(error.message);
       },
     });
   }
@@ -175,7 +175,7 @@ export class EditBasicInfoDoctorsCardComponent implements OnInit {
    * Obtiene los departamentos.
    */
   public getDepartments() {
-    this.departmentService.getItems().subscribe({
+    this._departmentService.getItems().subscribe({
       next: (data) => {
         this.departments = data.map((item: { id: String; name: String }) => ({
           item_id: item.id,
@@ -183,7 +183,7 @@ export class EditBasicInfoDoctorsCardComponent implements OnInit {
         }));
       },
       error: (error) => {
-        this.notificationService.showErrorToast(error.message);
+        this._notificationService.showErrorToast(error.message);
       },
     });
   }

@@ -31,10 +31,10 @@ export class AvatarComponent implements OnInit {
   @Input() extraClasses: string[] = [];
 
   constructor(
-    private userService: UserService,
-    private profileImageService: ProfileImageService
+    private _userService: UserService,
+    private _profileImageService: ProfileImageService
   ) {
-    this.profileImageService.profileImageUpdated.subscribe(
+    this._profileImageService.profileImageUpdated.subscribe(
       (imageUrl: string) => {
         this.profile_picture = imageUrl;
       }
@@ -42,7 +42,7 @@ export class AvatarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userService.getProfilePicture().subscribe({
+    this._userService.getProfilePicture().subscribe({
       next: (data) => {
         this.profile_picture = data.profile_picture;
       },
@@ -50,7 +50,7 @@ export class AvatarComponent implements OnInit {
         console.log(e);
       },
       complete: () => {
-        this.checkProfilePicture();
+        this._checkProfilePicture();
       },
     });
   }
@@ -71,7 +71,7 @@ export class AvatarComponent implements OnInit {
   /**
    * Método para verificar si el usuario tiene una imagen de perfil.
    */
-  private checkProfilePicture(): void {
+  private _checkProfilePicture(): void {
     if (!this.profile_picture) {
       this.extraClasses.push('bg-warning');
     } else {

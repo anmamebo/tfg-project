@@ -10,7 +10,7 @@ import Swal, { SweetAlertOptions } from 'sweetalert2';
 })
 export class NotificationService {
   /** Opciones de configuración para los toasts. */
-  private toastOptions: SweetAlertOptions = {
+  private _toastOptions: SweetAlertOptions = {
     toast: true,
     position: 'top-end',
     showConfirmButton: false,
@@ -32,7 +32,7 @@ export class NotificationService {
     Swal.fire({
       icon: 'success',
       title: message,
-      ...this.toastOptions,
+      ...this._toastOptions,
     });
   }
 
@@ -44,7 +44,7 @@ export class NotificationService {
     Swal.fire({
       icon: 'error',
       title: message,
-      ...this.toastOptions,
+      ...this._toastOptions,
     });
   }
 
@@ -56,7 +56,7 @@ export class NotificationService {
     Swal.fire({
       icon: 'warning',
       title: message,
-      ...this.toastOptions,
+      ...this._toastOptions,
     });
   }
 

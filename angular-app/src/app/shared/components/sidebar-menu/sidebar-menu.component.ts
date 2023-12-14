@@ -22,10 +22,10 @@ export class SidebarMenuComponent implements OnDestroy {
   /** Objeto `Subscription` para desuscribirse de los observables. */
   public subscriber: Subscription = new Subscription();
 
-  constructor(private router: Router) {
+  constructor(private _router: Router) {
     this.sidebarItems = sidebarData;
 
-    this.subscriber = this.router.events
+    this.subscriber = this._router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe((event: any) => {
         this.currentURL = event['url'];

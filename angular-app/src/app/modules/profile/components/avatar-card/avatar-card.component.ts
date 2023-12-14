@@ -40,13 +40,13 @@ export class AvatarCardComponent {
   @ViewChild('changeAvatar') changeAvatar!: SwalComponent;
 
   constructor(
-    private formBuilder: FormBuilder,
+    private _fb: FormBuilder,
     public readonly swalTargets: SwalPortalTargets,
-    private userService: UserService,
-    private profileImageService: ProfileImageService,
-    private notificationService: NotificationService
+    private _userService: UserService,
+    private _profileImageService: ProfileImageService,
+    private _notificationService: NotificationService
   ) {
-    this.avatarForm = this.formBuilder.group({
+    this.avatarForm = this._fb.group({
       file: [null, [Validators.required]],
       fileSource: ['', [Validators.required]],
     });
@@ -95,16 +95,16 @@ export class AvatarCardComponent {
     const file = this.form.get('fileSource')?.value as File;
 
     if (file) {
-      this.userService.updateProfilePicture(this.user.id, file).subscribe({
+      this._userService.updateProfilePicture(this.user.id, file).subscribe({
         next: (response) => {
           this.submitted = false;
-          this.profileImageService.emitProfileImageUpdated(
+          this._profileImageService.emitProfileImageUpdated(
             response.profile_picture_url
           );
-          this.notificationService.showSuccessToast(response.message);
+          this._notificationService.showSuccessToast(response.message);
         },
         error: (error) => {
-          this.notificationService.showErrorToast(error.message);
+          this._notificationService.showErrorToast(error.message);
         },
       });
     }
@@ -114,15 +114,15 @@ export class AvatarCardComponent {
    * Maneja la acción de eliminar la imagen de perfil.
    */
   public onDeleteProfilePicture() {
-    this.userService.deleteProfilePicture().subscribe({
+    this._userService.deleteProfilePicture().subscribe({
       next: (response) => {
-        this.profileImageService.emitProfileImageUpdated(
+        this._profileImageService.emitProfileImageUpdated(
           response.profile_picture_url
         );
-        this.notificationService.showSuccessToast(response.message);
+        this._notificationService.showSuccessToast(response.message);
       },
       error: (error) => {
-        this.notificationService.showErrorToast(error.message);
+        this._notificationService.showErrorToast(error.message);
       },
     });
   }

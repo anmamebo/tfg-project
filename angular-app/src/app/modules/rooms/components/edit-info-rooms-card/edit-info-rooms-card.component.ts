@@ -41,14 +41,14 @@ export class EditInfoRoomsCardComponent implements OnInit {
   dropdownSettings: IDropdownSettings = {};
 
   constructor(
-    private formBuilder: FormBuilder,
-    private roomService: RoomService,
-    private departmentService: DepartmentService,
-    private notificationService: NotificationService
+    private _fb: FormBuilder,
+    private _roomService: RoomService,
+    private _departmentService: DepartmentService,
+    private _notificationService: NotificationService
   ) {}
 
   ngOnInit(): void {
-    this.editInfoRoomForm = this.formBuilder.group({
+    this.editInfoRoomForm = this._fb.group({
       name: [this.room?.name, [Validators.required, Validators.maxLength(50)]],
       description: [this.room?.description, [Validators.maxLength(255)]],
       capacity: [
@@ -98,7 +98,7 @@ export class EditInfoRoomsCardComponent implements OnInit {
     this.submitted = true;
 
     if (!this.room || !this.room.id) {
-      this.notificationService.showErrorToast(
+      this._notificationService.showErrorToast(
         'No se ha podido obtener la sala.'
       );
       return;
@@ -119,13 +119,13 @@ export class EditInfoRoomsCardComponent implements OnInit {
       department: this.form.value.department[0].item_id,
     };
 
-    this.roomService.update(this.room.id, updatedData).subscribe({
+    this._roomService.update(this.room.id, updatedData).subscribe({
       next: (data: any) => {
         this.submitted = false;
-        this.notificationService.showSuccessToast(data.message);
+        this._notificationService.showSuccessToast(data.message);
       },
       error: (error: any) => {
-        this.notificationService.showErrorToast(error.message);
+        this._notificationService.showErrorToast(error.message);
       },
     });
   }
@@ -134,7 +134,7 @@ export class EditInfoRoomsCardComponent implements OnInit {
    * Obtiene los departamentos.
    */
   public getDepartments() {
-    this.departmentService.getItems().subscribe({
+    this._departmentService.getItems().subscribe({
       next: (data) => {
         this.departments = data.map((item: { id: String; name: String }) => ({
           item_id: item.id,
@@ -142,7 +142,7 @@ export class EditInfoRoomsCardComponent implements OnInit {
         }));
       },
       error: (error) => {
-        this.notificationService.showErrorToast(error.message);
+        this._notificationService.showErrorToast(error.message);
       },
     });
   }

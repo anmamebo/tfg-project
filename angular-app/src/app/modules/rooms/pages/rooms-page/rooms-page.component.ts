@@ -28,7 +28,7 @@ export class RoomsPageComponent {
   /** Datos de la entidad. */
   public entityData: entityData;
 
-  constructor(private roomService: RoomService) {
+  constructor(private _roomService: RoomService) {
     this.entityData = {
       title: {
         hasTitle: false,
@@ -53,7 +53,7 @@ export class RoomsPageComponent {
           edit: '/salas/editar',
         },
       },
-      service: this.roomService,
+      service: this._roomService,
       items: null,
       page: 1,
       totalPages: 1,

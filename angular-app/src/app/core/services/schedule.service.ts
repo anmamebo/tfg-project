@@ -21,8 +21,8 @@ export class ScheduleService {
   public url: string;
 
   constructor(
-    private http: HttpClient,
-    private httpCommonService: HttpCommonService
+    private _http: HttpClient,
+    private _httpCommonService: HttpCommonService
   ) {
     this.url = API_URL.url + 'schedules/schedules/';
   }
@@ -32,9 +32,9 @@ export class ScheduleService {
    * @returns Un observable que emite un objeto `Schedule`.
    */
   public getScheduleByDoctor(): Observable<Schedule[]> {
-    const headers = this.httpCommonService.getCommonHeaders();
+    const headers = this._httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
-    return this.http.get<Schedule[]>(this.url + 'get_by_doctor', httpOptions);
+    return this._http.get<Schedule[]>(this.url + 'get_by_doctor', httpOptions);
   }
 }

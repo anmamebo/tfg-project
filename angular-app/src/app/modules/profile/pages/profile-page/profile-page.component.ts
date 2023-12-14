@@ -33,8 +33,8 @@ export class ProfilePageComponent implements OnInit {
   public breadcrumbData = breadcrumbProfileData;
 
   constructor(
-    private tokenStorageService: TokenStorageService,
-    private userService: UserService
+    private _tokenStorageService: TokenStorageService,
+    private _userService: UserService
   ) {}
 
   ngOnInit(): void {
@@ -45,13 +45,13 @@ export class ProfilePageComponent implements OnInit {
    * Obtiene los datos del usuario actual y los asigna a la propiedad `user`.
    */
   public getUser(): void {
-    const userSession = this.tokenStorageService.getUser();
+    const userSession = this._tokenStorageService.getUser();
 
     if (userSession.user) {
-      this.userService.getUserById(userSession.user.id).subscribe({
+      this._userService.getUserById(userSession.user.id).subscribe({
         next: (user: User) => {
           this.user = user;
-          this.tokenStorageService.updateUser(user);
+          this._tokenStorageService.updateUser(user);
         },
         error: (error) => {
           console.error(error);

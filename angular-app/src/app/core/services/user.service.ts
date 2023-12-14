@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable, catchError } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 import { API_URL } from '../constants/API_URL';
 
 // Servicios
 import { HttpCommonService } from './http-common.service';
-import { TokenStorageService } from './token-storage.service';
 
 // Modelos
 import { User } from '../models/user.model';
@@ -22,9 +21,8 @@ export class UserService {
   public url: string;
 
   constructor(
-    private http: HttpClient,
-    private httpCommonService: HttpCommonService,
-    private tokenStorageService: TokenStorageService
+    private _http: HttpClient,
+    private _httpCommonService: HttpCommonService
   ) {
     this.url = API_URL.url + 'users/users/';
   }
@@ -35,10 +33,10 @@ export class UserService {
    * @returns Un observable que emite un objeto `User`.
    */
   public getUserById(id: number): Observable<User> {
-    const headers = this.httpCommonService.getCommonHeaders();
+    const headers = this._httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
-    return this.http.get<User>(this.url + id + '/', httpOptions);
+    return this._http.get<User>(this.url + id + '/', httpOptions);
   }
 
   /**
@@ -47,12 +45,12 @@ export class UserService {
    * @returns Un observable que emite un objeto `any`.
    */
   public updateUser(user: User): Observable<any> {
-    const headers = this.httpCommonService.getCommonHeaders();
+    const headers = this._httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
     let params = JSON.stringify(user);
 
-    return this.http.put<any>(this.url + user.id + '/', params, httpOptions);
+    return this._http.put<any>(this.url + user.id + '/', params, httpOptions);
   }
 
   /**
@@ -65,16 +63,16 @@ export class UserService {
     password: string;
     password2: string;
   }): Observable<any> {
-    const headers = this.httpCommonService.getCommonHeaders();
+    const headers = this._httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
-
-    // Obtiene la información del usuario actual, como su ID
-    let user = this.tokenStorageService.getUser();
-    let user_id = user.user.id;
 
     let params = JSON.stringify(data);
 
-    return this.http.post<any>(this.url + 'set_password/', params, httpOptions);
+    return this._http.post<any>(
+      this.url + 'set_password/',
+      params,
+      httpOptions
+    );
   }
 
   /**
@@ -84,14 +82,14 @@ export class UserService {
    * @returns Un Observable que se suscribe a la solicitud HTTP para actualizar la imagen de perfil.
    */
   public updateProfilePicture(userId: string, file: File): Observable<any> {
-    let headers = this.httpCommonService.getCommonHeaders();
+    let headers = this._httpCommonService.getCommonHeaders();
     headers = headers.delete('Content-Type');
     const httpOptions = { headers };
 
     let formData = new FormData();
     formData.append('profile_picture', file);
 
-    return this.http.put<any>(
+    return this._http.put<any>(
       `${this.url}${userId}/update_profile_picture/`,
       formData,
       httpOptions
@@ -103,10 +101,10 @@ export class UserService {
    * @returns Un Observable que se suscribe a la solicitud HTTP para obtener la imagen de perfil.
    */
   public getProfilePicture(): Observable<any> {
-    const headers = this.httpCommonService.getCommonHeaders();
+    const headers = this._httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
-    return this.http.get<any>(`${this.url}profile_picture/`, httpOptions);
+    return this._http.get<any>(`${this.url}profile_picture/`, httpOptions);
   }
 
   /**
@@ -114,10 +112,10 @@ export class UserService {
    * @returns Un Observable que se suscribe a la solicitud HTTP para eliminar la imagen de perfil.
    */
   public deleteProfilePicture(): Observable<any> {
-    const headers = this.httpCommonService.getCommonHeaders();
+    const headers = this._httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
-    return this.http.delete<any>(
+    return this._http.delete<any>(
       `${this.url}delete_profile_picture/`,
       httpOptions
     );

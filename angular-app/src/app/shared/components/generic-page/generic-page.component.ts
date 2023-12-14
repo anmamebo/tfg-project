@@ -18,12 +18,12 @@ export class GenericPageComponent {
   /** Datos para el componente `app-breadcrumb`. */
   @Input() breadcrumbData: any;
 
-  constructor(private location: Location) {}
+  constructor(private _location: Location) {}
 
   /**
    * Regresa a la página anterior.
    */
   public goBack(): void {
-    this.location.back();
+    this._location.back();
   }
 }

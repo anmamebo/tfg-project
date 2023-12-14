@@ -24,7 +24,7 @@ export class ListAppointmentsDoctorCardComponent extends GenericListCardComponen
   ];
 
   constructor(
-    private appointmentService: AppointmentService,
+    private _appointmentService: AppointmentService,
     notificationService: NotificationService
   ) {
     super(notificationService);
@@ -46,7 +46,7 @@ export class ListAppointmentsDoctorCardComponent extends GenericListCardComponen
       this.entityData.page = 1;
     }
 
-    this.appointmentService
+    this._appointmentService
       .getAppointmentsByDoctor(
         ['scheduled', 'rescheduled', 'in_progress'],
         page,
