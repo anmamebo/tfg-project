@@ -57,6 +57,7 @@ urlpatterns = [
     path("departments/", include("apps.departments.api.routers")),
     path("appointments/", include("apps.appointments.api.routers")),
     path("treatments/", include("apps.treatments.api.routers")),
+    path("statistics/", include("apps.core.api.routers")),
 ]
 
 if settings.DEBUG:

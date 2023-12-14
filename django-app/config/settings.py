@@ -41,6 +41,7 @@ BASE_APPS = [
 # Apps locales del proyecto
 LOCAL_APPS = [
     "apps.base",
+    "apps.core",
     "apps.users",
     "apps.patients",
     "apps.doctors",
