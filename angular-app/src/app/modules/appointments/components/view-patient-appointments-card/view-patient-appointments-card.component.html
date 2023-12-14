@@ -94,6 +94,12 @@
                 {{ patient.gender | gender }}
               </p>
             </div>
+            <div class="form-group">
+              <label for="nationality">Nacionalidad:</label>
+              <p class="form-control-static" id="nationality">
+                {{ patient.nationality || "--" }}
+              </p>
+            </div>
           </div>
         </div>
       </div>

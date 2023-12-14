@@ -2,12 +2,16 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { Spanish } from 'flatpickr/dist/l10n/es.js';
+
+// Constantes
 import { GENDER_OPTIONS } from 'src/app/core/constants/options/genders-options.constants';
 
 // Servicios
 import { PatientService } from 'src/app/core/services/patient.service';
 import { NotificationService } from 'src/app/core/services/notification.service';
+import { CountriesService } from 'src/app/core/services/countries.service';
 
 // Modelos
 import { Patient } from 'src/app/core/models/patient.model';
@@ -19,7 +23,7 @@ import { Patient } from 'src/app/core/models/patient.model';
 @Component({
   selector: 'app-edit-basic-info-patients-card',
   templateUrl: './edit-basic-info-patients-card.component.html',
-  providers: [DatePipe, PatientService],
+  providers: [DatePipe, PatientService, CountriesService],
 })
 export class EditBasicInfoPatientsCardComponent implements OnInit {
   /** Título de la tarjeta */
@@ -33,6 +37,12 @@ export class EditBasicInfoPatientsCardComponent implements OnInit {
 
   /** Paciente que se editará */
   @Input() public patient: Patient | null = null;
+
+  /** Países */
+  public nationalities: any = [];
+
+  /** Opciones del desplegable de seleccionar */
+  dropdownSettings: IDropdownSettings = {};
 
   /** Formulario para editar la información básica de un paciente */
   public editBasicInfoPatientForm: FormGroup = new FormGroup({});
@@ -48,6 +58,7 @@ export class EditBasicInfoPatientsCardComponent implements OnInit {
     private formBuilder: FormBuilder,
     private datePipe: DatePipe,
     private patientService: PatientService,
+    private countriesService: CountriesService,
     private notificationService: NotificationService
   ) {}
 
@@ -62,7 +73,30 @@ export class EditBasicInfoPatientsCardComponent implements OnInit {
       ],
       birthdate: [this.patient?.birthdate],
       gender: [this.patient?.gender, Validators.required],
+      nationality: [
+        this.patient?.nationality
+          ? [
+              {
+                item_id: this.patient?.nationality,
+                item_text: this.patient?.nationality,
+              },
+            ]
+          : [],
+      ],
     });
+
+    this.dropdownSettings = {
+      singleSelection: true,
+      idField: 'item_id',
+      textField: 'item_text',
+      searchPlaceholderText: 'Buscar',
+      noDataAvailablePlaceholderText: 'No hay datos disponibles',
+      noFilteredDataAvailablePlaceholderText: 'No hay datos disponibles',
+      itemsShowLimit: 6,
+      allowSearchFilter: true,
+    };
+
+    this.getCountries();
   }
 
   /** Obtiene el formulario */
@@ -103,6 +137,7 @@ export class EditBasicInfoPatientsCardComponent implements OnInit {
           )
         : null,
       gender: this.form.value.gender,
+      nationality: this.form.value.nationality[0]?.item_text || null,
       user: {
         id: this.patient.user.id,
         name: this.form.value.name,
@@ -117,6 +152,36 @@ export class EditBasicInfoPatientsCardComponent implements OnInit {
         this.refreshPatient.emit();
       },
       error: (error) => {
+        this.notificationService.showErrorToast(error.message);
+      },
+    });
+  }
+
+  /**
+   * Obtiene los países.
+   */
+  private getCountries(): void {
+    this.countriesService.getCountries().subscribe({
+      next: (data: any) => {
+        this.nationalities = data.map((item: any) => ({
+          item_id: item.translations.spa.common,
+          item_text: item.translations.spa.common,
+        }));
+
+        this.nationalities.sort((a: any, b: any) => {
+          const itemA = a.item_text.toUpperCase();
+          const itemB = b.item_text.toUpperCase();
+
+          if (itemA < itemB) {
+            return -1;
+          }
+          if (itemA > itemB) {
+            return 1;
+          }
+          return 0;
+        });
+      },
+      error: (error: any) => {
         this.notificationService.showErrorToast(error.message);
       },
     });

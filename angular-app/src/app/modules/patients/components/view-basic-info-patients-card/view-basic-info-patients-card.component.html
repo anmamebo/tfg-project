@@ -79,7 +79,7 @@
         </div>
       </div>
 
-      <div class="col-md-6">
+      <div class="col-md-3">
         <div class="form-group">
           <label for="gender">Género</label>
           <input
@@ -88,6 +88,19 @@
             id="gender"
             [attr.readonly]="true"
             [value]="patient.gender | gender"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="nationality">Nacionalidad</label>
+          <input
+            type="text"
+            class="form-control"
+            id="nationality"
+            [attr.readonly]="true"
+            [value]="patient.nationality || '--'"
           />
         </div>
       </div>

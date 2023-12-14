@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 // Módulos de terceros
 import { FlatpickrModule } from 'angularx-flatpickr';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 // Módulos
 import { PatientsRoutingModule } from './patients-routing.module';
@@ -64,6 +65,7 @@ import { CreatePatientsCardComponent } from './components/create-patients-card/c
     SharedModule,
     FormErrorsModule,
     GenericListCardModule,
+    NgMultiSelectDropDownModule.forRoot(),
   ],
 })
 export class PatientsModule {}

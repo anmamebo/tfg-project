@@ -3,7 +3,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 import { Subscription } from 'rxjs';
 
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { Spanish } from 'flatpickr/dist/l10n/es.js';
+
+// Constantes
 import { GENDER_OPTIONS } from 'src/app/core/constants/options/genders-options.constants';
 import { PHONENUMBER_REGEXP } from 'src/app/core/constants/reg-exp';
 import { INTEGER_REGEXP } from 'src/app/core/constants/reg-exp';
@@ -11,6 +14,7 @@ import { INTEGER_REGEXP } from 'src/app/core/constants/reg-exp';
 // Servicios
 import { PatientService } from 'src/app/core/services/patient.service';
 import { NotificationService } from 'src/app/core/services/notification.service';
+import { CountriesService } from 'src/app/core/services/countries.service';
 
 /**
  * Componente que representa la tarjeta de creación de un paciente
@@ -18,7 +22,7 @@ import { NotificationService } from 'src/app/core/services/notification.service'
 @Component({
   selector: 'app-create-patients-card',
   templateUrl: './create-patients-card.component.html',
-  providers: [PatientService, DatePipe],
+  providers: [PatientService, CountriesService, DatePipe],
 })
 export class CreatePatientsCardComponent implements OnInit {
   /** Título de la tarjeta */
@@ -48,10 +52,17 @@ export class CreatePatientsCardComponent implements OnInit {
   /** Indica si se muestran los campos de dirección */
   public showAddressInputs: boolean = false;
 
+  /** Países */
+  public nationalities: any = [];
+
+  /** Opciones del desplegable de seleccionar */
+  dropdownSettings: IDropdownSettings = {};
+
   constructor(
     private formBuilder: FormBuilder,
     private datePipe: DatePipe,
     private patientService: PatientService,
+    private countriesService: CountriesService,
     private notificationService: NotificationService
   ) {
     this.patientInfoForm = this.formBuilder.group({
@@ -64,6 +75,7 @@ export class CreatePatientsCardComponent implements OnInit {
       birthdate: [''],
       gender: ['', Validators.required],
       phone: ['', Validators.pattern(PHONENUMBER_REGEXP)],
+      nationality: [''],
     });
 
     this.addressForm = this.formBuilder.group({
@@ -83,6 +95,19 @@ export class CreatePatientsCardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.dropdownSettings = {
+      singleSelection: true,
+      idField: 'item_id',
+      textField: 'item_text',
+      searchPlaceholderText: 'Buscar',
+      noDataAvailablePlaceholderText: 'No hay datos disponibles',
+      noFilteredDataAvailablePlaceholderText: 'No hay datos disponibles',
+      itemsShowLimit: 6,
+      allowSearchFilter: true,
+    };
+
+    this.getCountries();
+
     this.dniInputSubscription = this.createPatientForm
       .get('patientInfoForm')!
       .get('dni')!
@@ -130,6 +155,7 @@ export class CreatePatientsCardComponent implements OnInit {
         : null,
       phone: this.patientInfo.value.phone || null,
       gender: this.patientInfo.value.gender,
+      nationality: this.patientInfo.value.nationality[0]?.item_text || null,
     };
 
     if (this.showAddressInputs && this.address) {
@@ -214,5 +240,35 @@ export class CreatePatientsCardComponent implements OnInit {
         }
       });
     }
+  }
+
+  /**
+   * Obtiene los países.
+   */
+  private getCountries(): void {
+    this.countriesService.getCountries().subscribe({
+      next: (data: any) => {
+        this.nationalities = data.map((item: any) => ({
+          item_id: item.translations.spa.common,
+          item_text: item.translations.spa.common,
+        }));
+
+        this.nationalities.sort((a: any, b: any) => {
+          const itemA = a.item_text.toUpperCase();
+          const itemB = b.item_text.toUpperCase();
+
+          if (itemA < itemB) {
+            return -1;
+          }
+          if (itemA > itemB) {
+            return 1;
+          }
+          return 0;
+        });
+      },
+      error: (error) => {
+        this.notificationService.showErrorToast(error.message);
+      },
+    });
   }
 }

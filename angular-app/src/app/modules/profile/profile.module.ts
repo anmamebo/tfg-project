@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 // Módulos de terceros
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { FlatpickrModule } from 'angularx-flatpickr';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 // Módulos
 import { ProfileRoutingModule } from './profile-routing.module';
@@ -46,6 +47,7 @@ import { DoctorInfoCardComponent } from './components/doctor-info-card/doctor-in
     GenericCardModule,
     FormErrorsModule,
     AvatarModule,
+    NgMultiSelectDropDownModule.forRoot(),
   ],
 })
 export class ProfileModule {}

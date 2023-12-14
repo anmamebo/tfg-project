@@ -217,6 +217,25 @@
                 ></app-form-errors>
               </div>
             </div>
+
+            <!-- Países -->
+            <div class="col-md-6">
+              <fieldset class="form-group">
+                <label for="nationality">Nacionalidad</label>
+
+                <ng-multiselect-dropdown
+                  [placeholder]="'Selecciona una nacionalidad'"
+                  [settings]="dropdownSettings"
+                  [data]="nationalities"
+                  formControlName="nationality"
+                ></ng-multiselect-dropdown>
+
+                <app-form-errors
+                  [control]="patientInfo.get('nationality')"
+                  [submitted]="submitted"
+                ></app-form-errors>
+              </fieldset>
+            </div>
           </div>
         </div>
 

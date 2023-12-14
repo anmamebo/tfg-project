@@ -127,6 +127,25 @@
           </div>
         </div>
 
+        <!-- Nacionalidad -->
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="nationality">Nacionalidad</label>
+
+            <ng-multiselect-dropdown
+              [placeholder]="'Nacionalidad'"
+              [settings]="dropdownSettings"
+              [data]="nationalities"
+              formControlName="nationality"
+            ></ng-multiselect-dropdown>
+
+            <app-form-errors
+              [control]="form.get('nationality')"
+              [submitted]="submitted"
+            ></app-form-errors>
+          </div>
+        </div>
+
         <!-- Botón -->
         <div class="col-12 d-flex justify-content-end">
           <button type="submit" class="btn btn-primary me-1 mb-1">

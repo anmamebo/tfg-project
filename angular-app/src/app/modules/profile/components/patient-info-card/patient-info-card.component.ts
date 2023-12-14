@@ -2,13 +2,17 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { Spanish } from 'flatpickr/dist/l10n/es.js';
+
+// Constantes
 import { GENDER_OPTIONS } from 'src/app/core/constants/options/genders-options.constants';
 import { PHONENUMBER_REGEXP } from 'src/app/core/constants/reg-exp';
 
 // Servicios
 import { PatientService } from 'src/app/core/services/patient.service';
 import { NotificationService } from 'src/app/core/services/notification.service';
+import { CountriesService } from 'src/app/core/services/countries.service';
 
 // Modelos
 import { Patient } from 'src/app/core/models/patient.model';
@@ -19,7 +23,7 @@ import { Patient } from 'src/app/core/models/patient.model';
 @Component({
   selector: 'app-patient-info-card',
   templateUrl: './patient-info-card.component.html',
-  providers: [DatePipe, PatientService, NotificationService],
+  providers: [DatePipe, PatientService, CountriesService],
 })
 export class PatientInfoCardComponent implements OnInit {
   /** Título de la tarjeta */
@@ -33,6 +37,12 @@ export class PatientInfoCardComponent implements OnInit {
 
   /** Paciente que se mostrará */
   @Input() public patient: Patient | null = null;
+
+  /** Países */
+  public nationalities: any = [];
+
+  /** Opciones del desplegable de seleccionar */
+  dropdownSettings: IDropdownSettings = {};
 
   /** Formulario para actualizar los datos del paciente */
   public updatePatientDataForm: FormGroup = new FormGroup({});
@@ -48,6 +58,7 @@ export class PatientInfoCardComponent implements OnInit {
     private formBuilder: FormBuilder,
     private datePipe: DatePipe,
     private patientService: PatientService,
+    private countriesService: CountriesService,
     private notificationService: NotificationService
   ) {}
 
@@ -61,7 +72,30 @@ export class PatientInfoCardComponent implements OnInit {
       gender: [this.patient?.gender, Validators.required],
       birthdate: [this.patient?.birthdate],
       phone: [this.patient?.phone, [Validators.pattern(PHONENUMBER_REGEXP)]],
+      nationality: [
+        this.patient?.nationality
+          ? [
+              {
+                item_id: this.patient?.nationality,
+                item_text: this.patient?.nationality,
+              },
+            ]
+          : [],
+      ],
     });
+
+    this.dropdownSettings = {
+      singleSelection: true,
+      idField: 'item_id',
+      textField: 'item_text',
+      searchPlaceholderText: 'Buscar',
+      noDataAvailablePlaceholderText: 'No hay datos disponibles',
+      noFilteredDataAvailablePlaceholderText: 'No hay datos disponibles',
+      itemsShowLimit: 6,
+      allowSearchFilter: true,
+    };
+
+    this.getCountries();
   }
 
   /** Obtiene el formulario */
@@ -98,6 +132,7 @@ export class PatientInfoCardComponent implements OnInit {
       gender: this.form.value.gender,
       phone: this.form.value.phone || null,
       social_security: this.form.value.social_security || null,
+      nationality: this.form.value.nationality[0]?.item_text || null,
     };
 
     this.patientService.update(this.patient.id, updatePatient).subscribe({
@@ -107,6 +142,36 @@ export class PatientInfoCardComponent implements OnInit {
         this.notificationService.showSuccessToast(data.message);
       },
       error: (error) => {
+        this.notificationService.showErrorToast(error.message);
+      },
+    });
+  }
+
+  /**
+   * Obtiene los países.
+   */
+  private getCountries(): void {
+    this.countriesService.getCountries().subscribe({
+      next: (data: any) => {
+        this.nationalities = data.map((item: any) => ({
+          item_id: item.translations.spa.common,
+          item_text: item.translations.spa.common,
+        }));
+
+        this.nationalities.sort((a: any, b: any) => {
+          const itemA = a.item_text.toUpperCase();
+          const itemB = b.item_text.toUpperCase();
+
+          if (itemA < itemB) {
+            return -1;
+          }
+          if (itemA > itemB) {
+            return 1;
+          }
+          return 0;
+        });
+      },
+      error: (error: any) => {
         this.notificationService.showErrorToast(error.message);
       },
     });

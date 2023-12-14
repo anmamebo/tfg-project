@@ -125,7 +125,7 @@
           </div>
 
           <!-- Género -->
-          <div class="col-md-6">
+          <div class="col-md-3">
             <fieldset class="form-group">
               <label for="gender">Género*</label>
               <select
@@ -152,6 +152,25 @@
                 [submitted]="submitted"
               ></app-form-errors>
             </fieldset>
+          </div>
+
+          <!-- Nacionalidad -->
+          <div class="col-md-3">
+            <div class="form-group">
+              <label for="nationality">Nacionalidad</label>
+
+              <ng-multiselect-dropdown
+                [placeholder]="'Nacionalidad'"
+                [settings]="dropdownSettings"
+                [data]="nationalities"
+                formControlName="nationality"
+              ></ng-multiselect-dropdown>
+
+              <app-form-errors
+                [control]="form.get('nationality')"
+                [submitted]="submitted"
+              ></app-form-errors>
+            </div>
           </div>
 
           <!-- Botones -->
