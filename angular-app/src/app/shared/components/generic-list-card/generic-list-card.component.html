@@ -71,6 +71,7 @@
 
       <app-elements-per-page
         [totalElements]="entityData.numItems"
+        [elementsPerPage]="entityData.numResults"
         (elementsPerPageChangedEvent)="onEntriesPerPageChanged($event)"
       >
       </app-elements-per-page>
