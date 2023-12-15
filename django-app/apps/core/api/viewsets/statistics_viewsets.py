@@ -7,7 +7,7 @@ from apps.doctors.models import Doctor
 from apps.patients.models import Patient
 from apps.schedules.models import Schedule
 from config.settings import TIME_ZONE
-from django.db.models import Count
+from django.db.models import Avg, Count, DurationField, ExpressionWrapper, F
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -103,5 +103,60 @@ def get_appointments_per_day(request):
 
     return Response(
         appointments_per_day_list,
+        status=status.HTTP_200_OK,
+    )
+
+
+@api_view(["GET"])
+def get_appointment_statuses(request):
+    """
+    Obtiene los diferentes estados de las citas y el número de citas en cada estado.
+
+    Args:
+        request (Request): Solicitud HTTP
+
+    Returns:
+        Response: Respuesta HTTP
+    """
+    appointment_statuses = (
+        Appointment.objects.values("status")
+        .annotate(count=Count("id"))
+        .order_by("status")
+    )
+
+    # Formatear los datos para la respuesta
+    statuses_data = [
+        {"status": item["status"], "count": item["count"]}
+        for item in appointment_statuses
+    ]
+
+    return Response(statuses_data, status=200)
+
+
+@api_view(["GET"])
+def average_waiting_time(request):
+    """
+    Obtiene el tiempo de espera promedio de las citas
+
+    Args:
+        request (Request): Solicitud HTTP
+
+    Returns:
+        Response: Respuesta HTTP
+    """
+    average_wait_time = Appointment.objects.annotate(
+        wait_time=ExpressionWrapper(
+            F("schedule__start_time") - F("request_date"), output_field=DurationField()
+        )
+    ).aggregate(avg_wait_time=Avg("wait_time"))
+
+    avg_wait_days = (
+        average_wait_time["avg_wait_time"].days
+        + average_wait_time["avg_wait_time"].seconds / (24 * 3600)
+        if average_wait_time["avg_wait_time"]
+        else None
+    )
+    return Response(
+        {"average_waiting_time_days": avg_wait_days},
         status=status.HTTP_200_OK,
     )
