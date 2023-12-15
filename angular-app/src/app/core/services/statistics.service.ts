@@ -54,4 +54,26 @@ export class StatisticsService {
       ...httpOptions,
     });
   }
+
+  /**
+   * Obtiene las estadísticas de citas por estado.
+   * @returns Observable con las estadísticas de citas por estado.
+   */
+  public getAppointmentsPerStatus(): Observable<any> {
+    const headers = this._httpCommonService.getCommonHeaders();
+    const httpOptions = { headers };
+
+    return this._http.get(this.url + 'get_appointment_statuses/', httpOptions);
+  }
+
+  /**
+   * Obtiene el tiempo medio de espera de las citas.
+   * @returns Observable con el tiempo medio de espera de las citas.
+   */
+  public getAverageWaitingTime(): Observable<any> {
+    const headers = this._httpCommonService.getCommonHeaders();
+    const httpOptions = { headers };
+
+    return this._http.get(this.url + 'average_waiting_time/', httpOptions);
+  }
 }
