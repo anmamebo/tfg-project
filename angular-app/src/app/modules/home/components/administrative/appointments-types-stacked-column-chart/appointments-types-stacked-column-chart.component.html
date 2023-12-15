@@ -1,0 +1,46 @@
+<div class="card">
+  <div class="card-header">
+    <div class="row">
+      <!-- Título tarjeta -->
+      <div class="col-md-7">
+        <h4 class="card-title">Distribución Mensual de Tipos de Citas</h4>
+      </div>
+      <!-- Selección de año y mes -->
+      <div class="col-md-5">
+        <div class="row justify-content-end">
+          <div class="col-sm-7">
+            <select
+              id="selectYear"
+              class="form-select"
+              (change)="onYearChange($event)"
+            >
+              <option
+                *ngFor="let y of years"
+                [value]="y.value"
+                [attr.selected]="y.value === year ? true : null"
+              >
+                {{ y.name }}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div id="area" style="min-height: 365px">
+      <apx-chart
+        [series]="series"
+        [chart]="chart"
+        [dataLabels]="dataLabels"
+        [plotOptions]="plotOptions"
+        [responsive]="responsive"
+        [yaxis]="yaxis"
+        [xaxis]="xaxis"
+        [legend]="legend"
+        [fill]="fill"
+        [noData]="{ text: 'Cargando...' }"
+      ></apx-chart>
+    </div>
+  </div>
+</div>

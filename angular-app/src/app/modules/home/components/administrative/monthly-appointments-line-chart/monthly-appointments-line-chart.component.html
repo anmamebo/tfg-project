@@ -1,0 +1,62 @@
+<div class="card">
+  <div class="card-header">
+    <div class="row">
+      <!-- Título tarjeta -->
+      <div class="col-md-6">
+        <h4 class="card-title">Citas Diarias por Mes</h4>
+      </div>
+      <!-- Selección de año y mes -->
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col-sm-6">
+            <select
+              id="selectMonth"
+              class="form-select"
+              (change)="onMonthChange($event)"
+            >
+              <option
+                *ngFor="let m of months"
+                [value]="m.value"
+                [attr.selected]="m.value === month ? true : null"
+              >
+                {{ m.name }}
+              </option>
+            </select>
+          </div>
+          <div class="col-sm-6">
+            <select
+              id="selectYear"
+              class="form-select"
+              (change)="onYearChange($event)"
+            >
+              <option
+                *ngFor="let y of years"
+                [value]="y.value"
+                [attr.selected]="y.value === year ? true : null"
+              >
+                {{ y.name }}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <!-- Gráfica -->
+    <div id="area" style="min-height: 365px">
+      <apx-chart
+        [series]="series"
+        [chart]="chart"
+        [dataLabels]="dataLabels"
+        [markers]="markers"
+        [fill]="fill"
+        [yaxis]="yaxis"
+        [xaxis]="xaxis"
+        [tooltip]="tooltip"
+        [autoUpdateSeries]="true"
+        [noData]="{ text: 'Cargando...' }"
+      ></apx-chart>
+    </div>
+  </div>
+</div>
