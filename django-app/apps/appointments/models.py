@@ -3,7 +3,7 @@ from django.db import models
 
 
 class Appointment(BaseModel):
-    status = [
+    status_choices = [
         ("pending", "Pendiente"),
         ("scheduled", "Programada"),
         ("in_progress", "En progreso"),
@@ -13,7 +13,7 @@ class Appointment(BaseModel):
         ("cancelled", "Cancelada"),
     ]
 
-    type = [
+    type_choices = [
         ("consultation", "Consulta"),
         ("procedure", "Procedimiento"),
         ("checkup", "Revisión"),
@@ -22,10 +22,10 @@ class Appointment(BaseModel):
     ]
 
     status = models.CharField(
-        verbose_name="Estado", max_length=50, choices=status, default="pending"
+        verbose_name="Estado", max_length=50, choices=status_choices, default="pending"
     )
     type = models.CharField(
-        verbose_name="Tipo", max_length=50, choices=type, default="consultation"
+        verbose_name="Tipo", max_length=50, choices=type_choices, default="consultation"
     )
     reason = models.TextField(
         verbose_name="Motivo", max_length=255, blank=True, null=True
