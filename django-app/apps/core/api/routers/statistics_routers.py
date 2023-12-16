@@ -1,4 +1,4 @@
-from apps.core.api.viewsets.statistics_viewsets import (
+from apps.core.api.views.statistics_views import (
     average_waiting_time,
     get_appointment_statuses,
     get_appointments_per_day,
