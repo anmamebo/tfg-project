@@ -27,13 +27,13 @@ export class StatisticsCardsComponent implements OnInit {
   constructor(private _statisticsService: StatisticsService) {}
 
   public ngOnInit(): void {
-    this.getOverallStats();
+    this._getOverallStats();
   }
 
   /**
    * Obtiene las estadísticas generales.
    */
-  private getOverallStats(): void {
+  private _getOverallStats(): void {
     this._statisticsService.getOverallStats().subscribe({
       next: (response: any) => {
         this.totalPatients = response.total_patients;
