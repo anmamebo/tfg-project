@@ -1,6 +1,7 @@
 from apps.users.api.serializers.user_serializer import (
     CustomTokenObtainPairSerializer,
     CustomUserSerializer,
+    EmptySerializer,
 )
 from apps.users.models import User
 from django.contrib.auth import authenticate
@@ -86,6 +87,8 @@ class Logout(GenericAPIView):
     Attributes:
         No se requieren atributos específicos para esta vista.
     """
+
+    serializer_class = EmptySerializer
 
     def post(self, request, *args, **kwargs):
         """

@@ -138,3 +138,7 @@ class UserProfilePictureSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ("profile_picture",)
+
+
+class EmptySerializer(serializers.Serializer):
+    pass
