@@ -18,6 +18,7 @@ import { GenericListCardModule } from 'src/app/shared/components/generic-list-ca
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { AdministrativeHomePageComponent } from './pages/administrative-home-page/administrative-home-page.component';
 import { DoctorHomePageComponent } from './pages/doctor-home-page/doctor-home-page.component';
+import { PatientHomePageComponent } from './pages/patient-home-page/patient-home-page.component';
 
 // Componentes
 import { MonthlyAppointmentsLineChartComponent } from './components/administrative/monthly-appointments-line-chart/monthly-appointments-line-chart.component';
@@ -58,6 +59,7 @@ import { AppointmentsAgeColumnChartComponent } from './components/administrative
     DoctorAppointmentsSpecialtyColumnsChartComponent,
     DoctorAppointmentsAgeColumnsChartComponent,
     AppointmentsAgeColumnChartComponent,
+    PatientHomePageComponent,
   ],
   imports: [
     CommonModule,
