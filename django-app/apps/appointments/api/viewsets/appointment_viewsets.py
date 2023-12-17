@@ -368,6 +368,74 @@ class AppointmentViewSet(viewsets.GenericViewSet):
         appointments_serializer = self.list_serializer_class(appointments, many=True)
         return Response(appointments_serializer.data, status=status.HTTP_200_OK)
 
+    @method_permission_classes([IsPatient])
+    @action(detail=False, methods=["get"])
+    def list_for_patient_by_date(self, request):
+        """
+        Lista todas las citas de un paciente de un día concreto.
+
+        Permisos requeridos:
+            - El usuario debe ser un paciente.
+
+        Parámetros opcionales:
+            date (str): La fecha de las citas a listar.
+            status (list): Los estados de las citas a filtrar.
+            search (str): El texto a buscar.
+            ordering (str): El campo por el cual se ordenarán las citas.
+            paginate (str): Indica si se debe paginar los resultados.
+
+        Args:
+            request (Request): La solicitud HTTP.
+
+        Returns:
+            Response: La respuesta que contiene la lista de citas.
+        """
+        patient = getattr(request.user, "patient", None)
+
+        date_str = self.request.query_params.get("date", None)
+
+        if not date_str:  # Si no se envió la fecha
+            return Response(
+                {"message": "La fecha es requerida."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        try:
+            date = datetime.strptime(date_str, "%Y-%m-%d").date()
+            next_day = date + timedelta(days=1)
+        except ValueError:  # Si la fecha no es válida
+            return Response(
+                {"message": "La fecha no es válida."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        appointments = Appointment.objects.filter(
+            patient=patient,
+            schedule__start_time__gt=date,
+            schedule__start_time__lt=next_day,
+        ).order_by(
+            "schedule__start_time"
+        )  # Filtra las citas del doctor
+
+        desired_statuses = request.GET.getlist("status", None)
+        if desired_statuses:
+            appointments = appointments.filter(
+                status__in=desired_statuses
+            )  # Filtra las citas por estados
+
+        appointments = self.filter_appointments(appointments)  # Filtra las citas
+        appointments = self.order_appointments(appointments)  # Ordena las citas
+
+        paginate = self.request.query_params.get("paginate", None)
+        if paginate and paginate == "true":
+            page = self.paginate_queryset(appointments)  # Pagina las citas
+            if page is not None:
+                appointments_serializer = self.list_serializer_class(page, many=True)
+                return self.get_paginated_response(appointments_serializer.data)
+
+        appointments_serializer = self.list_serializer_class(appointments, many=True)
+        return Response(appointments_serializer.data, status=status.HTTP_200_OK)
+
     def filter_appointments(self, appointments):
         """
         Filtra las citas.
