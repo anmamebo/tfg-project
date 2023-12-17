@@ -4,7 +4,9 @@
 </ng-container>
 
 <!-- Panel principal Médico -->
-<ng-container *appHasRole="['Médico']"></ng-container>
+<ng-container *appHasRole="['Médico']">
+  <app-doctor-home-page></app-doctor-home-page>
+</ng-container>
 
 <!-- Panel principal Paciente -->
 <ng-container *appHasRole="['Paciente']"></ng-container>

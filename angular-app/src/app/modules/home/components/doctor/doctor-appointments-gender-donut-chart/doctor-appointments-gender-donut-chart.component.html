@@ -1,0 +1,17 @@
+<div class="card">
+  <div class="card-header">
+    <h4 class="card-title">Porcentaje de Citas por Género</h4>
+  </div>
+  <div class="card-body">
+    <div id="area" style="min-height: 365px">
+      <apx-chart
+        [series]="series"
+        [chart]="chart"
+        [labels]="labels"
+        [colors]="colors"
+        [responsive]="responsive"
+        [noData]="{ text: 'No hay datos' }"
+      ></apx-chart>
+    </div>
+  </div>
+</div>
