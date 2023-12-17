@@ -131,4 +131,15 @@ export class StatisticsService {
       httpOptions
     );
   }
+
+  /**
+   * Obtiene las estadísticas de citas por edad.
+   * @returns Observable con las estadísticas de citas por edad.
+   */
+  public getAppointmentsPerAge(): Observable<any> {
+    const headers = this._httpCommonService.getCommonHeaders();
+    const httpOptions = { headers };
+
+    return this._http.get(this.url + 'get_appointments_per_age/', httpOptions);
+  }
 }
