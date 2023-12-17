@@ -1,14 +1,19 @@
 import math
+from datetime import date, datetime, timedelta
 
+import pytz
 from apps.appointments.models import Appointment
 from apps.doctors.models import Doctor
 from apps.patients.models import Patient
 from apps.schedules.models import Schedule
 from apps.treatments.models import Treatment
-from django.db.models import Avg, DurationField, ExpressionWrapper, F, Sum
+from config.settings import TIME_ZONE
+from django.db.models import Avg, Count, DurationField, ExpressionWrapper, F, Sum
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+
+tz = pytz.timezone(TIME_ZONE)  # Zona horaria de la aplicación
 
 
 @api_view(["GET"])
@@ -40,6 +45,180 @@ def get_overall_stats(request):
             "total_duration_in_hms": total_duration_in_hms,
             "average_time_per_patient": average_time_per_patient,
         },
+        status=status.HTTP_200_OK,
+    )
+
+
+@api_view(["GET"])
+def get_appointments_per_day(request):
+    """
+    Obtener el número de citas por día para el mes y año especificados
+    para un médico concreto.
+
+    Parámetros:
+        year (int): Año para el que se obtendrán las citas
+        month (int): Mes para el que se obtendrán las citas
+
+    Args:
+        request (Request): Solicitud HTTP
+
+    Returns:
+        Response: Respuesta HTTP
+    """
+    doctor = request.user.doctor
+
+    # Obtener el mes y el año de los parámetros de la solicitud
+    year = int(request.GET.get("year", datetime.now().year))
+    month = int(request.GET.get("month", datetime.now().month))
+
+    # Obtener el primer día del mes
+    start_date = datetime(year, month, 1)
+
+    # Obtener el primer día del siguiente mes
+    next_month = month % 12 + 1 if month < 12 else 1
+    next_year = year if next_month != 1 else year + 1
+    start_next_month = datetime(next_year, next_month, 1)
+
+    # Restar un segundo al primer día del siguiente mes para obtener el último segundo del mes actual
+    end_date = start_next_month - timedelta(seconds=1)
+
+    # Convertir las fechas a la zona horaria de la aplicación
+    start_date = tz.localize(start_date)
+    end_date = tz.localize(end_date)
+
+    # Crear una lista de fechas dentro del rango
+    date_range = [
+        start_date + timedelta(days=x) for x in range((end_date - start_date).days + 1)
+    ]
+    dates_dict = {date.strftime("%Y-%m-%d"): 0 for date in date_range}
+
+    appointments = (
+        Appointment.objects.filter(
+            schedule__start_time__range=[start_date, end_date], doctor=doctor
+        )
+        .extra(select={"date": "DATE({}.start_time)".format(Schedule._meta.db_table)})
+        .values("date")
+        .annotate(count=Count("id"))
+        .order_by("date")
+    )
+
+    # Mapear las citas a las fechas y actualizar el recuento si hay citas para esa fecha
+    for appointment in appointments:
+        date_str = appointment["date"].strftime("%Y-%m-%d")
+        if date_str in dates_dict:
+            dates_dict[date_str] = appointment["count"]
+
+    # Crear la lista final con todas las fechas y sus recuentos
+    appointments_per_day_list = [
+        {"date": date, "value": count} for date, count in dates_dict.items()
+    ]
+
+    return Response(
+        appointments_per_day_list,
+        status=status.HTTP_200_OK,
+    )
+
+
+@api_view(["GET"])
+def get_appointments_per_gender(request):
+    """
+    Obtener el número de citas por género para un médico concreto.
+
+    Args:
+        request (Request): Solicitud HTTP
+
+    Returns:
+        Response: Respuesta HTTP
+    """
+    doctor = request.user.doctor
+
+    appointments = (
+        Appointment.objects.filter(doctor=doctor)
+        .values("patient__gender")
+        .annotate(count=Count("id"))
+    )
+
+    appointments_per_gender = [
+        {"gender": data["patient__gender"], "value": data["count"]}
+        for data in appointments
+    ]
+
+    return Response(
+        appointments_per_gender,
+        status=status.HTTP_200_OK,
+    )
+
+
+@api_view(["GET"])
+def get_appointments_per_specialty(request):
+    """
+    Obtener el número de citas por especialidad para un médico concreto.
+
+    Args:
+        request (Request): Solicitud HTTP
+
+    Returns:
+        Response: Respuesta HTTP
+    """
+    doctor = request.user.doctor
+
+    appointments = (
+        Appointment.objects.filter(doctor=doctor)
+        .values("specialty__name")
+        .annotate(count=Count("id"))
+    )
+
+    appointments_per_specialty = [
+        {"specialty": data["specialty__name"], "value": data["count"]}
+        for data in appointments
+    ]
+
+    return Response(
+        appointments_per_specialty,
+        status=status.HTTP_200_OK,
+    )
+
+
+@api_view(["GET"])
+def get_appointments_per_age(request):
+    """
+    Obtener el número de citas por edad para un médico concreto.
+
+    Args:
+        request (Request): Solicitud HTTP
+
+    Returns:
+        Response: Respuesta HTTP
+    """
+    doctor = request.user.doctor
+
+    today = date.today()
+    max_date = today.year
+    min_date = max_date - 100
+
+    groups = [
+        (max_date - 0, max_date - 12),
+        (max_date - 13, max_date - 18),
+        (max_date - 19, max_date - 30),
+        (max_date - 31, max_date - 50),
+        (max_date - 51, max_date - 65),
+        (max_date - 66, min_date),
+    ]
+
+    appointments_by_age_group = {}
+
+    for group in groups:
+        age_min, age_max = group
+        appointments_count = Appointment.objects.filter(
+            doctor=doctor,
+            patient__birthdate__year__gte=age_max,
+            patient__birthdate__year__lte=age_min,
+        ).count()
+
+        appointments_by_age_group[f"{age_min}-{age_max}"] = appointments_count
+
+    return Response(
+        appointments_by_age_group,
         status=status.HTTP_200_OK,
     )
 
