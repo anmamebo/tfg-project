@@ -61,6 +61,10 @@ urlpatterns = [
     path(
         "doctor_statistics/", include("apps.core.api.routers.doctor_statistics_routers")
     ),
+    path(
+        "patient_statistics/",
+        include("apps.core.api.routers.patient_statistics_routers"),
+    ),
 ]
 
 if settings.DEBUG:
