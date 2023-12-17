@@ -1,6 +1,7 @@
 from apps.core.api.views.statistics_views import (
     average_waiting_time,
     get_appointment_statuses,
+    get_appointments_per_age,
     get_appointments_per_day,
     get_appointments_per_day_and_gender,
     get_appointments_per_month_and_type,
@@ -36,5 +37,10 @@ urlpatterns = [
         "medical_specialty_doctor_count/",
         medical_specialty_doctor_count,
         name="medical_specialty_doctor_count",
+    ),
+    path(
+        "get_appointments_per_age/",
+        get_appointments_per_age,
+        name="get_appointments_per_age",
     ),
 ]

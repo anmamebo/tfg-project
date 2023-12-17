@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import date, datetime, timedelta
 
 import pytz
 from apps.appointments.models import Appointment
@@ -305,5 +305,48 @@ def medical_specialty_doctor_count(request):
 
     return Response(
         serializer.data,
+        status=status.HTTP_200_OK,
+    )
+
+
+@api_view(["GET"])
+def get_appointments_per_age(request):
+    """
+    Obtener el número de citas por edad.
+
+    Args:
+        request (Request): Solicitud HTTP
+
+    Returns:
+        Response: Respuesta HTTP
+    """
+    today = date.today()
+    max_date = today.year
+    min_date = max_date - 100
+
+    groups = [
+        (max_date - 0, max_date - 12),
+        (max_date - 13, max_date - 18),
+        (max_date - 19, max_date - 30),
+        (max_date - 31, max_date - 50),
+        (max_date - 51, max_date - 65),
+        (max_date - 66, min_date),
+    ]
+
+    appointments_by_age_group = {}
+
+    appointments_by_age_group = {}
+
+    for group in groups:
+        age_min, age_max = group
+        appointments_count = Appointment.objects.filter(
+            patient__birthdate__year__gte=age_max,
+            patient__birthdate__year__lte=age_min,
+        ).count()
+
+        appointments_by_age_group[f"{age_min}-{age_max}"] = appointments_count
+
+    return Response(
+        appointments_by_age_group,
         status=status.HTTP_200_OK,
     )
