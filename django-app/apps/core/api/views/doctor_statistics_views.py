@@ -224,14 +224,43 @@ def get_appointments_per_age(request):
 
 
 def get_total_patients_completed(doctor):
+    """
+    Obtiene el número total de pacientes atendidos por un médico,
+    citas completadas.
+
+    Args:
+        doctor (Doctor): Médico
+
+    Returns:
+        int: Número total de pacientes atendidos
+    """
     return Appointment.objects.filter(doctor=doctor, status="completed").count()
 
 
 def get_total_treatments_prescribed(doctor):
+    """
+    Obtiene el número total de tratamientos prescritos por un médico.
+
+    Args:
+        doctor (Doctor): Médico
+
+    Returns:
+        int: Número total de tratamientos prescritos
+    """
     return Treatment.objects.filter(doctor=doctor).count()
 
 
 def get_total_duration(doctor):
+    """
+    Obtiene la suma de las duraciones de las citas completadas de un médico
+    (tiempo trabajado).
+
+    Args:
+        doctor (Doctor): Médico
+
+    Returns:
+        str: Duración total en formato HH:mm:ss
+    """
     total_duration = (
         Schedule.objects.filter(
             appointment__doctor=doctor, appointment__status="completed"
@@ -254,6 +283,15 @@ def get_total_duration(doctor):
 
 
 def get_average_time_per_patient(doctor):
+    """
+    Obtiene el tiempo promedio de las citas de un médico.
+
+    Args:
+        doctor (Doctor): Médico
+
+    Returns:
+        str: Tiempo promedio de las citas en formato HH:MM:SS.
+    """
     avg_time = (
         Appointment.objects.filter(doctor=doctor, status="completed")
         .annotate(
