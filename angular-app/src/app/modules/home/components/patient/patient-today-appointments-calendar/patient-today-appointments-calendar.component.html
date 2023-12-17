@@ -1,0 +1,15 @@
+<div class="card h-100 pb-3 pe-2">
+  <div class="card-header">
+    <h4 class="card-title">
+      Citas Hoy | {{ viewDate | date : "dd, MMM yyyy" }}
+    </h4>
+  </div>
+  <div class="card-body overflow-y-scroll scroll-container" #scrollContainer>
+    <mwl-calendar-day-view
+      [viewDate]="viewDate"
+      [events]="events"
+      [hourSegments]="6"
+    >
+    </mwl-calendar-day-view>
+  </div>
+</div>

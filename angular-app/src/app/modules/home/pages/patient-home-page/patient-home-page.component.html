@@ -1,1 +1,29 @@
-<p>patient-home-page works!</p>
+<div class="page-content">
+  <section class="row">
+    <div class="col-12">
+      <!-- Bienvenida -->
+      <app-welcome-card></app-welcome-card>
+    </div>
+  </section>
+
+  <section class="row">
+    <div class="col-lg-9">
+      <!-- Estadisticas generales -->
+      <app-patient-statistics-cards></app-patient-statistics-cards>
+    </div>
+    <div class="col-lg-3">
+      <!-- Tiempo medio de espera -->
+      <app-average-waiting-time-card></app-average-waiting-time-card>
+    </div>
+  </section>
+
+  <section class="row mb-4" style="height: 480px">
+    <!-- Calendario citas diarias -->
+    <div class="col-xl-6 col-12 h-100">
+      <app-patient-today-appointments-calendar></app-patient-today-appointments-calendar>
+    </div>
+    <div class="col-xl-6 col-12">
+      <app-patient-appointments-specialties-stacked-column-chart></app-patient-appointments-specialties-stacked-column-chart>
+    </div>
+  </section>
+</div>

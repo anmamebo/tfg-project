@@ -37,6 +37,9 @@ import { DoctorAppointmentsGenderDonutChartComponent } from './components/doctor
 import { DoctorAppointmentsSpecialtyColumnsChartComponent } from './components/doctor/doctor-appointments-specialty-columns-chart/doctor-appointments-specialty-columns-chart.component';
 import { DoctorAppointmentsAgeColumnsChartComponent } from './components/doctor/doctor-appointments-age-columns-chart/doctor-appointments-age-columns-chart.component';
 import { AppointmentsAgeColumnChartComponent } from './components/administrative/appointments-age-column-chart/appointments-age-column-chart.component';
+import { PatientStatisticsCardsComponent } from './components/patient/patient-statistics-cards/patient-statistics-cards.component';
+import { PatientTodayAppointmentsCalendarComponent } from './components/patient/patient-today-appointments-calendar/patient-today-appointments-calendar.component';
+import { PatientAppointmentsSpecialtiesStackedColumnChartComponent } from './components/patient/patient-appointments-specialties-stacked-column-chart/patient-appointments-specialties-stacked-column-chart.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +63,9 @@ import { AppointmentsAgeColumnChartComponent } from './components/administrative
     DoctorAppointmentsAgeColumnsChartComponent,
     AppointmentsAgeColumnChartComponent,
     PatientHomePageComponent,
+    PatientStatisticsCardsComponent,
+    PatientTodayAppointmentsCalendarComponent,
+    PatientAppointmentsSpecialtiesStackedColumnChartComponent,
   ],
   imports: [
     CommonModule,
