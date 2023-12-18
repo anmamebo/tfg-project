@@ -23,12 +23,36 @@ class TreatmentSerializer(serializers.ModelSerializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
+    """
+    Serializador para representar los datos de un usuario.
+
+    Este serializador maneja la representación de los datos de un usuario.
+
+    Args:
+        validated_data (dict): Datos validados para la representación del usuario.
+
+    Returns:
+        dict: Diccionario con los datos del usuario.
+    """
+
     class Meta:
         model = User
         fields = ["name", "last_name", "email"]
 
 
 class DoctorSerializer(serializers.ModelSerializer):
+    """
+    Serializador para representar los datos de un doctor.
+
+    Este serializador maneja la representación de los datos de un doctor.
+
+    Args:
+        validated_data (dict): Datos validados para la representación del doctor.
+
+    Returns:
+        dict: Diccionario con los datos del doctor.
+    """
+
     user = UserSerializer(read_only=True)
 
     class Meta:
