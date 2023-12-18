@@ -2,6 +2,8 @@ from apps.doctors.api.serializers.medicalspecialty_serializer import (
     MedicalSpecialtySerializer,
 )
 from apps.doctors.models import MedicalSpecialty
+from common_mixins.error_mixin import ErrorResponseMixin
+from common_mixins.pagination_mixin import PaginationMixin
 from config.permissions import IsAdministratorOrDoctor
 from django.shortcuts import get_object_or_404
 from rest_framework import status, viewsets
@@ -9,7 +11,9 @@ from rest_framework.response import Response
 from utilities.permissions_helper import method_permission_classes
 
 
-class MedicalSpecialtyViewSet(viewsets.GenericViewSet):
+class MedicalSpecialtyViewSet(
+    viewsets.GenericViewSet, PaginationMixin, ErrorResponseMixin
+):
     """
     Vista para gestionar especialidades médicas.
 
@@ -52,7 +56,7 @@ class MedicalSpecialtyViewSet(viewsets.GenericViewSet):
             Response: La respuesta que contiene la lista de especialidades médicas.
         """
         medicalspecialties = self.get_queryset()
-        medicalspecialties_serializer = self.list_serializer_class(
-            medicalspecialties, many=True
+
+        return self.conditional_paginated_response(
+            medicalspecialties, self.list_serializer_class
         )
-        return Response(medicalspecialties_serializer.data, status=status.HTTP_200_OK)

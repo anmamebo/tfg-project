@@ -6,6 +6,19 @@ from rest_framework import serializers
 
 
 class UserDoctorSerializer(serializers.ModelSerializer):
+    """
+    Serializador para representar los datos de un usuario médico.
+
+    Este serializador maneja la representación de los datos de un usuario médico,
+    incluyendo información sobre el usuario.
+
+    Args:
+        validated_data (dict): Datos validados para la representación del usuario médico.
+
+    Returns:
+        dict: Diccionario con los datos del usuario médico.
+    """
+
     class Meta:
         model = User
         fields = "__all__"
@@ -18,6 +31,19 @@ class UserDoctorSerializer(serializers.ModelSerializer):
 
 
 class CreateDoctorSerializer(serializers.ModelSerializer):
+    """
+    Serializador para representar la creación de un médico.
+
+    Este serializador maneja la representación de la creación de un médico,
+    incluyendo información sobre el usuario, departamentos y especialidades médicas.
+
+    Args:
+        validated_data (dict): Datos validados para la creación del médico.
+
+    Returns:
+        dict: Diccionario con los datos del médico.
+    """
+
     user = UserDoctorSerializer()
     departments = serializers.PrimaryKeyRelatedField(
         many=True, queryset=Department.objects.all(), required=False
@@ -60,6 +86,19 @@ class CreateDoctorSerializer(serializers.ModelSerializer):
 
 
 class DoctorSerializer(serializers.ModelSerializer):
+    """
+    Serializador para representar los datos de un médico.
+
+    Este serializador maneja la representación de los datos de un médico,
+    incluyendo información sobre el usuario, departamentos y especialidades médicas.
+
+    Args:
+        validated_data (dict): Datos validados para la representación del médico.
+
+    Returns:
+        dict: Diccionario con los datos del médico.
+    """
+
     user = serializers.SerializerMethodField(read_only=True)
     departments = serializers.SerializerMethodField(read_only=True)
     medical_specialties = serializers.SerializerMethodField(read_only=True)
@@ -100,6 +139,19 @@ class DoctorSerializer(serializers.ModelSerializer):
 
 
 class DoctorInDepartmentListSerializer(serializers.ModelSerializer):
+    """
+    Serializador para representar los datos de un médico en una lista de departamentos.
+
+    Este serializador maneja la representación de los datos de un médico en una lista de departamentos,
+    incluyendo información sobre el usuario.
+
+    Args:
+        validated_data (dict): Datos validados para la representación del médico en una lista de departamentos.
+
+    Returns:
+        dict: Diccionario con los datos del médico en una lista de departamentos.
+    """
+
     user = serializers.SerializerMethodField(read_only=True)
 
     class Meta:

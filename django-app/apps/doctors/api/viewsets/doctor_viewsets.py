@@ -6,6 +6,8 @@ from apps.doctors.api.serializers.doctor_serializer import (
 )
 from apps.doctors.models import Doctor
 from apps.users.api.serializers.user_serializer import UserSerializer
+from common_mixins.error_mixin import ErrorResponseMixin
+from common_mixins.pagination_mixin import PaginationMixin
 from config.permissions import IsAdministrator, IsAdministratorOrDoctor
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
@@ -18,7 +20,7 @@ from utilities.password_generator import generate_password
 from utilities.permissions_helper import method_permission_classes
 
 
-class DoctorViewSet(viewsets.GenericViewSet):
+class DoctorViewSet(viewsets.GenericViewSet, PaginationMixin, ErrorResponseMixin):
     """
     Vista para gestionar médicos.
 
@@ -56,6 +58,7 @@ class DoctorViewSet(viewsets.GenericViewSet):
             state (bool): El estado de los médicos a listar.
             search (str): Una cadena de texto para buscar médicos.
             ordering (str): El campo por el que se ordenarán los médicos.
+            paginate (bool): Indica si se desea paginar los resultados.
 
         Args:
             request (Request): La solicitud HTTP.
@@ -65,19 +68,9 @@ class DoctorViewSet(viewsets.GenericViewSet):
         """
         doctors = self.get_queryset()
 
-        doctors = self.filter_state_doctors(
-            doctors
-        )  # Filtra los médicos por estado (activos / no activos)
-        doctors = self.filter_doctors(doctors)  # Filtra los médicos
-        doctors = self.order_doctors(doctors)  # Ordena los médicos
+        doctors = self.filter_and_order_doctors(doctors)
 
-        page = self.paginate_queryset(doctors)
-        if page is not None:
-            doctors_serializer = self.list_serializer_class(page, many=True)
-            return self.get_paginated_response(doctors_serializer.data)
-
-        doctors_serializer = self.list_serializer_class(doctors, many=True)
-        return Response(doctors_serializer.data, status=status.HTTP_200_OK)
+        return self.conditional_paginated_response(doctors, self.list_serializer_class)
 
     @method_permission_classes([IsAdministrator])
     def create(self, request):
@@ -125,12 +118,10 @@ class DoctorViewSet(viewsets.GenericViewSet):
                 status=status.HTTP_201_CREATED,
             )
 
-        return Response(
-            {
-                "message": "Hay errores en la creación",
-                "errors": doctor_serializer.errors,
-            },
-            status=status.HTTP_400_BAD_REQUEST,
+        return self.error_response(
+            message="Hay errores en la creación.",
+            errors=doctor_serializer.errors,
+            status_code=status.HTTP_400_BAD_REQUEST,
         )
 
     @method_permission_classes([IsAdministratorOrDoctor, IsSelfDoctor])
@@ -179,12 +170,10 @@ class DoctorViewSet(viewsets.GenericViewSet):
             if user_serializer.is_valid():
                 user_serializer.save()
             else:
-                return Response(
-                    {
-                        "message": "Hay errores en la actualización",
-                        "errors": user_serializer.errors,
-                    },
-                    status=status.HTTP_400_BAD_REQUEST,
+                return self.error_response(
+                    message="Hay errores en la actualización.",
+                    errors=user_serializer.errors,
+                    status_code=status.HTTP_400_BAD_REQUEST,
                 )
 
         # Actualiza los datos del doctor
@@ -208,12 +197,10 @@ class DoctorViewSet(viewsets.GenericViewSet):
                 status=status.HTTP_200_OK,
             )
 
-        return Response(
-            {
-                "message": "Hay errores en la actualización",
-                "errors": doctor_serializer.errors,
-            },
-            status=status.HTTP_400_BAD_REQUEST,
+        return self.error_response(
+            message="Hay errores en la actualización.",
+            errors=doctor_serializer.errors,
+            status_code=status.HTTP_400_BAD_REQUEST,
         )
 
     @method_permission_classes([IsAdministrator])
@@ -233,9 +220,9 @@ class DoctorViewSet(viewsets.GenericViewSet):
         """
         doctor = self.get_queryset().filter(id=pk).first()
         if not doctor:
-            return Response(
-                {"message": "No se ha encontrado el médico."},
-                status=status.HTTP_400_BAD_REQUEST,
+            return self.error_response(
+                message="No se ha encontrado el médico.",
+                status_code=status.HTTP_400_BAD_REQUEST,
             )
 
         user = doctor.user
@@ -269,9 +256,9 @@ class DoctorViewSet(viewsets.GenericViewSet):
         """
         doctor = self.get_object(pk)
         if not doctor:
-            return Response(
-                {"message": "No se ha encontrado el médico."},
-                status=status.HTTP_400_BAD_REQUEST,
+            return self.error_response(
+                message="No se ha encontrado el médico.",
+                status_code=status.HTTP_400_BAD_REQUEST,
             )
 
         user = doctor.user
@@ -299,7 +286,9 @@ class DoctorViewSet(viewsets.GenericViewSet):
             department (string): El id del departamento.
 
         Parámetros opcionales:
+            ordering (string): El campo por el que se ordenarán los médicos.
             search (str): Una cadena de texto para buscar médicos.
+            state (bool): El estado de los médicos a listar.
             paginate (bool): Indica si se desea paginar los resultados.
 
         Args:
@@ -312,37 +301,34 @@ class DoctorViewSet(viewsets.GenericViewSet):
 
         department_id = self.request.query_params.get("department", None)
         if not department_id:
-            return Response(
-                {"message": "No se ha enviado el departamento"},
-                status=status.HTTP_400_BAD_REQUEST,
+            return self.error_response(
+                message="No se ha enviado el departamento",
+                status_code=status.HTTP_400_BAD_REQUEST,
             )
 
         doctors = doctors.filter(
             departments__id=department_id
         )  # Filtra los médicos por departamento
-        doctors = self.filter_doctors(doctors)  # Filtra los médicos
+        doctors = self.filter_and_order_doctors(doctors)
 
-        paginate = self.request.query_params.get("paginate", None)
-        if paginate and paginate == "true":
-            page = self.paginate_queryset(doctors)
-            if page is not None:
-                doctors_serializer = DoctorInDepartmentListSerializer(page, many=True)
-                return self.get_paginated_response(doctors_serializer.data)
+        return self.conditional_paginated_response(
+            doctors, DoctorInDepartmentListSerializer
+        )
 
-        doctors_serializer = DoctorInDepartmentListSerializer(doctors, many=True)
-        return Response(doctors_serializer.data, status=status.HTTP_200_OK)
-
-    def filter_doctors(self, doctors):
+    def filter_and_order_doctors(self, doctors):
         """
-        Filtra los médicos por búsqueda.
+        Filtra y ordena los médicos.
 
         Args:
             doctors (QuerySet): El conjunto de médicos.
 
         Returns:
-            QuerySet: El conjunto de médicos filtrados.
+            QuerySet: El conjunto de médicos filtrados y ordenados.
         """
         query = self.request.query_params.get("search", None)
+        ordering = self.request.query_params.get("ordering", None)
+        state = self.request.query_params.get("state", None)
+
         if query:
             doctors = doctors.filter(
                 Q(user__name__icontains=query)
@@ -351,35 +337,9 @@ class DoctorViewSet(viewsets.GenericViewSet):
                 | Q(collegiate_number__icontains=query)
             )
 
-        return doctors
-
-    def order_doctors(self, doctors):
-        """
-        Ordena los médicos.
-
-        Args:
-            doctors (QuerySet): El conjunto de médicos.
-
-        Returns:
-            QuerySet: El conjunto de médicos ordenados.
-        """
-        ordering = self.request.query_params.get("ordering", None)
         if ordering:
             doctors = doctors.order_by(ordering)
 
-        return doctors
-
-    def filter_state_doctors(self, doctors):
-        """
-        Filtra los médicos por estado (activos / no activos).
-
-        Args:
-            doctors (QuerySet): El conjunto de médicos.
-
-        Returns:
-            QuerySet: El conjunto de médicos filtrados.
-        """
-        state = self.request.query_params.get("state", None)
         if state in ["true", "false"]:
             state_boolean = state == "true"
             doctors = doctors.filter(state=state_boolean)
