@@ -31,8 +31,6 @@ class IsAppointmentPatient(permissions.BasePermission):
         if appointment_id:
             appointment = get_object_or_404(Appointment, pk=appointment_id)
             patient = getattr(request.user, "patient", None)
-            print(appointment.patient)
-            print(patient)
             return appointment.patient == patient
 
         return False
