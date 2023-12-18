@@ -1,6 +1,7 @@
 from apps.patients.api.permissions.address_permissions import IsAddressOwner
 from apps.patients.api.serializers.address_serializer import AddressSerializer
 from apps.patients.models import Address, Patient
+from common_mixins.error_mixin import ErrorResponseMixin
 from config.permissions import IsAdministratorOrDoctorOrPatient
 from django.shortcuts import get_object_or_404
 from rest_framework import status, viewsets
@@ -8,7 +9,7 @@ from rest_framework.response import Response
 from utilities.permissions_helper import method_permission_classes
 
 
-class AddressViewSet(viewsets.GenericViewSet):
+class AddressViewSet(viewsets.GenericViewSet, ErrorResponseMixin):
     """
     Vista para gestionar direcciones.
 
@@ -54,9 +55,9 @@ class AddressViewSet(viewsets.GenericViewSet):
         patient_id = request.data.get("patient_id")
 
         if not patient_id:
-            return Response(
-                {"message": "No se ha enviado el ID del paciente."},
-                status=status.HTTP_400_BAD_REQUEST,
+            return self.error_response(
+                message="No se ha enviado el ID del paciente.",
+                status_code=status.HTTP_400_BAD_REQUEST,
             )
 
         patient = get_object_or_404(Patient, pk=patient_id)
@@ -71,12 +72,10 @@ class AddressViewSet(viewsets.GenericViewSet):
                 status=status.HTTP_201_CREATED,
             )
 
-        return Response(
-            {
-                "message": "Hay errores en la información enviada.",
-                "errors": address_serializer.errors,
-            },
-            status=status.HTTP_400_BAD_REQUEST,
+        return self.error_response(
+            message="Hay errores en la información enviada.",
+            errors=address_serializer.errors,
+            status_code=status.HTTP_400_BAD_REQUEST,
         )
 
     @method_permission_classes([IsAdministratorOrDoctorOrPatient, IsAddressOwner])
@@ -106,10 +105,8 @@ class AddressViewSet(viewsets.GenericViewSet):
                 status=status.HTTP_200_OK,
             )
 
-        return Response(
-            {
-                "message": "Hay errores en la información enviada.",
-                "errors": address_serializer.errors,
-            },
-            status=status.HTTP_400_BAD_REQUEST,
+        return self.error_response(
+            message="Hay errores en la información enviada.",
+            errors=address_serializer.errors,
+            status_code=status.HTTP_400_BAD_REQUEST,
         )

@@ -5,6 +5,8 @@ from apps.patients.api.serializers.patient_serializer import (
 )
 from apps.patients.models import Patient
 from apps.users.api.serializers.user_serializer import UserSerializer
+from common_mixins.error_mixin import ErrorResponseMixin
+from common_mixins.pagination_mixin import PaginationMixin
 from config.permissions import (
     IsAdministrator,
     IsAdministratorOrDoctor,
@@ -20,7 +22,7 @@ from utilities.password_generator import generate_password
 from utilities.permissions_helper import method_permission_classes
 
 
-class PatientViewSet(viewsets.GenericViewSet):
+class PatientViewSet(viewsets.GenericViewSet, PaginationMixin, ErrorResponseMixin):
     """
     Vista para gestionar pacientes.
 
@@ -56,6 +58,12 @@ class PatientViewSet(viewsets.GenericViewSet):
         Permisos requeridos:
             - El usuario debe ser administrador o doctor.
 
+        Parámetros opcionales:
+            state (bool): El estado de los pacientes a listar.
+            search (str): Una cadena de texto para buscar pacientes.
+            ordering (str): El campo por el que se ordenarán los pacientes.
+            paginate (bool): Indica si se desea paginar los resultados.
+
         Args:
             request (Request): La solicitud HTTP.
 
@@ -64,19 +72,9 @@ class PatientViewSet(viewsets.GenericViewSet):
         """
         patients = self.get_queryset()
 
-        patients = self.filter_state_patients(
-            patients
-        )  # Filtra los pacientes por estado.
-        patients = self.filter_patients(patients)  # Filtra los pacientes.
-        patients = self.order_patients(patients)  # Ordena los pacientes.
+        patients = self.filter_and_order_patients(patients)
 
-        page = self.paginate_queryset(patients)
-        if page is not None:
-            patients_serializer = self.list_serializer_class(page, many=True)
-            return self.get_paginated_response(patients_serializer.data)
-        else:
-            patients_serializer = self.list_serializer_class(patients, many=True)
-            return Response(patients_serializer.data, status=status.HTTP_200_OK)
+        return self.conditional_paginated_response(patients, self.list_serializer_class)
 
     @method_permission_classes([IsAdministratorOrDoctor])
     def create(self, request):
@@ -93,8 +91,8 @@ class PatientViewSet(viewsets.GenericViewSet):
             Response: La respuesta que indica si el paciente se ha creado correctamente o si ha habido errores.
         """
         if "user" not in request.data or "dni" not in request.data:
-            return Response(
-                {"message": "No se ha enviado los datos del usuario"},
+            return self.error_response(
+                message="No se ha enviado los datos del paciente",
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
@@ -118,11 +116,9 @@ class PatientViewSet(viewsets.GenericViewSet):
                 status=status.HTTP_201_CREATED,
             )
 
-        return Response(
-            {
-                "message": "Hay errores en la creación",
-                "errors": patient_serializer.errors,
-            },
+        return self.error_response(
+            message="Hay errores en la creación.",
+            errors=patient_serializer.errors,
             status=status.HTTP_400_BAD_REQUEST,
         )
 
@@ -172,11 +168,9 @@ class PatientViewSet(viewsets.GenericViewSet):
             if user_serializer.is_valid():
                 user_serializer.save()
             else:
-                return Response(
-                    {
-                        "message": "Hay errores en la actualización",
-                        "errors": user_serializer.errors,
-                    },
+                return self.error_response(
+                    message="Hay errores en la actualización.",
+                    errors=user_serializer.errors,
                     status=status.HTTP_400_BAD_REQUEST,
                 )
 
@@ -191,11 +185,9 @@ class PatientViewSet(viewsets.GenericViewSet):
                 status=status.HTTP_200_OK,
             )
 
-        return Response(
-            {
-                "message": "Hay errores en la actualización",
-                "errors": patient_serializer.errors,
-            },
+        return self.error_response(
+            message="Hay errores en la actualización.",
+            errors=patient_serializer.errors,
             status=status.HTTP_400_BAD_REQUEST,
         )
 
@@ -216,8 +208,8 @@ class PatientViewSet(viewsets.GenericViewSet):
         """
         patient = self.get_queryset().filter(id=pk).first()
         if not patient:
-            return Response(
-                {"message": "No se ha encontrado el paciente."},
+            return self.error_response(
+                message="No se ha encontrado el paciente.",
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
@@ -256,8 +248,8 @@ class PatientViewSet(viewsets.GenericViewSet):
         """
         patient = self.get_object(pk)
         if not patient:
-            return Response(
-                {"message": "No se ha encontrado el paciente."},
+            return self.error_response(
+                message="No se ha encontrado el paciente.",
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
@@ -278,17 +270,20 @@ class PatientViewSet(viewsets.GenericViewSet):
                 status=status.HTTP_200_OK,
             )
 
-    def filter_patients(self, patients):
+    def filter_and_order_patients(self, patients):
         """
-        Filtra los pacientes por búsqueda.
+        Filtra y ordena los pacientes.
 
         Args:
             patients (QuerySet): El conjunto de pacientes.
 
         Returns:
-            QuerySet: El conjunto de pacientes filtrados.
+            QuerySet: El conjunto de pacientes filtrados y ordenados.
         """
         query = self.request.query_params.get("search", None)
+        ordering = self.request.query_params.get("ordering", None)
+        state = self.request.query_params.get("state", None)
+
         if query:
             patients = patients.filter(
                 Q(user__name__icontains=query)
@@ -299,35 +294,9 @@ class PatientViewSet(viewsets.GenericViewSet):
                 | Q(phone__icontains=query)
             )
 
-        return patients
-
-    def order_patients(self, patients):
-        """
-        Ordena los pacientes.
-
-        Args:
-            patients (QuerySet): El conjunto de pacientes.
-
-        Returns:
-            QuerySet: El conjunto de pacientes ordenados.
-        """
-        ordering = self.request.query_params.get("ordering", None)
         if ordering:
             patients = patients.order_by(ordering)
 
-        return patients
-
-    def filter_state_patients(self, patients):
-        """
-        Filtra los pacientes por estado.
-
-        Args:
-            patients (QuerySet): El conjunto de pacientes.
-
-        Returns:
-            QuerySet: El conjunto de pacientes filtrados.
-        """
-        state = self.request.query_params.get("state", None)
         if state in ["true", "false"]:
             state_boolean = state == "true"
             patients = patients.filter(state=state_boolean)
