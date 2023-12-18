@@ -3,6 +3,8 @@ from apps.departments.api.serializers.room_serializer import (
     RoomSerializer,
 )
 from apps.departments.models import Room
+from common_mixins.error_mixin import ErrorResponseMixin
+from common_mixins.pagination_mixin import PaginationMixin
 from config.permissions import IsAdministrator, IsAdministratorOrDoctor
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
@@ -12,7 +14,7 @@ from rest_framework.response import Response
 from utilities.permissions_helper import method_permission_classes
 
 
-class RoomViewSet(viewsets.GenericViewSet):
+class RoomViewSet(viewsets.GenericViewSet, PaginationMixin, ErrorResponseMixin):
     """
     Vista para gestionar salas.
 
@@ -60,19 +62,9 @@ class RoomViewSet(viewsets.GenericViewSet):
         """
         rooms = self.get_queryset()
 
-        rooms = self.filter_state_rooms(rooms)  # Filtra las salas por estado.
-        rooms = self.filter_rooms(rooms)  # Filtra las salas.
-        rooms = self.order_rooms(rooms)  # Ordena las salas.
+        rooms = self.filter_and_order_rooms(rooms)
 
-        paginate = self.request.query_params.get("paginate", None)
-        if paginate and paginate == "true":
-            page = self.paginate_queryset(rooms)
-            if page is not None:
-                rooms_serializer = self.list_serializer_class(page, many=True)
-                return self.get_paginated_response(rooms_serializer.data)
-
-        rooms_serializer = self.list_serializer_class(rooms, many=True)
-        return Response(rooms_serializer.data, status=status.HTTP_200_OK)
+        return self.conditional_paginated_response(rooms, self.list_serializer_class)
 
     @method_permission_classes([IsAdministrator])
     def create(self, request):
@@ -98,12 +90,10 @@ class RoomViewSet(viewsets.GenericViewSet):
                 status=status.HTTP_201_CREATED,
             )
 
-        return Response(
-            {
-                "message": "Hay errores en la creación.",
-                "errors": room_serializer.errors,
-            },
-            status=status.HTTP_400_BAD_REQUEST,
+        return self.error_response(
+            message="Hay errores en la creación.",
+            errors=room_serializer.errors,
+            status_code=status.HTTP_400_BAD_REQUEST,
         )
 
     @method_permission_classes([IsAdministratorOrDoctor])
@@ -151,12 +141,10 @@ class RoomViewSet(viewsets.GenericViewSet):
                 status=status.HTTP_200_OK,
             )
 
-        return Response(
-            {
-                "message": "Hay errores en la actualización",
-                "errors": room_serializer.errors,
-            },
-            status=status.HTTP_400_BAD_REQUEST,
+        return self.error_response(
+            message="Hay errores en la actualización.",
+            errors=room_serializer.errors,
+            status_code=status.HTTP_400_BAD_REQUEST,
         )
 
     @method_permission_classes([IsAdministrator])
@@ -176,11 +164,9 @@ class RoomViewSet(viewsets.GenericViewSet):
         """
         room = self.get_queryset().filter(id=pk).first()
         if not room:
-            return Response(
-                {
-                    "message": "No se encontró la sala.",
-                },
-                status=status.HTTP_400_BAD_REQUEST,
+            return self.error_response(
+                message="No se encontró la sala.",
+                status_code=status.HTTP_400_BAD_REQUEST,
             )
 
         room.state = False
@@ -211,9 +197,9 @@ class RoomViewSet(viewsets.GenericViewSet):
         """
         room = self.get_object(pk)
         if not room:
-            return Response(
-                {"message": "No se encontró la sala."},
-                status=status.HTTP_400_BAD_REQUEST,
+            return self.error_response(
+                message="No se encontró la sala.",
+                status_code=status.HTTP_400_BAD_REQUEST,
             )
 
         room.state = True
@@ -239,7 +225,9 @@ class RoomViewSet(viewsets.GenericViewSet):
             department (string): El id del departamento.
 
         Parámetros opcionales:
+            state (bool): El estado de las salas a listar.
             search (str): Una cadena de texto para buscar salas.
+            ordering (str): El campo por el que se ordenarán las salas.
             paginate (bool): Indica si se desea paginar los resultados.
 
         Args:
@@ -252,37 +240,30 @@ class RoomViewSet(viewsets.GenericViewSet):
 
         department_id = self.request.query_params.get("department", None)
         if not department_id:  # Si no se envía el id del departamento.
-            return Response(
-                {"message": "No se encontró el departamento."},
-                status=status.HTTP_400_BAD_REQUEST,
+            return self.error_response(
+                message="No se encontró el departamento.",
+                status_code=status.HTTP_400_BAD_REQUEST,
             )
 
-        rooms = rooms.filter(
-            department__id=department_id
-        )  # Filtra las salas por departamento.
-        rooms = self.filter_rooms(rooms)  # Filtra las salas.
+        rooms = rooms.filter(department__id=department_id)
+        rooms = self.filter_and_order_rooms(rooms)
 
-        paginate = self.request.query_params.get("paginate", None)
-        if paginate and paginate == "true":
-            page = self.paginate_queryset(rooms)
-            if page is not None:
-                rooms_serializer = BasicRoomSerializer(page, many=True)
-                return self.get_paginated_response(rooms_serializer.data)
+        return self.conditional_paginated_response(rooms, BasicRoomSerializer)
 
-        rooms_serializer = BasicRoomSerializer(rooms, many=True)
-        return Response(rooms_serializer.data, status=status.HTTP_200_OK)
-
-    def filter_rooms(self, rooms):
+    def filter_and_order_rooms(self, rooms):
         """
-        Filtra las salas.
+        Filtra y ordena las salas.
 
         Args:
-            rooms (QuerySet): El conjunto de datos a filtrar.
+            rooms (QuerySet): El conjunto de datos a filtrar y ordenar.
 
         Returns:
-            QuerySet: El conjunto de datos filtrado.
+            QuerySet: El conjunto de datos filtrado y ordenado.
         """
         query = self.request.query_params.get("search", None)
+        ordering = self.request.query_params.get("ordering", None)
+        state = self.request.query_params.get("state", None)
+
         if query:
             rooms = rooms.filter(
                 Q(name__icontains=query)
@@ -292,35 +273,9 @@ class RoomViewSet(viewsets.GenericViewSet):
                 | Q(capacity__icontains=query)
             )
 
-        return rooms
-
-    def order_rooms(self, rooms):
-        """
-        Ordena las salas.
-
-        Args:
-            rooms (QuerySet): El conjunto de datos a ordenar.
-
-        Returns:
-            QuerySet: El conjunto de datos ordenado.
-        """
-        ordering = self.request.query_params.get("ordering", None)
         if ordering:
             rooms = rooms.order_by(ordering)
 
-        return rooms
-
-    def filter_state_rooms(self, rooms):
-        """
-        Filtra las salas por estado.
-
-        Args:
-            rooms (QuerySet): El conjunto de datos a filtrar.
-
-        Returns:
-            QuerySet: El conjunto de datos filtrado.
-        """
-        state = self.request.query_params.get("state", None)
         if state in ["true", "false"]:
             state_boolean = state == "true"
             rooms = rooms.filter(state=state_boolean)

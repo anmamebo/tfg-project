@@ -3,6 +3,8 @@ from apps.departments.api.serializers.department_serializer import (
     DepartmentWithDoctorsSerializer,
 )
 from apps.departments.models import Department
+from common_mixins.error_mixin import ErrorResponseMixin
+from common_mixins.pagination_mixin import PaginationMixin
 from config.permissions import IsAdministrator, IsAdministratorOrDoctor
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
@@ -12,7 +14,7 @@ from rest_framework.response import Response
 from utilities.permissions_helper import method_permission_classes
 
 
-class DepartmentViewSet(viewsets.GenericViewSet):
+class DepartmentViewSet(viewsets.GenericViewSet, PaginationMixin, ErrorResponseMixin):
     """
     Vista para gestionar departamentos.
 
@@ -60,21 +62,11 @@ class DepartmentViewSet(viewsets.GenericViewSet):
         """
         departments = self.get_queryset()
 
-        departments = self.filter_state_departments(
-            departments
-        )  # Filtra los departamentos por estado.
-        departments = self.filter_departments(departments)  # Filtra los departamentos.
-        departments = self.order_departments(departments)  # Ordena los departamentos.
+        departments = self.filter_and_order_departments(departments)
 
-        paginate = self.request.query_params.get("paginate", None)
-        if paginate and paginate == "true":
-            page = self.paginate_queryset(departments)
-            if page is not None:
-                departments_serializer = self.list_serializer_class(page, many=True)
-                return self.get_paginated_response(departments_serializer.data)
-
-        departments_serializer = self.list_serializer_class(departments, many=True)
-        return Response(departments_serializer.data, status=status.HTTP_200_OK)
+        return self.conditional_paginated_response(
+            departments, self.list_serializer_class
+        )
 
     @method_permission_classes([IsAdministrator])
     def create(self, request):
@@ -98,11 +90,9 @@ class DepartmentViewSet(viewsets.GenericViewSet):
                 status=status.HTTP_201_CREATED,
             )
 
-        return Response(
-            {
-                "message": "Hay errores en la creación.",
-                "errors": department_serializer.errors,
-            },
+        return self.error_response(
+            message="Hay errores en la creación.",
+            errors=department_serializer.errors,
             status=status.HTTP_400_BAD_REQUEST,
         )
 
@@ -149,11 +139,9 @@ class DepartmentViewSet(viewsets.GenericViewSet):
                 status=status.HTTP_200_OK,
             )
 
-        return Response(
-            {
-                "message": "Hay errores en la actualización.",
-                "errors": department_serializer.errors,
-            },
+        return self.error_response(
+            message="Hay errores en la actualización.",
+            errors=department_serializer.errors,
             status=status.HTTP_400_BAD_REQUEST,
         )
 
@@ -174,9 +162,9 @@ class DepartmentViewSet(viewsets.GenericViewSet):
         """
         department = self.get_queryset().filter(id=pk).first()
         if not department:
-            return Response(
-                {"message": "No se ha encontrado el departamento."},
-                status=status.HTTP_400_BAD_REQUEST,
+            return self.error_response(
+                message="No se ha encontrado el departamento.",
+                status_code=status.HTTP_400_BAD_REQUEST,
             )
 
         department.state = False
@@ -204,9 +192,9 @@ class DepartmentViewSet(viewsets.GenericViewSet):
         """
         department = self.get_object(pk)
         if not department:
-            return Response(
-                {"message": "No se ha encontrado el departamento."},
-                status=status.HTTP_400_BAD_REQUEST,
+            return self.error_response(
+                message="No se ha encontrado el departamento.",
+                status_code=status.HTTP_400_BAD_REQUEST,
             )
 
         department.state = True
@@ -216,51 +204,28 @@ class DepartmentViewSet(viewsets.GenericViewSet):
             status=status.HTTP_200_OK,
         )
 
-    def filter_departments(self, departments):
+    def filter_and_order_departments(self, departments):
         """
-        Filtra los departamentos.
+        Filtra y ordena los departamentos.
 
         Args:
-            departments (QuerySet): El conjunto de datos a filtrar.
+            departments (QuerySet): El conjunto de datos a filtrar y ordenar.
 
         Returns:
-            QuerySet: El conjunto de datos filtrado.
+            QuerySet: El conjunto de datos filtrado y ordenado.
         """
         query = self.request.query_params.get("search", None)
+        ordering = self.request.query_params.get("ordering", None)
+        state = self.request.query_params.get("state", None)
+
         if query:
             departments = departments.filter(
                 Q(name__icontains=query) | Q(description__icontains=query)
             )
 
-        return departments
-
-    def order_departments(self, departments):
-        """
-        Ordena los departamentos.
-
-        Args:
-            departments (QuerySet): El conjunto de datos a ordenar.
-
-        Returns:
-            QuerySet: El conjunto de datos ordenado.
-        """
-        ordering = self.request.query_params.get("ordering", None)
         if ordering:
             departments = departments.order_by(ordering)
 
-        return departments
-
-    def filter_state_departments(self, departments):
-        """
-        Filtra los departamentos por estado.
-
-        Args:
-            departments (QuerySet): El conjunto de datos a filtrar.
-
-        Returns:
-            QuerySet: El conjunto de datos filtrado.
-        """
-        state = self.request.query_params.get("state", None)
         if state in ["true", "false"]:
             state_boolean = state == "true"
             departments = departments.filter(state=state_boolean)
