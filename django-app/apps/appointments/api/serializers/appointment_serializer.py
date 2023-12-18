@@ -10,22 +10,36 @@ from rest_framework import serializers
 
 
 class ScheduleAppointmentSerializer(serializers.ModelSerializer):
+    """
+    Serializador para representar los datos de una cita en un horario.
+
+    Este serializador maneja la representación de los datos de una cita en un horario,
+    excluyendo ciertos campos específicos.
+
+    Args:
+        validated_data (dict): Datos validados para la representación de la cita en un horario.
+
+    Returns:
+        dict: Diccionario con los datos de la cita en un horario.
+    """
+
     class Meta:
         model = Schedule
         exclude = ["doctor", "state", "created_date", "modified_date", "deleted_date"]
 
 
-class AppointmentListSerializer(serializers.ModelSerializer):
+class AppointmentSerializer(serializers.ModelSerializer):
     """
-    Serializador para representar los datos de una lista de citas.
+    Serializador para representar los datos de una cita.
 
-    Este serializador maneja la representación de los datos de una lista de citas.
+    Este serializador maneja la representación de los datos de una cita,
+    incluyendo información sobre el paciente, médico, especialidad médica, sala y horario.
 
     Args:
-        validated_data (dict): Datos validados para la representación de la lista de citas.
+        validated_data (dict): Datos validados para la representación de la cita.
 
     Returns:
-        dict: Diccionario con los datos de la lista de citas.
+        dict: Diccionario con los datos de la cita.
     """
 
     patient = PatientSerializer(read_only=True)

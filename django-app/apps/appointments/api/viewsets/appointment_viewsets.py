@@ -3,7 +3,7 @@ from datetime import datetime, timedelta
 import pytz
 from apps.appointments.api.permissions.appointment_permissions import IsAppointmentOwner
 from apps.appointments.api.serializers.appointment_serializer import (
-    AppointmentListSerializer,
+    AppointmentSerializer,
 )
 from apps.appointments.models import Appointment
 from common_mixins.error_mixin import ErrorResponseMixin
@@ -35,8 +35,8 @@ class AppointmentViewSet(viewsets.GenericViewSet, PaginationMixin, ErrorResponse
     """
 
     model = Appointment
-    serializer_class = AppointmentListSerializer
-    list_serializer_class = AppointmentListSerializer
+    serializer_class = AppointmentSerializer
+    list_serializer_class = AppointmentSerializer
     queryset = None
     status_transitions = {
         "pending": ["scheduled", "cancelled"],
