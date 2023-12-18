@@ -91,9 +91,9 @@ class DoctorViewSet(viewsets.GenericViewSet, PaginationMixin, ErrorResponseMixin
             or "name" not in request.data["user"]
             or "last_name" not in request.data["user"]
         ):
-            return Response(
-                {"message": "No se ha enviado los datos del usuario"},
-                status=status.HTTP_400_BAD_REQUEST,
+            return self.error_response(
+                message="No se ha enviado los datos del usuario",
+                status_code=status.HTTP_400_BAD_REQUEST,
             )
 
         request.data["user"]["password"] = generate_password()
