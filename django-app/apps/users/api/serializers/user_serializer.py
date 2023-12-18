@@ -53,6 +53,10 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
+    """
+    Custom serializer para agregar datos personalizados al token.
+    """
+
     @classmethod
     def get_token(cls, user):
         token = super().get_token(user)
@@ -64,12 +68,28 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
 
 
 class CustomUserSerializer(serializers.ModelSerializer):
+    """
+    Custom serializer para agregar datos personalizados al usuario.
+    """
+
     class Meta:
         model = User
         fields = ("id", "username", "email", "name", "last_name", "profile_picture")
 
 
 class UserSerializer(serializers.ModelSerializer):
+    """
+    Serializador para representar los datos de un usuario.
+
+    Este serializador maneja la representación de los datos de un usuario.
+
+    Args:
+        validated_data (dict): Datos validados para la representación del usuario.
+
+    Returns:
+        dict: Diccionario con los datos del usuario.
+    """
+
     # Ejemplo de acceder a datos de una relación 1 a 1
     # dni = serializers.CharField(source='patient.dni')
     # Si hay un serializer se podria hacer asi
@@ -91,12 +111,36 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class UpdateUserSerializer(serializers.ModelSerializer):
+    """
+    Serializador para representar los datos de la actualización de un usuario.
+
+    Este serializador maneja la representación de los datos de la actualización de un usuario.
+
+    Args:
+        validated_data (dict): Datos validados para la representación de la actualización del usuario.
+
+    Returns:
+        dict: Diccionario con los datos de la actualización del usuario.
+    """
+
     class Meta:
         model = User
         fields = ("username", "email", "name", "last_name", "profile_picture")
 
 
 class PasswordSerializer(serializers.Serializer):
+    """
+    Serializador para representar los datos de la actualización de la contraseña de un usuario.
+
+    Este serializador maneja la representación de los datos de la actualización de la contraseña de un usuario.
+
+    Args:
+        validated_data (dict): Datos validados para la representación de la actualización de la contraseña del usuario.
+
+    Returns:
+        dict: Diccionario con los datos de la actualización de la contraseña del usuario.
+    """
+
     old_password = serializers.CharField(max_length=128, min_length=1, write_only=True)
     password = serializers.CharField(max_length=128, min_length=1, write_only=True)
     password2 = serializers.CharField(max_length=128, min_length=1, write_only=True)
@@ -118,6 +162,18 @@ class PasswordSerializer(serializers.Serializer):
 
 
 class UserListSerializer(serializers.ModelSerializer):
+    """
+    Serializador para representar los datos de la lista de usuarios.
+
+    Este serializador maneja la representación de los datos de la lista de usuarios.
+
+    Args:
+        validated_data (dict): Datos validados para la representación de la lista de usuarios.
+
+    Returns:
+        dict: Diccionario con los datos de la lista de usuarios.
+    """
+
     class Meta:
         model = User
 
@@ -135,10 +191,28 @@ class UserListSerializer(serializers.ModelSerializer):
 
 
 class UserProfilePictureSerializer(serializers.ModelSerializer):
+    """
+    Serializador para representar los datos de la actualización de la imagen de perfil de un usuario.
+
+    Este serializador maneja la representación de los datos de la actualización de la imagen de perfil de un usuario.
+
+    Args:
+        validated_data (dict): Datos validados para la representación de la actualización de la imagen de perfil del usuario.
+
+    Returns:
+        dict: Diccionario con los datos de la actualización de la imagen de perfil del usuario.
+    """
+
     class Meta:
         model = User
         fields = ("profile_picture",)
 
 
 class EmptySerializer(serializers.Serializer):
+    """
+    Serializer vacío.
+
+    Este serializer se usa cuando no se necesita un serializer.
+    """
+
     pass

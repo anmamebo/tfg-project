@@ -2,6 +2,8 @@ from apps.users.api.serializers.group_serializer import (
     GroupListSerializer,
     GroupSerializer,
 )
+from common_mixins.error_mixin import ErrorResponseMixin
+from common_mixins.pagination_mixin import PaginationMixin
 from config.permissions import IsAdministrator
 from django.contrib.auth.models import Group
 from django.shortcuts import get_object_or_404
@@ -10,7 +12,7 @@ from rest_framework.response import Response
 from utilities.permissions_helper import method_permission_classes
 
 
-class GroupViewSet(viewsets.GenericViewSet):
+class GroupViewSet(viewsets.GenericViewSet, PaginationMixin, ErrorResponseMixin):
     """
     Vista para gestionar grupos.
 
@@ -44,6 +46,10 @@ class GroupViewSet(viewsets.GenericViewSet):
         Permisos requeridos:
             - El usuario debe ser administrador.
 
+        Parámetros opcionales:
+            ordering (str): El campo por el que se ordenarán los grupos.
+            paginate (bool): Indica si se desea paginar los resultados.
+
         Args:
             request (Request): La solicitud HTTP.
 
@@ -54,13 +60,7 @@ class GroupViewSet(viewsets.GenericViewSet):
 
         groups = self.order_groups(groups)  # Ordenar grupos
 
-        page = self.paginate_queryset(groups)
-        if page is not None:
-            groups_serializer = self.list_serializer_class(page, many=True)
-            return self.get_paginated_response(groups_serializer.data)
-
-        groups_serializer = self.list_serializer_class(groups, many=True)
-        return Response(groups_serializer.data, status=status.HTTP_200_OK)
+        return self.conditional_paginated_response(groups, self.list_serializer_class)
 
     @method_permission_classes([IsAdministrator])
     def create(self, request):
@@ -84,12 +84,10 @@ class GroupViewSet(viewsets.GenericViewSet):
                 status=status.HTTP_201_CREATED,
             )
 
-        return Response(
-            {
-                "message": "Hay errores en la creación",
-                "errors": group_serializer.errors,
-            },
-            status=status.HTTP_400_BAD_REQUEST,
+        return self.error_response(
+            message="Hay errores en la creación",
+            errors=group_serializer.errors,
+            status_code=status.HTTP_400_BAD_REQUEST,
         )
 
     @method_permission_classes([IsAdministrator])
@@ -135,12 +133,10 @@ class GroupViewSet(viewsets.GenericViewSet):
                 status=status.HTTP_200_OK,
             )
 
-        return Response(
-            {
-                "message": "Hay errores en la actualización",
-                "errors": group_serializer.errors,
-            },
-            status=status.HTTP_400_BAD_REQUEST,
+        return self.error_response(
+            message="Hay errores en la actualización",
+            errors=group_serializer.errors,
+            status_code=status.HTTP_400_BAD_REQUEST,
         )
 
     @method_permission_classes([IsAdministrator])

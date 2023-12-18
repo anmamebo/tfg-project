@@ -1,4 +1,5 @@
 from apps.users.api.serializers.permission_serializer import PermissionSerializer
+from common_mixins.pagination_mixin import PaginationMixin
 from config.permissions import IsAdministrator
 from django.contrib.auth.models import Permission
 from django.db.models import Q
@@ -8,7 +9,7 @@ from rest_framework.response import Response
 from utilities.permissions_helper import method_permission_classes
 
 
-class PermissionViewSet(viewsets.GenericViewSet):
+class PermissionViewSet(viewsets.GenericViewSet, PaginationMixin):
     """
     Vista para gestionar permisos.
 
@@ -43,6 +44,7 @@ class PermissionViewSet(viewsets.GenericViewSet):
             - El usuario debe ser administrador.
 
         Parámetros opcionales:
+            paginate (bool): Indica si se desea paginar los resultados.
             search (str): Una cadena de texto para buscar permisos.
             ordering (str): El campo por el que se ordenarán los permisos.
 
@@ -54,31 +56,25 @@ class PermissionViewSet(viewsets.GenericViewSet):
         """
         permissions = self.get_queryset()
 
-        permissions = self.filter_permissions(permissions)  # Filtrar permisos
-        permissions = self.order_permissions(permissions)  # Ordenar permisos
+        permissions = self.filter_and_order_permissions(permissions)
 
-        page = self.paginate_queryset(permissions)
-        if page is not None:
-            permissions_serializer = self.list_serializer_class(page, many=True)
-            return self.get_paginated_response(permissions_serializer.data)
+        return self.conditional_paginated_response(
+            permissions, self.list_serializer_class
+        )
 
-        permissions_serializer = self.list_serializer_class(permissions, many=True)
-        return Response(permissions_serializer.data, status=status.HTTP_200_OK)
-
-    def filter_permissions(self, permissions):
+    def filter_and_order_permissions(self, permissions):
         """
-        Filtra los permisos.
+        Filtra y ordena los permisos.
 
         Args:
             permissions (QuerySet): El conjunto de permisos.
 
         Returns:
-            QuerySet: El conjunto de permisos filtrados.
+            QuerySet: El conjunto de permisos filtrados y ordenados.
         """
-        # Obtener el parámetro de búsqueda de la solicitud
         query = self.request.query_params.get("search", None)
+        ordering = self.request.query_params.get("ordering", None)
 
-        # Realizar la búsqueda si se proporciona un parámetro de búsqueda
         if query:
             # Buscar en múltiples campos utilizando la cláusula Q de Django
             permissions = permissions.filter(
@@ -87,19 +83,6 @@ class PermissionViewSet(viewsets.GenericViewSet):
                 | Q(content_type__model__icontains=query)
             )
 
-        return permissions
-
-    def order_permissions(self, permissions):
-        """
-        Ordena los permisos.
-
-        Args:
-            permissions (QuerySet): El conjunto de permisos.
-
-        Returns:
-            QuerySet: El conjunto de permisos ordenados.
-        """
-        ordering = self.request.query_params.get("ordering", None)
         if ordering:
             permissions = permissions.order_by(ordering)
 

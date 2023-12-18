@@ -9,6 +9,7 @@ from apps.users.api.serializers.user_serializer import (
     UserSerializer,
 )
 from apps.users.models import User
+from common_mixins.error_mixin import ErrorResponseMixin
 from config.permissions import IsAdministrator, IsAdministratorOrDoctorOrPatient
 from django.shortcuts import get_object_or_404
 from rest_framework import status, viewsets
@@ -17,7 +18,7 @@ from rest_framework.response import Response
 from utilities.permissions_helper import method_permission_classes
 
 
-class UserViewSet(viewsets.GenericViewSet):
+class UserViewSet(viewsets.GenericViewSet, ErrorResponseMixin):
     """
     Vista para gestionar usuarios.
 
@@ -75,12 +76,10 @@ class UserViewSet(viewsets.GenericViewSet):
             user.save()
             return Response({"message": "Contraseña actualizada correctamente"})
 
-        return Response(
-            {
-                "message": "Hay errores en la información enviada",
-                "errors": password_serializer.errors,
-            },
-            status=status.HTTP_400_BAD_REQUEST,
+        return self.error_response(
+            message="Hay errores en la actualización",
+            errors=password_serializer.errors,
+            status_code=status.HTTP_400_BAD_REQUEST,
         )
 
     @method_permission_classes([IsAdministrator])
@@ -125,9 +124,10 @@ class UserViewSet(viewsets.GenericViewSet):
                 status=status.HTTP_201_CREATED,
             )
 
-        return Response(
-            {"message": "Hay errores en el registro", "errors": user_serializer.errors},
-            status=status.HTTP_400_BAD_REQUEST,
+        return self.error_response(
+            message="Hay errores en el registro",
+            errors=user_serializer.errors,
+            status_code=status.HTTP_400_BAD_REQUEST,
         )
 
     @method_permission_classes([IsAdministratorOrDoctorOrPatient, IsUserOwner])
@@ -175,12 +175,10 @@ class UserViewSet(viewsets.GenericViewSet):
                 status=status.HTTP_200_OK,
             )
 
-        return Response(
-            {
-                "message": "Hay errores en la actualización",
-                "errors": user_serializer.errors,
-            },
-            status=status.HTTP_400_BAD_REQUEST,
+        return self.error_response(
+            message="Hay errores en la actualización",
+            errors=user_serializer.errors,
+            status_code=status.HTTP_400_BAD_REQUEST,
         )
 
     @method_permission_classes([IsAdministrator])
@@ -203,9 +201,9 @@ class UserViewSet(viewsets.GenericViewSet):
         if user_destroy == 1:  # Verifica si se eliminó el usuario
             return Response({"message": "Usuario eliminado correctamente"})
 
-        return Response(
-            {"message": "No existe el usuario que desea eliminar"},
-            status=status.HTTP_404_NOT_FOUND,
+        return self.error_response(
+            message="No existe el usuario que desea eliminar",
+            status_code=status.HTTP_404_NOT_FOUND,
         )
 
     @method_permission_classes([IsAdministratorOrDoctorOrPatient, IsUserOwner])
@@ -266,12 +264,10 @@ class UserViewSet(viewsets.GenericViewSet):
                 status=status.HTTP_200_OK,
             )
 
-        return Response(
-            {
-                "message": "Hay errores en la actualización",
-                "errors": user_serializer.errors,
-            },
-            status=status.HTTP_400_BAD_REQUEST,
+        return self.error_response(
+            message="Hay errores en la actualización",
+            errors=user_serializer.errors,
+            status_code=status.HTTP_400_BAD_REQUEST,
         )
 
     @method_permission_classes([IsAdministratorOrDoctorOrPatient, IsUserOwner])
@@ -304,7 +300,7 @@ class UserViewSet(viewsets.GenericViewSet):
                 status=status.HTTP_200_OK,
             )
 
-        return Response(
-            {"message": "El usuario no tiene foto de perfil"},
-            status=status.HTTP_400_BAD_REQUEST,
+        return self.error_response(
+            message="El usuario no tiene foto de perfil",
+            status_code=status.HTTP_400_BAD_REQUEST,
         )

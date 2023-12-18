@@ -4,6 +4,7 @@ from apps.users.api.serializers.user_serializer import (
     EmptySerializer,
 )
 from apps.users.models import User
+from common_mixins.error_mixin import ErrorResponseMixin
 from django.contrib.auth import authenticate
 from django.utils import timezone
 from rest_framework import status
@@ -13,7 +14,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import TokenObtainPairView
 
 
-class Login(TokenObtainPairView):
+class Login(TokenObtainPairView, ErrorResponseMixin):
     """
     Vista para iniciar sesión y obtener tokens de acceso.
 
@@ -62,22 +63,13 @@ class Login(TokenObtainPairView):
                     status=status.HTTP_200_OK,
                 )
 
-            return Response(
-                {
-                    "message": "Contraseña o nombre de usuario incorrectos",
-                },
-                status=status.HTTP_400_BAD_REQUEST,
-            )
-
-        return Response(
-            {
-                "message": "Contraseña o nombre de usuario incorrectos",
-            },
-            status=status.HTTP_400_BAD_REQUEST,
+        return self.error_response(
+            message="Contraseña o nombre de usuario incorrectos",
+            status_code=status.HTTP_400_BAD_REQUEST,
         )
 
 
-class Logout(GenericAPIView):
+class Logout(GenericAPIView, ErrorResponseMixin):
     """
     Vista para cerrar sesión y revocar tokens de acceso.
 
@@ -111,6 +103,6 @@ class Logout(GenericAPIView):
                 {"message": "Sesión cerrada correctamente"}, status=status.HTTP_200_OK
             )
 
-        return Response(
-            {"message": "No existe este usuario"}, status=status.HTTP_400_BAD_REQUEST
+        return self.error_response(
+            message="No existe este usuario", status_code=status.HTTP_400_BAD_REQUEST
         )
