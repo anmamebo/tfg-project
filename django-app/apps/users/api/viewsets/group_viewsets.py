@@ -2,11 +2,11 @@ from apps.users.api.serializers.group_serializer import (
     GroupListSerializer,
     GroupSerializer,
 )
-from common_mixins.error_mixin import ErrorResponseMixin
-from common_mixins.pagination_mixin import PaginationMixin
 from config.permissions import IsAdministrator
 from django.contrib.auth.models import Group
 from django.shortcuts import get_object_or_404
+from mixins.error_mixin import ErrorResponseMixin
+from mixins.pagination_mixin import PaginationMixin
 from rest_framework import status, viewsets
 from rest_framework.response import Response
 from utilities.permissions_helper import method_permission_classes

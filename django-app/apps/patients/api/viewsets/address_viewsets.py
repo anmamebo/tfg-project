@@ -1,9 +1,9 @@
 from apps.patients.api.permissions.address_permissions import IsAddressOwner
 from apps.patients.api.serializers.address_serializer import AddressSerializer
 from apps.patients.models import Address, Patient
-from common_mixins.error_mixin import ErrorResponseMixin
 from config.permissions import IsAdministratorOrDoctorOrPatient
 from django.shortcuts import get_object_or_404
+from mixins.error_mixin import ErrorResponseMixin
 from rest_framework import status, viewsets
 from rest_framework.response import Response
 from utilities.permissions_helper import method_permission_classes

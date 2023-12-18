@@ -9,9 +9,9 @@ from apps.users.api.serializers.user_serializer import (
     UserSerializer,
 )
 from apps.users.models import User
-from common_mixins.error_mixin import ErrorResponseMixin
 from config.permissions import IsAdministrator, IsAdministratorOrDoctorOrPatient
 from django.shortcuts import get_object_or_404
+from mixins.error_mixin import ErrorResponseMixin
 from rest_framework import status, viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response

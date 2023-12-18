@@ -2,10 +2,10 @@ from apps.doctors.api.serializers.medicalspecialty_serializer import (
     MedicalSpecialtySerializer,
 )
 from apps.doctors.models import MedicalSpecialty
-from common_mixins.error_mixin import ErrorResponseMixin
-from common_mixins.pagination_mixin import PaginationMixin
 from config.permissions import IsAdministratorOrDoctor
 from django.shortcuts import get_object_or_404
+from mixins.error_mixin import ErrorResponseMixin
+from mixins.pagination_mixin import PaginationMixin
 from rest_framework import status, viewsets
 from rest_framework.response import Response
 from utilities.permissions_helper import method_permission_classes

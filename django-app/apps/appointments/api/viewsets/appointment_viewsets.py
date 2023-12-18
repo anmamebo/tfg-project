@@ -6,12 +6,12 @@ from apps.appointments.api.serializers.appointment_serializer import (
     AppointmentSerializer,
 )
 from apps.appointments.models import Appointment
-from common_mixins.error_mixin import ErrorResponseMixin
-from common_mixins.pagination_mixin import PaginationMixin
 from config.permissions import IsAdministrator, IsDoctor, IsPatient
 from config.settings import TIME_ZONE
 from django.db.models import F, Q
 from django.shortcuts import get_object_or_404
+from mixins.error_mixin import ErrorResponseMixin
+from mixins.pagination_mixin import PaginationMixin
 from rest_framework import status, viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response

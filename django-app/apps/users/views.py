@@ -4,9 +4,9 @@ from apps.users.api.serializers.user_serializer import (
     EmptySerializer,
 )
 from apps.users.models import User
-from common_mixins.error_mixin import ErrorResponseMixin
 from django.contrib.auth import authenticate
 from django.utils import timezone
+from mixins.error_mixin import ErrorResponseMixin
 from rest_framework import status
 from rest_framework.generics import GenericAPIView
 from rest_framework.response import Response

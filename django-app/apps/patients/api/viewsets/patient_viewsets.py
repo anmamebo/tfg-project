@@ -5,8 +5,6 @@ from apps.patients.api.serializers.patient_serializer import (
 )
 from apps.patients.models import Patient
 from apps.users.api.serializers.user_serializer import UserSerializer
-from common_mixins.error_mixin import ErrorResponseMixin
-from common_mixins.pagination_mixin import PaginationMixin
 from config.permissions import (
     IsAdministrator,
     IsAdministratorOrDoctor,
@@ -14,6 +12,8 @@ from config.permissions import (
 )
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
+from mixins.error_mixin import ErrorResponseMixin
+from mixins.pagination_mixin import PaginationMixin
 from rest_framework import status, viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
