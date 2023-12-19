@@ -93,6 +93,14 @@ class Appointment(BaseModel):
             ("delete_appointment", "Can delete appointment"),
         ]
 
+    def get_status_text(self):
+        status_choices = dict(self._meta.get_field("status").flatchoices)
+        return status_choices.get(self.status, "Desconocido")
+
+    def get_type_text(self):
+        type_choices = dict(self._meta.get_field("type").flatchoices)
+        return type_choices.get(self.type, "Desconocido")
+
     def __str__(self):
         info = []
 
