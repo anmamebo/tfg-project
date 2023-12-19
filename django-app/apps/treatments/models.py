@@ -56,6 +56,10 @@ class Treatment(BaseModel):
             ("delete_treatment", "Can delete treatment"),
         ]
 
+    def get_status_text(self):
+        status_choices = dict(self._meta.get_field("status").flatchoices)
+        return status_choices.get(self.status, "Desconocido")
+
     def __str__(self):
         return (
             self.description
