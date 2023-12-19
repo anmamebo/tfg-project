@@ -1,6 +1,7 @@
 from datetime import datetime, timedelta
 
 import pytz
+from apps.appointments.api.mixins.appointment_mixins import GeneratePDFMixin
 from apps.appointments.api.permissions.appointment_permissions import IsAppointmentOwner
 from apps.appointments.api.serializers.appointment_serializer import (
     AppointmentSerializer,
@@ -20,7 +21,9 @@ from utilities.permissions_helper import method_permission_classes
 tz = pytz.timezone(TIME_ZONE)  # Zona horaria de la aplicación
 
 
-class AppointmentViewSet(viewsets.GenericViewSet, PaginationMixin, ErrorResponseMixin):
+class AppointmentViewSet(
+    viewsets.GenericViewSet, PaginationMixin, ErrorResponseMixin, GeneratePDFMixin
+):
     """
     Vista para gestionar citas.
 
@@ -343,6 +346,23 @@ class AppointmentViewSet(viewsets.GenericViewSet, PaginationMixin, ErrorResponse
         return self.conditional_paginated_response(
             appointments, self.list_serializer_class
         )
+
+    @method_permission_classes([IsPatient])
+    @action(detail=True, methods=["get"])
+    def get_appointment_pdf(self, request, pk=None):
+        """
+        Genera un PDF con la información de una cita.
+
+        Args:
+            request (Request): La solicitud HTTP.
+            pk (int): El identificador de la cita.
+
+        Returns:
+            Response: La respuesta que contiene el PDF.
+        """
+        appointment = self.get_object(pk)
+
+        return self.generate_pdf(appointment)
 
     def filter_and_order_appointments(self, appointments):
         """
