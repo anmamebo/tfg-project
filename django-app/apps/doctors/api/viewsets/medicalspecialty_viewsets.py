@@ -2,7 +2,7 @@ from apps.doctors.api.serializers.medicalspecialty_serializer import (
     MedicalSpecialtySerializer,
 )
 from apps.doctors.models import MedicalSpecialty
-from config.permissions import IsAdministratorOrDoctor
+from config.permissions import IsAdministratorOrDoctorOrPatient
 from django.shortcuts import get_object_or_404
 from mixins.error_mixin import ErrorResponseMixin
 from mixins.pagination_mixin import PaginationMixin
@@ -41,7 +41,7 @@ class MedicalSpecialtyViewSet(
             )
         return self.queryset
 
-    @method_permission_classes([IsAdministratorOrDoctor])
+    @method_permission_classes([IsAdministratorOrDoctorOrPatient])
     def list(self, request):
         """
         Lista todas las especialidades médicas.
