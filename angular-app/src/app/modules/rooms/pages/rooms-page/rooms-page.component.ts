@@ -6,7 +6,7 @@ import { breadcrumbRoomsData } from 'src/app/core/constants/breadcrumb-data';
 import { RoomService } from 'src/app/core/services/entities/room.service';
 
 // Modelos
-import { entityData } from 'src/app/core/models/entityData.model';
+import { EntityData } from 'src/app/core/models/entity-data.interface';
 
 /**
  * Componente para la página de listado de salas.
@@ -26,7 +26,7 @@ export class RoomsPageComponent {
   public breadcrumbData = breadcrumbRoomsData;
 
   /** Datos de la entidad. */
-  public entityData: entityData;
+  public entityData: EntityData;
 
   constructor(private _roomService: RoomService) {
     this.entityData = {

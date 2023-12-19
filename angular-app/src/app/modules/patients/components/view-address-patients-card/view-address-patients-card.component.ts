@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 
 // Modelos
-import { Address } from 'src/app/core/models/address.model';
+import { Address } from 'src/app/core/models/address.interface';
 
 /**
  * Componente que representa la tarjeta de visualización de la

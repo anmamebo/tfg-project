@@ -6,7 +6,7 @@ import { GroupService } from 'src/app/core/services/entities/group.service';
 import { NotificationService } from 'src/app/core/services/notifications/notification.service';
 
 // Modelos
-import { Group } from 'src/app/core/models/group.model';
+import { Group } from 'src/app/core/models/group.interface';
 
 /**
  * Componente que representa la tarjeta para crear un grupo
@@ -54,7 +54,7 @@ export class CreateGroupCardComponent {
       return;
     }
 
-    const group: Group = new Group('', this.form.value.name);
+    const group: Group = { id: '', name: this.form.value.name };
 
     this._groupService.create(group).subscribe({
       next: (response) => {

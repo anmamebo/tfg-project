@@ -7,7 +7,7 @@ import { breadcrumbAppointmentsViewData } from 'src/app/core/constants/breadcrum
 import { AppointmentService } from 'src/app/core/services/entities/appointment.service';
 
 // Modelos
-import { Appointment } from 'src/app/core/models/appointment.model';
+import { Appointment } from 'src/app/core/models/appointment.interface';
 
 /**
  * Componente para la página de visualización de una cita

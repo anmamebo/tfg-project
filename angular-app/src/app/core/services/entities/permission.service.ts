@@ -6,7 +6,7 @@ import { EntityService } from '../generics/entity.service';
 import { HttpCommonService } from '../http-common/http-common.service';
 
 // Modelos
-import { Permission } from '../../models/permission.model';
+import { Permission } from '../../models/permission.interface';
 
 /**
  * Servicio para interactuar con la API para la gestión de permisos.

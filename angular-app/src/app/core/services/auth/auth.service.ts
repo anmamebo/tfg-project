@@ -9,7 +9,7 @@ import { API_URL } from '../../constants/API_URL';
 import { TokenStorageService } from './token-storage.service';
 
 // Modelos
-import { AuthResponse } from '../../models/auth-response.model';
+import { AuthResponse } from '../../models/auth-response.interface';
 
 // Configuración de encabezados HTTP
 const httpOptions = {

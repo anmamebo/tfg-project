@@ -8,7 +8,7 @@ import { NotificationService } from 'src/app/core/services/notifications/notific
 import { PatientService } from 'src/app/core/services/entities/patient.service';
 
 // Modelos
-import { Patient } from 'src/app/core/models/patient.model';
+import { Patient } from 'src/app/core/models/patient.interface';
 
 /**
  * Componente que representa la tarjeta de edición de la

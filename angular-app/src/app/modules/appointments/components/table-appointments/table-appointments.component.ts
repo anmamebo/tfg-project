@@ -5,7 +5,7 @@ import { GenericTableComponent } from 'src/app/shared/components/generic-table/g
 import {
   StatusBadgeClasses,
   STATUS_BADGE_CLASSES,
-} from 'src/app/core/models/appointment.model';
+} from 'src/app/core/models/appointment.interface';
 
 /**
  * Componente que representa una tabla de citas.

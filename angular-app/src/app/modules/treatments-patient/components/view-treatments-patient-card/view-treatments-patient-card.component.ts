@@ -12,7 +12,7 @@ import {
   Treatment,
   StatusBadgeClasses,
   STATUS_BADGE_CLASSES,
-} from 'src/app/core/models/treatment.model';
+} from 'src/app/core/models/treatment.interface';
 
 /**
  * Componente que representa una tarjeta de visualización de tratamientos para el rol de paciente.

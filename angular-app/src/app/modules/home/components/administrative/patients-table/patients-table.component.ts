@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
 import { PatientService } from 'src/app/core/services/entities/patient.service';
 
 // Modelos
-import { entityData } from 'src/app/core/models/entityData.model';
+import { EntityData } from 'src/app/core/models/entity-data.interface';
 
 /**
  * Componente que muestra una tabla de pacientes para
@@ -16,7 +16,7 @@ import { entityData } from 'src/app/core/models/entityData.model';
 })
 export class PatientsTableComponent {
   /** Datos de la entidad. */
-  public entityData: entityData;
+  public entityData: EntityData;
 
   constructor(private patientService: PatientService) {
     this.entityData = {

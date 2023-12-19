@@ -7,7 +7,7 @@ import { EntityService } from '../generics/entity.service';
 import { HttpCommonService } from '../http-common/http-common.service';
 
 // Modelos
-import { Doctor } from '../../models/doctor.model';
+import { Doctor } from '../../models/doctor.interface';
 
 /**
  * Servicio para interactuar con la API para la gestión de médicos.

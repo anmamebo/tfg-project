@@ -6,7 +6,7 @@ import { EntityService } from '../generics/entity.service';
 import { HttpCommonService } from '../http-common/http-common.service';
 
 // Modelos
-import { Department } from '../../models/department.model';
+import { Department } from '../../models/department.interface';
 
 /**
  * Servicio para interactuar con la API para la gestión de departamentos.

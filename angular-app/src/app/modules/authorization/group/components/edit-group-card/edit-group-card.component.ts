@@ -6,7 +6,7 @@ import { GroupService } from 'src/app/core/services/entities/group.service';
 import { NotificationService } from 'src/app/core/services/notifications/notification.service';
 
 // Modelos
-import { Group } from 'src/app/core/models/group.model';
+import { Group } from 'src/app/core/models/group.interface';
 
 /**
  * Componente que representa la tarjeta para editar un grupo
@@ -21,7 +21,7 @@ export class EditGroupCardComponent implements OnInit {
   public titleCard: string = 'Editar Grupo';
 
   /** Grupo que se editará */
-  @Input() public group: Group = new Group('', '');
+  @Input() public group: Group = {} as Group;
 
   /** Formulario para editar un grupo */
   public editGroupForm: FormGroup = new FormGroup({});
@@ -56,7 +56,10 @@ export class EditGroupCardComponent implements OnInit {
       return;
     }
 
-    const groupEdited: Group = new Group(this.group.id, this.form.value.name);
+    const groupEdited: Group = {
+      id: this.group.id,
+      name: this.form.value.name,
+    };
 
     this._groupService.update(this.group.id, groupEdited).subscribe({
       next: (data) => {

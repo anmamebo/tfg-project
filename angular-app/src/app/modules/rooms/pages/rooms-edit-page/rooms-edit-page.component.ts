@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { breadcrumbRoomsEditData } from 'src/app/core/constants/breadcrumb-data';
 
 // Modelos
-import { Room } from 'src/app/core/models/room.model';
+import { Room } from 'src/app/core/models/room.interface';
 
 /**
  * Componente para la página de edición de una sala.

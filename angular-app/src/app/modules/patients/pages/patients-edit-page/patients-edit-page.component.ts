@@ -7,7 +7,7 @@ import { breadcrumbPatientsEditData } from 'src/app/core/constants/breadcrumb-da
 import { PatientService } from 'src/app/core/services/entities/patient.service';
 
 // Modelos
-import { Patient } from 'src/app/core/models/patient.model';
+import { Patient } from 'src/app/core/models/patient.interface';
 
 /**
  * Componente para la página de edición de un paciente.

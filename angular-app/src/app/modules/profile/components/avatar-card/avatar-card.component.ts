@@ -16,7 +16,7 @@ import { ProfileImageService } from 'src/app/core/services/entities/profile-imag
 import { NotificationService } from 'src/app/core/services/notifications/notification.service';
 
 // Models
-import { User } from 'src/app/core/models/user.model';
+import { User } from 'src/app/core/models/user.interface';
 
 /**
  * Componente que representa una tarjeta de avatar de usuario.

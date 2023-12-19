@@ -5,7 +5,7 @@ import { TokenStorageService } from 'src/app/core/services/auth/token-storage.se
 import { UserService } from 'src/app/core/services/entities/user.service';
 
 // Modelos
-import { User } from 'src/app/core/models/user.model';
+import { User } from 'src/app/core/models/user.interface';
 
 import { breadcrumbProfileData } from 'src/app/core/constants/breadcrumb-data';
 

@@ -22,7 +22,7 @@ import { AppointmentService } from 'src/app/core/services/entities/appointment.s
 import { NotificationService } from 'src/app/core/services/notifications/notification.service';
 
 // Modelos
-import { Appointment } from 'src/app/core/models/appointment.model';
+import { Appointment } from 'src/app/core/models/appointment.interface';
 
 /**
  * Componente que representa la página de la agenda de un paciente

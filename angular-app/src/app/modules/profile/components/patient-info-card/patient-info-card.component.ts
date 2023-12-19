@@ -15,7 +15,7 @@ import { NotificationService } from 'src/app/core/services/notifications/notific
 import { CountriesService } from 'src/app/core/services/entities/countries.service';
 
 // Modelos
-import { Patient } from 'src/app/core/models/patient.model';
+import { Patient } from 'src/app/core/models/patient.interface';
 
 /**
  * Componente que representa una tarjeta de información de paciente.

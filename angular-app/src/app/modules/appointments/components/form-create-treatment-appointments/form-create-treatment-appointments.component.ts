@@ -8,7 +8,7 @@ import { TreatmentService } from 'src/app/core/services/entities/treatment.servi
 import { NotificationService } from 'src/app/core/services/notifications/notification.service';
 
 // Modelos
-import { Appointment } from 'src/app/core/models/appointment.model';
+import { Appointment } from 'src/app/core/models/appointment.interface';
 
 /**
  * Componente que representa la tarjeta de creación de un tratamiento

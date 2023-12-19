@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { breadcrumbDepartmentsEditData } from 'src/app/core/constants/breadcrumb-data';
 
 // Modelos
-import { Department } from 'src/app/core/models/department.model';
+import { Department } from 'src/app/core/models/department.interface';
 
 /**
  * Componente para la página de edición de un departamento.

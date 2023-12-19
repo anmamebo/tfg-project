@@ -6,7 +6,7 @@ import { EntityService } from '../generics/entity.service';
 import { HttpCommonService } from '../http-common/http-common.service';
 
 // Modelos
-import { Group } from '../../models/group.model';
+import { Group } from '../../models/group.interface';
 
 /**
  * Servicio para interactuar con la API para la gestión de grupos.

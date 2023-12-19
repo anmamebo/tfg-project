@@ -6,7 +6,7 @@ import { DepartmentService } from 'src/app/core/services/entities/department.ser
 import { NotificationService } from 'src/app/core/services/notifications/notification.service';
 
 // Modelos
-import { Department } from 'src/app/core/models/department.model';
+import { Department } from 'src/app/core/models/department.interface';
 
 /**
  * Componente que representa la tarjeta de edición de la

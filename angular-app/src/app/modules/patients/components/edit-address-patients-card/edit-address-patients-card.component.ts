@@ -8,7 +8,7 @@ import { AddressService } from 'src/app/core/services/entities/address.service';
 import { NotificationService } from 'src/app/core/services/notifications/notification.service';
 
 // Modelos
-import { Address } from 'src/app/core/models/address.model';
+import { Address } from 'src/app/core/models/address.interface';
 
 /**
  * Componente que representa la tarjeta de edición de la

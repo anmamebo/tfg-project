@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 // Modelos
-import { SortEvent } from 'src/app/core/models/sortEvent.model';
+import { SortEvent } from 'src/app/core/models/sort-event.interface';
 
 /**
  * Componente que representa una tabla genérica.

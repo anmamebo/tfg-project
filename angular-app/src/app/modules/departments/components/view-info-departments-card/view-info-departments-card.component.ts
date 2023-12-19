@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 
 // Modelos
-import { Department } from 'src/app/core/models/department.model';
+import { Department } from 'src/app/core/models/department.interface';
 
 /**
  * Componente que representa la tarjeta de visualización de la

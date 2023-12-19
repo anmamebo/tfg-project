@@ -8,7 +8,7 @@ import { AddressService } from 'src/app/core/services/entities/address.service';
 import { NotificationService } from 'src/app/core/services/notifications/notification.service';
 
 // Modelos
-import { Address } from 'src/app/core/models/address.model';
+import { Address } from 'src/app/core/models/address.interface';
 
 /**
  * Componente que representa una tarjeta de información de dirección de usuario.
@@ -23,7 +23,7 @@ export class AddressInfoCardComponent implements OnInit {
   public titleCard: string = 'Dirección';
 
   /** Dirección que se mostrará */
-  @Input() public address: Address = new Address('', '', '', '', '', '', '');
+  @Input() public address: Address = {} as Address;
 
   /** Formulario para actualizar los datos de la dirección */
   public updateAddressDataForm: FormGroup = new FormGroup({});
@@ -86,16 +86,16 @@ export class AddressInfoCardComponent implements OnInit {
       return;
     }
 
-    const updateAddress: Address = new Address(
-      this.address.id,
-      this.form.value.street,
-      this.form.value.number,
-      this.form.value.city,
-      this.form.value.province,
-      this.form.value.country,
-      this.form.value.postal_code,
-      this.form.value.floor || null
-    );
+    const updateAddress: Address = {
+      id: this.address.id,
+      street: this.form.value.street,
+      number: this.form.value.number,
+      city: this.form.value.city,
+      province: this.form.value.province,
+      country: this.form.value.country,
+      postal_code: this.form.value.postal_code,
+      floor: this.form.value.floor || null,
+    };
 
     this._addressService.updateAddress(updateAddress).subscribe({
       next: (data) => {

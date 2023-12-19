@@ -6,7 +6,7 @@ import { breadcrumbDoctorsData } from 'src/app/core/constants/breadcrumb-data';
 import { DoctorService } from 'src/app/core/services/entities/doctor.service';
 
 // Modelos
-import { entityData } from 'src/app/core/models/entityData.model';
+import { EntityData } from 'src/app/core/models/entity-data.interface';
 
 /**
  * Componente para la página de doctores.
@@ -26,7 +26,7 @@ export class DoctorsPageComponent {
   public breadcrumbData = breadcrumbDoctorsData;
 
   /** Datos de la entidad. */
-  public entityData: entityData;
+  public entityData: EntityData;
 
   constructor(private _doctorService: DoctorService) {
     this.entityData = {

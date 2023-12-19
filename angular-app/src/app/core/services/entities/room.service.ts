@@ -7,7 +7,7 @@ import { EntityService } from '../generics/entity.service';
 import { HttpCommonService } from '../http-common/http-common.service';
 
 // Modelos
-import { Room } from '../../models/room.model';
+import { Room } from '../../models/room.interface';
 
 /**
  * Servicio para interactuar con la API para la gestión de salas.

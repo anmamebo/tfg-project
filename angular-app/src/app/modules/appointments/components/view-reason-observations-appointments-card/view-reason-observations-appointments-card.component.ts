@@ -6,7 +6,7 @@ import { AppointmentService } from 'src/app/core/services/entities/appointment.s
 import { NotificationService } from 'src/app/core/services/notifications/notification.service';
 
 // Modelos
-import { Appointment } from 'src/app/core/models/appointment.model';
+import { Appointment } from 'src/app/core/models/appointment.interface';
 
 @Component({
   selector: 'app-view-reason-observations-appointments-card',

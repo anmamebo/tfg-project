@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 
 // Modelos
-import { Room } from 'src/app/core/models/room.model';
+import { Room } from 'src/app/core/models/room.interface';
 
 /**
  * Componente que representa la tarjeta de visualización de la

@@ -8,7 +8,7 @@ import { API_URL } from '../../constants/API_URL';
 import { HttpCommonService } from '../http-common/http-common.service';
 
 // Modelos
-import { User } from '../../models/user.model';
+import { User } from '../../models/user.interface';
 
 /**
  * Servicio para interactuar con la API para la gestión de usuarios.

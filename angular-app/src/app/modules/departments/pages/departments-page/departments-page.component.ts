@@ -6,7 +6,7 @@ import { breadcrumbDepartmentsData } from 'src/app/core/constants/breadcrumb-dat
 import { DepartmentService } from 'src/app/core/services/entities/department.service';
 
 // Modelos
-import { entityData } from 'src/app/core/models/entityData.model';
+import { EntityData } from 'src/app/core/models/entity-data.interface';
 
 /**
  * Componente para la página de departamentos.
@@ -26,7 +26,7 @@ export class DepartmentsPageComponent {
   public breadcrumbData = breadcrumbDepartmentsData;
 
   /** Datos de la entidad. */
-  public entityData: entityData;
+  public entityData: EntityData;
 
   constructor(private _departmentService: DepartmentService) {
     this.entityData = {

@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { breadcrumbAppointmentsData } from 'src/app/core/constants/breadcrumb-data';
 
 // Modelos
-import { entityData } from 'src/app/core/models/entityData.model';
+import { EntityData } from 'src/app/core/models/entity-data.interface';
 
 /**
  * Componente para la página de citas.
@@ -23,7 +23,7 @@ export class AppointmentsPageComponent {
   public breadcrumbData = breadcrumbAppointmentsData;
 
   /** Datos de la entidad. */
-  public entityData: entityData;
+  public entityData: EntityData;
 
   constructor() {
     this.entityData = {

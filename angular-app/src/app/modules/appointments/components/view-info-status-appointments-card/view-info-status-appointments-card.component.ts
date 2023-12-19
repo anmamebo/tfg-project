@@ -9,7 +9,7 @@ import {
   Appointment,
   StatusBadgeClasses,
   STATUS_BADGE_CLASSES,
-} from 'src/app/core/models/appointment.model';
+} from 'src/app/core/models/appointment.interface';
 
 /**
  * Componente para la tarjeta de visualización de la información

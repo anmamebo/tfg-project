@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 
 // Modelos
-import { Group } from 'src/app/core/models/group.model';
+import { Group } from 'src/app/core/models/group.interface';
 
 /**
  * Componente que representa la tarjeta de visualización de un grupo

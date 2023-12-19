@@ -3,7 +3,7 @@ import { EntityService } from 'src/app/core/services/generics/entity.service';
 /**
  * Interfaz que describe la estructura de los datos de una entidad.
  */
-export interface entityData {
+export interface EntityData {
   /** Título de la entidad. */
   title: {
     /** Indica si se mostrará el título. */

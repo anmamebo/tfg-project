@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { breadcrumbGroupViewData } from 'src/app/core/constants/breadcrumb-data';
 
 // Modelos
-import { Group } from 'src/app/core/models/group.model';
+import { Group } from 'src/app/core/models/group.interface';
 
 /**
  * Componente para la página de visualización de un grupo

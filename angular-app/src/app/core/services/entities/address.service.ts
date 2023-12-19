@@ -8,7 +8,7 @@ import { API_URL } from '../../constants/API_URL';
 import { HttpCommonService } from '../http-common/http-common.service';
 
 // Modelos
-import { Address } from '../../models/address.model';
+import { Address } from '../../models/address.interface';
 
 /**
  * Servicio para la gestión de direcciones.

@@ -5,7 +5,7 @@ import { RoomService } from 'src/app/core/services/entities/room.service';
 import { NotificationService } from 'src/app/core/services/notifications/notification.service';
 
 // Modelos
-import { Room } from 'src/app/core/models/room.model';
+import { Room } from 'src/app/core/models/room.interface';
 
 /**
  * Componente que representa la tarjeta de visualización de las salas

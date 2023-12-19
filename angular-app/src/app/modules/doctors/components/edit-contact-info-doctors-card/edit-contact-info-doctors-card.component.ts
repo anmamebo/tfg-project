@@ -6,7 +6,7 @@ import { NotificationService } from 'src/app/core/services/notifications/notific
 import { DoctorService } from 'src/app/core/services/entities/doctor.service';
 
 // Modelos
-import { Doctor } from 'src/app/core/models/doctor.model';
+import { Doctor } from 'src/app/core/models/doctor.interface';
 
 /**
  * Componente que representa la tarjeta de edición de la

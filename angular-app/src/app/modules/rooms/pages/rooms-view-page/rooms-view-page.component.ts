@@ -7,7 +7,7 @@ import { breadcrumbRoomsViewData } from 'src/app/core/constants/breadcrumb-data'
 import { RoomService } from 'src/app/core/services/entities/room.service';
 
 // Modelos
-import { Room } from 'src/app/core/models/room.model';
+import { Room } from 'src/app/core/models/room.interface';
 
 /**
  * Componente para la página de visualización de una sala

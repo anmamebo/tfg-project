@@ -6,7 +6,7 @@ import { breadcrumbGroupData } from 'src/app/core/constants/breadcrumb-data';
 import { GroupService } from 'src/app/core/services/entities/group.service';
 
 // Modelos
-import { entityData } from 'src/app/core/models/entityData.model';
+import { EntityData } from 'src/app/core/models/entity-data.interface';
 
 // Componentes
 import { GenericListCardComponent } from 'src/app/shared/components/generic-list-card/generic-list-card.component';
@@ -30,7 +30,7 @@ export class GroupPageComponent {
   public breadcrumbData = breadcrumbGroupData;
 
   /** Datos de la entidad. */
-  public entityData: entityData;
+  public entityData: EntityData;
 
   /** Referencia al componente hijo `ListGroupCardComponent`. */
   @ViewChild(GenericListCardComponent, { static: false })

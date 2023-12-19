@@ -8,7 +8,7 @@ import { API_URL } from '../../constants/API_URL';
 import { HttpCommonService } from '../http-common/http-common.service';
 
 // Modelos
-import { Treatment } from '../../models/treatment.model';
+import { Treatment } from '../../models/treatment.interface';
 
 /**
  * Servicio para interactuar con la API para la gestión de tratamientos.

@@ -7,7 +7,7 @@ import { breadcrumbDoctorsEditData } from 'src/app/core/constants/breadcrumb-dat
 import { DoctorService } from 'src/app/core/services/entities/doctor.service';
 
 // Modelos
-import { Doctor } from 'src/app/core/models/doctor.model';
+import { Doctor } from 'src/app/core/models/doctor.interface';
 
 /**
  * Componente para la página de edición de un médico.

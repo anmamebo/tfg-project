@@ -4,8 +4,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { NotificationService } from 'src/app/core/services/notifications/notification.service';
 
 // Modelos
-import { entityData } from 'src/app/core/models/entityData.model';
-import { SortEvent } from 'src/app/core/models/sortEvent.model';
+import { EntityData } from 'src/app/core/models/entity-data.interface';
+import { SortEvent } from 'src/app/core/models/sort-event.interface';
 
 /**
  * Componente que representa una tarjeta de listado genérica.
@@ -16,7 +16,7 @@ import { SortEvent } from 'src/app/core/models/sortEvent.model';
 })
 export class GenericListCardComponent implements OnInit {
   /** Datos de la entidad. */
-  @Input() public entityData: entityData;
+  @Input() public entityData: EntityData;
 
   /** Filtro de estado. */
   public filterState: boolean | null = true;

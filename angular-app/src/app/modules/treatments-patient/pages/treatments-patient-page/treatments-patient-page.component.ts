@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 import { breadCrumbTreatmentsPatientData } from 'src/app/core/constants/breadcrumb-data';
 
-import { entityData } from 'src/app/core/models/entityData.model';
+import { EntityData } from 'src/app/core/models/entity-data.interface';
 
 /**
  * Componente para la página de tratamientos del paciente.
@@ -22,7 +22,7 @@ export class TreatmentsPatientPageComponent {
   public breadcrumbData = breadCrumbTreatmentsPatientData;
 
   /** Datos de la entidad. */
-  public entityData: entityData;
+  public entityData: EntityData;
 
   constructor() {
     this.entityData = {

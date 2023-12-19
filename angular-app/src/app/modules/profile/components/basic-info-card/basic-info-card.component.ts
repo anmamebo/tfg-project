@@ -6,7 +6,7 @@ import { UserService } from 'src/app/core/services/entities/user.service';
 import { NotificationService } from 'src/app/core/services/notifications/notification.service';
 
 // Modelos
-import { User } from 'src/app/core/models/user.model';
+import { User } from 'src/app/core/models/user.interface';
 
 /**
  * Componente que representa la tarjeta de información básica del usuario

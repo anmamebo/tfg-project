@@ -8,7 +8,7 @@ import { API_URL } from '../../constants/API_URL';
 import { HttpCommonService } from '../http-common/http-common.service';
 
 // Modelos
-import { Schedule } from '../../models/schedule.model';
+import { Schedule } from '../../models/schedule.interface';
 
 /**
  * Servicio para interactuar con la API para la gestión de horarios.

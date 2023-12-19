@@ -10,7 +10,7 @@ import { DepartmentService } from 'src/app/core/services/entities/department.ser
 import { NotificationService } from 'src/app/core/services/notifications/notification.service';
 
 // Modelos
-import { Doctor } from 'src/app/core/models/doctor.model';
+import { Doctor } from 'src/app/core/models/doctor.interface';
 
 /**
  * Componente que representa la tarjeta de edición de la
