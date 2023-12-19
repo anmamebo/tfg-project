@@ -5,6 +5,7 @@ import { es } from 'date-fns/locale';
 // Servicios
 import { AppointmentService } from 'src/app/core/services/appointment.service';
 import { NotificationService } from 'src/app/core/services/notification.service';
+import { PdfAppointmentService } from 'src/app/core/services/pdf-appointment.service';
 
 // Modelos
 import {
@@ -20,7 +21,7 @@ import {
   selector: 'app-view-appointments-patient-card',
   templateUrl: './view-appointments-patient-card.component.html',
   styleUrls: ['./view-appointments-patient-card.component.scss'],
-  providers: [AppointmentService],
+  providers: [AppointmentService, PdfAppointmentService],
 })
 export class ViewAppointmentsPatientCardComponent implements OnInit {
   /** Cita. */
@@ -38,7 +39,8 @@ export class ViewAppointmentsPatientCardComponent implements OnInit {
 
   constructor(
     private _appointmentService: AppointmentService,
-    private _notificationService: NotificationService
+    private _notificationService: NotificationService,
+    private _pdfAppointmentService: PdfAppointmentService
   ) {}
 
   ngOnInit(): void {
@@ -101,5 +103,31 @@ export class ViewAppointmentsPatientCardComponent implements OnInit {
         ' ' +
         this.appointment.doctor.user.last_name;
     }
+  }
+
+  /**
+   * Descarga el PDF de la cita.
+   */
+  public downloadPDF(): void {
+    if (!this.appointment) return;
+
+    this._pdfAppointmentService.downloadPdf(this.appointment.id).subscribe({
+      next: (response: any) => {
+        console.log(response);
+      },
+    });
+  }
+
+  /**
+   * Imprime el PDF de la cita.
+   */
+  public printPDF(): void {
+    if (!this.appointment) return;
+
+    this._pdfAppointmentService.printPdf(this.appointment.id).subscribe({
+      next: (response: any) => {
+        console.log(response);
+      },
+    });
   }
 }

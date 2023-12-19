@@ -39,15 +39,30 @@
               <i class="bi bi-x-circle me-2"></i>
               Cancelar Cita
             </a>
-            <!-- <div class="dropdown-divider"></div>
-            <a class="dropdown-item" style="cursor: pointer">
+            <div
+              *ngIf="
+                appointment.status == 'pending' ||
+                appointment.status == 'scheduled' ||
+                appointment.status == 'rescheduled'
+              "
+              class="dropdown-divider"
+            ></div>
+            <a
+              class="dropdown-item"
+              style="cursor: pointer"
+              (click)="downloadPDF()"
+            >
               <i class="bi bi-file-earmark-arrow-down me-2"></i>
               Descargar PDF
             </a>
-            <a class="dropdown-item" style="cursor: pointer">
+            <a
+              class="dropdown-item"
+              style="cursor: pointer"
+              (click)="printPDF()"
+            >
               <i class="bi bi-printer me-2"></i>
               Imprimir
-            </a> -->
+            </a>
           </div>
         </div>
       </div>
