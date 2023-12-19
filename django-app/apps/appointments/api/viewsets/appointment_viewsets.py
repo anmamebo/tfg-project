@@ -5,6 +5,7 @@ from apps.appointments.api.mixins.appointment_mixins import GeneratePDFMixin
 from apps.appointments.api.permissions.appointment_permissions import IsAppointmentOwner
 from apps.appointments.api.serializers.appointment_serializer import (
     AppointmentSerializer,
+    CreateAppointmentSerializer,
 )
 from apps.appointments.models import Appointment
 from config.permissions import IsAdministrator, IsDoctor, IsPatient
@@ -93,6 +94,41 @@ class AppointmentViewSet(
 
         return self.conditional_paginated_response(
             appointments, self.list_serializer_class
+        )
+
+    @method_permission_classes([IsPatient])
+    def create(self, request):
+        """
+        Crea una cita para un paciente.
+
+        Permisos requeridos:
+            - El usuario debe ser un paciente.
+
+        Args:
+            request (Request): La solicitud HTTP.
+
+        Returns:
+            Response: La respuesta con el resultado de la operación.
+        """
+        patient = getattr(request.user, "patient", None)
+        request.data["patient"] = patient.id
+
+        serializer = CreateAppointmentSerializer(data=request.data)
+        if serializer.is_valid():
+            appointment = serializer.save()
+
+            # TODO: Implemntar lógica de generar cita
+
+            # TODO: Implemntar lógica de enviar correo
+
+            return Response(
+                {"message": "La cita ha sido creada."}, status=status.HTTP_201_CREATED
+            )
+
+        return self.error_response(
+            message="Hay errores en la creación",
+            errors=serializer.errors,
+            status_code=status.HTTP_400_BAD_REQUEST,
         )
 
     @method_permission_classes([IsDoctor, IsAppointmentOwner])

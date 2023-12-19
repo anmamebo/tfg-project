@@ -51,3 +51,22 @@ class AppointmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Appointment
         exclude = ["created_date", "modified_date", "deleted_date"]
+
+
+class CreateAppointmentSerializer(serializers.ModelSerializer):
+    """
+    Serializador para crear una cita.
+
+    Este serializador maneja la creación de una cita,
+    excluyendo ciertos campos específicos.
+
+    Args:
+        validated_data (dict): Datos validados para la representación de la cita.
+
+    Returns:
+        dict: Diccionario con los datos de la cita.
+    """
+
+    class Meta:
+        model = Appointment
+        exclude = ["created_date", "modified_date", "deleted_date"]
