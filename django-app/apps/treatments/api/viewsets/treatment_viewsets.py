@@ -2,6 +2,7 @@ from apps.appointments.api.permissions.appointment_permissions import (
     IsAppointmentPatient,
 )
 from apps.appointments.models import Appointment
+from apps.treatments.api.mixins.treatment_mixins import GeneratePDFMixin
 from apps.treatments.api.permissions.treatment_permissions import (
     IsTreatmentPatient,
     isTreatmentDoctor,
@@ -22,7 +23,9 @@ from rest_framework.response import Response
 from utilities.permissions_helper import method_permission_classes
 
 
-class TreatmentViewSet(viewsets.GenericViewSet, PaginationMixin, ErrorResponseMixin):
+class TreatmentViewSet(
+    viewsets.GenericViewSet, PaginationMixin, ErrorResponseMixin, GeneratePDFMixin
+):
     """
     Vista para gestionar tratamientos.
 
@@ -252,6 +255,23 @@ class TreatmentViewSet(viewsets.GenericViewSet, PaginationMixin, ErrorResponseMi
             },
             status=status.HTTP_200_OK,
         )
+
+    @method_permission_classes([IsAdministratorOrDoctorOrPatient, IsTreatmentPatient])
+    @action(detail=True, methods=["get"])
+    def get_treatment_pdf(self, request, pk=None):
+        """
+        Genera un PDF con la información de un tratamiento.
+
+        Args:
+            request (Request): La solicitud HTTP.
+            pk (int): El identificador del tratamiento.
+
+        Returns:
+            Response: La respuesta que contiene el PDF.
+        """
+        treatment = self.get_object(pk)
+
+        return self.generate_pdf(treatment)
 
     def filter_and_order_treatments(self, treatments):
         """
