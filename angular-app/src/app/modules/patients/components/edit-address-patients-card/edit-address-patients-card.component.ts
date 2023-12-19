@@ -4,8 +4,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { INTEGER_REGEXP } from 'src/app/core/constants/reg-exp';
 
 // Servicios
-import { AddressService } from 'src/app/core/services/address.service';
-import { NotificationService } from 'src/app/core/services/notification.service';
+import { AddressService } from 'src/app/core/services/entities/address.service';
+import { NotificationService } from 'src/app/core/services/notifications/notification.service';
 
 // Modelos
 import { Address } from 'src/app/core/models/address.model';

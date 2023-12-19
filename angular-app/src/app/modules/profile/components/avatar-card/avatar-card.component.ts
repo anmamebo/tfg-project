@@ -11,9 +11,9 @@ import { SwalPortalTargets } from '@sweetalert2/ngx-sweetalert2';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 
 // Servicios
-import { UserService } from 'src/app/core/services/user.service';
-import { ProfileImageService } from 'src/app/core/services/profile-image.service';
-import { NotificationService } from 'src/app/core/services/notification.service';
+import { UserService } from 'src/app/core/services/entities/user.service';
+import { ProfileImageService } from 'src/app/core/services/entities/profile-image.service';
+import { NotificationService } from 'src/app/core/services/notifications/notification.service';
 
 // Models
 import { User } from 'src/app/core/models/user.model';

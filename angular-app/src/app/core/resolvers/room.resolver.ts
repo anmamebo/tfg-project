@@ -7,7 +7,7 @@ import {
 import { Observable, catchError, map, of } from 'rxjs';
 import { inject } from '@angular/core';
 
-import { RoomService } from '../services/room.service';
+import { RoomService } from '../services/entities/room.service';
 
 export const roomResolver: ResolveFn<any> = (
   route: ActivatedRouteSnapshot,

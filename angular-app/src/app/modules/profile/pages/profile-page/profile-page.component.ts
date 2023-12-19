@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 // Servicios
-import { TokenStorageService } from 'src/app/core/services/token-storage.service';
-import { UserService } from 'src/app/core/services/user.service';
+import { TokenStorageService } from 'src/app/core/services/auth/token-storage.service';
+import { UserService } from 'src/app/core/services/entities/user.service';
 
 // Modelos
 import { User } from 'src/app/core/models/user.model';

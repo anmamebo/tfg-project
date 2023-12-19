@@ -4,8 +4,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PHONENUMBER_REGEXP } from 'src/app/core/constants/reg-exp';
 
 // Servicios
-import { NotificationService } from 'src/app/core/services/notification.service';
-import { PatientService } from 'src/app/core/services/patient.service';
+import { NotificationService } from 'src/app/core/services/notifications/notification.service';
+import { PatientService } from 'src/app/core/services/entities/patient.service';
 
 // Modelos
 import { Patient } from 'src/app/core/models/patient.model';

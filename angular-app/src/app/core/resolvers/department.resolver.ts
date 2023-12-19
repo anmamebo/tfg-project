@@ -7,7 +7,7 @@ import {
 import { Observable, catchError, map, of } from 'rxjs';
 import { inject } from '@angular/core';
 
-import { DepartmentService } from '../services/department.service';
+import { DepartmentService } from '../services/entities/department.service';
 
 export const departmentResolver: ResolveFn<any> = (
   route: ActivatedRouteSnapshot,

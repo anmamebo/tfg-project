@@ -2,8 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 // Servicios
-import { DepartmentService } from 'src/app/core/services/department.service';
-import { NotificationService } from 'src/app/core/services/notification.service';
+import { DepartmentService } from 'src/app/core/services/entities/department.service';
+import { NotificationService } from 'src/app/core/services/notifications/notification.service';
 
 // Modelos
 import { Department } from 'src/app/core/models/department.model';

@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { API_URL } from '../constants/API_URL';
+import { API_URL } from '../../constants/API_URL';
 
 // Servicios
-import { HttpCommonService } from './http-common.service';
+import { HttpCommonService } from '../http-common/http-common.service';
 
 // Modelos
-import { Treatment } from '../models/treatment.model';
+import { Treatment } from '../../models/treatment.model';
 
 /**
  * Servicio para interactuar con la API para la gestión de tratamientos.

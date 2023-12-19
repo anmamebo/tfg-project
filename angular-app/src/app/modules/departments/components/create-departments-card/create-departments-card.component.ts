@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 // Servicios
-import { DepartmentService } from 'src/app/core/services/department.service';
-import { NotificationService } from 'src/app/core/services/notification.service';
+import { DepartmentService } from 'src/app/core/services/entities/department.service';
+import { NotificationService } from 'src/app/core/services/notifications/notification.service';
 
 /**
  * Componente que representa la tarjeta de creación de un departamento

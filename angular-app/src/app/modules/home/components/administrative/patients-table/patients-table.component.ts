@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 // Servicios
-import { PatientService } from 'src/app/core/services/patient.service';
+import { PatientService } from 'src/app/core/services/entities/patient.service';
 
 // Modelos
 import { entityData } from 'src/app/core/models/entityData.model';

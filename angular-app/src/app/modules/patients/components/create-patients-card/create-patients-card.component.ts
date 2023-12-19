@@ -15,9 +15,9 @@ import {
 } from 'src/app/core/constants/reg-exp';
 
 // Servicios
-import { PatientService } from 'src/app/core/services/patient.service';
-import { NotificationService } from 'src/app/core/services/notification.service';
-import { CountriesService } from 'src/app/core/services/countries.service';
+import { PatientService } from 'src/app/core/services/entities/patient.service';
+import { NotificationService } from 'src/app/core/services/notifications/notification.service';
+import { CountriesService } from 'src/app/core/services/entities/countries.service';
 
 /**
  * Componente que representa la tarjeta de creación de un paciente

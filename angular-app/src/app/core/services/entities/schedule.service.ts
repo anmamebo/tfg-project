@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { API_URL } from '../constants/API_URL';
+import { API_URL } from '../../constants/API_URL';
 
 // Servicios
-import { HttpCommonService } from './http-common.service';
+import { HttpCommonService } from '../http-common/http-common.service';
 
 // Modelos
-import { Schedule } from '../models/schedule.model';
+import { Schedule } from '../../models/schedule.model';
 
 /**
  * Servicio para interactuar con la API para la gestión de horarios.

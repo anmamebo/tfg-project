@@ -7,7 +7,7 @@ import {
 import { Observable, catchError, map, of } from 'rxjs';
 import { inject } from '@angular/core';
 
-import { AppointmentService } from '../services/appointment.service';
+import { AppointmentService } from '../services/entities/appointment.service';
 
 export const appointmentForDoctorResolver: ResolveFn<any> = (
   route: ActivatedRouteSnapshot,

@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { breadcrumbRoomsViewData } from 'src/app/core/constants/breadcrumb-data';
 
 // Servicios
-import { RoomService } from 'src/app/core/services/room.service';
+import { RoomService } from 'src/app/core/services/entities/room.service';
 
 // Modelos
 import { Room } from 'src/app/core/models/room.model';

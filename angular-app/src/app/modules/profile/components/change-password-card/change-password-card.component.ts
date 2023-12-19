@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 // Servicios
-import { UserService } from 'src/app/core/services/user.service';
-import { NotificationService } from 'src/app/core/services/notification.service';
+import { UserService } from 'src/app/core/services/entities/user.service';
+import { NotificationService } from 'src/app/core/services/notifications/notification.service';
 
 // Validadores
 import Validation from 'src/app/core/validators/general.validator';

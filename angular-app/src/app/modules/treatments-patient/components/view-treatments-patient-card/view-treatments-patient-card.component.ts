@@ -3,8 +3,8 @@ import { format } from 'date-fns';
 import { es } from 'date-fns/locale';
 
 // Servicios
-import { TreatmentService } from 'src/app/core/services/treatment.service';
-import { NotificationService } from 'src/app/core/services/notification.service';
+import { TreatmentService } from 'src/app/core/services/entities/treatment.service';
+import { NotificationService } from 'src/app/core/services/notifications/notification.service';
 
 // Modelos
 import {

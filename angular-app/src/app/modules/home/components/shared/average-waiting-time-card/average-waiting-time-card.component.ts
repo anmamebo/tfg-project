@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 // Servicios
-import { StatisticsService } from 'src/app/core/services/statistics.service';
+import { StatisticsService } from 'src/app/core/services/statistics/statistics.service';
 
 /**
  * Componente para mostrar el tiempo medio de espera.

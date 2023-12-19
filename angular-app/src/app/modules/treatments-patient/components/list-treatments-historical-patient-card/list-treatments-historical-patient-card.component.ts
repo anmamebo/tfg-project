@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { GenericListCardComponent } from 'src/app/shared/components/generic-list-card/generic-list-card.component';
 
 // Servicios
-import { TreatmentService } from 'src/app/core/services/treatment.service';
-import { NotificationService } from 'src/app/core/services/notification.service';
+import { TreatmentService } from 'src/app/core/services/entities/treatment.service';
+import { NotificationService } from 'src/app/core/services/notifications/notification.service';
 
 /**
  * Componente que representa una tarjeta de listado de tratamientos para el rol de paciente.

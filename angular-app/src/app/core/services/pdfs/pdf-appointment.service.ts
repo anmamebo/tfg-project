@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 
-import { API_URL } from '../constants/API_URL';
+import { API_URL } from '../../constants/API_URL';
 
 // Servicios
-import { HttpCommonService } from './http-common.service';
+import { HttpCommonService } from '../http-common/http-common.service';
 
 /**
  * Servicio para gestionar la descarga e impresión de pdfs de citas.

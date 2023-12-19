@@ -5,9 +5,9 @@ import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { INTEGER_REGEXP } from 'src/app/core/constants/reg-exp';
 
 // Servicios
-import { RoomService } from 'src/app/core/services/room.service';
-import { DepartmentService } from 'src/app/core/services/department.service';
-import { NotificationService } from 'src/app/core/services/notification.service';
+import { RoomService } from 'src/app/core/services/entities/room.service';
+import { DepartmentService } from 'src/app/core/services/entities/department.service';
+import { NotificationService } from 'src/app/core/services/notifications/notification.service';
 
 /**
  * Componente que representa la tarjeta de creación de una sala

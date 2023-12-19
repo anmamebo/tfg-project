@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 // Servicios
-import { NotificationService } from 'src/app/core/services/notification.service';
+import { NotificationService } from 'src/app/core/services/notifications/notification.service';
 
 // Modelos
 import { entityData } from 'src/app/core/models/entityData.model';

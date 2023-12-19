@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 // Servicios
-import { RoomService } from 'src/app/core/services/room.service';
-import { NotificationService } from 'src/app/core/services/notification.service';
+import { RoomService } from 'src/app/core/services/entities/room.service';
+import { NotificationService } from 'src/app/core/services/notifications/notification.service';
 
 /**
  * Componente para los botones de la tarjeta de una sala

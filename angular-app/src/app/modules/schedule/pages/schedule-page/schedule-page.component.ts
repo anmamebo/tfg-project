@@ -18,7 +18,7 @@ import {
 import { breadcrumbScheduleData } from 'src/app/core/constants/breadcrumb-data';
 
 // Servicios
-import { ScheduleService } from 'src/app/core/services/schedule.service';
+import { ScheduleService } from 'src/app/core/services/entities/schedule.service';
 
 /**
  * Componente que representa la página de mi horario

@@ -3,21 +3,21 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 // Servicios
-import { EntityService } from './entity.service';
-import { HttpCommonService } from './http-common.service';
+import { EntityService } from '../generics/entity.service';
+import { HttpCommonService } from '../http-common/http-common.service';
 
 // Modelos
-import { Room } from '../models/room.model';
+import { Doctor } from '../../models/doctor.model';
 
 /**
- * Servicio para interactuar con la API para la gestión de salas.
+ * Servicio para interactuar con la API para la gestión de médicos.
  */
 @Injectable({
   providedIn: 'root',
 })
-export class RoomService extends EntityService<Room> {
+export class DoctorService extends EntityService<Doctor> {
   /** Endpoint de la API. */
-  public endpoint = 'departments/rooms/';
+  public endpoint = 'doctors/doctors/';
 
   constructor(http: HttpClient, httpCommonService: HttpCommonService) {
     super(http, httpCommonService);
@@ -32,13 +32,13 @@ export class RoomService extends EntityService<Room> {
   }
 
   /**
-   * Obtiene listado de salas de un departamento.
+   * Obtiene listado de médicos de un departamento.
    * @param id ID del departamento.
    * @param page página actual.
    * @param pageSize tamaño de la página.
    * @returns Un observable que emite un objeto `any`.
    */
-  public getRoomsByDepartmentId(
+  public getDoctorsByDepartmentId(
     id: string,
     page: number,
     pageSize: number,
@@ -58,7 +58,7 @@ export class RoomService extends EntityService<Room> {
     }
 
     return this.http.get<any>(
-      `${this.url}${this.endpoint}rooms_by_department`,
+      `${this.url}${this.endpoint}doctors_by_department/`,
       { params, ...httpOptions }
     );
   }

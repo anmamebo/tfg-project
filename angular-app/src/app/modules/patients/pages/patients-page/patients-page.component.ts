@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { breadcrumbPatientsData } from 'src/app/core/constants/breadcrumb-data';
 
 // Servicios
-import { PatientService } from 'src/app/core/services/patient.service';
+import { PatientService } from 'src/app/core/services/entities/patient.service';
 
 // Modelos
 import { entityData } from 'src/app/core/models/entityData.model';

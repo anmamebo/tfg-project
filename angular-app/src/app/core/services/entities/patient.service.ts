@@ -3,11 +3,11 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 // Servicios
-import { EntityService } from './entity.service';
-import { HttpCommonService } from './http-common.service';
+import { EntityService } from '../generics/entity.service';
+import { HttpCommonService } from '../http-common/http-common.service';
 
 // Modelos
-import { Patient } from '../models/patient.model';
+import { Patient } from '../../models/patient.model';
 
 /**
  * Servicio para interactuar con la API para la gestión de pacientes.

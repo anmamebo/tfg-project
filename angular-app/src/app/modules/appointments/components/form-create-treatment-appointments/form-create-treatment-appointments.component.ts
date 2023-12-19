@@ -4,8 +4,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Spanish } from 'flatpickr/dist/l10n/es.js';
 
 // Servicios
-import { TreatmentService } from 'src/app/core/services/treatment.service';
-import { NotificationService } from 'src/app/core/services/notification.service';
+import { TreatmentService } from 'src/app/core/services/entities/treatment.service';
+import { NotificationService } from 'src/app/core/services/notifications/notification.service';
 
 // Modelos
 import { Appointment } from 'src/app/core/models/appointment.model';

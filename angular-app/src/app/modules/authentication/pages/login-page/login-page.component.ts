@@ -3,8 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 // Servicios
-import { AuthService } from 'src/app/core/services/auth.service';
-import { TokenStorageService } from 'src/app/core/services/token-storage.service';
+import { AuthService } from 'src/app/core/services/auth/auth.service';
+import { TokenStorageService } from 'src/app/core/services/auth/token-storage.service';
 
 /**
  * Componente que representa la página de inicio de sesión.

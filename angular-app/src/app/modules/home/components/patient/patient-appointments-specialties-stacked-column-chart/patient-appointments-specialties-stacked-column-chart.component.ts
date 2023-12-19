@@ -13,7 +13,7 @@ import {
 } from 'ng-apexcharts';
 
 // Servicios
-import { PatientStatisticsService } from 'src/app/core/services/patient-statistics.service';
+import { PatientStatisticsService } from 'src/app/core/services/statistics/patient-statistics.service';
 
 @Component({
   selector: 'app-patient-appointments-specialties-stacked-column-chart',

@@ -11,7 +11,7 @@ import {
 } from 'ng-apexcharts';
 
 // Servicios
-import { DoctorStatisticsService } from 'src/app/core/services/doctor-statistics.service';
+import { DoctorStatisticsService } from 'src/app/core/services/statistics/doctor-statistics.service';
 
 /**
  * Componente para el gráfico citas por especialidad de los médicos.

@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { breadcrumbDoctorsEditData } from 'src/app/core/constants/breadcrumb-data';
 
 // Servicios
-import { DoctorService } from 'src/app/core/services/doctor.service';
+import { DoctorService } from 'src/app/core/services/entities/doctor.service';
 
 // Modelos
 import { Doctor } from 'src/app/core/models/doctor.model';

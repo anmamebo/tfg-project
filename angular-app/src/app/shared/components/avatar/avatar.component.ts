@@ -3,8 +3,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { API_URL } from 'src/app/core/constants/API_URL';
 
 // Servicios
-import { UserService } from 'src/app/core/services/user.service';
-import { ProfileImageService } from 'src/app/core/services/profile-image.service';
+import { UserService } from 'src/app/core/services/entities/user.service';
+import { ProfileImageService } from 'src/app/core/services/entities/profile-image.service';
 
 /**
  * Componente para mostrar el avatar de un usuario.

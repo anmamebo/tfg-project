@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 // Servicios
-import { StatisticsService } from 'src/app/core/services/statistics.service';
+import { StatisticsService } from 'src/app/core/services/statistics/statistics.service';
 
 /**
  * Componente para mostrar las estadísticas generales de la aplicación.

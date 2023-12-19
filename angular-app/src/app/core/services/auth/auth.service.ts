@@ -3,13 +3,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
 
-import { API_URL } from '../constants/API_URL';
+import { API_URL } from '../../constants/API_URL';
 
 // Servicios
 import { TokenStorageService } from './token-storage.service';
 
 // Modelos
-import { AuthResponse } from '../models/auth-response.model';
+import { AuthResponse } from '../../models/auth-response.model';
 
 // Configuración de encabezados HTTP
 const httpOptions = {

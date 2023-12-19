@@ -4,8 +4,8 @@ import { GenericListCardComponent } from 'src/app/shared/components/generic-list
 import { SwalPortalTargets } from '@sweetalert2/ngx-sweetalert2';
 
 // Servicios
-import { TreatmentService } from 'src/app/core/services/treatment.service';
-import { NotificationService } from 'src/app/core/services/notification.service';
+import { TreatmentService } from 'src/app/core/services/entities/treatment.service';
+import { NotificationService } from 'src/app/core/services/notifications/notification.service';
 
 // Modelos
 import { Appointment } from 'src/app/core/models/appointment.model';

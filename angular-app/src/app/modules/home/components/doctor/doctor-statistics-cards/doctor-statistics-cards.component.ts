@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 // Servicios
-import { DoctorStatisticsService } from 'src/app/core/services/doctor-statistics.service';
+import { DoctorStatisticsService } from 'src/app/core/services/statistics/doctor-statistics.service';
 
 /**
  * Componente para mostrar las estadísticas generales del médico.

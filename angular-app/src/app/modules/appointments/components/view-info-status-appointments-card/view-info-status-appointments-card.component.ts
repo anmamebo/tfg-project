@@ -1,8 +1,8 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 // Servicios
-import { AppointmentService } from 'src/app/core/services/appointment.service';
-import { NotificationService } from 'src/app/core/services/notification.service';
+import { AppointmentService } from 'src/app/core/services/entities/appointment.service';
+import { NotificationService } from 'src/app/core/services/notifications/notification.service';
 
 // Modelos
 import {

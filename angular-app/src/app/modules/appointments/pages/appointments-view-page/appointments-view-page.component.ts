@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { breadcrumbAppointmentsViewData } from 'src/app/core/constants/breadcrumb-data';
 
 // Servicios
-import { AppointmentService } from 'src/app/core/services/appointment.service';
+import { AppointmentService } from 'src/app/core/services/entities/appointment.service';
 
 // Modelos
 import { Appointment } from 'src/app/core/models/appointment.model';

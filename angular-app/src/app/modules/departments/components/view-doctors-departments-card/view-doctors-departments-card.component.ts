@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 // Servicios
-import { DoctorService } from 'src/app/core/services/doctor.service';
-import { NotificationService } from 'src/app/core/services/notification.service';
+import { DoctorService } from 'src/app/core/services/entities/doctor.service';
+import { NotificationService } from 'src/app/core/services/notifications/notification.service';
 
 // Modelos
 import { Doctor } from 'src/app/core/models/doctor.model';

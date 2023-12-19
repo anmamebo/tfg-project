@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 // Servicios
-import { EntityService } from './entity.service';
-import { HttpCommonService } from './http-common.service';
+import { EntityService } from '../generics/entity.service';
+import { HttpCommonService } from '../http-common/http-common.service';
 
 // Modelos
-import { Permission } from '../models/permission.model';
+import { Permission } from '../../models/permission.model';
 
 /**
  * Servicio para interactuar con la API para la gestión de permisos.

@@ -11,7 +11,7 @@ import {
 import { STATUS_APPOINTMENT_OPTIONS } from 'src/app/core/constants/options/status-appointment-options.constants';
 
 // Servicios
-import { StatisticsService } from 'src/app/core/services/statistics.service';
+import { StatisticsService } from 'src/app/core/services/statistics/statistics.service';
 
 /**
  * Componente para el gráfico de citas por estado.

@@ -12,7 +12,7 @@ import {
 } from 'ng-apexcharts';
 
 // Servicios
-import { StatisticsService } from 'src/app/core/services/statistics.service';
+import { StatisticsService } from 'src/app/core/services/statistics/statistics.service';
 
 /**
  * Componente para el gráfico de citas mensuales.

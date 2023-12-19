@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { breadcrumbPermissionData } from 'src/app/core/constants/breadcrumb-data';
 
 // Servicios
-import { PermissionService } from 'src/app/core/services/permission.service';
+import { PermissionService } from 'src/app/core/services/entities/permission.service';
 
 // Modelos
 import { entityData } from 'src/app/core/models/entityData.model';

@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { breadcrumbDepartmentsViewData } from 'src/app/core/constants/breadcrumb-data';
 
 // Servicios
-import { DepartmentService } from 'src/app/core/services/department.service';
+import { DepartmentService } from 'src/app/core/services/entities/department.service';
 
 // Modelos
 import { Department } from 'src/app/core/models/department.model';

@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 // Servicios
-import { DoctorService } from 'src/app/core/services/doctor.service';
-import { NotificationService } from 'src/app/core/services/notification.service';
+import { DoctorService } from 'src/app/core/services/entities/doctor.service';
+import { NotificationService } from 'src/app/core/services/notifications/notification.service';
 
 /**
  * Componente para los botones de la tarjeta de un médico

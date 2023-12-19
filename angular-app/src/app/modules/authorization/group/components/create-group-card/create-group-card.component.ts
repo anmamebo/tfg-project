@@ -2,8 +2,8 @@ import { Component, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 // Servicios
-import { GroupService } from 'src/app/core/services/group.service';
-import { NotificationService } from 'src/app/core/services/notification.service';
+import { GroupService } from 'src/app/core/services/entities/group.service';
+import { NotificationService } from 'src/app/core/services/notifications/notification.service';
 
 // Modelos
 import { Group } from 'src/app/core/models/group.model';

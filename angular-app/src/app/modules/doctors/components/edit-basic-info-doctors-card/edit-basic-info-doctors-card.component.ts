@@ -4,10 +4,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 
 // Servicios
-import { DoctorService } from 'src/app/core/services/doctor.service';
-import { MedicalspecialtyService } from 'src/app/core/services/medicalspecialty.service';
-import { DepartmentService } from 'src/app/core/services/department.service';
-import { NotificationService } from 'src/app/core/services/notification.service';
+import { DoctorService } from 'src/app/core/services/entities/doctor.service';
+import { MedicalspecialtyService } from 'src/app/core/services/entities/medicalspecialty.service';
+import { DepartmentService } from 'src/app/core/services/entities/department.service';
+import { NotificationService } from 'src/app/core/services/notifications/notification.service';
 
 // Modelos
 import { Doctor } from 'src/app/core/models/doctor.model';

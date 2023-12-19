@@ -3,7 +3,7 @@ import { Component, ViewChild } from '@angular/core';
 import { breadcrumbGroupData } from 'src/app/core/constants/breadcrumb-data';
 
 // Servicios
-import { GroupService } from 'src/app/core/services/group.service';
+import { GroupService } from 'src/app/core/services/entities/group.service';
 
 // Modelos
 import { entityData } from 'src/app/core/models/entityData.model';

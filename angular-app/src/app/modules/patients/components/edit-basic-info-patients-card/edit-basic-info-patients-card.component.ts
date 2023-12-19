@@ -10,9 +10,9 @@ import { GENDER_OPTIONS } from 'src/app/core/constants/options/genders-options.c
 import { DNI_REGEXP } from 'src/app/core/constants/reg-exp';
 
 // Servicios
-import { PatientService } from 'src/app/core/services/patient.service';
-import { NotificationService } from 'src/app/core/services/notification.service';
-import { CountriesService } from 'src/app/core/services/countries.service';
+import { PatientService } from 'src/app/core/services/entities/patient.service';
+import { NotificationService } from 'src/app/core/services/notifications/notification.service';
+import { CountriesService } from 'src/app/core/services/entities/countries.service';
 
 // Modelos
 import { Patient } from 'src/app/core/models/patient.model';

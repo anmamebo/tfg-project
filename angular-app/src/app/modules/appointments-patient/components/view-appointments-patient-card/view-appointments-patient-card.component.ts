@@ -3,9 +3,9 @@ import { format } from 'date-fns';
 import { es } from 'date-fns/locale';
 
 // Servicios
-import { AppointmentService } from 'src/app/core/services/appointment.service';
-import { NotificationService } from 'src/app/core/services/notification.service';
-import { PdfAppointmentService } from 'src/app/core/services/pdf-appointment.service';
+import { AppointmentService } from 'src/app/core/services/entities/appointment.service';
+import { NotificationService } from 'src/app/core/services/notifications/notification.service';
+import { PdfAppointmentService } from 'src/app/core/services/pdfs/pdf-appointment.service';
 
 // Modelos
 import {

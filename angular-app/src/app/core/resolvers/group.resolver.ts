@@ -7,7 +7,7 @@ import {
 import { Observable, catchError, map, of } from 'rxjs';
 import { inject } from '@angular/core';
 
-import { GroupService } from '../services/group.service';
+import { GroupService } from '../services/entities/group.service';
 
 export const groupResolver: ResolveFn<any> = (
   route: ActivatedRouteSnapshot,

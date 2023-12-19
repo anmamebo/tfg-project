@@ -2,8 +2,8 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 // Servicios
-import { NotificationService } from 'src/app/core/services/notification.service';
-import { DoctorService } from 'src/app/core/services/doctor.service';
+import { NotificationService } from 'src/app/core/services/notifications/notification.service';
+import { DoctorService } from 'src/app/core/services/entities/doctor.service';
 
 // Modelos
 import { Doctor } from 'src/app/core/models/doctor.model';

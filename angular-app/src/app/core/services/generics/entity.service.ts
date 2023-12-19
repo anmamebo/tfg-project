@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { API_URL } from 'src/app/core/constants/API_URL';
 
 // Servicios
-import { HttpCommonService } from 'src/app/core/services/http-common.service';
+import { HttpCommonService } from 'src/app/core/services/http-common/http-common.service';
 
 /**
  * Servicio genérico para entidades.
