@@ -162,6 +162,12 @@ export const breadcrumbAppointmentsViewData = [
   { label: 'Ver cita', url: '' },
 ];
 
+// Solicitar cita paciente
+export const breadcrumbAppointmentsRequestPatientData = [
+  { label: 'Panel Principal', url: '/' },
+  { label: 'Solicitar cita', url: '' },
+];
+
 // Agenda citas paciente
 export const breadcrumbAppointmentsCalendarPatientData = [
   { label: 'Panel Principal', url: '/' },

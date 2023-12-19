@@ -13,10 +13,10 @@ export const sidebarData = [
     roles: [ROLES.ADMIN, ROLES.DOCTOR, ROLES.PATIENT],
   },
   {
-    name: 'Horario',
-    url: '/horario',
-    icon: 'calendar2-event-fill',
-    roles: [ROLES.DOCTOR],
+    name: 'Solicitar Cita',
+    url: '/solicitar-cita',
+    icon: 'person-plus-fill',
+    roles: [ROLES.DOCTOR, ROLES.PATIENT],
   },
   {
     name: 'Mis Citas',
@@ -58,6 +58,12 @@ export const sidebarData = [
         roles: [ROLES.PATIENT],
       },
     ],
+  },
+  {
+    name: 'Horario',
+    url: '/horario',
+    icon: 'calendar2-event-fill',
+    roles: [ROLES.DOCTOR],
   },
   {
     name: 'Citas',

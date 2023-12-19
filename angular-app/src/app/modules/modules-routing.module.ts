@@ -65,6 +65,15 @@ const routes: Routes = [
     data: { roles: [ROLES.ADMIN] },
   },
   {
+    path: 'solicitar-cita',
+    loadChildren: () =>
+      import('./appointment-request/appointment-request.module').then(
+        (m) => m.AppointmentRequestModule
+      ),
+    canActivate: [roleGuard],
+    data: { roles: [ROLES.DOCTOR, ROLES.PATIENT] },
+  },
+  {
     path: 'm/citas',
     loadChildren: () =>
       import('./appointments/appointments.module').then(

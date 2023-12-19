@@ -1,0 +1,77 @@
+<app-generic-card [hasCardHeader]="false">
+  <div class="card-content">
+    <form
+      (ngSubmit)="onSubmit()"
+      [formGroup]="createAppointmentRequestForm"
+      class="form form-horizontal"
+    >
+      <div class="form-body">
+        <div class="row">
+          <div class="col-md-6">
+            <!-- Tipo de cita -->
+            <div class="form-group">
+              <label for="type">Tipo de cita</label>
+
+              <ng-multiselect-dropdown
+                [placeholder]="'Selecciona un tipo'"
+                [settings]="dropdownSettings"
+                [data]="types"
+                formControlName="type"
+              ></ng-multiselect-dropdown>
+
+              <app-form-errors
+                [control]="form.get('type')"
+                [submitted]="submitted"
+              ></app-form-errors>
+            </div>
+
+            <!-- Especialidad -->
+            <div class="form-group">
+              <label for="specialty">Especialidad</label>
+
+              <ng-multiselect-dropdown
+                [placeholder]="'Selecciona una especialidad'"
+                [settings]="dropdownSettings"
+                [data]="medicalSpecialties"
+                formControlName="specialty"
+              ></ng-multiselect-dropdown>
+
+              <app-form-errors
+                [control]="form.get('specialty')"
+                [submitted]="submitted"
+              ></app-form-errors>
+            </div>
+          </div>
+
+          <!-- Motivo -->
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="reason">Motivo</label>
+              <textarea
+                formControlName="reason"
+                class="form-control"
+                id="reason"
+                rows="5"
+                placeholder="Motivo"
+                [ngClass]="{
+                  'is-invalid': submitted && form.get('reason')?.errors
+                }"
+                style="resize: none"
+              ></textarea>
+
+              <app-form-errors
+                [control]="form.get('reason')"
+                [submitted]="submitted"
+              ></app-form-errors>
+            </div>
+          </div>
+
+          <!-- Botones -->
+          <div class="col-12 d-flex justify-content-end">
+            <button type="submit" class="btn btn-primary">Solicitar</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</app-generic-card>
