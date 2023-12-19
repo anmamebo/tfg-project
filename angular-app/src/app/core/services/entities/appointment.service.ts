@@ -328,6 +328,20 @@ export class AppointmentService {
   }
 
   /**
+   * Crea una cita.
+   * @param appointment Objeto con los datos de la cita.
+   * @returns Un observable que emite la respuesta del servidor.
+   */
+  public createAppointment(appointment: Appointment): Observable<any> {
+    const headers = this._httpCommonService.getCommonHeaders();
+    const httpOptions = { headers };
+
+    let params = JSON.stringify(appointment);
+
+    return this._http.post<any>(`${this.url}`, params, httpOptions);
+  }
+
+  /**
    * Actualiza el estado de una cita.
    * @param id ID de la cita.
    * @param status Estado de la cita.
