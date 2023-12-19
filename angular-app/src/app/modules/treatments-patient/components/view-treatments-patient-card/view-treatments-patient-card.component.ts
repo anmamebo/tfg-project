@@ -169,11 +169,13 @@ export class ViewTreatmentsPatientCardComponent implements OnInit {
   public downloadPDF(): void {
     if (!this.treatment) return;
 
-    this._pdfTreatmentService.downloadPdf(this.treatment.id).subscribe({
-      next: (response: any) => {
-        console.log(response);
-      },
-    });
+    this._pdfTreatmentService
+      .downloadTreatmentPdf(this.treatment.id)
+      .subscribe({
+        next: (response: any) => {
+          console.log(response);
+        },
+      });
   }
 
   /**
@@ -182,7 +184,7 @@ export class ViewTreatmentsPatientCardComponent implements OnInit {
   public printPDF(): void {
     if (!this.treatment) return;
 
-    this._pdfTreatmentService.printPdf(this.treatment.id).subscribe({
+    this._pdfTreatmentService.printTreatmentPdf(this.treatment.id).subscribe({
       next: (response: any) => {
         console.log(response);
       },

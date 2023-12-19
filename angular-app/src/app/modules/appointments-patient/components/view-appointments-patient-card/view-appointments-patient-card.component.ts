@@ -111,11 +111,13 @@ export class ViewAppointmentsPatientCardComponent implements OnInit {
   public downloadPDF(): void {
     if (!this.appointment) return;
 
-    this._pdfAppointmentService.downloadPdf(this.appointment.id).subscribe({
-      next: (response: any) => {
-        console.log(response);
-      },
-    });
+    this._pdfAppointmentService
+      .downloadAppointmentPdf(this.appointment.id)
+      .subscribe({
+        next: (response: any) => {
+          console.log(response);
+        },
+      });
   }
 
   /**
@@ -124,10 +126,12 @@ export class ViewAppointmentsPatientCardComponent implements OnInit {
   public printPDF(): void {
     if (!this.appointment) return;
 
-    this._pdfAppointmentService.printPdf(this.appointment.id).subscribe({
-      next: (response: any) => {
-        console.log(response);
-      },
-    });
+    this._pdfAppointmentService
+      .printAppointmentPdf(this.appointment.id)
+      .subscribe({
+        next: (response: any) => {
+          console.log(response);
+        },
+      });
   }
 }
