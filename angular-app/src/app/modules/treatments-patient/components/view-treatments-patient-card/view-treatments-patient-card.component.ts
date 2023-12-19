@@ -5,6 +5,7 @@ import { es } from 'date-fns/locale';
 // Servicios
 import { TreatmentService } from 'src/app/core/services/entities/treatment.service';
 import { NotificationService } from 'src/app/core/services/notifications/notification.service';
+import { PdfTreatmentService } from 'src/app/core/services/pdfs/pdf-treatment.service';
 
 // Modelos
 import {
@@ -20,7 +21,7 @@ import {
   selector: 'app-view-treatments-patient-card',
   templateUrl: './view-treatments-patient-card.component.html',
   styleUrls: ['./view-treatments-patient-card.component.scss'],
-  providers: [TreatmentService],
+  providers: [TreatmentService, PdfTreatmentService],
 })
 export class ViewTreatmentsPatientCardComponent implements OnInit {
   /** Tratamiento. */
@@ -37,7 +38,8 @@ export class ViewTreatmentsPatientCardComponent implements OnInit {
 
   constructor(
     private _treatmentService: TreatmentService,
-    private _notificationService: NotificationService
+    private _notificationService: NotificationService,
+    private _pdfTreatmentService: PdfTreatmentService
   ) {}
 
   ngOnInit(): void {
@@ -159,5 +161,31 @@ export class ViewTreatmentsPatientCardComponent implements OnInit {
           });
       }
     );
+  }
+
+  /**
+   * Descarga el PDF de la cita.
+   */
+  public downloadPDF(): void {
+    if (!this.treatment) return;
+
+    this._pdfTreatmentService.downloadPdf(this.treatment.id).subscribe({
+      next: (response: any) => {
+        console.log(response);
+      },
+    });
+  }
+
+  /**
+   * Imprime el PDF de la cita.
+   */
+  public printPDF(): void {
+    if (!this.treatment) return;
+
+    this._pdfTreatmentService.printPdf(this.treatment.id).subscribe({
+      next: (response: any) => {
+        console.log(response);
+      },
+    });
   }
 }

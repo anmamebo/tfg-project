@@ -53,6 +53,26 @@
               <i class="bi bi-x-circle me-2"></i>
               Cancelar
             </a>
+            <div
+              *ngIf="treatment.status == 'in_progress'"
+              class="dropdown-divider"
+            ></div>
+            <a
+              class="dropdown-item"
+              style="cursor: pointer"
+              (click)="downloadPDF()"
+            >
+              <i class="bi bi-file-earmark-arrow-down me-2"></i>
+              Descargar PDF
+            </a>
+            <a
+              class="dropdown-item"
+              style="cursor: pointer"
+              (click)="printPDF()"
+            >
+              <i class="bi bi-printer me-2"></i>
+              Imprimir
+            </a>
           </div>
         </div>
       </div>
