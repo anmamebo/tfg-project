@@ -31,26 +31,33 @@ export abstract class EntityService<T> {
   abstract getEndpoint(): string;
 
   /**
-   * Obtiene el listado de elementos de la entidad.
-   *
-   * @param page Número de página.
-   * @param numResults Número de resultados por página.
-   * @param searchTerm Término de búsqueda.
-   * @param paginated Indica si se quiere paginar.
-   * @returns Observable con los elementos de la entidad.
+   * Obtiene el lista de elementos de la entidad.
+   * @param options Opciones de la petición.
+   * @returns Un observable que emite un objeto `any`.
    */
   public getItems(
-    page?: number,
-    numResults?: number,
-    searchTerm?: string,
-    paginated: boolean = false,
-    state: boolean | null = true,
-    sortBy?: string,
-    sortOrder?: string
+    options: {
+      page?: number;
+      numResults?: number;
+      searchTerm?: string;
+      paginated?: boolean;
+      state?: boolean | null;
+      sortBy?: string;
+      sortOrder?: string;
+    } = {}
   ): Observable<any> {
+    const {
+      page,
+      numResults,
+      searchTerm,
+      paginated = false,
+      state = true,
+      sortBy,
+      sortOrder,
+    } = options;
+
     const headers = this.httpCommonService.getCommonHeaders(); // Obtiene cabeceras comunes
     const httpOptions = { headers };
-
     let params = new HttpParams();
 
     if (paginated) {

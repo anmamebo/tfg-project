@@ -123,15 +123,15 @@ export class GenericListCardComponent implements OnInit {
     }
 
     this.entityData.service
-      .getItems(
-        page,
-        this.entityData.numResults,
-        this.entityData.search.search,
-        true,
-        this.filterState,
-        this.sort.column,
-        this.sort.order
-      )
+      .getItems({
+        page: page,
+        numResults: this.entityData.numResults,
+        searchTerm: this.entityData.search.search,
+        paginated: true,
+        state: this.filterState,
+        sortBy: this.sort.column,
+        sortOrder: this.sort.order,
+      })
       .subscribe({
         next: (response: any) => {
           this.entityData.items = response.results;
