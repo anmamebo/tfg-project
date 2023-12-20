@@ -78,13 +78,9 @@ export class AppointmentsCalendarPatientPageComponent implements OnInit {
    */
   public getAppointments() {
     this._appointmentService
-      .getAppointmentsByPatient(
-        ['scheduled', 'in_progress', 'completed', 'rescheduled'],
-        0,
-        0,
-        '',
-        false
-      )
+      .getAppointmentsByPatient({
+        statuses: ['scheduled', 'in_progress', 'completed', 'rescheduled'],
+      })
       .subscribe({
         next: (data: any) => {
           this.events = this._formatData(data);

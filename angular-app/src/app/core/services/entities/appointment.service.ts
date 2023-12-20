@@ -10,6 +10,18 @@ import { HttpCommonService } from '../http-common/http-common.service';
 // Modelos
 import { Appointment } from '../../models/appointment.interface';
 
+interface AppointmentOptions {
+  date?: string;
+  statuses?: string[];
+  page?: number;
+  numResults?: number;
+  searchTerm?: string;
+  paginate?: boolean;
+  state?: boolean | null;
+  sortBy?: string;
+  sortOrder?: string;
+}
+
 /**
  * Servicio para interactuar con la API para la gestión de citas.
  */
@@ -29,9 +41,9 @@ export class AppointmentService {
 
   /**
    * Actualiza la cita.
-   * @param id El identificador de la cita.
-   * @param item El objeto con los datos de la cita.
-   * @returns Un observable que emite la respuesta del servidor.
+   * @param {string} id El identificador de la cita.
+   * @param {Appointment} item El objeto con los datos de la cita.
+   * @returns {Observable<any>} Un observable que emite la respuesta del servidor.
    */
   public update(id: string, item: Appointment): Observable<any> {
     const headers = this._httpCommonService.getCommonHeaders();
@@ -44,8 +56,8 @@ export class AppointmentService {
 
   /**
    * Obtiene una cita por su id para un doctor.
-   * @param id Id de la cita.
-   * @returns Un observable que emite la respuesta del servidor.
+   * @param {string} id Id de la cita.
+   * @returns {Observable<Appointment>} Un observable que emite la respuesta del servidor.
    */
   public getAppointmentByIdByDoctor(id: string): Observable<Appointment> {
     const headers = this._httpCommonService.getCommonHeaders();
@@ -58,23 +70,29 @@ export class AppointmentService {
   }
 
   /**
-   * Obtiene las citas de un médico.
-   * @returns Un observable que emite la respuesta del servidor.
+   * Construye y retorna los parámetros para las peticiones HTTP.
+   * @param {AppointmentOptions} options - Opciones para construir los parámetros HTTP.
+   * @returns {HttpParams} Los parámetros HTTP construidos para la consulta.
    */
-  public getAppointmentsByDoctor(
-    statuses: string[] | null,
-    page?: number,
-    numResults?: number,
-    searchTerm?: string,
-    paginated: boolean = false,
-    state?: boolean | null,
-    sortBy?: string,
-    sortOrder?: string
-  ): Observable<any> {
-    const headers = this._httpCommonService.getCommonHeaders();
-    const httpOptions = { headers };
+  private _buildParams(options: AppointmentOptions = {}): HttpParams {
+    const {
+      date,
+      statuses,
+      page,
+      numResults,
+      searchTerm,
+      paginate = false,
+      state = true,
+      sortBy,
+      sortOrder,
+    } = options;
 
     let params = new HttpParams();
+
+    if (date) {
+      // Si se ha indicado la fecha
+      params = params.set('date', date);
+    }
 
     if (statuses) {
       // Si se han indicado los estados
@@ -83,7 +101,7 @@ export class AppointmentService {
       });
     }
 
-    if (paginated) {
+    if (paginate) {
       // Si se quiere paginar
 
       if (page) {
@@ -116,6 +134,23 @@ export class AppointmentService {
         `${sortOrder === 'desc' ? '-' : ''}${sortBy}`
       );
     }
+
+    return params;
+  }
+
+  /**
+   * Obtiene las citas de un médico con opciones específicas.
+   * @param {AppointmentOptions} options - Opciones para filtrar las citas del medico.
+   *
+   * @returns {Observable<any>} Un observable que emite la respuesta del servidor.
+   */
+  public getAppointmentsByDoctor(
+    options: AppointmentOptions = {}
+  ): Observable<any> {
+    const params = this._buildParams(options);
+
+    const headers = this._httpCommonService.getCommonHeaders();
+    const httpOptions = { headers };
 
     return this._http.get<any>(`${this.url}list_for_doctor/`, {
       params,
@@ -124,64 +159,18 @@ export class AppointmentService {
   }
 
   /**
-   * Obtiene las citas de un paciente.
-   * @returns Un observable que emite la respuesta del servidor.
+   * Obtiene las citas de un paciente con opciones específicas.
+   * @param {AppointmentOptions} options - Opciones para filtrar las citas del paciente.
+   *
+   * @returns {Observable<any>} Un observable que emite la respuesta del servidor.
    */
   public getAppointmentsByPatient(
-    statuses: string[] | null,
-    page?: number,
-    numResults?: number,
-    searchTerm?: string,
-    paginated: boolean = false,
-    state?: boolean | null,
-    sortBy?: string,
-    sortOrder?: string
+    options: AppointmentOptions = {}
   ): Observable<any> {
+    const params = this._buildParams(options);
+
     const headers = this._httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
-
-    let params = new HttpParams();
-
-    if (statuses) {
-      // Si se han indicado los estados
-      statuses.forEach((status) => {
-        params = params.append('status', status);
-      });
-    }
-
-    if (paginated) {
-      // Si se quiere paginar
-
-      if (page) {
-        // Si se ha indicado la página
-        params = params.set('page', page.toString());
-      }
-
-      if (numResults) {
-        // Si se ha indicado el número de resultados por página
-        params = params.set('page_size', numResults.toString());
-      }
-
-      params = params.set('paginate', 'true'); // Indica que se quiere paginar
-    }
-
-    if (searchTerm) {
-      // Si se ha indicado un término de búsqueda
-      params = params.set('search', searchTerm);
-    }
-
-    if (state !== null && state !== undefined) {
-      // Si se ha indicado un estado
-      params = params.set('state', state.toString());
-    }
-
-    if (sortBy && sortOrder) {
-      // Si se ha indicado un campo por el que ordenar
-      params = params.set(
-        'ordering',
-        `${sortOrder === 'desc' ? '-' : ''}${sortBy}`
-      );
-    }
 
     return this._http.get<any>(`${this.url}list_for_patient/`, {
       params,
@@ -190,67 +179,20 @@ export class AppointmentService {
   }
 
   /**
-   * Obtiene las citas de un médico en un día concreto.
-   * @returns Un observable que emite la respuesta del servidor.
+   * Obtiene las citas de un médico para un día específico, con opciones específicas.
+   * @param {AppointmentOptions} options - Opciones para filtrar las citas del médico.
+   *
+   * @returns {Observable<any>} Un observable que emite la respuesta del servidor.
    */
   public getAppointmentsByDoctorAndDay(
-    date: string,
-    statuses: string[] | null,
-    page?: number,
-    numResults?: number,
-    searchTerm?: string,
-    paginated: boolean = false,
-    state?: boolean | null,
-    sortBy?: string,
-    sortOrder?: string
+    options: AppointmentOptions = {
+      date: new Date().toISOString().slice(0, 10),
+    }
   ): Observable<any> {
+    const params = this._buildParams(options);
+
     const headers = this._httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
-
-    let params = new HttpParams();
-
-    params = params.set('date', date);
-
-    if (statuses) {
-      // Si se han indicado los estados
-      statuses.forEach((status) => {
-        params = params.append('status', status);
-      });
-    }
-
-    if (paginated) {
-      // Si se quiere paginar
-
-      if (page) {
-        // Si se ha indicado la página
-        params = params.set('page', page.toString());
-      }
-
-      if (numResults) {
-        // Si se ha indicado el número de resultados por página
-        params = params.set('page_size', numResults.toString());
-      }
-
-      params = params.set('paginate', 'true'); // Indica que se quiere paginar
-    }
-
-    if (searchTerm) {
-      // Si se ha indicado un término de búsqueda
-      params = params.set('search', searchTerm);
-    }
-
-    if (state !== null && state !== undefined) {
-      // Si se ha indicado un estado
-      params = params.set('state', state.toString());
-    }
-
-    if (sortBy && sortOrder) {
-      // Si se ha indicado un campo por el que ordenar
-      params = params.set(
-        'ordering',
-        `${sortOrder === 'desc' ? '-' : ''}${sortBy}`
-      );
-    }
 
     return this._http.get<any>(`${this.url}list_for_doctor_by_date/`, {
       params,
@@ -259,67 +201,20 @@ export class AppointmentService {
   }
 
   /**
-   * Obtiene las citas de un paciente en un día concreto.
-   * @returns Un observable que emite la respuesta del servidor.
+   * Obtiene las citas de un paciente para un día específico, con opciones específicas.
+   * @param {AppointmentOptions} options - Opciones para filtrar las citas del paciente.
+   *
+   * @returns {Observable<any>} Un observable que emite la respuesta del servidor.
    */
   public getAppointmentsByPatientAndDay(
-    date: string,
-    statuses: string[] | null,
-    page?: number,
-    numResults?: number,
-    searchTerm?: string,
-    paginated: boolean = false,
-    state?: boolean | null,
-    sortBy?: string,
-    sortOrder?: string
+    options: AppointmentOptions = {
+      date: new Date().toISOString().slice(0, 10),
+    }
   ): Observable<any> {
+    const params = this._buildParams(options);
+
     const headers = this._httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
-
-    let params = new HttpParams();
-
-    params = params.set('date', date);
-
-    if (statuses) {
-      // Si se han indicado los estados
-      statuses.forEach((status) => {
-        params = params.append('status', status);
-      });
-    }
-
-    if (paginated) {
-      // Si se quiere paginar
-
-      if (page) {
-        // Si se ha indicado la página
-        params = params.set('page', page.toString());
-      }
-
-      if (numResults) {
-        // Si se ha indicado el número de resultados por página
-        params = params.set('page_size', numResults.toString());
-      }
-
-      params = params.set('paginate', 'true'); // Indica que se quiere paginar
-    }
-
-    if (searchTerm) {
-      // Si se ha indicado un término de búsqueda
-      params = params.set('search', searchTerm);
-    }
-
-    if (state !== null && state !== undefined) {
-      // Si se ha indicado un estado
-      params = params.set('state', state.toString());
-    }
-
-    if (sortBy && sortOrder) {
-      // Si se ha indicado un campo por el que ordenar
-      params = params.set(
-        'ordering',
-        `${sortOrder === 'desc' ? '-' : ''}${sortBy}`
-      );
-    }
 
     return this._http.get<any>(`${this.url}list_for_patient_by_date/`, {
       params,
@@ -329,8 +224,8 @@ export class AppointmentService {
 
   /**
    * Crea una cita.
-   * @param appointment Objeto con los datos de la cita.
-   * @returns Un observable que emite la respuesta del servidor.
+   * @param {Appointment} appointment Objeto con los datos de la cita.
+   * @returns {Observable<any>} Un observable que emite la respuesta del servidor.
    */
   public createAppointment(appointment: Appointment): Observable<any> {
     const headers = this._httpCommonService.getCommonHeaders();
@@ -343,9 +238,9 @@ export class AppointmentService {
 
   /**
    * Actualiza el estado de una cita.
-   * @param id ID de la cita.
-   * @param status Estado de la cita.
-   * @returns Un observable que emite la respuesta del servidor.
+   * @param {string} id ID de la cita.
+   * @param {string} status Estado de la cita.
+   * @returns {Observable<any>} Un observable que emite la respuesta del servidor.
    */
   public updateStatus(id: string, status: string): Observable<any> {
     const headers = this._httpCommonService.getCommonHeaders();

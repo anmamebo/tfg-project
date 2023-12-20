@@ -37,16 +37,16 @@ export class ListAppointmentsPatientCardComponent extends GenericListCardCompone
     }
 
     this._appointmentService
-      .getAppointmentsByPatient(
-        ['pending', 'scheduled', 'rescheduled', 'in_progress'],
-        page,
-        this.entityData.numResults,
-        this.entityData.search.search,
-        true,
-        this.filterState,
-        this.sort.column,
-        this.sort.order
-      )
+      .getAppointmentsByPatient({
+        statuses: ['pending', 'scheduled', 'rescheduled', 'in_progress'],
+        page: page,
+        numResults: this.entityData.numResults,
+        searchTerm: this.entityData.search.search,
+        paginate: true,
+        state: this.filterState,
+        sortBy: this.sort.column,
+        sortOrder: this.sort.order,
+      })
       .subscribe({
         next: (response: any) => {
           this.entityData.items = response.results;

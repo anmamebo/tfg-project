@@ -79,13 +79,16 @@ export class DoctorTodayAppointmentsCalendarComponent implements AfterViewInit {
    */
   private _getEvents(date: string): void {
     this._appointmentService
-      .getAppointmentsByDoctorAndDay(date, [
-        'scheduled',
-        'rescheduled',
-        'in_progress',
-        'no_show',
-        'completed',
-      ])
+      .getAppointmentsByDoctorAndDay({
+        date: date,
+        statuses: [
+          'scheduled',
+          'rescheduled',
+          'in_progress',
+          'no_show',
+          'completed',
+        ],
+      })
       .subscribe({
         next: (data) => {
           this.events = this._formatData(data);

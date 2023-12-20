@@ -47,16 +47,16 @@ export class ListAppointmentsHistoricalDoctorCardComponent extends GenericListCa
     }
 
     this._appointmentService
-      .getAppointmentsByDoctor(
-        ['completed', 'no_show', 'cancelled'],
-        page,
-        this.entityData.numResults,
-        this.entityData.search.search,
-        true,
-        this.filterState,
-        this.sort.column,
-        this.sort.order
-      )
+      .getAppointmentsByDoctor({
+        statuses: ['completed', 'no_show', 'cancelled'],
+        page: page,
+        numResults: this.entityData.numResults,
+        searchTerm: this.entityData.search.search,
+        paginate: true,
+        state: this.filterState,
+        sortBy: this.sort.column,
+        sortOrder: this.sort.order,
+      })
       .subscribe({
         next: (response: any) => {
           this.entityData.items = response.results;

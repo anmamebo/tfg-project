@@ -81,13 +81,16 @@ export class PatientTodayAppointmentsCalendarComponent
    */
   private _getEvents(date: string): void {
     this._appointmentService
-      .getAppointmentsByPatientAndDay(date, [
-        'scheduled',
-        'rescheduled',
-        'in_progress',
-        'no_show',
-        'completed',
-      ])
+      .getAppointmentsByPatientAndDay({
+        date: date,
+        statuses: [
+          'scheduled',
+          'rescheduled',
+          'in_progress',
+          'no_show',
+          'completed',
+        ],
+      })
       .subscribe({
         next: (data) => {
           this.events = this._formatData(data);
