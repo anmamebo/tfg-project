@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { API_URL } from '../../constants/API_URL';
+import { API_URL } from 'src/app/core/constants/API_URL';
 
 // Servicios
-import { HttpCommonService } from '../http-common/http-common.service';
+import { HttpCommonService } from 'src/app/core/services/http-common/http-common.service';
 
 // Modelos
-import { Address } from '../../models/address.interface';
+import { Address } from 'src/app/core/models/address.interface';
 
 /**
  * Servicio para la gestión de direcciones.
@@ -29,8 +29,8 @@ export class AddressService {
 
   /**
    * Crea una dirección.
-   * @param address El objeto `Address` con los datos de la dirección.
-   * @returns Un observable que emite un objeto `any`.
+   * @param {Address} address El objeto con los datos de la dirección.
+   * @returns {Observable<any>} Un observable que emite la respuesta del servidor.
    */
   public createAddress(address: Address): Observable<any> {
     const headers = this._httpCommonService.getCommonHeaders();
@@ -43,8 +43,8 @@ export class AddressService {
 
   /**
    * Actualiza los datos de una dirección.
-   * @param address El objeto `Address` con los datos actualizados.
-   * @returns Un observable que emite un objeto `any`.
+   * @param {Address} address El objeto con los datos actualizados.
+   * @returns {Observable<any>} Un observable que emite la respuesta del servidor.
    */
   public updateAddress(address: Address): Observable<any> {
     const headers = this._httpCommonService.getCommonHeaders();

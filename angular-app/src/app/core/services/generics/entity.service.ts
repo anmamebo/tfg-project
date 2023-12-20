@@ -26,14 +26,14 @@ export abstract class EntityService<T> {
 
   /**
    * Obtiene el endpoint de la entidad.
-   * @returns El endpoint de la entidad.
+   * @returns {string} El endpoint de la entidad.
    */
   abstract getEndpoint(): string;
 
   /**
    * Obtiene el lista de elementos de la entidad.
    * @param options Opciones de la petición.
-   * @returns Un observable que emite un objeto `any`.
+   * @returns {Observable<any>} Un observable que emite un objeto `any`.
    */
   public getItems(
     options: {
@@ -102,8 +102,8 @@ export abstract class EntityService<T> {
 
   /**
    * Obtiene un elemento de la entidad.
-   * @param id El identificador del elemento.
-   * @returns Un observable que emite un objeto `any`.
+   * @param {string} id El identificador del elemento.
+   * @returns {Observable<T>} Un observable que emite un objeto `any`.
    */
   public getItemById(id: string): Observable<T> {
     const headers = this.httpCommonService.getCommonHeaders();
@@ -117,8 +117,8 @@ export abstract class EntityService<T> {
 
   /**
    * Crea un elemento de la entidad.
-   * @param item El objeto con los datos del elemento.
-   * @returns Un observable que emite un objeto `any`.
+   * @param {T} item El objeto con los datos del elemento.
+   * @returns {Observable<any>} Un observable que emite un objeto `any`.
    */
   public create(item: T): Observable<any> {
     const headers = this.httpCommonService.getCommonHeaders();
@@ -135,9 +135,9 @@ export abstract class EntityService<T> {
 
   /**
    * Actualiza un elemento de la entidad.
-   * @param id El identificador del elemento.
-   * @param item El objeto con los datos del elemento.
-   * @returns Un observable que emite un objeto `any`.
+   * @param {string} id El identificador del elemento.
+   * @param {T} item El objeto con los datos del elemento.
+   * @returns {Observable<any>} Un observable que emite un objeto `any`.
    */
   public update(id: string, item: T): Observable<any> {
     const headers = this.httpCommonService.getCommonHeaders();
@@ -154,8 +154,8 @@ export abstract class EntityService<T> {
 
   /**
    * Elimina un elemento de la entidad.
-   * @param id El identificador del elemento.
-   * @returns Un observable que emite un objeto `any`.
+   * @param {string} id El identificador del elemento.
+   * @returns {Observable<any>} Un observable que emite un objeto `any`.
    */
   public delete(id: string): Observable<any> {
     const headers = this.httpCommonService.getCommonHeaders();
@@ -169,8 +169,8 @@ export abstract class EntityService<T> {
 
   /**
    * Activa un elemento de la entidad.
-   * @param id El identificador del elemento.
-   * @returns Un observable que emite un objeto `any`.
+   * @param {string} id El identificador del elemento.
+   * @returns {Observable<any>} Un observable que emite un objeto `any`.
    */
   public activate(id: string): Observable<any> {
     const headers = this.httpCommonService.getCommonHeaders();

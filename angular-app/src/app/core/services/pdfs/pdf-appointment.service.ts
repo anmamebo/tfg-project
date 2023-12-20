@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 // Servicios
-import { HttpCommonService } from '../http-common/http-common.service';
+import { HttpCommonService } from 'src/app/core/services/http-common/http-common.service';
 import { PdfService } from 'src/app/core/services/generics/pdf.service';
 
 /**
@@ -16,6 +16,7 @@ export class PdfAppointmentService extends PdfService {
   /** Endpoint de la API. */
   public endpoint = 'appointments/appointments/';
 
+  /** Endpoint de la API para la gestión de pdfs. */
   public entityEndpoint = 'get_appointment_pdf/';
 
   constructor(_http: HttpClient, _httpCommonService: HttpCommonService) {
@@ -24,7 +25,7 @@ export class PdfAppointmentService extends PdfService {
 
   /**
    * Obtiene la URL del endpoint.
-   * @returns La URL del endpoint.
+   * @returns {string} La URL del endpoint.
    */
   public getEndpoint(): string {
     return this.endpoint;
@@ -32,8 +33,8 @@ export class PdfAppointmentService extends PdfService {
 
   /**
    * Obtiene el pdf de una cita.
-   * @param id Id de la cita.
-   * @returns Un observable que emite la respuesta del servidor.
+   * @param {string} id Id de la cita.
+   * @returns {Observable<Blob>} Un observable que emite la respuesta del servidor.
    */
   public downloadAppointmentPdf(id: string): Observable<Blob> {
     return this.handlePdfAction(this.entityEndpoint, id, 'download');
@@ -41,8 +42,8 @@ export class PdfAppointmentService extends PdfService {
 
   /**
    * Imprime el pdf de una cita.
-   * @param id Id de la cita.
-   * @returns Un observable que emite la respuesta del servidor.
+   * @param {string} id Id de la cita.
+   * @returns {Observable<Blob>} Un observable que emite la respuesta del servidor.
    */
   public printAppointmentPdf(id: string): Observable<Blob> {
     return this.handlePdfAction(this.entityEndpoint, id, 'print');

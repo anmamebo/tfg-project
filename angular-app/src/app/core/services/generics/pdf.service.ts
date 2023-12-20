@@ -26,16 +26,16 @@ export abstract class PdfService {
 
   /**
    * Obtiene el endpoint de la entidad.
-   * @returns El endpoint de la entidad.
+   * @returns {string} El endpoint de la entidad.
    */
   abstract getEndpoint(): string;
 
   /**
    * Gestiona la descarga o impresión de un archivo PDF.
-   * @param entityEndpoint Endpoint de la entidad.
-   * @param id ID de la entidad.
-   * @param action Acción a realizar.
-   * @returns El archivo PDF.
+   * @param {string} entityEndpoint Endpoint de la entidad.
+   * @param {string} id ID de la entidad.
+   * @param {'download' | 'print'} action Acción a realizar.
+   * @returns {Observable<Blob>} El archivo PDF.
    */
   protected handlePdfAction(
     entityEndpoint: string,
@@ -77,8 +77,8 @@ export abstract class PdfService {
 
   /**
    * Descarga un archivo.
-   * @param blob Archivo.
-   * @param fileName Nombre del archivo.
+   * @param {Blob} blob Archivo.
+   * @param {string} fileName Nombre del archivo.
    */
   private _downloadFile(blob: Blob, fileName: string): void {
     const downloadLink = document.createElement('a');
@@ -91,8 +91,8 @@ export abstract class PdfService {
 
   /**
    * Imprime un archivo.
-   * @param blob Archivo.
-   * @param fileName Nombre del archivo.
+   * @param {Blob} blob Archivo.
+   * @param {string} fileName Nombre del archivo.
    */
   private _printFile(blob: Blob, fileName: string): void {
     const fileURL = window.URL.createObjectURL(blob);

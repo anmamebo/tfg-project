@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpHeaders } from '@angular/common/http';
 
 // Servicios
-import { TokenStorageService } from '../auth/token-storage.service';
+import { TokenStorageService } from 'src/app/core/services/auth/token-storage.service';
 
 /**
  * Servicio para la gestión de encabezados HTTP comunes.
@@ -15,7 +15,7 @@ export class HttpCommonService {
 
   /**
    * Obtiene los encabezados HTTP comunes.
-   * @returns Un objeto `HttpHeaders`.
+   * @returns {HttpHeaders} Los encabezados HTTP comunes.
    */
   public getCommonHeaders(): HttpHeaders {
     let headers = new HttpHeaders({

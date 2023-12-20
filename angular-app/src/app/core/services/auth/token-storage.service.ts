@@ -17,9 +17,9 @@ export class TokenStorageService {
 
   /**
    * Cierra la sesión del usuario actual y elimina el token y los datos del usuario del almacenamiento de sesión.
-   * @returns Los datos del usuario antes de cerrar la sesión.
+   * @returns {any} Los datos del usuario antes de cerrar la sesión.
    */
-  public signOut() {
+  public signOut(): any {
     let user = this.getUser();
     window.sessionStorage.removeItem(TOKEN_KEY);
     window.sessionStorage.removeItem(USER_KEY);
@@ -29,9 +29,9 @@ export class TokenStorageService {
 
   /**
    * Almacena el token de autenticación en el almacenamiento de sesión.
-   * @param token El token de autenticación a almacenar.
+   * @param {string} token El token de autenticación a almacenar.
    */
-  public saveTokenSession(token: string) {
+  public saveTokenSession(token: string): void {
     window.sessionStorage.removeItem(TOKEN_KEY);
     window.sessionStorage.setItem(TOKEN_KEY, token);
   }
@@ -51,26 +51,26 @@ export class TokenStorageService {
 
   /**
    * Almacena los datos del usuario en el almacenamiento de sesión.
-   * @param user Los datos del usuario a almacenar.
+   * @param {any} user Los datos del usuario a almacenar.
    */
-  public saveUserSession(user: any) {
+  public saveUserSession(user: any): void {
     window.sessionStorage.removeItem(USER_KEY);
     window.sessionStorage.setItem(USER_KEY, JSON.stringify(user));
   }
 
   /**
    * Obtiene los datos del usuario almacenados en el almacenamiento de sesión.
-   * @returns Los datos del usuario.
+   * @returns {any} Los datos del usuario.
    */
-  public getUser() {
+  public getUser(): any {
     return JSON.parse(sessionStorage.getItem(USER_KEY) || '{}');
   }
 
   /**
    * Actualiza los datos del usuario en el almacenamiento de sesión.
-   * @param userUpdated Los datos del usuario actualizados.
+   * @param {any} userUpdated Los datos del usuario actualizados.
    */
-  public updateUser(userUpdated: any) {
+  public updateUser(userUpdated: any): void {
     let user = this.getUser();
 
     if (
@@ -88,16 +88,16 @@ export class TokenStorageService {
 
   /**
    * Almacena el token de autenticación y los datos del usuario en el almacenamiento de sesión.
-   * @param user Los datos del usuario con el token de autenticación.
+   * @param {any} user Los datos del usuario con el token de autenticación.
    */
-  public saveSession(user: any) {
+  public saveSession(user: any): void {
     this.saveTokenSession(user.token);
     this.saveUserSession(user);
   }
 
   /**
    * Almacena el token de autenticación y los datos del usuario en el almacenamiento de sesión.
-   * @param user Los datos del usuario con el token de autenticación.
+   * @param {any} user Los datos del usuario con el token de autenticación.
    */
   public saveSingIn(user: any): void {
     this.saveSession(user);

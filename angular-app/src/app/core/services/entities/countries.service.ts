@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 /**
  * Servicio para la gestión de países.
@@ -16,10 +17,10 @@ export class CountriesService {
   }
 
   /**
-   * Obtiene todos los países.
-   * @returns Un observable que emite un objeto `any`.
+   * Obtiene los países.
+   * @returns {Observable<any>} Un observable que emite la respuesta del servidor.
    */
-  public getCountries() {
+  public getCountries(): Observable<any> {
     return this._http.get(`${this.url}all?fields=name,translations`);
   }
 }

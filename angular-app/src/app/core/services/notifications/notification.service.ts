@@ -26,9 +26,9 @@ export class NotificationService {
 
   /**
    * Muestra un toast de éxito con un mensaje.
-   * @param message El mensaje que se mostrará en el toast de éxito.
+   * @param {string} message El mensaje que se mostrará en el toast de éxito.
    */
-  showSuccessToast(message: string) {
+  showSuccessToast(message: string): void {
     Swal.fire({
       icon: 'success',
       title: message,
@@ -38,9 +38,9 @@ export class NotificationService {
 
   /**
    * Muestra un toast de error con un mensaje.
-   * @param message El mensaje que se mostrará en el toast de error.
+   * @param {string} message El mensaje que se mostrará en el toast de error.
    */
-  showErrorToast(message: string) {
+  showErrorToast(message: string): void {
     Swal.fire({
       icon: 'error',
       title: message,
@@ -50,9 +50,9 @@ export class NotificationService {
 
   /**
    * Muestra un toast de advertencia con un mensaje.
-   * @param message El mensaje que se mostrará en el toast de advertencia.
+   * @param {string} message El mensaje que se mostrará en el toast de advertencia.
    */
-  showWarningToast(message: string) {
+  showWarningToast(message: string): void {
     Swal.fire({
       icon: 'warning',
       title: message,
@@ -62,9 +62,9 @@ export class NotificationService {
 
   /**
    * Muestra un dialogo de confirmación para eliminar un registro y ejecuta la función `onConfirm` si se confirma.
-   * @param onConfirm Función que se ejecutará si se confirma la eliminación.
+   * @param {() => void} onConfirm Función que se ejecutará si se confirma la eliminación.
    */
-  showConfirmDeleteDialog(onConfirm: () => void) {
+  showConfirmDeleteDialog(onConfirm: () => void): void {
     Swal.fire({
       title: '¿Estás seguro?',
       text: '¡No podrás revertir esta acción!',
@@ -89,9 +89,9 @@ export class NotificationService {
 
   /**
    * Muestra un dialogo de confirmación para reactivar un registro y ejecuta la función `onConfirm` si se confirma.
-   * @param onConfirm Función que se ejecutará si se confirma la desactivación.
+   * @param {() => void} onConfirm Función que se ejecutará si se confirma la desactivación.
    */
-  showConfirmReactivateDialog(onConfirm: () => void) {
+  showConfirmReactivateDialog(onConfirm: () => void): void {
     Swal.fire({
       title: '¿Estás seguro?',
       text: '',
@@ -116,7 +116,13 @@ export class NotificationService {
 
   /**
    * Muestra un dialogo de confirmación genérico y ejecuta la función `onConfirm` si se confirma.
-   * @param onConfirm Función que se ejecutará si se confirma.
+   * @param {string} title Título del dialogo.
+   * @param {string} text Texto del dialogo.
+   * @param {string} confirmButtonText Texto del botón de confirmación.
+   * @param {string} successTitle Título del dialogo de éxito.
+   * @param {string} successText Texto del dialogo de éxito.
+   * @param {string} cancelButtonText Texto del botón de cancelación.
+   * @param {() => void} onConfirm Función que se ejecutará si se confirma.
    */
   showConfirmGenericDialog(
     title: string,
@@ -126,7 +132,7 @@ export class NotificationService {
     successText: string,
     cancelButtonText: string = 'Cancelar',
     onConfirm: () => void
-  ) {
+  ): void {
     Swal.fire({
       title: title,
       text: text,

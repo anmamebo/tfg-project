@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { API_URL } from '../../constants/API_URL';
+import { API_URL } from 'src/app/core/constants/API_URL';
 
 // Servicios
-import { HttpCommonService } from '../http-common/http-common.service';
+import { HttpCommonService } from 'src/app/core/services/http-common/http-common.service';
 
 // Modelos
-import { User } from '../../models/user.interface';
+import { User } from 'src/app/core/models/user.interface';
 
 /**
  * Servicio para interactuar con la API para la gestión de usuarios.
@@ -29,20 +29,20 @@ export class UserService {
 
   /**
    * Obtiene un usuario por su identificador.
-   * @param id El identificador del usuario.
-   * @returns Un observable que emite un objeto `User`.
+   * @param {string} id El identificador del usuario.
+   * @returns {Observable<User>} Un observable que emite la respuesta del servidor.
    */
-  public getUserById(id: number): Observable<User> {
+  public getUserById(id: string): Observable<User> {
     const headers = this._httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
-    return this._http.get<User>(this.url + id + '/', httpOptions);
+    return this._http.get<User>(`${this.url}${id}/`, httpOptions);
   }
 
   /**
    * Actualiza los datos de un usuario.
-   * @param user El objeto `User` con los datos actualizados.
-   * @returns Un observable que emite un objeto `any`.
+   * @param {User} user El objeto con los datos actualizados.
+   * @returns {Observable<any>} Un observable que emite la respuesta del servidor.
    */
   public updateUser(user: User): Observable<any> {
     const headers = this._httpCommonService.getCommonHeaders();
@@ -50,13 +50,17 @@ export class UserService {
 
     let params = JSON.stringify(user);
 
-    return this._http.put<any>(this.url + user.id + '/', params, httpOptions);
+    return this._http.put<any>(`${this.url}${user.id}/`, params, httpOptions);
   }
 
   /**
    * Actualiza la contraseña del usuario.
-   * @param data - Los datos necesarios para actualizar la contraseña, como la nueva contraseña.
-   * @returns Un Observable que se suscribe a la solicitud HTTP para actualizar la contraseña.
+   * @param {{
+   *   old_password: string;
+   *   password: string;
+   *   password2: string;
+   * }} data - Los datos necesarios para actualizar la contraseña, como la nueva contraseña.
+   * @returns {Observable<any>} Un Observable que se suscribe a la solicitud HTTP para actualizar la contraseña.
    */
   public updatePassword(data: {
     old_password: string;
@@ -69,7 +73,7 @@ export class UserService {
     let params = JSON.stringify(data);
 
     return this._http.post<any>(
-      this.url + 'set_password/',
+      `${this.url}set_password/`,
       params,
       httpOptions
     );
@@ -77,9 +81,9 @@ export class UserService {
 
   /**
    * Actualiza la imagen de perfil del usuario.
-   * @param userId - El ID del usuario.
-   * @param file - El archivo de imagen de perfil.
-   * @returns Un Observable que se suscribe a la solicitud HTTP para actualizar la imagen de perfil.
+   * @param {string} userId - El ID del usuario.
+   * @param {File} file - El archivo de imagen de perfil.
+   * @returns {Observable<any>} Un Observable que se suscribe a la solicitud HTTP para actualizar la imagen de perfil.
    */
   public updateProfilePicture(userId: string, file: File): Observable<any> {
     let headers = this._httpCommonService.getCommonHeaders();
@@ -98,7 +102,7 @@ export class UserService {
 
   /**
    * Obtiene la imagen de perfil del usuario.
-   * @returns Un Observable que se suscribe a la solicitud HTTP para obtener la imagen de perfil.
+   * @returns {Observable<any>} Un Observable que se suscribe a la solicitud HTTP para obtener la imagen de perfil.
    */
   public getProfilePicture(): Observable<any> {
     const headers = this._httpCommonService.getCommonHeaders();
@@ -109,7 +113,7 @@ export class UserService {
 
   /**
    * Elimina la imagen de perfil del usuario.
-   * @returns Un Observable que se suscribe a la solicitud HTTP para eliminar la imagen de perfil.
+   * @returns {Observable<any>} Un Observable que se suscribe a la solicitud HTTP para eliminar la imagen de perfil.
    */
   public deleteProfilePicture(): Observable<any> {
     const headers = this._httpCommonService.getCommonHeaders();

@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { API_URL } from '../../constants/API_URL';
+import { API_URL } from 'src/app/core/constants/API_URL';
 
 // Servicios
-import { HttpCommonService } from '../http-common/http-common.service';
+import { HttpCommonService } from 'src/app/core/services/http-common/http-common.service';
 
 /**
  * Servicio para interactuar con la API para la gestión de estadísticas de médicos.
@@ -26,20 +26,20 @@ export class DoctorStatisticsService {
 
   /**
    * Obtiene las estadísticas generales.
-   * @returns Observable con las estadísticas generales de la aplicación.
+   * @returns {Observable<any>} Observable con las estadísticas generales de la aplicación.
    */
   public getDoctorOverallStats(): Observable<any> {
     const headers = this._httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
-    return this._http.get(this.url + 'get_overall_stats/', httpOptions);
+    return this._http.get(`${this.url}get_overall_stats/`, httpOptions);
   }
 
   /**
    * Obtiene las estadísticas de citas por día.
-   * @param month mes
-   * @param year año
-   * @returns Observable con las estadísticas de citas por día.
+   * @param {number} month mes
+   * @param {number} year año
+   * @returns {Observable<any>} Observable con las estadísticas de citas por día.
    */
   public getDoctorAppointmentsPerDay(
     month: number,
@@ -52,7 +52,7 @@ export class DoctorStatisticsService {
     params = params.append('month', month.toString());
     params = params.append('year', year.toString());
 
-    return this._http.get(this.url + 'get_appointments_per_day/', {
+    return this._http.get(`${this.url}get_appointments_per_day/`, {
       params,
       ...httpOptions,
     });
@@ -60,40 +60,40 @@ export class DoctorStatisticsService {
 
   /**
    * Obtiene las estadísticas de citas por género.
-   * @returns Observable con las estadísticas de citas por género.
+   * @returns {Observable<any>} Observable con las estadísticas de citas por género.
    */
   public getDoctorAppointmentsPerGender(): Observable<any> {
     const headers = this._httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
     return this._http.get(
-      this.url + 'get_appointments_per_gender/',
+      `${this.url}get_appointments_per_gender/`,
       httpOptions
     );
   }
 
   /**
    * Obtiene las estadísticas de citas por especialidad.
-   * @returns Observable con las estadísticas de citas por especialidad.
+   * @returns {Observable<any>} Observable con las estadísticas de citas por especialidad.
    */
   public getDoctorAppointmentsPerSpecialty(): Observable<any> {
     const headers = this._httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
     return this._http.get(
-      this.url + 'get_appointments_per_specialty/',
+      `${this.url}get_appointments_per_specialty/`,
       httpOptions
     );
   }
 
   /**
    * Obtiene las estadísticas de citas por edad.
-   * @returns Observable con las estadísticas de citas por edad.
+   * @returns {Observable<any>} Observable con las estadísticas de citas por edad.
    */
   public getDoctorAppointmentsPerAge(): Observable<any> {
     const headers = this._httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
-    return this._http.get(this.url + 'get_appointments_per_age/', httpOptions);
+    return this._http.get(`${this.url}get_appointments_per_age/`, httpOptions);
   }
 }

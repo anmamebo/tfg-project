@@ -88,12 +88,12 @@ export class ViewRoomsDepartmentsCardComponent implements OnInit {
     }
 
     this._roomService
-      .getRoomsByDepartmentId(
-        this.departmentId,
-        page,
-        this.numResults,
-        this.search
-      )
+      .getRoomsByDepartmentId(this.departmentId, {
+        page: page,
+        paginate: true,
+        searchTerm: this.search,
+        pageSize: this.numResults,
+      })
       .subscribe({
         next: (response: any) => {
           this.rooms = response.results;

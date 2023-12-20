@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { API_URL } from '../../constants/API_URL';
+import { API_URL } from 'src/app/core/constants/API_URL';
 
 // Servicios
-import { HttpCommonService } from '../http-common/http-common.service';
+import { HttpCommonService } from 'src/app/core/services/http-common/http-common.service';
 
 /**
  * Servicio para interactuar con la API para la gestión de estadísticas de pacientes.
@@ -26,19 +26,19 @@ export class PatientStatisticsService {
 
   /**
    * Obtiene las estadísticas generales.
-   * @returns Observable con las estadísticas generales de la aplicación.
+   * @returns {Observable<any>} Observable con las estadísticas generales de la aplicación.
    */
   public getPatientOverallStats(): Observable<any> {
     const headers = this._httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
-    return this._http.get(this.url + 'get_overall_stats/', httpOptions);
+    return this._http.get(`${this.url}get_overall_stats/`, httpOptions);
   }
 
   /**
    * Obtiene las estadísticas de citas por especialidad y mes.
-   * @param year Año del que se quieren obtener las estadísticas.
-   * @returns Observable con las estadísticas de citas por especialidad y mes.
+   * @param {number} year Año del que se quieren obtener las estadísticas.
+   * @returns {Observable<any>} Observable con las estadísticas de citas por especialidad y mes.
    */
   public getPatientAppointmentsPerSpecialtyAndMonth(
     year: number
@@ -49,7 +49,7 @@ export class PatientStatisticsService {
     const params = new HttpParams().set('year', String(year));
 
     return this._http.get(
-      this.url + 'get_patient_appointments_per_specialty_and_month/',
+      `${this.url}get_patient_appointments_per_specialty_and_month/`,
       { params, ...httpOptions }
     );
   }

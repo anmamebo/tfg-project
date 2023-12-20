@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { API_URL } from '../../constants/API_URL';
+import { API_URL } from 'src/app/core/constants/API_URL';
 
 // Servicios
-import { HttpCommonService } from '../http-common/http-common.service';
+import { HttpCommonService } from 'src/app/core/services/http-common/http-common.service';
 
 /**
  * Servicio para interactuar con la API para la gestión de especialidades médicas.
@@ -26,7 +26,7 @@ export class MedicalspecialtyService {
 
   /**
    * Obtiene todas las especialidades médicas.
-   * @returns Un observable que emite un objeto `any`.
+   * @returns {Observable<any>} Un observable que emite la respuesta del servidor.
    */
   getMedicalSpecialties(): Observable<any> {
     const headers = this._httpCommonService.getCommonHeaders();

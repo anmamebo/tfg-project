@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 // Servicios
-import { EntityService } from '../generics/entity.service';
-import { HttpCommonService } from '../http-common/http-common.service';
+import { EntityService } from 'src/app/core/services/generics/entity.service';
+import { HttpCommonService } from 'src/app/core/services/http-common/http-common.service';
 
 // Modelos
-import { Patient } from '../../models/patient.interface';
+import { Patient } from 'src/app/core/models/patient.interface';
 
 /**
  * Servicio para interactuar con la API para la gestión de pacientes.
@@ -25,7 +24,7 @@ export class PatientService extends EntityService<Patient> {
 
   /**
    * Obtiene la URL del endpoint.
-   * @returns La URL del endpoint.
+   * @returns {string} La URL del endpoint.
    */
   public getEndpoint(): string {
     return this.endpoint;

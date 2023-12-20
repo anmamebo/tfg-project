@@ -3,13 +3,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
 
-import { API_URL } from '../../constants/API_URL';
+import { API_URL } from 'src/app/core/constants/API_URL';
 
 // Servicios
-import { TokenStorageService } from './token-storage.service';
+import { TokenStorageService } from 'src/app/core/services/auth/token-storage.service';
 
 // Modelos
-import { AuthResponse } from '../../models/auth-response.interface';
+import { AuthResponse } from 'src/app/core/models/auth-response.interface';
 
 // Configuración de encabezados HTTP
 const httpOptions = {
@@ -35,8 +35,11 @@ export class AuthService {
 
   /**
    * Inicia sesión con las credenciales de usuario proporcionadas.
-   * @param user Credenciales de usuario.
-   * @returns Un observable que emite un objeto `AuthResponse`.
+   * @param {{
+   *   username: string;
+   *   password: string;
+   * }} user Credenciales de usuario.
+   * @returns {Observable<AuthResponse>} Un observable que emite la respuesta del servidor.
    */
   public login(user: {
     username: string;
@@ -45,7 +48,7 @@ export class AuthService {
     let params = JSON.stringify(user);
 
     return this._http.post<AuthResponse>(
-      this.url + 'login/',
+      `${this.url}login/`,
       params,
       httpOptions
     );
@@ -53,19 +56,15 @@ export class AuthService {
 
   /**
    * Verifica si el usuario ha iniciado sesión.
-   * @returns `true` si el usuario ha iniciado sesión, de lo contrario `false`.
+   * @returns {boolean} `true` si el usuario ha iniciado sesión, de lo contrario `false`.
    */
   public isLogin(): boolean {
-    if (this._tokenStorageService.getToken()) {
-      return true;
-    } else {
-      return false;
-    }
+    return this._tokenStorageService.getToken() ? true : false;
   }
 
   /**
    * Cierra la sesión del usuario actual.
-   * @returns Un observable que emite un objeto `any`.
+   * @returns {Observable<any>} Un observable que emite la respuesta del servidor.
    */
   public logOut(): Observable<any> {
     let user = this._tokenStorageService.signOut();
@@ -76,17 +75,18 @@ export class AuthService {
     });
     const httpOptions = { headers };
 
-    return this._http.post<any>(this.url + 'logout/', user_id, httpOptions);
+    return this._http.post<any>(`${this.url}logout/`, user_id, httpOptions);
   }
 
   /**
    * Obtiene los roles del usuario actual a partir del token de autenticación.
-   * @returns Lista de roles del usuario actual.
+   * @returns {string[]} Lista de roles del usuario actual.
    */
   public getRolesFromToken(): string[] {
     const token: string = this._tokenStorageService.getToken();
     const decodedToken: any = jwtDecode(token);
     const roles = decodedToken.groups || [];
+
     return roles;
   }
 }

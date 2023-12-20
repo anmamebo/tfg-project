@@ -14,7 +14,7 @@ export class ProfileImageService {
 
   /**
    * Emite el evento de actualización de imagen de perfil.
-   * @param imageUrl URL de la imagen de perfil.
+   * @param {string} imageUrl URL de la imagen de perfil.
    */
   public emitProfileImageUpdated(imageUrl: string) {
     this.profileImageUpdated.emit(imageUrl);

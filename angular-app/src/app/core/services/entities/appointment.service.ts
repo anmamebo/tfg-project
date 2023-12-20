@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { API_URL } from '../../constants/API_URL';
+import { API_URL } from 'src/app/core/constants/API_URL';
 
 // Servicios
-import { HttpCommonService } from '../http-common/http-common.service';
+import { HttpCommonService } from 'src/app/core/services/http-common/http-common.service';
 
 // Modelos
-import { Appointment } from '../../models/appointment.interface';
+import { Appointment } from 'src/app/core/models/appointment.interface';
 
 interface AppointmentOptions {
   date?: string;
@@ -141,7 +141,6 @@ export class AppointmentService {
   /**
    * Obtiene las citas de un médico con opciones específicas.
    * @param {AppointmentOptions} options - Opciones para filtrar las citas del medico.
-   *
    * @returns {Observable<any>} Un observable que emite la respuesta del servidor.
    */
   public getAppointmentsByDoctor(
@@ -161,7 +160,6 @@ export class AppointmentService {
   /**
    * Obtiene las citas de un paciente con opciones específicas.
    * @param {AppointmentOptions} options - Opciones para filtrar las citas del paciente.
-   *
    * @returns {Observable<any>} Un observable que emite la respuesta del servidor.
    */
   public getAppointmentsByPatient(
@@ -181,7 +179,6 @@ export class AppointmentService {
   /**
    * Obtiene las citas de un médico para un día específico, con opciones específicas.
    * @param {AppointmentOptions} options - Opciones para filtrar las citas del médico.
-   *
    * @returns {Observable<any>} Un observable que emite la respuesta del servidor.
    */
   public getAppointmentsByDoctorAndDay(
@@ -203,7 +200,6 @@ export class AppointmentService {
   /**
    * Obtiene las citas de un paciente para un día específico, con opciones específicas.
    * @param {AppointmentOptions} options - Opciones para filtrar las citas del paciente.
-   *
    * @returns {Observable<any>} Un observable que emite la respuesta del servidor.
    */
   public getAppointmentsByPatientAndDay(
