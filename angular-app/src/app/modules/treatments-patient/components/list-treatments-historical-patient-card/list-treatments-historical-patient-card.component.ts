@@ -39,15 +39,15 @@ export class ListTreatmentsHistoricalPatientCardComponent extends GenericListCar
     }
 
     this._treatmentService
-      .getTreatmentsByPatient(
-        ['completed', 'interrupted', 'cancelled'],
-        page,
-        this.entityData.numResults,
-        this.entityData.search.search,
-        true,
-        this.sort.column,
-        this.sort.order
-      )
+      .getTreatmentsByPatient({
+        statuses: ['completed', 'interrupted', 'cancelled'],
+        page: page,
+        numResults: this.entityData.numResults,
+        searchTerm: this.entityData.search.search,
+        paginate: true,
+        sortBy: this.sort.column,
+        sortOrder: this.sort.order,
+      })
       .subscribe({
         next: (response: any) => {
           this.entityData.items = response.results;

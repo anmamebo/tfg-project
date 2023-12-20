@@ -10,6 +10,16 @@ import { HttpCommonService } from '../http-common/http-common.service';
 // Modelos
 import { Treatment } from '../../models/treatment.interface';
 
+interface TreatmentOptions {
+  statuses?: string[];
+  page?: number;
+  numResults?: number;
+  searchTerm?: string;
+  paginate?: boolean;
+  sortBy?: string;
+  sortOrder?: string;
+}
+
 /**
  * Servicio para interactuar con la API para la gestión de tratamientos.
  */
@@ -28,77 +38,35 @@ export class TreatmentService {
   }
 
   /**
-   * Obtiene los tratamientos de una cita.
-   * @param appointmentId Id de la cita.
-   * @param page Número de página.
-   * @param numResults Número de resultados por página.
-   * @param searchTerm Término de búsqueda.
-   * @param paginated Indica si se debe paginar el resultado.
-   * @returns Un observable que emite la respuesta del servidor.
+   * Construye y retorna los parámetros para las peticiones HTTP.
+   * @param {TreatmentOptions} options - Opciones para construir los parámetros HTTP.
+   * @returns {HttpParams} Los parámetros HTTP construidos para la consulta.
    */
-  public getTreatmentsByAppointment(
-    appointmentId: string,
-    page?: number,
-    numResults?: number,
-    searchTerm?: string,
-    paginated: boolean = false
-  ): Observable<any> {
-    const headers = this._httpCommonService.getCommonHeaders();
-    const httpOptions = { headers };
-
-    let params = new HttpParams();
-
-    if (paginated) {
-      if (page) {
-        params = params.append('page', page.toString());
-      }
-
-      if (numResults) {
-        params = params.append('page_size', numResults.toString());
-      }
-
-      params = params.append('paginate', 'true');
-    }
-
-    params = params.append('appointment_id', appointmentId);
-
-    return this._http.get<any>(`${this.url}list_for_appointment/`, {
-      params,
-      ...httpOptions,
-    });
-  }
-
-  public getTreatmentsByPatient(
-    statuses: string[] | null,
-    page?: number,
-    numResults?: number,
-    searchTerm?: string,
-    paginated: boolean = false,
-    sortBy?: string,
-    sortOrder?: string
-  ): Observable<any> {
-    const headers = this._httpCommonService.getCommonHeaders();
-    const httpOptions = { headers };
+  private _buildParams(options: TreatmentOptions = {}): HttpParams {
+    const {
+      statuses,
+      page,
+      numResults,
+      searchTerm,
+      paginate = false,
+      sortBy,
+      sortOrder,
+    } = options;
 
     let params = new HttpParams();
 
     if (statuses) {
-      // Si se han indicado los estados
       statuses.forEach((status) => {
         params = params.append('status', status);
       });
     }
 
-    if (paginated) {
-      // Si se quiere paginar
-
+    if (paginate) {
       if (page) {
-        // Si se ha indicado la página
         params = params.set('page', page.toString());
       }
 
       if (numResults) {
-        // Si se ha indicado el número de resultados por página
         params = params.set('page_size', numResults.toString());
       }
 
@@ -118,6 +86,44 @@ export class TreatmentService {
       );
     }
 
+    return params;
+  }
+
+  /**
+   * Obtiene los tratamientos de una cita.
+   * @param {string} appointmentId Id de la cita.
+   * @param {TreatmentOptions} options - Opciones para filtrar los tratamientos.
+   * @returns {Observable<any>} Un observable que emite la respuesta del servidor.
+   */
+  public getTreatmentsByAppointment(
+    appointmentId: string,
+    options: TreatmentOptions = {}
+  ): Observable<any> {
+    let params = this._buildParams(options);
+    params = params.append('appointment_id', appointmentId);
+
+    const headers = this._httpCommonService.getCommonHeaders();
+    const httpOptions = { headers };
+
+    return this._http.get<any>(`${this.url}list_for_appointment/`, {
+      params,
+      ...httpOptions,
+    });
+  }
+
+  /**
+   * Obtiene los tratamientos de un paciente.
+   * @param {TreatmentOptions} options - Opciones para filtrar los tratamientos.
+   * @returns {Observable<any>} Un observable que emite la respuesta del servidor.
+   */
+  public getTreatmentsByPatient(
+    options: TreatmentOptions = {}
+  ): Observable<any> {
+    const params = this._buildParams(options);
+
+    const headers = this._httpCommonService.getCommonHeaders();
+    const httpOptions = { headers };
+
     return this._http.get<any>(`${this.url}list_for_patient/`, {
       params,
       ...httpOptions,
@@ -126,8 +132,8 @@ export class TreatmentService {
 
   /**
    * Crear un tratamiento.
-   * @param treatment El tratamiento a crear.
-   * @returns Un observable que emite la respuesta del servidor.
+   * @param {Treatment} treatment El tratamiento a crear.
+   * @returns {Observable<any>} Un observable que emite la respuesta del servidor.
    */
   public createTreatment(treatment: Treatment): Observable<any> {
     const headers = this._httpCommonService.getCommonHeaders();
@@ -140,9 +146,9 @@ export class TreatmentService {
 
   /**
    * Actualiza el estado de un tratamiento.
-   * @param id ID del tratamiento.
-   * @param status Estado del tratamiento.
-   * @returns Un observable que emite la respuesta del servidor.
+   * @param {string} id ID del tratamiento.
+   * @param {string} status Estado del tratamiento.
+   * @returns {Observable<any>} Un observable que emite la respuesta del servidor.
    */
   public updateStatus(id: string, status: string): Observable<any> {
     const headers = this._httpCommonService.getCommonHeaders();

@@ -50,13 +50,11 @@ export class ViewTreatmentsAppointmentsCardComponent extends GenericListCardComp
     }
 
     this._treatmentService
-      .getTreatmentsByAppointment(
-        this.appointment.id,
-        page,
-        this.entityData.numResults,
-        '',
-        true
-      )
+      .getTreatmentsByAppointment(this.appointment.id, {
+        page: page,
+        numResults: this.entityData.numResults,
+        paginate: true,
+      })
       .subscribe({
         next: (response: any) => {
           this.entityData.items = response.results;
