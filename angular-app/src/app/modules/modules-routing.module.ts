@@ -49,6 +49,15 @@ const routes: Routes = [
     data: { roles: [ROLES.ADMIN] },
   },
   {
+    path: 'especialidades-medicas',
+    loadChildren: () =>
+      import('./medical-specialties/medical-specialties.module').then(
+        (m) => m.MedicalSpecialtiesModule
+      ),
+    canActivate: [roleGuard],
+    data: { roles: [ROLES.ADMIN] },
+  },
+  {
     path: 'departamentos',
     loadChildren: () =>
       import('./departments/departments.module').then(

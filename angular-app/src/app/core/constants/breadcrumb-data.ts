@@ -197,3 +197,30 @@ export const breadcrumbTreatmentsHistoricalPatientData = [
   { label: 'Panel Principal', url: '/' },
   { label: 'Historial de Tratamientos', url: '' },
 ];
+
+// Especialidades médicas
+export const breadcrumbMedicalSpecialtiesData = [
+  { label: 'Panel Principal', url: '/' },
+  { label: 'Especialidades médicas', url: '' },
+];
+
+// Especialidades médicas crear
+export const breadcrumbMedicalSpecialtiesCreateData = [
+  { label: 'Panel Principal', url: '/' },
+  { label: 'Especialidades médicas', url: '/especialidades-medicas' },
+  { label: 'Crear especialidad médica', url: '' },
+];
+
+// Especialidades médicas editar
+export const breadcrumbMedicalSpecialtiesEditData = [
+  { label: 'Panel Principal', url: '/' },
+  { label: 'Especialidades médicas', url: '/especialidades-medicas' },
+  { label: 'Editar especialidad médica', url: '' },
+];
+
+// Especialidades médicas ver
+export const breadcrumbMedicalSpecialtiesViewData = [
+  { label: 'Panel Principal', url: '/' },
+  { label: 'Especialidades médicas', url: '/especialidades-medicas' },
+  { label: 'Ver especialidad médica', url: '' },
+];

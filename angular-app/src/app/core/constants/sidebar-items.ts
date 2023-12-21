@@ -121,6 +121,13 @@ export const sidebarData = [
     roles: [ROLES.ADMIN],
   },
   {
+    name: 'Especialidades',
+    key: 'especialidades-medicas',
+    url: '/especialidades-medicas',
+    icon: 'diagram-2-fill',
+    roles: [ROLES.ADMIN],
+  },
+  {
     name: 'Departamentos',
     key: 'departamentos',
     url: '/departamentos',
