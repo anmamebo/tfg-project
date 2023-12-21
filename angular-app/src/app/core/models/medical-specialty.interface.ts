@@ -5,4 +5,5 @@ export interface MedicalSpecialty {
   name: string;
   description?: string;
   doctors?: Doctor[];
+  state?: boolean;
 }
