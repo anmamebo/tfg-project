@@ -38,9 +38,7 @@ class MedicalSpecialtyViewSet(
 
     def get_queryset(self):
         if self.queryset is None:
-            self.queryset = (
-                self.model.objects.filter(state=True).all().order_by("-created_date")
-            )
+            self.queryset = self.model.objects.all().order_by("-created_date")
         return self.queryset
 
     @method_permission_classes([IsAdministratorOrDoctorOrPatient])

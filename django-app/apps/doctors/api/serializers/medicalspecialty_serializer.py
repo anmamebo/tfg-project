@@ -18,7 +18,7 @@ class MedicalSpecialtySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = MedicalSpecialty
-        exclude = ["state", "created_date", "modified_date", "deleted_date"]
+        exclude = ["created_date", "modified_date", "deleted_date"]
 
 
 class MedicalSpecialtyStatisticsSerializer(serializers.ModelSerializer):
