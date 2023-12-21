@@ -2,11 +2,12 @@ from apps.doctors.api.serializers.medicalspecialty_serializer import (
     MedicalSpecialtySerializer,
 )
 from apps.doctors.models import MedicalSpecialty
-from config.permissions import IsAdministratorOrDoctorOrPatient
+from config.permissions import IsAdministrator, IsAdministratorOrDoctorOrPatient
 from django.shortcuts import get_object_or_404
 from mixins.error_mixin import ErrorResponseMixin
 from mixins.pagination_mixin import PaginationMixin
 from rest_framework import status, viewsets
+from rest_framework.decorators import action
 from rest_framework.response import Response
 from utilities.permissions_helper import method_permission_classes
 
@@ -47,7 +48,7 @@ class MedicalSpecialtyViewSet(
         Lista todas las especialidades médicas.
 
         Permisos requeridos:
-            - El usuario debe ser administrador o doctor.
+            - El usuario debe ser administrador, doctor o paciente.
 
         Args:
             request (Request): La solicitud HTTP.
@@ -59,4 +60,142 @@ class MedicalSpecialtyViewSet(
 
         return self.conditional_paginated_response(
             medicalspecialties, self.list_serializer_class
+        )
+
+    @method_permission_classes([IsAdministrator])
+    def create(self, request):
+        """
+        Crea una especialidad médica.
+
+        Permisos requeridos:
+            - El usuario debe ser administrador.
+
+        Args:
+            request (Request): La solicitud HTTP.
+
+        Returns:
+            Response: La respuesta que contiene la especialidad médica creada.
+        """
+        serializer = self.serializer_class(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(
+                {"message": "Especialidad médica creada correctamente."},
+                status=status.HTTP_201_CREATED,
+            )
+
+        return self.error_response(
+            message="Hay errores en la creación",
+            errors=serializer.errors,
+            status_code=status.HTTP_400_BAD_REQUEST,
+        )
+
+    @method_permission_classes([IsAdministratorOrDoctorOrPatient])
+    def retrieve(self, request, pk=None):
+        """
+        Obtiene una especialidad médica.
+
+        Permisos requeridos:
+            - El usuario debe ser administrador, doctor o paciente.
+
+        Args:
+            request (Request): La solicitud HTTP.
+            pk (int): El identificador de la especialidad médica.
+
+        Returns:
+            Response: La respuesta que contiene la especialidad médica.
+        """
+        medical_specialty = self.get_object(pk)
+        serializer = self.serializer_class(medical_specialty)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    @method_permission_classes([IsAdministrator])
+    def update(self, request, pk=None):
+        """
+        Actualiza una especialidad médica.
+
+        Permisos requeridos:
+            - El usuario debe ser administrador.
+
+        Args:
+            request (Request): La solicitud HTTP.
+            pk (int): El identificador de la especialidad médica.
+
+        Returns:
+            Response: La respuesta que contiene la especialidad médica actualizada.
+        """
+        medical_specialty = self.get_object(pk)
+        serializer = self.serializer_class(
+            medical_specialty, data=request.data, partial=True
+        )
+        if serializer.is_valid():
+            serializer.save()
+            return Response(
+                {"message": "Especialidad médica actualizada correctamente."},
+                status=status.HTTP_200_OK,
+            )
+
+        return self.error_response(
+            message="Hay errores en la actualización",
+            errors=serializer.errors,
+            status_code=status.HTTP_400_BAD_REQUEST,
+        )
+
+    @method_permission_classes([IsAdministrator])
+    def destroy(self, request, pk=None):
+        """
+        Elimina una especialidad médica.
+
+        Permisos requeridos:
+            - El usuario debe ser administrador.
+
+        Args:
+            request (Request): La solicitud HTTP.
+            pk (int): El identificador de la especialidad médica.
+
+        Returns:
+            Response: La respuesta que contiene el mensaje de éxito.
+        """
+        medical_specialty = self.get_queryset().filter(id=pk).first()
+        if not medical_specialty:
+            return self.error_response(
+                message="No se encontró la especialidad médica.",
+                status_code=status.HTTP_404_NOT_FOUND,
+            )
+
+        medical_specialty.state = False
+        medical_specialty.save()
+        return Response(
+            {"message": "Especialidad médica eliminada correctamente."},
+            status=status.HTTP_200_OK,
+        )
+
+    @method_permission_classes([IsAdministrator])
+    @action(detail=True, methods=["put"])
+    def activate(self, request, pk=None):
+        """
+        Activa una especialidad médica.
+
+        Permisos requeridos:
+            - El usuario debe ser administrador.
+
+        Args:
+            request (Request): La solicitud HTTP.
+            pk (int): El identificador de la especialidad médica.
+
+        Returns:
+            Response: La respuesta que contiene el mensaje de éxito.
+        """
+        medical_specialty = self.get_queryset().filter(id=pk).first()
+        if not medical_specialty:
+            return self.error_response(
+                message="No se encontró la especialidad médica.",
+                status_code=status.HTTP_404_NOT_FOUND,
+            )
+
+        medical_specialty.state = True
+        medical_specialty.save()
+        return Response(
+            {"message": "Especialidad médica activada correctamente."},
+            status=status.HTTP_200_OK,
         )
