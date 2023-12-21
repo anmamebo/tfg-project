@@ -3,6 +3,7 @@ from apps.doctors.api.serializers.medicalspecialty_serializer import (
 )
 from apps.doctors.models import MedicalSpecialty
 from config.permissions import IsAdministrator, IsAdministratorOrDoctorOrPatient
+from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from mixins.error_mixin import ErrorResponseMixin
 from mixins.pagination_mixin import PaginationMixin
@@ -57,6 +58,8 @@ class MedicalSpecialtyViewSet(
             Response: La respuesta que contiene la lista de especialidades médicas.
         """
         medicalspecialties = self.get_queryset()
+
+        medicalspecialties = self.filter_and_order_specialties(medicalspecialties)
 
         return self.conditional_paginated_response(
             medicalspecialties, self.list_serializer_class
@@ -199,3 +202,31 @@ class MedicalSpecialtyViewSet(
             {"message": "Especialidad médica activada correctamente."},
             status=status.HTTP_200_OK,
         )
+
+    def filter_and_order_specialties(self, medical_specialties):
+        """
+        Filtra y ordena las especialidades médicas.
+
+        Args:
+            medical_specialties (QuerySet): El conjunto de especialidades médicas.
+
+        Returns:
+            QuerySet: El conjunto de especialidades médicas filtradas y ordenadas.
+        """
+        query = self.request.query_params.get("search", None)
+        ordering = self.request.query_params.get("ordering", None)
+        state = self.request.query_params.get("state", None)
+
+        if query:
+            medical_specialties = medical_specialties.filter(
+                Q(name__icontains=query) | Q(description__icontains=query)
+            )
+
+        if ordering:
+            medical_specialties = medical_specialties.order_by(ordering)
+
+        if state in ["true", "false"]:
+            state_boolean = state == "true"
+            medical_specialties = medical_specialties.filter(state=state_boolean)
+
+        return medical_specialties
