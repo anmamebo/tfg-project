@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-
-import { API_URL } from 'src/app/core/constants/API_URL';
 
 // Servicios
+import { EntityService } from 'src/app/core/services/generics/entity.service';
 import { HttpCommonService } from 'src/app/core/services/http-common/http-common.service';
+
+// Modelos
+import { MedicalSpecialty } from 'src/app/core/models/medical-specialty.interface';
 
 /**
  * Servicio para interactuar con la API para la gestión de especialidades médicas.
@@ -13,25 +14,19 @@ import { HttpCommonService } from 'src/app/core/services/http-common/http-common
 @Injectable({
   providedIn: 'root',
 })
-export class MedicalspecialtyService {
-  /** URL base de la API. */
-  public url: string;
+export class MedicalspecialtyService extends EntityService<MedicalSpecialty> {
+  /** URL del endpoint. */
+  public endpoint = 'doctors/medicalspecialties/';
 
-  constructor(
-    private _http: HttpClient,
-    private _httpCommonService: HttpCommonService
-  ) {
-    this.url = API_URL.url + 'doctors/medicalspecialties/';
+  constructor(http: HttpClient, httpCommonService: HttpCommonService) {
+    super(http, httpCommonService);
   }
 
   /**
-   * Obtiene todas las especialidades médicas.
-   * @returns {Observable<any>} Un observable que emite la respuesta del servidor.
+   * Obtiene la URL del endpoint.
+   * @returns {string} La URL del endpoint.
    */
-  getMedicalSpecialties(): Observable<any> {
-    const headers = this._httpCommonService.getCommonHeaders();
-    const httpOptions = { headers };
-
-    return this._http.get<any>(this.url, httpOptions);
+  public getEndpoint(): string {
+    return this.endpoint;
   }
 }

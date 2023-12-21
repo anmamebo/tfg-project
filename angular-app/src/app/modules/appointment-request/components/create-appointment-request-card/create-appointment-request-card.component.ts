@@ -102,7 +102,7 @@ export class CreateAppointmentRequestCardComponent implements OnInit {
    * Obtiene las especialidades médicas.
    */
   private _getSpecialties(): void {
-    this._medicalSpecialtyService.getMedicalSpecialties().subscribe({
+    this._medicalSpecialtyService.getItems().subscribe({
       next: (response: any) => {
         this.medicalSpecialties = response.map((specialty: any) => ({
           item_id: specialty.id,

@@ -156,7 +156,7 @@ export class EditBasicInfoDoctorsCardComponent implements OnInit {
    * Obtiene las especialidades médicas.
    */
   public getMedicalSpecialties() {
-    this._medicalSpecialtyService.getMedicalSpecialties().subscribe({
+    this._medicalSpecialtyService.getItems().subscribe({
       next: (data) => {
         this.medicalSpecialties = data.map(
           (item: { id: String; name: String }) => ({
