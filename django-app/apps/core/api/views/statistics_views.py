@@ -283,6 +283,10 @@ def get_appointments_per_month_and_type(request):
     # Ordenar por mes
     monthly_appointments = dict(sorted(monthly_appointments.items()))
 
+    # Ordenar por tipo
+    for month in monthly_appointments:
+        monthly_appointments[month] = dict(sorted(monthly_appointments[month].items()))
+
     return Response(
         monthly_appointments,
         status=status.HTTP_200_OK,
@@ -300,8 +304,10 @@ def medical_specialty_doctor_count(request):
     Returns:
         Response: Respuesta HTTP
     """
-    specialties = MedicalSpecialty.objects.filter(state=True).annotate(
-        doctor_count=Count("doctor")
+    specialties = (
+        MedicalSpecialty.objects.filter(state=True)
+        .annotate(doctor_count=Count("doctor"))
+        .order_by("name")
     )
     serializer = MedicalSpecialtyStatisticsSerializer(specialties, many=True)
 

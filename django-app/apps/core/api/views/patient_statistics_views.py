@@ -1,14 +1,12 @@
 import math
-from datetime import date, datetime, timedelta
+from datetime import date, datetime
 
 import pytz
 from apps.appointments.models import Appointment
-from apps.doctors.models import Doctor, MedicalSpecialty
-from apps.patients.models import Patient
-from apps.schedules.models import Schedule
+from apps.doctors.models import MedicalSpecialty
 from apps.treatments.models import Treatment
 from config.settings import TIME_ZONE
-from django.db.models import Avg, Count, DurationField, ExpressionWrapper, F, Sum
+from django.db.models import Avg, DurationField, ExpressionWrapper, F
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -71,7 +69,9 @@ def get_patient_appointments_per_specialty_and_month(request):
     ).exclude(status="cancelled")
 
     # Obtener especialidades
-    specialty_names = MedicalSpecialty.objects.values_list("name", flat=True)
+    specialty_names = MedicalSpecialty.objects.filter(state=True).values_list(
+        "name", flat=True
+    )
 
     # Obtener recuento mensual de citas por especialidad
     monthly_appointments = {}
@@ -100,6 +100,10 @@ def get_patient_appointments_per_specialty_and_month(request):
 
     # Ordenar por mes
     monthly_appointments = dict(sorted(monthly_appointments.items()))
+
+    # Ordenar por tipo
+    for month in monthly_appointments:
+        monthly_appointments[month] = dict(sorted(monthly_appointments[month].items()))
 
     return Response(
         monthly_appointments,
