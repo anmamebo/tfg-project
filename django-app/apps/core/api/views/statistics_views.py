@@ -300,7 +300,9 @@ def medical_specialty_doctor_count(request):
     Returns:
         Response: Respuesta HTTP
     """
-    specialties = MedicalSpecialty.objects.annotate(doctor_count=Count("doctor"))
+    specialties = MedicalSpecialty.objects.filter(state=True).annotate(
+        doctor_count=Count("doctor")
+    )
     serializer = MedicalSpecialtyStatisticsSerializer(specialties, many=True)
 
     return Response(
