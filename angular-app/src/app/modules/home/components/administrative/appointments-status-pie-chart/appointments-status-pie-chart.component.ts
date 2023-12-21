@@ -85,9 +85,9 @@ export class AppointmentsStatusPieChartComponent {
     this._statisticsService.getAppointmentsPerStatus().subscribe({
       next: (data: any) => {
         this.series = data.map((item: any) => item.count);
-        this.labels = data.map((item: any) =>
-          this._getTextByValue(item.status)
-        );
+        this.labels = data
+          .map((item: any) => this._getTextByValue(item.status))
+          .sort();
       },
       error: (err) => {
         console.log(err);

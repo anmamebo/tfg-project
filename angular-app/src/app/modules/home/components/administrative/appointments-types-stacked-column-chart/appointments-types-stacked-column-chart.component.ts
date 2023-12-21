@@ -161,7 +161,7 @@ export class AppointmentsTypesStackedColumnChartComponent {
    * @returns datos formateados
    */
   private _formatDataForChart(data: any[]): any[] {
-    const series: any[] = [];
+    let series: any[] = [];
     Object.keys(data).forEach((month: any) => {
       const monthData = data[month];
       Object.keys(monthData).forEach((type, index) => {
@@ -183,7 +183,29 @@ export class AppointmentsTypesStackedColumnChartComponent {
       });
     });
 
+    series = this._orderSeries(series);
+
     return series;
+  }
+
+  /**
+   * Ordena las series.
+   * @param series series
+   * @returns series ordenadas
+   */
+  private _orderSeries(series: any[]): any[] {
+    return series.sort((a, b) => {
+      const nameA = a.name.toLowerCase();
+      const nameB = b.name.toLowerCase();
+
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+      return 0;
+    });
   }
 
   /**
