@@ -1,3 +1,4 @@
+from collections import defaultdict
 from datetime import date, datetime, timedelta
 
 import pytz
@@ -11,6 +12,7 @@ from apps.patients.models import Patient
 from apps.schedules.models import Schedule
 from config.settings import TIME_ZONE
 from django.db.models import Avg, Count, DurationField, ExpressionWrapper, F
+from django.db.models.functions import TruncDate
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -29,10 +31,10 @@ def get_overall_stats(request):
     Returns:
         Response: Respuesta HTTP
     """
-    total_patients = Patient.objects.count()
-    total_doctors = Doctor.objects.count()
-    total_departments = Department.objects.count()
-    total_appointments = Appointment.objects.count()
+    total_patients = Patient.objects.filter(state=True).count()
+    total_doctors = Doctor.objects.filter(state=True).count()
+    total_departments = Department.objects.filter(state=True).count()
+    total_appointments = Appointment.objects.filter(state=True).count()
 
     return Response(
         {
@@ -64,26 +66,8 @@ def get_appointments_per_day(request):
     year = int(request.GET.get("year", datetime.now().year))
     month = int(request.GET.get("month", datetime.now().month))
 
-    # Obtener el primer día del mes
-    start_date = datetime(year, month, 1)
-
-    # Obtener el primer día del siguiente mes
-    next_month = month % 12 + 1 if month < 12 else 1
-    next_year = year if next_month != 1 else year + 1
-    start_next_month = datetime(next_year, next_month, 1)
-
-    # Restar un segundo al primer día del siguiente mes para obtener el último segundo del mes actual
-    end_date = start_next_month - timedelta(seconds=1)
-
-    # Convertir las fechas a la zona horaria de la aplicación
-    start_date = tz.localize(start_date)
-    end_date = tz.localize(end_date)
-
-    # Crear una lista de fechas dentro del rango
-    date_range = [
-        start_date + timedelta(days=x) for x in range((end_date - start_date).days + 1)
-    ]
-    dates_dict = {date.strftime("%Y-%m-%d"): 0 for date in date_range}
+    # Obtiene el primer día del mes, el último día del mes y una lista de fechas dentro del rango
+    start_date, end_date, date_range = get_date_range(year, month)
 
     appointments = (
         Appointment.objects.filter(schedule__start_time__range=[start_date, end_date])
@@ -92,6 +76,9 @@ def get_appointments_per_day(request):
         .annotate(count=Count("id"))
         .order_by("date")
     )
+
+    # Establece la fecha como clave del diccionario y el valor como el recuento
+    dates_dict = {date.strftime("%Y-%m-%d"): 0 for date in date_range}
 
     # Mapear las citas a las fechas y actualizar el recuento si hay citas para esa fecha
     for appointment in appointments:
@@ -184,52 +171,52 @@ def get_appointments_per_day_and_gender(request):
     year = int(request.GET.get("year", datetime.now().year))
     month = int(request.GET.get("month", datetime.now().month))
 
-    # Obtener el primer día del mes
-    start_date = datetime(year, month, 1)
+    if month < 1 or month > 12:
+        return Response(
+            {"message": "El mes debe estar entre 1 y 12"},
+            status=status.HTTP_400_BAD_REQUEST,
+        )
 
-    # Obtener el primer día del siguiente mes
-    next_month = month % 12 + 1 if month < 12 else 1
-    next_year = year if next_month != 1 else year + 1
-    start_next_month = datetime(next_year, next_month, 1)
+    if year < 1:
+        return Response(
+            {"message": "El año debe ser mayor a 0"},
+            status=status.HTTP_400_BAD_REQUEST,
+        )
 
-    # Restar un segundo al primer día del siguiente mes para obtener el último segundo del mes actual
-    end_date = start_next_month - timedelta(seconds=1)
+    # Obtiene el primer día del mes, el último día del mes y una lista de fechas dentro del rango
+    start_date, end_date, date_range = get_date_range(year, month)
 
-    # Convertir las fechas a la zona horaria de la aplicación
-    start_date = tz.localize(start_date)
-    end_date = tz.localize(end_date)
-
+    # Formato [{'date': datetime.date(2023, 12, 5), 'gender': 'M', 'count': 1}, {...}, ...]
     appointments = (
         Appointment.objects.filter(schedule__start_time__range=[start_date, end_date])
+        .annotate(gender=F("patient__gender"))
         .extra(select={"date": "DATE({}.start_time)".format(Schedule._meta.db_table)})
-        .values("date", "patient__gender")
+        .values("date", "gender")
         .annotate(count=Count("id"))
-        .order_by("date", "patient__gender")
+        .order_by("date", "gender")
     )
 
-    # Crear una lista de fechas dentro del rango
-    date_range = [
-        start_date + timedelta(days=x) for x in range((end_date - start_date).days + 1)
-    ]
-    dates_dict = {date.strftime("%Y-%m-%d"): {"M": 0, "F": 0} for date in date_range}
+    # Establece la fecha como clave del diccionario y el valor como otro diccionario con el recuento por género
+    dates_dict = {}
+    for date in date_range:
+        date_str = date.strftime("%Y-%m-%d")
+        dates_dict[date_str] = {"M": 0, "F": 0}
 
+    # Mapear las citas a las fechas y actualizar el recuento si hay citas para esa fecha
     for appointment in appointments:
         date_str = appointment["date"].strftime("%Y-%m-%d")
-        gender = appointment["patient__gender"]
-        if date_str not in dates_dict:
-            dates_dict[date_str] = {"M": 0, "F": 0}
+        gender = appointment["gender"]
+        count = appointment["count"]
 
-        if gender == "M":
-            dates_dict[date_str]["M"] += appointment["count"]
-        elif gender == "F":
-            dates_dict[date_str]["F"] += appointment["count"]
+        dates_dict[date_str][gender] += count
 
     # Crear la lista final con todas las fechas y sus recuentos por género
     appointments_per_day_list = [
         {
             "date": date,
-            "male": data["M"],
-            "female": data["F"],
+            "genders": [
+                {"name": gender, "count": count} for gender, count in data.items()
+            ],
         }
         for date, data in dates_dict.items()
     ]
@@ -257,6 +244,12 @@ def get_appointments_per_month_and_type(request):
     # Obtener el año para el que deseas las citas
     year = int(request.query_params.get("year", datetime.now().year))
 
+    if year < 1:
+        return Response(
+            {"message": "El año debe ser mayor a 0"},
+            status=status.HTTP_400_BAD_REQUEST,
+        )
+
     #  Obtener citas filtradas por año
     appointments = Appointment.objects.filter(schedule__start_time__year=year)
 
@@ -264,31 +257,28 @@ def get_appointments_per_month_and_type(request):
     appointment_types = Appointment.type_choices
     type_keys = [key for key, _ in appointment_types]
 
-    # Obtener recuento mensual de citas por tipo
-    monthly_appointments = {}
+    # Establece el mes como clave del diccionario y el valor como otro diccionario con el recuento por tipo
+    dates_dict = {}
+    for month in range(1, 13):
+        dates_dict[month] = {type_key: 0 for type_key in type_keys}
+
+    # Mapear las citas a los meses y actualizar el recuento si hay citas para ese mes
     for appointment in appointments:
-        month = appointment.schedule.start_time.month
+        date = appointment.schedule.start_time.month
         appointment_type = appointment.type
 
-        if month not in monthly_appointments:
-            monthly_appointments[month] = {type_key: 0 for type_key in type_keys}
+        dates_dict[date][appointment_type] += 1
 
-        monthly_appointments[month][appointment_type] += 1
-
-    # Rellenar con cero si no hay citas en algún mes para algún tipo
-    for month in range(1, 13):
-        if month not in monthly_appointments:
-            monthly_appointments[month] = {type_key: 0 for type_key in type_keys}
-
-    # Ordenar por mes
-    monthly_appointments = dict(sorted(monthly_appointments.items()))
-
-    # Ordenar por tipo
-    for month in monthly_appointments:
-        monthly_appointments[month] = dict(sorted(monthly_appointments[month].items()))
+    appointments_per_month_and_type_list = [
+        {
+            "month": month,
+            "types": [{"name": type, "count": count} for type, count in data.items()],
+        }
+        for month, data in dates_dict.items()
+    ]
 
     return Response(
-        monthly_appointments,
+        appointments_per_month_and_type_list,
         status=status.HTTP_200_OK,
     )
 
@@ -341,20 +331,48 @@ def get_appointments_per_age(request):
         (max_date - 66, min_date),
     ]
 
-    appointments_by_age_group = {}
+    appointments_by_age_group = defaultdict(int)
 
-    appointments_by_age_group = {}
-
-    for group in groups:
-        age_min, age_max = group
-        appointments_count = Appointment.objects.filter(
+    for age_min, age_max in groups:
+        age_group = f"{datetime.now().year - age_min}-{datetime.now().year - age_max}"
+        appointments_by_age_group[age_group] = Appointment.objects.filter(
             patient__birthdate__year__gte=age_max,
             patient__birthdate__year__lte=age_min,
         ).count()
 
-        appointments_by_age_group[f"{age_min}-{age_max}"] = appointments_count
+    appointments_by_age_group_list = [
+        {"age_group": age_group, "count": count}
+        for age_group, count in appointments_by_age_group.items()
+    ]
 
     return Response(
-        appointments_by_age_group,
+        appointments_by_age_group_list,
         status=status.HTTP_200_OK,
     )
+
+
+def get_date_range(year, month):
+    """
+    Obtiene el primer día del mes, el último día del mes y una lista de fechas dentro del rango
+
+    Args:
+        year (int): Año para el que se obtendrán las citas
+        month (int): Mes para el que se obtendrán las citas
+
+    Returns:
+        tuple: Tupla con el primer día del mes, el último día del mes y una lista de fechas dentro del rango
+    """
+    start_date = datetime(year, month, 1)
+    next_month = month % 12 + 1 if month < 12 else 1
+    next_year = year if next_month != 1 else year + 1
+    start_next_month = datetime(next_year, next_month, 1)
+    end_date = start_next_month - timedelta(seconds=1)
+
+    start_date = tz.localize(start_date)
+    end_date = tz.localize(end_date)
+
+    date_range = [
+        start_date + timedelta(days=x) for x in range((end_date - start_date).days + 1)
+    ]
+
+    return start_date, end_date, date_range

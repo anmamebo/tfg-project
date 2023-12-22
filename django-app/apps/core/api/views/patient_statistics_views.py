@@ -63,50 +63,47 @@ def get_patient_appointments_per_specialty_and_month(request):
     # Obtener el año para el que deseas las citas
     year = int(request.query_params.get("year", datetime.today().year))
 
+    if year < 1:
+        return Response(
+            {"message": "El año debe ser mayor a 0."},
+            status=status.HTTP_400_BAD_REQUEST,
+        )
+
     #  Obtener citas filtradas por año
     appointments = Appointment.objects.filter(
         patient=patient, schedule__start_time__year=year
     ).exclude(status="cancelled")
 
     # Obtener especialidades
-    specialty_names = MedicalSpecialty.objects.filter(state=True).values_list(
-        "name", flat=True
+    specialty_names = (
+        MedicalSpecialty.objects.filter(state=True)
+        .values_list("name", flat=True)
+        .order_by("name")
     )
 
-    # Obtener recuento mensual de citas por especialidad
-    monthly_appointments = {}
-    for appointment in appointments:
-        month = appointment.schedule.start_time.month
-        appointment_specialty = appointment.specialty.name
-
-        if month not in monthly_appointments:
-            monthly_appointments[month] = {appointment_specialty: 1}
-        else:
-            if appointment_specialty not in monthly_appointments[month]:
-                monthly_appointments[month][appointment_specialty] = 1
-            else:
-                monthly_appointments[month][appointment_specialty] += 1
-
-    # Rellenar con cero si no hay citas en algún mes para alguna especialidad
+    # Establece el mes como clave del diccionario y el valor como otro diccionario con el recuento por tipo
+    dates_dict = {}
     for month in range(1, 13):
-        if month not in monthly_appointments:
-            monthly_appointments[month] = {
-                specialty: 0 for specialty in specialty_names
-            }
-        else:
-            for specialty in specialty_names:
-                if specialty not in monthly_appointments[month]:
-                    monthly_appointments[month][specialty] = 0
+        dates_dict[month] = {specialty: 0 for specialty in specialty_names}
 
-    # Ordenar por mes
-    monthly_appointments = dict(sorted(monthly_appointments.items()))
+    for appointment in appointments:
+        date = appointment.schedule.start_time.month
+        specialty = appointment.specialty.name
 
-    # Ordenar por tipo
-    for month in monthly_appointments:
-        monthly_appointments[month] = dict(sorted(monthly_appointments[month].items()))
+        dates_dict[date][specialty] += 1
+
+    appointments_per_specialty_and_month_list = [
+        {
+            "month": month,
+            "specialties": [
+                {"name": specialty, "count": count} for specialty, count in data.items()
+            ],
+        }
+        for month, data in dates_dict.items()
+    ]
 
     return Response(
-        monthly_appointments,
+        appointments_per_specialty_and_month_list,
         status=status.HTTP_200_OK,
     )
 

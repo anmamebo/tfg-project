@@ -1,4 +1,5 @@
 import math
+from collections import defaultdict
 from datetime import date, datetime, timedelta
 
 import pytz
@@ -71,26 +72,7 @@ def get_appointments_per_day(request):
     year = int(request.GET.get("year", datetime.now().year))
     month = int(request.GET.get("month", datetime.now().month))
 
-    # Obtener el primer día del mes
-    start_date = datetime(year, month, 1)
-
-    # Obtener el primer día del siguiente mes
-    next_month = month % 12 + 1 if month < 12 else 1
-    next_year = year if next_month != 1 else year + 1
-    start_next_month = datetime(next_year, next_month, 1)
-
-    # Restar un segundo al primer día del siguiente mes para obtener el último segundo del mes actual
-    end_date = start_next_month - timedelta(seconds=1)
-
-    # Convertir las fechas a la zona horaria de la aplicación
-    start_date = tz.localize(start_date)
-    end_date = tz.localize(end_date)
-
-    # Crear una lista de fechas dentro del rango
-    date_range = [
-        start_date + timedelta(days=x) for x in range((end_date - start_date).days + 1)
-    ]
-    dates_dict = {date.strftime("%Y-%m-%d"): 0 for date in date_range}
+    start_date, end_date, date_range = get_date_range(year, month)
 
     appointments = (
         Appointment.objects.filter(
@@ -101,6 +83,8 @@ def get_appointments_per_day(request):
         .annotate(count=Count("id"))
         .order_by("date")
     )
+
+    dates_dict = {date.strftime("%Y-%m-%d"): 0 for date in date_range}
 
     # Mapear las citas a las fechas y actualizar el recuento si hay citas para esa fecha
     for appointment in appointments:
@@ -205,20 +189,23 @@ def get_appointments_per_age(request):
         (max_date - 66, min_date),
     ]
 
-    appointments_by_age_group = {}
+    appointments_by_age_group = defaultdict(int)
 
-    for group in groups:
-        age_min, age_max = group
-        appointments_count = Appointment.objects.filter(
+    for age_min, age_max in groups:
+        age_group = f"{datetime.now().year - age_min}-{datetime.now().year - age_max}"
+        appointments_by_age_group[age_group] = Appointment.objects.filter(
             doctor=doctor,
             patient__birthdate__year__gte=age_max,
             patient__birthdate__year__lte=age_min,
         ).count()
 
-        appointments_by_age_group[f"{age_min}-{age_max}"] = appointments_count
+    appointments_by_age_group_list = [
+        {"age_group": age_group, "count": count}
+        for age_group, count in appointments_by_age_group.items()
+    ]
 
     return Response(
-        appointments_by_age_group,
+        appointments_by_age_group_list,
         status=status.HTTP_200_OK,
     )
 
@@ -309,3 +296,30 @@ def get_average_time_per_patient(doctor):
     avg_time_in_hms = f"{avg_hours}h {avg_minutes}m {avg_seconds}s"
 
     return avg_time_in_hms
+
+
+def get_date_range(year, month):
+    """
+    Obtiene el primer día del mes, el último día del mes y una lista de fechas dentro del rango
+
+    Args:
+        year (int): Año para el que se obtendrán las citas
+        month (int): Mes para el que se obtendrán las citas
+
+    Returns:
+        tuple: Tupla con el primer día del mes, el último día del mes y una lista de fechas dentro del rango
+    """
+    start_date = datetime(year, month, 1)
+    next_month = month % 12 + 1 if month < 12 else 1
+    next_year = year if next_month != 1 else year + 1
+    start_next_month = datetime(next_year, next_month, 1)
+    end_date = start_next_month - timedelta(seconds=1)
+
+    start_date = tz.localize(start_date)
+    end_date = tz.localize(end_date)
+
+    date_range = [
+        start_date + timedelta(days=x) for x in range((end_date - start_date).days + 1)
+    ]
+
+    return start_date, end_date, date_range
