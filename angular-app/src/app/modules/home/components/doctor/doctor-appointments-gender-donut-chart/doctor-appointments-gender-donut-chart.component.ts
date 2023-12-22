@@ -70,7 +70,9 @@ export class DoctorAppointmentsGenderDonutChartComponent implements OnInit {
   }
 
   /**
-   * Obtiene las estadísticas de género de las citas de los doctores.
+   * Obtiene y actualiza las estadísticas de citas de doctor por género.
+   * @private
+   * @returns {void}
    */
   private _getDoctorAppointmentsGenderStats(): void {
     this._doctorStatisticsService.getDoctorAppointmentsPerGender().subscribe({
@@ -87,9 +89,10 @@ export class DoctorAppointmentsGenderDonutChartComponent implements OnInit {
   }
 
   /**
-   * Retorna el texto correspondiente al valor.
-   * @param value Valor.
-   * @returns Texto correspondiente al valor.
+   * Obtiene el texto asociado a un valor de género.
+   * @private
+   * @param {string} value - Valor del género ('M' para masculino, 'F' para femenino).
+   * @returns {string} El texto asociado al valor de género.
    */
   private _getTextByValue(value: string): string {
     return value === 'M' ? 'Masculino' : 'Femenino';

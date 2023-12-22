@@ -156,8 +156,10 @@ export class AppointmentsTypesStackedColumnChartComponent implements OnInit {
   }
 
   /**
-   * Obtiene las estadísticas de citas por mes y tipo.
-   * @param year año
+   * Obtiene y asigna estadísticas de citas por tipo para un año específico.
+   * @private
+   * @param {number} year - Año para el que se obtienen las estadísticas de citas por tipo.
+   * @returns {void}
    */
   private _getAppointmentsTypesStats(year: number): void {
     this._statisticsService.getAppointmentsPerMonthAndType(year).subscribe({
@@ -171,9 +173,10 @@ export class AppointmentsTypesStackedColumnChartComponent implements OnInit {
   }
 
   /**
-   * Formatea los datos para el gráfico.
-   * @param data datos
-   * @returns datos formateados
+   * Formatea los datos de citas por tipos para su visualización en un gráfico.
+   * @private
+   * @param {AppointmentsPerTypes[]} data - Datos de citas por tipos a formatear.
+   * @returns {SeriesData[]} Datos formateados para el gráfico.
    */
   private _formatDataForChart(data: AppointmentsPerTypes[]): SeriesData[] {
     let transformedData: SeriesData[] = [];
@@ -211,9 +214,10 @@ export class AppointmentsTypesStackedColumnChartComponent implements OnInit {
   }
 
   /**
-   * Ordena las series.
-   * @param series series
-   * @returns series ordenadas
+   * Ordena la serie de datos alfabéticamente por el nombre.
+   * @private
+   * @param {SeriesData[]} series - Serie de datos a ordenar.
+   * @returns {SeriesData[]} Serie de datos ordenada alfabéticamente por nombre.
    */
   private _orderSeries(series: SeriesData[]): SeriesData[] {
     return series.sort((a, b) => {
@@ -231,7 +235,9 @@ export class AppointmentsTypesStackedColumnChartComponent implements OnInit {
   }
 
   /**
-   * Genera las opciones para los años.
+   * Genera y añade un rango de años a una lista.
+   * @private
+   * @returns {void}
    */
   private _generateYears(): void {
     const startYear = 2023;
@@ -242,8 +248,10 @@ export class AppointmentsTypesStackedColumnChartComponent implements OnInit {
   }
 
   /**
-   * Evento que se ejecuta cuando se cambia el año.
-   * @param event Evento de cambio.
+   * Maneja el cambio de año y actualiza las estadísticas de citas por tipo.
+   * @public
+   * @param {Event} event - Evento que desencadena el cambio de año.
+   * @returns {void}
    */
   public onYearChange(event: Event): void {
     const selectedYear = (event.target as HTMLInputElement)?.value;

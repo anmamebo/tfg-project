@@ -90,7 +90,9 @@ export class DoctorAppointmentsSpecialtyColumnsChartComponent
   }
 
   /**
-   * Obtiene las estadísticas de citas por especialidad de los doctores.
+   * Obtiene y actualiza las estadísticas de citas de doctor por especialidad.
+   * @private
+   * @returns {void}
    */
   private _getDoctorAppointmentsPerSpecialty(): void {
     this._doctorStatisticsService

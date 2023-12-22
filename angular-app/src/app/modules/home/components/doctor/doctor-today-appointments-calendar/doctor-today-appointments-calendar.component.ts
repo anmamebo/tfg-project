@@ -59,7 +59,9 @@ export class DoctorTodayAppointmentsCalendarComponent implements AfterViewInit {
   }
 
   /**
-   * Scroll hacia la hora actual.
+   * Desplaza el contenedor de desplazamiento para mostrar la vista actual en el calendario.
+   * @private
+   * @returns {void}
    */
   private _scrollToCurrentView(): void {
     if (CalendarView.Day) {
@@ -74,8 +76,10 @@ export class DoctorTodayAppointmentsCalendarComponent implements AfterViewInit {
   }
 
   /**
-   * Obtiene los eventos del calendario.
-   * @param date - Fecha de los eventos.
+   * Obtiene y actualiza los eventos para una fecha específica.
+   * @private
+   * @param {string} date - Fecha para la que se obtienen los eventos en formato de cadena.
+   * @returns {void}
    */
   private _getEvents(date: string): void {
     this._appointmentService
@@ -102,9 +106,10 @@ export class DoctorTodayAppointmentsCalendarComponent implements AfterViewInit {
   }
 
   /**
-   * Formatea los datos de las citas para el calendario.
-   * @param appointments - Lista de citas.
-   * @returns Lista de eventos del calendario.
+   * Formatea los datos de citas para su representación en eventos de calendario.
+   * @private
+   * @param {Appointment[]} appointments - Lista de citas a formatear.
+   * @returns {CalendarEvent[]} Lista de eventos de calendario formateados.
    */
   private _formatData(appointments: Appointment[]): CalendarEvent[] {
     return appointments.map((appointment: Appointment) => {

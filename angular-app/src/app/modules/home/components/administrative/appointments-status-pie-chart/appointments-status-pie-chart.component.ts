@@ -87,7 +87,9 @@ export class AppointmentsStatusPieChartComponent implements OnInit {
   }
 
   /**
-   * Obtiene las estadísticas de citas por estado.
+   * Obtiene y actualiza las estadísticas de citas por estado.
+   * @private
+   * @returns {void}
    */
   private _getAppointmentsStatusStats(): void {
     this._statisticsService.getAppointmentsPerStatus().subscribe({
@@ -106,9 +108,10 @@ export class AppointmentsStatusPieChartComponent implements OnInit {
   }
 
   /**
-   * Obtiene el texto de un valor.
-   * @param value valor
-   * @returns texto del valor
+   * Obtiene el texto asociado a un valor dado, si existe.
+   * @private
+   * @param {string} value - Valor del cual se busca el texto asociado.
+   * @returns {string} El texto asociado al valor, o el valor mismo si no se encuentra asociado.
    */
   private _getTextByValue(value: string): string {
     const status = STATUS_APPOINTMENT_OPTIONS.find(

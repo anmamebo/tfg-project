@@ -75,7 +75,9 @@ export class DoctorsMedicalSpecialtiesDonutChartComponent implements OnInit {
   }
 
   /**
-   * Obtiene las estadísticas de especialidades médicas de los doctores.
+   * Obtiene y actualiza las estadísticas de la cantidad de doctores por especialidad médica.
+   * @private
+   * @returns {void}
    */
   private _getDoctorsMedicalSpecialtiesStats(): void {
     this._statisticsService.getMedicalSpecialtyDoctorCount().subscribe({

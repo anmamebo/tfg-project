@@ -123,9 +123,11 @@ export class AppointmentsGenderAreaSplineChartComponent implements OnInit {
   }
 
   /**
-   * Obtiene las estadísticas de citas por día y género.
-   * @param month mes
-   * @param year año
+   * Obtiene y asigna estadísticas de citas por día y género para un mes y año dados.
+   * @private
+   * @param {number} month - Mes para el que se obtienen las estadísticas.
+   * @param {number} year - Año para el que se obtienen las estadísticas.
+   * @returns {void}
    */
   private _getAppointmentsPerDayAndGender(month: number, year: number): void {
     this._statisticsService
@@ -144,9 +146,10 @@ export class AppointmentsGenderAreaSplineChartComponent implements OnInit {
   }
 
   /**
-   * Formatea los datos para el gráfico.
-   * @param data Datos.
-   * @returns Datos formateados.
+   * Formatea los datos de citas por género para su visualización en un gráfico.
+   * @private
+   * @param {AppointmentsPerGender[]} data - Datos de citas por género a formatear.
+   * @returns {{ xaxisCategories: number[]; series: SeriesData[]; }} Objeto con datos formateados para el gráfico.
    */
   private _formatDataForChart(data: AppointmentsPerGender[]): {
     xaxisCategories: number[];
@@ -180,7 +183,9 @@ export class AppointmentsGenderAreaSplineChartComponent implements OnInit {
   }
 
   /**
-   * Genera las opciones para los meses.
+   * Genera y asigna los nombres de los meses junto con sus valores correspondientes.
+   * @private
+   * @returns {void}
    */
   private _generateMonths(): void {
     for (let i = 1; i <= 12; i++) {
@@ -192,7 +197,9 @@ export class AppointmentsGenderAreaSplineChartComponent implements OnInit {
   }
 
   /**
-   * Genera las opciones para los años.
+   * Genera y asigna los nombres de los años junto con sus valores correspondientes.
+   * @private
+   * @returns {void}
    */
   private _generateYears(): void {
     const startYear = 2023;
@@ -203,8 +210,10 @@ export class AppointmentsGenderAreaSplineChartComponent implements OnInit {
   }
 
   /**
-   * Evento que se ejecuta cuando se cambia el mes.
-   * @param event Evento de cambio.
+   * Maneja el cambio de mes y actualiza las estadísticas de citas por día y género.
+   * @public
+   * @param {Event} event - Evento que desencadena el cambio de mes.
+   * @returns {void}
    */
   public onMonthChange(event: Event): void {
     const selectedMonth = (event.target as HTMLInputElement)?.value;
@@ -215,8 +224,10 @@ export class AppointmentsGenderAreaSplineChartComponent implements OnInit {
   }
 
   /**
-   * Evento que se ejecuta cuando se cambia el año.
-   * @param event Evento de cambio.
+   * Maneja el cambio de año y actualiza las estadísticas de citas por día y género.
+   * @public
+   * @param {Event} event - Evento que desencadena el cambio de año.
+   * @returns {void}
    */
   public onYearChange(event: Event): void {
     const selectedYear = (event.target as HTMLInputElement)?.value;

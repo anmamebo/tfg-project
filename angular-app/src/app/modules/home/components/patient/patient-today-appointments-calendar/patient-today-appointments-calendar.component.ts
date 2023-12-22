@@ -61,7 +61,9 @@ export class PatientTodayAppointmentsCalendarComponent
   }
 
   /**
-   * Scroll hacia la hora actual.
+   * Desplaza la vista actual en el calendario para mostrar el momento actual.
+   * @private
+   * @returns {void}
    */
   private _scrollToCurrentView(): void {
     if (CalendarView.Day) {
@@ -76,8 +78,10 @@ export class PatientTodayAppointmentsCalendarComponent
   }
 
   /**
-   * Obtiene los eventos del calendario.
-   * @param date - Fecha de los eventos.
+   * Obtiene y actualiza los eventos de citas para un paciente en un día específico.
+   * @private
+   * @param {string} date - Fecha para la que se obtienen los eventos en formato de cadena.
+   * @returns {void}
    */
   private _getEvents(date: string): void {
     this._appointmentService
@@ -104,9 +108,10 @@ export class PatientTodayAppointmentsCalendarComponent
   }
 
   /**
-   * Formatea los datos de las citas para el calendario.
-   * @param appointments - Lista de citas.
-   * @returns Lista de eventos del calendario.
+   * Formatea los datos de citas para su representación como eventos en un calendario.
+   * @private
+   * @param {Appointment[]} appointments - Datos de citas a formatear.
+   * @returns {CalendarEvent[]} Datos formateados como eventos para el calendario.
    */
   private _formatData(appointments: Appointment[]): CalendarEvent[] {
     return appointments.map((appointment: Appointment) => {

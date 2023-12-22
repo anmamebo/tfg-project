@@ -38,7 +38,9 @@ export class StatisticsCardsComponent implements OnInit {
   }
 
   /**
-   * Obtiene las estadísticas generales.
+   * Obtiene y actualiza las estadísticas generales.
+   * @private
+   * @returns {void}
    */
   private _getOverallStats(): void {
     this._statisticsService.getOverallStats().subscribe({

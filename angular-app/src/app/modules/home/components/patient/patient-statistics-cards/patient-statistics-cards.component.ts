@@ -35,7 +35,9 @@ export class PatientStatisticsCardsComponent implements OnInit {
   }
 
   /**
-   * Obtiene las estadísticas generales.
+   * Obtiene y actualiza las estadísticas generales del paciente.
+   * @private
+   * @returns {void}
    */
   private _getPatientOverallStats(): void {
     this._patientStatisticsService.getPatientOverallStats().subscribe({

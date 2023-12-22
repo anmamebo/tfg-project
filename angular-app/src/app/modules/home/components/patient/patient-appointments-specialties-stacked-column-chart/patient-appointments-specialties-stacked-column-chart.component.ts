@@ -165,8 +165,10 @@ export class PatientAppointmentsSpecialtiesStackedColumnChartComponent
   }
 
   /**
-   * Obtiene las estadísticas de citas por mes y tipo.
-   * @param year año
+   * Obtiene y actualiza las estadísticas de citas por especialidades para un año específico.
+   * @private
+   * @param {number} year - Año para el que se obtienen las estadísticas de citas por especialidades.
+   * @returns {void}
    */
   private _getAppointmentsSpecialtiesStats(year: number): void {
     this._patientStatisticsService
@@ -182,9 +184,10 @@ export class PatientAppointmentsSpecialtiesStackedColumnChartComponent
   }
 
   /**
-   * Formatea los datos para el gráfico.
-   * @param data datos
-   * @returns datos formateados
+   * Formatea los datos de citas por especialidades para su representación en un gráfico.
+   * @private
+   * @param {AppointmentsPerSpecialties[]} data - Datos de citas por especialidades a formatear.
+   * @returns {SeriesData[]} Datos formateados para el gráfico, en un arreglo de objetos de datos de serie.
    */
   private _formatDataForChart(
     data: AppointmentsPerSpecialties[]
@@ -218,7 +221,9 @@ export class PatientAppointmentsSpecialtiesStackedColumnChartComponent
   }
 
   /**
-   * Genera las opciones para los años.
+   * Genera un rango de años y los agrega a una lista.
+   * @private
+   * @returns {void}
    */
   private _generateYears(): void {
     const startYear = 2023;
@@ -229,8 +234,10 @@ export class PatientAppointmentsSpecialtiesStackedColumnChartComponent
   }
 
   /**
-   * Evento que se ejecuta cuando se cambia el año.
-   * @param event Evento de cambio.
+   * Maneja el cambio de año y actualiza las estadísticas de citas por especialidades.
+   * @public
+   * @param {Event} event - El evento que desencadena el cambio de año.
+   * @returns {void}
    */
   public onYearChange(event: Event): void {
     const selectedYear = (event.target as HTMLInputElement)?.value;

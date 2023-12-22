@@ -128,7 +128,11 @@ export class DoctorMonthlyAppointmentsLineChartComponent implements OnInit {
   }
 
   /**
-   * Obtiene las citas por día.
+   * Obtiene y actualiza las estadísticas de citas por día para un mes y año específicos.
+   * @private
+   * @param {number} month - Mes para el que se obtienen las estadísticas de citas por día.
+   * @param {number} year - Año para el que se obtienen las estadísticas de citas por día.
+   * @returns {void}
    */
   private _getAppointmentsPerDay(month: number, year: number): void {
     this._statisticsService.getDoctorAppointmentsPerDay(month, year).subscribe({
@@ -143,9 +147,10 @@ export class DoctorMonthlyAppointmentsLineChartComponent implements OnInit {
   }
 
   /**
-   * Formatea los datos para el gráfico.
-   * @param data Datos de las citas por día.
-   * @returns Datos formateados para el gráfico.
+   * Formatea los datos de citas por día para su visualización en un gráfico.
+   * @private
+   * @param {AppointmentsPerDay[]} data - Datos de citas por día a formatear.
+   * @returns {number[][]} Datos formateados para el gráfico, en un arreglo de arreglos.
    */
   private _formatDataForChart(data: AppointmentsPerDay[]): number[][] {
     return data.map((item: AppointmentsPerDay) => {
@@ -155,7 +160,9 @@ export class DoctorMonthlyAppointmentsLineChartComponent implements OnInit {
   }
 
   /**
-   * Genera las opciones para los meses.
+   * Genera los nombres de los meses junto con sus valores correspondientes y los agrega a una lista.
+   * @private
+   * @returns {void}
    */
   private _generateMonths(): void {
     for (let i = 1; i <= 12; i++) {
@@ -167,7 +174,9 @@ export class DoctorMonthlyAppointmentsLineChartComponent implements OnInit {
   }
 
   /**
-   * Genera las opciones para los años.
+   * Genera un rango de años y los agrega a una lista.
+   * @private
+   * @returns {void}
    */
   private _generateYears(): void {
     const startYear = 2023;
@@ -178,8 +187,10 @@ export class DoctorMonthlyAppointmentsLineChartComponent implements OnInit {
   }
 
   /**
-   * Evento que se ejecuta cuando se cambia el mes.
-   * @param event Evento de cambio.
+   * Maneja el cambio de mes y actualiza las estadísticas de citas por día.
+   * @public
+   * @param {Event} event - El evento que desencadena el cambio de mes.
+   * @returns {void}
    */
   public onMonthChange(event: Event): void {
     const selectedMonth = (event.target as HTMLInputElement)?.value;
@@ -190,8 +201,10 @@ export class DoctorMonthlyAppointmentsLineChartComponent implements OnInit {
   }
 
   /**
-   * Evento que se ejecuta cuando se cambia el año.
-   * @param event Evento de cambio.
+   * Maneja el cambio de año y actualiza las estadísticas de citas por día.
+   * @public
+   * @param {Event} event - El evento que desencadena el cambio de año.
+   * @returns {void}
    */
   public onYearChange(event: Event): void {
     const selectedYear = (event.target as HTMLInputElement)?.value;

@@ -26,7 +26,9 @@ export class AverageWaitingTimeCardComponent implements OnInit {
   }
 
   /**
-   * Obtiene el tiempo medio de espera.
+   * Obtiene y actualiza el tiempo promedio de espera.
+   * @private
+   * @returns {void}
    */
   private _getAverageWaitingTime(): void {
     this._statisticsService.getAverageWaitingTime().subscribe({

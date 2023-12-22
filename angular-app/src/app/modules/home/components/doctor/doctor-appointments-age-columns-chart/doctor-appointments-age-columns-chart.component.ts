@@ -88,7 +88,9 @@ export class DoctorAppointmentsAgeColumnsChartComponent implements OnInit {
   }
 
   /**
-   * Obtiene las estadísticas de citas de los médicos por edad.
+   * Obtiene y actualiza las estadísticas de citas de doctor por grupo de edad.
+   * @private
+   * @returns {void}
    */
   private _getDoctorAppointmentsPerAge(): void {
     this._doctorStatisticsService.getDoctorAppointmentsPerAge().subscribe({

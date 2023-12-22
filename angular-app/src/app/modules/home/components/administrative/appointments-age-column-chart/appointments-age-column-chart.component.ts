@@ -88,7 +88,9 @@ export class AppointmentsAgeColumnChartComponent implements OnInit {
   }
 
   /**
-   * Obtiene las estadísticas de citas por edad.
+   * Obtiene y asigna estadísticas de citas por grupo de edad.
+   * @private
+   * @returns {void}
    */
   private _getAppointmentsPerAge(): void {
     this._statisticsService.getAppointmentsPerAge().subscribe({

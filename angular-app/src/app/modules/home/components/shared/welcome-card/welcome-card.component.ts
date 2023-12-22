@@ -28,7 +28,9 @@ export class WelcomeCardComponent implements OnInit {
   }
 
   /**
-   * Método para establecer el saludo y el mensaje personalizado.
+   * Establece mensajes personalizados según la hora del día.
+   * @private
+   * @returns {void}
    */
   private _setMessages(): void {
     const currentHour = new Date().getHours();
@@ -48,7 +50,9 @@ export class WelcomeCardComponent implements OnInit {
   }
 
   /**
-   * Método para obtener el nombre del usuario logueado.
+   * Obtiene y actualiza el nombre del usuario si está disponible en el almacenamiento de tokens.
+   * @private
+   * @returns {void}
    */
   private _getUser(): void {
     let user = this._tokenStorageService.getUser();
