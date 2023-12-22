@@ -52,7 +52,11 @@ export class ChangePasswordCardComponent {
   }
 
   /**
-   * Maneja la acción de envío del formulario de cambio de contraseña.
+   * Gestiona el envío del formulario para actualizar la contraseña del usuario.
+   * Realiza una solicitud para actualizar la contraseña del usuario actual con los datos proporcionados en el formulario.
+   * Muestra una notificación de éxito o error según el resultado.
+   * @returns {void}
+   * @public
    */
   public onSubmit(): void {
     this.submitted = true;

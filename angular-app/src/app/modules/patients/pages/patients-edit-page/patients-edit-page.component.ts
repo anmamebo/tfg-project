@@ -44,7 +44,10 @@ export class PatientsEditPageComponent implements OnInit {
   }
 
   /**
-   * Actualiza los datos del paciente.
+   * Actualiza los datos del paciente actualizando la información del paciente desde el servicio.
+   * Emite un evento para actualizar la información del paciente y el título después de la actualización.
+   * @returns {void}
+   * @public
    */
   public onRefreshPatient(): void {
     if (!this.patient) return;
@@ -58,7 +61,10 @@ export class PatientsEditPageComponent implements OnInit {
   }
 
   /**
-   * Actualiza el título de la página.
+   * Actualiza el título de la página con el nombre completo del paciente si está disponible.
+   * Utiliza los datos del paciente para actualizar el título de la página.
+   * @returns {void}
+   * @private
    */
   private _refreshTitle(): void {
     let title = this.pageTitle.split(' - ');

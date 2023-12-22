@@ -28,8 +28,12 @@ export class ButtonsDoctorsCardComponent {
   ) {}
 
   /**
-   * Elimina un médico
-   * @param id Identificador del médico
+   * Elimina un doctor según su ID.
+   * Muestra un diálogo de confirmación antes de realizar la eliminación.
+   * Emite un evento para actualizar la lista de doctores después de la eliminación exitosa.
+   * @param {string} id - El ID del doctor que se desea eliminar.
+   * @returns {void}
+   * @public
    */
   public deleteDoctor(id: string): void {
     this._notificationService.showConfirmDeleteDialog(() => {
@@ -47,8 +51,12 @@ export class ButtonsDoctorsCardComponent {
   }
 
   /**
-   * Activa un médico
-   * @param id Identificador del médico
+   * Activa un médico utilizando su ID.
+   * Muestra un diálogo de confirmación antes de realizar la activación.
+   * Emite un evento para actualizar la lista de médicos después de la activación exitosa.
+   * @param {string} id - El ID del médico que se desea activar.
+   * @returns {void}
+   * @public
    */
   public activateDoctor(id: string): void {
     this._notificationService.showConfirmReactivateDialog(() => {

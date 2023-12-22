@@ -11,9 +11,6 @@ import { AppointmentService } from 'src/app/core/services/entities/appointment.s
 import { MedicalspecialtyService } from 'src/app/core/services/entities/medicalspecialty.service';
 import { NotificationService } from 'src/app/core/services/notifications/notification.service';
 
-// Modelos
-import { Appointment } from 'src/app/core/models/appointment.interface';
-
 /**
  * Componente que representa la tarjeta de creación de una solicitud de cita
  */
@@ -66,12 +63,15 @@ export class CreateAppointmentRequestCardComponent implements OnInit {
     this._getSpecialties();
   }
 
+  /** Obtiene el formulario. */
   get form() {
     return this.createAppointmentRequestForm;
   }
 
   /**
-   * Maneja la acción de enviar el formulario.
+   * Ejecuta la lógica al enviar el formulario para crear una cita.
+   * @public
+   * @returns {void}
    */
   public onSubmit(): void {
     this.submitted = true;
@@ -99,7 +99,9 @@ export class CreateAppointmentRequestCardComponent implements OnInit {
   }
 
   /**
-   * Obtiene las especialidades médicas.
+   * Obtiene y actualiza la lista de especialidades médicas.
+   * @private
+   * @returns {void}
    */
   private _getSpecialties(): void {
     this._medicalSpecialtyService.getItems().subscribe({
@@ -116,8 +118,11 @@ export class CreateAppointmentRequestCardComponent implements OnInit {
   }
 
   /**
-   * Formatea los tipos de cita.
+   * Formatea y actualiza la lista de tipos de citas.
+   * @private
+   * @returns {void}
    */
+
   private _formatTypes(): void {
     this.types = TYPE_APPOINTMENT_OPTIONS.map(
       (type: { value: string; text: string }) => {

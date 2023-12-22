@@ -59,7 +59,11 @@ export class EditContactInfoPatientsCardComponent implements OnInit {
   }
 
   /**
-   * Maneja la acción de enviar el formulario.
+   * Gestiona el envío del formulario de actualización de información del paciente.
+   * Actualiza la información de contacto del paciente utilizando los datos ingresados en el formulario.
+   * Emite un evento para actualizar la lista de pacientes después de la actualización exitosa.
+   * @returns {void}
+   * @public
    */
   public onSubmit(): void {
     this.submitted = true;

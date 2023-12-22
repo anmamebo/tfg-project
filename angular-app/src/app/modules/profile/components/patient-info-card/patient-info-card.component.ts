@@ -111,7 +111,11 @@ export class PatientInfoCardComponent implements OnInit {
   }
 
   /**
-   * Maneja la acción de envio del formulario
+   * Actualiza la información del paciente con los datos proporcionados en el formulario.
+   * Realiza una solicitud para actualizar los detalles del paciente y muestra notificaciones de éxito o error según el resultado.
+   * Emite un evento de actualización del paciente en caso de éxito.
+   * @returns {void}
+   * @public
    */
   public onSubmit(): void {
     this.submitted = true;
@@ -155,7 +159,11 @@ export class PatientInfoCardComponent implements OnInit {
   }
 
   /**
-   * Obtiene los países.
+   * Obtiene la lista de países desde el servicio de países.
+   * Asigna las nacionalidades recuperadas a la propiedad 'nationalities' de la clase actual.
+   * Ordena alfabéticamente las nacionalidades obtenidas y las almacena para su uso.
+   * @returns {void}
+   * @private
    */
   private _getCountries(): void {
     this._countriesService.getCountries().subscribe({

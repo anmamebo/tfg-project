@@ -52,7 +52,11 @@ export class EditInfoDepartmentsCardComponent implements OnInit {
   }
 
   /**
-   * Maneja la acción de envio del formulario
+   * Realiza la acción de envío del formulario.
+   * Actualiza la información del departamento si es válido y está completo.
+   * Muestra notificaciones de error o éxito según corresponda.
+   * @public
+   * @returns {void}
    */
   public onSubmit(): void {
     this.submitted = true;

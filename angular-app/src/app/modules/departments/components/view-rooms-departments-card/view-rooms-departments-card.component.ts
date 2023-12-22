@@ -59,8 +59,10 @@ export class ViewRoomsDepartmentsCardComponent implements OnInit {
   }
 
   /**
-   * Va a la página indicada.
-   * @param page Número de página al que se quiere ir.
+   * Cambia la página de visualización y actualiza las habitaciones por departamento en la nueva página.
+   * @param {number} page - El número de página al que se desea navegar.
+   * @returns {void}
+   * @public
    */
   public goToPage(page: number): void {
     this.page = page;
@@ -68,16 +70,21 @@ export class ViewRoomsDepartmentsCardComponent implements OnInit {
   }
 
   /**
-   * Lanza el evento de búsqueda.
-   * @param searchTerm Término de búsqueda.
+   * Maneja el evento de envío de búsqueda y actualiza la lista de habitaciones por departamento con el término de búsqueda proporcionado.
+   * @param {string} searchTerm - Término de búsqueda para filtrar la lista de habitaciones.
+   * @returns {void}
+   * @public
    */
   public onSearchSubmitted(searchTerm: string): void {
     this.getRoomsByDepartmentId(this.page, searchTerm);
   }
 
   /**
-   * Obtiene las salas de un departamento.
-   * @param page Número de página al que se quiere ir.
+   * Obtiene la lista de habitaciones por departamento, opcionalmente filtrada por término de búsqueda y paginada.
+   * @param {number} page - Número de página para la paginación.
+   * @param {string} [searchTerm] - Término opcional para filtrar la lista de habitaciones.
+   * @returns {void}
+   * @public
    */
   public getRoomsByDepartmentId(page: number, searchTerm?: string): void {
     // Comprueba si el término de búsqueda ha cambiado

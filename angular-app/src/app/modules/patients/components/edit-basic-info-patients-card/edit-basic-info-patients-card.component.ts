@@ -113,7 +113,11 @@ export class EditBasicInfoPatientsCardComponent implements OnInit {
   }
 
   /**
-   * Maneja la acción de envio del formulario
+   * Gestiona el envío del formulario de actualización de información del paciente.
+   * Actualiza la información del paciente utilizando los datos ingresados en el formulario.
+   * Emite un evento para actualizar la lista de pacientes después de la actualización exitosa.
+   * @returns {void}
+   * @public
    */
   public onSubmit(): void {
     this.submitted = true;
@@ -166,7 +170,10 @@ export class EditBasicInfoPatientsCardComponent implements OnInit {
   }
 
   /**
-   * Obtiene los países.
+   * Obtiene la lista de países y prepara los datos para su uso como nacionalidades.
+   * Actualiza la lista de nacionalidades con los países obtenidos del servicio.
+   * @returns {void}
+   * @private
    */
   private _getCountries(): void {
     this._countriesService.getCountries().subscribe({

@@ -61,7 +61,10 @@ export class DoctorInfoCardComponent implements OnInit {
   }
 
   /**
-   * Maneja la acción de envio del formulario
+   * Actualiza la información del doctor con los datos proporcionados en el formulario.
+   * Realiza una solicitud para actualizar los detalles del doctor y muestra notificaciones de éxito o error según el resultado.
+   * @returns {void}
+   * @public
    */
   public onSubmit(): void {
     this.submitted = true;

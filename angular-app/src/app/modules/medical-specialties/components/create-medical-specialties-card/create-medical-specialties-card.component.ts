@@ -39,7 +39,10 @@ export class CreateMedicalSpecialtiesCardComponent {
   }
 
   /**
-   * Maneja la acción de enviar el formulario.
+   * Maneja el envío del formulario para la creación de una nueva especialidad médica.
+   * Crea una nueva especialidad médica utilizando la información ingresada en el formulario.
+   * @returns {void}
+   * @public
    */
   public onSubmit(): void {
     this.submitted = true;

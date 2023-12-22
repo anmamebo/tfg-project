@@ -22,9 +22,11 @@ export class ElementsPerPageComponent {
   public quantityOptions: number[] = [5, 10, 20, 50, 100];
 
   /**
-   * Lanza el evento de cambio de número de resultados por página
+   * Emite un evento cuando se cambia el número de elementos por página seleccionado.
+   * @public
+   * @returns {void}
    */
-  onSelectChanged(): void {
+  public onSelectChanged(): void {
     this.elementsPerPageChangedEvent.emit(this.elementsPerPage);
   }
 }

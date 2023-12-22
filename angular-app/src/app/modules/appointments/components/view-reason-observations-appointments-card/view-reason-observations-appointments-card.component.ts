@@ -48,7 +48,9 @@ export class ViewReasonObservationsAppointmentsCardComponent implements OnInit {
   }
 
   /**
-   * Maneja la acción de enviar el formulario.
+   * Envía las observaciones actualizadas para una cita.
+   * @public
+   * @returns {void}
    */
   public onSubmit(): void {
     this.submitted = true;

@@ -12,6 +12,12 @@ import { Observable, catchError } from 'rxjs';
 export class ErrorHandlerInterceptor implements HttpInterceptor {
   constructor() {}
 
+  /**
+   * Intercepta las solicitudes HTTP y maneja los errores.
+   * @param {HttpRequest<any>} request - La solicitud HTTP.
+   * @param {HttpHandler} next - El siguiente manipulador en la cadena.
+   * @returns {Observable<HttpEvent<any>>} - Un observable de eventos HTTP.
+   */
   intercept(
     request: HttpRequest<any>,
     next: HttpHandler

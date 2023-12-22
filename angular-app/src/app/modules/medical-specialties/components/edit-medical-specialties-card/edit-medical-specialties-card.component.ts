@@ -55,7 +55,10 @@ export class EditMedicalSpecialtiesCardComponent {
   }
 
   /**
-   * Maneja la acción de envio del formulario
+   * Maneja el envío del formulario para la actualización de una especialidad médica existente.
+   * Actualiza la información de la especialidad médica en función de los datos ingresados en el formulario.
+   * @returns {void}
+   * @public
    */
   public onSubmit(): void {
     this.submitted = true;

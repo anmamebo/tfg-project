@@ -69,7 +69,9 @@ export class SchedulePageComponent implements OnInit {
   }
 
   /**
-   * Obtiene los horarios del doctor y actualiza la lista de eventos del calendario.
+   * Obtiene el horario asociado a un doctor y actualiza los eventos en la interfaz.
+   * @public
+   * @returns {void}
    */
   public getScheduleByDoctor(): void {
     this._scheduleService.getScheduleByDoctor().subscribe({
@@ -91,12 +93,20 @@ export class SchedulePageComponent implements OnInit {
   }
 
   /**
-   * Maneja el clic en un día del calendario.
-   * @param param - Objeto con la fecha y eventos asociados al día clicado.
-   * @param param.date - Fecha clicada.
-   * @param param.events - Eventos asociados a la fecha clicada.
+   * Maneja el evento de clic en un día del calendario.
+   * @public
+   * @param {object} params - Objeto que contiene la fecha y eventos del día clicado.
+   * @param {Date} params.date - Fecha del día clicado.
+   * @param {CalendarEvent[]} params.events - Lista de eventos asociados al día clicado.
+   * @returns {void}
    */
-  dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
+  public dayClicked({
+    date,
+    events,
+  }: {
+    date: Date;
+    events: CalendarEvent[];
+  }): void {
     if (isSameMonth(date, this.viewDate)) {
       if (
         (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
@@ -111,13 +121,16 @@ export class SchedulePageComponent implements OnInit {
   }
 
   /**
-   * Maneja el cambio en la hora de un evento del calendario.
-   * @param param - Objeto con el evento y las nuevas fechas.
-   * @param param.event - Evento del calendario.
-   * @param param.newStart - Nueva fecha de inicio.
-   * @param param.newEnd - Nueva fecha de fin.
+   * Maneja el evento de cambio de tiempo de un evento en el calendario.
+   * Actualiza las fechas de inicio y fin del evento modificado en la lista de eventos.
+   * @public
+   * @param {object} params - Objeto que contiene el evento y las nuevas fechas de inicio y fin.
+   * @param {CalendarEvent} params.event - Evento que experimenta el cambio de tiempo.
+   * @param {Date} params.newStart - Nueva fecha de inicio del evento.
+   * @param {Date} params.newEnd - Nueva fecha de fin del evento.
+   * @returns {void}
    */
-  eventTimesChanged({
+  public eventTimesChanged({
     event,
     newStart,
     newEnd,
@@ -135,17 +148,21 @@ export class SchedulePageComponent implements OnInit {
   }
 
   /**
-   * Settea la vista del calendario.
-   * @param view Vista del calendario.
+   * Establece la vista del calendario a la vista proporcionada.
+   * @public
+   * @param {CalendarView} view - La vista del calendario que se establecerá.
+   * @returns {void}
    */
-  setView(view: CalendarView) {
+  public setView(view: CalendarView): void {
     this.view = view;
   }
 
   /**
-   * Cierra el día abierto en la vista mensual del calendario.
+   * Cierra la vista expandida de un día en el modo de vista mensual del calendario.
+   * @public
+   * @returns {void}
    */
-  closeOpenMonthViewDay(): void {
+  public closeOpenMonthViewDay(): void {
     this.activeDayIsOpen = false;
   }
 }

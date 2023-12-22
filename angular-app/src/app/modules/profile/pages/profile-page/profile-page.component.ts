@@ -42,7 +42,10 @@ export class ProfilePageComponent implements OnInit {
   }
 
   /**
-   * Obtiene los datos del usuario actual y los asigna a la propiedad `user`.
+   * Obtiene los detalles del usuario actual y actualiza la propiedad 'user'.
+   * Actualiza los detalles del usuario en el servicio de almacenamiento de tokens.
+   * @public
+   * @returns {void}
    */
   public getUser(): void {
     const userSession = this._tokenStorageService.getUser();

@@ -70,7 +70,10 @@ export class CreateRoomsCardComponent implements OnInit {
   }
 
   /**
-   * Maneja la acción de enviar el formulario.
+   * Maneja la presentación del formulario para la creación de una sala.
+   * Si el formulario es válido, crea una nueva sala con la información proporcionada.
+   * @public
+   * @returns {void}
    */
   public onSubmit(): void {
     this.submitted = true;
@@ -102,9 +105,11 @@ export class CreateRoomsCardComponent implements OnInit {
   }
 
   /**
-   * Obtiene los departamentos.
+   * Obtiene la lista de departamentos y los asigna a la propiedad 'departments'.
+   * @public
+   * @returns {void}
    */
-  public getDepartments() {
+  public getDepartments(): void {
     this._departmentService.getItems().subscribe({
       next: (data) => {
         this.departments = data.map((item: { id: String; name: String }) => ({

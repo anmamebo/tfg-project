@@ -58,18 +58,24 @@ export class AvatarCardComponent {
   }
 
   /**
-   * Cierra el modal para cambiar el avatar.
+   * Cierra el componente de cambio de avatar.
+   * Restablece el estado de envío de datos a falso y cierra el componente modal de cambio de avatar.
+   * @returns {void}
+   * @public
    */
-  public closeChangeAvatar() {
+  public closeChangeAvatar(): void {
     this.submitted = false;
     this.changeAvatar.close();
   }
 
   /**
-   * Maneja el evento de cambio de archivo.
-   * @param event Evento de cambio de archivo.
+   * Maneja el cambio de archivo de entrada para el componente de selección de avatar.
+   * Actualiza el valor del archivo seleccionado en el formulario del avatar.
+   * @param {any} event - Evento de cambio de archivo del componente de selección de archivos.
+   * @returns {void}
+   * @public
    */
-  public onFileChange(event: any) {
+  public onFileChange(event: any): void {
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
       this.avatarForm.patchValue({
@@ -79,9 +85,13 @@ export class AvatarCardComponent {
   }
 
   /**
-   * Maneja la acción de enviar el formulario.
+   * Gestiona el envío del formulario para actualizar la imagen de perfil del usuario.
+   * Actualiza la imagen de perfil del usuario mediante el archivo seleccionado en el formulario.
+   * Muestra una notificación de éxito o error según el resultado de la actualización.
+   * @returns {void}
+   * @public
    */
-  public onSubmit() {
+  public onSubmit(): void {
     this.submitted = true;
 
     if (!this.user) {
@@ -111,9 +121,14 @@ export class AvatarCardComponent {
   }
 
   /**
-   * Maneja la acción de eliminar la imagen de perfil.
+   * Elimina la imagen de perfil del usuario.
+   * Realiza una solicitud para eliminar la imagen de perfil del usuario actual.
+   * Actualiza la imagen de perfil emitida por el servicio de imágenes de perfil.
+   * Muestra una notificación de éxito o error según el resultado de la eliminación.
+   * @returns {void}
+   * @public
    */
-  public onDeleteProfilePicture() {
+  public onDeleteProfilePicture(): void {
     this._userService.deleteProfilePicture().subscribe({
       next: (response) => {
         this._profileImageService.emitProfileImageUpdated(

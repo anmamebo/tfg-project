@@ -45,7 +45,9 @@ export class CreateGroupCardComponent {
   }
 
   /**
-   * Maneja la acción de envio del formulario
+   * Envía el formulario para crear un grupo.
+   * @public
+   * @returns {void}
    */
   public onSubmit(): void {
     this.submitted = true;

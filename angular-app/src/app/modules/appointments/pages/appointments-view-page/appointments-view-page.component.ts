@@ -51,7 +51,9 @@ export class AppointmentsViewPageComponent {
   }
 
   /**
-   * Actualiza los datos de la cita
+   * Actualiza la información de la cita actual, refrescando los datos desde el servicio.
+   * @public
+   * @returns {void}
    */
   public onRefreshAppointment(): void {
     if (!this.appointment) {

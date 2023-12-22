@@ -92,7 +92,9 @@ export class EditInfoRoomsCardComponent implements OnInit {
   }
 
   /**
-   * Maneja la acción de envio del formulario
+   * Actualiza la información de una sala existente.
+   * @public
+   * @returns {void}
    */
   public onSubmit(): void {
     this.submitted = true;
@@ -131,9 +133,11 @@ export class EditInfoRoomsCardComponent implements OnInit {
   }
 
   /**
-   * Obtiene los departamentos.
+   * Obtiene la lista de departamentos y los asigna a la propiedad 'departments'.
+   * @public
+   * @returns {void}
    */
-  public getDepartments() {
+  public getDepartments(): void {
     this._departmentService.getItems().subscribe({
       next: (data) => {
         this.departments = data.map((item: { id: String; name: String }) => ({

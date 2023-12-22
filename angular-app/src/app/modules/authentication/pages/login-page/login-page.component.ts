@@ -43,7 +43,9 @@ export class LoginPageComponent {
   }
 
   /**
-   * Maneja la acción de envío del formulario de inicio de sesión.
+   * Maneja el envío del formulario de inicio de sesión.
+   * @public
+   * @returns {void}
    */
   public onSubmit(): void {
     this.submitted = true;
@@ -62,7 +64,6 @@ export class LoginPageComponent {
       next: (data) => {
         this.errorMessage = '';
         this._tokenStorageService.saveSingIn(data);
-        // TODO: no se hace así
         this._router.navigate(['/']);
       },
       error: (e) => {

@@ -9,6 +9,14 @@ import { inject } from '@angular/core';
 
 import { MedicalspecialtyService } from 'src/app/core/services/entities/medicalspecialty.service';
 
+/**
+ * Resolver que obtiene detalles de una especialidad médica por su ID.
+ * @param {ActivatedRouteSnapshot} route - El snapshot actual de la ruta.
+ * @param {RouterStateSnapshot} state - El estado actual del enrutador.
+ * @param {MedicalspecialtyService} medicalSpecialtyService - Servicio para obtener detalles de la especialidad médica.
+ * @param {Router} router - Enrutador para redireccionar en caso de error.
+ * @returns {Observable<any>} - Un observable que emite los detalles de la especialidad médica.
+ */
 export const medicalSpecialtyResolver: ResolveFn<any> = (
   route: ActivatedRouteSnapshot,
   state: RouterStateSnapshot,

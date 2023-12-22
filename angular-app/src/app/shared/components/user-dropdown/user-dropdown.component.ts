@@ -26,7 +26,9 @@ export class UserDropdownComponent implements OnInit {
   }
 
   /**
-   * Método para cerrar la sesión del usuario.
+   * Cierra la sesión del usuario.
+   * @public
+   * @returns {void}
    */
   public logout(): void {
     this._authService.logOut().subscribe({
@@ -41,7 +43,9 @@ export class UserDropdownComponent implements OnInit {
   }
 
   /**
-   * Método para obtener el usuario logueado y actualizar el nombre de usuario.
+   * Obtiene la información del usuario desde el servicio de almacenamiento de tokens y establece el nombre de usuario.
+   * @private
+   * @returns {void}
    */
   private _getUser(): void {
     let user = this._tokenStorageService.getUser();

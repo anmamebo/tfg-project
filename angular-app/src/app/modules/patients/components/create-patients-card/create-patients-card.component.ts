@@ -141,7 +141,10 @@ export class CreatePatientsCardComponent implements OnInit {
   }
 
   /**
-   * Maneja la acción de enviar el formulario.
+   * Maneja el envío del formulario para la creación de un nuevo paciente.
+   * Crea un nuevo paciente utilizando la información ingresada en el formulario.
+   * @returns {void}
+   * @public
    */
   public onSubmit(): void {
     this.submitted = true;
@@ -194,7 +197,11 @@ export class CreatePatientsCardComponent implements OnInit {
   }
 
   /**
-   * Muestra u oculta los campos de dirección.
+   * Alterna la visualización de los campos de dirección.
+   * Cambia el estado de visualización de los campos de dirección entre visible e invisible.
+   * Inicializa los validadores de dirección en función del estado actual.
+   * @returns {void}
+   * @public
    */
   public toggleAddressInputs(): void {
     this.showAddressInputs = !this.showAddressInputs;
@@ -202,7 +209,11 @@ export class CreatePatientsCardComponent implements OnInit {
   }
 
   /**
-   * Inicializa los validadores de los campos de dirección en función de si se muestran o no.
+   * Inicializa los validadores para los campos de dirección, dependiendo del estado de visualización de dichos campos.
+   * Si los campos de dirección están visibles, se aplican validadores específicos a cada campo.
+   * Si los campos de dirección están ocultos, se eliminan los validadores de los campos correspondientes.
+   * @returns {void}
+   * @private
    */
   private _initAddressValidators(): void {
     this.submitted = false;
@@ -254,7 +265,10 @@ export class CreatePatientsCardComponent implements OnInit {
   }
 
   /**
-   * Obtiene los países.
+   * Obtiene la lista de países y prepara los datos para su uso como nacionalidades.
+   * Actualiza la lista de nacionalidades con los países obtenidos del servicio.
+   * @returns {void}
+   * @private
    */
   private _getCountries(): void {
     this._countriesService.getCountries().subscribe({

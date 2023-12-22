@@ -37,8 +37,10 @@ export class ViewInfoStatusAppointmentsCardComponent {
   ) {}
 
   /**
-   * Actualiza el estado de la cita
-   * @param status Nuevo estado de la cita
+   * Actualiza el estado de la cita.
+   * @public
+   * @param {string} status - Nuevo estado para la cita.
+   * @returns {void}
    */
   public updateStatus(status: string): void {
     if (!this.appointment) {

@@ -42,7 +42,10 @@ export class DoctorsViewPageComponent {
   }
 
   /**
-   * Actualiza los datos del médico
+   * Actualiza la información del médico actual volviendo a obtener sus datos desde el servicio.
+   * Si no hay médico definido, no se realiza ninguna acción.
+   * @returns {void}
+   * @public
    */
   onRefreshDoctor(): void {
     if (!this.doctor) return;

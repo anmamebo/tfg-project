@@ -74,7 +74,9 @@ export class AppointmentsCalendarPatientPageComponent implements OnInit {
   }
 
   /**
-   * Obtiene las citas del paciente.
+   * Obtiene citas del paciente con ciertos estados.
+   * @public
+   * @returns {void}
    */
   public getAppointments() {
     this._appointmentService
@@ -93,9 +95,10 @@ export class AppointmentsCalendarPatientPageComponent implements OnInit {
   }
 
   /**
-   * Formatea los datos de las citas para el calendario.
-   * @param appointments - Lista de citas.
-   * @returns Lista de eventos del calendario.
+   * Formatea los datos de las citas para su visualización en el calendario.
+   * @private
+   * @param {Appointment[]} appointments - Lista de citas a formatear.
+   * @returns {CalendarEvent[]} - Lista de eventos formateados para el calendario.
    */
   private _formatData(appointments: Appointment[]): CalendarEvent[] {
     return appointments.map((appointment: Appointment) => {
@@ -129,12 +132,19 @@ export class AppointmentsCalendarPatientPageComponent implements OnInit {
   }
 
   /**
-   * Maneja el clic en un día del calendario.
-   * @param param - Objeto con la fecha y eventos asociados al día clicado.
-   * @param param.date - Fecha clicada.
-   * @param param.events - Eventos asociados a la fecha clicada.
+   * Maneja el evento de clic en un día en el calendario.
+   * @public
+   * @param {Date} date - Fecha seleccionada.
+   * @param {CalendarEvent[]} events - Eventos del día seleccionado.
+   * @returns {void}
    */
-  dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
+  public dayClicked({
+    date,
+    events,
+  }: {
+    date: Date;
+    events: CalendarEvent[];
+  }): void {
     if (isSameMonth(date, this.viewDate)) {
       if (
         (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
@@ -150,12 +160,11 @@ export class AppointmentsCalendarPatientPageComponent implements OnInit {
 
   /**
    * Maneja el cambio en la hora de un evento del calendario.
-   * @param param - Objeto con el evento y las nuevas fechas.
-   * @param param.event - Evento del calendario.
-   * @param param.newStart - Nueva fecha de inicio.
-   * @param param.newEnd - Nueva fecha de fin.
+   * @public
+   * @param {CalendarEventTimesChangedEvent} event - Evento del calendario.
+   * @returns {void}
    */
-  eventTimesChanged({
+  public eventTimesChanged({
     event,
     newStart,
     newEnd,
@@ -174,16 +183,20 @@ export class AppointmentsCalendarPatientPageComponent implements OnInit {
 
   /**
    * Settea la vista del calendario.
-   * @param view Vista del calendario.
+   * @public
+   * @param {CalendarView} view - Vista del calendario.
+   * @returns {void}
    */
-  setView(view: CalendarView) {
+  public setView(view: CalendarView): void {
     this.view = view;
   }
 
   /**
    * Cierra el día abierto en la vista mensual del calendario.
+   * @public
+   * @returns {void}
    */
-  closeOpenMonthViewDay(): void {
+  public closeOpenMonthViewDay(): void {
     this.activeDayIsOpen = false;
   }
 }

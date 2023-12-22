@@ -55,7 +55,10 @@ export class EditContactInfoDoctorsCardComponent implements OnInit {
   }
 
   /**
-   * Maneja la acción de enviar el formulario.
+   * Maneja el envío del formulario para actualizar la información del médico, incluyendo su correo electrónico.
+   * Actualiza los datos del médico en función de la información ingresada en el formulario.
+   * @returns {void}
+   * @public
    */
   public onSubmit(): void {
     this.submitted = true;

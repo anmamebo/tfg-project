@@ -23,7 +23,9 @@ export class SearchComponent {
   }
 
   /**
-   * Emite el evento searchSubmitted.
+   * Envia el término de búsqueda obtenido del formulario.
+   * @public
+   * @returns {void}
    */
   public submitSearch(): void {
     const searchTerm = this.formSearch.get('searchTerm')?.value;

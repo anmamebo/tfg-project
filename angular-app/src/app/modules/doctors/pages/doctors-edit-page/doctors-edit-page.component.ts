@@ -44,7 +44,10 @@ export class DoctorsEditPageComponent implements OnInit {
   }
 
   /**
-   * Actualiza los datos del médico.
+   * Actualiza la información del médico actual volviendo a obtener sus datos desde el servicio.
+   * Si no hay médico definido, no se realiza ninguna acción.
+   * @returns {void}
+   * @public
    */
   public onRefreshDoctor(): void {
     if (!this.doctor) {
@@ -59,7 +62,10 @@ export class DoctorsEditPageComponent implements OnInit {
   }
 
   /**
-   * Actualiza el título de la página.
+   * Actualiza el título de la página concatenando el nombre completo del médico, si está disponible.
+   * Es un método privado utilizado para refrescar el título de la página.
+   * @returns {void}
+   * @private
    */
   private _refreshTitle(): void {
     let title = this.pageTitle.split(' - ');

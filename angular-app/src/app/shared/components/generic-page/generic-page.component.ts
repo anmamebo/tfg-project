@@ -21,7 +21,9 @@ export class GenericPageComponent {
   constructor(private _location: Location) {}
 
   /**
-   * Regresa a la página anterior.
+   * Navega hacia atrás en el historial del navegador.
+   * @public
+   * @returns {void}
    */
   public goBack(): void {
     this._location.back();

@@ -56,7 +56,9 @@ export class FormCreateTreatmentAppointmentsComponent {
   }
 
   /**
-   * Maneja la acción de enviar el formulario.
+   * Ejecuta la lógica al enviar el formulario para crear un tratamiento.
+   * @public
+   * @returns {void}
    */
   public onSubmit(): void {
     this.submitted = true;

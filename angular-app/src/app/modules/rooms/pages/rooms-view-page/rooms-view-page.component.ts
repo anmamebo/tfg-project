@@ -40,7 +40,9 @@ export class RoomsViewPageComponent implements OnInit {
   }
 
   /**
-   * Actualiza los datos de la sala
+   * Actualiza los datos de la sala actual a partir de su ID.
+   * @public
+   * @returns {void}
    */
   onRefreshRoom(): void {
     if (!this.room) return;

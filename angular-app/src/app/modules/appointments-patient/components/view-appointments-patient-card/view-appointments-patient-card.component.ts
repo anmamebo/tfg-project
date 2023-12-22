@@ -48,9 +48,15 @@ export class ViewAppointmentsPatientCardComponent implements OnInit {
   }
 
   /**
-   * Cancela la cita.
+   * Cancela una cita.
+   * Si no hay una cita disponible, muestra un mensaje de error.
+   * Muestra un diálogo de confirmación para confirmar la cancelación de la cita.
+   * Si se confirma la cancelación, actualiza el estado de la cita a "cancelled" a través del servicio `_appointmentService`.
+   * Emite el evento `appointmentCancelled` si la cita se cancela correctamente.
+   * @public
+   * @returns {void}
    */
-  public cancelAppointment() {
+  public cancelAppointment(): void {
     if (!this.appointment) {
       this._notificationService.showErrorToast(
         'No se ha podido cancelar la cita.'
@@ -83,9 +89,11 @@ export class ViewAppointmentsPatientCardComponent implements OnInit {
   }
 
   /**
-   * Genera el título de la tarjeta.
+   * Genera el título para una cita médica a partir de la información del doctor, fecha y hora.
+   * @private
+   * @returns {void}
    */
-  private _generateTitle() {
+  private _generateTitle(): void {
     if (
       this.appointment &&
       this.appointment.schedule &&
@@ -106,7 +114,9 @@ export class ViewAppointmentsPatientCardComponent implements OnInit {
   }
 
   /**
-   * Descarga el PDF de la cita.
+   * Descarga un archivo PDF relacionado con la cita médica.
+   * @public
+   * @returns {void}
    */
   public downloadPDF(): void {
     if (!this.appointment) return;
@@ -121,7 +131,9 @@ export class ViewAppointmentsPatientCardComponent implements OnInit {
   }
 
   /**
-   * Imprime el PDF de la cita.
+   * Imprime un archivo PDF relacionado con la cita médica.
+   * @public
+   * @returns {void}
    */
   public printPDF(): void {
     if (!this.appointment) return;

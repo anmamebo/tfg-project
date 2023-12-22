@@ -77,7 +77,10 @@ export class CreateDoctorsCardComponent implements OnInit {
   }
 
   /**
-   * Maneja la acción de enviar el formulario.
+   * Maneja el envío del formulario para crear un nuevo doctor.
+   * Actualiza la información del nuevo doctor en función de los datos ingresados en el formulario.
+   * @returns {void}
+   * @public
    */
   public onSubmit(): void {
     this.submitted = true;
@@ -119,7 +122,9 @@ export class CreateDoctorsCardComponent implements OnInit {
   }
 
   /**
-   * Obtiene las especialidades médicas.
+   * Obtiene las especialidades médicas desde el servicio y actualiza la lista de especialidades disponibles.
+   * @returns {void}
+   * @public
    */
   public getMedicalSpecialties() {
     this._medicalSpecialtyService.getItems().subscribe({
@@ -138,7 +143,9 @@ export class CreateDoctorsCardComponent implements OnInit {
   }
 
   /**
-   * Obtiene los departamentos.
+   * Obtiene los departamentos desde el servicio y actualiza la lista de departamentos disponibles.
+   * @returns {void}
+   * @public
    */
   public getDepartments() {
     this._departmentService.getItems().subscribe({

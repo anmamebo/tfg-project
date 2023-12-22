@@ -28,8 +28,12 @@ export class ButtonsRoomsCardComponent {
   ) {}
 
   /**
-   * Elimina una sala
-   * @param id Identificador de la sala
+   * Elimina una sala específica.
+   * Muestra un diálogo de confirmación antes de la eliminación.
+   * Emite un evento de actualización ('refreshRoom') después de eliminar la sala.
+   * @public
+   * @param {string} id - El ID de la sala que se eliminará.
+   * @returns {void}
    */
   public deleteRoom(id: string): void {
     this._notificationService.showConfirmDeleteDialog(() => {
@@ -47,8 +51,12 @@ export class ButtonsRoomsCardComponent {
   }
 
   /**
-   * Activa una sala
-   * @param id Identificador de la sala
+   * Activa una sala específica.
+   * Muestra un diálogo de confirmación antes de la activación.
+   * Emite un evento de actualización ('refreshRoom') después de activar la sala.
+   * @public
+   * @param {string} id - El ID de la sala que se activará.
+   * @returns {void}
    */
   public activateRoom(id: string): void {
     this._notificationService.showConfirmReactivateDialog(() => {

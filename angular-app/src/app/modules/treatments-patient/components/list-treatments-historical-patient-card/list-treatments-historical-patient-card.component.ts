@@ -23,10 +23,11 @@ export class ListTreatmentsHistoricalPatientCardComponent extends GenericListCar
   }
 
   /**
-   * Obtiene los tratamientos.
-   *
-   * @param page Número de página.
-   * @param searchTerm Término de búsqueda.
+   * Obtiene los elementos correspondientes a una página específica y un término de búsqueda opcional.
+   * @public
+   * @param {number} page - El número de página a obtener.
+   * @param {string} [searchTerm] - El término de búsqueda opcional.
+   * @returns {void}
    */
   public override getItems(page: number, searchTerm?: string): void {
     if (

@@ -47,7 +47,9 @@ export class EditGroupCardComponent implements OnInit {
   }
 
   /**
-   * Maneja la acción de envio del formulario
+   * Envía el formulario para actualizar un grupo existente.
+   * @public
+   * @returns {void}
    */
   public onSubmit(): void {
     this.submitted = true;

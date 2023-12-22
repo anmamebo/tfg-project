@@ -32,10 +32,11 @@ export class ViewTreatmentsAppointmentsCardComponent extends GenericListCardComp
   }
 
   /**
-   * Obtiene los tratamientos de una cita.
-   *
-   * @param page Número de página.
-   * @param searchTerm Término de búsqueda.
+   * Obtiene los tratamientos relacionados con una cita específica para mostrarlos en la interfaz.
+   * @public
+   * @param {number} page - Página actual de la lista de tratamientos.
+   * @param {string} [searchTerm] - Término de búsqueda opcional para filtrar los tratamientos.
+   * @returns {void}
    */
   public override getItems(page: number, searchTerm?: string): void {
     if (!this.appointment) return;

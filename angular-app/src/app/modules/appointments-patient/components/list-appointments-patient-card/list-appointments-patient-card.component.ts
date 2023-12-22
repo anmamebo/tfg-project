@@ -21,10 +21,11 @@ export class ListAppointmentsPatientCardComponent extends GenericListCardCompone
   }
 
   /**
-   * Obtiene las citas.
-   *
-   * @param page Número de página.
-   * @param searchTerm Término de búsqueda.
+   * Obtiene citas de pacientes con ciertos estados y opciones de búsqueda.
+   * @public
+   * @param {number} page - Número de la página actual.
+   * @param {string} [searchTerm] - Término de búsqueda opcional.
+   * @returns {void}
    */
   public override getItems(page: number, searchTerm?: string): void {
     if (

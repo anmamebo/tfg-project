@@ -28,8 +28,12 @@ export class ButtonsPatientsCardComponent {
   ) {}
 
   /**
-   * Elimina un paciente
-   * @param id Identificador del paciente
+   * Elimina un paciente utilizando su ID.
+   * Muestra un diálogo de confirmación antes de realizar la eliminación.
+   * Emite un evento para actualizar la lista de pacientes después de la eliminación exitosa.
+   * @param {string} id - El ID del paciente que se desea eliminar.
+   * @returns {void}
+   * @public
    */
   public deletePatient(id: string): void {
     this._notificationService.showConfirmDeleteDialog(() => {
@@ -47,8 +51,12 @@ export class ButtonsPatientsCardComponent {
   }
 
   /**
-   * Activa un paciente
-   * @param id Identificador del paciente
+   * Activa un paciente utilizando su ID.
+   * Muestra un diálogo de confirmación antes de realizar la activación.
+   * Emite un evento para actualizar la lista de pacientes después de la activación exitosa.
+   * @param {string} id - El ID del paciente que se desea activar.
+   * @returns {void}
+   * @public
    */
   public activatePatient(id: string): void {
     this._notificationService.showConfirmReactivateDialog(() => {

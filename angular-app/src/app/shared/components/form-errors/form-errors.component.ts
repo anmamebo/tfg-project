@@ -16,8 +16,9 @@ export class FormErrorsComponent {
   @Input() public submitted: boolean = false;
 
   /**
-   * Obtiene los mensajes de error del control
-   * @returns Mensajes de error
+   * Devuelve un array de mensajes de error asociados al control actual.
+   * @public
+   * @returns {string[]} Array de mensajes de error.
    */
   public getErrorMessages(): string[] {
     const errors: string[] = [];

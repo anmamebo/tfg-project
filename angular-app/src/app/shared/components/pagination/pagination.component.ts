@@ -23,7 +23,9 @@ export class PaginationComponent {
   constructor() {}
 
   /**
-   * Va a la página siguiente
+   * Avanza a la siguiente página y ejecuta la función para cambiar de página.
+   * @public
+   * @returns {void}
    */
   public next(): void {
     this.page++;
@@ -31,7 +33,9 @@ export class PaginationComponent {
   }
 
   /**
-   * Va a la página anterior
+   * Retrocede a la página anterior y ejecuta la función para cambiar de página.
+   * @public
+   * @returns {void}
    */
   public prev(): void {
     this.page--;
@@ -39,7 +43,10 @@ export class PaginationComponent {
   }
 
   /**
-   * Va a la página indicada
+   * Navega a una página específica dentro del rango de páginas disponibles.
+   * @public
+   * @param {number} pageNumber - El número de la página a la que se quiere ir.
+   * @returns {void}
    */
   public goToPage(pageNumber: number): void {
     if (pageNumber >= 1 && pageNumber <= this.totalPages) {
@@ -49,30 +56,20 @@ export class PaginationComponent {
   }
 
   /**
-   * Emite al padre la página a la que se quiere ir
+   * Emite un evento indicando el cambio de página.
+   * @public
+   * @returns {void}
    */
   public turnPage(): void {
     this.pageEmitter.emit(this.page);
   }
 
   /**
-   * Devuelve un array con las páginas que se van a mostrar en la paginación
-   * @returns Array con las páginas que se van a mostrar en la paginación
+   * Retorna un array con el número total de páginas.
+   * @public
+   * @returns {number[]} - Array con números representando las páginas.
    */
   public getPages(): number[] {
-    // const maxDisplayedPages = 8;
-    // const pagesBeforeCurrent = Math.floor(maxDisplayedPages / 2);
-    // const pagesAfterCurrent = maxDisplayedPages - pagesBeforeCurrent;
-
-    // let startPage = Math.max(1, this.page - pagesBeforeCurrent);
-    // let endPage = Math.min(this.totalPages, this.page + pagesAfterCurrent);
-
-    // if (endPage - startPage < maxDisplayedPages) {
-    //   startPage = Math.max(1, endPage - maxDisplayedPages + 1);
-    // }
-
-    // return Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i);
-
     return Array.from({ length: this.totalPages }, (_, i) => i + 1);
   }
 }

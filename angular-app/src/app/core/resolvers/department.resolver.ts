@@ -9,6 +9,14 @@ import { inject } from '@angular/core';
 
 import { DepartmentService } from '../services/entities/department.service';
 
+/**
+ * Resolver que obtiene detalles de un departamento por su ID.
+ * @param {ActivatedRouteSnapshot} route - El snapshot actual de la ruta.
+ * @param {RouterStateSnapshot} state - El estado actual del enrutador.
+ * @param {DepartmentService} departmentService - Servicio para obtener detalles del departamento.
+ * @param {Router} router - Enrutador para redireccionar en caso de error.
+ * @returns {Observable<any>} - Un observable que emite los detalles del departamento.
+ */
 export const departmentResolver: ResolveFn<any> = (
   route: ActivatedRouteSnapshot,
   state: RouterStateSnapshot,

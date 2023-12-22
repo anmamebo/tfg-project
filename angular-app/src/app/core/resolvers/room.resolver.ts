@@ -9,6 +9,14 @@ import { inject } from '@angular/core';
 
 import { RoomService } from '../services/entities/room.service';
 
+/**
+ * Resolver que obtiene detalles de una habitación por su ID.
+ * @param {ActivatedRouteSnapshot} route - El snapshot actual de la ruta.
+ * @param {RouterStateSnapshot} state - El estado actual del enrutador.
+ * @param {RoomService} roomService - Servicio para obtener detalles de la habitación.
+ * @param {Router} router - Enrutador para redireccionar en caso de error.
+ * @returns {Observable<any>} - Un observable que emite los detalles de la habitación.
+ */
 export const roomResolver: ResolveFn<any> = (
   route: ActivatedRouteSnapshot,
   state: RouterStateSnapshot,

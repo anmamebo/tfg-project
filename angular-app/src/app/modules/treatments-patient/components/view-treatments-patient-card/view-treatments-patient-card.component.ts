@@ -47,9 +47,11 @@ export class ViewTreatmentsPatientCardComponent implements OnInit {
   }
 
   /**
-   * Genera el título de la tarjeta.
+   * Genera un título para el tratamiento basado en su fecha de inicio y descripción.
+   * @private
+   * @returns {void}
    */
-  private _generateTitle() {
+  private _generateTitle(): void {
     if (this.treatment) {
       const start_date = new Date(this.treatment.start_date);
       const date = format(start_date, 'dd, MMMM yyyy', { locale: es });
@@ -59,9 +61,13 @@ export class ViewTreatmentsPatientCardComponent implements OnInit {
   }
 
   /**
-   * Completa el tratamiento.
+   * Completa el tratamiento actual, cambiando su estado a "completado".
+   * Muestra un diálogo de confirmación antes de completar el tratamiento.
+   * Emite un evento cuando se cambia el estado del tratamiento.
+   * @public
+   * @returns {void}
    */
-  public completeTreatment() {
+  public completeTreatment(): void {
     if (!this.treatment) {
       this._notificationService.showErrorToast(
         'No se ha podido completar el tratamiento.'
@@ -94,9 +100,13 @@ export class ViewTreatmentsPatientCardComponent implements OnInit {
   }
 
   /**
-   * Interrumpe el tratamiento.
+   * Interrumpe el tratamiento actual, cambiando su estado a "interrumpido".
+   * Muestra un diálogo de confirmación antes de interrumpir el tratamiento.
+   * Emite un evento cuando se cambia el estado del tratamiento.
+   * @public
+   * @returns {void}
    */
-  public interruptTreatment() {
+  public interruptTreatment(): void {
     if (!this.treatment) {
       this._notificationService.showErrorToast(
         'No se ha podido interrumpir el tratamiento.'
@@ -129,9 +139,13 @@ export class ViewTreatmentsPatientCardComponent implements OnInit {
   }
 
   /**
-   * Cancela el tratamiento.
+   * Cancela el tratamiento actual, cambiando su estado a "cancelado".
+   * Muestra un diálogo de confirmación antes de cancelar el tratamiento.
+   * Emite un evento cuando se cambia el estado del tratamiento.
+   * @public
+   * @returns {void}
    */
-  public cancelTreatment() {
+  public cancelTreatment(): void {
     if (!this.treatment) {
       this._notificationService.showErrorToast(
         'No se ha podido cancelar el tratamiento.'
@@ -164,7 +178,9 @@ export class ViewTreatmentsPatientCardComponent implements OnInit {
   }
 
   /**
-   * Descarga el PDF de la cita.
+   * Descarga el archivo PDF del tratamiento actual si está disponible.
+   * @public
+   * @returns {void}
    */
   public downloadPDF(): void {
     if (!this.treatment) return;
@@ -179,7 +195,9 @@ export class ViewTreatmentsPatientCardComponent implements OnInit {
   }
 
   /**
-   * Imprime el PDF de la cita.
+   * Imprime el archivo PDF del tratamiento actual si está disponible para impresión.
+   * @public
+   * @returns {void}
    */
   public printPDF(): void {
     if (!this.treatment) return;

@@ -40,7 +40,10 @@ export class MedicalSpecialtiesViewPageComponent implements OnInit {
   }
 
   /**
-   * Actualiza los datos de la especialidad médica
+   * Actualiza la información de la especialidad médica actual volviendo a obtener sus datos desde el servicio.
+   * Si no hay una especialidad médica definida, no se realiza ninguna acción.
+   * @returns {void}
+   * @public
    */
   onRefreshMedicalSpecialty(): void {
     if (!this.medicalSpecialty) return;

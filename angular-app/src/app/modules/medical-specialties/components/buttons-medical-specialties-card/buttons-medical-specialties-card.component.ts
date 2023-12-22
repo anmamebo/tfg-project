@@ -29,8 +29,12 @@ export class ButtonsMedicalSpecialtiesCardComponent {
   ) {}
 
   /**
-   * Elimina una especialidad médica
-   * @param id Identificador de la especialidad médica
+   * Elimina una especialidad médica según su ID.
+   * Muestra un diálogo de confirmación antes de realizar la eliminación.
+   * Emite un evento para actualizar la lista de especialidades médicas después de la eliminación exitosa.
+   * @param {string} id - El ID de la especialidad médica que se desea eliminar.
+   * @returns {void}
+   * @public
    */
   public deleteMedicalSpecialty(id: string): void {
     this._notificationService.showConfirmDeleteDialog(() => {
@@ -48,8 +52,12 @@ export class ButtonsMedicalSpecialtiesCardComponent {
   }
 
   /**
-   * Activa una especialidad médica
-   * @param id Identificador de la especialidad médica
+   * Activa una especialidad médica utilizando su ID.
+   * Muestra un diálogo de confirmación antes de realizar la activación.
+   * Emite un evento para actualizar la lista de especialidades médicas después de la activación exitosa.
+   * @param {string} id - El ID de la especialidad médica que se desea activar.
+   * @returns {void}
+   * @public
    */
   public activateMedicalSpecialty(id: string): void {
     this._notificationService.showConfirmReactivateDialog(() => {

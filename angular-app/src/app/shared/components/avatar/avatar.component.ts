@@ -46,8 +46,8 @@ export class AvatarComponent implements OnInit {
       next: (data) => {
         this.profile_picture = data.profile_picture;
       },
-      error: (e) => {
-        console.log(e);
+      error: (error) => {
+        console.error(error);
       },
       complete: () => {
         this._checkProfilePicture();
@@ -56,8 +56,8 @@ export class AvatarComponent implements OnInit {
   }
 
   /**
-   * Método para obtener la primera letra del nombre del usuario.
-   * @returns string la primera letra del nombre del usuario.
+   * Obtiene las iniciales del nombre del paciente.
+   * @returns {string} Las iniciales en mayúsculas del nombre del paciente.
    */
   public getFirstLetter(): string {
     const names = this.name.split(' '); // Divide el nombre en palabras
@@ -69,7 +69,9 @@ export class AvatarComponent implements OnInit {
   }
 
   /**
-   * Método para verificar si el usuario tiene una imagen de perfil.
+   * Verifica si hay una imagen de perfil y agrega un color al fondo si no hay ninguna.
+   * @private
+   * @returns {void}
    */
   private _checkProfilePicture(): void {
     if (!this.profile_picture) {

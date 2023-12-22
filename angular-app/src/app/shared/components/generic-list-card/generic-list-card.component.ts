@@ -59,26 +59,33 @@ export class GenericListCardComponent implements OnInit {
   }
 
   /**
-   * Filtra los elementos de la entidad.
-   * @param filterValue Valor del filtro.
+   * Filtra los elementos en función de un valor booleano o nulo y actualiza los elementos mostrados.
+   * @public
+   * @param {boolean | null} filterValue - Valor booleano o nulo para filtrar los elementos.
+   * @returns {void}
    */
-  public filterItems(filterValue: boolean | null) {
+  public filterItems(filterValue: boolean | null): void {
     this.filterState = filterValue;
     this.getItems(this.entityData.page);
   }
 
   /**
-   * Ordena los elementos de la entidad.
-   * @param sortEvent Evento de ordenación.
+   * Ordena los elementos utilizando un evento de clasificación y actualiza los elementos mostrados.
+   * @public
+   * @param {SortEvent} sortEvent - Evento de clasificación que contiene la información sobre la clasificación.
+   * @returns {void}
    */
+
   public sortItems(sortEvent: SortEvent): void {
     this.sort = sortEvent;
     this.getItems(this.entityData.page);
   }
 
   /**
-   * Obtiene los elementos de la entidad de la página indicada.
-   * @param page Número de página.
+   * Cambia la página actual de elementos y actualiza los elementos mostrados en función del número de página proporcionado.
+   * @public
+   * @param {number} page - Número de página al que se desea navegar.
+   * @returns {void}
    */
   public goToPage(page: number): void {
     this.entityData.page = page;
@@ -86,16 +93,20 @@ export class GenericListCardComponent implements OnInit {
   }
 
   /**
-   * Obtiene los elementos de la entidad por el término de búsqueda.
-   * @param searchTerm Término de búsqueda.
+   * Realiza una búsqueda utilizando el término proporcionado y actualiza los elementos mostrados en función de la página actual y el término de búsqueda.
+   * @public
+   * @param {string} searchTerm - Término de búsqueda utilizado para filtrar los elementos.
+   * @returns {void}
    */
   public onSearchSubmitted(searchTerm: string): void {
     this.getItems(this.entityData.page, searchTerm);
   }
 
   /**
-   * Obtiene los elementos de la entidad con el número de elementos por página indicado.
-   * @param elementsPerPage Número de elementos por página.
+   * Actualiza el número de resultados mostrados por página y vuelve a obtener los elementos con la nueva configuración de paginación.
+   * @public
+   * @param {number} elementsPerPage - Número de elementos que se mostrarán por página.
+   * @returns {void}
    */
   public onEntriesPerPageChanged(elementsPerPage: number): void {
     this.entityData.numResults = elementsPerPage;
@@ -104,9 +115,11 @@ export class GenericListCardComponent implements OnInit {
   }
 
   /**
-   * Obtiene los elementos de la entidad.
-   * @param page Número de página.
-   * @param searchTerm Término de búsqueda.
+   * Obtiene los elementos de una página específica utilizando un servicio de datos, aplicando filtros de búsqueda, paginación y ordenamiento si se proporcionan.
+   * @public
+   * @param {number} page - Número de la página que se desea obtener.
+   * @param {string} [searchTerm] - Término de búsqueda para filtrar los resultados (opcional).
+   * @returns {void}
    */
   public getItems(page: number, searchTerm?: string): void {
     if (
@@ -147,8 +160,10 @@ export class GenericListCardComponent implements OnInit {
   }
 
   /**
-   * Elimina un elemento de la entidad.
-   * @param id ID del elemento.
+   * Elimina un elemento mediante su identificador, mostrando un diálogo de confirmación antes de proceder.
+   * @public
+   * @param {string} id - Identificador del elemento que se desea eliminar.
+   * @returns {void}
    */
   public delete(id: string): void {
     this.notificationService.showConfirmDeleteDialog(() => {

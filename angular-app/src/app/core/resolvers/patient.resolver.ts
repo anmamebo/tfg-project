@@ -9,6 +9,14 @@ import { inject } from '@angular/core';
 
 import { PatientService } from '../services/entities/patient.service';
 
+/**
+ * Resolver que obtiene detalles de un paciente por su ID.
+ * @param {ActivatedRouteSnapshot} route - El snapshot actual de la ruta.
+ * @param {RouterStateSnapshot} state - El estado actual del enrutador.
+ * @param {PatientService} patientService - Servicio para obtener detalles del paciente.
+ * @param {Router} router - Enrutador para redireccionar en caso de error.
+ * @returns {Observable<any>} - Un observable que emite los detalles del paciente.
+ */
 export const patientResolver: ResolveFn<any> = (
   route: ActivatedRouteSnapshot,
   state: RouterStateSnapshot,

@@ -40,7 +40,10 @@ export class DepartmentsViewPageComponent implements OnInit {
   }
 
   /**
-   * Actualiza los datos del departamento
+   * Actualiza la información del departamento actual volviendo a obtener sus datos desde el servicio.
+   * Si no hay departamento definido, no se realiza ninguna acción.
+   * @returns {void}
+   * @public
    */
   onRefreshDepartment(): void {
     if (!this.department) {

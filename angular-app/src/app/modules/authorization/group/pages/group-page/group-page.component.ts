@@ -72,8 +72,10 @@ export class GroupPageComponent {
 
   /**
    * Actualiza la lista de grupos.
+   * @public
+   * @returns {void}
    */
-  updateGroupList(): void {
+  public updateGroupList(): void {
     if (!this.listGroupCardComponent) {
       return;
     }

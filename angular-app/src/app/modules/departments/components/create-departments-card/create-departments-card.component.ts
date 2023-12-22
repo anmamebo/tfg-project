@@ -39,8 +39,12 @@ export class CreateDepartmentsCardComponent {
   }
 
   /**
-   * Maneja la acción de enviar el formulario.
+   * Método público que se ejecuta al enviar un formulario.
+   * Realiza validaciones y crea un departamento si los datos son válidos.
+   * @public
+   * @returns {void}
    */
+
   public onSubmit(): void {
     this.submitted = true;
 

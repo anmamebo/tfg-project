@@ -44,7 +44,10 @@ export class PatientsViewPageComponent implements OnInit {
   }
 
   /**
-   * Actualiza los datos del paciente
+   * Actualiza los datos del paciente actualizando la información del paciente desde el servicio.
+   * Emite un evento para actualizar la información del paciente y el título después de la actualización.
+   * @returns {void}
+   * @public
    */
   public onRefreshPatient(): void {
     if (!this.patient) return;

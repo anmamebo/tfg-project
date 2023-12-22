@@ -85,7 +85,10 @@ export class EditAddressPatientsCardComponent implements OnInit {
   }
 
   /**
-   * Maneja la acción de envio del formulario
+   * Gestiona el envío del formulario de dirección de un paciente.
+   * Crea o actualiza la dirección del paciente según corresponda.
+   * @returns {void}
+   * @public
    */
   public onSubmit(): void {
     this.submitted = true;

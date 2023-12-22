@@ -41,10 +41,11 @@ export class GenericTableComponent {
   constructor() {}
 
   /**
-   * Obtiene el valor de un campo de un objeto.
-   * @param item Item del que se quiere obtener el valor.
-   * @param field Campo del que se quiere obtener el valor.
-   * @returns Valor del campo.
+   * Obtiene el valor de un campo específico dentro de un objeto.
+   * @public
+   * @param {any} item - El objeto del que se obtendrá el valor del campo.
+   * @param {string} field - El nombre del campo a obtener, puede ser anidado (ej. "campo.anidado.valor").
+   * @returns {any} El valor del campo solicitado, o '--' si el valor es nulo o indefinido.
    */
   public getFieldValue(item: any, field: string): any {
     const fields = field.split('.');
@@ -57,8 +58,11 @@ export class GenericTableComponent {
   }
 
   /**
-   * Lanza el evento de ordenación.
-   * @param column Columna por la que se ordena.
+   * Ordena los datos según la columna especificada.
+   * Si se selecciona la misma columna, invierte el orden de clasificación.
+   * @public
+   * @param {string} column - El nombre de la columna por la que se ordenarán los datos.
+   * @returns {void}
    */
   public sortData(column: string): void {
     if (this.sortedColumn === column) {
@@ -78,8 +82,10 @@ export class GenericTableComponent {
   }
 
   /**
-   * Lanza el evento de eliminar.
-   * @param id Id del elemento a eliminar.
+   * Emite un evento para eliminar un elemento con el ID especificado.
+   * @public
+   * @param {number} id - El ID del elemento que se eliminará.
+   * @returns {void}
    */
   public onDelete(id: number): void {
     this.onDeleteEvent.emit(id);

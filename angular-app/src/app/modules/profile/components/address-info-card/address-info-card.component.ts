@@ -77,7 +77,11 @@ export class AddressInfoCardComponent implements OnInit {
   }
 
   /**
-   * Maneja la acción de envio del formulario
+   * Gestiona la actualización de la dirección del paciente utilizando los datos ingresados en el formulario.
+   * Actualiza la dirección del paciente mediante el servicio de direcciones.
+   * Muestra una notificación de éxito o error según el resultado de la actualización.
+   * @returns {void}
+   * @public
    */
   public onSubmit(): void {
     this.submitted = true;

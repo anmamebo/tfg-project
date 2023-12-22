@@ -55,7 +55,11 @@ export class BasicInfoCardComponent implements OnInit {
   }
 
   /**
-   * Maneja la acción de envio del formulario
+   * Gestiona el envío del formulario para actualizar la información del usuario.
+   * Realiza una solicitud para actualizar la información del usuario actual con los datos proporcionados en el formulario.
+   * Emite un evento indicando que el usuario ha sido actualizado y muestra una notificación de éxito o error según el resultado.
+   * @returns {void}
+   * @public
    */
   public onSubmit(): void {
     this.submitted = true;

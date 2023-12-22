@@ -44,15 +44,18 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   }
 
   /**
-   * Verifica si el ancho de la ventana es mayor a 1200px.
-   * @returns boolean true si el ancho de la ventana es mayor a 1200px, false en caso contrario.
+   * Determina si la ventana actual corresponde a un entorno de escritorio basándose en el ancho de la ventana.
+   * @private
+   * @returns {boolean} Devuelve true si la ventana es considerada como un entorno de escritorio; de lo contrario, devuelve false.
    */
   private _isDesktop(): boolean {
     return window.innerWidth > 1200;
   }
 
   /**
-   * Inicializa el sidebar.
+   * Realiza acciones específicas en la carga inicial de la barra lateral, estableciendo clases y configuraciones iniciales.
+   * @private
+   * @returns {void}
    */
   private _onFirstLoad(): void {
     if (!this.sidebarEL) return;
@@ -81,7 +84,9 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   }
 
   /**
-   * Inicializa los eventos del sidebar.
+   * Inicializa los event listeners para la barra lateral y sus elementos interactivos.
+   * @private
+   * @returns {void}
    */
   private _initializeEventListeners(): void {
     if (!this.sidebarEL) return;
@@ -141,7 +146,9 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   }
 
   /**
-   * Evento que se ejecuta cuando se redimensiona la ventana.
+   * Maneja el evento de redimensionamiento de la ventana para la barra lateral.
+   * @private
+   * @returns {void}
    */
   private _onResize(): void {
     if (!this.sidebarEL) return;
@@ -157,8 +164,11 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   }
 
   /**
-   * Muestra u oculta el sidebar.
+   * Alternar la visibilidad de la barra lateral.
+   * @private
+   * @returns {void}
    */
+
   private _toggle(): void {
     if (!this.sidebarEL) return;
     const sidebarState = this.sidebarEL.classList.contains('active');
@@ -170,7 +180,9 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   }
 
   /**
-   * Muestra el sidebar.
+   * Muestra la barra lateral.
+   * @private
+   * @returns {void}
    */
   private _show(): void {
     if (!this.sidebarEL) return;
@@ -181,7 +193,9 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   }
 
   /**
-   * Oculta el sidebar.
+   * Oculta la barra lateral.
+   * @private
+   * @returns {void}
    */
   private _hide(): void {
     if (!this.sidebarEL) return;
@@ -192,7 +206,9 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   }
 
   /**
-   * Crea el backdrop del sidebar.
+   * Crea un fondo oscuro para la barra lateral cuando está en modo móvil.
+   * @private
+   * @returns {void}
    */
   private _createBackdrop(): void {
     if (this._isDesktop()) return;
@@ -204,7 +220,9 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   }
 
   /**
-   * Elimina el backdrop del sidebar.
+   * Elimina el fondo oscuro de la barra lateral, si existe.
+   * @private
+   * @returns {void}
    */
   private _deleteBackdrop(): void {
     const backdrop = document.querySelector('.sidebar-backdrop');
@@ -214,8 +232,10 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   }
 
   /**
-   * Muestra u oculta el overflow del body.
-   * @param active boolean true para mostrar el overflow del body, false para ocultarlo.
+   * Controla el estado de desbordamiento del cuerpo (overflow) dependiendo del estado de la barra lateral.
+   * @private
+   * @param {boolean | undefined} [active] - Valor opcional para el desbordamiento del cuerpo.
+   * @returns {void}
    */
   private _toggleOverFlowBody(active?: boolean): void {
     const body = document.querySelector('body');
@@ -229,10 +249,11 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   }
 
   /**
-   * Calcula la altura de los hijos del sidebar.
-   * @param el HTMLElement elemento HTML del sidebar.
-   * @param deep boolean true para calcular la altura de los hijos de los hijos del sidebar, false para calcular la altura de los hijos directos del sidebar.
-   * @returns number altura de los hijos del sidebar.
+   * Calcula la altura de los elementos secundarios de un elemento HTML.
+   * @private
+   * @param {HTMLElement} el - El elemento del cual se calculará la altura de los elementos secundarios.
+   * @param {boolean} [deep=false] - Indica si se debe calcular la altura de los elementos secundarios anidados.
+   * @returns {number} La altura total de los elementos secundarios.
    */
   private _calculateChildrenHeight(el: HTMLElement, deep = false): number {
     let height = 0;
@@ -270,9 +291,11 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   }
 
   /**
-   * Establece el tema de la aplicación.
-   * @param theme string tema de la aplicación.
-   * @param persist boolean true para persistir el tema en el localStorage, false en caso contrario.
+   * Establece un tema específico en el cuerpo del documento y en el atributo 'data-bs-theme' del elemento raíz.
+   * @private
+   * @param {string} theme - El nombre del tema a aplicar.
+   * @param {boolean} [persist=false] - Indica si se debe persistir el tema en el almacenamiento local.
+   * Si es verdadero, el tema se guardará en el almacenamiento local.
    */
   private _setTheme(theme: string, persist = false): void {
     document.body.classList.add(theme);
@@ -285,6 +308,10 @@ export class SidebarComponent implements OnInit, AfterViewInit {
 
   /**
    * Inicializa el tema de la aplicación.
+   * Comprueba si hay un tema almacenado localmente y lo aplica si existe.
+   * Si no hay un tema almacenado, verifica la preferencia de color del usuario y aplica el tema correspondiente (claro u oscuro).
+   * @private
+   * @returns {void}
    */
   private _initTheme(): void {
     //If the user manually set a theme, we'll load that
