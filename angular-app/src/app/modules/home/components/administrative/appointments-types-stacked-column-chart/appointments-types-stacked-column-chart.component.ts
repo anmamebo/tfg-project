@@ -161,31 +161,38 @@ export class AppointmentsTypesStackedColumnChartComponent {
    * @returns datos formateados
    */
   private _formatDataForChart(data: any[]): any[] {
-    let series: any[] = [];
-    Object.keys(data).forEach((month: any) => {
-      const monthData = data[month];
-      Object.keys(monthData).forEach((type, index) => {
-        const appointmentType = type.toLowerCase();
-        const foundType = TYPE_APPOINTMENT_OPTIONS.find(
-          (option) => option.value === appointmentType
-        );
-        const appointmentTypeName = foundType
-          ? foundType.text
-          : appointmentType.toUpperCase();
+    let transformedData: any[] = [];
 
-        if (!series[index]) {
-          series[index] = {
-            name: appointmentTypeName,
-            data: [],
+    // Mapear cada tipo y acumular los recuentos por mes
+    data.forEach((monthData) => {
+      monthData.types.forEach((type: any) => {
+        // Buscar el texto correspondiente al valor 'value' en TYPE_APPOINTMENT_OPTIONS
+        const foundType = TYPE_APPOINTMENT_OPTIONS.find(
+          (option) => option.value === type.name
+        );
+
+        const typeName = foundType ? foundType.text : type.name;
+
+        const foundTypeData = transformedData.find(
+          (item) => item.name === typeName
+        );
+
+        if (foundTypeData) {
+          foundTypeData.data[monthData.month - 1] += type.count;
+        } else {
+          const newData: any = {
+            name: typeName,
+            data: Array(12).fill(0),
           };
+          newData.data[monthData.month - 1] = type.count;
+          transformedData.push(newData);
         }
-        series[index].data.push(monthData[type]);
       });
     });
 
-    series = this._orderSeries(series);
+    transformedData = this._orderSeries(transformedData);
 
-    return series;
+    return transformedData;
   }
 
   /**

@@ -83,32 +83,13 @@ export class DoctorAppointmentsAgeColumnsChartComponent {
   private _getDoctorAppointmentsPerAge(): void {
     this._doctorStatisticsService.getDoctorAppointmentsPerAge().subscribe({
       next: (response) => {
-        const formattedData = this._formattedData(response);
-        this.series[0].data = formattedData.map((item: any) => item.count);
-        const ranges = formattedData.map((item: any) => item.range);
+        this.series[0].data = response.map((item: any) => item.count);
+        const ranges = response.map((item: any) => item.age_group);
         this.xaxis.categories.push(...ranges);
       },
       error: (error) => {
         console.log(error);
       },
     });
-  }
-
-  /**
-   * Formatea los datos para el gráfico.
-   * @param data Datos a formatear.
-   * @returns Datos formateados.
-   */
-  private _formattedData(data: any): any {
-    const formattedData = Object.entries(data).map(([range, count]) => {
-      const [startYear, endYear] = range.split('-').map(Number);
-      const ageRange = `${new Date().getFullYear() - startYear}-${
-        new Date().getFullYear() - endYear
-      }`;
-
-      return { range: ageRange, count };
-    });
-
-    return formattedData;
   }
 }

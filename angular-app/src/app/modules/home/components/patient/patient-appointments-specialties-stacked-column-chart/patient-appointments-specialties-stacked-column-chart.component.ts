@@ -170,21 +170,32 @@ export class PatientAppointmentsSpecialtiesStackedColumnChartComponent {
    * @returns datos formateados
    */
   private _formatDataForChart(data: any[]): any[] {
-    const series: any[] = [];
-    Object.keys(data).forEach((month: any) => {
-      const monthData = data[month];
-      Object.keys(monthData).forEach((specialty, index) => {
-        if (!series[index]) {
-          series[index] = {
-            name: specialty,
-            data: [],
+    const transformedData: any[] = [];
+
+    // Mapear cada especialidad y acumular los recuentos por mes
+    data.forEach((monthData) => {
+      monthData.specialties.forEach((specialty: any) => {
+        // Buscar si la especialidad ya existe en los datos transformados
+        const foundSpecialty = transformedData.find(
+          (item) => item.name === specialty.name
+        );
+
+        if (foundSpecialty) {
+          // Si la especialidad ya está en los datos transformados, actualizar el recuento en el mes correspondiente
+          foundSpecialty.data[monthData.month - 1] += specialty.count;
+        } else {
+          // Si la especialidad no está en los datos transformados, crear un nuevo objeto y agregarlo
+          const newData: any = {
+            name: specialty.name,
+            data: Array(12).fill(0), // Crear un array de 12 elementos con valores predeterminados en 0
           };
+          newData.data[monthData.month - 1] = specialty.count; // Asignar el recuento en el mes correspondiente
+          transformedData.push(newData);
         }
-        series[index].data.push(monthData[specialty]);
       });
     });
 
-    return series;
+    return transformedData;
   }
 
   /**

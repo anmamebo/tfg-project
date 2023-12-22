@@ -13,6 +13,21 @@ import {
 // Servicios
 import { StatisticsService } from 'src/app/core/services/statistics/statistics.service';
 
+interface GenderData {
+  name: string;
+  count: number;
+}
+
+interface Data {
+  date: string;
+  genders: GenderData[];
+}
+
+interface SeriesData {
+  name: string;
+  data: [number, string][];
+}
+
 /**
  * Componente para el gráfico de citas por día y género.
  */
@@ -119,23 +134,8 @@ export class AppointmentsGenderAreaSplineChartComponent {
         next: (result) => {
           const formattedData = this._formatDataForChart(result);
 
-          this.series = [
-            {
-              name: 'Masculino',
-              data: formattedData.map(([date, male]) => [
-                date,
-                male.toFixed(0),
-              ]),
-            },
-            {
-              name: 'Femenino',
-              data: formattedData.map(([date, , female]) => [
-                date,
-                female.toFixed(0),
-              ]),
-            },
-          ];
-          this.xaxis.categories = formattedData.map(([date]) => date);
+          this.series = formattedData.series as ApexAxisChartSeries;
+          this.xaxis.categories = formattedData.xaxisCategories;
         },
         error: (error) => {
           console.log(error);
@@ -145,14 +145,38 @@ export class AppointmentsGenderAreaSplineChartComponent {
 
   /**
    * Formatea los datos para el gráfico.
-   * @param data datos
-   * @returns datos formateados
+   * @param data Datos.
+   * @returns Datos formateados.
    */
-  private _formatDataForChart(data: any[]): any[] {
-    return data.map((item) => {
-      const timestamp = new Date(item.date).getTime();
-      return [timestamp, item.male, item.female];
+  private _formatDataForChart(data: Data[]): {
+    xaxisCategories: number[];
+    series: SeriesData[];
+  } {
+    const xaxisCategories: number[] = [];
+    const series: SeriesData[] = [
+      {
+        name: 'Masculino',
+        data: [],
+      },
+      {
+        name: 'Femenino',
+        data: [],
+      },
+    ];
+
+    data.forEach((item: Data) => {
+      const date = new Date(item.date).getTime();
+      xaxisCategories.push(date);
+
+      item.genders.forEach((gender: GenderData, index: number) => {
+        series[index].data.push([date, gender.count.toString()]);
+      });
     });
+
+    return {
+      xaxisCategories: xaxisCategories,
+      series: series,
+    };
   }
 
   /**
