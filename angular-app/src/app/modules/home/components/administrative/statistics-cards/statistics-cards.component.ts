@@ -3,6 +3,13 @@ import { Component, OnInit } from '@angular/core';
 // Servicios
 import { StatisticsService } from 'src/app/core/services/statistics/statistics.service';
 
+interface Statistics {
+  total_patients: number;
+  total_doctors: number;
+  total_appointments: number;
+  total_departments: number;
+}
+
 /**
  * Componente para mostrar las estadísticas generales de la aplicación.
  */
@@ -35,13 +42,13 @@ export class StatisticsCardsComponent implements OnInit {
    */
   private _getOverallStats(): void {
     this._statisticsService.getOverallStats().subscribe({
-      next: (response: any) => {
+      next: (response: Statistics) => {
         this.totalPatients = response.total_patients;
         this.totalDoctors = response.total_doctors;
         this.totalAppointments = response.total_appointments;
         this.totalDepartments = response.total_departments;
       },
-      error: (error: any) => {
+      error: (error) => {
         console.error(error);
       },
     });

@@ -3,6 +3,13 @@ import { Component, OnInit } from '@angular/core';
 // Servicios
 import { PatientStatisticsService } from 'src/app/core/services/statistics/patient-statistics.service';
 
+interface Statistics {
+  next_appointments: number;
+  active_treatments: number;
+  total_appointments: number;
+  average_time_per_appointment: string;
+}
+
 @Component({
   selector: 'app-patient-statistics-cards',
   templateUrl: './patient-statistics-cards.component.html',
@@ -32,13 +39,13 @@ export class PatientStatisticsCardsComponent implements OnInit {
    */
   private _getPatientOverallStats(): void {
     this._patientStatisticsService.getPatientOverallStats().subscribe({
-      next: (response: any) => {
+      next: (response: Statistics) => {
         this.appointments = response.total_appointments;
         this.nextAppointments = response.next_appointments;
         this.activeTreatments = response.active_treatments;
         this.averageTimePerAppointment = response.average_time_per_appointment;
       },
-      error: (error: any) => {
+      error: (error) => {
         console.error(error);
       },
     });

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import {
   ApexChart,
@@ -8,10 +8,21 @@ import {
   ApexXAxis,
   ApexLegend,
   ApexGrid,
+  ApexNoData,
 } from 'ng-apexcharts';
 
 // Servicios
 import { StatisticsService } from 'src/app/core/services/statistics/statistics.service';
+
+interface AppointmentsPerAge {
+  age_group: string;
+  count: number;
+}
+
+const DEFAULT_CHART_HEIGHT = 350;
+const DEFAULT_COLUMN_WIDTH = '45%';
+const DEFAULT_FONT_SIZE = '12px';
+const SERIES_NAME = 'Citas';
 
 /**
  * Componente para el gráfico citas por edad.
@@ -21,59 +32,58 @@ import { StatisticsService } from 'src/app/core/services/statistics/statistics.s
   templateUrl: './appointments-age-column-chart.component.html',
   providers: [StatisticsService],
 })
-export class AppointmentsAgeColumnChartComponent {
+export class AppointmentsAgeColumnChartComponent implements OnInit {
   /** Series del gráfico. */
-  public series: ApexAxisChartSeries;
+  public series: ApexAxisChartSeries = [{ name: SERIES_NAME, data: [] }];
 
   /** Configuración del gráfico. */
-  public chart: ApexChart;
+  public chart: ApexChart = {
+    height: DEFAULT_CHART_HEIGHT,
+    type: 'bar',
+  };
 
   /** Etiquetas del gráfico. */
-  public dataLabels: ApexDataLabels;
+  public dataLabels: ApexDataLabels = {
+    enabled: false,
+  };
 
   /** Configuración del gráfico. */
-  public plotOptions: ApexPlotOptions;
+  public plotOptions: ApexPlotOptions = {
+    bar: {
+      columnWidth: DEFAULT_COLUMN_WIDTH,
+      distributed: true,
+    },
+  };
 
   /** Eje X del gráfico. */
-  public xaxis: ApexXAxis;
+  public xaxis: ApexXAxis = {
+    type: 'category',
+    categories: [],
+    labels: {
+      style: {
+        fontSize: DEFAULT_FONT_SIZE,
+      },
+    },
+  };
 
   /** Configuración del grid. */
-  public grid: ApexGrid;
+  public grid: ApexGrid = {
+    show: true,
+  };
 
   /** Leyenda del gráfico. */
-  public legend: ApexLegend;
+  public legend: ApexLegend = {
+    show: false,
+  };
 
-  constructor(private _statisticsService: StatisticsService) {
-    this.series = [{ name: 'Citas', data: [] }];
-    this.chart = {
-      height: 350,
-      type: 'bar',
-    };
-    this.plotOptions = {
-      bar: {
-        columnWidth: '45%',
-        distributed: true,
-      },
-    };
-    this.dataLabels = {
-      enabled: false,
-    };
-    this.legend = {
-      show: false,
-    };
-    this.grid = {
-      show: true,
-    };
-    this.xaxis = {
-      type: 'category',
-      categories: [],
-      labels: {
-        style: {
-          fontSize: '12px',
-        },
-      },
-    };
+  /** Mensaje cuando no hay datos. */
+  public noData: ApexNoData = {
+    text: 'Cargando...',
+  };
 
+  constructor(private _statisticsService: StatisticsService) {}
+
+  ngOnInit(): void {
     this._getAppointmentsPerAge();
   }
 
@@ -82,13 +92,17 @@ export class AppointmentsAgeColumnChartComponent {
    */
   private _getAppointmentsPerAge(): void {
     this._statisticsService.getAppointmentsPerAge().subscribe({
-      next: (response) => {
-        this.series[0].data = response.map((item: any) => item.count);
-        const ranges = response.map((item: any) => item.age_group);
+      next: (response: AppointmentsPerAge[]) => {
+        this.series[0].data = response.map(
+          (item: AppointmentsPerAge) => item.count
+        );
+        const ranges = response.map(
+          (item: AppointmentsPerAge) => item.age_group
+        );
         this.xaxis.categories.push(...ranges);
       },
       error: (error) => {
-        console.log(error);
+        console.error(error);
       },
     });
   }

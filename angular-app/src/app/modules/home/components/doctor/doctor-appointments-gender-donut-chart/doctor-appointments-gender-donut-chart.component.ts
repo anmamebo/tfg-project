@@ -1,13 +1,24 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import {
   ApexNonAxisChartSeries,
   ApexResponsive,
   ApexChart,
+  ApexNoData,
 } from 'ng-apexcharts';
 
 // Servicios
 import { DoctorStatisticsService } from 'src/app/core/services/statistics/doctor-statistics.service';
+
+interface AppointmentsPerGender {
+  gender: string;
+  value: number;
+}
+
+const DEFAULT_CHART_HEIGHT = 350;
+const DEFAULT_CHART_WIDTH = '100%';
+const DEFAULT_RESPONSIVE_CHART_WIDTH = 200;
+const DEFAULT_RESPONSIVE_BREAKPOINT = 480;
 
 /**
  * Componente para el gráfico de género de las citas de los doctores.
@@ -17,45 +28,44 @@ import { DoctorStatisticsService } from 'src/app/core/services/statistics/doctor
   templateUrl: './doctor-appointments-gender-donut-chart.component.html',
   providers: [DoctorStatisticsService],
 })
-export class DoctorAppointmentsGenderDonutChartComponent {
+export class DoctorAppointmentsGenderDonutChartComponent implements OnInit {
   /** Series del gráfico. */
-  public series: ApexNonAxisChartSeries;
+  public series: ApexNonAxisChartSeries = [1];
 
   /** Configuración del gráfico. */
-  public chart: ApexChart;
+  public chart: ApexChart = {
+    width: DEFAULT_CHART_WIDTH,
+    height: DEFAULT_CHART_HEIGHT,
+    type: 'donut',
+  };
 
   /** Configuración responsive del gráfico. */
-  public responsive: ApexResponsive[];
-
-  /** Etiquetas del gráfico. */
-  public labels: any;
-
-  /** Colores del gráfico. */
-  public colors: string[];
-
-  constructor(private _doctorStatisticsService: DoctorStatisticsService) {
-    this.series = [1];
-    this.colors = ['#435EBE', '#57CAEB'];
-    this.chart = {
-      width: '100%',
-      height: 350,
-      type: 'donut',
-    };
-    this.labels = [];
-    this.responsive = [
-      {
-        breakpoint: 480,
-        options: {
-          chart: {
-            width: 200,
-          },
-          legend: {
-            position: 'bottom',
-          },
+  public responsive: ApexResponsive[] = [
+    {
+      breakpoint: DEFAULT_RESPONSIVE_BREAKPOINT,
+      options: {
+        chart: {
+          width: DEFAULT_RESPONSIVE_CHART_WIDTH,
+        },
+        legend: {
+          position: 'bottom',
         },
       },
-    ];
+    },
+  ];
 
+  /** Etiquetas del gráfico. */
+  public labels: string[] = [];
+
+  /** Colores del gráfico. */
+  public colors: string[] = ['#435EBE', '#57CAEB'];
+
+  /** Texto cuando no hay datos. */
+  public noData: ApexNoData = { text: 'No hay datos' };
+
+  constructor(private _doctorStatisticsService: DoctorStatisticsService) {}
+
+  ngOnInit(): void {
     this._getDoctorAppointmentsGenderStats();
   }
 
@@ -64,11 +74,11 @@ export class DoctorAppointmentsGenderDonutChartComponent {
    */
   private _getDoctorAppointmentsGenderStats(): void {
     this._doctorStatisticsService.getDoctorAppointmentsPerGender().subscribe({
-      next: (response) => {
-        this.labels = response.map((item: any) =>
+      next: (response: AppointmentsPerGender[]) => {
+        this.labels = response.map((item: AppointmentsPerGender) =>
           this._getTextByValue(item.gender)
         );
-        this.series = response.map((item: any) => item.value);
+        this.series = response.map((item: AppointmentsPerGender) => item.value);
       },
       error: (error) => {
         console.error(error.message);

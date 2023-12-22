@@ -61,7 +61,7 @@ export class DoctorTodayAppointmentsCalendarComponent implements AfterViewInit {
   /**
    * Scroll hacia la hora actual.
    */
-  private _scrollToCurrentView() {
+  private _scrollToCurrentView(): void {
     if (CalendarView.Day) {
       // each hour is 60px high, so to get the pixels to scroll it's just the amount of minutes since midnight
       const minutesSinceStartOfDay = differenceInMinutes(
@@ -90,8 +90,8 @@ export class DoctorTodayAppointmentsCalendarComponent implements AfterViewInit {
         ],
       })
       .subscribe({
-        next: (data) => {
-          this.events = this._formatData(data);
+        next: (response: Appointment[]) => {
+          this.events = this._formatData(response);
 
           this._cdr.detectChanges();
         },

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import {
   ApexAxisChartSeries,
@@ -10,6 +10,7 @@ import {
   ApexXAxis,
   ApexLegend,
   ApexFill,
+  ApexNoData,
 } from 'ng-apexcharts';
 
 // Constantes
@@ -17,6 +18,38 @@ import { TYPE_APPOINTMENT_OPTIONS } from 'src/app/core/constants/options/type-ap
 
 // Servicios
 import { StatisticsService } from 'src/app/core/services/statistics/statistics.service';
+
+interface TypesData {
+  name: string;
+  count: number;
+}
+
+interface AppointmentsPerTypes {
+  month: number;
+  types: TypesData[];
+}
+
+interface SeriesData {
+  name: string;
+  data: number[];
+}
+
+const DEFAULT_CHART_HEIGHT = 350;
+const DEFAULT_RESPONSIVE_BREAKPOINT = 480;
+const CATEGORIES = [
+  `01`,
+  `02`,
+  `03`,
+  `04`,
+  `05`,
+  `06`,
+  `07`,
+  `08`,
+  `09`,
+  `10`,
+  `11`,
+  `12`,
+];
 
 /**
  * Componente para el gráfico de citas por mes y tipo.
@@ -26,33 +59,84 @@ import { StatisticsService } from 'src/app/core/services/statistics/statistics.s
   templateUrl: './appointments-types-stacked-column-chart.component.html',
   providers: [StatisticsService],
 })
-export class AppointmentsTypesStackedColumnChartComponent {
+export class AppointmentsTypesStackedColumnChartComponent implements OnInit {
   /** Series del gráfico. */
-  public series: ApexAxisChartSeries;
+  public series: ApexAxisChartSeries = [];
 
   /** Configuración del gráfico. */
-  public chart: ApexChart;
+  public chart: ApexChart = {
+    type: 'bar',
+    height: DEFAULT_CHART_HEIGHT,
+    stacked: true,
+    toolbar: {
+      show: true,
+    },
+    zoom: {
+      enabled: true,
+    },
+  };
 
   /** Configuración de las etiquetas de datos. */
-  public dataLabels: ApexDataLabels;
+  public dataLabels: ApexDataLabels = {
+    enabled: false,
+  };
 
   /** Configuración de las opciones de las series. */
-  public plotOptions: ApexPlotOptions;
+  public plotOptions: ApexPlotOptions = {
+    bar: {
+      horizontal: false,
+    },
+  };
 
   /** Configuración del gráfico. */
-  public responsive: ApexResponsive[];
+  public responsive: ApexResponsive[] = [
+    {
+      breakpoint: DEFAULT_RESPONSIVE_BREAKPOINT,
+      options: {
+        legend: {
+          position: 'bottom',
+          offsetX: -10,
+          offsetY: 0,
+        },
+      },
+    },
+  ];
 
   /** Configuración del eje Y. */
-  public yaxis: ApexYAxis;
+  public yaxis: ApexYAxis = {
+    min: 0,
+    labels: {
+      formatter: function (val) {
+        return val.toFixed(0);
+      },
+    },
+    title: {
+      text: 'Citas',
+    },
+  };
 
   /** Configuración del eje X. */
-  public xaxis: ApexXAxis;
+  public xaxis: ApexXAxis = {
+    type: 'category',
+    categories: CATEGORIES,
+    title: {
+      text: 'Meses',
+    },
+  };
 
   /** Configuración de la leyenda. */
-  public legend: ApexLegend;
+  public legend: ApexLegend = {
+    position: 'right',
+    offsetY: 40,
+  };
 
   /** Configuración del relleno. */
-  public fill: ApexFill;
+  public fill: ApexFill = {
+    opacity: 1,
+  };
+
+  /** Mensaje cuando no hay datos. */
+  public noData: ApexNoData = { text: 'Cargando...' };
 
   /** Año. */
   public year: number;
@@ -63,81 +147,12 @@ export class AppointmentsTypesStackedColumnChartComponent {
   constructor(private _statisticsService: StatisticsService) {
     const date = new Date();
     this.year = date.getFullYear();
+  }
 
-    this.series = [];
-    this.chart = {
-      type: 'bar',
-      height: 350,
-      stacked: true,
-      toolbar: {
-        show: true,
-      },
-      zoom: {
-        enabled: true,
-      },
-    };
-    this.responsive = [
-      {
-        breakpoint: 480,
-        options: {
-          legend: {
-            position: 'bottom',
-            offsetX: -10,
-            offsetY: 0,
-          },
-        },
-      },
-    ];
-    this.plotOptions = {
-      bar: {
-        horizontal: false,
-      },
-    };
-    this.yaxis = {
-      min: 0,
-      labels: {
-        formatter: function (val) {
-          return val.toFixed(0);
-        },
-      },
-      title: {
-        text: 'Citas',
-      },
-    };
-    this.xaxis = {
-      type: 'category',
-      categories: [
-        `01`,
-        `02`,
-        `03`,
-        `04`,
-        `05`,
-        `06`,
-        `07`,
-        `08`,
-        `09`,
-        `10`,
-        `11`,
-        `12`,
-      ],
-      title: {
-        text: 'Meses',
-      },
-    };
-    this.legend = {
-      position: 'right',
-      offsetY: 40,
-    };
-    this.fill = {
-      opacity: 1,
-    };
-    this.dataLabels = {
-      enabled: false,
-    };
-
+  ngOnInit(): void {
     this._generateYears();
 
-    this._getAppointmentsTypesStats(2023);
+    this._getAppointmentsTypesStats(this.year);
   }
 
   /**
@@ -146,11 +161,11 @@ export class AppointmentsTypesStackedColumnChartComponent {
    */
   private _getAppointmentsTypesStats(year: number): void {
     this._statisticsService.getAppointmentsPerMonthAndType(year).subscribe({
-      next: (response) => {
+      next: (response: AppointmentsPerTypes[]) => {
         this.series = this._formatDataForChart(response);
       },
       error: (error) => {
-        console.log(error);
+        console.error(error);
       },
     });
   }
@@ -160,12 +175,12 @@ export class AppointmentsTypesStackedColumnChartComponent {
    * @param data datos
    * @returns datos formateados
    */
-  private _formatDataForChart(data: any[]): any[] {
-    let transformedData: any[] = [];
+  private _formatDataForChart(data: AppointmentsPerTypes[]): SeriesData[] {
+    let transformedData: SeriesData[] = [];
 
     // Mapear cada tipo y acumular los recuentos por mes
-    data.forEach((monthData) => {
-      monthData.types.forEach((type: any) => {
+    data.forEach((monthData: AppointmentsPerTypes) => {
+      monthData.types.forEach((type: TypesData) => {
         // Buscar el texto correspondiente al valor 'value' en TYPE_APPOINTMENT_OPTIONS
         const foundType = TYPE_APPOINTMENT_OPTIONS.find(
           (option) => option.value === type.name
@@ -180,7 +195,7 @@ export class AppointmentsTypesStackedColumnChartComponent {
         if (foundTypeData) {
           foundTypeData.data[monthData.month - 1] += type.count;
         } else {
-          const newData: any = {
+          const newData: SeriesData = {
             name: typeName,
             data: Array(12).fill(0),
           };
@@ -200,7 +215,7 @@ export class AppointmentsTypesStackedColumnChartComponent {
    * @param series series
    * @returns series ordenadas
    */
-  private _orderSeries(series: any[]): any[] {
+  private _orderSeries(series: SeriesData[]): SeriesData[] {
     return series.sort((a, b) => {
       const nameA = a.name.toLowerCase();
       const nameB = b.name.toLowerCase();
@@ -218,7 +233,7 @@ export class AppointmentsTypesStackedColumnChartComponent {
   /**
    * Genera las opciones para los años.
    */
-  private _generateYears() {
+  private _generateYears(): void {
     const startYear = 2023;
     const endYear = 2030;
     for (let i = startYear; i <= endYear; i++) {
@@ -230,9 +245,11 @@ export class AppointmentsTypesStackedColumnChartComponent {
    * Evento que se ejecuta cuando se cambia el año.
    * @param event Evento de cambio.
    */
-  public onYearChange(event: any) {
-    const selectedYear = event.target.value;
-    this.year = selectedYear;
-    this._getAppointmentsTypesStats(this.year);
+  public onYearChange(event: Event): void {
+    const selectedYear = (event.target as HTMLInputElement)?.value;
+    if (selectedYear) {
+      this.year = parseInt(selectedYear, 10);
+      this._getAppointmentsTypesStats(this.year);
+    }
   }
 }

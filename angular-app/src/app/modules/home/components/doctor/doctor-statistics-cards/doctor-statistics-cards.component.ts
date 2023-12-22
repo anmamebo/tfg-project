@@ -3,6 +3,13 @@ import { Component, OnInit } from '@angular/core';
 // Servicios
 import { DoctorStatisticsService } from 'src/app/core/services/statistics/doctor-statistics.service';
 
+interface Statistics {
+  total_appointments_completed: number;
+  total_treatments_prescribed: number;
+  total_duration_in_hms: string;
+  average_time_per_patient: string;
+}
+
 /**
  * Componente para mostrar las estadísticas generales del médico.
  */
@@ -35,13 +42,13 @@ export class DoctorStatisticsCardsComponent implements OnInit {
    */
   private _getDoctorOverallStats(): void {
     this._doctorStatisticsService.getDoctorOverallStats().subscribe({
-      next: (response: any) => {
+      next: (response: Statistics) => {
         this.completedAppointments = response.total_appointments_completed;
         this.prescribedTreatments = response.total_treatments_prescribed;
         this.workedTime = response.total_duration_in_hms;
         this.averageTimePerPatient = response.average_time_per_patient;
       },
-      error: (error: any) => {
+      error: (error) => {
         console.error(error);
       },
     });

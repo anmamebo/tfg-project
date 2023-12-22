@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import {
   ApexAxisChartSeries,
@@ -8,6 +8,7 @@ import {
   ApexDataLabels,
   ApexTooltip,
   ApexStroke,
+  ApexNoData,
 } from 'ng-apexcharts';
 
 // Servicios
@@ -18,7 +19,7 @@ interface GenderData {
   count: number;
 }
 
-interface Data {
+interface AppointmentsPerGender {
   date: string;
   genders: GenderData[];
 }
@@ -28,6 +29,8 @@ interface SeriesData {
   data: [number, string][];
 }
 
+const DEFAULT_CHART_HEIGHT = 350;
+
 /**
  * Componente para el gráfico de citas por día y género.
  */
@@ -36,27 +39,63 @@ interface SeriesData {
   templateUrl: './appointments-gender-area-spline-chart.component.html',
   providers: [StatisticsService],
 })
-export class AppointmentsGenderAreaSplineChartComponent {
+export class AppointmentsGenderAreaSplineChartComponent implements OnInit {
   /** Series del gráfico. */
-  public series: ApexAxisChartSeries;
+  public series: ApexAxisChartSeries = [
+    {
+      name: 'Masculino',
+      data: [],
+    },
+    {
+      name: 'Femenino',
+      data: [],
+    },
+  ];
 
   /** Configuración del gráfico. */
-  public chart: ApexChart;
+  public chart: ApexChart = {
+    height: DEFAULT_CHART_HEIGHT,
+    type: 'area',
+  };
 
   /** Configuración del eje Y. */
-  public yaxis: ApexYAxis;
+  public yaxis: ApexYAxis = {
+    min: 0,
+    labels: {
+      formatter: function (val) {
+        return val.toFixed(0);
+      },
+    },
+    title: {
+      text: 'Citas',
+    },
+  };
 
   /** Configuración del eje X. */
-  public xaxis: ApexXAxis;
+  public xaxis: ApexXAxis = {
+    type: 'datetime',
+    categories: [],
+  };
 
   /** Configuración del relleno. */
-  public stroke: ApexStroke;
+  public stroke: ApexStroke = {
+    curve: 'smooth',
+  };
 
   /** Configuración del tooltip. */
-  public tooltip: ApexTooltip;
+  public tooltip: ApexTooltip = {
+    x: {
+      format: 'dd/MM/yy',
+    },
+  };
 
   /** Configuración de las etiquetas de datos. */
-  public dataLabels: ApexDataLabels;
+  public dataLabels: ApexDataLabels = {
+    enabled: false,
+  };
+
+  /** Mensaje cuando no hay datos. */
+  public noData: ApexNoData = { text: 'Cargando...' };
 
   /** Mes. */
   public month: number;
@@ -74,52 +113,13 @@ export class AppointmentsGenderAreaSplineChartComponent {
     const date = new Date();
     this.month = date.getMonth() + 1;
     this.year = date.getFullYear();
+  }
 
+  ngOnInit(): void {
     this._generateMonths();
     this._generateYears();
 
-    this.series = [
-      {
-        name: 'Masculino',
-        data: [],
-      },
-      {
-        name: 'Femenino',
-        data: [],
-      },
-    ];
-    this.chart = {
-      height: 350,
-      type: 'area',
-    };
-    this.dataLabels = {
-      enabled: false,
-    };
-    this.stroke = {
-      curve: 'smooth',
-    };
-    this.yaxis = {
-      min: 0,
-      labels: {
-        formatter: function (val) {
-          return val.toFixed(0);
-        },
-      },
-      title: {
-        text: 'Citas',
-      },
-    };
-    this.xaxis = {
-      type: 'datetime',
-      categories: [],
-    };
-    this.tooltip = {
-      x: {
-        format: 'dd/MM/yy',
-      },
-    };
-
-    this._getAppointmentsPerDayAndGender(12, 2023);
+    this._getAppointmentsPerDayAndGender(this.month, this.year);
   }
 
   /**
@@ -131,14 +131,14 @@ export class AppointmentsGenderAreaSplineChartComponent {
     this._statisticsService
       .getAppointmentsPerDayAndGender(month, year)
       .subscribe({
-        next: (result) => {
-          const formattedData = this._formatDataForChart(result);
+        next: (response: AppointmentsPerGender[]) => {
+          const formattedData = this._formatDataForChart(response);
 
           this.series = formattedData.series as ApexAxisChartSeries;
           this.xaxis.categories = formattedData.xaxisCategories;
         },
         error: (error) => {
-          console.log(error);
+          console.error(error);
         },
       });
   }
@@ -148,7 +148,7 @@ export class AppointmentsGenderAreaSplineChartComponent {
    * @param data Datos.
    * @returns Datos formateados.
    */
-  private _formatDataForChart(data: Data[]): {
+  private _formatDataForChart(data: AppointmentsPerGender[]): {
     xaxisCategories: number[];
     series: SeriesData[];
   } {
@@ -164,7 +164,7 @@ export class AppointmentsGenderAreaSplineChartComponent {
       },
     ];
 
-    data.forEach((item: Data) => {
+    data.forEach((item: AppointmentsPerGender) => {
       const date = new Date(item.date).getTime();
       xaxisCategories.push(date);
 
@@ -182,7 +182,7 @@ export class AppointmentsGenderAreaSplineChartComponent {
   /**
    * Genera las opciones para los meses.
    */
-  private _generateMonths() {
+  private _generateMonths(): void {
     for (let i = 1; i <= 12; i++) {
       const monthName = new Date(2000, i - 1, 1).toLocaleString('default', {
         month: 'long',
@@ -194,7 +194,7 @@ export class AppointmentsGenderAreaSplineChartComponent {
   /**
    * Genera las opciones para los años.
    */
-  private _generateYears() {
+  private _generateYears(): void {
     const startYear = 2023;
     const endYear = 2030;
     for (let i = startYear; i <= endYear; i++) {
@@ -206,19 +206,23 @@ export class AppointmentsGenderAreaSplineChartComponent {
    * Evento que se ejecuta cuando se cambia el mes.
    * @param event Evento de cambio.
    */
-  public onMonthChange(event: any) {
-    const selectedMonth = event.target.value;
-    this.month = selectedMonth;
-    this._getAppointmentsPerDayAndGender(this.month, this.year);
+  public onMonthChange(event: Event): void {
+    const selectedMonth = (event.target as HTMLInputElement)?.value;
+    if (selectedMonth) {
+      this.month = parseInt(selectedMonth, 10);
+      this._getAppointmentsPerDayAndGender(this.month, this.year);
+    }
   }
 
   /**
    * Evento que se ejecuta cuando se cambia el año.
    * @param event Evento de cambio.
    */
-  public onYearChange(event: any) {
-    const selectedYear = event.target.value;
-    this.year = selectedYear;
-    this._getAppointmentsPerDayAndGender(this.month, this.year);
+  public onYearChange(event: Event): void {
+    const selectedYear = (event.target as HTMLInputElement)?.value;
+    if (selectedYear) {
+      this.year = parseInt(selectedYear, 10);
+      this._getAppointmentsPerDayAndGender(this.month, this.year);
+    }
   }
 }

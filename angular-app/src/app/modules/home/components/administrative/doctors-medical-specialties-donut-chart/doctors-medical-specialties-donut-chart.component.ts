@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import {
   ApexNonAxisChartSeries,
@@ -9,6 +9,25 @@ import {
 // Servicios
 import { StatisticsService } from 'src/app/core/services/statistics/statistics.service';
 
+interface DoctorsPerMedicalSpecialty {
+  name: string;
+  doctor_count: number;
+}
+
+const DEFAULT_CHART_HEIGHT = 350;
+const DEFAULT_CHART_WIDTH = '100%';
+const DEFAULT_RESPONSIVE_CHART_WIDTH = 200;
+const DEFAULT_RESPONSIVE_BREAKPOINT = 480;
+const COLORS = [
+  '#FF4560',
+  '#00E396',
+  '#FEB019',
+  '#775DD0',
+  '#546E7A',
+  '#26a69a',
+  '#008FFB',
+];
+
 /**
  * Componente para el gráfico de especialidades médicas de los doctores.
  */
@@ -17,53 +36,41 @@ import { StatisticsService } from 'src/app/core/services/statistics/statistics.s
   templateUrl: './doctors-medical-specialties-donut-chart.component.html',
   providers: [StatisticsService],
 })
-export class DoctorsMedicalSpecialtiesDonutChartComponent {
+export class DoctorsMedicalSpecialtiesDonutChartComponent implements OnInit {
   /** Series del gráfico. */
-  public series: ApexNonAxisChartSeries;
+  public series: ApexNonAxisChartSeries = [1];
 
   /** Configuración del gráfico. */
-  public chart: ApexChart;
+  public chart: ApexChart = {
+    width: DEFAULT_CHART_WIDTH,
+    height: DEFAULT_CHART_HEIGHT,
+    type: 'donut',
+  };
 
   /** Configuración responsive del gráfico. */
-  public responsive: ApexResponsive[];
-
-  /** Etiquetas del gráfico. */
-  public labels: any;
-
-  /** Colores del gráfico. */
-  public colors: string[];
-
-  constructor(private _statisticsService: StatisticsService) {
-    this.series = [1];
-    this.colors = [
-      '#FF4560',
-      '#00E396',
-      '#FEB019',
-      '#775DD0',
-      '#546E7A',
-      '#26a69a',
-      '#008FFB',
-    ];
-    this.chart = {
-      width: '100%',
-      height: 350,
-      type: 'donut',
-    };
-    this.labels = [];
-    this.responsive = [
-      {
-        breakpoint: 480,
-        options: {
-          chart: {
-            width: 200,
-          },
-          legend: {
-            position: 'bottom',
-          },
+  public responsive: ApexResponsive[] = [
+    {
+      breakpoint: DEFAULT_RESPONSIVE_BREAKPOINT,
+      options: {
+        chart: {
+          width: DEFAULT_RESPONSIVE_CHART_WIDTH,
+        },
+        legend: {
+          position: 'bottom',
         },
       },
-    ];
+    },
+  ];
 
+  /** Etiquetas del gráfico. */
+  public labels: string[] = [];
+
+  /** Colores del gráfico. */
+  public colors: string[] = COLORS;
+
+  constructor(private _statisticsService: StatisticsService) {}
+
+  ngOnInit(): void {
     this._getDoctorsMedicalSpecialtiesStats();
   }
 
@@ -72,9 +79,13 @@ export class DoctorsMedicalSpecialtiesDonutChartComponent {
    */
   private _getDoctorsMedicalSpecialtiesStats(): void {
     this._statisticsService.getMedicalSpecialtyDoctorCount().subscribe({
-      next: (response) => {
-        this.labels = response.map((item: any) => item.name);
-        this.series = response.map((item: any) => item.doctor_count);
+      next: (response: DoctorsPerMedicalSpecialty[]) => {
+        this.labels = response.map(
+          (item: DoctorsPerMedicalSpecialty) => item.name
+        );
+        this.series = response.map(
+          (item: DoctorsPerMedicalSpecialty) => item.doctor_count
+        );
       },
       error: (error) => {
         console.error(error);
