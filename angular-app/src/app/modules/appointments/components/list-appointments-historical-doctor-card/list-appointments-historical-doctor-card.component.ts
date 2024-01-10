@@ -23,11 +23,25 @@ export class ListAppointmentsHistoricalDoctorCardComponent extends GenericListCa
     { header: 'FECHA', field: 'schedule.start_time' },
   ];
 
+  /** Filtro de estado. */
+  public filter: string = 'all';
+
   constructor(
     private _appointmentService: AppointmentService,
     notificationService: NotificationService
   ) {
     super(notificationService);
+  }
+
+  /**
+   * Filtra elementos según el valor del filtro.
+   * @public
+   * @param {string} filterValue - Valor del filtro.
+   * @returns {void}
+   */
+  public filterElements(filterValue: string): void {
+    this.filter = filterValue;
+    this.getItems(this.entityData.page);
   }
 
   /**
@@ -47,9 +61,18 @@ export class ListAppointmentsHistoricalDoctorCardComponent extends GenericListCa
       this.entityData.page = 1;
     }
 
+    const statusMapping: { [key: string]: string[] } = {
+      all: ['completed', 'no_show', 'cancelled'],
+      completed: ['completed'],
+      no_show: ['no_show'],
+      cancelled: ['cancelled'],
+    };
+
+    let statuses: string[] = statusMapping[this.filter] || [];
+
     this._appointmentService
       .getAppointmentsByDoctor({
-        statuses: ['completed', 'no_show', 'cancelled'],
+        statuses: statuses,
         page: page,
         numResults: this.entityData.numResults,
         searchTerm: this.entityData.search.search,

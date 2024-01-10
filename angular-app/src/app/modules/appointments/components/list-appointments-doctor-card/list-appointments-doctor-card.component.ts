@@ -23,11 +23,25 @@ export class ListAppointmentsDoctorCardComponent extends GenericListCardComponen
     { header: 'FECHA', field: 'schedule.start_time' },
   ];
 
+  /** Filtro de estado. */
+  public filter: string = 'all';
+
   constructor(
     private _appointmentService: AppointmentService,
     notificationService: NotificationService
   ) {
     super(notificationService);
+  }
+
+  /**
+   * Filtra elementos según el valor del filtro.
+   * @public
+   * @param {string} filterValue - Valor del filtro.
+   * @returns {void}
+   */
+  public filterElements(filterValue: string): void {
+    this.filter = filterValue;
+    this.getItems(this.entityData.page);
   }
 
   /**
@@ -47,9 +61,18 @@ export class ListAppointmentsDoctorCardComponent extends GenericListCardComponen
       this.entityData.page = 1;
     }
 
+    const statusMappings: { [key: string]: string[] } = {
+      all: ['scheduled', 'rescheduled', 'in_progress'],
+      scheduled: ['scheduled'],
+      rescheduled: ['rescheduled'],
+      in_progress: ['in_progress'],
+    };
+
+    let statuses: string[] = statusMappings[this.filter] || [];
+
     this._appointmentService
       .getAppointmentsByDoctor({
-        statuses: ['scheduled', 'rescheduled', 'in_progress'],
+        statuses: statuses,
         page: page,
         numResults: this.entityData.numResults,
         searchTerm: this.entityData.search.search,

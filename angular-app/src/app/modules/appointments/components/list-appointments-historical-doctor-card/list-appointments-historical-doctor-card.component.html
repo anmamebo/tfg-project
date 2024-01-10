@@ -10,6 +10,48 @@
       >
         <app-search (searchSubmitted)="onSearchSubmitted($event)"></app-search>
       </div>
+      <div class="col-lg-5 col-md-6 mt-md-0 mt-2 text-end">
+        <button
+          (click)="filterElements('all')"
+          class="btn btn-sm btn-primary rounded-pill me-2"
+          [ngClass]="{
+            'btn-primary': filter === 'all',
+            'btn-outline-primary': filter !== 'all'
+          }"
+        >
+          Todas
+        </button>
+        <button
+          (click)="filterElements('completed')"
+          class="btn btn-sm btn-primary rounded-pill me-2"
+          [ngClass]="{
+            'btn-primary': filter === 'completed',
+            'btn-outline-primary': filter !== 'completed'
+          }"
+        >
+          Completadas
+        </button>
+        <button
+          (click)="filterElements('no_show')"
+          class="btn btn-sm btn-primary rounded-pill me-2"
+          [ngClass]="{
+            'btn-primary': filter === 'no_show',
+            'btn-outline-primary': filter !== 'no_show'
+          }"
+        >
+          No presentados
+        </button>
+        <button
+          (click)="filterElements('cancelled')"
+          class="btn btn-sm btn-primary rounded-pill me-2"
+          [ngClass]="{
+            'btn-primary': filter === 'cancelled',
+            'btn-outline-primary': filter !== 'cancelled'
+          }"
+        >
+          Canceladas
+        </button>
+      </div>
     </div>
 
     <ng-container *ngIf="entityData.items; else noItems">
