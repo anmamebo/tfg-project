@@ -96,6 +96,7 @@ class AppointmentViewSet(
             appointments, self.list_serializer_class
         )
 
+    # TODO: Implementar también para el médico
     @method_permission_classes([IsPatient])
     def create(self, request):
         """

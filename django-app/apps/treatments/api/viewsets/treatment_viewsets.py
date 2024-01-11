@@ -262,6 +262,10 @@ class TreatmentViewSet(
         """
         Genera un PDF con la información de un tratamiento.
 
+        Permisos requeridos:
+            - El usuario debe ser administrador, médico o paciente.
+            - El usuario debe ser el paciente del tratamiento (en el caso de paciente).
+
         Args:
             request (Request): La solicitud HTTP.
             pk (int): El identificador del tratamiento.
