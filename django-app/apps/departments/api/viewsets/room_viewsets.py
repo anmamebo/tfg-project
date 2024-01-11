@@ -236,7 +236,7 @@ class RoomViewSet(viewsets.GenericViewSet, PaginationMixin, ErrorResponseMixin):
         Returns:
             Response: La respuesta que contiene la lista de salas.
         """
-        rooms = self.get_queryset()
+        rooms = self.get_queryset().filter(state=True)
 
         department_id = self.request.query_params.get("department", None)
         if not department_id:  # Si no se envía el id del departamento.

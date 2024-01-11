@@ -297,7 +297,7 @@ class DoctorViewSet(viewsets.GenericViewSet, PaginationMixin, ErrorResponseMixin
         Returns:
             Response: La respuesta que contiene la lista de médicos.
         """
-        doctors = self.get_queryset()
+        doctors = self.get_queryset().filter(state=True)
 
         department_id = self.request.query_params.get("department", None)
         if not department_id:
