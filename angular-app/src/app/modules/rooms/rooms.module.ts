@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 // Módulos
 import { RoomsRoutingModule } from './rooms-routing.module';
+import { SharedModule } from 'src/app/shared/shared.module';
 import { GenericPageModule } from 'src/app/shared/components/generic-page/generic-page.module';
 import { GenericListCardModule } from 'src/app/shared/components/generic-list-card/generic-list-card.module';
 import { GenericCardModule } from 'src/app/shared/components/generic-card/generic-card.module';
@@ -39,6 +40,7 @@ import { CreateRoomsCardComponent } from './components/create-rooms-card/create-
     CommonModule,
     ReactiveFormsModule,
     RoomsRoutingModule,
+    SharedModule,
     GenericPageModule,
     GenericListCardModule,
     GenericCardModule,

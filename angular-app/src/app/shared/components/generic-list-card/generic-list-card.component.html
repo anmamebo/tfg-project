@@ -50,6 +50,7 @@
         class="col-md-3 col-12 mt-md-0 mt-3"
       >
         <a
+          *appHasRole="entityData.create.roles || []"
           [routerLink]="[entityData.create.create]"
           class="btn btn-primary w-100"
           >{{ entityData.create.createText }}</a

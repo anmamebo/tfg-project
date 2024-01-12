@@ -5,9 +5,9 @@
 >
   <div class="page-content">
     <ng-container *ngIf="medicalSpecialty">
-      <section class="section">
+      <section *appHasRole="buttonsRoles" class="section">
         <app-buttons-medical-specialties-card
-          *ngIf="medicalSpecialty.id && medicalSpecialty.state"
+          *ngIf="medicalSpecialty.id && medicalSpecialty.state !== undefined"
           [medicalSpecialtyId]="medicalSpecialty.id"
           [isActive]="medicalSpecialty.state"
           (refreshMedicalSpecialty)="onRefreshMedicalSpecialty()"

@@ -8,6 +8,9 @@ import { MedicalSpecialtiesCreatePageComponent } from './pages/medical-specialti
 
 import { medicalSpecialtyResolver } from 'src/app/core/resolvers/medical-specialty.resolver';
 
+import { roleGuard } from 'src/app/core/guards/role.guard';
+import { ROLES } from 'src/app/core/constants/roles.constants';
+
 const routes: Routes = [
   {
     path: '',
@@ -18,6 +21,8 @@ const routes: Routes = [
     path: 'crear',
     component: MedicalSpecialtiesCreatePageComponent,
     title: 'Crear especialidad médica | HospitalSys',
+    canActivate: [roleGuard],
+    data: { roles: [ROLES.ADMIN] },
   },
   {
     path: ':id',
@@ -34,6 +39,8 @@ const routes: Routes = [
     resolve: {
       data: medicalSpecialtyResolver, // Resolver para obtener los datos de la especialidad médica
     },
+    canActivate: [roleGuard],
+    data: { roles: [ROLES.ADMIN] },
   },
 ];
 

@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
+import { ROLES } from 'src/app/core/constants/roles.constants';
+
 // Servicios
 import { PatientService } from 'src/app/core/services/entities/patient.service';
 import { NotificationService } from 'src/app/core/services/notifications/notification.service';
@@ -21,6 +23,15 @@ export class ButtonsPatientsCardComponent {
 
   /** Evento para refrescar el paciente */
   @Output() public refreshPatient: EventEmitter<void> = new EventEmitter();
+
+  /** Roles que pueden editar */
+  public editRoles: string[] = [ROLES.ADMIN, ROLES.DOCTOR];
+
+  /** Roles que pueden eliminar */
+  public deleteRoles: string[] = [ROLES.ADMIN];
+
+  /** Roles que pueden activar */
+  public activateRoles: string[] = [ROLES.ADMIN];
 
   constructor(
     private _patientService: PatientService,

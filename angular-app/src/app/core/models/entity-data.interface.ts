@@ -25,6 +25,8 @@ export interface EntityData {
     createText?: string;
     /** URL de creación. */
     create?: string;
+    /** Permisos de creación */
+    roles?: string[];
   };
   /** Configuración de las acciones de los elementos. */
   actions: {
@@ -32,10 +34,25 @@ export interface EntityData {
     hasActions: boolean;
     /** URLs de las acciones. */
     actions?: {
-      /** URL de mostrar. */
-      show?: string;
-      /** URL de editar. */
-      edit?: string;
+      /** Acción mostrar. */
+      show?: {
+        /** URL de mostrar. */
+        url: string;
+        /** Permisos de mostrar */
+        roles: string[];
+      };
+      /** Acción editar. */
+      edit?: {
+        /** URL de editar. */
+        url: string;
+        /** Permisos de editar */
+        roles: string[];
+      };
+      /** Acción eliminar */
+      delete?: {
+        /** Permisos de eliminar */
+        roles: string[];
+      };
     };
   };
   /** Servicio de la entidad. */
@@ -57,5 +74,6 @@ export interface EntityData {
     /** Texto de búsqueda. */
     search?: string;
   };
+  /** Indica si se mostrará el filtro de estado. */
   hasStateFilter?: boolean;
 }

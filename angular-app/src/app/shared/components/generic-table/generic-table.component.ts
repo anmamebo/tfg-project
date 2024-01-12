@@ -3,6 +3,20 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 // Modelos
 import { SortEvent } from 'src/app/core/models/sort-event.interface';
 
+interface ActionsUrls {
+  show?: {
+    url: string;
+    roles: string[];
+  };
+  edit?: {
+    url: string;
+    roles: string[];
+  };
+  delete?: {
+    roles: string[];
+  };
+}
+
 /**
  * Componente que representa una tabla genérica.
  */
@@ -21,7 +35,19 @@ export class GenericTableComponent {
   @Input() public actions: boolean = false;
 
   /** Objeto con las urls de las acciones. */
-  @Input() public actionsUrls: any = {};
+  @Input() public actionsUrls: ActionsUrls | undefined = {
+    show: {
+      url: '',
+      roles: [],
+    },
+    edit: {
+      url: '',
+      roles: [],
+    },
+    delete: {
+      roles: [],
+    },
+  };
 
   /** Evento que se lanza al pulsar el botón de eliminar. */
   @Output() public onDeleteEvent: EventEmitter<any> = new EventEmitter<any>();

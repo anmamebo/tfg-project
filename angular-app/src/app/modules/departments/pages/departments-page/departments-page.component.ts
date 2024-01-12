@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 
+import { ROLES } from 'src/app/core/constants/roles.constants';
 import { breadcrumbDepartmentsData } from 'src/app/core/constants/breadcrumb-data';
 
 // Servicios
@@ -43,12 +44,22 @@ export class DepartmentsPageComponent {
         hasCreate: true,
         createText: 'Crear Departamento',
         create: '/departamentos/crear',
+        roles: [ROLES.ADMIN],
       },
       actions: {
         hasActions: true,
         actions: {
-          show: '/departamentos',
-          edit: '/departamentos/editar',
+          show: {
+            url: '/departamentos',
+            roles: [ROLES.ADMIN, ROLES.DOCTOR],
+          },
+          edit: {
+            url: '/departamentos/editar',
+            roles: [ROLES.ADMIN],
+          },
+          delete: {
+            roles: [ROLES.ADMIN],
+          },
         },
       },
       service: this._departmentService,

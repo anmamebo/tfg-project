@@ -8,6 +8,9 @@ import { RoomsCreatePageComponent } from './pages/rooms-create-page/rooms-create
 
 import { roomResolver } from 'src/app/core/resolvers/room.resolver';
 
+import { roleGuard } from 'src/app/core/guards/role.guard';
+import { ROLES } from 'src/app/core/constants/roles.constants';
+
 const routes: Routes = [
   {
     path: '',
@@ -18,6 +21,8 @@ const routes: Routes = [
     path: 'crear',
     component: RoomsCreatePageComponent,
     title: 'Crear sala | HospitalSys',
+    canActivate: [roleGuard],
+    data: { roles: [ROLES.ADMIN] },
   },
   {
     path: ':id',
@@ -34,6 +39,8 @@ const routes: Routes = [
     resolve: {
       data: roomResolver, // Resolver para obtener los datos de la sala
     },
+    canActivate: [roleGuard],
+    data: { roles: [ROLES.ADMIN] },
   },
 ];
 

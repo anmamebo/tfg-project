@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 
+import { ROLES } from 'src/app/core/constants/roles.constants';
 import { breadcrumbPatientsData } from 'src/app/core/constants/breadcrumb-data';
 
 // Servicios
@@ -45,14 +46,24 @@ export class PatientsPageComponent {
       ],
       create: {
         hasCreate: true,
-        createText: 'Crear Paciente',
+        createText: 'Alta Paciente',
         create: '/pacientes/crear',
+        roles: [ROLES.ADMIN, ROLES.DOCTOR],
       },
       actions: {
         hasActions: true,
         actions: {
-          show: '/pacientes',
-          edit: '/pacientes/editar',
+          show: {
+            url: '/pacientes',
+            roles: [ROLES.ADMIN, ROLES.DOCTOR],
+          },
+          edit: {
+            url: '/pacientes/editar',
+            roles: [ROLES.ADMIN, ROLES.DOCTOR],
+          },
+          delete: {
+            roles: [ROLES.ADMIN],
+          },
         },
       },
       service: this.patientService,

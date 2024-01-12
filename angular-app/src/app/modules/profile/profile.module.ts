@@ -9,6 +9,7 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 // Módulos
 import { ProfileRoutingModule } from './profile-routing.module';
+import { SharedModule } from 'src/app/shared/shared.module';
 import { GenericPageModule } from 'src/app/shared/components/generic-page/generic-page.module';
 import { GenericCardModule } from 'src/app/shared/components/generic-card/generic-card.module';
 import { LoadingSpinnerModule } from 'src/app/shared/components/loading-spinner/loading-spinner.module';
@@ -42,6 +43,7 @@ import { DoctorInfoCardComponent } from './components/doctor-info-card/doctor-in
     ReactiveFormsModule,
     SweetAlert2Module,
     FlatpickrModule.forRoot(),
+    SharedModule,
     LoadingSpinnerModule,
     GenericPageModule,
     GenericCardModule,

@@ -69,22 +69,22 @@ export const sidebarData = [
     name: 'Citas',
     key: 'm/citas',
     icon: 'journal-medical',
-    roles: [ROLES.ADMIN, ROLES.DOCTOR],
+    roles: [ROLES.DOCTOR],
     submenu: [
       {
         name: 'Citas',
         url: '/m/citas/mis-citas',
-        roles: [ROLES.ADMIN, ROLES.DOCTOR],
+        roles: [ROLES.DOCTOR],
       },
       {
         name: 'Historial',
         url: '/m/citas/historial',
-        roles: [ROLES.ADMIN, ROLES.DOCTOR],
+        roles: [ROLES.DOCTOR],
       },
       {
         name: 'Reportes y estadísticas',
         url: '/m/citas/reportes',
-        roles: [ROLES.ADMIN, ROLES.DOCTOR],
+        roles: [ROLES.DOCTOR],
       },
     ],
   },
@@ -125,14 +125,14 @@ export const sidebarData = [
     key: 'especialidades-medicas',
     url: '/especialidades-medicas',
     icon: 'diagram-2-fill',
-    roles: [ROLES.ADMIN],
+    roles: [ROLES.ADMIN, ROLES.DOCTOR],
   },
   {
     name: 'Departamentos',
     key: 'departamentos',
     url: '/departamentos',
     icon: 'building-fill',
-    roles: [ROLES.ADMIN],
+    roles: [ROLES.ADMIN, ROLES.DOCTOR],
   },
   {
     name: 'Salas',

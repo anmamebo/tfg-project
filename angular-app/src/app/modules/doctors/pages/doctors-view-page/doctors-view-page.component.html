@@ -7,7 +7,7 @@
     <ng-container *ngIf="doctor">
       <section class="section">
         <app-buttons-doctors-card
-          *ngIf="doctor.id && doctor.state"
+          *ngIf="doctor.id && doctor.state !== undefined"
           [doctorId]="doctor.id"
           [isActive]="doctor.state"
           (refreshDoctor)="onRefreshDoctor()"

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 
+import { ROLES } from 'src/app/core/constants/roles.constants';
 import { breadcrumbMedicalSpecialtiesData } from 'src/app/core/constants/breadcrumb-data';
 
 // Servicios
@@ -44,12 +45,22 @@ export class MedicalSpecialtiesPageComponent {
         hasCreate: true,
         createText: 'Crear Especialidad Médica',
         create: '/especialidades-medicas/crear',
+        roles: [ROLES.ADMIN],
       },
       actions: {
         hasActions: true,
         actions: {
-          show: '/especialidades-medicas',
-          edit: '/especialidades-medicas/editar',
+          show: {
+            url: '/especialidades-medicas',
+            roles: [ROLES.ADMIN, ROLES.DOCTOR],
+          },
+          edit: {
+            url: '/especialidades-medicas/editar',
+            roles: [ROLES.ADMIN],
+          },
+          delete: {
+            roles: [ROLES.ADMIN],
+          },
         },
       },
       service: this._medicalSpecialtyService,

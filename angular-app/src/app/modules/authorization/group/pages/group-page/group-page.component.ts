@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 
+import { ROLES } from 'src/app/core/constants/roles.constants';
 import { breadcrumbGroupData } from 'src/app/core/constants/breadcrumb-data';
 
 // Servicios
@@ -53,8 +54,17 @@ export class GroupPageComponent {
       actions: {
         hasActions: true,
         actions: {
-          show: '/autorizacion/grupos',
-          edit: '/autorizacion/grupos/editar',
+          show: {
+            url: '/autorizacion/grupos',
+            roles: [ROLES.ADMIN],
+          },
+          edit: {
+            url: '/autorizacion/grupos/editar',
+            roles: [ROLES.ADMIN],
+          },
+          delete: {
+            roles: [ROLES.ADMIN],
+          },
         },
       },
       service: this._groupService,

@@ -24,25 +24,29 @@
                 (updatedUserEvent)="getUser()"
               ></app-basic-info-card>
 
-              <ng-container *ngIf="user.doctor">
-                <app-doctor-info-card
-                  [doctor]="user.doctor"
-                  (updatedDoctorEvent)="getUser()"
-                ></app-doctor-info-card>
-              </ng-container>
-
-              <ng-container *ngIf="user.patient">
-                <app-patient-info-card
-                  [patient]="user.patient"
-                  (updatedPatientEvent)="getUser()"
-                ></app-patient-info-card>
-
-                <ng-container *ngIf="user.patient.address">
-                  <app-address-info-card
-                    [address]="user.patient.address"
-                  ></app-address-info-card>
+              <div *appHasRole="['Médico']">
+                <ng-container *ngIf="user.doctor">
+                  <app-doctor-info-card
+                    [doctor]="user.doctor"
+                    (updatedDoctorEvent)="getUser()"
+                  ></app-doctor-info-card>
                 </ng-container>
-              </ng-container>
+              </div>
+
+              <div *appHasRole="['Paciente']">
+                <ng-container *ngIf="user.patient">
+                  <app-patient-info-card
+                    [patient]="user.patient"
+                    (updatedPatientEvent)="getUser()"
+                  ></app-patient-info-card>
+
+                  <ng-container *ngIf="user.patient.address">
+                    <app-address-info-card
+                      [address]="user.patient.address"
+                    ></app-address-info-card>
+                  </ng-container>
+                </ng-container>
+              </div>
             </div>
             <div
               class="tab-pane fade"

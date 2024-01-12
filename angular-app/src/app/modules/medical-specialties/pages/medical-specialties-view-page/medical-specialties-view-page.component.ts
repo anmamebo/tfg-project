@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
+import { ROLES } from 'src/app/core/constants/roles.constants';
 import { breadcrumbMedicalSpecialtiesViewData } from 'src/app/core/constants/breadcrumb-data';
 
 // Servicios
@@ -26,6 +27,9 @@ export class MedicalSpecialtiesViewPageComponent implements OnInit {
 
   /** Datos para el breadcrumb */
   public breadcrumbData = breadcrumbMedicalSpecialtiesViewData;
+
+  /** Roles que pueden visualizar los botones de acciones */
+  public buttonsRoles: string[] = [ROLES.ADMIN];
 
   /** Especialidad médica que se visualizará */
   public medicalSpecialty: MedicalSpecialty | null = null;

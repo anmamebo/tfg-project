@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 // Módulos
 import { MedicalSpecialtiesRoutingModule } from './medical-specialties-routing.module';
+import { SharedModule } from 'src/app/shared/shared.module';
 import { GenericPageModule } from 'src/app/shared/components/generic-page/generic-page.module';
 import { GenericListCardModule } from 'src/app/shared/components/generic-list-card/generic-list-card.module';
 import { GenericCardModule } from 'src/app/shared/components/generic-card/generic-card.module';
@@ -36,6 +37,7 @@ import { CreateMedicalSpecialtiesCardComponent } from './components/create-medic
     CommonModule,
     MedicalSpecialtiesRoutingModule,
     ReactiveFormsModule,
+    SharedModule,
     GenericPageModule,
     GenericListCardModule,
     GenericCardModule,

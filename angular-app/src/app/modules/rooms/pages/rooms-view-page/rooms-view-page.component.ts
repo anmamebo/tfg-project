@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
+import { ROLES } from 'src/app/core/constants/roles.constants';
 import { breadcrumbRoomsViewData } from 'src/app/core/constants/breadcrumb-data';
 
 // Servicios
@@ -26,6 +27,9 @@ export class RoomsViewPageComponent implements OnInit {
 
   /** Datos para el breadcrumb */
   public breadcrumbData = breadcrumbRoomsViewData;
+
+  /** Roles que pueden visualizar los botones de acciones */
+  public buttonsRoles: string[] = [ROLES.ADMIN];
 
   /** Sala que se visualizará */
   public room: Room | null = null;

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 
+import { ROLES } from 'src/app/core/constants/roles.constants';
 import { breadcrumbRoomsData } from 'src/app/core/constants/breadcrumb-data';
 
 // Servicios
@@ -45,12 +46,22 @@ export class RoomsPageComponent {
         hasCreate: true,
         createText: 'Crear Sala',
         create: '/salas/crear',
+        roles: [ROLES.ADMIN],
       },
       actions: {
         hasActions: true,
         actions: {
-          show: '/salas',
-          edit: '/salas/editar',
+          show: {
+            url: '/salas',
+            roles: [ROLES.ADMIN, ROLES.DOCTOR],
+          },
+          edit: {
+            url: '/salas/editar',
+            roles: [ROLES.ADMIN],
+          },
+          delete: {
+            roles: [ROLES.ADMIN],
+          },
         },
       },
       service: this._roomService,

@@ -55,7 +55,7 @@ const routes: Routes = [
         (m) => m.MedicalSpecialtiesModule
       ),
     canActivate: [roleGuard],
-    data: { roles: [ROLES.ADMIN] },
+    data: { roles: [ROLES.ADMIN, ROLES.DOCTOR] },
   },
   {
     path: 'departamentos',
@@ -64,14 +64,14 @@ const routes: Routes = [
         (m) => m.DepartmentsModule
       ),
     canActivate: [roleGuard],
-    data: { roles: [ROLES.ADMIN] },
+    data: { roles: [ROLES.ADMIN, ROLES.DOCTOR] },
   },
   {
     path: 'salas',
     loadChildren: () =>
       import('./rooms/rooms.module').then((m) => m.RoomsModule),
     canActivate: [roleGuard],
-    data: { roles: [ROLES.ADMIN] },
+    data: { roles: [ROLES.ADMIN, ROLES.DOCTOR] },
   },
   {
     path: 'solicitar-cita',
@@ -89,7 +89,7 @@ const routes: Routes = [
         (m) => m.AppointmentsModule
       ),
     canActivate: [roleGuard],
-    data: { roles: [ROLES.ADMIN, ROLES.DOCTOR] },
+    data: { roles: [ROLES.DOCTOR] },
   },
   {
     path: 'citas',

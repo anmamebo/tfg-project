@@ -8,6 +8,9 @@ import { DepartmentsCreatePageComponent } from './pages/departments-create-page/
 
 import { departmentResolver } from 'src/app/core/resolvers/department.resolver';
 
+import { roleGuard } from 'src/app/core/guards/role.guard';
+import { ROLES } from 'src/app/core/constants/roles.constants';
+
 const routes: Routes = [
   {
     path: '',
@@ -18,6 +21,8 @@ const routes: Routes = [
     path: 'crear',
     component: DepartmentsCreatePageComponent,
     title: 'Crear departamento | HospitalSys',
+    canActivate: [roleGuard],
+    data: { roles: [ROLES.ADMIN] },
   },
   {
     path: ':id',
@@ -34,6 +39,8 @@ const routes: Routes = [
     resolve: {
       data: departmentResolver, // Resolver para obtener los datos del departamento
     },
+    canActivate: [roleGuard],
+    data: { roles: [ROLES.ADMIN] },
   },
 ];
 

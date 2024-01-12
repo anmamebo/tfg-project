@@ -5,9 +5,9 @@
 >
   <div class="page-content">
     <ng-container *ngIf="room">
-      <section class="section">
+      <section *appHasRole="buttonsRoles" class="section">
         <app-buttons-rooms-card
-          *ngIf="room.id && room.is_available"
+          *ngIf="room.id && room.is_available !== undefined"
           [roomId]="room.id"
           [isActive]="room.is_available"
           (refreshRoom)="onRefreshRoom()"

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 // Módulos
+import { SharedModule } from 'src/app/shared/shared.module';
 import { GenericCardModule } from 'src/app/shared/components/generic-card/generic-card.module';
 import { SearchModule } from 'src/app/shared/components/search/search.module';
 import { GenericTableModule } from 'src/app/shared/components/generic-table/generic-table.module';
@@ -18,6 +19,7 @@ import { GenericListCardComponent } from './generic-list-card.component';
   imports: [
     CommonModule,
     RouterModule,
+    SharedModule,
     GenericCardModule,
     SearchModule,
     GenericTableModule,
