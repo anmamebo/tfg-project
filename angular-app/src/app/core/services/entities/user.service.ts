@@ -73,7 +73,7 @@ export class UserService {
     let params = JSON.stringify(data);
 
     return this._http.post<any>(
-      `${this.url}set_password/`,
+      `${this.url}set-password/`,
       params,
       httpOptions
     );
@@ -81,11 +81,10 @@ export class UserService {
 
   /**
    * Actualiza la imagen de perfil del usuario.
-   * @param {string} userId - El ID del usuario.
    * @param {File} file - El archivo de imagen de perfil.
    * @returns {Observable<any>} Un Observable que se suscribe a la solicitud HTTP para actualizar la imagen de perfil.
    */
-  public updateProfilePicture(userId: string, file: File): Observable<any> {
+  public updateProfilePicture(file: File): Observable<any> {
     let headers = this._httpCommonService.getCommonHeaders();
     headers = headers.delete('Content-Type');
     const httpOptions = { headers };
@@ -94,7 +93,7 @@ export class UserService {
     formData.append('profile_picture', file);
 
     return this._http.put<any>(
-      `${this.url}${userId}/update_profile_picture/`,
+      `${this.url}profile-picture/`,
       formData,
       httpOptions
     );
@@ -108,7 +107,7 @@ export class UserService {
     const headers = this._httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
-    return this._http.get<any>(`${this.url}profile_picture/`, httpOptions);
+    return this._http.get<any>(`${this.url}profile-picture/`, httpOptions);
   }
 
   /**
@@ -119,9 +118,6 @@ export class UserService {
     const headers = this._httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
-    return this._http.delete<any>(
-      `${this.url}delete_profile_picture/`,
-      httpOptions
-    );
+    return this._http.delete<any>(`${this.url}profile-picture/`, httpOptions);
   }
 }

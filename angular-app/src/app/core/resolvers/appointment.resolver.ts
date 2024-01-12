@@ -24,7 +24,7 @@ export const appointmentForDoctorResolver: ResolveFn<any> = (
   router: Router = inject(Router)
 ): Observable<any> => {
   const appointmentId = route.params['id'];
-  return appointmentService.getAppointmentByIdByDoctor(appointmentId).pipe(
+  return appointmentService.getAppointmentByIdForDoctor(appointmentId).pipe(
     map((appointment) => {
       if (appointment) {
         return appointment;

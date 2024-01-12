@@ -17,7 +17,7 @@ export class PdfAppointmentService extends PdfService {
   public endpoint = 'appointments/appointments/';
 
   /** Endpoint de la API para la gestión de pdfs. */
-  public entityEndpoint = 'get_appointment_pdf/';
+  public entityEndpoint = 'pdf/';
 
   constructor(_http: HttpClient, _httpCommonService: HttpCommonService) {
     super(_http, _httpCommonService);

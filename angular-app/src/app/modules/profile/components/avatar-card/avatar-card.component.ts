@@ -105,7 +105,7 @@ export class AvatarCardComponent {
     const file = this.form.get('fileSource')?.value as File;
 
     if (file) {
-      this._userService.updateProfilePicture(this.user.id, file).subscribe({
+      this._userService.updateProfilePicture(file).subscribe({
         next: (response) => {
           this.submitted = false;
           this._profileImageService.emitProfileImageUpdated(

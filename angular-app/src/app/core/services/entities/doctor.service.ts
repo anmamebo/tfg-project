@@ -87,9 +87,9 @@ export class DoctorService extends EntityService<Doctor> {
     const headers = this.httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
-    return this.http.get<any>(
-      `${this.url}${this.endpoint}doctors_by_department/`,
-      { params, ...httpOptions }
-    );
+    return this.http.get<any>(`${this.url}${this.endpoint}department/`, {
+      params,
+      ...httpOptions,
+    });
   }
 }

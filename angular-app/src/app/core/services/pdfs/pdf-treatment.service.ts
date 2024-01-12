@@ -17,7 +17,7 @@ export class PdfTreatmentService extends PdfService {
   public endpoint = 'treatments/treatments/';
 
   /** Endpoint de la API para la gestión de pdfs. */
-  public entityEndpoint = 'get_treatment_pdf/';
+  public entityEndpoint = 'pdf/';
 
   constructor(_http: HttpClient, _httpCommonService: HttpCommonService) {
     super(_http, _httpCommonService);

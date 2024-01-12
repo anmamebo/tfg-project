@@ -61,7 +61,7 @@ export class AppointmentsViewPageComponent {
     }
 
     this._appointmentService
-      .getAppointmentByIdByDoctor(this.appointment.id)
+      .getAppointmentByIdForDoctor(this.appointment.id)
       .subscribe({
         next: (appointment: Appointment) => {
           this.appointment = appointment;

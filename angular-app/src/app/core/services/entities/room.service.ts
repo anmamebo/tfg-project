@@ -87,9 +87,9 @@ export class RoomService extends EntityService<Room> {
     const headers = this.httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
-    return this.http.get<any>(
-      `${this.url}${this.endpoint}rooms_by_department`,
-      { params, ...httpOptions }
-    );
+    return this.http.get<any>(`${this.url}${this.endpoint}department`, {
+      params,
+      ...httpOptions,
+    });
   }
 }

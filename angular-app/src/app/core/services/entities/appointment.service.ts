@@ -59,14 +59,11 @@ export class AppointmentService {
    * @param {string} id Id de la cita.
    * @returns {Observable<Appointment>} Un observable que emite la respuesta del servidor.
    */
-  public getAppointmentByIdByDoctor(id: string): Observable<Appointment> {
+  public getAppointmentByIdForDoctor(id: string): Observable<Appointment> {
     const headers = this._httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
-    return this._http.get<Appointment>(
-      `${this.url}${id}/retrieve_for_doctor/`,
-      httpOptions
-    );
+    return this._http.get<Appointment>(`${this.url}${id}`, httpOptions);
   }
 
   /**
@@ -151,7 +148,7 @@ export class AppointmentService {
     const headers = this._httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
-    return this._http.get<any>(`${this.url}list_for_doctor/`, {
+    return this._http.get<any>(`${this.url}doctor/`, {
       params,
       ...httpOptions,
     });
@@ -170,7 +167,7 @@ export class AppointmentService {
     const headers = this._httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
-    return this._http.get<any>(`${this.url}list_for_patient/`, {
+    return this._http.get<any>(`${this.url}patient/`, {
       params,
       ...httpOptions,
     });
@@ -191,7 +188,7 @@ export class AppointmentService {
     const headers = this._httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
-    return this._http.get<any>(`${this.url}list_for_doctor_by_date/`, {
+    return this._http.get<any>(`${this.url}doctor/date/`, {
       params,
       ...httpOptions,
     });
@@ -212,7 +209,7 @@ export class AppointmentService {
     const headers = this._httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
-    return this._http.get<any>(`${this.url}list_for_patient_by_date/`, {
+    return this._http.get<any>(`${this.url}patient/date/`, {
       params,
       ...httpOptions,
     });
@@ -243,7 +240,7 @@ export class AppointmentService {
     const httpOptions = { headers };
 
     return this._http.put<any>(
-      `${this.url}${id}/update_status/`,
+      `${this.url}${id}/status/`,
       { status },
       httpOptions
     );

@@ -105,7 +105,7 @@ export class TreatmentService {
     const headers = this._httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
-    return this._http.get<any>(`${this.url}list_for_appointment/`, {
+    return this._http.get<any>(`${this.url}appointment/`, {
       params,
       ...httpOptions,
     });
@@ -124,7 +124,7 @@ export class TreatmentService {
     const headers = this._httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
-    return this._http.get<any>(`${this.url}list_for_patient/`, {
+    return this._http.get<any>(`${this.url}patient/`, {
       params,
       ...httpOptions,
     });
@@ -155,7 +155,7 @@ export class TreatmentService {
     const httpOptions = { headers };
 
     return this._http.put<any>(
-      `${this.url}${id}/update_status/`,
+      `${this.url}${id}/status/`,
       { status },
       httpOptions
     );

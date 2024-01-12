@@ -35,6 +35,6 @@ export class ScheduleService {
     const headers = this._httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
-    return this._http.get<Schedule[]>(`${this.url}get_by_doctor`, httpOptions);
+    return this._http.get<Schedule[]>(`${this.url}doctor`, httpOptions);
   }
 }

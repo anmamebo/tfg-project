@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import { API_URL } from 'src/app/core/constants/API_URL';
+import { MEDIA_URL } from 'src/app/core/constants/API_URL';
 
 // Servicios
 import { UserService } from 'src/app/core/services/entities/user.service';
@@ -16,7 +16,7 @@ import { ProfileImageService } from 'src/app/core/services/entities/profile-imag
 })
 export class AvatarComponent implements OnInit {
   /** URL de la api. */
-  public API_URL = API_URL.url.replace(/\/$/, '');
+  public MEDIA_URL = MEDIA_URL.url;
 
   /* URL de la imagen de perfil. */
   public profile_picture: string | null = null;
