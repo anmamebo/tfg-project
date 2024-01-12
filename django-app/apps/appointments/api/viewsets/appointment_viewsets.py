@@ -133,6 +133,26 @@ class AppointmentViewSet(
         )
 
     @method_permission_classes([IsDoctor, IsAppointmentOwner])
+    def retrieve(self, request, pk=None):
+        """
+        Recupera una cita de un doctor.
+
+        Permisos requeridos:
+            - El usuario debe ser un médico.
+            - El usuario debe ser el médico de la cita.
+
+        Args:
+            request (Request): La solicitud HTTP.
+            pk (int): El identificador de la cita.
+
+        Returns:
+            Response: La respuesta que contiene la cita.
+        """
+        appointment = self.get_object(pk)
+        appointment_serializer = self.serializer_class(appointment)
+        return Response(appointment_serializer.data, status=status.HTTP_200_OK)
+
+    @method_permission_classes([IsDoctor, IsAppointmentOwner])
     def update(self, request, pk=None):
         """
         Actualiza una cita.
@@ -165,7 +185,7 @@ class AppointmentViewSet(
         )
 
     @method_permission_classes([IsDoctor])
-    @action(detail=False, methods=["get"])
+    @action(detail=False, methods=["get"], url_path="doctor")
     def list_for_doctor(self, request):
         """
         Lista todas las citas de un doctor ordenadas por fecha más cercana.
@@ -199,7 +219,7 @@ class AppointmentViewSet(
         )
 
     @method_permission_classes([IsPatient])
-    @action(detail=False, methods=["get"])
+    @action(detail=False, methods=["get"], url_path="patient")
     def list_for_patient(self, request):
         """
         Lista todas las citas de un paciente ordenadas por fecha más cercana.
@@ -241,28 +261,7 @@ class AppointmentViewSet(
             appointments, self.list_serializer_class
         )
 
-    @method_permission_classes([IsDoctor, IsAppointmentOwner])
-    @action(detail=True, methods=["get"])
-    def retrieve_for_doctor(self, request, pk=None):
-        """
-        Recupera una cita de un doctor.
-
-        Permisos requeridos:
-            - El usuario debe ser un médico.
-            - El usuario debe ser el médico de la cita.
-
-        Args:
-            request (Request): La solicitud HTTP.
-            pk (int): El identificador de la cita.
-
-        Returns:
-            Response: La respuesta que contiene la cita.
-        """
-        appointment = self.get_object(pk)
-        appointment_serializer = self.serializer_class(appointment)
-        return Response(appointment_serializer.data, status=status.HTTP_200_OK)
-
-    @action(detail=True, methods=["put"])
+    @action(detail=True, methods=["put"], url_path="status")
     def update_status(self, request, pk=None):
         """
         Actualiza el estado de una cita, siempre y cuando
@@ -307,7 +306,7 @@ class AppointmentViewSet(
         )
 
     @method_permission_classes([IsDoctor])
-    @action(detail=False, methods=["get"])
+    @action(detail=False, methods=["get"], url_path="doctor/date")
     def list_for_doctor_by_date(self, request):
         """
         Lista todas las citas de un médico de un día concreto.
@@ -346,7 +345,7 @@ class AppointmentViewSet(
         )
 
     @method_permission_classes([IsPatient])
-    @action(detail=False, methods=["get"])
+    @action(detail=False, methods=["get"], url_path="patient/date")
     def list_for_patient_by_date(self, request):
         """
         Lista todas las citas de un paciente de un día concreto.
@@ -385,10 +384,13 @@ class AppointmentViewSet(
         )
 
     @method_permission_classes([IsPatient])
-    @action(detail=True, methods=["get"])
-    def get_appointment_pdf(self, request, pk=None):
+    @action(detail=True, methods=["get"], url_path="pdf")
+    def get_pdf(self, request, pk=None):
         """
         Genera un PDF con la información de una cita.
+
+        Permisos requeridos:
+            - El usuario debe ser un paciente.
 
         Args:
             request (Request): La solicitud HTTP.

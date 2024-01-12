@@ -213,7 +213,7 @@ class RoomViewSet(viewsets.GenericViewSet, PaginationMixin, ErrorResponseMixin):
         )
 
     @method_permission_classes([IsAdministratorOrDoctor])
-    @action(detail=False, methods=["get"])
+    @action(detail=False, methods=["get"], url_path="department")
     def rooms_by_department(self, request):
         """
         Lista todas las salas por departamento.

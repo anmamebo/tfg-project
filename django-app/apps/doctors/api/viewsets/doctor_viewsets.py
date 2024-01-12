@@ -274,7 +274,7 @@ class DoctorViewSet(viewsets.GenericViewSet, PaginationMixin, ErrorResponseMixin
             )
 
     @method_permission_classes([IsAdministratorOrDoctor])
-    @action(detail=False, methods=["get"])
+    @action(detail=False, methods=["get"], url_path="department")
     def doctors_by_department(self, request):
         """
         Lista todos los médicos por departamento.

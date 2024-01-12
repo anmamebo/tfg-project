@@ -35,7 +35,7 @@ class ScheduleViewSet(viewsets.GenericViewSet):
         return self.queryset
 
     @method_permission_classes([IsDoctor])
-    @action(detail=False, methods=["get"])
+    @action(detail=False, methods=["get"], url_path="doctor")
     def get_by_doctor(self, request):
         """
         Recupera los horarios de un médico, siempre y cuando el usuario sea un médico.

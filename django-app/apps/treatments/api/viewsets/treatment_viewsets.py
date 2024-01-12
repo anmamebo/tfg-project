@@ -143,7 +143,7 @@ class TreatmentViewSet(
         )
 
     @method_permission_classes([IsAdministratorOrDoctorOrPatient, IsAppointmentPatient])
-    @action(detail=False, methods=["get"])
+    @action(detail=False, methods=["get"], url_path="appointment")
     def list_for_appointment(self, request):
         """
         Lista todos los tratamientos de una cita.
@@ -180,7 +180,7 @@ class TreatmentViewSet(
         )
 
     @method_permission_classes([IsPatient])
-    @action(detail=False, methods=["get"])
+    @action(detail=False, methods=["get"], url_path="patient")
     def list_for_patient(self, request):
         """
         Lista todos los tratamientos de un paciente.
@@ -211,7 +211,7 @@ class TreatmentViewSet(
         )
 
     @method_permission_classes([IsAdministratorOrDoctorOrPatient, IsTreatmentPatient])
-    @action(detail=True, methods=["put"])
+    @action(detail=True, methods=["put"], url_path="status")
     def update_status(self, request, pk=None):
         """
         Actualiza el estado de un tratamiento, siempre y cuando
@@ -257,7 +257,7 @@ class TreatmentViewSet(
         )
 
     @method_permission_classes([IsAdministratorOrDoctorOrPatient, IsTreatmentPatient])
-    @action(detail=True, methods=["get"])
+    @action(detail=True, methods=["get"], url_path="pdf")
     def get_treatment_pdf(self, request, pk=None):
         """
         Genera un PDF con la información de un tratamiento.

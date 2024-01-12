@@ -52,7 +52,7 @@ class UserViewSet(viewsets.GenericViewSet, ErrorResponseMixin):
     # detail=True si es para un solo objeto, detail=False si es para todos los objetos
     # si se usa url_path se debe especificar la url completa
     @method_permission_classes([IsAdministratorOrDoctorOrPatient])
-    @action(detail=False, methods=["post"])
+    @action(detail=False, methods=["post"], url_path="set-password")
     def set_password(self, request):
         """
         Establece una nueva contraseña para el usuario.
@@ -207,10 +207,10 @@ class UserViewSet(viewsets.GenericViewSet, ErrorResponseMixin):
         )
 
     @method_permission_classes([IsAdministratorOrDoctorOrPatient, IsUserOwner])
-    @action(detail=False, methods=["get"])
+    @action(detail=False, methods=["get", "put", "delete"], url_path="profile-picture")
     def profile_picture(self, request):
         """
-        Recupera la foto de perfil de un usuario específico.
+        Recupera, actualiza o elimina la foto de perfil de un usuario existente.
 
         Permisos requeridos:
             - El usuario debe ser administrador, médico o paciente.
@@ -223,12 +223,42 @@ class UserViewSet(viewsets.GenericViewSet, ErrorResponseMixin):
             Response: La respuesta que contiene la foto de perfil del usuario o un mensaje de error si no tiene permisos.
         """
         user = self.get_object(request.user.id)
+
+        if request.method == "GET":
+            serializer = UserProfilePictureSerializer(user)
+            return Response(serializer.data)
+
+        elif request.method == "PUT":
+            self.update_profile_picture(request, user)
+
+        elif request.method == "DELETE":
+            self.delete_profile_picture(request, user)
+
+        else:
+            return self.error_response(
+                message="Método HTTP no permitido",
+                status_code=status.HTTP_405_METHOD_NOT_ALLOWED,
+            )
+
+    def get_profile_picture(self, request, user):
+        """
+        Recupera la foto de perfil de un usuario específico.
+
+        Permisos requeridos:
+            - El usuario debe ser administrador, médico o paciente.
+            - El usuario debe ser el dueño del usuario (en el caso de paciente y de médico).
+
+        Args:
+            request (Request): La solicitud HTTP.
+            user (User): El usuario.
+
+        Returns:
+            Response: La respuesta que contiene la foto de perfil del usuario o un mensaje de error si no tiene permisos.
+        """
         serializer = UserProfilePictureSerializer(user)
         return Response(serializer.data)
 
-    @method_permission_classes([IsAdministratorOrDoctorOrPatient, IsUserOwner])
-    @action(detail=True, methods=["put"])
-    def update_profile_picture(self, request, pk=None):
+    def update_profile_picture(self, request, user):
         """
         Actualiza la foto de perfil de un usuario existente.
 
@@ -238,13 +268,11 @@ class UserViewSet(viewsets.GenericViewSet, ErrorResponseMixin):
 
         Args:
             request (Request): La solicitud HTTP.
-            pk (int): El ID del usuario.
+            user (User): El usuario.
 
         Returns:
             Response: La respuesta que indica si la foto de perfil se ha actualizado correctamente o si ha habido errores.
         """
-        user = self.get_object(pk)
-
         image_path = None
         if user.profile_picture:
             image_path = user.profile_picture.path
@@ -270,9 +298,7 @@ class UserViewSet(viewsets.GenericViewSet, ErrorResponseMixin):
             status_code=status.HTTP_400_BAD_REQUEST,
         )
 
-    @method_permission_classes([IsAdministratorOrDoctorOrPatient, IsUserOwner])
-    @action(detail=False, methods=["delete"])
-    def delete_profile_picture(self, request):
+    def delete_profile_picture(self, request, user):
         """
         Elimina la foto de perfil de un usuario existente.
 
@@ -282,6 +308,7 @@ class UserViewSet(viewsets.GenericViewSet, ErrorResponseMixin):
 
         Args:
             request (Request): La solicitud HTTP.
+            user (User): El usuario.
 
         Returns:
             Response: La respuesta que indica si la foto de perfil se ha eliminado correctamente o si ha habido errores.
