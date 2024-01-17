@@ -93,7 +93,7 @@ class PatientViewSet(viewsets.GenericViewSet, PaginationMixin, ErrorResponseMixi
         if "user" not in request.data or "dni" not in request.data:
             return self.error_response(
                 message="No se ha enviado los datos del paciente",
-                status=status.HTTP_400_BAD_REQUEST,
+                status_code=status.HTTP_400_BAD_REQUEST,
             )
 
         request.data["user"]["password"] = generate_password()
@@ -119,7 +119,7 @@ class PatientViewSet(viewsets.GenericViewSet, PaginationMixin, ErrorResponseMixi
         return self.error_response(
             message="Hay errores en la creación.",
             errors=patient_serializer.errors,
-            status=status.HTTP_400_BAD_REQUEST,
+            status_code=status.HTTP_400_BAD_REQUEST,
         )
 
     @method_permission_classes([IsAdministratorOrDoctorOrPatient, IsSelfPatient])
@@ -171,7 +171,7 @@ class PatientViewSet(viewsets.GenericViewSet, PaginationMixin, ErrorResponseMixi
                 return self.error_response(
                     message="Hay errores en la actualización.",
                     errors=user_serializer.errors,
-                    status=status.HTTP_400_BAD_REQUEST,
+                    status_code=status.HTTP_400_BAD_REQUEST,
                 )
 
         # Actualiza los datos del paciente
@@ -188,7 +188,7 @@ class PatientViewSet(viewsets.GenericViewSet, PaginationMixin, ErrorResponseMixi
         return self.error_response(
             message="Hay errores en la actualización.",
             errors=patient_serializer.errors,
-            status=status.HTTP_400_BAD_REQUEST,
+            status_code=status.HTTP_400_BAD_REQUEST,
         )
 
     @method_permission_classes([IsAdministrator])
@@ -210,7 +210,7 @@ class PatientViewSet(viewsets.GenericViewSet, PaginationMixin, ErrorResponseMixi
         if not patient:
             return self.error_response(
                 message="No se ha encontrado el paciente.",
-                status=status.HTTP_400_BAD_REQUEST,
+                status_code=status.HTTP_400_BAD_REQUEST,
             )
 
         user = patient.user
@@ -250,7 +250,7 @@ class PatientViewSet(viewsets.GenericViewSet, PaginationMixin, ErrorResponseMixi
         if not patient:
             return self.error_response(
                 message="No se ha encontrado el paciente.",
-                status=status.HTTP_400_BAD_REQUEST,
+                status_code=status.HTTP_400_BAD_REQUEST,
             )
 
         user = patient.user
