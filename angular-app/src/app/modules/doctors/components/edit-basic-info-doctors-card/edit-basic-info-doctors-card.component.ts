@@ -160,7 +160,7 @@ export class EditBasicInfoDoctorsCardComponent implements OnInit {
    * @returns {void}
    * @public
    */
-  public getMedicalSpecialties() {
+  public getMedicalSpecialties(): void {
     this._medicalSpecialtyService.getItems().subscribe({
       next: (data) => {
         this.medicalSpecialties = data.map(
@@ -181,7 +181,7 @@ export class EditBasicInfoDoctorsCardComponent implements OnInit {
    * @returns {void}
    * @public
    */
-  public getDepartments() {
+  public getDepartments(): void {
     this._departmentService.getItems().subscribe({
       next: (data) => {
         this.departments = data.map((item: { id: String; name: String }) => ({
