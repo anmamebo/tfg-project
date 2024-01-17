@@ -126,7 +126,7 @@ class TreatmentViewSet(
             Response: La respuesta que contiene los datos del tratamiento actualizado.
         """
         treatment = self.get_object(pk)
-        serializer = self.serializer_class(treatment, data=request.data)
+        serializer = self.serializer_class(treatment, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
             return Response(
@@ -140,6 +140,39 @@ class TreatmentViewSet(
             message="Ha ocurrido un error al actualizar el tratamiento.",
             errors=serializer.errors,
             status_code=status.HTTP_400_BAD_REQUEST,
+        )
+
+    @method_permission_classes([IsDoctor, isTreatmentDoctor])
+    def destroy(self, request, pk=None):
+        """
+        Elimina un tratamiento.
+
+        Permisos requeridos:
+            - El usuario debe ser médico.
+            - El usuario debe ser el médico del tratamiento.
+
+        Args:
+            request (Request): La solicitud HTTP.
+            pk (int): El identificador del tratamiento.
+
+        Returns:
+            Response: La respuesta que contiene el mensaje de éxito o error.
+        """
+        treatment = self.get_queryset().filter(id=pk).first()
+        if not treatment:
+            return self.error_response(
+                message="El tratamiento no existe.",
+                status_code=status.HTTP_404_NOT_FOUND,
+            )
+
+        treatment.state = False
+        treatment.save()
+
+        return Response(
+            {
+                "message": "Tratamiento eliminado correctamente.",
+            },
+            status=status.HTTP_200_OK,
         )
 
     @method_permission_classes([IsAdministratorOrDoctorOrPatient, IsAppointmentPatient])
@@ -173,7 +206,11 @@ class TreatmentViewSet(
             )
 
         appointment = get_object_or_404(Appointment, pk=appointment_id)
-        treatments = self.get_queryset().filter(appointment_id=appointment_id)
+        treatments = (
+            self.get_queryset()
+            .filter(appointment_id=appointment_id, state=True)
+            .order_by("-start_date")
+        )
 
         return self.conditional_paginated_response(
             treatments, self.list_serializer_class
@@ -201,7 +238,11 @@ class TreatmentViewSet(
             Response: La respuesta que contiene la lista de tratamientos.
         """
         patient = getattr(request.user, "patient", None)
-        treatments = self.get_queryset().filter(patient=patient).order_by("start_date")
+        treatments = (
+            self.get_queryset()
+            .filter(patient=patient, state=True)
+            .order_by("start_date")
+        )
 
         treatments = self.filter_treatments_by_statuses(treatments)
         treatments = self.filter_and_order_treatments(treatments)
