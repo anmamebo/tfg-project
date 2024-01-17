@@ -1,0 +1,28 @@
+<app-generic-page
+  [pageTitle]="pageTitle"
+  [pageDescription]="pageDescription"
+  [breadcrumbData]="breadcrumbData"
+>
+  <div class="page-content">
+    <ng-container *ngIf="administrative">
+      <section class="section">
+        <app-buttons-administratives-card
+          *ngIf="administrative.id && administrative.is_active !== undefined"
+          [administrativeId]="administrative.id"
+          [isActive]="administrative.is_active"
+          (refreshAdministrative)="onRefreshAdministrative()"
+        ></app-buttons-administratives-card>
+      </section>
+
+      <section class="section">
+        <div class="row">
+          <div class="col-12">
+            <app-view-info-administratives-card
+              [administrative]="administrative"
+            ></app-view-info-administratives-card>
+          </div>
+        </div>
+      </section>
+    </ng-container>
+  </div>
+</app-generic-page>

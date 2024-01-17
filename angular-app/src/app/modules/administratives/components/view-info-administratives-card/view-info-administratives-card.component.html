@@ -1,0 +1,70 @@
+<app-generic-card [title]="titleCard">
+  <div class="card-content">
+    <div *ngIf="administrative" class="row">
+      <div class="col-md-2">
+        <div class="form-group">
+          <label for="id">ID</label>
+          <input
+            type="text"
+            class="form-control"
+            id="id"
+            [attr.readonly]="true"
+            [value]="administrative.id"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-5">
+        <div class="form-group">
+          <label for="username">Nombre de usuario</label>
+          <input
+            type="text"
+            class="form-control"
+            id="username"
+            [attr.readonly]="true"
+            [value]="administrative.username"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-5">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            type="text"
+            class="form-control"
+            id="email"
+            [attr.readonly]="true"
+            [value]="administrative.email"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="name">Nombre</label>
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            [attr.readonly]="true"
+            [value]="administrative.name"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="last_name">Apellidos</label>
+          <input
+            type="text"
+            class="form-control"
+            id="last_name"
+            [attr.readonly]="true"
+            [value]="administrative.last_name"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</app-generic-card>

@@ -107,6 +107,13 @@ export const sidebarData = [
     ],
   },
   {
+    name: 'Administrativos',
+    key: 'administrativos',
+    url: '/administrativos',
+    icon: 'people-fill',
+    roles: [ROLES.ADMIN],
+  },
+  {
     name: 'Pacientes',
     key: 'pacientes',
     url: '/pacientes',

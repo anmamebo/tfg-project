@@ -1,0 +1,20 @@
+<app-generic-page
+  [pageTitle]="pageTitle"
+  [pageDescription]="pageDescription"
+  [breadcrumbData]="breadcrumbData"
+>
+  <div class="page-content">
+    <ng-container *ngIf="administrative">
+      <section class="section">
+        <div class="row">
+          <div class="col-12">
+            <app-edit-info-administratives-card
+              [administrative]="administrative"
+              (refreshAdministrative)="onRefreshAdministrative()"
+            ></app-edit-info-administratives-card>
+          </div>
+        </div>
+      </section>
+    </ng-container>
+  </div>
+</app-generic-page>

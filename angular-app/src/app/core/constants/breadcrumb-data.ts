@@ -36,6 +36,33 @@ export const breadcrumbPermissionData = [
   { label: 'Permisos', url: '' },
 ];
 
+// Administrativos
+export const breadcrumbAdministrativesData = [
+  { label: 'Panel Principal', url: '/' },
+  { label: 'Administrativos', url: '' },
+];
+
+// Administrativos crear
+export const breadcrumbAdministrativesCreateData = [
+  { label: 'Panel Principal', url: '/' },
+  { label: 'Administrativos', url: '/administrativos' },
+  { label: 'Alta administrativo', url: '' },
+];
+
+// Administrativos editar
+export const breadcrumbAdministrativesEditData = [
+  { label: 'Panel Principal', url: '/' },
+  { label: 'Administrativos', url: '/administrativos' },
+  { label: 'Editar administrativo', url: '' },
+];
+
+// Administrativos ver
+export const breadcrumbAdministrativesViewData = [
+  { label: 'Panel Principal', url: '/' },
+  { label: 'Administrativos', url: '/administrativos' },
+  { label: 'Ver administrativo', url: '' },
+];
+
 // Pacientes
 export const breadcrumbPatientsData = [
   { label: 'Panel Principal', url: '/' },
