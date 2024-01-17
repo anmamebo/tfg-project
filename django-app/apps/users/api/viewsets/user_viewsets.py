@@ -10,15 +10,17 @@ from apps.users.api.serializers.user_serializer import (
 )
 from apps.users.models import User
 from config.permissions import IsAdministrator, IsAdministratorOrDoctorOrPatient
+from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from mixins.error_mixin import ErrorResponseMixin
+from mixins.pagination_mixin import PaginationMixin
 from rest_framework import status, viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from utilities.permissions_helper import method_permission_classes
 
 
-class UserViewSet(viewsets.GenericViewSet, ErrorResponseMixin):
+class UserViewSet(viewsets.GenericViewSet, ErrorResponseMixin, PaginationMixin):
     """
     Vista para gestionar usuarios.
 
@@ -46,7 +48,7 @@ class UserViewSet(viewsets.GenericViewSet, ErrorResponseMixin):
     # Define el conjunto de datos que se utilizará para las consultas
     def get_queryset(self):
         if self.queryset is None:
-            self.queryset = self.model.objects.filter(is_active=True).all()
+            self.queryset = self.model.objects.all().order_by("-id")
         return self.queryset
 
     # detail=True si es para un solo objeto, detail=False si es para todos los objetos
@@ -90,6 +92,12 @@ class UserViewSet(viewsets.GenericViewSet, ErrorResponseMixin):
         Permisos requeridos:
             - El usuario debe ser administrador.
 
+        Parámetros opcionales:
+            state (bool): El estado de los pacientes a listar.
+            search (str): Una cadena de texto para buscar pacientes.
+            ordering (str): El campo por el que se ordenarán los pacientes.
+            paginate (bool): Indica si se desea paginar los resultados.
+
         Args:
             request (Request): La solicitud HTTP.
 
@@ -97,8 +105,10 @@ class UserViewSet(viewsets.GenericViewSet, ErrorResponseMixin):
             Response: La respuesta que contiene la lista de usuarios o un mensaje de error si no tiene permisos.
         """
         users = self.get_queryset()
-        users_serializer = self.list_serializer_class(users, many=True)
-        return Response(users_serializer.data, status=status.HTTP_200_OK)
+
+        users = self.filter_and_order_users(users)
+
+        return self.conditional_paginated_response(users, self.list_serializer_class)
 
     @method_permission_classes([IsAdministrator])
     def create(self, request):
@@ -240,24 +250,6 @@ class UserViewSet(viewsets.GenericViewSet, ErrorResponseMixin):
                 status_code=status.HTTP_405_METHOD_NOT_ALLOWED,
             )
 
-    def get_profile_picture(self, request, user):
-        """
-        Recupera la foto de perfil de un usuario específico.
-
-        Permisos requeridos:
-            - El usuario debe ser administrador, médico o paciente.
-            - El usuario debe ser el dueño del usuario (en el caso de paciente y de médico).
-
-        Args:
-            request (Request): La solicitud HTTP.
-            user (User): El usuario.
-
-        Returns:
-            Response: La respuesta que contiene la foto de perfil del usuario o un mensaje de error si no tiene permisos.
-        """
-        serializer = UserProfilePictureSerializer(user)
-        return Response(serializer.data)
-
     def update_profile_picture(self, request, user):
         """
         Actualiza la foto de perfil de un usuario existente.
@@ -331,3 +323,34 @@ class UserViewSet(viewsets.GenericViewSet, ErrorResponseMixin):
             message="El usuario no tiene foto de perfil",
             status_code=status.HTTP_400_BAD_REQUEST,
         )
+
+    def filter_and_order_users(self, users):
+        """
+        Filtra y ordena los usuarios.
+
+        Args:
+            users (QuerySet): El conjunto de usuarios.
+
+        Returns:
+            QuerySet: El conjunto de usuarios filtrados y ordenados.
+        """
+        query = self.request.query_params.get("search", None)
+        ordering = self.request.query_params.get("ordering", None)
+        state = self.request.query_params.get("state", None)
+
+        if query:
+            users = users.filter(
+                Q(name__icontains=query)
+                | Q(last_name__icontains=query)
+                | Q(email__icontains=query)
+                | Q(username__icontains=query)
+            )
+
+        if ordering:
+            users = users.order_by(ordering)
+
+        if state in ["true", "false"]:
+            state_boolean = state == "true"
+            users = users.filter(is_active=state_boolean)
+
+        return users

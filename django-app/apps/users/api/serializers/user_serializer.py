@@ -181,9 +181,9 @@ class UserListSerializer(serializers.ModelSerializer):
         return {
             "id": instance.id,
             "name": instance.name,
+            "last_name": instance.last_name,
             "username": instance.username,
             "email": instance.email,
-            "profile_picture": instance.profile_picture,
             "groups": instance.groups.all().values_list(
                 "name", flat=True
             ),  # flat=True para que devuelva una lista de valores en vez de una lista de tuplas
