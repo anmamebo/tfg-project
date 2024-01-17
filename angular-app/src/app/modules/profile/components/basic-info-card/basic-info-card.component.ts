@@ -84,7 +84,7 @@ export class BasicInfoCardComponent implements OnInit {
     };
 
     // Envía la solicitud de actualización de usuario al servicio
-    this._userService.updateUser(updateUser).subscribe({
+    this._userService.update(this.user.id, updateUser).subscribe({
       next: (data) => {
         this.submitted = false;
         this.updatedUserEvent.emit();

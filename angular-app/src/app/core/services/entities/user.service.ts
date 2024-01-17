@@ -2,9 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { API_URL } from 'src/app/core/constants/API_URL';
-
 // Servicios
+import { EntityService } from 'src/app/core/services/generics/entity.service';
 import { HttpCommonService } from 'src/app/core/services/http-common/http-common.service';
 
 // Modelos
@@ -16,41 +15,20 @@ import { User } from 'src/app/core/models/user.interface';
 @Injectable({
   providedIn: 'root',
 })
-export class UserService {
-  /** URL base de la API. */
-  public url: string;
+export class UserService extends EntityService<User> {
+  /** Endpoint de la API. */
+  public endpoint = 'users/users/';
 
-  constructor(
-    private _http: HttpClient,
-    private _httpCommonService: HttpCommonService
-  ) {
-    this.url = API_URL.url + 'users/users/';
+  constructor(http: HttpClient, httpCommonService: HttpCommonService) {
+    super(http, httpCommonService);
   }
 
   /**
-   * Obtiene un usuario por su identificador.
-   * @param {string} id El identificador del usuario.
-   * @returns {Observable<User>} Un observable que emite la respuesta del servidor.
+   * Obtiene la URL del endpoint.
+   * @returns {string} La URL del endpoint.
    */
-  public getUserById(id: string): Observable<User> {
-    const headers = this._httpCommonService.getCommonHeaders();
-    const httpOptions = { headers };
-
-    return this._http.get<User>(`${this.url}${id}/`, httpOptions);
-  }
-
-  /**
-   * Actualiza los datos de un usuario.
-   * @param {User} user El objeto con los datos actualizados.
-   * @returns {Observable<any>} Un observable que emite la respuesta del servidor.
-   */
-  public updateUser(user: User): Observable<any> {
-    const headers = this._httpCommonService.getCommonHeaders();
-    const httpOptions = { headers };
-
-    let params = JSON.stringify(user);
-
-    return this._http.put<any>(`${this.url}${user.id}/`, params, httpOptions);
+  public getEndpoint(): string {
+    return this.endpoint;
   }
 
   /**
@@ -67,13 +45,13 @@ export class UserService {
     password: string;
     password2: string;
   }): Observable<any> {
-    const headers = this._httpCommonService.getCommonHeaders();
+    const headers = this.httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
     let params = JSON.stringify(data);
 
-    return this._http.post<any>(
-      `${this.url}set-password/`,
+    return this.http.post<any>(
+      `${this.url}${this.endpoint}set-password/`,
       params,
       httpOptions
     );
@@ -85,15 +63,15 @@ export class UserService {
    * @returns {Observable<any>} Un Observable que se suscribe a la solicitud HTTP para actualizar la imagen de perfil.
    */
   public updateProfilePicture(file: File): Observable<any> {
-    let headers = this._httpCommonService.getCommonHeaders();
+    let headers = this.httpCommonService.getCommonHeaders();
     headers = headers.delete('Content-Type');
     const httpOptions = { headers };
 
     let formData = new FormData();
     formData.append('profile_picture', file);
 
-    return this._http.put<any>(
-      `${this.url}profile-picture/`,
+    return this.http.put<any>(
+      `${this.url}${this.endpoint}profile-picture/`,
       formData,
       httpOptions
     );
@@ -104,10 +82,13 @@ export class UserService {
    * @returns {Observable<any>} Un Observable que se suscribe a la solicitud HTTP para obtener la imagen de perfil.
    */
   public getProfilePicture(): Observable<any> {
-    const headers = this._httpCommonService.getCommonHeaders();
+    const headers = this.httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
-    return this._http.get<any>(`${this.url}profile-picture/`, httpOptions);
+    return this.http.get<any>(
+      `${this.url}${this.endpoint}profile-picture/`,
+      httpOptions
+    );
   }
 
   /**
@@ -115,9 +96,12 @@ export class UserService {
    * @returns {Observable<any>} Un Observable que se suscribe a la solicitud HTTP para eliminar la imagen de perfil.
    */
   public deleteProfilePicture(): Observable<any> {
-    const headers = this._httpCommonService.getCommonHeaders();
+    const headers = this.httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
-    return this._http.delete<any>(`${this.url}profile-picture/`, httpOptions);
+    return this.http.delete<any>(
+      `${this.url}${this.endpoint}profile-picture/`,
+      httpOptions
+    );
   }
 }
