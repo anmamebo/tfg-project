@@ -32,6 +32,7 @@
       <ng-container *ngIf="entityData.items.length > 0; else lenghtZero">
         <app-accordion-treatments-appointments
           [treatments]="entityData.items"
+          (refreshTreatments)="getItems(this.entityData.page)"
         ></app-accordion-treatments-appointments>
 
         <app-elements-per-page

@@ -35,6 +35,7 @@ import { ListAppointmentsHistoricalDoctorCardComponent } from './components/list
 import { TableAppointmentsComponent } from './components/table-appointments/table-appointments.component';
 import { AccordionTreatmentsAppointmentsComponent } from './components/accordion-treatments-appointments/accordion-treatments-appointments.component';
 import { FormCreateTreatmentAppointmentsComponent } from './components/form-create-treatment-appointments/form-create-treatment-appointments.component';
+import { FormEditTreatmentAppointmentsComponent } from './components/form-edit-treatment-appointments/form-edit-treatment-appointments.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { FormCreateTreatmentAppointmentsComponent } from './components/form-crea
     FormCreateTreatmentAppointmentsComponent,
     AppointmentsHistoricalViewPageComponent,
     ListAppointmentsHistoricalDoctorCardComponent,
+    FormEditTreatmentAppointmentsComponent,
   ],
   imports: [
     CommonModule,

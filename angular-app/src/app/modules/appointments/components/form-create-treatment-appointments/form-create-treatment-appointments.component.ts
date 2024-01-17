@@ -22,7 +22,7 @@ export class FormCreateTreatmentAppointmentsComponent {
   /** Cita para la que se crea el tratamiento */
   @Input() appointment: Appointment | null = null;
 
-  /** Opciones para el campo de fecha de nacimiento */
+  /** Opciones para el campo de fecha de comienzo */
   public locale = Spanish;
 
   /** Formulario para la información del tratamiento */

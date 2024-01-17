@@ -160,4 +160,31 @@ export class TreatmentService {
       httpOptions
     );
   }
+
+  /**
+   * Actualiza un tratamiento.
+   * @param {string} id ID del tratamiento.
+   * @param {Treatment} treatment El tratamiento a actualizar.
+   * @returns {Observable<any>} Un observable que emite la respuesta del servidor.
+   */
+  public updateTreatment(id: string, treatment: Treatment): Observable<any> {
+    const headers = this._httpCommonService.getCommonHeaders();
+    const httpOptions = { headers };
+
+    let params = JSON.stringify(treatment);
+
+    return this._http.put<any>(`${this.url}${id}/`, params, httpOptions);
+  }
+
+  /**
+   * Elimina un tratamiento.
+   * @param {string} id ID del tratamiento.
+   * @returns {Observable<any>} Un observable que emite la respuesta del servidor.
+   */
+  public deleteTreatment(id: string): Observable<any> {
+    const headers = this._httpCommonService.getCommonHeaders();
+    const httpOptions = { headers };
+
+    return this._http.delete<any>(`${this.url}${id}/`, httpOptions);
+  }
 }
