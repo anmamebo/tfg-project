@@ -74,7 +74,9 @@
             <span
               *ngIf="
                 actionsUrls.delete &&
-                (item.state == null || item.state === true)
+                (item.state === true ||
+                  item.is_active == true ||
+                  (item.state === undefined && item.is_active === undefined))
               "
             >
               <a
