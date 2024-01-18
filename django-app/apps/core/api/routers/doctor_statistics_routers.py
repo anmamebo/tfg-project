@@ -8,24 +8,24 @@ from apps.core.api.views.doctor_statistics_views import (
 from django.urls import path
 
 urlpatterns = [
-    path("get_overall_stats/", get_overall_stats, name="doctor_statistics"),
+    path("general/", get_overall_stats, name="doctor_statistics"),
     path(
-        "get_appointments_per_day/",
+        "appointments-per-day/",
         get_appointments_per_day,
         name="doctor_appointments_per_day",
     ),
     path(
-        "get_appointments_per_gender/",
+        "appointments-per-gender/",
         get_appointments_per_gender,
         name="doctor_appointments_per_gender",
     ),
     path(
-        "get_appointments_per_specialty/",
+        "appointments-per-specialty/",
         get_appointments_per_specialty,
         name="doctor_appointments_per_specialty",
     ),
     path(
-        "get_appointments_per_age/",
+        "appointments-per-age/",
         get_appointments_per_age,
         name="doctor_appointments_per_age",
     ),

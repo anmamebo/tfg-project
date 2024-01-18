@@ -11,35 +11,35 @@ from apps.core.api.views.statistics_views import (
 from django.urls import path
 
 urlpatterns = [
-    path("get_overall_stats/", get_overall_stats, name="statistics"),
+    path("general/", get_overall_stats, name="statistics"),
     path(
-        "get_appointments_per_day/",
+        "appointments-per-day/",
         get_appointments_per_day,
         name="appointments_per_day",
     ),
     path(
-        "get_appointment_statuses/",
+        "appointment-statuses/",
         get_appointment_statuses,
         name="appointment_statuses",
     ),
-    path("average_waiting_time/", average_waiting_time, name="average_waiting_time"),
+    path("average-waiting-time/", average_waiting_time, name="average_waiting_time"),
     path(
-        "get_appointments_per_day_and_gender/",
+        "appointments-per-day-and-gender/",
         get_appointments_per_day_and_gender,
         name="get_appointments_per_day_and_gender",
     ),
     path(
-        "get_appointments_per_month_and_type/",
+        "appointments-per-month-and-type/",
         get_appointments_per_month_and_type,
         name="get_appointments_per_month_and_type",
     ),
     path(
-        "medical_specialty_doctor_count/",
+        "medical-specialty-doctor-count/",
         medical_specialty_doctor_count,
         name="medical_specialty_doctor_count",
     ),
     path(
-        "get_appointments_per_age/",
+        "appointments-per-age/",
         get_appointments_per_age,
         name="get_appointments_per_age",
     ),
