@@ -32,7 +32,7 @@ export class DoctorStatisticsService {
     const headers = this._httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
-    return this._http.get(`${this.url}get_overall_stats/`, httpOptions);
+    return this._http.get(`${this.url}general/`, httpOptions);
   }
 
   /**
@@ -52,7 +52,7 @@ export class DoctorStatisticsService {
     params = params.append('month', month.toString());
     params = params.append('year', year.toString());
 
-    return this._http.get(`${this.url}get_appointments_per_day/`, {
+    return this._http.get(`${this.url}appointments-per-day/`, {
       params,
       ...httpOptions,
     });
@@ -66,10 +66,7 @@ export class DoctorStatisticsService {
     const headers = this._httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
-    return this._http.get(
-      `${this.url}get_appointments_per_gender/`,
-      httpOptions
-    );
+    return this._http.get(`${this.url}appointments-per-gender/`, httpOptions);
   }
 
   /**
@@ -81,7 +78,7 @@ export class DoctorStatisticsService {
     const httpOptions = { headers };
 
     return this._http.get(
-      `${this.url}get_appointments_per_specialty/`,
+      `${this.url}appointments-per-specialty/`,
       httpOptions
     );
   }
@@ -94,6 +91,6 @@ export class DoctorStatisticsService {
     const headers = this._httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
-    return this._http.get(`${this.url}get_appointments_per_age/`, httpOptions);
+    return this._http.get(`${this.url}appointments-per-age/`, httpOptions);
   }
 }

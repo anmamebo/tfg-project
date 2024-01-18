@@ -32,7 +32,7 @@ export class StatisticsService {
     const headers = this._httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
-    return this._http.get(`${this.url}get_overall_stats/`, httpOptions);
+    return this._http.get(`${this.url}general/`, httpOptions);
   }
 
   /**
@@ -49,7 +49,7 @@ export class StatisticsService {
     params = params.append('month', month.toString());
     params = params.append('year', year.toString());
 
-    return this._http.get(`${this.url}get_appointments_per_day/`, {
+    return this._http.get(`${this.url}appointments-per-day/`, {
       params,
       ...httpOptions,
     });
@@ -72,7 +72,7 @@ export class StatisticsService {
     params = params.append('month', month.toString());
     params = params.append('year', year.toString());
 
-    return this._http.get(`${this.url}get_appointments_per_day_and_gender/`, {
+    return this._http.get(`${this.url}appointments-per-day-and-gender/`, {
       params,
       ...httpOptions,
     });
@@ -86,7 +86,7 @@ export class StatisticsService {
     const headers = this._httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
-    return this._http.get(`${this.url}get_appointment_statuses/`, httpOptions);
+    return this._http.get(`${this.url}appointment-statuses/`, httpOptions);
   }
 
   /**
@@ -97,7 +97,7 @@ export class StatisticsService {
     const headers = this._httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
-    return this._http.get(`${this.url}average_waiting_time/`, httpOptions);
+    return this._http.get(`${this.url}average-waiting-time/`, httpOptions);
   }
 
   /**
@@ -112,7 +112,7 @@ export class StatisticsService {
     let params = new HttpParams();
     params = params.append('year', year.toString());
 
-    return this._http.get(`${this.url}get_appointments_per_month_and_type/`, {
+    return this._http.get(`${this.url}appointments-per-month-and-type/`, {
       params,
       ...httpOptions,
     });
@@ -127,7 +127,7 @@ export class StatisticsService {
     const httpOptions = { headers };
 
     return this._http.get(
-      `${this.url}medical_specialty_doctor_count/`,
+      `${this.url}medical-specialty-doctor-count/`,
       httpOptions
     );
   }
@@ -140,6 +140,6 @@ export class StatisticsService {
     const headers = this._httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
-    return this._http.get(`${this.url}get_appointments_per_age/`, httpOptions);
+    return this._http.get(`${this.url}appointments-per-age/`, httpOptions);
   }
 }

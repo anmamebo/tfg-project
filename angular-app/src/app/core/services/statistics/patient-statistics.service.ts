@@ -32,7 +32,7 @@ export class PatientStatisticsService {
     const headers = this._httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
-    return this._http.get(`${this.url}get_overall_stats/`, httpOptions);
+    return this._http.get(`${this.url}general/`, httpOptions);
   }
 
   /**
@@ -48,9 +48,9 @@ export class PatientStatisticsService {
 
     const params = new HttpParams().set('year', String(year));
 
-    return this._http.get(
-      `${this.url}get_patient_appointments_per_specialty_and_month/`,
-      { params, ...httpOptions }
-    );
+    return this._http.get(`${this.url}appointments-per-specialty-and-month/`, {
+      params,
+      ...httpOptions,
+    });
   }
 }
