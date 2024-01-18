@@ -36,7 +36,7 @@
           <!-- Contraseña -->
           <div class="form-group position-relative has-icon-left mb-4">
             <input
-              type="password"
+              [type]="showPassword ? 'text' : 'password'"
               formControlName="password"
               class="form-control form-control-xl"
               placeholder="Contraseña"
@@ -46,6 +46,18 @@
             />
             <div class="form-control-icon">
               <i class="bi bi-shield-lock"></i>
+            </div>
+            <div class="form-control-icon form-control-icon-right">
+              <a href="javascript:void(0);">
+                <i
+                  class="bi"
+                  [ngClass]="{
+                    'bi-eye': !showPassword,
+                    'bi-eye-slash': showPassword
+                  }"
+                  (click)="showPassword = !showPassword"
+                ></i>
+              </a>
             </div>
 
             <app-form-errors

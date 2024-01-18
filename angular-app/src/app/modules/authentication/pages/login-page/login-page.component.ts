@@ -25,6 +25,9 @@ export class LoginPageComponent {
   /** Mensaje de error. */
   public errorMessage: string = '';
 
+  /** Indica si se debe mostrar la contraseña. */
+  public showPassword: boolean = false;
+
   constructor(
     private _authService: AuthService,
     private _tokenStorageService: TokenStorageService,

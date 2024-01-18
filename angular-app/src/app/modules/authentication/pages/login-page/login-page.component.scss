@@ -56,3 +56,10 @@ html[data-bs-theme="dark"] {
     background: $page-auth-right-bg;
   }
 }
+
+.form-control-icon-right {
+  position: absolute;
+  right: 0 !important;
+  left: auto !important;
+  padding-right: 1.5rem !important;
+}
