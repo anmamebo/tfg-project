@@ -57,9 +57,13 @@ html[data-bs-theme="dark"] {
   }
 }
 
+.password-form-group input {
+  padding-right: 3.2rem !important;
+}
+
 .form-control-icon-right {
   position: absolute;
   right: 0 !important;
   left: auto !important;
-  padding-right: 1.5rem !important;
+  padding-right: 1.2rem !important;
 }
