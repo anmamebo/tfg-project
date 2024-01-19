@@ -28,7 +28,7 @@
           </div>
         </div>
 
-        <!-- Número de colegiado -->
+        <!-- Disponibilidad -->
         <div class="col-sm-6 col-12">
           <div class="form-group">
             <label class="form-check-label" for="is_available"
@@ -48,6 +48,29 @@
                 >No se puede editar la disponibilidad.</small
               >
             </p>
+          </div>
+        </div>
+
+        <!-- Departamentos -->
+        <div *ngIf="doctor && doctor.departments" class="col-sm-6 col-12">
+          <label for="departments">Departamentos</label>
+          <div class="badges mt-2">
+            <ng-container *ngFor="let department of doctor.departments">
+              <span class="badge bg-primary me-2">{{ department.name }}</span>
+            </ng-container>
+          </div>
+        </div>
+
+        <!-- Especialidades -->
+        <div
+          *ngIf="doctor && doctor.medical_specialties"
+          class="col-sm-6 col-12"
+        >
+          <label for="specialties">Especialidades médicas</label>
+          <div class="badges mt-2">
+            <ng-container *ngFor="let specialty of doctor.medical_specialties">
+              <span class="badge bg-primary me-2">{{ specialty.name }}</span>
+            </ng-container>
           </div>
         </div>
 
