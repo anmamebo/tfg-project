@@ -239,10 +239,10 @@ class UserViewSet(viewsets.GenericViewSet, ErrorResponseMixin, PaginationMixin):
             return Response(serializer.data)
 
         elif request.method == "PUT":
-            self.update_profile_picture(request, user)
+            return self.update_profile_picture(request, user)
 
         elif request.method == "DELETE":
-            self.delete_profile_picture(request, user)
+            return self.delete_profile_picture(request, user)
 
         else:
             return self.error_response(
