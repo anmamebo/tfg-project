@@ -13,6 +13,8 @@ import { Appointment } from 'src/app/core/models/appointment.interface';
 interface AppointmentOptions {
   date?: string;
   statuses?: string[];
+  types?: string[];
+  specialties?: string[];
   page?: number;
   numResults?: number;
   searchTerm?: string;
@@ -20,6 +22,10 @@ interface AppointmentOptions {
   state?: boolean | null;
   sortBy?: string;
   sortOrder?: string;
+  scheduleStartTimeFrom?: string;
+  scheduleStartTimeTo?: string;
+  requestDateFrom?: string;
+  requestDateTo?: string;
 }
 
 /**
@@ -75,6 +81,8 @@ export class AppointmentService {
     const {
       date,
       statuses,
+      types,
+      specialties,
       page,
       numResults,
       searchTerm,
@@ -82,6 +90,10 @@ export class AppointmentService {
       state = true,
       sortBy,
       sortOrder,
+      scheduleStartTimeFrom,
+      scheduleStartTimeTo,
+      requestDateFrom,
+      requestDateTo,
     } = options;
 
     let params = new HttpParams();
@@ -96,6 +108,40 @@ export class AppointmentService {
       statuses.forEach((status) => {
         params = params.append('status', status);
       });
+    }
+
+    if (types) {
+      // Si se han indicado los tipos
+      types.forEach((type) => {
+        params = params.append('type', type);
+      });
+    }
+
+    if (specialties) {
+      // Si se han indicado las especialidades
+      specialties.forEach((specialty) => {
+        params = params.append('specialty', specialty);
+      });
+    }
+
+    if (scheduleStartTimeFrom) {
+      // Si se ha indicado la hora de inicio de la cita
+      params = params.set('schedule__start_time__gte', scheduleStartTimeFrom);
+    }
+
+    if (scheduleStartTimeTo) {
+      // Si se ha indicado la hora de fin de la cita
+      params = params.set('schedule__start_time__lte', scheduleStartTimeTo);
+    }
+
+    if (requestDateFrom) {
+      // Si se ha indicado la fecha de solicitud de la cita
+      params = params.set('request_date__gte', requestDateFrom);
+    }
+
+    if (requestDateTo) {
+      // Si se ha indicado la fecha de solicitud de la cita
+      params = params.set('request_date__lte', requestDateTo);
     }
 
     if (paginate) {

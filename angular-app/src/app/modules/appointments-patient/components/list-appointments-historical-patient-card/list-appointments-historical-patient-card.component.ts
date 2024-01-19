@@ -13,6 +13,9 @@ import { NotificationService } from 'src/app/core/services/notifications/notific
   templateUrl: './list-appointments-historical-patient-card.component.html',
 })
 export class ListAppointmentsHistoricalPatientCardComponent extends GenericListCardComponent {
+  /** Filtros */
+  public filters: any = null;
+
   constructor(
     private _appointmentService: AppointmentService,
     notificationService: NotificationService
@@ -39,9 +42,47 @@ export class ListAppointmentsHistoricalPatientCardComponent extends GenericListC
       this.entityData.page = 1;
     }
 
+    let statuses: string[] = ['completed', 'no_show', 'cancelled'];
+    let types: string[] | undefined = undefined;
+    let specialties: string[] | undefined = undefined;
+    let scheduleStartTimeFrom: string | undefined = undefined;
+    let scheduleStartTimeTo: string | undefined = undefined;
+    let requestDateFrom: string | undefined = undefined;
+    let requestDateTo: string | undefined = undefined;
+
+    if (this.filters) {
+      if (this.filters.statuses.length > 0) {
+        statuses = this.filters.statuses;
+      }
+      if (this.filters.types.length > 0) {
+        types = this.filters.types;
+      }
+      if (this.filters.specialties.length > 0) {
+        specialties = this.filters.specialties;
+      }
+      if (this.filters.date) {
+        scheduleStartTimeFrom = this.filters.date.from;
+        if (this.filters.date.to != undefined) {
+          scheduleStartTimeTo = this.filters.date.to;
+        } else {
+          scheduleStartTimeTo = this.filters.date.from;
+        }
+      }
+      if (this.filters.requestDate) {
+        requestDateFrom = this.filters.requestDate.from;
+        if (this.filters.requestDate.to != undefined) {
+          requestDateTo = this.filters.requestDate.to;
+        } else {
+          requestDateTo = this.filters.requestDate.from;
+        }
+      }
+    }
+
     this._appointmentService
       .getAppointmentsByPatient({
-        statuses: ['completed', 'no_show', 'cancelled'],
+        statuses: statuses,
+        types: types,
+        specialties: specialties,
         page: page,
         numResults: this.entityData.numResults,
         searchTerm: this.entityData.search.search,
@@ -49,6 +90,10 @@ export class ListAppointmentsHistoricalPatientCardComponent extends GenericListC
         state: this.filterState,
         sortBy: this.sort.column,
         sortOrder: this.sort.order,
+        scheduleStartTimeFrom: scheduleStartTimeFrom,
+        scheduleStartTimeTo: scheduleStartTimeTo,
+        requestDateFrom: requestDateFrom,
+        requestDateTo: requestDateTo,
       })
       .subscribe({
         next: (response: any) => {
@@ -62,5 +107,16 @@ export class ListAppointmentsHistoricalPatientCardComponent extends GenericListC
           this.notificationService.showErrorToast(error.message);
         },
       });
+  }
+
+  /**
+   * Aplica los filtros seleccionados.
+   * @param {any} event - Evento con los filtros seleccionados.
+   * @returns {void}
+   * @public
+   */
+  public applyFilters(event: any): void {
+    this.filters = event;
+    this.getItems(this.entityData.page);
   }
 }

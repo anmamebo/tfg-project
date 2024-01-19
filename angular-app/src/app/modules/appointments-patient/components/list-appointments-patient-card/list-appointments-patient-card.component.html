@@ -1,5 +1,11 @@
 <!-- Comprueba si se han cargado las citas -->
 <ng-container *ngIf="entityData.items; else noItems">
+  <!-- Filtros -->
+  <app-filters-appointments-patient-card
+    [typePage]="'next'"
+    (filters)="applyFilters($event)"
+  ></app-filters-appointments-patient-card>
+
   <!-- Comprueba que hayan citas -->
   <ng-container *ngIf="entityData.items.length > 0; else lengthZero">
     <!-- Recorre las citas -->

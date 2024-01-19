@@ -1,5 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
+
+// Módulos de terceros
+import { FlatpickrModule } from 'angularx-flatpickr';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 // Calendario
 import { CalendarModule, DateAdapter } from 'angular-calendar';
@@ -23,6 +28,7 @@ import { AppointmentsCalendarPatientPageComponent } from './pages/appointments-c
 import { ListAppointmentsPatientCardComponent } from './components/list-appointments-patient-card/list-appointments-patient-card.component';
 import { ViewAppointmentsPatientCardComponent } from './components/view-appointments-patient-card/view-appointments-patient-card.component';
 import { ListAppointmentsHistoricalPatientCardComponent } from './components/list-appointments-historical-patient-card/list-appointments-historical-patient-card.component';
+import { FiltersAppointmentsPatientCardComponent } from './components/filters-appointments-patient-card/filters-appointments-patient-card.component';
 
 @NgModule({
   declarations: [
@@ -32,16 +38,20 @@ import { ListAppointmentsHistoricalPatientCardComponent } from './components/lis
     AppointmentsHistoricalPatientPageComponent,
     ListAppointmentsHistoricalPatientCardComponent,
     AppointmentsCalendarPatientPageComponent,
+    FiltersAppointmentsPatientCardComponent,
   ],
   imports: [
     CommonModule,
     AppointmentsPatientRoutingModule,
     SharedModule,
+    ReactiveFormsModule,
     GenericPageModule,
     GenericCardModule,
     LoadingSpinnerModule,
     PaginationModule,
     ElementsPerPageModule,
+    NgMultiSelectDropDownModule.forRoot(),
+    FlatpickrModule.forRoot(),
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory,
