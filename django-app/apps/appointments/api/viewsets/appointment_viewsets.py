@@ -230,9 +230,15 @@ class AppointmentViewSet(
         Parámetros opcionales:
             state (str): El estado de la cita (true: activas, false: no activas).
             status (list): Los estados de las citas a filtrar.
+            type (list): Los tipos de las citas a filtrar.
+            specialty (list): Las especialidades de las citas a filtrar.
             search (str): El texto a buscar.
             ordering (str): El campo por el cual se ordenarán las citas.
             paginate (str): Indica si se debe paginar los resultados.
+            schedule__start_time__gte (str): La fecha de inicio de la cita.
+            schedule__start_time__lte (str): La fecha de fin de la cita.
+            request_date__gte (str): La fecha de solicitud de la cita.
+            request_date__lte (str): La fecha de solicitud de la cita.
 
         Args:
             request (Request): La solicitud HTTP.
@@ -255,6 +261,14 @@ class AppointmentViewSet(
         )
 
         appointments = self.filter_appointments_by_statuses(appointments)
+        appointments = self.filter_appointments_by_types(appointments)
+        appointments = self.filter_appointments_by_specialties(appointments)
+        appointments = self.filter_appointments_by_date_range(
+            appointments, "schedule__start_time"
+        )
+        appointments = self.filter_appointments_by_date_range(
+            appointments, "request_date"
+        )
         appointments = self.filter_and_order_appointments(appointments)
 
         return self.conditional_paginated_response(
@@ -446,6 +460,70 @@ class AppointmentViewSet(
         desired_statuses = self.request.GET.getlist("status", None)
         if desired_statuses:
             return appointments.filter(status__in=desired_statuses)
+
+        return appointments
+
+    def filter_appointments_by_types(self, appointments):
+        """
+        Filtra las citas por tipos.
+
+        Args:
+            appointments (QuerySet): El conjunto de citas.
+
+        Returns:
+            QuerySet: El conjunto de citas filtradas.
+        """
+        desired_types = self.request.GET.getlist("type", None)
+        if desired_types:
+            return appointments.filter(type__in=desired_types)
+
+        return appointments
+
+    def filter_appointments_by_specialties(self, appointments):
+        """
+        Filtra las citas por especialidades.
+
+        Args:
+            appointments (QuerySet): El conjunto de citas.
+
+        Returns:
+            QuerySet: El conjunto de citas filtradas.
+        """
+        desired_specialties = self.request.GET.getlist("specialty", None)
+        if desired_specialties:
+            return appointments.filter(specialty__in=desired_specialties)
+
+        return appointments
+
+    def filter_appointments_by_date_range(self, appointments, date_field):
+        """
+        Filtra las citas por rango de fechas.
+
+        Args:
+            appointments (QuerySet): El conjunto de citas.
+            date_field (str): El campo de fecha de la cita.
+
+        Returns:
+            QuerySet: El conjunto de citas filtradas.
+        """
+        start_date_str = self.request.query_params.get(f"{date_field}__gte", None)
+        end_date_str = self.request.query_params.get(f"{date_field}__lte", None)
+
+        if start_date_str and end_date_str:
+            try:
+                start_date = datetime.strptime(start_date_str, "%Y-%m-%d").date()
+                end_date = datetime.strptime(
+                    end_date_str, "%Y-%m-%d"
+                ).date() + timedelta(days=1)
+            except ValueError:
+                return self.error_response(
+                    message="La fecha no es válida.",
+                    status_code=status.HTTP_400_BAD_REQUEST,
+                )
+
+            return appointments.filter(
+                **{f"{date_field}__range": [start_date, end_date]}
+            )
 
         return appointments
 
