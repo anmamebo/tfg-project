@@ -47,24 +47,16 @@ export class ListTreatmentsPatientCardComponent extends GenericListCardComponent
     let endDateTo: string | undefined = undefined;
 
     if (this.filters) {
-      if (this.filters.statuses.length > 0) {
+      if (this.filters.statuses) {
         statuses = this.filters.statuses;
       }
       if (this.filters.startDate) {
         startDateFrom = this.filters.startDate.from;
-        if (this.filters.startDate.to != undefined) {
-          startDateTo = this.filters.startDate.to;
-        } else {
-          startDateTo = this.filters.startDate.from;
-        }
+        startDateTo = this.filters.startDate.to;
       }
       if (this.filters.endDate) {
         endDateFrom = this.filters.endDate.from;
-        if (this.filters.endDate.to != undefined) {
-          endDateTo = this.filters.endDate.to;
-        } else {
-          endDateTo = this.filters.endDate.from;
-        }
+        endDateTo = this.filters.endDate.to;
       }
     }
 

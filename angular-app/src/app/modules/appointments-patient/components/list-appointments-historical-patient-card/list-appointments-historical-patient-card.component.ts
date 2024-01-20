@@ -51,30 +51,22 @@ export class ListAppointmentsHistoricalPatientCardComponent extends GenericListC
     let requestDateTo: string | undefined = undefined;
 
     if (this.filters) {
-      if (this.filters.statuses.length > 0) {
+      if (this.filters.statuses) {
         statuses = this.filters.statuses;
       }
-      if (this.filters.types.length > 0) {
+      if (this.filters.types) {
         types = this.filters.types;
       }
-      if (this.filters.specialties.length > 0) {
+      if (this.filters.specialties) {
         specialties = this.filters.specialties;
       }
       if (this.filters.date) {
         scheduleStartTimeFrom = this.filters.date.from;
-        if (this.filters.date.to != undefined) {
-          scheduleStartTimeTo = this.filters.date.to;
-        } else {
-          scheduleStartTimeTo = this.filters.date.from;
-        }
+        scheduleStartTimeTo = this.filters.date.to;
       }
       if (this.filters.requestDate) {
         requestDateFrom = this.filters.requestDate.from;
-        if (this.filters.requestDate.to != undefined) {
-          requestDateTo = this.filters.requestDate.to;
-        } else {
-          requestDateTo = this.filters.requestDate.from;
-        }
+        requestDateTo = this.filters.requestDate.to;
       }
     }
 

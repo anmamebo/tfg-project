@@ -80,9 +80,9 @@ export class FiltersAppointmentsPatientCardComponent implements OnInit {
     private _medicalSpecialtyService: MedicalspecialtyService
   ) {
     this.filtersForm = this._fb.group({
-      statuses: [[]],
-      types: [[]],
-      specialties: [[]],
+      statuses: [null],
+      types: [null],
+      specialties: [null],
       date: [null],
       requestDate: [null],
     });
@@ -122,21 +122,25 @@ export class FiltersAppointmentsPatientCardComponent implements OnInit {
     }
 
     const filters: Filters = {
-      statuses: this.form.value.statuses.map(
-        (status: OptionItem) => status.item_id
-      ),
-      types: this.form.value.types.map((type: OptionItem) => type.item_id),
-      specialties: this.form.value.specialties.map(
-        (specialty: OptionItem) => specialty.item_id
-      ),
+      statuses: this.form.value.statuses
+        ? this.form.value.statuses.map((status: OptionItem) => status.item_id)
+        : null,
+      types: this.form.value.types
+        ? this.form.value.types.map((type: OptionItem) => type.item_id)
+        : null,
+      specialties: this.form.value.specialties
+        ? this.form.value.specialties.map(
+            (specialty: OptionItem) => specialty.item_id
+          )
+        : null,
       date: this.form.value.date,
       requestDate: this.form.value.requestDate,
     };
 
     if (
-      filters.statuses.length === 0 &&
-      filters.types.length === 0 &&
-      filters.specialties.length === 0 &&
+      !filters.statuses &&
+      !filters.types &&
+      !filters.specialties &&
       !filters.date &&
       !filters.requestDate
     ) {
@@ -157,9 +161,9 @@ export class FiltersAppointmentsPatientCardComponent implements OnInit {
    */
   public onReset(): void {
     this.submitted = false;
-    this.form.get('statuses')?.setValue([]);
-    this.form.get('types')?.setValue([]);
-    this.form.get('specialties')?.setValue([]);
+    this.form.get('statuses')?.setValue(null);
+    this.form.get('types')?.setValue(null);
+    this.form.get('specialties')?.setValue(null);
     this.form.get('date')?.setValue(null);
     this.form.get('requestDate')?.setValue(null);
     this.filters.emit(null);
@@ -244,6 +248,10 @@ export class FiltersAppointmentsPatientCardComponent implements OnInit {
     if (date) {
       date.from = date.from ? this._formatDate(date.from) : null;
       date.to = date.to ? this._formatDate(date.to) : null;
+
+      if (!date.to) {
+        date.to = date.from;
+      }
     }
 
     return date;

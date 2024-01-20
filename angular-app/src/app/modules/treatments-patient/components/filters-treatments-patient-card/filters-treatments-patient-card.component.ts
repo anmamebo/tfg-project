@@ -59,7 +59,7 @@ export class FiltersTreatmentsPatientCardComponent implements OnInit {
 
   constructor(private _fb: FormBuilder, private _datePipe: DatePipe) {
     this.filtersForm = this._fb.group({
-      statuses: [[]],
+      statuses: [null],
       startDate: [null],
       endDate: [null],
     });
@@ -97,18 +97,14 @@ export class FiltersTreatmentsPatientCardComponent implements OnInit {
     }
 
     const filters: Filters = {
-      statuses: this.form.value.statuses.map(
-        (status: OptionItem) => status.item_id
-      ),
+      statuses: this.form.value.statuses
+        ? this.form.value.statuses.map((status: OptionItem) => status.item_id)
+        : null,
       startDate: this.form.value.startDate,
       endDate: this.form.value.endDate,
     };
 
-    if (
-      filters.statuses.length === 0 &&
-      !filters.startDate &&
-      !filters.endDate
-    ) {
+    if (!filters.statuses && !filters.startDate && !filters.endDate) {
       this.filters.emit(null);
     } else {
       filters.startDate = this._formatDateFilter(filters.startDate);
@@ -126,7 +122,7 @@ export class FiltersTreatmentsPatientCardComponent implements OnInit {
    */
   public onReset(): void {
     this.submitted = false;
-    this.form.get('statuses')?.setValue([]);
+    this.form.get('statuses')?.setValue(null);
     this.form.get('startDate')?.setValue(null);
     this.form.get('endDate')?.setValue(null);
     this.filters.emit(null);
@@ -172,6 +168,10 @@ export class FiltersTreatmentsPatientCardComponent implements OnInit {
     if (date) {
       date.from = date.from ? this._formatDate(date.from) : null;
       date.to = date.to ? this._formatDate(date.to) : null;
+
+      if (!date.to) {
+        date.to = date.from;
+      }
     }
 
     return date;
