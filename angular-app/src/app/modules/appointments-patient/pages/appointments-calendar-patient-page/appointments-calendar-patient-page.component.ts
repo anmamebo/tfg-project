@@ -78,7 +78,7 @@ export class AppointmentsCalendarPatientPageComponent implements OnInit {
    * @public
    * @returns {void}
    */
-  public getAppointments() {
+  public getAppointments(): void {
     this._appointmentService
       .getAppointmentsByPatient({
         statuses: ['scheduled', 'in_progress', 'completed', 'rescheduled'],
