@@ -18,7 +18,11 @@ import {
 import { breadcrumbScheduleData } from 'src/app/core/constants/breadcrumb-data';
 
 // Servicios
-import { ScheduleService } from 'src/app/core/services/entities/schedule.service';
+import { AppointmentService } from 'src/app/core/services/entities/appointment.service';
+import { NotificationService } from 'src/app/core/services/notifications/notification.service';
+
+// Modelos
+import { Appointment } from 'src/app/core/models/appointment.interface';
 
 /**
  * Componente que representa la página de mi horario
@@ -28,7 +32,7 @@ import { ScheduleService } from 'src/app/core/services/entities/schedule.service
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './schedule-page.component.html',
   styleUrls: ['./schedule-page.component.scss'],
-  providers: [ScheduleService, DatePipe],
+  providers: [AppointmentService, DatePipe],
 })
 export class SchedulePageComponent implements OnInit {
   /** Título de la página. */
@@ -59,13 +63,14 @@ export class SchedulePageComponent implements OnInit {
   activeDayIsOpen: boolean = false;
 
   constructor(
-    private _scheduleService: ScheduleService,
+    private _appointmentService: AppointmentService,
+    private _notificationService: NotificationService,
     private _cdr: ChangeDetectorRef,
     private _datePipe: DatePipe
   ) {}
 
   ngOnInit(): void {
-    this.getScheduleByDoctor();
+    this.getAppointments();
   }
 
   /**
@@ -73,22 +78,56 @@ export class SchedulePageComponent implements OnInit {
    * @public
    * @returns {void}
    */
-  public getScheduleByDoctor(): void {
-    this._scheduleService.getScheduleByDoctor().subscribe({
-      next: (data) => {
-        this.events = data.map((schedule) => ({
-          start: new Date(schedule.start_time),
-          end: new Date(schedule.end_time),
-          title:
-            this._datePipe.transform(schedule.start_time, 'h:mm a') +
-            ' - ' +
-            this._datePipe.transform(schedule.end_time, 'h:mm a'),
-        }));
-        this._cdr.detectChanges();
-      },
-      error: (error) => {
-        console.error(error);
-      },
+  public getAppointments(): void {
+    this._appointmentService
+      .getAppointmentsByDoctor({
+        statuses: ['scheduled', 'in_progress', 'completed', 'rescheduled'],
+      })
+      .subscribe({
+        next: (data: any) => {
+          this.events = this._formatData(data);
+          this._cdr.detectChanges();
+        },
+        error: (error) => {
+          this._notificationService.showErrorToast(error.message);
+        },
+      });
+  }
+
+  /**
+   * Formatea los datos de las citas para su visualización en el calendario.
+   * @private
+   * @param {Appointment[]} appointments - Lista de citas a formatear.
+   * @returns {CalendarEvent[]} - Lista de eventos formateados para el calendario.
+   */
+  private _formatData(appointments: Appointment[]): CalendarEvent[] {
+    return appointments.map((appointment: Appointment) => {
+      const scheduleStartTime = appointment.schedule?.start_time;
+      const patientName = appointment.patient?.user?.name;
+      const patientLastName = appointment.patient?.user?.last_name;
+      const roomName = appointment.room?.name;
+      const roomLocation = appointment.room?.location;
+
+      const titleParts: string[] = [];
+
+      if (scheduleStartTime) {
+        titleParts.push(
+          this._datePipe.transform(scheduleStartTime, 'HH:mm') || ''
+        );
+      }
+
+      if (patientName && patientLastName) {
+        titleParts.push(`${patientName} ${patientLastName}`);
+      }
+
+      if (roomName && roomLocation) {
+        titleParts.push(`${roomName} ${roomLocation}`);
+      }
+
+      return {
+        title: titleParts.join(' | '),
+        start: scheduleStartTime ? new Date(scheduleStartTime) : new Date(),
+      };
     });
   }
 
