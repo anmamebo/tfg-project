@@ -1,3 +1,5 @@
+from datetime import datetime, timedelta
+
 from apps.appointments.api.permissions.appointment_permissions import (
     IsAppointmentPatient,
 )
@@ -245,6 +247,8 @@ class TreatmentViewSet(
         )
 
         treatments = self.filter_treatments_by_statuses(treatments)
+        treatments = self.filter_treatments_by_date_range(treatments, "start_date")
+        treatments = self.filter_treatments_by_date_range(treatments, "end_date")
         treatments = self.filter_and_order_treatments(treatments)
 
         return self.conditional_paginated_response(
@@ -357,5 +361,35 @@ class TreatmentViewSet(
         desired_statuses = self.request.GET.getlist("status", None)
         if desired_statuses:
             return treatments.filter(status__in=desired_statuses)
+
+        return treatments
+
+    def filter_treatments_by_date_range(self, treatments, date_field):
+        """
+        Filtra los tratamientos por rango de fechas.
+
+        Args:
+            treatments (QuerySet): El conjunto de tratamientos.
+            date_field (str): El campo de fecha a filtrar.
+
+        Returns:
+            QuerySet El conjunto de tratamientos filtrados.
+        """
+        start_date_str = self.request.query_params.get(f"{date_field}__gte", None)
+        end_date_str = self.request.query_params.get(f"{date_field}__lte", None)
+
+        if start_date_str and end_date_str:
+            try:
+                start_date = datetime.strptime(start_date_str, "%Y-%m-%d").date()
+                end_date = datetime.strptime(
+                    end_date_str, "%Y-%m-%d"
+                ).date() + timedelta(days=1)
+            except ValueError:
+                return self.error_response(
+                    message="La fecha no es válida.",
+                    status_code=status.HTTP_400_BAD_REQUEST,
+                )
+
+            return treatments.filter(**{f"{date_field}__range": [start_date, end_date]})
 
         return treatments
