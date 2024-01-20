@@ -89,7 +89,7 @@ const routes: Routes = [
         (m) => m.AppointmentRequestModule
       ),
     canActivate: [roleGuard],
-    data: { roles: [ROLES.DOCTOR, ROLES.PATIENT] },
+    data: { roles: [ROLES.PATIENT] },
   },
   {
     path: 'm/citas',

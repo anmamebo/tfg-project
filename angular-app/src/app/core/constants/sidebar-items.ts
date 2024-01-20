@@ -16,7 +16,7 @@ export const sidebarData = [
     name: 'Solicitar Cita',
     url: '/solicitar-cita',
     icon: 'person-plus-fill',
-    roles: [ROLES.DOCTOR, ROLES.PATIENT],
+    roles: [ROLES.PATIENT],
   },
   {
     name: 'Mis Citas',
@@ -79,11 +79,6 @@ export const sidebarData = [
       {
         name: 'Historial',
         url: '/m/citas/historial',
-        roles: [ROLES.DOCTOR],
-      },
-      {
-        name: 'Reportes y estadísticas',
-        url: '/m/citas/reportes',
         roles: [ROLES.DOCTOR],
       },
     ],
