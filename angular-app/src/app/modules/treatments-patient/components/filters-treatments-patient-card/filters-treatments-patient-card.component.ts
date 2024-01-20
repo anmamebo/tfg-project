@@ -11,6 +11,22 @@ import {
   STATUS_HISTORICAL_TREATMENT_OPTIONS,
 } from 'src/app/core/constants/options/status-treatment-options.constants';
 
+interface FilterDate {
+  from: string | null;
+  to: string | null;
+}
+
+interface Filters {
+  statuses: string[];
+  startDate: FilterDate;
+  endDate: FilterDate;
+}
+
+interface OptionItem {
+  item_id: string;
+  item_text: string;
+}
+
 /**
  * Componente que representa la tarjeta de filtros de los tratamientos de un paciente
  */
@@ -30,7 +46,7 @@ export class FiltersTreatmentsPatientCardComponent implements OnInit {
   public submitted: boolean = false;
 
   /** Estados del tratamiento */
-  public statuses: any = [];
+  public statuses: OptionItem[] = [];
 
   /** Opciones para el campo de fecha */
   public locale = Spanish;
@@ -39,7 +55,7 @@ export class FiltersTreatmentsPatientCardComponent implements OnInit {
   dropdownSettings: IDropdownSettings = {};
 
   /** Emite los filtros */
-  @Output() public filters: EventEmitter<any> = new EventEmitter();
+  @Output() public filters: EventEmitter<Filters | null> = new EventEmitter();
 
   constructor(private _fb: FormBuilder, private _datePipe: DatePipe) {
     this.filtersForm = this._fb.group({
@@ -80,9 +96,9 @@ export class FiltersTreatmentsPatientCardComponent implements OnInit {
       return;
     }
 
-    let filters: any = {
+    const filters: Filters = {
       statuses: this.form.value.statuses.map(
-        (status: { item_id: string; item_text: string }) => status.item_id
+        (status: OptionItem) => status.item_id
       ),
       startDate: this.form.value.startDate,
       endDate: this.form.value.endDate,
@@ -93,12 +109,13 @@ export class FiltersTreatmentsPatientCardComponent implements OnInit {
       !filters.startDate &&
       !filters.endDate
     ) {
-      filters = null;
+      this.filters.emit(null);
+    } else {
+      filters.startDate = this._formatDateFilter(filters.startDate);
+      filters.endDate = this._formatDateFilter(filters.endDate);
+      this.filters.emit(filters);
     }
 
-    filters = this._formatDateFilter(filters);
-
-    this.filters.emit(filters);
     this.submitted = false;
   }
 
@@ -147,29 +164,16 @@ export class FiltersTreatmentsPatientCardComponent implements OnInit {
 
   /**
    * Formatea los filtros de fecha.
-   * @param {any} filters - Filtros a formatear.
-   * @returns {any} Filtros formateados.
+   * @param {FilterDate} date - Filtros de fecha.
+   * @returns {FilterDate} Filtros formateados.
    * @private
    */
-  private _formatDateFilter(filters: any): any {
-    if (filters.startDate) {
-      filters.startDate.from = filters.startDate.from
-        ? this._formatDate(filters.startDate.from)
-        : null;
-      filters.startDate.to = filters.startDate.to
-        ? this._formatDate(filters.startDate.to)
-        : null;
+  private _formatDateFilter(date: FilterDate): FilterDate {
+    if (date) {
+      date.from = date.from ? this._formatDate(date.from) : null;
+      date.to = date.to ? this._formatDate(date.to) : null;
     }
 
-    if (filters.endDate) {
-      filters.endDate.from = filters.endDate.from
-        ? this._formatDate(filters.endDate.from)
-        : null;
-      filters.endDate.to = filters.endDate.to
-        ? this._formatDate(filters.endDate.to)
-        : null;
-    }
-
-    return filters;
+    return date;
   }
 }

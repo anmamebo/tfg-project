@@ -16,6 +16,27 @@ import { TYPE_APPOINTMENT_OPTIONS } from 'src/app/core/constants/options/type-ap
 import { MedicalspecialtyService } from 'src/app/core/services/entities/medicalspecialty.service';
 import { NotificationService } from 'src/app/core/services/notifications/notification.service';
 
+// Modelos
+import { MedicalSpecialty } from 'src/app/core/models/medical-specialty.interface';
+
+interface FilterDate {
+  from: string | null;
+  to: string | null;
+}
+
+interface Filters {
+  statuses: string[];
+  types: string[];
+  specialties: string[];
+  date: FilterDate;
+  requestDate: FilterDate;
+}
+
+interface OptionItem {
+  item_id: string;
+  item_text: string;
+}
+
 /**
  * Componente que representa la tarjeta de filtros de las citas de un paciente
  */
@@ -35,13 +56,13 @@ export class FiltersAppointmentsPatientCardComponent implements OnInit {
   public submitted: boolean = false;
 
   /** Estados de la cita */
-  public statuses: any = [];
+  public statuses: OptionItem[] = [];
 
   /** Tipos de cita */
-  public types: any = [];
+  public types: OptionItem[] = [];
 
   /** Especialidades médicas */
-  public medicalSpecialties: any = [];
+  public medicalSpecialties: OptionItem[] = [];
 
   /** Opciones para el campo de fecha */
   public locale = Spanish;
@@ -50,7 +71,7 @@ export class FiltersAppointmentsPatientCardComponent implements OnInit {
   dropdownSettings: IDropdownSettings = {};
 
   /** Emite los filtros */
-  @Output() public filters: EventEmitter<any> = new EventEmitter();
+  @Output() public filters: EventEmitter<Filters | null> = new EventEmitter();
 
   constructor(
     private _fb: FormBuilder,
@@ -100,15 +121,13 @@ export class FiltersAppointmentsPatientCardComponent implements OnInit {
       return;
     }
 
-    let filters: any = {
+    const filters: Filters = {
       statuses: this.form.value.statuses.map(
-        (status: { item_id: string; item_text: string }) => status.item_id
+        (status: OptionItem) => status.item_id
       ),
-      types: this.form.value.types.map(
-        (type: { item_id: string; item_text: string }) => type.item_id
-      ),
+      types: this.form.value.types.map((type: OptionItem) => type.item_id),
       specialties: this.form.value.specialties.map(
-        (specialty: { item_id: string; item_text: string }) => specialty.item_id
+        (specialty: OptionItem) => specialty.item_id
       ),
       date: this.form.value.date,
       requestDate: this.form.value.requestDate,
@@ -121,12 +140,13 @@ export class FiltersAppointmentsPatientCardComponent implements OnInit {
       !filters.date &&
       !filters.requestDate
     ) {
-      filters = null;
+      this.filters.emit(null);
+    } else {
+      filters.date = this._formatDateFilter(filters.date);
+      filters.requestDate = this._formatDateFilter(filters.requestDate);
+      this.filters.emit(filters);
     }
 
-    filters = this._formatDateFilter(filters);
-
-    this.filters.emit(filters);
     this.submitted = false;
   }
 
@@ -187,11 +207,13 @@ export class FiltersAppointmentsPatientCardComponent implements OnInit {
    */
   private _getSpecialties(): void {
     this._medicalSpecialtyService.getItems().subscribe({
-      next: (response: any) => {
-        this.medicalSpecialties = response.map((specialty: any) => ({
-          item_id: specialty.id,
-          item_text: specialty.name,
-        }));
+      next: (response: MedicalSpecialty[]) => {
+        this.medicalSpecialties = response.map(
+          (specialty: MedicalSpecialty) => ({
+            item_id: specialty.id,
+            item_text: specialty.name,
+          })
+        );
       },
       error: (error: any) => {
         this._notificationService.showErrorToast(
@@ -214,29 +236,16 @@ export class FiltersAppointmentsPatientCardComponent implements OnInit {
 
   /**
    * Formatea los filtros de fecha.
-   * @param {any} filters - Filtros a formatear.
-   * @returns {any} Filtros formateados.
+   * @param {FilterDate} date - Filtros de fecha.
+   * @returns {FilterDate} Filtros formateados.
    * @private
    */
-  private _formatDateFilter(filters: any): any {
-    if (filters.date) {
-      filters.date.from = filters.date.from
-        ? this._formatDate(filters.date.from)
-        : null;
-      filters.date.to = filters.date.to
-        ? this._formatDate(filters.date.to)
-        : null;
+  private _formatDateFilter(date: FilterDate): FilterDate {
+    if (date) {
+      date.from = date.from ? this._formatDate(date.from) : null;
+      date.to = date.to ? this._formatDate(date.to) : null;
     }
 
-    if (filters.requestDate) {
-      filters.requestDate.from = filters.requestDate.from
-        ? this._formatDate(filters.requestDate.from)
-        : null;
-      filters.requestDate.to = filters.requestDate.to
-        ? this._formatDate(filters.requestDate.to)
-        : null;
-    }
-
-    return filters;
+    return date;
   }
 }
