@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import datetime
 
 from apps.appointments.api.permissions.appointment_permissions import (
     IsAppointmentPatient,
@@ -17,6 +17,7 @@ from apps.treatments.models import Treatment
 from config.permissions import IsAdministratorOrDoctorOrPatient, IsDoctor, IsPatient
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
+from django.utils import timezone
 from mixins.error_mixin import ErrorResponseMixin
 from mixins.pagination_mixin import PaginationMixin
 from rest_framework import status, viewsets
@@ -381,9 +382,13 @@ class TreatmentViewSet(
         if start_date_str and end_date_str:
             try:
                 start_date = datetime.strptime(start_date_str, "%Y-%m-%d").date()
-                end_date = datetime.strptime(
-                    end_date_str, "%Y-%m-%d"
-                ).date() + timedelta(days=1)
+                end_date = datetime.strptime(end_date_str, "%Y-%m-%d").date()
+                start_date = timezone.make_aware(
+                    datetime.combine(start_date, datetime.min.time())
+                )
+                end_date = timezone.make_aware(
+                    datetime.combine(end_date, datetime.max.time())
+                )
             except ValueError:
                 return self.error_response(
                     message="La fecha no es válida.",
