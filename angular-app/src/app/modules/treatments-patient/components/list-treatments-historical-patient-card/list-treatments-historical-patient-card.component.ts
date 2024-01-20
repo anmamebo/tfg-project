@@ -13,6 +13,9 @@ import { NotificationService } from 'src/app/core/services/notifications/notific
   templateUrl: './list-treatments-historical-patient-card.component.html',
 })
 export class ListTreatmentsHistoricalPatientCardComponent extends GenericListCardComponent {
+  /** Filtros */
+  public filters: any = null;
+
   constructor(
     private _treatmentService: TreatmentService,
     notificationService: NotificationService
@@ -39,15 +42,47 @@ export class ListTreatmentsHistoricalPatientCardComponent extends GenericListCar
       this.entityData.page = 1;
     }
 
+    let statuses: string[] = ['completed', 'interrupted', 'cancelled'];
+    let startDateFrom: string | undefined = undefined;
+    let startDateTo: string | undefined = undefined;
+    let endDateFrom: string | undefined = undefined;
+    let endDateTo: string | undefined = undefined;
+
+    if (this.filters) {
+      if (this.filters.statuses.length > 0) {
+        statuses = this.filters.statuses;
+      }
+      if (this.filters.startDate) {
+        startDateFrom = this.filters.startDate.from;
+        if (this.filters.startDate.to != undefined) {
+          startDateTo = this.filters.startDate.to;
+        } else {
+          startDateTo = this.filters.startDate.from;
+        }
+      }
+      if (this.filters.endDate) {
+        endDateFrom = this.filters.endDate.from;
+        if (this.filters.endDate.to != undefined) {
+          endDateTo = this.filters.endDate.to;
+        } else {
+          endDateTo = this.filters.endDate.from;
+        }
+      }
+    }
+
     this._treatmentService
       .getTreatmentsByPatient({
-        statuses: ['completed', 'interrupted', 'cancelled'],
+        statuses: statuses,
         page: page,
         numResults: this.entityData.numResults,
         searchTerm: this.entityData.search.search,
         paginate: true,
         sortBy: this.sort.column,
         sortOrder: this.sort.order,
+        startDateFrom: startDateFrom,
+        startDateTo: startDateTo,
+        endDateFrom: endDateFrom,
+        endDateTo: endDateTo,
       })
       .subscribe({
         next: (response: any) => {
@@ -61,5 +96,16 @@ export class ListTreatmentsHistoricalPatientCardComponent extends GenericListCar
           this.notificationService.showErrorToast(error.message);
         },
       });
+  }
+
+  /**
+   * Aplica los filtros seleccionados.
+   * @param {any} event - Evento con los filtros seleccionados.
+   * @returns {void}
+   * @public
+   */
+  public applyFilters(event: any): void {
+    this.filters = event;
+    this.getItems(this.entityData.page);
   }
 }

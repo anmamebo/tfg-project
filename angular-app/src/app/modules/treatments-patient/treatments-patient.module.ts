@@ -1,5 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
+
+// Módulos de terceros
+import { FlatpickrModule } from 'angularx-flatpickr';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 // Módulos
 import { TreatmentsPatientRoutingModule } from './treatments-patient-routing.module';
@@ -18,6 +23,7 @@ import { TreatmentsHistoricalPatientPageComponent } from './pages/treatments-his
 import { ListTreatmentsPatientCardComponent } from './components/list-treatments-patient-card/list-treatments-patient-card.component';
 import { ViewTreatmentsPatientCardComponent } from './components/view-treatments-patient-card/view-treatments-patient-card.component';
 import { ListTreatmentsHistoricalPatientCardComponent } from './components/list-treatments-historical-patient-card/list-treatments-historical-patient-card.component';
+import { FiltersTreatmentsPatientCardComponent } from './components/filters-treatments-patient-card/filters-treatments-patient-card.component';
 
 @NgModule({
   declarations: [
@@ -26,16 +32,20 @@ import { ListTreatmentsHistoricalPatientCardComponent } from './components/list-
     ViewTreatmentsPatientCardComponent,
     TreatmentsHistoricalPatientPageComponent,
     ListTreatmentsHistoricalPatientCardComponent,
+    FiltersTreatmentsPatientCardComponent,
   ],
   imports: [
     CommonModule,
     TreatmentsPatientRoutingModule,
     SharedModule,
+    ReactiveFormsModule,
     GenericPageModule,
     GenericCardModule,
     LoadingSpinnerModule,
     ElementsPerPageModule,
     PaginationModule,
+    NgMultiSelectDropDownModule.forRoot(),
+    FlatpickrModule.forRoot(),
   ],
 })
 export class TreatmentsPatientModule {}

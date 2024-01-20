@@ -1,5 +1,11 @@
 <!-- Comprueba si se han cargado los tratamientos -->
 <ng-container *ngIf="entityData.items; else noItems">
+  <!-- Filtros -->
+  <app-filters-treatments-patient-card
+    [typePage]="'next'"
+    (filters)="applyFilters($event)"
+  ></app-filters-treatments-patient-card>
+
   <!-- Comprueba que hayan tratamientos -->
   <ng-container *ngIf="entityData.items.length > 0; else lengthZero">
     <!-- Recorre los tratamientos -->

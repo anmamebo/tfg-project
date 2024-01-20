@@ -18,6 +18,10 @@ interface TreatmentOptions {
   paginate?: boolean;
   sortBy?: string;
   sortOrder?: string;
+  startDateFrom?: string;
+  startDateTo?: string;
+  endDateFrom?: string;
+  endDateTo?: string;
 }
 
 /**
@@ -51,6 +55,10 @@ export class TreatmentService {
       paginate = false,
       sortBy,
       sortOrder,
+      startDateFrom,
+      startDateTo,
+      endDateFrom,
+      endDateTo,
     } = options;
 
     let params = new HttpParams();
@@ -59,6 +67,22 @@ export class TreatmentService {
       statuses.forEach((status) => {
         params = params.append('status', status);
       });
+    }
+
+    if (startDateFrom) {
+      params = params.set('start_date__gte', startDateFrom);
+    }
+
+    if (startDateTo) {
+      params = params.set('start_date__lte', startDateTo);
+    }
+
+    if (endDateFrom) {
+      params = params.set('end_date__gte', endDateFrom);
+    }
+
+    if (endDateTo) {
+      params = params.set('end_date__lte', endDateTo);
     }
 
     if (paginate) {
