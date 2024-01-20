@@ -54,7 +54,7 @@ export class FiltersAppointmentsPatientCardComponent implements OnInit {
 
   constructor(
     private _fb: FormBuilder,
-    private datePipe: DatePipe,
+    private _datePipe: DatePipe,
     private _notificationService: NotificationService,
     private _medicalSpecialtyService: MedicalspecialtyService
   ) {
@@ -209,7 +209,7 @@ export class FiltersAppointmentsPatientCardComponent implements OnInit {
    */
   private _formatDate(rawDate: string): string {
     const date = new Date(rawDate);
-    return this.datePipe.transform(date, 'yyyy-MM-dd') || rawDate;
+    return this._datePipe.transform(date, 'yyyy-MM-dd') || rawDate;
   }
 
   /**
