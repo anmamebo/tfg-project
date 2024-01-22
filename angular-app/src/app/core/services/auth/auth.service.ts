@@ -89,4 +89,42 @@ export class AuthService {
 
     return roles;
   }
+
+  /**
+   * Envia un correo electrónico con un enlace para restablecer la contraseña.
+   * @param email Correo electrónico del usuario.
+   * @returns {Observable<any>} Un observable que emite la respuesta del servidor.
+   */
+  public forgotPassword(email: string): Observable<any> {
+    let params = JSON.stringify({ email });
+
+    return this._http.post<any>(
+      `${this.url}forget-password/`,
+      params,
+      httpOptions
+    );
+  }
+
+  /**
+   * Restablece la contraseña del usuario.
+   * @param {{
+   *   password: string;
+   *   token: string;
+   *   id: string;
+   * }} data Datos para restablecer la contraseña.
+   * @returns {Observable<any>} Un observable que emite la respuesta del servidor.
+   */
+  public resetPassword(data: {
+    password: string;
+    token: string;
+    id: string;
+  }): Observable<any> {
+    let params = JSON.stringify(data);
+
+    return this._http.post<any>(
+      `${this.url}reset-password/`,
+      params,
+      httpOptions
+    );
+  }
 }
