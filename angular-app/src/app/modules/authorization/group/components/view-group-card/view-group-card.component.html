@@ -26,30 +26,6 @@
           />
         </div>
       </div>
-
-      <div class="col-12 mt-3">
-        <div class="form-group">
-          <label for="staticInput">Permisos vinculados</label>
-
-          <ng-container
-            *ngIf="
-              group.permissions && group.permissions.length > 0;
-              else notPermissions
-            "
-          >
-            <app-generic-table
-              [columns]="columns"
-              [data]="group.permissions || []"
-              [actions]="false"
-            ></app-generic-table>
-          </ng-container>
-          <ng-template #notPermissions>
-            <p class="form-control-static" id="staticInput">
-              No hay permisos vinculados.
-            </p>
-          </ng-template>
-        </div>
-      </div>
     </div>
     <ng-template #loading>
       <div class="row">

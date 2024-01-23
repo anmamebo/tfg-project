@@ -12,13 +12,6 @@ const routes: Routes = [
     canActivate: [roleGuard],
     data: { roles: [ROLES.ADMIN] },
   },
-  {
-    path: 'permisos',
-    loadChildren: () =>
-      import('./permission/permission.module').then((m) => m.PermissionModule),
-    canActivate: [roleGuard],
-    data: { roles: [ROLES.ADMIN] },
-  },
 ];
 
 @NgModule({

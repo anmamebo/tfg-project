@@ -30,12 +30,6 @@ export const breadcrumbGroupViewData = [
   { label: 'Ver grupo', url: '' },
 ];
 
-// Permisos
-export const breadcrumbPermissionData = [
-  { label: 'Panel Principal', url: '/' },
-  { label: 'Permisos', url: '' },
-];
-
 // Administrativos
 export const breadcrumbAdministrativesData = [
   { label: 'Panel Principal', url: '/' },

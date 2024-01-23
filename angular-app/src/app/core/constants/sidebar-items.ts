@@ -94,11 +94,6 @@ export const sidebarData = [
         url: '/autorizacion/grupos',
         roles: [ROLES.ADMIN],
       },
-      {
-        name: 'Permisos',
-        url: '/autorizacion/permisos',
-        roles: [ROLES.ADMIN],
-      },
     ],
   },
   {

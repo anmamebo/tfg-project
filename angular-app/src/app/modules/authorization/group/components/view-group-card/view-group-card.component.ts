@@ -17,12 +17,5 @@ export class ViewGroupCardComponent {
   /** Grupo que se visualizará */
   @Input() public group: Group | null = null;
 
-  /** Columnas que se visualizarán en la tabla de permisos asignados al grupo */
-  public columns: any[] = [
-    { header: 'ID', field: 'id' },
-    { header: 'NOMBRE', field: 'name' },
-    { header: 'MODELO RELACIONADO', field: 'content_type' },
-  ];
-
   constructor() {}
 }
