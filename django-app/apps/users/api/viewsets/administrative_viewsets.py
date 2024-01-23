@@ -1,15 +1,10 @@
-import os
-
-from apps.users.api.permissions.user_permissions import IsUserOwner
 from apps.users.api.serializers.user_serializer import (
-    PasswordSerializer,
     UpdateUserSerializer,
     UserListSerializer,
-    UserProfilePictureSerializer,
     UserSerializer,
 )
 from apps.users.models import User
-from config.permissions import IsAdministrator, IsAdministratorOrDoctorOrPatient
+from config.permissions import IsAdministrator
 from django.contrib.auth.models import Group
 from django.db.models import Q
 from django.http import Http404
