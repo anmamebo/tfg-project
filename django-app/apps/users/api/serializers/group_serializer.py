@@ -1,4 +1,3 @@
-from apps.users.api.serializers.permission_serializer import PermissionSerializer
 from django.contrib.auth.models import Group
 from rest_framework import serializers
 
@@ -15,8 +14,6 @@ class GroupSerializer(serializers.ModelSerializer):
     Returns:
         dict: Diccionario con los datos del grupo.
     """
-
-    permissions = PermissionSerializer(many=True, read_only=True)
 
     class Meta:
         model = Group
