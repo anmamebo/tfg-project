@@ -21,7 +21,7 @@ export class DoctorStatisticsService {
     private _http: HttpClient,
     private _httpCommonService: HttpCommonService
   ) {
-    this.url = API_URL.url + 'doctor_statistics/';
+    this.url = API_URL.url + 'doctor-statistics/';
   }
 
   /**
