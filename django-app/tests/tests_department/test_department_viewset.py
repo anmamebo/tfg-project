@@ -3,7 +3,7 @@ from uuid import UUID
 from apps.departments.models import Department
 from faker import Factory
 from rest_framework import status
-from tests.factories.department.department import DepartmentFactory
+from tests.factories.department import DepartmentFactory
 from tests.test_setup import PATIENT, TestSetUp
 
 faker = Factory.create()
