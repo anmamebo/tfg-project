@@ -124,3 +124,100 @@ class DepartmentTestCase(TestSetUp):
             [department.name for department in departments],
             "Los nombres de los departamentos no coinciden.",
         )
+
+    def test_department_list_filter(self):
+        """
+        Prueba la obtención de todos los departamentos filtrados por nombre.
+        """
+        departments = DepartmentFactory.create_batch(10)
+
+        response = self.client.get(f"{self.url}?search={departments[0].name}")
+
+        self.assertEqual(
+            response.status_code, status.HTTP_200_OK, "La solicitud GET no fue exitosa."
+        )
+        self.assertEqual(
+            len(response.data),
+            1,
+            "La longitud de la respuesta no coincide con la cantidad de departamentos creados",
+        )
+        self.assertEqual(
+            response.data[0]["name"],
+            departments[0].name,
+            "El nombre del departamento no coincide.",
+        )
+
+    def test_department_update(self):
+        """
+        Prueba la actualización de un departamento.
+        """
+        department = DepartmentFactory()
+
+        department_data = {
+            "name": faker.name(),
+            "description": faker.text(),
+        }
+
+        response = self.client.put(
+            f"{self.url}{department.id}/", department_data, format="json"
+        )
+
+        self.assertEqual(
+            response.status_code,
+            status.HTTP_200_OK,
+            "La solicitud PUT no fue exitosa.",
+        )
+        self.assertEqual(
+            Department.objects.all().count(), 1, "El departamento no se actualizó."
+        )
+        self.assertEqual(
+            response.data["message"],
+            "Departamento actualizado correctamente.",
+            "El mensaje de éxito no coincide.",
+        )
+
+    def test_department_destroy(self):
+        """
+        Prueba la eliminación de un departamento.
+        """
+        department = DepartmentFactory()
+
+        response = self.client.delete(f"{self.url}{department.id}/")
+
+        self.assertEqual(
+            response.status_code,
+            status.HTTP_200_OK,
+            "La solicitud DELETE no fue exitosa.",
+        )
+        self.assertFalse(
+            Department.objects.filter(id=department.id, state=True).exists(),
+            "El departamento no se eliminó.",
+        )
+        self.assertEqual(
+            response.data["message"],
+            "Departamento eliminado correctamente.",
+            "El mensaje de éxito no coincide.",
+        )
+
+    def test_department_activate(self):
+        """
+        Prueba la activación de un departamento.
+        """
+        department = DepartmentFactory(state=False)
+
+        response = self.client.put(f"{self.url}{department.id}/activate/")
+
+        self.assertEqual(
+            response.status_code,
+            status.HTTP_200_OK,
+            "La solicitud PUT no fue exitosa.",
+        )
+        self.assertTrue(
+            Department.objects.filter(id=department.id, state=True).exists(),
+            "El departamento no se activó.",
+        )
+        self.assertEqual(
+            response.data["message"],
+            "Departamento activado correctamente.",
+            "El mensaje de éxito no coincide.",
+        )
