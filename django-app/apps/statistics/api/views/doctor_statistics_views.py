@@ -4,8 +4,6 @@ from datetime import date, datetime, timedelta
 
 import pytz
 from apps.appointments.models import Appointment
-from apps.doctors.models import Doctor
-from apps.patients.models import Patient
 from apps.schedules.models import Schedule
 from apps.treatments.models import Treatment
 from config.settings import TIME_ZONE

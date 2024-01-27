@@ -59,14 +59,14 @@ urlpatterns = [
     path("api/departments/", include("apps.departments.api.routers")),
     path("api/appointments/", include("apps.appointments.api.routers")),
     path("api/treatments/", include("apps.treatments.api.routers")),
-    path("api/statistics/", include("apps.core.api.routers.statistics_routers")),
+    path("api/statistics/", include("apps.statistics.api.routers.statistics_routers")),
     path(
         "api/doctor_statistics/",
-        include("apps.core.api.routers.doctor_statistics_routers"),
+        include("apps.statistics.api.routers.doctor_statistics_routers"),
     ),
     path(
         "api/patient_statistics/",
-        include("apps.core.api.routers.patient_statistics_routers"),
+        include("apps.statistics.api.routers.patient_statistics_routers"),
     ),
 ]
 

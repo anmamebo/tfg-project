@@ -1,4 +1,4 @@
-from apps.core.api.views.statistics_views import (
+from apps.statistics.api.views.statistics_views import (
     average_waiting_time,
     get_appointment_statuses,
     get_appointments_per_age,

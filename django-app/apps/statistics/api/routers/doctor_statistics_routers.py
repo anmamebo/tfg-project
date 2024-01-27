@@ -1,4 +1,4 @@
-from apps.core.api.views.doctor_statistics_views import (
+from apps.statistics.api.views.doctor_statistics_views import (
     get_appointments_per_age,
     get_appointments_per_day,
     get_appointments_per_gender,

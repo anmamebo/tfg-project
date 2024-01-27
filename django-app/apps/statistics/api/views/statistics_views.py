@@ -12,7 +12,6 @@ from apps.patients.models import Patient
 from apps.schedules.models import Schedule
 from config.settings import TIME_ZONE
 from django.db.models import Avg, Count, DurationField, ExpressionWrapper, F
-from django.db.models.functions import TruncDate
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response

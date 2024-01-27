@@ -1,4 +1,4 @@
-from apps.core.api.views.patient_statistics_views import (
+from apps.statistics.api.views.patient_statistics_views import (
     get_overall_stats,
     get_patient_appointments_per_specialty_and_month,
 )

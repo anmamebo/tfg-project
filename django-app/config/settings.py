@@ -41,7 +41,6 @@ BASE_APPS = [
 # Apps locales del proyecto
 LOCAL_APPS = [
     "apps.base",
-    "apps.core",
     "apps.users",
     "apps.patients",
     "apps.doctors",
@@ -49,6 +48,7 @@ LOCAL_APPS = [
     "apps.departments",
     "apps.appointments",
     "apps.treatments",
+    "apps.statistics",
 ]
 
 # Apps de terceros instaladas en el proyecto
