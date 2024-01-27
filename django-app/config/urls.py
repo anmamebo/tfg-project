@@ -26,9 +26,9 @@ from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 schema_view = get_schema_view(
     openapi.Info(
-        title="Django Rest Api",
+        title="Django REST API",
         default_version="v1",
-        description="Django Rest Api",
+        description="Django REST API for a medical appointment system.",
         contact=openapi.Contact(email="anmamebo2001@gmail.com"),
     ),
     public=True,
