@@ -13,7 +13,7 @@ class UserFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = User
 
-    username = factory.Sequence(lambda n: f"{faker.name()}{n}")
+    username = factory.Sequence(lambda n: f"{faker.first_name()}{n}")
     email = factory.LazyAttribute(lambda obj: f"{obj.username}@example.com")
     password = faker.password()
     name = faker.first_name()
@@ -21,3 +21,11 @@ class UserFactory(factory.django.DjangoModelFactory):
     is_active = True
     is_staff = False
     is_superuser = False
+
+    @factory.post_generation
+    def groups(self, create, extracted, **kwargs):
+        if not create:
+            return
+        if extracted:
+            for group in extracted:
+                self.groups.add(group)
