@@ -14,7 +14,7 @@ import { PdfService } from 'src/app/core/services/generics/pdf.service';
 })
 export class PdfAppointmentService extends PdfService {
   /** Endpoint de la API. */
-  public endpoint = 'appointments/appointments/';
+  public endpoint = 'appointments/';
 
   /** Endpoint de la API para la gestión de pdfs. */
   public entityEndpoint = 'pdf/';

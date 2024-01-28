@@ -24,7 +24,7 @@ interface DoctorOptions {
 })
 export class DoctorService extends EntityService<Doctor> {
   /** Endpoint de la API. */
-  public endpoint = 'doctors/doctors/';
+  public endpoint = 'doctors/';
 
   constructor(http: HttpClient, httpCommonService: HttpCommonService) {
     super(http, httpCommonService);

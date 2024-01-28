@@ -38,7 +38,7 @@ export class TreatmentService {
     private _http: HttpClient,
     private _httpCommonService: HttpCommonService
   ) {
-    this.url = API_URL.url + 'treatments/treatments/';
+    this.url = API_URL.url + 'treatments/';
   }
 
   /**

@@ -24,7 +24,7 @@ export class AddressService {
     private _http: HttpClient,
     private _httpCommonService: HttpCommonService
   ) {
-    this.url = API_URL.url + 'addresses/addresses/';
+    this.url = API_URL.url + 'addresses/';
   }
 
   /**

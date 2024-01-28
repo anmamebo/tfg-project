@@ -16,7 +16,7 @@ import { Department } from 'src/app/core/models/department.interface';
 })
 export class DepartmentService extends EntityService<Department> {
   /** Endpoint de la API. */
-  public endpoint = 'departments/departments/';
+  public endpoint = 'departments/';
 
   constructor(http: HttpClient, httpCommonService: HttpCommonService) {
     super(http, httpCommonService);

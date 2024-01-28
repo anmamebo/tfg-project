@@ -16,7 +16,7 @@ import { Patient } from 'src/app/core/models/patient.interface';
 })
 export class PatientService extends EntityService<Patient> {
   /** Endpoint de la API. */
-  public endpoint = 'patients/patients/';
+  public endpoint = 'patients/';
 
   constructor(http: HttpClient, httpCommonService: HttpCommonService) {
     super(http, httpCommonService);

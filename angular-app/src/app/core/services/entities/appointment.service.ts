@@ -42,7 +42,7 @@ export class AppointmentService {
     private _http: HttpClient,
     private _httpCommonService: HttpCommonService
   ) {
-    this.url = API_URL.url + 'appointments/appointments/';
+    this.url = API_URL.url + 'appointments/';
   }
 
   /**

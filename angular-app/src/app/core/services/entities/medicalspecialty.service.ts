@@ -16,7 +16,7 @@ import { MedicalSpecialty } from 'src/app/core/models/medical-specialty.interfac
 })
 export class MedicalspecialtyService extends EntityService<MedicalSpecialty> {
   /** URL del endpoint. */
-  public endpoint = 'medicalspecialties/medicalspecialties/';
+  public endpoint = 'medicalspecialties/';
 
   constructor(http: HttpClient, httpCommonService: HttpCommonService) {
     super(http, httpCommonService);

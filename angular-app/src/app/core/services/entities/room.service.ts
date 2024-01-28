@@ -24,7 +24,7 @@ interface RoomOptions {
 })
 export class RoomService extends EntityService<Room> {
   /** Endpoint de la API. */
-  public endpoint = 'rooms/rooms/';
+  public endpoint = 'rooms/';
 
   constructor(http: HttpClient, httpCommonService: HttpCommonService) {
     super(http, httpCommonService);
