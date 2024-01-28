@@ -16,7 +16,7 @@ import { Group } from 'src/app/core/models/group.interface';
 })
 export class GroupService extends EntityService<Group> {
   /** Endpoint de la API. */
-  public endpoint = 'users/groups/';
+  public endpoint = 'groups/groups/';
 
   constructor(http: HttpClient, httpCommonService: HttpCommonService) {
     super(http, httpCommonService);
