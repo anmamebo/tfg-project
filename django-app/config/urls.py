@@ -53,6 +53,7 @@ urlpatterns = [
     path("api/token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
     path("api/token/refresh/", TokenRefreshView.as_view, name="token_refresh"),
     path("api/users/", include("apps.users.api.routers")),
+    path("api/groups/", include("apps.groups.api.routers")),
     path("api/patients/", include("apps.patients.api.routers")),
     path("api/addresses/", include("apps.addresses.api.routers")),
     path("api/doctors/", include("apps.doctors.api.routers")),

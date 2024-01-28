@@ -42,6 +42,7 @@ BASE_APPS = [
 LOCAL_APPS = [
     "apps.base",
     "apps.users",
+    "apps.groups",
     "apps.patients",
     "apps.addresses",
     "apps.doctors",

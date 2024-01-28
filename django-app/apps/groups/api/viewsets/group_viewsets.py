@@ -1,4 +1,4 @@
-from apps.users.api.serializers.group_serializer import (
+from apps.groups.api.serializers.group_serializer import (
     GroupListSerializer,
     GroupSerializer,
 )

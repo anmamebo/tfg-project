@@ -1,6 +1,6 @@
 from apps.doctors.api.serializers.doctor_serializer import DoctorSerializer
+from apps.groups.api.serializers.group_serializer import GroupSerializer
 from apps.patients.api.serializers.patient_serializer import PatientSerializer
-from apps.users.api.serializers.group_serializer import GroupSerializer
 from apps.users.models import User
 from django.contrib.auth.hashers import check_password
 from rest_framework import serializers
