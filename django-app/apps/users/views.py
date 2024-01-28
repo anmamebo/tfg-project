@@ -1,9 +1,9 @@
-from apps.users.api.serializers.user_serializer import (
+from apps.users.models import User
+from apps.users.serializers import (
     CustomTokenObtainPairSerializer,
     CustomUserSerializer,
     EmptySerializer,
 )
-from apps.users.models import User
 from django.contrib.auth import authenticate
 from django.contrib.auth.tokens import default_token_generator
 from django.utils import timezone
