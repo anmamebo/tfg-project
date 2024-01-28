@@ -9,7 +9,7 @@ class DepartmentAdmin(admin.ModelAdmin):
         "created_date",
     )
     readonly_fields = ("id", "created_date", "modified_date")
-    search_fields = ("name", "description")
+    search_fields = ("id", "name", "description")
     ordering = ("-created_date",)
 
 
@@ -24,7 +24,7 @@ class RoomAdmin(admin.ModelAdmin):
         "department",
     )
     readonly_fields = ("id", "created_date", "modified_date")
-    search_fields = ("name", "description", "type", "location", "capacity")
+    search_fields = ("id", "name", "description", "type", "location", "capacity")
     list_filter = ("is_available", "department")
     ordering = ("-created_date",)
 

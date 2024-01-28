@@ -12,6 +12,7 @@ class UserAdmin(admin.ModelAdmin):
     )
     readonly_fields = ("id",)
     search_fields = (
+        "id",
         "email",
         "username",
         "name",

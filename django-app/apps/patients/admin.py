@@ -14,7 +14,15 @@ class AddressAdmin(admin.ModelAdmin):
         "created_date",
     )
     readonly_fields = ("id", "created_date", "modified_date")
-    search_fields = ("street", "number", "city", "province", "country", "postal_code")
+    search_fields = (
+        "id",
+        "street",
+        "number",
+        "city",
+        "province",
+        "country",
+        "postal_code",
+    )
     list_filter = ("province", "country")
     ordering = ("-created_date",)
 
@@ -31,6 +39,7 @@ class PatientAdmin(admin.ModelAdmin):
     )
     readonly_fields = ("id", "created_date", "modified_date")
     search_fields = (
+        "id",
         "user__name",
         "user__last_name",
         "user__username",

@@ -17,6 +17,7 @@ class AppointmentAdmin(admin.ModelAdmin):
         "request_date",
     )
     search_fields = (
+        "id",
         "status",
         "type",
         "reason",

@@ -13,7 +13,10 @@ class TreatmentAdmin(admin.ModelAdmin):
     )
     readonly_fields = ("id", "created_date", "modified_date")
     list_display_links = ("description",)
-    search_fields = ("description",)
+    search_fields = (
+        "id",
+        "description",
+    )
     list_filter = ("status",)
     ordering = ("-created_date",)
 

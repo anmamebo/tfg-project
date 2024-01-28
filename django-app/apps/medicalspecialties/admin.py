@@ -10,7 +10,7 @@ class MedicalSpecialtyAdmin(admin.ModelAdmin):
         "created_date",
     )
     readonly_fields = ("id", "created_date", "modified_date")
-    search_fields = ("name", "description")
+    search_fields = ("id", "name", "description")
     list_filter = ("state",)
     ordering = ("-created_date",)
 

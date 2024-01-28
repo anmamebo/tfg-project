@@ -14,6 +14,7 @@ class ScheduleAdmin(admin.ModelAdmin):
         "modified_date",
     )
     search_fields = (
+        "id",
         "doctor__user__name",
         "doctor__user__last_name",
         "doctor__user__username",
