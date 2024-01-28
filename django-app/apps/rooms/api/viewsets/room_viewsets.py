@@ -1,8 +1,8 @@
-from apps.departments.api.serializers.room_serializer import (
+from apps.rooms.api.serializers.room_serializer import (
     BasicRoomSerializer,
     RoomSerializer,
 )
-from apps.departments.models import Room
+from apps.rooms.models import Room
 from config.permissions import IsAdministrator, IsAdministratorOrDoctor
 from django.db.models import Q
 from django.shortcuts import get_object_or_404

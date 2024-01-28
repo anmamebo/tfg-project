@@ -55,7 +55,7 @@ class Appointment(BaseModel):
         verbose_name="Paciente",
     )
     room = models.ForeignKey(
-        "departments.Room",
+        "rooms.Room",
         on_delete=models.CASCADE,
         verbose_name="Sala",
         blank=True,

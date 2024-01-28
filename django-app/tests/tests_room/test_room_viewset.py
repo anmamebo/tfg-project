@@ -1,6 +1,6 @@
 from uuid import UUID
 
-from apps.departments.models import Room
+from apps.rooms.models import Room
 from faker import Factory
 from rest_framework import status
 from tests.factories.department import DepartmentFactory
@@ -18,7 +18,7 @@ class RoomTestCase(TestSetUp):
         TestSetUp (APITestCase): Clase de configuración de prueba.
     """
 
-    url = "/api/departments/rooms/"
+    url = "/api/rooms/rooms/"
 
     def test_room_create(self):
         """

@@ -1,5 +1,5 @@
 from apps.departments.api.serializers.department_serializer import DepartmentSerializer
-from apps.departments.models import Room
+from apps.rooms.models import Room
 from rest_framework import serializers
 
 

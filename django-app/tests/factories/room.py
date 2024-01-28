@@ -1,5 +1,5 @@
 import factory
-from apps.departments.models import Room
+from apps.rooms.models import Room
 from faker import Factory
 from tests.factories.department import DepartmentFactory
 

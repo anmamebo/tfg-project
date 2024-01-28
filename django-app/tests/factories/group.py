@@ -7,7 +7,7 @@ faker = Factory.create()
 
 class GroupFactory(factory.django.DjangoModelFactory):
     """
-    Clase de fábrica para crear instancias de Room.
+    Clase de fábrica para crear instancias de Group.
     """
 
     class Meta:
