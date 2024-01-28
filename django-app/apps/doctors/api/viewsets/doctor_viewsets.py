@@ -331,7 +331,9 @@ class DoctorViewSet(viewsets.GenericViewSet, PaginationMixin, ErrorResponseMixin
 
         if query:
             doctors = doctors.filter(
-                Q(user__name__icontains=query)
+                Q(id__icontains=query)
+                | Q(user__id__icontains=query)
+                | Q(user__name__icontains=query)
                 | Q(user__last_name__icontains=query)
                 | Q(user__email__icontains=query)
                 | Q(collegiate_number__icontains=query)

@@ -220,7 +220,9 @@ class DepartmentViewSet(viewsets.GenericViewSet, PaginationMixin, ErrorResponseM
 
         if query:
             departments = departments.filter(
-                Q(name__icontains=query) | Q(description__icontains=query)
+                Q(id__icontains=query)
+                | Q(name__icontains=query)
+                | Q(description__icontains=query)
             )
 
         if ordering:

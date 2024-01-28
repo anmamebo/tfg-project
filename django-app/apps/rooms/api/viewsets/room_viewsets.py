@@ -266,7 +266,8 @@ class RoomViewSet(viewsets.GenericViewSet, PaginationMixin, ErrorResponseMixin):
 
         if query:
             rooms = rooms.filter(
-                Q(name__icontains=query)
+                Q(id__icontains=query)
+                | Q(name__icontains=query)
                 | Q(type__icontains=query)
                 | Q(location__icontains=query)
                 | Q(department__name__icontains=query)

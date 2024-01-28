@@ -286,7 +286,9 @@ class PatientViewSet(viewsets.GenericViewSet, PaginationMixin, ErrorResponseMixi
 
         if query:
             patients = patients.filter(
-                Q(user__name__icontains=query)
+                Q(id__icontains=query)
+                | Q(user__id__icontains=query)
+                | Q(user__name__icontains=query)
                 | Q(user__last_name__icontains=query)
                 | Q(dni__icontains=query)
                 | Q(user__email__icontains=query)

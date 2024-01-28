@@ -264,7 +264,8 @@ class AdministrativeViewSet(
 
         if query:
             users = users.filter(
-                Q(name__icontains=query)
+                Q(id__icontains=query)
+                | Q(name__icontains=query)
                 | Q(last_name__icontains=query)
                 | Q(email__icontains=query)
                 | Q(username__icontains=query)
