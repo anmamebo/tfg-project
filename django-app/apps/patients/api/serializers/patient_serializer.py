@@ -1,4 +1,4 @@
-from apps.patients.api.serializers.address_serializer import AddressSerializer
+from apps.addresses.api.serializers.address_serializer import AddressSerializer
 from apps.patients.models import Patient
 from apps.users.models import User
 from django.contrib.auth.models import Group

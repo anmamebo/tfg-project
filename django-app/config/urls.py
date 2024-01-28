@@ -54,6 +54,7 @@ urlpatterns = [
     path("api/token/refresh/", TokenRefreshView.as_view, name="token_refresh"),
     path("api/users/", include("apps.users.api.routers")),
     path("api/patients/", include("apps.patients.api.routers")),
+    path("api/addresses/", include("apps.addresses.api.routers")),
     path("api/doctors/", include("apps.doctors.api.routers")),
     path("api/medicalspecialties/", include("apps.medicalspecialties.api.routers")),
     path("api/schedules/", include("apps.schedules.api.routers")),

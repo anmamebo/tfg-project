@@ -1,5 +1,5 @@
-from apps.patients.api.permissions.address_permissions import IsAddressOwner
-from apps.patients.api.serializers.address_serializer import AddressSerializer
+from apps.addresses.api.permissions.address_permissions import IsAddressOwner
+from apps.addresses.api.serializers.address_serializer import AddressSerializer
 from apps.patients.models import Address, Patient
 from config.permissions import IsAdministratorOrDoctorOrPatient
 from django.shortcuts import get_object_or_404

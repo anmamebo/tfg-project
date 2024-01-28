@@ -1,4 +1,4 @@
-from apps.patients.models import Address
+from apps.addresses.models import Address
 from config.permissions import is_administrator, is_doctor, is_patient
 from rest_framework import permissions
 
