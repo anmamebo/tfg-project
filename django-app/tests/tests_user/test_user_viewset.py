@@ -3,7 +3,7 @@ from uuid import UUID
 from apps.users.models import User
 from faker import Factory
 from rest_framework import status
-from tests.factories.user import UserFactory
+from tests.factories.user import BaseUserFactory
 from tests.test_setup import TestSetUp
 
 faker = Factory.create()
@@ -76,7 +76,7 @@ class UserTestCase(TestSetUp):
         """
         Prueba la obtención de un usuario.
         """
-        user = UserFactory()
+        user = BaseUserFactory()
         response = self.client.get(f"{self.url}{user.id}/")
 
         self.assertEqual(
@@ -106,7 +106,7 @@ class UserTestCase(TestSetUp):
         """
         Prueba la obtención de una lista de usuarios.
         """
-        users = UserFactory.create_batch(5)
+        users = BaseUserFactory.create_batch(5)
         response = self.client.get(self.url)
 
         self.assertEqual(
@@ -146,7 +146,7 @@ class UserTestCase(TestSetUp):
         """
         Prueba la eliminación de un usuario.
         """
-        user = UserFactory()
+        user = BaseUserFactory()
         response = self.client.delete(f"{self.url}{user.id}/")
 
         self.assertEqual(
