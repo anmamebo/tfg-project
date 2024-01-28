@@ -50,7 +50,7 @@ registerLocaleData(localeEs);
       provide: NG_PROGRESS_CONFIG,
       useValue: {
         spinner: false,
-        color: '#FF0000',
+        color: '#435ebe',
         speed: 250,
       },
     },
