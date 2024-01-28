@@ -1,13 +1,14 @@
 import factory
 from apps.users.models import User
 from faker import Factory
+from tests.factories.group import GroupFactory
 
 faker = Factory.create()
 
 
-class UserFactory(factory.django.DjangoModelFactory):
+class BaseUserFactory(factory.django.DjangoModelFactory):
     """
-    Clase de fábrica para crear instancias de User.
+    Clase base de fábrica de usuarios.
     """
 
     class Meta:
@@ -22,10 +23,56 @@ class UserFactory(factory.django.DjangoModelFactory):
     is_staff = False
     is_superuser = False
 
+
+class AdministrativeUserFactory(BaseUserFactory):
+    """
+    Clase de fábrica de usuarios administrativos.
+    """
+
+    is_staff = True
+    is_superuser = True
+
     @factory.post_generation
     def groups(self, create, extracted, **kwargs):
+        """
+        Agrega el grupo de administradores al usuario.
+        """
         if not create:
             return
-        if extracted:
-            for group in extracted:
-                self.groups.add(group)
+
+        admin_group = GroupFactory(name="Administrativo")
+        self.groups.add(admin_group)
+
+
+class DoctorUserFactory(BaseUserFactory):
+    """
+    Clase de fábrica de usuarios doctores.
+    """
+
+    @factory.post_generation
+    def groups(self, create, extracted, **kwargs):
+        """
+        Agrega el grupo de doctores al usuario.
+        """
+        if not create:
+            return
+
+        doctor_group = GroupFactory(name="Médico")
+        self.groups.add(doctor_group)
+
+
+class PatientUserFactory(BaseUserFactory):
+    """
+    Clase de fábrica de usuarios pacientes.
+    """
+
+    @factory.post_generation
+    def groups(self, create, extracted, **kwargs):
+        """
+        Agrega el grupo de pacientes al usuario.
+        """
+        if not create:
+            return
+
+        patient_group = GroupFactory(name="Paciente")
+        self.groups.add(patient_group)
