@@ -1,6 +1,6 @@
 from uuid import UUID
 
-from apps.doctors.models import MedicalSpecialty
+from apps.medicalspecialties.models import MedicalSpecialty
 from faker import Factory
 from rest_framework import status
 from tests.factories.medicalspecialty import MedicalSpecialtyFactory
@@ -17,7 +17,7 @@ class MedicalSpecialtyTestCase(TestSetUp):
         TestSetUp (APITestCase): Clase de configuración de prueba.
     """
 
-    url = "/api/doctors/medicalspecialties/"
+    url = "/api/medicalspecialties/medicalspecialties/"
 
     def test_medicalspecialty_create(self):
         """

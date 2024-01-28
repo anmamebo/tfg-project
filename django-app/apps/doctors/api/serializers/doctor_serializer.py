@@ -1,5 +1,6 @@
 from apps.departments.models import Department
-from apps.doctors.models import Doctor, MedicalSpecialty
+from apps.doctors.models import Doctor
+from apps.medicalspecialties.models import MedicalSpecialty
 from apps.users.models import User
 from django.contrib.auth.models import Group
 from rest_framework import serializers

@@ -1,4 +1,4 @@
-from apps.doctors.models import MedicalSpecialty
+from apps.medicalspecialties.models import MedicalSpecialty
 from rest_framework import serializers
 
 

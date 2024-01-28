@@ -1,4 +1,5 @@
-from apps.doctors.models import Doctor, MedicalSpecialty
+from apps.doctors.models import Doctor
+from apps.medicalspecialties.models import MedicalSpecialty
 from django.contrib import admin
 
 
@@ -15,18 +16,6 @@ class MedicalSpecialtyFilter(admin.SimpleListFilter):
             return queryset.filter(medical_specialties__id=self.value())
 
 
-class MedicalSpecialtyAdmin(admin.ModelAdmin):
-    list_display = (
-        "name",
-        "description",
-        "created_date",
-    )
-    readonly_fields = ("id", "created_date", "modified_date")
-    search_fields = ("name", "description")
-    list_filter = ("state",)
-    ordering = ("-created_date",)
-
-
 class DoctorAdmin(admin.ModelAdmin):
     list_display = (
         "user",
@@ -37,6 +26,7 @@ class DoctorAdmin(admin.ModelAdmin):
     )
     readonly_fields = ("id", "created_date", "modified_date")
     search_fields = (
+        "id",
         "user__name",
         "user__last_name",
         "user__username",
@@ -53,4 +43,3 @@ class DoctorAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Doctor, DoctorAdmin)
-admin.site.register(MedicalSpecialty, MedicalSpecialtyAdmin)

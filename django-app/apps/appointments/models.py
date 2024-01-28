@@ -69,7 +69,7 @@ class Appointment(BaseModel):
         null=True,
     )
     specialty = models.ForeignKey(
-        "doctors.MedicalSpecialty",
+        "medicalspecialties.MedicalSpecialty",
         on_delete=models.CASCADE,
         verbose_name="Especialidad",
     )

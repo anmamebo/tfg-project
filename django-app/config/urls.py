@@ -55,6 +55,7 @@ urlpatterns = [
     path("api/users/", include("apps.users.api.routers")),
     path("api/patients/", include("apps.patients.api.routers")),
     path("api/doctors/", include("apps.doctors.api.routers")),
+    path("api/medicalspecialties/", include("apps.medicalspecialties.api.routers")),
     path("api/schedules/", include("apps.schedules.api.routers")),
     path("api/departments/", include("apps.departments.api.routers")),
     path("api/appointments/", include("apps.appointments.api.routers")),

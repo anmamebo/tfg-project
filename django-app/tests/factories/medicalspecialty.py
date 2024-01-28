@@ -1,5 +1,5 @@
 import factory
-from apps.doctors.models import MedicalSpecialty
+from apps.medicalspecialties.models import MedicalSpecialty
 from faker import Factory
 
 faker = Factory.create()

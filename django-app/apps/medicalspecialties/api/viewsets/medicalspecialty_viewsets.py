@@ -1,7 +1,7 @@
-from apps.doctors.api.serializers.medicalspecialty_serializer import (
+from apps.medicalspecialties.api.serializers.medicalspecialty_serializer import (
     MedicalSpecialtySerializer,
 )
-from apps.doctors.models import MedicalSpecialty
+from apps.medicalspecialties.models import MedicalSpecialty
 from config.permissions import IsAdministrator, IsAdministratorOrDoctorOrPatient
 from django.db.models import Q
 from django.shortcuts import get_object_or_404

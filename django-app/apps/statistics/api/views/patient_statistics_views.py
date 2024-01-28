@@ -3,7 +3,7 @@ from datetime import date, datetime
 
 import pytz
 from apps.appointments.models import Appointment
-from apps.doctors.models import MedicalSpecialty
+from apps.medicalspecialties.models import MedicalSpecialty
 from apps.treatments.models import Treatment
 from config.settings import TIME_ZONE
 from django.db.models import Avg, DurationField, ExpressionWrapper, F

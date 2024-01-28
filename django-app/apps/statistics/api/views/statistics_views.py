@@ -4,10 +4,10 @@ from datetime import date, datetime, timedelta
 import pytz
 from apps.appointments.models import Appointment
 from apps.departments.models import Department
-from apps.doctors.api.serializers.medicalspecialty_serializer import (
+from apps.doctors.models import Doctor, MedicalSpecialty
+from apps.medicalspecialties.api.serializers.medicalspecialty_serializer import (
     MedicalSpecialtyStatisticsSerializer,
 )
-from apps.doctors.models import Doctor, MedicalSpecialty
 from apps.patients.models import Patient
 from apps.schedules.models import Schedule
 from config.settings import TIME_ZONE
