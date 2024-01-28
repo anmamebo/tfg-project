@@ -17,7 +17,7 @@ class DepartmentTestCase(TestSetUp):
         TestSetUp (APITestCase): Clase de configuración de prueba.
     """
 
-    url = "/api/departments/departments/"
+    url = "/api/departments/"
 
     def test_department_create(self):
         """

@@ -3,6 +3,6 @@ from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
 
-router.register(r"groups", GroupViewSet, basename="groups")
+router.register(r"", GroupViewSet, basename="groups")
 
 urlpatterns = router.urls

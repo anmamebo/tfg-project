@@ -18,7 +18,7 @@ class RoomTestCase(TestSetUp):
         TestSetUp (APITestCase): Clase de configuración de prueba.
     """
 
-    url = "/api/rooms/rooms/"
+    url = "/api/rooms/"
 
     def test_room_create(self):
         """

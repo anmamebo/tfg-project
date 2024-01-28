@@ -5,8 +5,6 @@ from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
 
-router.register(
-    r"medicalspecialties", MedicalSpecialtyViewSet, basename="medicalspecialties"
-)
+router.register(r"", MedicalSpecialtyViewSet, basename="medicalspecialties")
 
 urlpatterns = router.urls

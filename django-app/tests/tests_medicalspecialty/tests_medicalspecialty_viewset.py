@@ -17,7 +17,7 @@ class MedicalSpecialtyTestCase(TestSetUp):
         TestSetUp (APITestCase): Clase de configuración de prueba.
     """
 
-    url = "/api/medicalspecialties/medicalspecialties/"
+    url = "/api/medicalspecialties/"
 
     def test_medicalspecialty_create(self):
         """

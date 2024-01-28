@@ -15,7 +15,7 @@ class GroupTestCase(TestSetUp):
         TestSetUp (APITestCase): Clase de configuración de prueba.
     """
 
-    url = "/api/groups/groups/"
+    url = "/api/groups/"
 
     def test_group_create(self):
         """

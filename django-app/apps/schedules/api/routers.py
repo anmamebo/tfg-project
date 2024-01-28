@@ -3,6 +3,6 @@ from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
 
-router.register(r"schedules", ScheduleViewSet, basename="schedules")
+router.register(r"", ScheduleViewSet, basename="schedules")
 
 urlpatterns = router.urls
