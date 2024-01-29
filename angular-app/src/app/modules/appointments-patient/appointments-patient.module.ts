@@ -18,6 +18,7 @@ import { GenericCardModule } from 'src/app/shared/components/generic-card/generi
 import { LoadingSpinnerModule } from 'src/app/shared/components/loading-spinner/loading-spinner.module';
 import { PaginationModule } from 'src/app/shared/components/pagination/pagination.module';
 import { ElementsPerPageModule } from 'src/app/shared/components/elements-per-page/elements-per-page.module';
+import { TooltipModule } from 'src/app/shared/components/tooltip/tooltip.module';
 
 // Componentes Páginas
 import { AppointmentsPatientPageComponent } from './pages/appointments-patient-page/appointments-patient-page.component';
@@ -56,6 +57,7 @@ import { FiltersAppointmentsPatientCardComponent } from './components/filters-ap
       provide: DateAdapter,
       useFactory: adapterFactory,
     }),
+    TooltipModule,
   ],
 })
 export class AppointmentsPatientModule {}

@@ -14,6 +14,7 @@ import { LoadingSpinnerModule } from 'src/app/shared/components/loading-spinner/
 import { ElementsPerPageModule } from 'src/app/shared/components/elements-per-page/elements-per-page.module';
 import { PaginationModule } from 'src/app/shared/components/pagination/pagination.module';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { TooltipModule } from 'src/app/shared/components/tooltip/tooltip.module';
 
 // Componentes Páginas
 import { TreatmentsPatientPageComponent } from './pages/treatments-patient-page/treatments-patient-page.component';
@@ -46,6 +47,7 @@ import { FiltersTreatmentsPatientCardComponent } from './components/filters-trea
     PaginationModule,
     NgMultiSelectDropDownModule.forRoot(),
     FlatpickrModule.forRoot(),
+    TooltipModule,
   ],
 })
 export class TreatmentsPatientModule {}
