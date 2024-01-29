@@ -47,14 +47,6 @@ class Treatment(BaseModel):
     class Meta:
         verbose_name = "Tratamiento"
         verbose_name_plural = "Tratamientos"
-        default_permissions = ()
-        permissions = [
-            ("list_treatment", "Can list treatment"),
-            ("get_treatment", "Can get treatment"),
-            ("add_treatment", "Can add treatment"),
-            ("change_treatment", "Can change treatment"),
-            ("delete_treatment", "Can delete treatment"),
-        ]
 
     def get_status_text(self):
         status_choices = dict(self._meta.get_field("status").flatchoices)

@@ -42,14 +42,6 @@ class Patient(BaseModel):
     class Meta:
         verbose_name = "Paciente"
         verbose_name_plural = "Pacientes"
-        default_permissions = ()
-        permissions = [
-            ("list_patient", "Can list patient"),
-            ("get_patient", "Can get patient"),
-            ("add_patient", "Can add patient"),
-            ("change_patient", "Can change patient"),
-            ("delete_patient", "Can delete patient"),
-        ]
 
     def __str__(self):
         return f"{self.user.name} {self.user.last_name} ({self.user.username}) - {self.user.email}"

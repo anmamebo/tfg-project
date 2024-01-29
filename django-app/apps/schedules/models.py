@@ -14,14 +14,6 @@ class Schedule(BaseModel):
     class Meta:
         verbose_name = "Horario"
         verbose_name_plural = "Horarios"
-        default_permissions = ()
-        permissions = [
-            ("list_schedule", "Can list schedule"),
-            ("get_schedule", "Can get schedule"),
-            ("add_schedule", "Can add schedule"),
-            ("change_schedule", "Can change schedule"),
-            ("delete_schedule", "Can delete schedule"),
-        ]
 
     def save(self, *args, **kwargs):
         self.day_of_week = self.start_time.weekday()

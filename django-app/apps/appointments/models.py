@@ -84,14 +84,6 @@ class Appointment(BaseModel):
     class Meta:
         verbose_name = "Cita"
         verbose_name_plural = "Citas"
-        default_permissions = ()
-        permissions = [
-            ("list_appointment", "Can list appointment"),
-            ("get_appointment", "Can get appointment"),
-            ("add_appointment", "Can add appointment"),
-            ("change_appointment", "Can change appointment"),
-            ("delete_appointment", "Can delete appointment"),
-        ]
 
     def get_status_text(self):
         status_choices = dict(self._meta.get_field("status").flatchoices)

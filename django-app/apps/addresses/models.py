@@ -14,14 +14,6 @@ class Address(BaseModel):
     class Meta:
         verbose_name = "Dirección"
         verbose_name_plural = "Direcciones"
-        default_permissions = ()
-        permissions = [
-            ("list_address", "Can list address"),
-            ("get_address", "Can get address"),
-            ("add_address", "Can add address"),
-            ("change_address", "Can change address"),
-            ("delete_address", "Can delete address"),
-        ]
 
     def __str__(self):
         return f"{self.street} {self.number} {self.floor} - {self.city} ({self.province}) - {self.country} - {self.postal_code}"

@@ -26,14 +26,6 @@ class Room(BaseModel):
     class Meta:
         verbose_name = "Sala"
         verbose_name_plural = "Salas"
-        default_permissions = ()
-        permissions = [
-            ("list_room", "Can list room"),
-            ("get_room", "Can get room"),
-            ("add_room", "Can add room"),
-            ("change_room", "Can change room"),
-            ("delete_room", "Can delete room"),
-        ]
 
     def __str__(self):
         if self.department is None:
