@@ -72,6 +72,8 @@ export class MedicalSpecialtiesPageComponent {
       search: {
         hasSearch: true,
         search: '',
+        searchInfoTooltip:
+          'Buscar especialidades por id, nombre o descripción.',
       },
       hasStateFilter: true,
     };

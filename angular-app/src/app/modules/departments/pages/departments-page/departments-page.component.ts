@@ -71,6 +71,7 @@ export class DepartmentsPageComponent {
       search: {
         hasSearch: true,
         search: '',
+        searchInfoTooltip: 'Buscar departamentos por id, nombre o descripción.',
       },
       hasStateFilter: true,
     };

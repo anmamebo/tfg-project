@@ -73,6 +73,8 @@ export interface EntityData {
     hasSearch: boolean;
     /** Texto de búsqueda. */
     search?: string;
+    /** Mensaje para el tooltip info de búsqueda. */
+    searchInfoTooltip?: string;
   };
   /** Indica si se mostrará el filtro de estado. */
   hasStateFilter?: boolean;

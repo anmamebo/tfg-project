@@ -48,6 +48,8 @@ export class AppointmentsPageComponent {
       search: {
         hasSearch: true,
         search: '',
+        searchInfoTooltip:
+          'Buscar citas por id, nombre o apellidos del paciente o motivo.',
       },
       hasStateFilter: false,
     };

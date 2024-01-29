@@ -8,7 +8,10 @@
         *ngIf="entityData.search.hasSearch"
         class="col-lg-4 col-md-6 col-12 mt-md-0 mt-3"
       >
-        <app-search (searchSubmitted)="onSearchSubmitted($event)"></app-search>
+        <app-search
+          [infoTooltipText]="entityData.search.searchInfoTooltip || ''"
+          (searchSubmitted)="onSearchSubmitted($event)"
+        ></app-search>
       </div>
       <div class="col-lg-5 col-md-6 mt-md-0 mt-2 text-end">
         <button

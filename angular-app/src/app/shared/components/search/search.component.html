@@ -13,5 +13,21 @@
     >
       <i class="bi bi-search"></i>
     </div>
+    <div
+      *ngIf="infoTooltipText"
+      class="form-control-icon form-control-icon-right"
+      style="
+        position: absolute;
+        right: 0 !important;
+        left: auto !important;
+        padding-right: 1rem !important;
+        cursor: pointer;
+      "
+      customTooltip
+      [tooltip]="infoTooltipText"
+      [tooltipOffsetTop]="5"
+    >
+      <i class="bi bi-info-circle"></i>
+    </div>
   </div>
 </form>

@@ -73,6 +73,8 @@ export class RoomsPageComponent {
       search: {
         hasSearch: true,
         search: '',
+        searchInfoTooltip:
+          'Buscar salas por id, nombre, tipo, localización, nombre de departamento o capacidad.',
       },
       hasStateFilter: true,
     };

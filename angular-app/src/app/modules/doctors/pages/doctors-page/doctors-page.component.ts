@@ -73,6 +73,8 @@ export class DoctorsPageComponent {
       search: {
         hasSearch: true,
         search: '',
+        searchInfoTooltip:
+          'Buscar médicos por id, nombre, apellidos, email o nº colegiado.',
       },
       hasStateFilter: true,
     };

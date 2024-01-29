@@ -2,7 +2,10 @@
   <div class="card-content">
     <div class="row justify-content-start">
       <div class="col-md-6">
-        <app-search (searchSubmitted)="onSearchSubmitted($event)"></app-search>
+        <app-search
+          [infoTooltipText]="searchInfoTooltip"
+          (searchSubmitted)="onSearchSubmitted($event)"
+        ></app-search>
       </div>
     </div>
 

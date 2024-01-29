@@ -74,6 +74,8 @@ export class AdministrativesPageComponent {
       search: {
         hasSearch: true,
         search: '',
+        searchInfoTooltip:
+          'Buscar administrativos por id, nombre, apellidos, email o nombre de usuario.',
       },
       hasStateFilter: true,
     };

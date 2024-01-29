@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 /**
@@ -9,6 +9,9 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   templateUrl: './search.component.html',
 })
 export class SearchComponent {
+  /** Texto del tooltip de información. */
+  @Input() public infoTooltipText: string = '';
+
   /** Evento que se lanza al pulsar el botón de buscar. */
   @Output() public searchSubmitted: EventEmitter<string> =
     new EventEmitter<string>();

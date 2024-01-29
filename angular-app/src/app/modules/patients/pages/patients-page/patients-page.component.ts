@@ -75,6 +75,8 @@ export class PatientsPageComponent {
       search: {
         hasSearch: true,
         search: '',
+        searchInfoTooltip:
+          'Buscar pacientes por id, nombre, apellidos, dni, email, nº seguridad social o teléfono.',
       },
       hasStateFilter: true,
     };

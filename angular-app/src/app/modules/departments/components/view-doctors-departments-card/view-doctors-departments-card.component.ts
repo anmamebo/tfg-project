@@ -33,6 +33,10 @@ export class ViewDoctorsDepartmentsCardComponent implements OnInit {
     { header: 'EMAIL', field: 'user.email' },
   ];
 
+  /** Texto de información para la búsqueda. */
+  public searchInfoTooltip =
+    'Buscar médicos por id, nombre, apellidos, email o nº colegiado.';
+
   /** Página actual. */
   public page: number = 1;
 

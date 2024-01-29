@@ -34,6 +34,10 @@ export class ViewRoomsDepartmentsCardComponent implements OnInit {
     { header: 'CAPACIDAD', field: 'capacity' },
   ];
 
+  /** Texto de información para la búsqueda. */
+  public searchInfoTooltip =
+    'Buscar salas por id, nombre, tipo, localización, nombre de departamento o capacidad.';
+
   /** Página actual. */
   public page: number = 1;
 
