@@ -434,7 +434,8 @@ class AppointmentViewSet(
 
         if query:
             appointments = appointments.filter(
-                Q(patient__user__name__icontains=query)
+                Q(id__icontains=query)
+                | Q(patient__user__name__icontains=query)
                 | Q(patient__user__last_name__icontains=query)
                 | Q(reason__icontains=query)
             )
