@@ -17,6 +17,7 @@ import { ElementsPerPageModule } from 'src/app/shared/components/elements-per-pa
 import { PaginationModule } from 'src/app/shared/components/pagination/pagination.module';
 import { FormErrorsModule } from 'src/app/shared/components/form-errors/form-errors.module';
 import { SearchModule } from 'src/app/shared/components/search/search.module';
+import { TooltipModule } from 'src/app/shared/components/tooltip/tooltip.module';
 
 // Componentes Páginas
 import { AppointmentsPageComponent } from './pages/appointments-page/appointments-page.component';
@@ -68,6 +69,7 @@ import { FormEditTreatmentAppointmentsComponent } from './components/form-edit-t
     SweetAlert2Module.forRoot(),
     FlatpickrModule.forRoot(),
     SearchModule,
+    TooltipModule,
   ],
 })
 export class AppointmentsModule {}
