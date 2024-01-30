@@ -60,6 +60,9 @@ export class FormErrorsComponent {
           case 'passwordsMatch':
             errors.push('Las contraseñas coinciden.');
             break;
+          case 'invalidFileExtension':
+            errors.push('Extensión de archivo inválida.');
+            break;
           default:
             errors.push(error);
             break;

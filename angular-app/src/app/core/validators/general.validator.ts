@@ -32,4 +32,32 @@ export default class Validation {
       }
     };
   }
+
+  /**
+   * Comprueba si un campo en un formulario tiene una extensión de fichero permitida.
+   * @param allowedExtensions Las extensiones de fichero permitidas.
+   * @returns Una función de validación para comprobar la extensión del fichero.
+   */
+  static fileExtension(allowedExtensions: string[]): ValidatorFn {
+    /**
+     * Función de validación que comprueba la extensión del fichero.
+     * @param control El control al que se aplica la validación.
+     * @returns Un objeto de errores si la extensión no es válida; de lo contrario, null.
+     */
+    return (control: AbstractControl): { [key: string]: any } | null => {
+      const file = control.value;
+
+      if (file) {
+        const fileNameParts = file.split('.');
+        const fileExtension =
+          fileNameParts.length > 1 ? fileNameParts.pop()?.toLowerCase() : null;
+
+        if (fileExtension && allowedExtensions.indexOf(fileExtension) === -1) {
+          return { invalidFileExtension: true };
+        }
+      }
+
+      return null;
+    };
+  }
 }
