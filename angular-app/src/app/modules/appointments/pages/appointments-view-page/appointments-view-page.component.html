@@ -18,11 +18,14 @@
 
       <section class="section">
         <div class="row">
+          <!-- Información del paciente -->
           <div class="col-lg-6">
             <app-view-patient-appointments-card
               [patient]="appointment.patient"
             ></app-view-patient-appointments-card>
           </div>
+
+          <!-- Motivo y observaciones de la cita -->
           <div class="col-lg-6">
             <app-view-reason-observations-appointments-card
               [appointment]="appointment"
@@ -30,11 +33,15 @@
             ></app-view-reason-observations-appointments-card>
           </div>
         </div>
-        <div class="col-md-8">
+
+        <!-- Tratamientos -->
+        <div class="col-xxl-6">
           <app-view-treatments-appointments-card
             [appointment]="appointment"
           ></app-view-treatments-appointments-card>
         </div>
+
+        <!-- Pruebas médicas -->
       </section>
     </ng-container>
   </div>
