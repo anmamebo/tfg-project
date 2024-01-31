@@ -20,7 +20,11 @@ import { MedicalTestsViewPageComponent } from './page/medical-tests-view-page/me
 import { ViewInfoMedicalTestsCardComponent } from './components/view-info-medical-tests-card/view-info-medical-tests-card.component';
 import { ViewAttachmentsMedicalTestsCardComponent } from './components/view-attachments-medical-tests-card/view-attachments-medical-tests-card.component';
 import { ViewExtraInfoMedicalTestsCardComponent } from './components/view-extra-info-medical-tests-card/view-extra-info-medical-tests-card.component';
+
+// Componentes formularios
 import { FormUploadAttachmentMedicalTestsComponent } from './components/form-upload-attachment-medical-tests/form-upload-attachment-medical-tests.component';
+import { FormCompleteMedicalTestComponent } from './components/form-complete-medical-test/form-complete-medical-test.component';
+import { FormEditMedicalTestComponent } from './components/form-edit-medical-test/form-edit-medical-test.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +33,8 @@ import { FormUploadAttachmentMedicalTestsComponent } from './components/form-upl
     ViewAttachmentsMedicalTestsCardComponent,
     ViewExtraInfoMedicalTestsCardComponent,
     FormUploadAttachmentMedicalTestsComponent,
+    FormCompleteMedicalTestComponent,
+    FormEditMedicalTestComponent,
   ],
   imports: [
     CommonModule,

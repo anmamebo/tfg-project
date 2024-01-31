@@ -5,7 +5,30 @@
       <div class="col-12">
         <div class="row">
           <div class="col-12 mb-3">
-            <h5>Información de la prueba médica</h5>
+            <div class="row justify-content-between">
+              <div class="col">
+                <h5>Información de la prueba médica</h5>
+              </div>
+
+              <div class="col text-end">
+                <!-- Editar prueba médica -->
+                <button
+                  [swal]="editMedicalTest"
+                  class="btn btn-outline-primary me-3"
+                >
+                  Editar
+                </button>
+
+                <!-- Completar prueba médica -->
+                <button
+                  *ngIf="!medicalTest.is_completed"
+                  [swal]="completeMedicalTest"
+                  class="btn btn-primary"
+                >
+                  Completar
+                </button>
+              </div>
+            </div>
           </div>
           <div class="col-md-6 col-12 mb-1">
             <p>
@@ -42,3 +65,41 @@
     </div>
   </div>
 </app-generic-card>
+
+<swal
+  #completeMedicalTest
+  [showCloseButton]="true"
+  [showCancelButton]="false"
+  [showConfirmButton]="false"
+  [width]="'1000px'"
+>
+  <div *swalPortal="swalTargets.title">
+    <h4 class="mb-4 text-start text-uppercase">Completar Prueba Médica</h4>
+  </div>
+  <div *swalPortal="swalTargets.content">
+    <app-form-complete-medical-test
+      *ngIf="medicalTest"
+      [medicalTestId]="medicalTest.id"
+      (completedMedicalTest)="updatedMedicalTest.emit($event)"
+    ></app-form-complete-medical-test>
+  </div>
+</swal>
+
+<swal
+  #editMedicalTest
+  [showCloseButton]="true"
+  [showCancelButton]="false"
+  [showConfirmButton]="false"
+  [width]="'1000px'"
+>
+  <div *swalPortal="swalTargets.title">
+    <h4 class="mb-4 text-start text-uppercase">Editar Prueba Médica</h4>
+  </div>
+  <div *swalPortal="swalTargets.content">
+    <app-form-edit-medical-test
+      *ngIf="medicalTest"
+      [medicalTest]="medicalTest"
+      (updatedMedicalTest)="updatedMedicalTest.emit($event)"
+    ></app-form-edit-medical-test>
+  </div>
+</swal>

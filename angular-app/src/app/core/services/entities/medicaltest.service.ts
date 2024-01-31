@@ -37,6 +37,21 @@ export class MedicalTestService {
   }
 
   /**
+   * Actualiza una prueba médica.
+   * @param {string} id - ID de la prueba médica.
+   * @param {any} medicalTest - Datos de la prueba médica.
+   * @returns {Observable<any>} Un observable que emite un objeto `any`.
+   */
+  public updateMedicalTest(id: string, medicalTest: any): Observable<any> {
+    const headers = this._httpCommonService.getCommonHeaders();
+    const httpOptions = { headers };
+
+    let params = JSON.stringify(medicalTest);
+
+    return this._http.put<any>(`${this.url}${id}/`, params, httpOptions);
+  }
+
+  /**
    * Gestiona la descarga de un fichero adjunto de una prueba médica.
    * @param {string} attachmentId ID del fichero adjunto.
    * @returns {Observable<Blob>} El archivo adjunto.

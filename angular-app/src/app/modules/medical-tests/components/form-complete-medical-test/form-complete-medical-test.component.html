@@ -1,0 +1,40 @@
+<form
+  (ngSubmit)="onSubmit()"
+  [formGroup]="completeMedicalTestForm"
+  class="form form-horizontal text-start"
+>
+  <div class="form-body">
+    <div class="row w-100">
+      <!-- Resultado -->
+      <div class="col-12">
+        <div class="form-group">
+          <label for="result">Resultado*</label>
+          <textarea
+            formControlName="result"
+            class="form-control"
+            id="result"
+            rows="5"
+            placeholder="Resultado"
+            [ngClass]="{
+              'is-invalid': submitted && form.get('result')?.errors
+            }"
+            style="resize: none"
+          ></textarea>
+
+          <app-form-errors
+            [control]="form.get('result')"
+            [submitted]="submitted"
+          ></app-form-errors>
+        </div>
+      </div>
+
+      <!-- Botones -->
+      <div class="col-12 d-flex justify-content-end mt-3">
+        <button type="reset" class="btn btn-outline-primary me-1">
+          Limpiar
+        </button>
+        <button type="submit" class="btn btn-primary">Completar</button>
+      </div>
+    </div>
+  </div>
+</form>
