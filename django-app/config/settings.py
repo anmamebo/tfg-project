@@ -53,6 +53,7 @@ LOCAL_APPS = [
     "apps.appointments",
     "apps.treatments",
     "apps.statistics",
+    "apps.medicaltests",
 ]
 
 # Apps de terceros instaladas en el proyecto
