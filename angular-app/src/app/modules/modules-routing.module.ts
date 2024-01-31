@@ -118,6 +118,15 @@ const routes: Routes = [
     canActivate: [roleGuard],
     data: { roles: [ROLES.PATIENT] },
   },
+  {
+    path: 'pruebas-medicas',
+    loadChildren: () =>
+      import('./medical-tests/medical-tests.module').then(
+        (m) => m.MedicalTestsModule
+      ),
+    canActivate: [roleGuard],
+    data: { roles: [ROLES.DOCTOR, ROLES.PATIENT] },
+  },
 ];
 
 @NgModule({

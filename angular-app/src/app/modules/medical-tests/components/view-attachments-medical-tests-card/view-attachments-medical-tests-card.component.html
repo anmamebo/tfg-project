@@ -1,0 +1,96 @@
+<app-generic-card [hasCardHeader]="false">
+  <div class="card-content">
+    <div class="row justify-content-between">
+      <div class="col align-self-center">
+        <h5 class="mb-0">
+          Ficheros adjuntos <span>({{ attachments.length }})</span>
+        </h5>
+      </div>
+      <div class="col">
+        <div class="d-flex justify-content-end">
+          <button [swal]="uploadFile" class="btn btn-primary">
+            Subir fichero
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-generic-card>
+
+<div class="row row-cols-xxl-4 row-cols-lg-3 row-cols-md-2 row-cols-1">
+  <div class="col" *ngFor="let attachment of attachments">
+    <div class="card p-3">
+      <!-- Botón eliminar fichero -->
+      <button
+        (click)="deleteFile(attachment.id)"
+        class="delete-btn btn btn-danger rounded-circle"
+      >
+        <i class="bi bi-x-lg"></i>
+      </button>
+
+      <div class="card-content text-center">
+        <!-- Icono extensión fichero -->
+        <ng-container
+          *ngIf="
+            attachment.extension && hasFileIcon(attachment.extension);
+            else unknownExtension
+          "
+        >
+          <i class="file-icon bi bi-filetype-{{ attachment.extension }}"></i>
+        </ng-container>
+        <ng-template #unknownExtension>
+          <i class="file-icon bi bi-file-earmark"></i>
+        </ng-template>
+
+        <div class="card-body pt-3">
+          <!-- Botón descargar -->
+          <button
+            (click)="downloadFile(attachment.id)"
+            class="btn btn-primary block mb-4"
+          >
+            Descargar
+          </button>
+
+          <!-- Nombre y descripción -->
+          <h4
+            class="card-title"
+            *ngIf="attachment.name"
+            customTooltip
+            [tooltip]="attachment.name"
+            [tooltipOffsetTop]="5"
+          >
+            {{ attachment.name }}
+          </h4>
+          <p
+            class="card-text"
+            *ngIf="attachment.description"
+            customTooltip
+            [tooltip]="attachment.description"
+            [tooltipOffsetTop]="5"
+          >
+            {{ attachment.description }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal subir fichero -->
+<swal
+  #uploadFile
+  [showCloseButton]="true"
+  [showCancelButton]="false"
+  [showConfirmButton]="false"
+  [width]="'1000px'"
+>
+  <div *swalPortal="swalTargets.title">
+    <h4 class="mb-4 text-start text-uppercase">Subir fichero</h4>
+  </div>
+  <div *swalPortal="swalTargets.content">
+    <app-form-upload-attachment-medical-tests
+      [medicalTestId]="medicalTestId"
+      (uploadedAttachment)="updateAttachment.emit($event)"
+    ></app-form-upload-attachment-medical-tests>
+  </div>
+</swal>

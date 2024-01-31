@@ -245,3 +245,30 @@ export const breadcrumbMedicalSpecialtiesViewData = [
   { label: 'Especialidades médicas', url: '/especialidades-medicas' },
   { label: 'Ver especialidad médica', url: '' },
 ];
+
+// Pruebas médicas
+export const breadcrumbMedicalTestsData = [
+  { label: 'Panel Principal', url: '/' },
+  { label: 'Pruebas médicas', url: '' },
+];
+
+// Pruebas médicas crear
+export const breadcrumbMedicalTestsCreateData = [
+  { label: 'Panel Principal', url: '/' },
+  { label: 'Pruebas médicas', url: '/pruebas-medicas' },
+  { label: 'Crear prueba médica', url: '' },
+];
+
+// Pruebas médicas editar
+export const breadcrumbMedicalTestsEditData = [
+  { label: 'Panel Principal', url: '/' },
+  { label: 'Pruebas médicas', url: '/pruebas-medicas' },
+  { label: 'Editar prueba médica', url: '' },
+];
+
+// Pruebas médicas ver
+export const breadcrumbMedicalTestsViewData = [
+  { label: 'Panel Principal', url: '/' },
+  // { label: 'Pruebas médicas', url: '/pruebas-medicas' },
+  { label: 'Ver prueba médica', url: '' },
+];

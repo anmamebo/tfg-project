@@ -1,0 +1,16 @@
+export const ALLOWED_FILE_EXTENSIONS: string[] = [
+  'pdf',
+  'jpg',
+  'jpeg',
+  'png',
+  'svg',
+  'txt',
+  'doc',
+  'docx',
+  'xls',
+  'xlsx',
+  'mp4',
+  'mp3',
+  'mov',
+  'wav',
+];

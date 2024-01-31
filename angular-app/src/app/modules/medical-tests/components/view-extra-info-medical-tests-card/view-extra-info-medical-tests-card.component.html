@@ -1,0 +1,101 @@
+<app-generic-card [hasCardHeader]="false">
+  <div *ngIf="medicalTest" class="card-content">
+    <div id="content" class="row">
+      <!-- Información de la Cita -->
+      <div *ngIf="medicalTest.appointment" class="col-12 mb-5">
+        <div class="row">
+          <div class="col-12 mb-3">
+            <h5>Información de la cita</h5>
+          </div>
+          <div class="col-md-6 col-12 mb-1">
+            <p>
+              <strong>Motivo:</strong>
+              {{ medicalTest.appointment.reason || "--" }}
+            </p>
+          </div>
+          <div class="col-md-6 col-12 mb-1">
+            <p>
+              <strong>Tipo de cita:</strong>
+              {{ (medicalTest.appointment.type | typeAppointment) || "--" }}
+            </p>
+          </div>
+          <div class="col-md-6 col-12 mb-1">
+            <p>
+              <strong>Especialidad médica:</strong>
+              {{ medicalTest.appointment.specialty.name }}
+            </p>
+          </div>
+          <div
+            *ngIf="medicalTest.appointment.schedule"
+            class="col-md-6 col-12 mb-1"
+          >
+            <p>
+              <strong>Fecha:</strong>
+              {{
+                (medicalTest.appointment.schedule.start_time
+                  | date : "dd/MM/yyyy") || "--"
+              }}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Información del Paciente -->
+      <div class="col-md-6 mb-5 mb-md-0">
+        <div class="row">
+          <div class="col-12 mb-3">
+            <h5>Información del paciente</h5>
+          </div>
+          <div class="col-12 mb-1">
+            <p>
+              <strong>Nombre:</strong>
+              {{ medicalTest.patient.user.name }}
+              {{ medicalTest.patient.user.last_name }}
+            </p>
+          </div>
+          <div class="col-12 mb-1">
+            <p>
+              <strong>Correo electrónico:</strong>
+              {{ medicalTest.patient.user.email }}
+            </p>
+          </div>
+          <div class="col-12 mb-1">
+            <p>
+              <strong>Nº seguridad social:</strong>
+              {{ medicalTest.patient.social_security }}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Información del Médico -->
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col-12 mb-3">
+            <h5>Información del médico</h5>
+          </div>
+          <div class="col-12 mb-1">
+            <p>
+              <strong>Nombre:</strong>
+              Dr/a.
+              {{ medicalTest.doctor.user.name }}
+              {{ medicalTest.doctor.user.last_name }}
+            </p>
+          </div>
+          <div class="col-12 mb-1">
+            <p>
+              <strong>Correo electrónico:</strong>
+              {{ medicalTest.doctor.user.email }}
+            </p>
+          </div>
+          <div class="col-12 mb-1">
+            <p>
+              <strong>Nº de colegiado:</strong>
+              {{ medicalTest.doctor.collegiate_number }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-generic-card>

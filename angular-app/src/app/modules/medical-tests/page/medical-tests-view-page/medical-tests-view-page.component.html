@@ -1,0 +1,46 @@
+<app-generic-page
+  [pageTitle]="pageTitle"
+  [pageDescription]="pageDescription"
+  [breadcrumbData]="breadcrumbData"
+>
+  <div class="page-content">
+    <ng-container *ngIf="medicalTest">
+      <!-- Información de la prueba médica -->
+      <section class="section">
+        <div class="row">
+          <div class="col-12">
+            <app-view-info-medical-tests-card
+              [medicalTest]="medicalTest"
+            ></app-view-info-medical-tests-card>
+          </div>
+        </div>
+      </section>
+
+      <!-- Archivos adjuntos -->
+      <ng-container *ngIf="medicalTest.attachments">
+        <section class="section">
+          <div class="row">
+            <div class="col-12">
+              <app-view-attachments-medical-tests-card
+                [medicalTestId]="medicalTest.id"
+                [attachments]="medicalTest.attachments"
+                (updateAttachment)="getMedicalTest()"
+              ></app-view-attachments-medical-tests-card>
+            </div>
+          </div>
+        </section>
+      </ng-container>
+
+      <!-- Información extra -->
+      <section class="section">
+        <div class="row">
+          <div class="col-12">
+            <app-view-extra-info-medical-tests-card
+              [medicalTest]="medicalTest"
+            ></app-view-extra-info-medical-tests-card>
+          </div>
+        </div>
+      </section>
+    </ng-container>
+  </div>
+</app-generic-page>

@@ -1,0 +1,44 @@
+<app-generic-card [hasCardHeader]="false">
+  <div *ngIf="medicalTest" class="card-content">
+    <div id="content" class="row">
+      <!-- Información de la Prueba Médica -->
+      <div class="col-12">
+        <div class="row">
+          <div class="col-12 mb-3">
+            <h5>Información de la prueba médica</h5>
+          </div>
+          <div class="col-md-6 col-12 mb-1">
+            <p>
+              <strong>Nombre:</strong>
+              {{ medicalTest.name }}
+            </p>
+          </div>
+          <div class="col-md-6 col-12 mb-1">
+            <p>
+              <strong>Descripción:</strong>
+              {{ medicalTest.description || "--" }}
+            </p>
+          </div>
+          <div class="col-md-6 col-12 mb-1">
+            <p>
+              <strong>Fecha de prescripción:</strong>
+              {{ medicalTest.date_prescribed | date : "dd/MM/yyyy" }}
+            </p>
+          </div>
+          <div class="col-md-6 col-12 mb-1">
+            <p>
+              <strong>Completada:</strong>
+              {{ medicalTest.is_completed ? "Sí" : "No" }}
+            </p>
+          </div>
+          <div class="col-12 mb-1">
+            <p>
+              <strong>Resultado:</strong>
+              {{ medicalTest.result || "--" }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-generic-card>

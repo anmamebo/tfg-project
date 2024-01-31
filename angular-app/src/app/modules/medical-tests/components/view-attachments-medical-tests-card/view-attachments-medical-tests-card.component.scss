@@ -1,0 +1,24 @@
+.file-icon {
+  font-size: 60px;
+}
+
+.card-title,
+.card-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card {
+  min-height: 284px;
+}
+
+.delete-btn {
+  position: absolute;
+  right: -12px;
+  top: -12px;
+
+  & i {
+    font-size: 15px;
+  }
+}
