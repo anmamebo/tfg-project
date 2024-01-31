@@ -1,0 +1,42 @@
+<div class="table-responsive">
+  <table class="table table-hover mb-0">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th class="text-center">Fecha de prescripción</th>
+        <th class="text-center">Ficheros adjuntos</th>
+        <th class="text-center">Completada</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="let test of medicalTests"
+        [routerLink]="['/pruebas-medicas', test.id]"
+        style="cursor: pointer"
+      >
+        <td>{{ test.name }}</td>
+        <td class="text-center">
+          {{ test.date_prescribed | date : "dd, MMMM yyyy" }}
+        </td>
+        <td class="text-center">{{ test.attachments?.length }}</td>
+        <td class="text-center">
+          <span
+            class="badge rounded-circle"
+            [ngClass]="{
+              'bg-success': test.is_completed,
+              'bg-danger': !test.is_completed
+            }"
+            style="padding: 0.25rem !important; font-size: 10pt"
+            ><i
+              class="bi"
+              [ngClass]="{
+                'bi-check-lg': test.is_completed,
+                'bi-x-lg': !test.is_completed
+              }"
+            ></i>
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

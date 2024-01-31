@@ -34,14 +34,21 @@
           </div>
         </div>
 
-        <!-- Tratamientos -->
-        <div class="col-xxl-6">
-          <app-view-treatments-appointments-card
-            [appointment]="appointment"
-          ></app-view-treatments-appointments-card>
-        </div>
+        <div class="row">
+          <!-- Tratamientos -->
+          <div class="col-xxl-6">
+            <app-view-treatments-appointments-card
+              [appointment]="appointment"
+            ></app-view-treatments-appointments-card>
+          </div>
 
-        <!-- Pruebas médicas -->
+          <!-- Pruebas médicas -->
+          <div class="col-xxl-6">
+            <app-view-medical-tests-appointments-card
+              [appointment]="appointment"
+            ></app-view-medical-tests-appointments-card>
+          </div>
+        </div>
       </section>
     </ng-container>
   </div>

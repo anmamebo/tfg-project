@@ -31,12 +31,15 @@ import { ViewInfoStatusAppointmentsCardComponent } from './components/view-info-
 import { ViewReasonObservationsAppointmentsCardComponent } from './components/view-reason-observations-appointments-card/view-reason-observations-appointments-card.component';
 import { ViewTreatmentsAppointmentsCardComponent } from './components/view-treatments-appointments-card/view-treatments-appointments-card.component';
 import { ListAppointmentsHistoricalDoctorCardComponent } from './components/list-appointments-historical-doctor-card/list-appointments-historical-doctor-card.component';
+import { ViewMedicalTestsAppointmentsCardComponent } from './components/view-medical-tests-appointments-card/view-medical-tests-appointments-card.component';
 
 // Componentes
 import { TableAppointmentsComponent } from './components/table-appointments/table-appointments.component';
 import { AccordionTreatmentsAppointmentsComponent } from './components/accordion-treatments-appointments/accordion-treatments-appointments.component';
 import { FormCreateTreatmentAppointmentsComponent } from './components/form-create-treatment-appointments/form-create-treatment-appointments.component';
 import { FormEditTreatmentAppointmentsComponent } from './components/form-edit-treatment-appointments/form-edit-treatment-appointments.component';
+import { FormCreateMedicalTestAppointmentsComponent } from './components/form-create-medical-test-appointments/form-create-medical-test-appointments.component';
+import { TableMedicalTestsAppointmentsComponent } from './components/table-medical-tests-appointments/table-medical-tests-appointments.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +56,9 @@ import { FormEditTreatmentAppointmentsComponent } from './components/form-edit-t
     AppointmentsHistoricalViewPageComponent,
     ListAppointmentsHistoricalDoctorCardComponent,
     FormEditTreatmentAppointmentsComponent,
+    ViewMedicalTestsAppointmentsCardComponent,
+    FormCreateMedicalTestAppointmentsComponent,
+    TableMedicalTestsAppointmentsComponent,
   ],
   imports: [
     CommonModule,

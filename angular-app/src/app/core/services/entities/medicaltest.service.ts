@@ -1,11 +1,23 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 
 import { API_URL } from 'src/app/core/constants/API_URL';
 
 // Servicios
 import { HttpCommonService } from 'src/app/core/services/http-common/http-common.service';
+
+// Modelos
+import { MedicalTest } from 'src/app/core/models/medical-test.interface';
+
+interface MedicalTestOptions {
+  page?: number;
+  numResults?: number;
+  searchTerm?: string;
+  paginate?: boolean;
+  sortBy?: string;
+  sortOrder?: string;
+}
 
 /**
  * Servicio para interactuar con la API para la gestión de pruebas médicas.
@@ -25,6 +37,73 @@ export class MedicalTestService {
   }
 
   /**
+   * Construye y retorna los parámetros para las peticiones HTTP.
+   * @param {MedicalTestOptions} options - Opciones para construir los parámetros HTTP.
+   * @returns {HttpParams} Los parámetros HTTP construidos para la consulta.
+   */
+  private _buildParams(options: MedicalTestOptions = {}): HttpParams {
+    const {
+      page,
+      numResults,
+      searchTerm,
+      paginate = false,
+      sortBy,
+      sortOrder,
+    } = options;
+
+    let params = new HttpParams();
+
+    if (paginate) {
+      if (page) {
+        params = params.set('page', page.toString());
+      }
+
+      if (numResults) {
+        params = params.set('page_size', numResults.toString());
+      }
+
+      params = params.set('paginate', 'true'); // Indica que se quiere paginar
+    }
+
+    if (searchTerm) {
+      // Si se ha indicado un término de búsqueda
+      params = params.set('search', searchTerm);
+    }
+
+    if (sortBy && sortOrder) {
+      // Si se ha indicado un campo por el que ordenar
+      params = params.set(
+        'ordering',
+        `${sortOrder === 'desc' ? '-' : ''}${sortBy}`
+      );
+    }
+
+    return params;
+  }
+
+  /**
+   * Obtiene todas las pruebas médicas de una cita.
+   * @param {string} appointmentId ID de la cita.
+   * @param {MedicalTestOptions} options Opciones para filtrar las pruebas médicas.
+   * @returns {Observable<any>} Un observable que emite un objeto `any`.
+   */
+  public getMedicalTestsByAppointment(
+    appointmentId: string,
+    options: MedicalTestOptions = {}
+  ): Observable<any> {
+    let params = this._buildParams(options);
+    params = params.set('appointment_id', appointmentId);
+
+    const headers = this._httpCommonService.getCommonHeaders();
+    const httpOptions = { headers };
+
+    return this._http.get<any>(`${this.url}appointment/`, {
+      params,
+      ...httpOptions,
+    });
+  }
+
+  /**
    * Obtiene una prueba médica por su ID.
    * @param {string} id - El ID de la prueba médica.
    * @returns {Observable<any>} Un observable que emite un objeto `any`.
@@ -34,6 +113,20 @@ export class MedicalTestService {
     const httpOptions = { headers };
 
     return this._http.get<any>(`${this.url}${id}/`, httpOptions);
+  }
+
+  /**
+   * Crea una prueba médica.
+   * @param {MedicalTest} medicalTest - Datos de la prueba médica.
+   * @returns {Observable<any>} Un observable que emite un objeto `any`.
+   */
+  public createMedicalTest(medicalTest: MedicalTest): Observable<any> {
+    const headers = this._httpCommonService.getCommonHeaders();
+    const httpOptions = { headers };
+
+    let params = JSON.stringify(medicalTest);
+
+    return this._http.post<any>(`${this.url}`, params, httpOptions);
   }
 
   /**
