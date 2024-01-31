@@ -29,7 +29,7 @@
     </swal>
 
     <ng-container *ngIf="entityData.items; else noItems">
-      <ng-container *ngIf="entityData.items.length > 0; else lenghtZero">
+      <ng-container *ngIf="entityData.items.length > 0; else lengthZero">
         <app-accordion-treatments-appointments
           [treatments]="entityData.items"
           (refreshTreatments)="getItems(this.entityData.page)"
@@ -50,7 +50,7 @@
         >
         </app-pagination>
       </ng-container>
-      <ng-template #lenghtZero> No hay tratamientos para mostrar. </ng-template>
+      <ng-template #lengthZero> No hay tratamientos para mostrar. </ng-template>
     </ng-container>
 
     <ng-template #noItems>
