@@ -93,7 +93,7 @@ class DepartmentViewSet(viewsets.GenericViewSet, PaginationMixin, ErrorResponseM
         return self.error_response(
             message="Hay errores en la creación.",
             errors=department_serializer.errors,
-            status=status.HTTP_400_BAD_REQUEST,
+            status_code=status.HTTP_400_BAD_REQUEST,
         )
 
     @method_permission_classes([IsAdministratorOrDoctor])
@@ -142,7 +142,7 @@ class DepartmentViewSet(viewsets.GenericViewSet, PaginationMixin, ErrorResponseM
         return self.error_response(
             message="Hay errores en la actualización.",
             errors=department_serializer.errors,
-            status=status.HTTP_400_BAD_REQUEST,
+            status_code=status.HTTP_400_BAD_REQUEST,
         )
 
     @method_permission_classes([IsAdministrator])
