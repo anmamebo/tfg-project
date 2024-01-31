@@ -10,7 +10,7 @@ import { NotificationService } from 'src/app/core/services/notifications/notific
 import { MedicalTestAttachment } from 'src/app/core/models/medical-test.interface';
 
 // Constantes
-import { ALLOWED_FILE_EXTENSIONS } from 'src/app/core/constants/attachments-file-extensions.constants';
+import { ATTACHMENTS_ALLOWED_FILE_EXTENSIONS } from 'src/app/core/constants/file-extensions.constants';
 
 /**
  * Componente para la visualización de los ficheros adjuntos de una prueba médica.
@@ -45,7 +45,7 @@ export class ViewAttachmentsMedicalTestsCardComponent {
    * @public
    */
   public hasFileIcon(extension: string): boolean {
-    return ALLOWED_FILE_EXTENSIONS.includes(extension);
+    return ATTACHMENTS_ALLOWED_FILE_EXTENSIONS.includes(extension);
   }
 
   /**

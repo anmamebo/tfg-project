@@ -6,7 +6,7 @@ import { MedicalTestService } from 'src/app/core/services/entities/medicaltest.s
 import { NotificationService } from 'src/app/core/services/notifications/notification.service';
 
 // Constantes
-import { ALLOWED_FILE_EXTENSIONS } from 'src/app/core/constants/attachments-file-extensions.constants';
+import { ATTACHMENTS_ALLOWED_FILE_EXTENSIONS } from 'src/app/core/constants/file-extensions.constants';
 
 // Validadores
 import Validation from 'src/app/core/validators/general.validator';
@@ -45,7 +45,7 @@ export class FormUploadAttachmentMedicalTestsComponent {
         null,
         [
           Validators.required,
-          Validation.fileExtension(ALLOWED_FILE_EXTENSIONS),
+          Validation.fileExtension(ATTACHMENTS_ALLOWED_FILE_EXTENSIONS),
         ],
       ],
       fileSource: ['', [Validators.required]],
