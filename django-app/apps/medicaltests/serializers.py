@@ -92,6 +92,18 @@ class MedicalTestSerializer(serializers.ModelSerializer):
         exclude = ["created_date", "modified_date", "deleted_date"]
 
 
+class CreateMedicalTestSerializer(serializers.ModelSerializer):
+    """
+    Serializador para la creación de los datos de un examen médico.
+
+    Este serializador maneja la creación de los datos de un examen médico.
+    """
+
+    class Meta:
+        model = MedicalTest
+        exclude = ["state", "created_date", "modified_date", "deleted_date"]
+
+
 class AttachmentCreateSerializer(serializers.ModelSerializer):
     """
     Serializador para la representación de los datos de un adjunto de un examen médico.

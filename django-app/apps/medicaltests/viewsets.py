@@ -1,8 +1,10 @@
 import os
 
+from apps.appointments.models import Appointment
 from apps.medicaltests.models import MedicalTest, MedicalTestAttachment
 from apps.medicaltests.serializers import (
     AttachmentCreateSerializer,
+    CreateMedicalTestSerializer,
     MedicalTestSerializer,
 )
 from django.http import FileResponse
@@ -73,7 +75,7 @@ class MedicalTestViewSet(viewsets.GenericViewSet, PaginationMixin, ErrorResponse
         Returns:
             Response: La respuesta que indica si la prueba médica fue creado o no.
         """
-        serializer = self.serializer_class(data=request.data)
+        serializer = CreateMedicalTestSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(
@@ -131,6 +133,44 @@ class MedicalTestViewSet(viewsets.GenericViewSet, PaginationMixin, ErrorResponse
             message="Hay errores en la actualización.",
             errors=serializer.errors,
             status_code=status.HTTP_400_BAD_REQUEST,
+        )
+
+    @action(detail=False, methods=["get"], url_path="appointment")
+    def list_for_appointment(self, request):
+        """
+        Lista todas las pruebas médicas de una cita.
+
+        Este método lista todas las pruebas médicas de una cita.
+
+        Parámetros:
+            appointment_id (int): El id de la cita.
+
+        Parámetros opcionales:
+            paginate (bool): Indica si se desea paginar los resultados.
+
+        Args:
+            request (Request): La solicitud HTTP.
+
+        Returns:
+            Response: La respuesta que contiene la lista de pruebas médicas de una cita.
+        """
+        appointment_id = request.query_params.get("appointment_id", None)
+
+        if not appointment_id:
+            return self.error_response(
+                message="No se ha especificado el identificador de la cita.",
+                status_code=status.HTTP_400_BAD_REQUEST,
+            )
+
+        appointment = get_object_or_404(Appointment, pk=appointment_id)
+        medicaltests = (
+            self.get_queryset()
+            .filter(appointment_id=appointment_id, state=True)
+            .order_by("-created_date")
+        )
+
+        return self.conditional_paginated_response(
+            medicaltests, self.list_serializer_class
         )
 
     @action(detail=True, methods=["get"], url_path="download-attachment")
