@@ -15,6 +15,7 @@ import { GenericCardModule } from 'src/app/shared/components/generic-card/generi
 import { LoadingSpinnerModule } from 'src/app/shared/components/loading-spinner/loading-spinner.module';
 import { FormErrorsModule } from 'src/app/shared/components/form-errors/form-errors.module';
 import { AvatarModule } from 'src/app/shared/components/avatar/avatar.module';
+import { TooltipModule } from 'src/app/shared/components/tooltip/tooltip.module';
 
 // Componentes páginas
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
@@ -50,6 +51,7 @@ import { DoctorInfoCardComponent } from './components/doctor-info-card/doctor-in
     FormErrorsModule,
     AvatarModule,
     NgMultiSelectDropDownModule.forRoot(),
+    TooltipModule,
   ],
 })
 export class ProfileModule {}

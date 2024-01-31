@@ -14,3 +14,10 @@ export const ATTACHMENTS_ALLOWED_FILE_EXTENSIONS: string[] = [
   'mov',
   'wav',
 ];
+
+export const PROFILE_PICTURE_ALLOWED_FILE_EXTENSIONS: string[] = [
+  'jpg',
+  'jpeg',
+  'png',
+  'svg',
+];

@@ -12,6 +12,12 @@ import { NotificationService } from 'src/app/core/services/notifications/notific
 // Models
 import { User } from 'src/app/core/models/user.interface';
 
+// Constantes
+import { PROFILE_PICTURE_ALLOWED_FILE_EXTENSIONS } from 'src/app/core/constants/file-extensions.constants';
+
+// Validadores
+import Validation from 'src/app/core/validators/general.validator';
+
 /**
  * Componente que representa una tarjeta de avatar de usuario.
  */
@@ -33,6 +39,10 @@ export class AvatarCardComponent {
   /** Referencia al componente de SweetAlert2 para cambiar el avatar */
   @ViewChild('changeAvatar') changeAvatar!: SwalComponent;
 
+  /** Texto que indica las extensiones de archivo válidas para el avatar */
+  public validExtensionsText: string =
+    PROFILE_PICTURE_ALLOWED_FILE_EXTENSIONS.join(', ');
+
   constructor(
     private _fb: FormBuilder,
     public readonly swalTargets: SwalPortalTargets,
@@ -41,7 +51,13 @@ export class AvatarCardComponent {
     private _notificationService: NotificationService
   ) {
     this.avatarForm = this._fb.group({
-      file: [null, [Validators.required]],
+      file: [
+        null,
+        [
+          Validators.required,
+          Validation.fileExtension(PROFILE_PICTURE_ALLOWED_FILE_EXTENSIONS),
+        ],
+      ],
       fileSource: ['', [Validators.required]],
     });
   }
