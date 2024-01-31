@@ -105,6 +105,34 @@ class MedicalTestViewSet(viewsets.GenericViewSet, PaginationMixin, ErrorResponse
 
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+    def update(self, request, pk=None):
+        """
+        Actualiza una prueba médica.
+
+        Este método actualiza una prueba médica.
+
+        Args:
+            request (Request): La solicitud HTTP.
+            pk (int): El id de la prueba médica.
+
+        Returns:
+            Response: La respuesta que indica si la prueba médica fue actualizada o no.
+        """
+        medicaltest = self.get_object(pk)
+        serializer = self.serializer_class(medicaltest, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(
+                {"message": "Prueba médica actualizada correctamente."},
+                status=status.HTTP_200_OK,
+            )
+
+        return self.error_response(
+            message="Hay errores en la actualización.",
+            errors=serializer.errors,
+            status_code=status.HTTP_400_BAD_REQUEST,
+        )
+
     @action(detail=True, methods=["get"], url_path="download-attachment")
     def download_attachment(self, request, pk=None):
         """
