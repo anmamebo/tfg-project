@@ -5,6 +5,8 @@ import { PatientsPageComponent } from './pages/patients-page/patients-page.compo
 import { PatientsEditPageComponent } from './pages/patients-edit-page/patients-edit-page.component';
 import { PatientsViewPageComponent } from './pages/patients-view-page/patients-view-page.component';
 import { PatientsCreatePageComponent } from './pages/patients-create-page/patients-create-page.component';
+import { PatientsMedicalHistoryPageComponent } from './pages/patients-medical-history-page/patients-medical-history-page.component';
+import { PatientsTreatmentsPageComponent } from './pages/patients-treatments-page/patients-treatments-page.component';
 
 import { patientResolver } from 'src/app/core/resolvers/patient.resolver';
 
@@ -31,6 +33,22 @@ const routes: Routes = [
     path: 'editar/:id',
     component: PatientsEditPageComponent,
     title: 'Editar paciente | HospitalSys',
+    resolve: {
+      data: patientResolver, // Resolver para obtener los datos del paciente
+    },
+  },
+  {
+    path: 'historial-medico/:id',
+    component: PatientsMedicalHistoryPageComponent,
+    title: 'Historial médico | HospitalSys',
+    resolve: {
+      data: patientResolver, // Resolver para obtener los datos del paciente
+    },
+  },
+  {
+    path: 'tratamientos/:id',
+    component: PatientsTreatmentsPageComponent,
+    title: 'Tratamientos | HospitalSys',
     resolve: {
       data: patientResolver, // Resolver para obtener los datos del paciente
     },

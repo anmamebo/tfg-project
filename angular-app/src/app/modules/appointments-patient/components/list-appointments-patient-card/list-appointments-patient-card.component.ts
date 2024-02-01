@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { GenericListCardComponent } from 'src/app/shared/components/generic-list-card/generic-list-card.component';
 
 // Servicios
@@ -15,6 +15,9 @@ import { NotificationService } from 'src/app/core/services/notifications/notific
 export class ListAppointmentsPatientCardComponent extends GenericListCardComponent {
   /** Filtros */
   public filters: any = null;
+
+  /** Identificador del paciente */
+  @Input() public patientId: string | null = null;
 
   constructor(
     private _appointmentService: AppointmentService,
@@ -74,22 +77,25 @@ export class ListAppointmentsPatientCardComponent extends GenericListCardCompone
     }
 
     this._appointmentService
-      .getAppointmentsByPatient({
-        statuses: statuses,
-        types: types,
-        specialties: specialties,
-        page: page,
-        numResults: this.entityData.numResults,
-        searchTerm: this.entityData.search.search,
-        paginate: true,
-        state: this.filterState,
-        sortBy: this.sort.column,
-        sortOrder: this.sort.order,
-        scheduleStartTimeFrom: scheduleStartTimeFrom,
-        scheduleStartTimeTo: scheduleStartTimeTo,
-        requestDateFrom: requestDateFrom,
-        requestDateTo: requestDateTo,
-      })
+      .getAppointmentsByPatient(
+        {
+          statuses: statuses,
+          types: types,
+          specialties: specialties,
+          page: page,
+          numResults: this.entityData.numResults,
+          searchTerm: this.entityData.search.search,
+          paginate: true,
+          state: this.filterState,
+          sortBy: this.sort.column,
+          sortOrder: this.sort.order,
+          scheduleStartTimeFrom: scheduleStartTimeFrom,
+          scheduleStartTimeTo: scheduleStartTimeTo,
+          requestDateFrom: requestDateFrom,
+          requestDateTo: requestDateTo,
+        },
+        this.patientId
+      )
       .subscribe({
         next: (response: any) => {
           this.entityData.items = response.results;

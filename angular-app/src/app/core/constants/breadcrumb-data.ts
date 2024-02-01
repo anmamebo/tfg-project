@@ -84,6 +84,20 @@ export const breadcrumbPatientsViewData = [
   { label: 'Ver paciente', url: '' },
 ];
 
+// Pacientes historial médico
+export const breadcrumbPatientsMedicalHistoryData = [
+  { label: 'Panel Principal', url: '/' },
+  { label: 'Pacientes', url: '/pacientes' },
+  { label: 'Historial médico', url: '' },
+];
+
+// Pacientes tratamientos
+export const breadcrumbPatientsTreatmentsData = [
+  { label: 'Panel Principal', url: '/' },
+  { label: 'Pacientes', url: '/pacientes' },
+  { label: 'Tratamientos', url: '' },
+];
+
 // Médicos
 export const breadcrumbDoctorsData = [
   { label: 'Panel Principal', url: '/' },

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { GenericListCardComponent } from 'src/app/shared/components/generic-list-card/generic-list-card.component';
 
 // Servicios
@@ -15,6 +15,9 @@ import { NotificationService } from 'src/app/core/services/notifications/notific
 export class ListTreatmentsPatientCardComponent extends GenericListCardComponent {
   /** Filtros */
   public filters: any = null;
+
+  /** Identificador del paciente */
+  @Input() public patientId: string | null = null;
 
   constructor(
     private _treatmentService: TreatmentService,
@@ -61,19 +64,22 @@ export class ListTreatmentsPatientCardComponent extends GenericListCardComponent
     }
 
     this._treatmentService
-      .getTreatmentsByPatient({
-        statuses: statuses,
-        page: page,
-        numResults: this.entityData.numResults,
-        searchTerm: this.entityData.search.search,
-        paginate: true,
-        sortBy: this.sort.column,
-        sortOrder: this.sort.order,
-        startDateFrom: startDateFrom,
-        startDateTo: startDateTo,
-        endDateFrom: endDateFrom,
-        endDateTo: endDateTo,
-      })
+      .getTreatmentsByPatient(
+        {
+          statuses: statuses,
+          page: page,
+          numResults: this.entityData.numResults,
+          searchTerm: this.entityData.search.search,
+          paginate: true,
+          sortBy: this.sort.column,
+          sortOrder: this.sort.order,
+          startDateFrom: startDateFrom,
+          startDateTo: startDateTo,
+          endDateFrom: endDateFrom,
+          endDateTo: endDateTo,
+        },
+        this.patientId
+      )
       .subscribe({
         next: (response: any) => {
           this.entityData.items = response.results;

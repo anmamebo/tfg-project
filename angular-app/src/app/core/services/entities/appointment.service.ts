@@ -206,9 +206,14 @@ export class AppointmentService {
    * @returns {Observable<any>} Un observable que emite la respuesta del servidor.
    */
   public getAppointmentsByPatient(
-    options: AppointmentOptions = {}
+    options: AppointmentOptions = {},
+    patientId: string | null = null
   ): Observable<any> {
-    const params = this._buildParams(options);
+    let params = this._buildParams(options);
+
+    if (patientId) {
+      params = params.set('patient_id', patientId);
+    }
 
     const headers = this._httpCommonService.getCommonHeaders();
     const httpOptions = { headers };

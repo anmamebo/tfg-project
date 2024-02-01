@@ -29,27 +29,29 @@
             class="dropdown-menu dropdown-menu-dark"
             aria-labelledby="dropdownMenuButton"
           >
-            <a
-              *ngIf="
-                appointment.status == 'pending' ||
-                appointment.status == 'scheduled' ||
-                appointment.status == 'rescheduled'
-              "
-              class="dropdown-item"
-              style="cursor: pointer"
-              (click)="cancelAppointment()"
-            >
-              <i class="bi bi-x-circle me-2"></i>
-              Cancelar Cita
-            </a>
-            <div
-              *ngIf="
-                appointment.status == 'pending' ||
-                appointment.status == 'scheduled' ||
-                appointment.status == 'rescheduled'
-              "
-              class="dropdown-divider"
-            ></div>
+            <span *appHasRole="['Paciente']">
+              <a
+                *ngIf="
+                  appointment.status == 'pending' ||
+                  appointment.status == 'scheduled' ||
+                  appointment.status == 'rescheduled'
+                "
+                class="dropdown-item"
+                style="cursor: pointer"
+                (click)="cancelAppointment()"
+              >
+                <i class="bi bi-x-circle me-2"></i>
+                Cancelar Cita
+              </a>
+              <div
+                *ngIf="
+                  appointment.status == 'pending' ||
+                  appointment.status == 'scheduled' ||
+                  appointment.status == 'rescheduled'
+                "
+                class="dropdown-divider"
+              ></div>
+            </span>
             <a
               class="dropdown-item"
               style="cursor: pointer"

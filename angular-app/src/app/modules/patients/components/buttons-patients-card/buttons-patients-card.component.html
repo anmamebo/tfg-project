@@ -2,11 +2,19 @@
   <div class="col-sm-8">
     <app-generic-card [hasCardHeader]="false">
       <div class="card-content row justify-content-around">
-        <a class="btn btn-primary col-xl-3 col-lg-4 mb-2 mb-lg-0 me-0">
+        <a
+          [routerLink]="['/pacientes/historial-medico/', patientId]"
+          class="btn btn-primary col-xl-3 col-lg-4 mb-2 mb-lg-0 me-0"
+        >
           Historial Médico
         </a>
 
-        <a class="btn btn-primary col-lg-3 mb-2 mb-lg-0"> Tratamientos </a>
+        <a
+          [routerLink]="['/pacientes/tratamientos/', patientId]"
+          class="btn btn-primary col-lg-3 mb-2 mb-lg-0"
+        >
+          Tratamientos
+        </a>
         <a class="btn btn-primary col-xl-3 col-lg-4"> Pruebas Médicas </a>
       </div>
     </app-generic-card>

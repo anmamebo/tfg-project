@@ -29,37 +29,39 @@
             class="dropdown-menu dropdown-menu-dark"
             aria-labelledby="dropdownMenuButton"
           >
-            <a
-              *ngIf="treatment.status == 'in_progress'"
-              class="dropdown-item"
-              style="cursor: pointer"
-              (click)="completeTreatment()"
-            >
-              <i class="bi bi-check-circle me-2"></i>
-              Completar
-            </a>
-            <a
-              *ngIf="treatment.status == 'in_progress'"
-              class="dropdown-item"
-              style="cursor: pointer"
-              (click)="interruptTreatment()"
-            >
-              <i class="bi bi-exclamation-circle me-2"></i>
-              Interrumpir
-            </a>
-            <a
-              *ngIf="treatment.status == 'in_progress'"
-              class="dropdown-item"
-              style="cursor: pointer"
-              (click)="cancelTreatment()"
-            >
-              <i class="bi bi-x-circle me-2"></i>
-              Cancelar
-            </a>
-            <div
-              *ngIf="treatment.status == 'in_progress'"
-              class="dropdown-divider"
-            ></div>
+            <span *appHasRole="['Paciente']">
+              <a
+                *ngIf="treatment.status == 'in_progress'"
+                class="dropdown-item"
+                style="cursor: pointer"
+                (click)="completeTreatment()"
+              >
+                <i class="bi bi-check-circle me-2"></i>
+                Completar
+              </a>
+              <a
+                *ngIf="treatment.status == 'in_progress'"
+                class="dropdown-item"
+                style="cursor: pointer"
+                (click)="interruptTreatment()"
+              >
+                <i class="bi bi-exclamation-circle me-2"></i>
+                Interrumpir
+              </a>
+              <a
+                *ngIf="treatment.status == 'in_progress'"
+                class="dropdown-item"
+                style="cursor: pointer"
+                (click)="cancelTreatment()"
+              >
+                <i class="bi bi-x-circle me-2"></i>
+                Cancelar
+              </a>
+              <div
+                *ngIf="treatment.status == 'in_progress'"
+                class="dropdown-divider"
+              ></div>
+            </span>
             <a
               class="dropdown-item"
               style="cursor: pointer"

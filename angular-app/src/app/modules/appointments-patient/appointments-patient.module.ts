@@ -59,5 +59,9 @@ import { FiltersAppointmentsPatientCardComponent } from './components/filters-ap
     }),
     TooltipModule,
   ],
+  exports: [
+    ListAppointmentsPatientCardComponent,
+    ListAppointmentsHistoricalPatientCardComponent,
+  ],
 })
 export class AppointmentsPatientModule {}

@@ -49,5 +49,9 @@ import { FiltersTreatmentsPatientCardComponent } from './components/filters-trea
     FlatpickrModule.forRoot(),
     TooltipModule,
   ],
+  exports: [
+    ListTreatmentsPatientCardComponent,
+    ListTreatmentsHistoricalPatientCardComponent,
+  ],
 })
 export class TreatmentsPatientModule {}
