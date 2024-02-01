@@ -2,11 +2,16 @@ from datetime import datetime
 
 from apps.appointments.models import Appointment
 from apps.appointments.permissions import IsAppointmentPatient
+from apps.patients.models import Patient
 from apps.treatments.mixins import GeneratePDFMixin
 from apps.treatments.models import Treatment
 from apps.treatments.permissions import IsTreatmentPatient, isTreatmentDoctor
 from apps.treatments.serializers import TreatmentListSerializer, TreatmentSerializer
-from config.permissions import IsAdministratorOrDoctorOrPatient, IsDoctor, IsPatient
+from config.permissions import (
+    IsAdministratorOrDoctorOrPatient,
+    IsDoctor,
+    IsDoctorOrPatient,
+)
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
@@ -211,20 +216,25 @@ class TreatmentViewSet(
             treatments, self.list_serializer_class
         )
 
-    @method_permission_classes([IsPatient])
+    @method_permission_classes([IsAdministratorOrDoctorOrPatient])
     @action(detail=False, methods=["get"], url_path="patient")
     def list_for_patient(self, request):
         """
         Lista todos los tratamientos de un paciente.
 
         Permisos requeridos:
-            - El usuario debe ser paciente.
+            - El usuario debe ser paciente o médico.
 
         Parámetros opcionales:
+            patient_id (str): El identificador del paciente.
             status (list): La lista de estados de los tratamientos.
             search (str): El texto a buscar en el nombre del tratamiento.
             ordering (str): El campo por el cual ordenar los resultados.
             paginate (str): Indica si se debe paginar los resultados.
+            start_date__gte (str): La fecha de inicio mínima del tratamiento.
+            start_date__lte (str): La fecha de inicio máxima del tratamiento.
+            end_date__gte (str): La fecha de fin mínima del tratamiento.
+            end_date__lte (str): La fecha de fin máxima del tratamiento.
 
         Args:
             request (Request): La solicitud HTTP.
@@ -232,7 +242,12 @@ class TreatmentViewSet(
         Returns:
             Response: La respuesta que contiene la lista de tratamientos.
         """
-        patient = getattr(request.user, "patient", None)
+        if request.GET.get("patient_id", None):
+            patient_id = request.GET.get("patient_id", None)
+            patient = get_object_or_404(Patient, pk=patient_id)
+        else:
+            patient = getattr(request.user, "patient", None)
+
         treatments = (
             self.get_queryset()
             .filter(patient=patient, state=True)

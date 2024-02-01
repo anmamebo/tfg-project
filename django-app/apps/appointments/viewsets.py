@@ -3,12 +3,19 @@ from datetime import datetime, timedelta
 import pytz
 from apps.appointments.mixins import GeneratePDFMixin
 from apps.appointments.models import Appointment
-from apps.appointments.permissions import IsAppointmentOwner
+from apps.appointments.permissions import IsAppointmentOwner, IsAppointmentPatient
 from apps.appointments.serializers import (
     AppointmentSerializer,
     CreateAppointmentSerializer,
 )
-from config.permissions import IsAdministrator, IsDoctor, IsPatient
+from apps.patients.models import Patient
+from config.permissions import (
+    IsAdministrator,
+    IsAdministratorOrDoctorOrPatient,
+    IsDoctor,
+    IsDoctorOrPatient,
+    IsPatient,
+)
 from config.settings import TIME_ZONE
 from django.db.models import F, Q
 from django.shortcuts import get_object_or_404
@@ -219,16 +226,17 @@ class AppointmentViewSet(
             appointments, self.list_serializer_class
         )
 
-    @method_permission_classes([IsPatient])
+    @method_permission_classes([IsAdministratorOrDoctorOrPatient, IsAppointmentPatient])
     @action(detail=False, methods=["get"], url_path="patient")
     def list_for_patient(self, request):
         """
         Lista todas las citas de un paciente ordenadas por fecha más cercana.
 
         Permisos requeridos:
-            - El usuario debe ser un paciente.
+            - El usuario debe ser un paciente o un médico.
 
         Parámetros opcionales:
+            patient_id (str): El identificador del paciente.
             state (str): El estado de la cita (true: activas, false: no activas).
             status (list): Los estados de las citas a filtrar.
             type (list): Los tipos de las citas a filtrar.
@@ -247,7 +255,11 @@ class AppointmentViewSet(
         Returns:
             Response: La respuesta que contiene la lista de citas.
         """
-        patient = getattr(request.user, "patient", None)
+        if request.GET.get("patient_id", None):
+            patient_id = request.GET.get("patient_id", None)
+            patient = get_object_or_404(Patient, pk=patient_id)
+        else:
+            patient = getattr(request.user, "patient", None)
 
         # Filtra las citas del paciente y ordena las citas, primero muestra las
         # más cercanas que tienen horario y luego las que no tienen horario por
@@ -398,7 +410,7 @@ class AppointmentViewSet(
             appointments, self.list_serializer_class
         )
 
-    @method_permission_classes([IsPatient])
+    @method_permission_classes([IsAdministratorOrDoctorOrPatient, IsAppointmentPatient])
     @action(detail=True, methods=["get"], url_path="pdf")
     def get_pdf(self, request, pk=None):
         """

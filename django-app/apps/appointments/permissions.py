@@ -23,14 +23,14 @@ class IsAppointmentPatient(permissions.BasePermission):
     También permite el acceso a usuarios que pertenezcan al grupo Administrativo y Médico.
     """
 
-    def has_permission(self, request, view):
+    def has_object_permission(self, request, view, obj):
         if is_administrator(request.user) or is_doctor(request.user):
             return True
 
-        appointment_id = request.query_params.get("appointment_id", None)
-        if appointment_id:
-            appointment = get_object_or_404(Appointment, pk=appointment_id)
+        if is_patient(request.user):
             patient = getattr(request.user, "patient", None)
-            return appointment.patient == patient
+
+            if isinstance(obj, Appointment):
+                return obj.patient == patient
 
         return False
