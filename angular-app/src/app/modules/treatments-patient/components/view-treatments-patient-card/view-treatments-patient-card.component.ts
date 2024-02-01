@@ -191,6 +191,9 @@ export class ViewTreatmentsPatientCardComponent implements OnInit {
         next: (response: any) => {
           console.log(response);
         },
+        error: (error: any) => {
+          this._notificationService.showErrorToast(error.message);
+        },
       });
   }
 
@@ -205,6 +208,9 @@ export class ViewTreatmentsPatientCardComponent implements OnInit {
     this._pdfTreatmentService.printTreatmentPdf(this.treatment.id).subscribe({
       next: (response: any) => {
         console.log(response);
+      },
+      error: (error: any) => {
+        this._notificationService.showErrorToast(error.message);
       },
     });
   }

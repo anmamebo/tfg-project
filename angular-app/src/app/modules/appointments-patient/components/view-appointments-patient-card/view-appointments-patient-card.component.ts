@@ -127,6 +127,9 @@ export class ViewAppointmentsPatientCardComponent implements OnInit {
         next: (response: any) => {
           console.log(response);
         },
+        error: (error: any) => {
+          this._notificationService.showErrorToast(error.message);
+        },
       });
   }
 
@@ -143,6 +146,9 @@ export class ViewAppointmentsPatientCardComponent implements OnInit {
       .subscribe({
         next: (response: any) => {
           console.log(response);
+        },
+        error: (error: any) => {
+          this._notificationService.showErrorToast(error.message);
         },
       });
   }
