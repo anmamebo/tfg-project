@@ -104,7 +104,11 @@ export class FiltersTreatmentsPatientCardComponent implements OnInit {
       endDate: this.form.value.endDate,
     };
 
-    if (!filters.statuses && !filters.startDate && !filters.endDate) {
+    if (
+      (!filters.statuses || filters.statuses.length == 0) &&
+      !filters.startDate &&
+      !filters.endDate
+    ) {
       this.filters.emit(null);
     } else {
       filters.startDate = this._formatDateFilter(filters.startDate);

@@ -109,6 +109,7 @@ export class ListAppointmentsHistoricalPatientCardComponent extends GenericListC
    */
   public applyFilters(event: any): void {
     this.filters = event;
-    this.getItems(this.entityData.page);
+    this.entityData.page = 1;
+    this.getItems(1);
   }
 }

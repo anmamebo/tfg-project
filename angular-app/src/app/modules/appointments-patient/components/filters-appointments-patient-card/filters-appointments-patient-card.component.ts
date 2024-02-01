@@ -138,9 +138,9 @@ export class FiltersAppointmentsPatientCardComponent implements OnInit {
     };
 
     if (
-      !filters.statuses &&
-      !filters.types &&
-      !filters.specialties &&
+      (!filters.statuses || filters.statuses.length == 0) &&
+      (!filters.types || filters.types.length == 0) &&
+      (!filters.specialties || filters.specialties.length == 0) &&
       !filters.date &&
       !filters.requestDate
     ) {
