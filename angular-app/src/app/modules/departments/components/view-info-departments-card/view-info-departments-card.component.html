@@ -1,42 +1,30 @@
 <app-generic-card [title]="titleCard">
   <div class="card-content">
     <div *ngIf="department" class="row">
-      <div class="col-lg-1 col-md-3">
+      <div class="col-12">
         <div class="form-group">
-          <label for="id">ID</label>
-          <input
-            type="text"
-            class="form-control"
-            id="id"
-            [attr.readonly]="true"
-            [value]="department.id"
-          />
+          <label for="id">ID:</label>
+          <p class="form-control-static" id="id">
+            {{ department.id }}
+          </p>
         </div>
       </div>
 
-      <div class="col-lg-5 col-md-9">
+      <div class="col-md-4">
         <div class="form-group">
-          <label for="name">Nombre</label>
-          <input
-            type="text"
-            class="form-control"
-            id="name"
-            [attr.readonly]="true"
-            [value]="department.name"
-          />
+          <label for="name">Nombre:</label>
+          <p class="form-control-static" id="name">
+            {{ department.name }}
+          </p>
         </div>
       </div>
 
-      <div class="col-lg-6">
+      <div class="col-md-8">
         <div class="form-group">
-          <label for="description">Descripción</label>
-          <textarea
-            class="form-control"
-            id="description"
-            [attr.readonly]="true"
-            rows="3"
-            >{{ department.description || "--" }}</textarea
-          >
+          <label for="description">Descripción:</label>
+          <p class="form-control-static" id="description">
+            {{ department.description || "--" }}
+          </p>
         </div>
       </div>
     </div>

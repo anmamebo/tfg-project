@@ -1,70 +1,56 @@
 <app-generic-card [title]="titleCard">
   <div class="card-content">
     <div *ngIf="doctor && doctor.user" class="row">
-      <div class="col-md-2">
+      <div class="col-12">
         <div class="form-group">
-          <label for="id">ID</label>
-          <input
-            type="text"
-            class="form-control"
-            id="id"
-            [attr.readonly]="true"
-            [value]="doctor.id"
-          />
-        </div>
-      </div>
-
-      <div class="col-md-5">
-        <div class="form-group">
-          <label for="name">Nombre</label>
-          <input
-            type="text"
-            class="form-control"
-            id="name"
-            [attr.readonly]="true"
-            [value]="doctor.user.name"
-          />
-        </div>
-      </div>
-
-      <div class="col-md-5">
-        <div class="form-group">
-          <label for="last_name">Apellidos</label>
-          <input
-            type="text"
-            class="form-control"
-            id="last_name"
-            [attr.readonly]="true"
-            [value]="doctor.user.last_name"
-          />
+          <label for="id">ID:</label>
+          <p class="form-control-static" id="id">
+            {{ doctor.id }}
+          </p>
         </div>
       </div>
 
       <div class="col-md-6">
         <div class="form-group">
-          <label for="collegiate_number">Nº de Colegiado</label>
-          <input
-            type="text"
-            class="form-control"
-            id="collegiate_number"
-            [attr.readonly]="true"
-            [value]="doctor.collegiate_number"
-          />
+          <label for="name">Nombre:</label>
+          <p class="form-control-static" id="name">
+            {{ doctor.user.name }}
+          </p>
         </div>
       </div>
 
       <div class="col-md-6">
         <div class="form-group">
-          <label for="is_available">Disponibilidad</label>
-          <br />
-          <span
-            class="badge"
-            [ngClass]="{
-              'bg-light-success': doctor.is_available,
-              'bg-light-danger': !doctor.is_available
-            }"
-            >{{ doctor.is_available ? "Disponible" : "No disponible" }}</span
-          >
+          <label for="last_name">Apellidos:</label>
+          <p class="form-control-static" id="last_name">
+            {{ doctor.user.last_name }}
+          </p>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="collegiate_number">Nº de Colegiado:</label>
+          <p class="form-control-static" id="collegiate_number">
+            {{ doctor.collegiate_number }}
+          </p>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="is_available">Disponibilidad:</label>
+          <p class="form-control-static" id="is_available">
+            <span
+              class="badge"
+              [ngClass]="{
+                'bg-light-success': doctor.is_available,
+                'bg-light-danger': !doctor.is_available
+              }"
+            >
+              {{ doctor.is_available ? "Disponible" : "No disponible" }}
+            </span>
+          </p>
         </div>
       </div>
     </div>

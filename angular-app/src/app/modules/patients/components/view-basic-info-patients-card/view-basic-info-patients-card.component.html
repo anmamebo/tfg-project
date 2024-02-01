@@ -1,107 +1,75 @@
 <app-generic-card [title]="titleCard">
   <div class="card-content">
     <div *ngIf="patient && patient.user" class="row">
-      <div class="col-md-2">
+      <div class="col-md-8">
         <div class="form-group">
-          <label for="id">ID</label>
-          <input
-            type="text"
-            class="form-control"
-            id="id"
-            [attr.readonly]="true"
-            [value]="patient.id"
-          />
+          <label for="id">ID:</label>
+          <p class="form-control-static" id="id">
+            {{ patient.id }}
+          </p>
         </div>
       </div>
 
-      <div class="col-md-5">
+      <div class="col-md-4">
         <div class="form-group">
-          <label for="name">Nombre</label>
-          <input
-            type="text"
-            class="form-control"
-            id="name"
-            [attr.readonly]="true"
-            [value]="patient.user.name"
-          />
+          <label for="dni">DNI:</label>
+          <p class="form-control-static" id="dni">
+            {{ patient.dni }}
+          </p>
         </div>
       </div>
 
-      <div class="col-md-5">
+      <div class="col-md-4">
         <div class="form-group">
-          <label for="last_name">Apellidos</label>
-          <input
-            type="text"
-            class="form-control"
-            id="last_name"
-            [attr.readonly]="true"
-            [value]="patient.user.last_name"
-          />
+          <label for="name">Nombre:</label>
+          <p class="form-control-static" id="name">
+            {{ patient.user.name }}
+          </p>
         </div>
       </div>
 
-      <div class="col-md-6">
+      <div class="col-md-4">
         <div class="form-group">
-          <label for="dni">DNI</label>
-          <input
-            type="text"
-            class="form-control"
-            id="dni"
-            [attr.readonly]="true"
-            [value]="patient.dni"
-          />
+          <label for="last_name">Apellidos:</label>
+          <p class="form-control-static" id="last_name">
+            {{ patient.user.last_name }}
+          </p>
         </div>
       </div>
 
-      <div class="col-md-6">
+      <div class="col-md-4">
         <div class="form-group">
-          <label for="social_security">Nº de la seguridad social</label>
-          <input
-            type="text"
-            class="form-control"
-            id="social_security"
-            [attr.readonly]="true"
-            [value]="patient.social_security"
-          />
+          <label for="birthdate">Fecha de nacimiento:</label>
+          <p class="form-control-static" id="birthdate">
+            {{ patient.birthdate | date : "d MMMM, y" }}
+          </p>
         </div>
       </div>
 
-      <div class="col-md-6">
+      <div class="col-md-4">
         <div class="form-group">
-          <label for="birthdate">Fecha de nacimiento</label>
-          <input
-            type="text"
-            class="form-control"
-            id="birthdate"
-            [attr.readonly]="true"
-            [value]="patient.birthdate | date : 'd MMMM, y'"
-          />
+          <label for="social_security">Nº de la seguridad social:</label>
+          <p class="form-control-static" id="social_security">
+            {{ patient.social_security }}
+          </p>
         </div>
       </div>
 
-      <div class="col-md-3">
+      <div class="col-md-4">
         <div class="form-group">
-          <label for="gender">Género</label>
-          <input
-            type="text"
-            class="form-control"
-            id="gender"
-            [attr.readonly]="true"
-            [value]="patient.gender | gender"
-          />
+          <label for="gender">Género:</label>
+          <p class="form-control-static" id="gender">
+            {{ patient.gender | gender }}
+          </p>
         </div>
       </div>
 
-      <div class="col-md-3">
+      <div class="col-md-4">
         <div class="form-group">
-          <label for="nationality">Nacionalidad</label>
-          <input
-            type="text"
-            class="form-control"
-            id="nationality"
-            [attr.readonly]="true"
-            [value]="patient.nationality || '--'"
-          />
+          <label for="nationality">Nacionalidad:</label>
+          <p class="form-control-static" id="nationality">
+            {{ patient.nationality || "--" }}
+          </p>
         </div>
       </div>
     </div>

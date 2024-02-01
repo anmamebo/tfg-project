@@ -1,68 +1,48 @@
 <app-generic-card [title]="titleCard">
   <div class="card-content">
     <div *ngIf="administrative" class="row">
-      <div class="col-md-2">
+      <div class="col-12">
         <div class="form-group">
-          <label for="id">ID</label>
-          <input
-            type="text"
-            class="form-control"
-            id="id"
-            [attr.readonly]="true"
-            [value]="administrative.id"
-          />
-        </div>
-      </div>
-
-      <div class="col-md-5">
-        <div class="form-group">
-          <label for="username">Nombre de usuario</label>
-          <input
-            type="text"
-            class="form-control"
-            id="username"
-            [attr.readonly]="true"
-            [value]="administrative.username"
-          />
-        </div>
-      </div>
-
-      <div class="col-md-5">
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input
-            type="text"
-            class="form-control"
-            id="email"
-            [attr.readonly]="true"
-            [value]="administrative.email"
-          />
+          <label for="id">ID:</label>
+          <p class="form-control-static" id="id">
+            {{ administrative.id }}
+          </p>
         </div>
       </div>
 
       <div class="col-md-6">
         <div class="form-group">
-          <label for="name">Nombre</label>
-          <input
-            type="text"
-            class="form-control"
-            id="name"
-            [attr.readonly]="true"
-            [value]="administrative.name"
-          />
+          <label for="username">Nombre de usuario:</label>
+          <p class="form-control-static" id="username">
+            {{ administrative.username }}
+          </p>
         </div>
       </div>
 
       <div class="col-md-6">
         <div class="form-group">
-          <label for="last_name">Apellidos</label>
-          <input
-            type="text"
-            class="form-control"
-            id="last_name"
-            [attr.readonly]="true"
-            [value]="administrative.last_name"
-          />
+          <label for="email">Email:</label>
+          <p class="form-control-static" id="email">
+            {{ administrative.email }}
+          </p>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="name">Nombre:</label>
+          <p class="form-control-static" id="name">
+            {{ administrative.name }}
+          </p>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="last_name">Apellidos:</label>
+          <p class="form-control-static" id="last_name">
+            {{ administrative.last_name }}
+          </p>
         </div>
       </div>
     </div>

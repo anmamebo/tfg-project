@@ -3,27 +3,19 @@
     <div *ngIf="group; else loading" class="row">
       <div class="col-md-6">
         <div class="form-group">
-          <label for="id">ID</label>
-          <input
-            type="text"
-            class="form-control"
-            id="id"
-            [attr.readonly]="true"
-            [value]="group.id"
-          />
+          <label for="id">ID:</label>
+          <p class="form-control-static" id="id">
+            {{ group.id }}
+          </p>
         </div>
       </div>
 
       <div class="col-md-6">
         <div class="form-group">
-          <label for="name">Nombre</label>
-          <input
-            type="text"
-            class="form-control"
-            id="name"
-            [attr.readonly]="true"
-            [value]="group.name"
-          />
+          <label for="name">Nombre:</label>
+          <p class="form-control-static" id="name">
+            {{ group.name }}
+          </p>
         </div>
       </div>
     </div>

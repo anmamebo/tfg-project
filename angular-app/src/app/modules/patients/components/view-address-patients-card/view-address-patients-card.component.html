@@ -3,92 +3,64 @@
     <div *ngIf="address" class="row">
       <div class="col-md-6">
         <div class="form-group">
-          <label for="street">Calle</label>
-          <input
-            type="text"
-            class="form-control"
-            id="street"
-            [attr.readonly]="true"
-            [value]="address.street"
-          />
+          <label for="street">Calle:</label>
+          <p class="form-control-static" id="street">
+            {{ address.street }}
+          </p>
         </div>
       </div>
 
-      <div class="col-md-3">
+      <div class="col-md-3 col-6">
         <div class="form-group">
-          <label for="number">Número</label>
-          <input
-            type="text"
-            class="form-control"
-            id="number"
-            [attr.readonly]="true"
-            [value]="address.number"
-          />
+          <label for="number">Número:</label>
+          <p class="form-control-static" id="number">
+            {{ address.number }}
+          </p>
         </div>
       </div>
 
-      <div class="col-md-3">
+      <div class="col-md-3 col-6">
         <div class="form-group">
-          <label for="floor">Piso</label>
-          <input
-            type="text"
-            class="form-control"
-            id="floor"
-            [attr.readonly]="true"
-            [value]="address.floor"
-          />
+          <label for="floor">Piso:</label>
+          <p class="form-control-static" id="floor">
+            {{ address.floor }}
+          </p>
         </div>
       </div>
 
-      <div class="col-md-6">
+      <div class="col-6">
         <div class="form-group">
-          <label for="city">Ciudad</label>
-          <input
-            type="text"
-            class="form-control"
-            id="city"
-            [attr.readonly]="true"
-            [value]="address.city"
-          />
+          <label for="city">Ciudad:</label>
+          <p class="form-control-static" id="city">
+            {{ address.city }}
+          </p>
         </div>
       </div>
 
-      <div class="col-md-6">
+      <div class="col-6">
         <div class="form-group">
-          <label for="postal_code">Código Postal</label>
-          <input
-            type="text"
-            class="form-control"
-            id="postal_code"
-            [attr.readonly]="true"
-            [value]="address.postal_code"
-          />
+          <label for="postal_code">Código Postal:</label>
+          <p class="form-control-static" id="postal_code">
+            {{ address.postal_code }}
+          </p>
         </div>
       </div>
 
-      <div class="col-md-6">
+      <div class="col-6">
         <div class="form-group">
-          <label for="province">Provincia</label>
-          <input
-            type="text"
-            class="form-control"
-            id="province"
-            [attr.readonly]="true"
-            [value]="address.province"
-          />
+          <label for="province">Provincia:</label>
+          <p class="form-control-static" id="province">
+            {{ address.province }}
+          </p>
         </div>
       </div>
 
-      <div class="col-md-6">
+      <div class="col-6">
         <div class="form-group">
-          <label for="country">País</label>
-          <input
-            type="text"
-            class="form-control"
-            id="country"
-            [attr.readonly]="true"
-            [value]="address.country"
-          />
+          <label for="country">País:</label>
+          <p class="form-control-static" id="country">
+            {{ address.country }}
+          </p>
         </div>
       </div>
     </div>

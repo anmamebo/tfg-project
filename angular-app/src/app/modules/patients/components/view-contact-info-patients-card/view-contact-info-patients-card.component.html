@@ -3,40 +3,28 @@
     <div *ngIf="patient && patient.user" class="row">
       <div class="col-12">
         <div class="form-group">
-          <label for="username">Nombre de usuario</label>
-          <input
-            type="text"
-            class="form-control"
-            id="username"
-            [attr.readonly]="true"
-            [value]="patient.user.username"
-          />
+          <label for="username">Nombre de usuario:</label>
+          <p class="form-control-static" id="username">
+            {{ patient.user.username }}
+          </p>
         </div>
       </div>
 
       <div class="col-lg-12 col-md-6 col-12">
         <div class="form-group">
-          <label for="email">Email</label>
-          <input
-            type="text"
-            class="form-control"
-            id="email"
-            [attr.readonly]="true"
-            [value]="patient.user.email"
-          />
+          <label for="email">Email:</label>
+          <p class="form-control-static" id="email">
+            {{ patient.user.email }}
+          </p>
         </div>
       </div>
 
       <div class="col-lg-12 col-md-6 col-12">
         <div class="form-group">
-          <label for="phone">Nº de teléfono</label>
-          <input
-            type="text"
-            class="form-control"
-            id="phone"
-            [attr.readonly]="true"
-            [value]="patient.phone"
-          />
+          <label for="phone">Nº de teléfono:</label>
+          <p class="form-control-static" id="phone">
+            {{ patient.phone }}
+          </p>
         </div>
       </div>
     </div>

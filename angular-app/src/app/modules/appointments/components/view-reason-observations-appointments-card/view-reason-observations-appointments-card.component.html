@@ -1,16 +1,10 @@
 <app-generic-card [hasCardHeader]="false">
   <div *ngIf="appointment" class="card-content">
     <div class="row justify-content-between">
+      <!-- Motivo -->
       <div class="col-12 mb-5">
         <h4 class="mb-3">Motivo de la cita</h4>
-        <textarea
-          class="form-control"
-          id="reason"
-          [attr.readonly]="true"
-          rows="2"
-          style="resize: none"
-          >{{ appointment.reason }}</textarea
-        >
+        <p>{{ appointment.reason }}</p>
       </div>
       <div class="col-12">
         <form
@@ -39,7 +33,7 @@
                     formControlName="observations"
                     class="form-control"
                     id="observations"
-                    rows="3"
+                    rows="4"
                     placeholder="Añadir observaciones"
                     [ngClass]="{
                       'is-invalid':
