@@ -24,6 +24,9 @@
       <button
         (click)="deleteFile(attachment.id)"
         class="delete-btn btn btn-danger rounded-circle"
+        customTooltip
+        [tooltip]="'Eliminar'"
+        [tooltipOffsetTop]="5"
       >
         <i class="bi bi-x-lg"></i>
       </button>
