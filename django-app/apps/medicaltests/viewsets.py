@@ -1,4 +1,5 @@
 import os
+from datetime import datetime, timedelta
 
 from apps.appointments.models import Appointment
 from apps.medicaltests.models import MedicalTest, MedicalTestAttachment
@@ -7,8 +8,11 @@ from apps.medicaltests.serializers import (
     CreateMedicalTestSerializer,
     MedicalTestSerializer,
 )
+from apps.patients.models import Patient
+from django.db.models import Q
 from django.http import FileResponse
 from django.shortcuts import get_object_or_404
+from django.utils import timezone
 from mixins.error_mixin import ErrorResponseMixin
 from mixins.pagination_mixin import PaginationMixin
 from rest_framework import status, viewsets
@@ -173,6 +177,49 @@ class MedicalTestViewSet(viewsets.GenericViewSet, PaginationMixin, ErrorResponse
             medicaltests, self.list_serializer_class
         )
 
+    @action(detail=False, methods=["get"], url_path="patient")
+    def list_for_patient(self, request):
+        """
+        Lista todas las pruebas médicas de un paciente.
+
+        Este método lista todas las pruebas médicas de un paciente.
+
+        Parámetros opcionales:
+            patient_id (int): El id del paciente.
+            search (str): El texto por el cual se desea buscar en los resultados.
+            ordering (str): El campo por el cual se desea ordenar los resultados.
+            paginate (bool): Indica si se desea paginar los resultados.
+            completed (bool): Indica si se desea obtener las pruebas médicas completadas o no.
+            date_prescribed__gte (str): La fecha de prescripción mínima.
+            date_prescribed__lte (str): La fecha de prescripción máxima.
+
+        Args:
+            request (Request): La solicitud HTTP.
+
+        Returns:
+            Response: La respuesta que contiene la lista de pruebas médicas de un paciente.
+        """
+        if request.GET.get("patient_id", None):
+            patient_id = request.GET.get("patient_id", None)
+            patient = get_object_or_404(Patient, pk=patient_id)
+        else:
+            patient = getattr(request.user, "patient", None)
+
+        medicaltests = (
+            self.get_queryset()
+            .filter(patient=patient, state=True)
+            .order_by("-date_prescribed")
+        )
+
+        medicaltests = self.filter_and_order_medicaltests(medicaltests)
+        medicaltests = self.filter_medicaltests_by_date_range(
+            medicaltests, "date_prescribed"
+        )
+
+        return self.conditional_paginated_response(
+            medicaltests, self.list_serializer_class
+        )
+
     @action(detail=True, methods=["get"], url_path="download-attachment")
     def download_attachment(self, request, pk=None):
         """
@@ -250,3 +297,69 @@ class MedicalTestViewSet(viewsets.GenericViewSet, PaginationMixin, ErrorResponse
             message="No se pudo eliminar el archivo.",
             status_code=status.HTTP_400_BAD_REQUEST,
         )
+
+    def filter_and_order_medicaltests(self, medicaltests):
+        """
+        Filtra y ordena las pruebas médicas.
+
+        Este método filtra y ordena las pruebas médicas.
+
+        Args:
+            medicaltests (QuerySet): Las pruebas médicas.
+
+        Returns:
+            QuerySet: Las pruebas médicas filtradas y ordenadas.
+        """
+        query = self.request.query_params.get("search", None)
+        ordering = self.request.query_params.get("ordering", None)
+        completed = self.request.query_params.get("completed", None)
+
+        if query:
+            medicaltests = medicaltests.filter(
+                Q(id__icontains=query) | Q(name__icontains=query)
+            )
+
+        if ordering:
+            medicaltests = medicaltests.order_by(ordering)
+
+        if completed in ["true", "false"]:
+            completed_boolean = completed == "true"
+            medicaltests = medicaltests.filter(is_completed=completed_boolean)
+
+        return medicaltests
+
+    def filter_medicaltests_by_date_range(self, medicaltests, date_field):
+        """
+        Filtra las pruebas médicas por rango de fechas.
+
+        Args:
+            medicaltests (QuerySet): El conjunto de pruebas médicas.
+            date_field (str): El campo de fecha de la prueba médica.
+
+        Returns:
+            QuerySet: El conjunto de pruebas médicas filtradas.
+        """
+        start_date_str = self.request.query_params.get(f"{date_field}__gte", None)
+        end_date_str = self.request.query_params.get(f"{date_field}__lte", None)
+
+        if start_date_str and end_date_str:
+            try:
+                start_date = datetime.strptime(start_date_str, "%Y-%m-%d").date()
+                end_date = datetime.strptime(end_date_str, "%Y-%m-%d").date()
+                start_date = timezone.make_aware(
+                    datetime.combine(start_date, datetime.min.time())
+                )
+                end_date = timezone.make_aware(
+                    datetime.combine(end_date, datetime.max.time())
+                )
+            except ValueError:
+                return self.error_response(
+                    message="La fecha no es válida.",
+                    status_code=status.HTTP_400_BAD_REQUEST,
+                )
+
+            return medicaltests.filter(
+                **{f"{date_field}__range": [start_date, end_date]}
+            )
+
+        return medicaltests
