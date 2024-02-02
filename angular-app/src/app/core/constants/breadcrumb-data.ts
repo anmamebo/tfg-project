@@ -98,6 +98,13 @@ export const breadcrumbPatientsTreatmentsData = [
   { label: 'Tratamientos', url: '' },
 ];
 
+// Pacientes pruebas médicas
+export const breadcrumbPatientsMedicalTestsData = [
+  { label: 'Panel Principal', url: '/' },
+  { label: 'Pacientes', url: '/pacientes' },
+  { label: 'Pruebas médicas', url: '' },
+];
+
 // Médicos
 export const breadcrumbDoctorsData = [
   { label: 'Panel Principal', url: '/' },

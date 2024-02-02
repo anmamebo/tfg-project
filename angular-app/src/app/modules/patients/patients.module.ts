@@ -20,6 +20,7 @@ import { FormErrorsModule } from 'src/app/shared/components/form-errors/form-err
 import { GenericListCardModule } from 'src/app/shared/components/generic-list-card/generic-list-card.module';
 import { AppointmentsPatientModule } from '../appointments-patient/appointments-patient.module';
 import { TreatmentsPatientModule } from '../treatments-patient/treatments-patient.module';
+import { MedicalTestsModule } from '../medical-tests/medical-tests.module';
 
 // Componentes páginas
 import { PatientsPageComponent } from './pages/patients-page/patients-page.component';
@@ -28,6 +29,7 @@ import { PatientsEditPageComponent } from './pages/patients-edit-page/patients-e
 import { PatientsCreatePageComponent } from './pages/patients-create-page/patients-create-page.component';
 import { PatientsMedicalHistoryPageComponent } from './pages/patients-medical-history-page/patients-medical-history-page.component';
 import { PatientsTreatmentsPageComponent } from './pages/patients-treatments-page/patients-treatments-page.component';
+import { PatientsMedicalTestsPageComponent } from './pages/patients-medical-tests-page/patients-medical-tests-page.component';
 
 // Componentes tarjetas
 import { ViewBasicInfoPatientsCardComponent } from './components/view-basic-info-patients-card/view-basic-info-patients-card.component';
@@ -55,6 +57,7 @@ import { CreatePatientsCardComponent } from './components/create-patients-card/c
     CreatePatientsCardComponent,
     PatientsMedicalHistoryPageComponent,
     PatientsTreatmentsPageComponent,
+    PatientsMedicalTestsPageComponent,
   ],
   imports: [
     CommonModule,
@@ -74,6 +77,7 @@ import { CreatePatientsCardComponent } from './components/create-patients-card/c
     NgMultiSelectDropDownModule.forRoot(),
     AppointmentsPatientModule,
     TreatmentsPatientModule,
+    MedicalTestsModule,
   ],
 })
 export class PatientsModule {}

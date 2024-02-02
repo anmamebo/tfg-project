@@ -65,5 +65,6 @@ import { FormEditMedicalTestComponent } from './components/form-edit-medical-tes
     FlatpickrModule.forRoot(),
     NgMultiSelectDropDownModule.forRoot(),
   ],
+  exports: [ListMedicalTestsCardComponent],
 })
 export class MedicalTestsModule {}

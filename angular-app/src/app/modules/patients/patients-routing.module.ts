@@ -7,6 +7,7 @@ import { PatientsViewPageComponent } from './pages/patients-view-page/patients-v
 import { PatientsCreatePageComponent } from './pages/patients-create-page/patients-create-page.component';
 import { PatientsMedicalHistoryPageComponent } from './pages/patients-medical-history-page/patients-medical-history-page.component';
 import { PatientsTreatmentsPageComponent } from './pages/patients-treatments-page/patients-treatments-page.component';
+import { PatientsMedicalTestsPageComponent } from './pages/patients-medical-tests-page/patients-medical-tests-page.component';
 
 import { patientResolver } from 'src/app/core/resolvers/patient.resolver';
 
@@ -49,6 +50,14 @@ const routes: Routes = [
     path: 'tratamientos/:id',
     component: PatientsTreatmentsPageComponent,
     title: 'Tratamientos | HospitalSys',
+    resolve: {
+      data: patientResolver, // Resolver para obtener los datos del paciente
+    },
+  },
+  {
+    path: 'pruebas-medicas/:id',
+    component: PatientsMedicalTestsPageComponent,
+    title: 'Pruebas médicas | HospitalSys',
     resolve: {
       data: patientResolver, // Resolver para obtener los datos del paciente
     },

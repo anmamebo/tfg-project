@@ -52,17 +52,20 @@ export class ListMedicalTestsCardComponent extends GenericListCardComponent {
     }
 
     this._medicalTestService
-      .getMedicalTestsByPatient({
-        page: page,
-        numResults: this.entityData.numResults,
-        searchTerm: this.entityData.search.search,
-        paginate: true,
-        sortBy: this.sort.column,
-        sortOrder: this.sort.order,
-        completed: completed,
-        dateFrom: dateFrom,
-        dateTo: dateTo,
-      })
+      .getMedicalTestsByPatient(
+        {
+          page: page,
+          numResults: this.entityData.numResults,
+          searchTerm: this.entityData.search.search,
+          paginate: true,
+          sortBy: this.sort.column,
+          sortOrder: this.sort.order,
+          completed: completed,
+          dateFrom: dateFrom,
+          dateTo: dateTo,
+        },
+        this.patientId
+      )
       .subscribe({
         next: (response: any) => {
           this.entityData.items = response.results;

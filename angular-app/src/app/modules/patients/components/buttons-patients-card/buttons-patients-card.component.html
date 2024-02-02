@@ -15,7 +15,12 @@
         >
           Tratamientos
         </a>
-        <a class="btn btn-primary col-xl-3 col-lg-4"> Pruebas Médicas </a>
+        <a
+          [routerLink]="['/pacientes/pruebas-medicas/', patientId]"
+          class="btn btn-primary col-xl-3 col-lg-4"
+        >
+          Pruebas Médicas
+        </a>
       </div>
     </app-generic-card>
   </div>
