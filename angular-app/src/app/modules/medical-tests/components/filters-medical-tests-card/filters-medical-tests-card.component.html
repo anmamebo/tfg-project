@@ -1,0 +1,75 @@
+<div class="filters-card">
+  <p>
+    <button
+      class="btn btn-primary"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#collapseFilters"
+      aria-expanded="false"
+      aria-controls="collapseFilters"
+    >
+      <i class="bi bi-funnel me-1"></i>
+      Filtrar
+    </button>
+  </p>
+
+  <div class="collapse" id="collapseFilters">
+    <app-generic-card [hasCardHeader]="false">
+      <div class="card-content">
+        <form
+          (ngSubmit)="onSubmit()"
+          [formGroup]="filtersForm"
+          class="form form-horizontal"
+        >
+          <div class="row">
+            <!-- Estados -->
+            <div class="col-md-4 col-12">
+              <div class="form-group">
+                <label for="completed">Estados</label>
+                <ng-multiselect-dropdown
+                  [placeholder]="'Selecciona un estado'"
+                  [settings]="dropdownSettings"
+                  [data]="completedOptions"
+                  formControlName="completed"
+                ></ng-multiselect-dropdown>
+              </div>
+            </div>
+
+            <!-- Fecha cita -->
+            <div class="col-md-4 col-12">
+              <div class="form-group">
+                <label for="date">Fecha prescripción</label>
+                <input
+                  type="text"
+                  formControlName="date"
+                  id="date"
+                  class="form-control"
+                  mwlFlatpickr
+                  [convertModelValue]="true"
+                  [locale]="locale"
+                  [dateFormat]="'d-m-Y'"
+                  [monthSelectorType]="'dropdown'"
+                  placeholder="Fecha prescripción"
+                  [mode]="'range'"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <!-- Botones -->
+            <div class="col-12 d-flex justify-content-end">
+              <button
+                type="button"
+                class="btn btn-outline-primary me-2"
+                (click)="onReset()"
+              >
+                Resetear
+              </button>
+              <button type="submit" class="btn btn-primary">Aplicar</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </app-generic-card>
+  </div>
+</div>

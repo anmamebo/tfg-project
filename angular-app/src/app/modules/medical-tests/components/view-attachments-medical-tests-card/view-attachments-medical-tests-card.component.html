@@ -6,7 +6,7 @@
           Ficheros adjuntos <span>({{ attachments.length }})</span>
         </h5>
       </div>
-      <div class="col">
+      <div *appHasRole="['Médico']" class="col">
         <div class="d-flex justify-content-end">
           <button [swal]="uploadFile" class="btn btn-primary">
             Subir fichero
@@ -22,6 +22,7 @@
     <div class="card p-3">
       <!-- Botón eliminar fichero -->
       <button
+        *appHasRole="['Médico']"
         (click)="deleteFile(attachment.id)"
         class="delete-btn btn btn-danger rounded-circle"
         customTooltip

@@ -7,7 +7,7 @@ export const sidebarData = [
     roles: [ROLES.ADMIN, ROLES.DOCTOR, ROLES.PATIENT],
   },
   {
-    name: 'Panel principal',
+    name: 'Panel Principal',
     url: '/',
     icon: 'grid-fill',
     roles: [ROLES.ADMIN, ROLES.DOCTOR, ROLES.PATIENT],
@@ -42,7 +42,7 @@ export const sidebarData = [
     ],
   },
   {
-    name: 'Mis tratamientos',
+    name: 'Mis Tratamientos',
     key: 'tratamientos',
     icon: 'capsule',
     roles: [ROLES.PATIENT],
@@ -58,6 +58,12 @@ export const sidebarData = [
         roles: [ROLES.PATIENT],
       },
     ],
+  },
+  {
+    name: 'Mis Pruebas Médicas',
+    url: '/pruebas-medicas',
+    icon: 'clipboard2-pulse-fill',
+    roles: [ROLES.PATIENT],
   },
   {
     name: 'Horario',

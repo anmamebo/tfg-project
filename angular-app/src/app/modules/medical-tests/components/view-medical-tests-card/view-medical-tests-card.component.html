@@ -1,0 +1,154 @@
+<app-generic-card *ngIf="medicalTest" [hasCardHeader]="false">
+  <div class="card-content">
+    <!-- Título -->
+    <div id="title" class="row mb-4">
+      <div class="col-auto">
+        <span
+          class="badge"
+          [ngClass]="{
+            'bg-success': medicalTest.is_completed,
+            'bg-danger': !medicalTest.is_completed
+          }"
+        >
+          {{ medicalTest.is_completed ? "Completada" : "No completada" }}
+        </span>
+      </div>
+      <div class="col-md col-12">
+        <h4 class="card-title">
+          {{ cardTitle }}
+        </h4>
+      </div>
+    </div>
+
+    <!-- Contenido -->
+    <div id="content" class="row">
+      <!-- Información -->
+      <div class="col-12 mb-3">
+        <div class="row mb-3">
+          <div class="col-12">
+            <h5>Información de la prueba médica</h5>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-12">
+            <p>
+              <strong>Descripción:</strong>
+              {{ medicalTest.description || "--" }}
+            </p>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-12">
+            <p>
+              <strong>Archivos adjuntos:</strong>
+              {{ medicalTest.attachments?.length }}
+            </p>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-12">
+            <p>
+              <strong>Resultado:</strong>
+              {{ medicalTest.result || "--" }}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Información de la cita -->
+      <div *ngIf="medicalTest.appointment" class="col-md-6">
+        <div class="row mb-3">
+          <div class="col-12">
+            <h5>Información de la cita</h5>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-12">
+            <p>
+              <strong>Motivo:</strong>
+              {{ medicalTest.appointment.reason || "--" }}
+            </p>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-12">
+            <p>
+              <strong>Tipo de cita:</strong>
+              {{ medicalTest.appointment.type | typeAppointment }}
+            </p>
+          </div>
+        </div>
+        <div *ngIf="medicalTest.appointment.specialty" class="row mb-1">
+          <div class="col-12">
+            <p>
+              <strong>Especialidad médica:</strong>
+              {{ medicalTest.appointment.specialty.name }}
+            </p>
+          </div>
+        </div>
+        <div *ngIf="medicalTest.appointment.schedule" class="row mb-1">
+          <div class="col-12">
+            <p>
+              <strong>Fecha:</strong>
+              {{
+                medicalTest.appointment.schedule.start_time
+                  | date : "dd, MMMM yyyy"
+              }}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Información del médico -->
+      <div *ngIf="medicalTest.doctor" class="col-md-6">
+        <div class="row mb-3">
+          <div class="col-12">
+            <h5>Información del médico</h5>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-12">
+            <p>
+              <strong>Nombre:</strong>
+              {{ medicalTest.doctor.user.name }}
+              {{ medicalTest.doctor.user.last_name }}
+            </p>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-12">
+            <p>
+              <strong>Correo electrónico:</strong>
+              {{ medicalTest.doctor.user.email }}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div
+        *ngIf="medicalTest.attachments && medicalTest.attachments.length > 0"
+        class="col-12 mt-3"
+      >
+        <button
+          class="btn btn-primary collapsed"
+          type="button"
+          data-bs-toggle="collapse"
+          [attr.data-bs-target]="'#collapseAttachments' + medicalTest.id"
+          aria-expanded="false"
+          aria-controls="collapseExample"
+        >
+          Mostrar archivos adjuntos
+        </button>
+        <div
+          class="collapse"
+          [attr.id]="'collapseAttachments' + medicalTest.id"
+        >
+          <app-view-attachments-medical-tests-card
+            *ngIf="medicalTest.attachments"
+            [attachments]="medicalTest.attachments"
+          ></app-view-attachments-medical-tests-card>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-generic-card>

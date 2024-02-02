@@ -1,0 +1,48 @@
+<!-- Comprueba si se han cargado las pruebas médicas -->
+<ng-container *ngIf="entityData.items; else noItems">
+  <!-- Filtros -->
+  <app-filters-medical-tests-card
+    (filters)="applyFilters($event)"
+  ></app-filters-medical-tests-card>
+
+  <!-- Comprueba que hayan pruebas médicas -->
+  <ng-container *ngIf="entityData.items.length > 0; else lengthZero">
+    <!-- Recorre las pruebas médicas -->
+    <ng-container *ngFor="let medicalTest of entityData.items">
+      <app-view-medical-tests-card
+        [medicalTest]="medicalTest"
+      ></app-view-medical-tests-card>
+    </ng-container>
+
+    <!-- Selector elementos por página -->
+    <app-elements-per-page
+      [totalElements]="entityData.numItems"
+      [elementsPerPage]="entityData.numResults"
+      (elementsPerPageChangedEvent)="onEntriesPerPageChanged($event)"
+    >
+    </app-elements-per-page>
+
+    <!-- Paginación -->
+    <app-pagination
+      [page]="entityData.page"
+      [totalPages]="entityData.totalPages"
+      [numItems]="entityData.numItems"
+      (pageEmitter)="goToPage($event)"
+    >
+    </app-pagination>
+  </ng-container>
+
+  <!-- No hay pruebas médicas -->
+  <ng-template #lengthZero>
+    <app-generic-card [hasCardHeader]="false">
+      <div class="card-content">No hay pruebas médicas.</div>
+    </app-generic-card>
+  </ng-template>
+</ng-container>
+
+<!-- Cargando citas -->
+<ng-template #noItems>
+  <app-generic-card [hasCardHeader]="false">
+    <div class="card-content"><app-loading-spinner></app-loading-spinner></div>
+  </app-generic-card>
+</ng-template>

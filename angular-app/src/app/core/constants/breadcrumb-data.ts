@@ -266,20 +266,6 @@ export const breadcrumbMedicalTestsData = [
   { label: 'Pruebas médicas', url: '' },
 ];
 
-// Pruebas médicas crear
-export const breadcrumbMedicalTestsCreateData = [
-  { label: 'Panel Principal', url: '/' },
-  { label: 'Pruebas médicas', url: '/pruebas-medicas' },
-  { label: 'Crear prueba médica', url: '' },
-];
-
-// Pruebas médicas editar
-export const breadcrumbMedicalTestsEditData = [
-  { label: 'Panel Principal', url: '/' },
-  { label: 'Pruebas médicas', url: '/pruebas-medicas' },
-  { label: 'Editar prueba médica', url: '' },
-];
-
 // Pruebas médicas ver
 export const breadcrumbMedicalTestsViewData = [
   { label: 'Panel Principal', url: '/' },

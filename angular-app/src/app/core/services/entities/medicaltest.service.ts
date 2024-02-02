@@ -17,6 +17,9 @@ interface MedicalTestOptions {
   paginate?: boolean;
   sortBy?: string;
   sortOrder?: string;
+  completed?: 'true' | 'false';
+  dateFrom?: string;
+  dateTo?: string;
 }
 
 /**
@@ -49,9 +52,26 @@ export class MedicalTestService {
       paginate = false,
       sortBy,
       sortOrder,
+      completed,
+      dateFrom,
+      dateTo,
     } = options;
 
     let params = new HttpParams();
+
+    console.log(completed);
+
+    if (completed) {
+      params = params.set('completed', completed);
+    }
+
+    if (dateFrom) {
+      params = params.set('date_prescribed__gte', dateFrom);
+    }
+
+    if (dateTo) {
+      params = params.set('date_prescribed__lte', dateTo);
+    }
 
     if (paginate) {
       if (page) {
@@ -98,6 +118,30 @@ export class MedicalTestService {
     const httpOptions = { headers };
 
     return this._http.get<any>(`${this.url}appointment/`, {
+      params,
+      ...httpOptions,
+    });
+  }
+
+  /**
+   * Obtiene todas las pruebas médicas de un paciente.
+   * @param {MedicalTestOptions} options Opciones para filtrar las pruebas médicas.
+   * @param {string | null} patientId ID del paciente.
+   * @returns {Observable<any>} Un observable que emite un objeto `any`.
+   */
+  public getMedicalTestsByPatient(
+    options: MedicalTestOptions = {},
+    patientId: string | null = null
+  ): Observable<any> {
+    let params = this._buildParams(options);
+    if (patientId) {
+      params = params.set('patient_id', patientId);
+    }
+
+    const headers = this._httpCommonService.getCommonHeaders();
+    const httpOptions = { headers };
+
+    return this._http.get<any>(`${this.url}patient/`, {
       params,
       ...httpOptions,
     });
