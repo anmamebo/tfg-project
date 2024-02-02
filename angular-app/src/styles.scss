@@ -143,3 +143,11 @@ html[data-bs-theme="dark"] {
   outline: 0 !important;
   box-shadow: none !important;
 }
+
+button:focus,
+input:focus,
+select:focus,
+textarea:focus {
+  outline: 0 !important;
+  box-shadow: none !important;
+}
