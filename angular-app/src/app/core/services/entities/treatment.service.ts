@@ -138,6 +138,7 @@ export class TreatmentService {
   /**
    * Obtiene los tratamientos de un paciente.
    * @param {TreatmentOptions} options - Opciones para filtrar los tratamientos.
+   * @param {string | null} patientId - Id del paciente.
    * @returns {Observable<any>} Un observable que emite la respuesta del servidor.
    */
   public getTreatmentsByPatient(

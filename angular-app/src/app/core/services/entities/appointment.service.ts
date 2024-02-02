@@ -203,6 +203,7 @@ export class AppointmentService {
   /**
    * Obtiene las citas de un paciente con opciones específicas.
    * @param {AppointmentOptions} options - Opciones para filtrar las citas del paciente.
+   * @param {string | null} patientId - Id del paciente.
    * @returns {Observable<any>} Un observable que emite la respuesta del servidor.
    */
   public getAppointmentsByPatient(
