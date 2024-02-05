@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 
+import { SwalPortalTargets } from '@sweetalert2/ngx-sweetalert2';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { Spanish } from 'flatpickr/dist/l10n/es.js';
 
@@ -55,6 +56,7 @@ export class PatientInfoCardComponent implements OnInit {
     new EventEmitter<void>();
 
   constructor(
+    public readonly swalTargets: SwalPortalTargets,
     private _fb: FormBuilder,
     private _datePipe: DatePipe,
     private _patientService: PatientService,
@@ -190,5 +192,14 @@ export class PatientInfoCardComponent implements OnInit {
         this._notificationService.showErrorToast(error.message);
       },
     });
+  }
+
+  /**
+   * Emite un evento de actualización del paciente.
+   * @returns {void}
+   * @public
+   */
+  public onCreatedAddress(): void {
+    this.updatedPatientEvent.emit();
   }
 }

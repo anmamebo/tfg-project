@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { INTEGER_REGEXP } from 'src/app/core/constants/reg-exp';
@@ -30,6 +30,10 @@ export class AddressInfoCardComponent implements OnInit {
 
   /** Indica si se ha enviado el formulario */
   public submitted: boolean = false;
+
+  /** Evento para actualizar los datos del paciente */
+  @Output() public refreshPatient: EventEmitter<void> =
+    new EventEmitter<void>();
 
   constructor(
     private _fb: FormBuilder,
@@ -109,6 +113,30 @@ export class AddressInfoCardComponent implements OnInit {
       error: (error) => {
         this._notificationService.showErrorToast(error.message);
       },
+    });
+  }
+
+  /**
+   * Elimina la dirección del paciente.
+   * @returns {void}
+   * @public
+   */
+  public onDelete(): void {
+    if (!this.address) return;
+
+    this._notificationService.showConfirmDeleteDialog(() => {
+      if (!this.address) return;
+
+      this._addressService.deleteAddress(this.address.id).subscribe({
+        next: (response: any) => {
+          this._notificationService.showSuccessToast(response.message);
+          this.form.reset();
+          this.refreshPatient.emit();
+        },
+        error: (error) => {
+          this._notificationService.showErrorToast(error.message);
+        },
+      });
     });
   }
 }

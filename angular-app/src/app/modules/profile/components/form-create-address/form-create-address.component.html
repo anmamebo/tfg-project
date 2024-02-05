@@ -1,0 +1,168 @@
+<form
+  (ngSubmit)="onSubmit()"
+  [formGroup]="createAddressForm"
+  class="form form-horizontal"
+>
+  <div class="form-body text-start">
+    <div class="row w-100">
+      <!-- Calle -->
+      <div class="col-xl-6 col-12">
+        <div class="form-group">
+          <label for="street">Calle*</label>
+          <input
+            type="text"
+            formControlName="street"
+            id="street"
+            class="form-control"
+            placeholder="Calle"
+            [ngClass]="{
+              'is-invalid': submitted && form.get('street')?.errors
+            }"
+          />
+
+          <app-form-errors
+            [control]="form.get('street')"
+            [submitted]="submitted"
+          ></app-form-errors>
+        </div>
+      </div>
+
+      <!-- Número -->
+      <div class="col-xl-3 col-sm-6 col-12">
+        <div class="form-group">
+          <label for="number">Número*</label>
+          <input
+            type="text"
+            formControlName="number"
+            id="number"
+            class="form-control"
+            placeholder="Número"
+            [ngClass]="{
+              'is-invalid': submitted && form.get('number')?.errors
+            }"
+          />
+
+          <app-form-errors
+            [control]="form.get('number')"
+            [submitted]="submitted"
+          ></app-form-errors>
+        </div>
+      </div>
+
+      <!-- Piso -->
+      <div class="col-xl-3 col-sm-6 col-12">
+        <div class="form-group">
+          <label for="floor">Piso</label>
+          <input
+            type="text"
+            formControlName="floor"
+            id="floor"
+            class="form-control"
+            placeholder="Piso"
+            [ngClass]="{
+              'is-invalid': submitted && form.get('floor')?.errors
+            }"
+          />
+
+          <app-form-errors
+            [control]="form.get('floor')"
+            [submitted]="submitted"
+          ></app-form-errors>
+        </div>
+      </div>
+
+      <!-- Ciudad -->
+      <div class="col-xl-6 col-12">
+        <div class="form-group">
+          <label for="city">Ciudad*</label>
+          <input
+            type="text"
+            formControlName="city"
+            id="city"
+            class="form-control"
+            placeholder="Ciudad"
+            [ngClass]="{
+              'is-invalid': submitted && form.get('city')?.errors
+            }"
+          />
+
+          <app-form-errors
+            [control]="form.get('city')"
+            [submitted]="submitted"
+          ></app-form-errors>
+        </div>
+      </div>
+
+      <!-- Código Postal -->
+      <div class="col-xl-6 col-12">
+        <div class="form-group">
+          <label for="postal_code">Código Postal*</label>
+          <input
+            type="text"
+            formControlName="postal_code"
+            id="postal_code"
+            class="form-control"
+            placeholder="Código Postal"
+            [ngClass]="{
+              'is-invalid': submitted && form.get('postal_code')?.errors
+            }"
+          />
+
+          <app-form-errors
+            [control]="form.get('postal_code')"
+            [submitted]="submitted"
+          ></app-form-errors>
+        </div>
+      </div>
+
+      <!-- Provincia -->
+      <div class="col-md-6 col-12">
+        <div class="form-group">
+          <label for="province">Provincia*</label>
+          <input
+            type="text"
+            formControlName="province"
+            id="province"
+            class="form-control"
+            placeholder="Provincia"
+            [ngClass]="{
+              'is-invalid': submitted && form.get('province')?.errors
+            }"
+          />
+
+          <app-form-errors
+            [control]="form.get('province')"
+            [submitted]="submitted"
+          ></app-form-errors>
+        </div>
+      </div>
+
+      <!-- País -->
+      <div class="col-md-6 col-12">
+        <div class="form-group">
+          <label for="country">País*</label>
+          <input
+            type="text"
+            formControlName="country"
+            id="country"
+            class="form-control"
+            placeholder="País"
+            [ngClass]="{
+              'is-invalid': submitted && form.get('country')?.errors
+            }"
+          />
+
+          <app-form-errors
+            [control]="form.get('country')"
+            [submitted]="submitted"
+          ></app-form-errors>
+        </div>
+      </div>
+
+      <!-- Botones -->
+      <div class="col-12 d-flex justify-content-end">
+        <button type="submit" class="btn btn-primary mb-1">Añadir</button>
+      </div>
+    </div>
+  </div>
+</form>

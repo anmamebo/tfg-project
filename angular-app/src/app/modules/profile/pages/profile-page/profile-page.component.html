@@ -43,6 +43,7 @@
                   <ng-container *ngIf="user.patient.address">
                     <app-address-info-card
                       [address]="user.patient.address"
+                      (refreshPatient)="getUser()"
                     ></app-address-info-card>
                   </ng-container>
                 </ng-container>

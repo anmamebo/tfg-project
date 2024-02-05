@@ -139,7 +139,6 @@ export class EditAddressPatientsCardComponent implements OnInit {
 
   /**
    * Elimina la dirección del paciente.
-   * @param {string} id El identificador de la dirección.
    * @returns {void}
    * @public
    */

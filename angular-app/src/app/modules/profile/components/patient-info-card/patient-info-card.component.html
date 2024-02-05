@@ -1,5 +1,31 @@
 <app-generic-card [title]="titleCard">
   <div class="card-content">
+    <button
+      *ngIf="patient && !patient.address"
+      [swal]="createAddress"
+      class="btn btn-outline-primary"
+      style="position: absolute; right: 0; top: -80px"
+    >
+      Añadir dirección
+    </button>
+    <swal
+      #createAddress
+      [showCloseButton]="true"
+      [showCancelButton]="false"
+      [showConfirmButton]="false"
+      [width]="'1000px'"
+    >
+      <div *swalPortal="swalTargets.title">
+        <h4 class="mb-4 text-start text-uppercase">Añadir dirección</h4>
+      </div>
+      <div *swalPortal="swalTargets.content">
+        <app-form-create-address
+          *ngIf="patient"
+          [patientId]="patient.id"
+          (createdAddress)="onCreatedAddress()"
+        ></app-form-create-address>
+      </div>
+    </swal>
     <form
       *ngIf="patient"
       (ngSubmit)="onSubmit()"

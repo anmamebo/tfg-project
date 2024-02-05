@@ -28,6 +28,9 @@ import { PatientInfoCardComponent } from './components/patient-info-card/patient
 import { AddressInfoCardComponent } from './components/address-info-card/address-info-card.component';
 import { DoctorInfoCardComponent } from './components/doctor-info-card/doctor-info-card.component';
 
+// Componentes
+import { FormCreateAddressComponent } from './components/form-create-address/form-create-address.component';
+
 @NgModule({
   declarations: [
     ProfilePageComponent,
@@ -37,6 +40,7 @@ import { DoctorInfoCardComponent } from './components/doctor-info-card/doctor-in
     PatientInfoCardComponent,
     AddressInfoCardComponent,
     DoctorInfoCardComponent,
+    FormCreateAddressComponent,
   ],
   imports: [
     CommonModule,
