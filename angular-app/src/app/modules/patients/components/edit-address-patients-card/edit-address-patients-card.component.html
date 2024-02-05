@@ -1,5 +1,13 @@
 <app-generic-card [title]="titleCard">
   <div class="card-content">
+    <button
+      *ngIf="address"
+      (click)="onDelete()"
+      class="btn btn-outline-danger"
+      style="position: absolute; right: 0; top: -80px"
+    >
+      Eliminar
+    </button>
     <form
       (ngSubmit)="onSubmit()"
       [formGroup]="editAddressPatientForm"

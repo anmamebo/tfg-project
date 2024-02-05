@@ -38,7 +38,7 @@ export class AddressService {
 
     let params = JSON.stringify(address);
 
-    return this._http.post<any>(this.url, params, httpOptions);
+    return this._http.post<any>(`${this.url}`, params, httpOptions);
   }
 
   /**
@@ -53,9 +53,21 @@ export class AddressService {
     let params = JSON.stringify(address);
 
     return this._http.put<any>(
-      this.url + address.id + '/',
+      `${this.url}${address.id}/`,
       params,
       httpOptions
     );
+  }
+
+  /**
+   * Elimina una dirección.
+   * @param {string} id El identificador de la dirección.
+   * @returns {Observable<any>} Un observable que emite la respuesta del servidor.
+   */
+  public deleteAddress(id: string): Observable<any> {
+    const headers = this._httpCommonService.getCommonHeaders();
+    const httpOptions = { headers };
+
+    return this._http.delete<any>(`${this.url}${id}/`, httpOptions);
   }
 }

@@ -136,4 +136,29 @@ export class EditAddressPatientsCardComponent implements OnInit {
       });
     }
   }
+
+  /**
+   * Elimina la dirección del paciente.
+   * @param {string} id El identificador de la dirección.
+   * @returns {void}
+   * @public
+   */
+  public onDelete(): void {
+    if (!this.address) return;
+
+    this._notificationService.showConfirmDeleteDialog(() => {
+      if (!this.address) return;
+
+      this._addressService.deleteAddress(this.address.id).subscribe({
+        next: (response: any) => {
+          this._notificationService.showSuccessToast(response.message);
+          this.form.reset();
+          this.refreshPatient.emit();
+        },
+        error: (error) => {
+          this._notificationService.showErrorToast(error.message);
+        },
+      });
+    });
+  }
 }
