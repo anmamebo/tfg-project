@@ -110,3 +110,27 @@ class AddressViewSet(viewsets.GenericViewSet, ErrorResponseMixin):
             errors=address_serializer.errors,
             status_code=status.HTTP_400_BAD_REQUEST,
         )
+
+    @method_permission_classes([IsAdministratorOrDoctorOrPatient, IsAddressOwner])
+    def destroy(self, request, pk=None):
+        """
+        Elimina una dirección existente.
+
+        Permisos requeridos:
+            - El usuario debe ser administrador, médico o paciente.
+            - El usuario debe ser el dueño de la dirección (en el caso de paciente).
+
+        Args:
+            request (Request): La solicitud HTTP.
+            pk (int): El ID de la dirección.
+
+        Returns:
+            Response: La respuesta que indica si la dirección se ha eliminado correctamente o si ha habido errores.
+        """
+        address = self.get_object(pk)
+        address.delete()
+
+        return Response(
+            {"message": "Dirección eliminada correctamente."},
+            status=status.HTTP_200_OK,
+        )
