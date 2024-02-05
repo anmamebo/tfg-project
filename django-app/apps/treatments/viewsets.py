@@ -1,7 +1,6 @@
 from datetime import datetime
 
 from apps.appointments.models import Appointment
-from apps.appointments.permissions import IsAppointmentPatient
 from apps.patients.models import Patient
 from apps.treatments.mixins import GeneratePDFMixin
 from apps.treatments.models import Treatment
@@ -11,7 +10,11 @@ from apps.treatments.permissions import (
     IsTreatmentsPatient,
 )
 from apps.treatments.serializers import TreatmentListSerializer, TreatmentSerializer
-from config.permissions import IsAdministratorOrDoctorOrPatient, IsDoctor
+from config.permissions import (
+    IsAdministratorOrDoctor,
+    IsAdministratorOrDoctorOrPatient,
+    IsDoctor,
+)
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
@@ -175,15 +178,14 @@ class TreatmentViewSet(
             status=status.HTTP_200_OK,
         )
 
-    @method_permission_classes([IsAdministratorOrDoctorOrPatient, IsAppointmentPatient])
+    @method_permission_classes([IsAdministratorOrDoctor])
     @action(detail=False, methods=["get"], url_path="appointment")
     def list_for_appointment(self, request):
         """
         Lista todos los tratamientos de una cita.
 
         Permisos requeridos:
-            - El usuario debe ser administrador, médico o paciente.
-            - El usuario debe ser el paciente de la cita (en el caso de paciente).
+            - El usuario debe ser administrador o médico.
 
         Parámetros:
             appointment_id (str): El identificador de la cita.
