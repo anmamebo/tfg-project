@@ -3,7 +3,11 @@ from datetime import datetime, timedelta
 import pytz
 from apps.appointments.mixins import GeneratePDFMixin
 from apps.appointments.models import Appointment
-from apps.appointments.permissions import IsAppointmentOwner, IsAppointmentPatient
+from apps.appointments.permissions import (
+    IsAppointmentOwner,
+    IsAppointmentPatient,
+    IsAppointmentsPatient,
+)
 from apps.appointments.serializers import (
     AppointmentSerializer,
     CreateAppointmentSerializer,
@@ -13,7 +17,6 @@ from config.permissions import (
     IsAdministrator,
     IsAdministratorOrDoctorOrPatient,
     IsDoctor,
-    IsDoctorOrPatient,
     IsPatient,
 )
 from config.settings import TIME_ZONE
@@ -226,14 +229,17 @@ class AppointmentViewSet(
             appointments, self.list_serializer_class
         )
 
-    @method_permission_classes([IsAdministratorOrDoctorOrPatient, IsAppointmentPatient])
+    @method_permission_classes(
+        [IsAdministratorOrDoctorOrPatient, IsAppointmentsPatient]
+    )
     @action(detail=False, methods=["get"], url_path="patient")
     def list_for_patient(self, request):
         """
         Lista todas las citas de un paciente ordenadas por fecha más cercana.
 
         Permisos requeridos:
-            - El usuario debe ser un paciente o un médico.
+            - El usuario debe ser un administrador, un paciente o un médico.
+            - El usuario debe ser el paciente de las citas (en el caso de paciente).
 
         Parámetros opcionales:
             patient_id (str): El identificador del paciente.
@@ -288,11 +294,19 @@ class AppointmentViewSet(
             appointments, self.list_serializer_class
         )
 
+    @method_permission_classes(
+        [IsAdministratorOrDoctorOrPatient, IsAppointmentOwner, IsAppointmentPatient]
+    )
     @action(detail=True, methods=["put"], url_path="status")
     def update_status(self, request, pk=None):
         """
         Actualiza el estado de una cita, siempre y cuando
         la transición de estado sea válida.
+
+        Permisos requeridos:
+            - El usuario debe ser un administrador, un paciente o un médico.
+            - El usuario debe ser el paciente de la cita (en el caso de paciente).
+            - El usuario debe ser el médico de la cita (en el caso de médico).
 
         Args:
             request (Request): La solicitud HTTP.

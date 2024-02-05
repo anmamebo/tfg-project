@@ -5,13 +5,13 @@ from apps.appointments.permissions import IsAppointmentPatient
 from apps.patients.models import Patient
 from apps.treatments.mixins import GeneratePDFMixin
 from apps.treatments.models import Treatment
-from apps.treatments.permissions import IsTreatmentPatient, isTreatmentDoctor
-from apps.treatments.serializers import TreatmentListSerializer, TreatmentSerializer
-from config.permissions import (
-    IsAdministratorOrDoctorOrPatient,
-    IsDoctor,
-    IsDoctorOrPatient,
+from apps.treatments.permissions import (
+    IsTreatmentDoctor,
+    IsTreatmentPatient,
+    IsTreatmentsPatient,
 )
+from apps.treatments.serializers import TreatmentListSerializer, TreatmentSerializer
+from config.permissions import IsAdministratorOrDoctorOrPatient, IsDoctor
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
@@ -109,7 +109,7 @@ class TreatmentViewSet(
         serializer = self.serializer_class(treatment)
         return Response(serializer.data)
 
-    @method_permission_classes([IsDoctor, isTreatmentDoctor])
+    @method_permission_classes([IsDoctor, IsTreatmentDoctor])
     def update(self, request, pk=None):
         """
         Actualiza un tratamiento.
@@ -142,7 +142,7 @@ class TreatmentViewSet(
             status_code=status.HTTP_400_BAD_REQUEST,
         )
 
-    @method_permission_classes([IsDoctor, isTreatmentDoctor])
+    @method_permission_classes([IsDoctor, IsTreatmentDoctor])
     def destroy(self, request, pk=None):
         """
         Elimina un tratamiento.
@@ -216,14 +216,15 @@ class TreatmentViewSet(
             treatments, self.list_serializer_class
         )
 
-    @method_permission_classes([IsAdministratorOrDoctorOrPatient])
+    @method_permission_classes([IsAdministratorOrDoctorOrPatient, IsTreatmentsPatient])
     @action(detail=False, methods=["get"], url_path="patient")
     def list_for_patient(self, request):
         """
         Lista todos los tratamientos de un paciente.
 
         Permisos requeridos:
-            - El usuario debe ser paciente o médico.
+            - El usuario debe ser administrador, paciente o médico.
+            - El usuario debe ser el paciente de los tratamientos (en el caso de paciente).
 
         Parámetros opcionales:
             patient_id (str): El identificador del paciente.
@@ -263,7 +264,9 @@ class TreatmentViewSet(
             treatments, self.list_serializer_class
         )
 
-    @method_permission_classes([IsAdministratorOrDoctorOrPatient, IsTreatmentPatient])
+    @method_permission_classes(
+        [IsAdministratorOrDoctorOrPatient, IsTreatmentDoctor, IsTreatmentPatient]
+    )
     @action(detail=True, methods=["put"], url_path="status")
     def update_status(self, request, pk=None):
         """
@@ -272,6 +275,7 @@ class TreatmentViewSet(
 
         Permisos requeridos:
             - El usuario debe ser administrador, médico o paciente.
+            - El usuario debe ser el médico del tratamiento (en el caso de médico).
             - El usuario debe ser el paciente del tratamiento (en el caso de paciente).
 
         Args:
