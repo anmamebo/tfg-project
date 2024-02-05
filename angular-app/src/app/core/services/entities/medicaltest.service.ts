@@ -59,8 +59,6 @@ export class MedicalTestService {
 
     let params = new HttpParams();
 
-    console.log(completed);
-
     if (completed) {
       params = params.set('completed', completed);
     }
@@ -197,11 +195,14 @@ export class MedicalTestService {
     const headers = this._httpCommonService.getCommonHeaders();
 
     return this._http
-      .get(`${this.url}${attachmentId}/download-attachment/`, {
-        headers,
-        responseType: 'blob',
-        observe: 'response',
-      })
+      .get(
+        `${API_URL.url}medicaltestattachments/${attachmentId}/download-attachment/`,
+        {
+          headers,
+          responseType: 'blob',
+          observe: 'response',
+        }
+      )
       .pipe(
         map((response: HttpResponse<Blob> | null) => {
           if (!response || !response.body) {
@@ -242,7 +243,7 @@ export class MedicalTestService {
     formData.append('medical_test', attachment.medical_test);
 
     return this._http.post<any>(
-      `${this.url}upload-attachment/`,
+      `${API_URL.url}medicaltestattachments/upload-attachment/`,
       formData,
       httpOptions
     );
@@ -258,7 +259,7 @@ export class MedicalTestService {
     const httpOptions = { headers };
 
     return this._http.delete<any>(
-      `${this.url}${attachmentId}/delete-attachment/`,
+      `${API_URL.url}medicaltestattachments/${attachmentId}/delete-attachment/`,
       httpOptions
     );
   }
