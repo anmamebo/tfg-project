@@ -30,7 +30,7 @@ class Patient(BaseModel):
     )
     address = models.OneToOneField(
         Address,
-        on_delete=models.CASCADE,
+        on_delete=models.SET_NULL,
         verbose_name="Dirección",
         blank=True,
         null=True,
