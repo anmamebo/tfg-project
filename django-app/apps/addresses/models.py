@@ -16,4 +16,5 @@ class Address(BaseModel):
         verbose_name_plural = "Direcciones"
 
     def __str__(self):
-        return f"{self.street} {self.number} {self.floor} - {self.city} ({self.province}) - {self.country} - {self.postal_code}"
+        floor = f"{self.floor}" if self.floor else ""
+        return f"{self.street} {self.number} {floor} - {self.city} ({self.province}) - {self.country} - {self.postal_code}"
