@@ -1,4 +1,4 @@
-from apps.medicaltests.viewsets import MedicalTestViewSet
+from apps.medicaltests.viewsets.medicaltest_viewsets import MedicalTestViewSet
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
