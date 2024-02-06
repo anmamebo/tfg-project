@@ -58,7 +58,7 @@ export class ViewAttachmentsMedicalTestsCardComponent {
     this._medicalTestService
       .downloadMedicalTestAttachment(attachmentId)
       .subscribe({
-        next: (response: any) => {
+        next: (response: Blob) => {
           console.log(response);
         },
       });

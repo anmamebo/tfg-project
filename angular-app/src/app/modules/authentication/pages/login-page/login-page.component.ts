@@ -6,6 +6,9 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { TokenStorageService } from 'src/app/core/services/auth/token-storage.service';
 
+// Modelos
+import { AuthResponse } from 'src/app/core/models/response/auth-response.interface';
+
 /**
  * Componente que representa la página de inicio de sesión.
  */
@@ -64,7 +67,7 @@ export class LoginPageComponent {
     };
 
     this._authService.login(user).subscribe({
-      next: (response) => {
+      next: (response: AuthResponse) => {
         this.errorMessage = '';
         this._tokenStorageService.saveSingIn(response);
         this._router.navigate(['/']);

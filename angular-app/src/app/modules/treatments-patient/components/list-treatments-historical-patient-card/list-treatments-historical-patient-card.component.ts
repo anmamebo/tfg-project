@@ -4,6 +4,11 @@ import { GenericListCardComponent } from 'src/app/shared/components/generic-list
 // Servicios
 import { TreatmentService } from 'src/app/core/services/entities/treatment.service';
 import { NotificationService } from 'src/app/core/services/notifications/notification.service';
+import {
+  ListResponse,
+  PaginatedResponse,
+} from 'src/app/core/models/response/list-response.interface';
+import { Treatment } from 'src/app/core/models/treatment.interface';
 
 /**
  * Componente que representa una tarjeta de listado de tratamientos para el rol de paciente.
@@ -83,9 +88,10 @@ export class ListTreatmentsHistoricalPatientCardComponent extends GenericListCar
         this.patientId
       )
       .subscribe({
-        next: (response: any) => {
-          this.entityData.items = response.results;
-          this.entityData.numItems = response.count;
+        next: (response: ListResponse<Treatment>) => {
+          const paginatedResponse = response as PaginatedResponse<Treatment>;
+          this.entityData.items = paginatedResponse.results;
+          this.entityData.numItems = paginatedResponse.count;
           this.entityData.totalPages = Math.ceil(
             this.entityData.numItems / this.entityData.numResults
           );

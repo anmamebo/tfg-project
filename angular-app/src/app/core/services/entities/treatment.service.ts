@@ -4,6 +4,9 @@ import { Observable } from 'rxjs';
 
 import { API_URL } from 'src/app/core/constants/API-URL.constants';
 
+import { ListResponse } from 'src/app/core/models/response/list-response.interface';
+import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
+
 // Servicios
 import { HttpCommonService } from 'src/app/core/services/http-common/http-common.service';
 
@@ -117,19 +120,19 @@ export class TreatmentService {
    * Obtiene los tratamientos de una cita.
    * @param {string} appointmentId Id de la cita.
    * @param {TreatmentOptions} options - Opciones para filtrar los tratamientos.
-   * @returns {Observable<any>} Un observable que emite la respuesta del servidor.
+   * @returns {Observable<ListResponse<Treatment>>} Un observable que emite la respuesta del servidor.
    */
   public getTreatmentsByAppointment(
     appointmentId: string,
     options: TreatmentOptions = {}
-  ): Observable<any> {
+  ): Observable<ListResponse<Treatment>> {
     let params = this._buildParams(options);
     params = params.append('appointment_id', appointmentId);
 
     const headers = this._httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
-    return this._http.get<any>(`${this.url}appointment/`, {
+    return this._http.get<ListResponse<Treatment>>(`${this.url}appointment/`, {
       params,
       ...httpOptions,
     });
@@ -139,12 +142,12 @@ export class TreatmentService {
    * Obtiene los tratamientos de un paciente.
    * @param {TreatmentOptions} options - Opciones para filtrar los tratamientos.
    * @param {string | null} patientId - Id del paciente.
-   * @returns {Observable<any>} Un observable que emite la respuesta del servidor.
+   * @returns {Observable<ListResponse<Treatment>>} Un observable que emite la respuesta del servidor.
    */
   public getTreatmentsByPatient(
     options: TreatmentOptions = {},
     patientId: string | null = null
-  ): Observable<any> {
+  ): Observable<ListResponse<Treatment>> {
     let params = this._buildParams(options);
 
     if (patientId) {
@@ -154,7 +157,7 @@ export class TreatmentService {
     const headers = this._httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
-    return this._http.get<any>(`${this.url}patient/`, {
+    return this._http.get<ListResponse<Treatment>>(`${this.url}patient/`, {
       params,
       ...httpOptions,
     });
@@ -163,28 +166,28 @@ export class TreatmentService {
   /**
    * Crear un tratamiento.
    * @param {Treatment} treatment El tratamiento a crear.
-   * @returns {Observable<any>} Un observable que emite la respuesta del servidor.
+   * @returns {Observable<MessageResponse>} Un observable que emite la respuesta del servidor.
    */
-  public createTreatment(treatment: Treatment): Observable<any> {
+  public createTreatment(treatment: Treatment): Observable<MessageResponse> {
     const headers = this._httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
     let params = JSON.stringify(treatment);
 
-    return this._http.post<any>(`${this.url}`, params, httpOptions);
+    return this._http.post<MessageResponse>(`${this.url}`, params, httpOptions);
   }
 
   /**
    * Actualiza el estado de un tratamiento.
    * @param {string} id ID del tratamiento.
    * @param {string} status Estado del tratamiento.
-   * @returns {Observable<any>} Un observable que emite la respuesta del servidor.
+   * @returns {Observable<MessageResponse>} Un observable que emite la respuesta del servidor.
    */
-  public updateStatus(id: string, status: string): Observable<any> {
+  public updateStatus(id: string, status: string): Observable<MessageResponse> {
     const headers = this._httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
-    return this._http.put<any>(
+    return this._http.put<MessageResponse>(
       `${this.url}${id}/status/`,
       { status },
       httpOptions
@@ -195,26 +198,33 @@ export class TreatmentService {
    * Actualiza un tratamiento.
    * @param {string} id ID del tratamiento.
    * @param {Treatment} treatment El tratamiento a actualizar.
-   * @returns {Observable<any>} Un observable que emite la respuesta del servidor.
+   * @returns {Observable<MessageResponse>} Un observable que emite la respuesta del servidor.
    */
-  public updateTreatment(id: string, treatment: Treatment): Observable<any> {
+  public updateTreatment(
+    id: string,
+    treatment: Treatment
+  ): Observable<MessageResponse> {
     const headers = this._httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
     let params = JSON.stringify(treatment);
 
-    return this._http.put<any>(`${this.url}${id}/`, params, httpOptions);
+    return this._http.put<MessageResponse>(
+      `${this.url}${id}/`,
+      params,
+      httpOptions
+    );
   }
 
   /**
    * Elimina un tratamiento.
    * @param {string} id ID del tratamiento.
-   * @returns {Observable<any>} Un observable que emite la respuesta del servidor.
+   * @returns {Observable<MessageResponse>} Un observable que emite la respuesta del servidor.
    */
-  public deleteTreatment(id: string): Observable<any> {
+  public deleteTreatment(id: string): Observable<MessageResponse> {
     const headers = this._httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
-    return this._http.delete<any>(`${this.url}${id}/`, httpOptions);
+    return this._http.delete<MessageResponse>(`${this.url}${id}/`, httpOptions);
   }
 }

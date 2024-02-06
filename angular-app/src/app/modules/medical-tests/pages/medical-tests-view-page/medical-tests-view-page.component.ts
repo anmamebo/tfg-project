@@ -72,7 +72,7 @@ export class MedicalTestsViewPageComponent {
     if (!this.medicalTest) return;
 
     this._medicalTestService.getMedicalTestById(this.medicalTest.id).subscribe({
-      next: (response: any) => {
+      next: (response: MedicalTest) => {
         this.medicalTest = response;
       },
       error: (error: any) => {

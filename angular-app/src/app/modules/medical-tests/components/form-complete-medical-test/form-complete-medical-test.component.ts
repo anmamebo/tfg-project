@@ -5,6 +5,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MedicalTestService } from 'src/app/core/services/entities/medicaltest.service';
 import { NotificationService } from 'src/app/core/services/notifications/notification.service';
 
+// Modelos
+import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
+
 /**
  * Componente para el formulario de completar una prueba médica.
  */
@@ -62,7 +65,7 @@ export class FormCompleteMedicalTestComponent {
     this._medicalTestService
       .updateMedicalTest(this.medicalTestId, medicalTest)
       .subscribe({
-        next: (response: any) => {
+        next: (response: MessageResponse) => {
           this.form.reset();
           this.submitted = false;
           this.completedMedicalTest.emit();

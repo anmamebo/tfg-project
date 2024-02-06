@@ -6,6 +6,10 @@ import { NotificationService } from 'src/app/core/services/notifications/notific
 
 // Modelos
 import { Room } from 'src/app/core/models/room.interface';
+import {
+  ListResponse,
+  PaginatedResponse,
+} from 'src/app/core/models/response/list-response.interface';
 
 /**
  * Componente que representa la tarjeta de visualización de las salas
@@ -106,9 +110,10 @@ export class ViewRoomsDepartmentsCardComponent implements OnInit {
         pageSize: this.numResults,
       })
       .subscribe({
-        next: (response: any) => {
-          this.rooms = response.results;
-          this.numRooms = response.count;
+        next: (response: ListResponse<Room>) => {
+          const paginatedResponse = response as PaginatedResponse<Room>;
+          this.rooms = paginatedResponse.results;
+          this.numRooms = paginatedResponse.count;
           this.totalPages = Math.ceil(this.numRooms / this.numResults);
         },
         error: (error: any) => {

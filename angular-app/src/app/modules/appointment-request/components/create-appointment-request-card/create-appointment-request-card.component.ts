@@ -11,6 +11,11 @@ import { AppointmentService } from 'src/app/core/services/entities/appointment.s
 import { MedicalspecialtyService } from 'src/app/core/services/entities/medicalspecialty.service';
 import { NotificationService } from 'src/app/core/services/notifications/notification.service';
 
+// Modelos
+import { MedicalSpecialty } from 'src/app/core/models/medical-specialty.interface';
+import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
+import { ListResponse } from 'src/app/core/models/response/list-response.interface';
+
 /**
  * Componente que representa la tarjeta de creación de una solicitud de cita
  */
@@ -87,7 +92,7 @@ export class CreateAppointmentRequestCardComponent implements OnInit {
     };
 
     this._appointmentService.createAppointment(appointment).subscribe({
-      next: (response: any) => {
+      next: (response: MessageResponse) => {
         this.createAppointmentRequestForm.reset();
         this.submitted = false;
         this._notificationService.showSuccessToast(response.message);
@@ -105,11 +110,15 @@ export class CreateAppointmentRequestCardComponent implements OnInit {
    */
   private _getSpecialties(): void {
     this._medicalSpecialtyService.getItems().subscribe({
-      next: (response: any) => {
-        this.medicalSpecialties = response.map((specialty: any) => ({
-          item_id: specialty.id,
-          item_text: specialty.name,
-        }));
+      next: (response: ListResponse<MedicalSpecialty>) => {
+        if (Array.isArray(response)) {
+          this.medicalSpecialties = response.map(
+            (specialty: MedicalSpecialty) => ({
+              item_id: specialty.id,
+              item_text: specialty.name,
+            })
+          );
+        }
       },
       error: (error: any) => {
         this._notificationService.showErrorToast(error.message);

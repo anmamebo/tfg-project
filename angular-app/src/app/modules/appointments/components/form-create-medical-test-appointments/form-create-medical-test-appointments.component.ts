@@ -7,6 +7,7 @@ import { NotificationService } from 'src/app/core/services/notifications/notific
 
 // Modelos
 import { Appointment } from 'src/app/core/models/appointment.interface';
+import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
 
 /**
  * Componente que representa la tarjeta de creación de una prueba médica
@@ -77,7 +78,7 @@ export class FormCreateMedicalTestAppointmentsComponent {
     };
 
     this._medicalTestService.createMedicalTest(medicalTest).subscribe({
-      next: (response: any) => {
+      next: (response: MessageResponse) => {
         this.createMedicalTestForm.reset();
         this.submitted = false;
         this.createdMedicalTest.emit();

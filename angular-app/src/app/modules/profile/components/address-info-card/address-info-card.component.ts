@@ -9,6 +9,7 @@ import { NotificationService } from 'src/app/core/services/notifications/notific
 
 // Modelos
 import { Address } from 'src/app/core/models/address.interface';
+import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
 
 /**
  * Componente que representa una tarjeta de información de dirección de usuario.
@@ -106,7 +107,7 @@ export class AddressInfoCardComponent implements OnInit {
     };
 
     this._addressService.updateAddress(updateAddress).subscribe({
-      next: (response) => {
+      next: (response: MessageResponse) => {
         this.submitted = false;
         this._notificationService.showSuccessToast(response.message);
       },
@@ -128,7 +129,7 @@ export class AddressInfoCardComponent implements OnInit {
       if (!this.address) return;
 
       this._addressService.deleteAddress(this.address.id).subscribe({
-        next: (response: any) => {
+        next: (response: MessageResponse) => {
           this._notificationService.showSuccessToast(response.message);
           this.form.reset();
           this.refreshPatient.emit();

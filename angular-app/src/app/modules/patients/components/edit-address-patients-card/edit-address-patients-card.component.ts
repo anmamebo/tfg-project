@@ -9,6 +9,7 @@ import { NotificationService } from 'src/app/core/services/notifications/notific
 
 // Modelos
 import { Address } from 'src/app/core/models/address.interface';
+import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
 
 /**
  * Componente que representa la tarjeta de edición de la
@@ -113,7 +114,7 @@ export class EditAddressPatientsCardComponent implements OnInit {
       address.patient_id = this.patientId;
 
       this._addressService.createAddress(address).subscribe({
-        next: (response) => {
+        next: (response: MessageResponse) => {
           this.submitted = false;
           this._notificationService.showSuccessToast(response.message);
           this.refreshPatient.emit();
@@ -125,7 +126,7 @@ export class EditAddressPatientsCardComponent implements OnInit {
     } else {
       // Si el paciente tiene dirección, se actualiza
       this._addressService.updateAddress(address).subscribe({
-        next: (response) => {
+        next: (response: MessageResponse) => {
           this.submitted = false;
           this._notificationService.showSuccessToast(response.message);
           this.refreshPatient.emit();
@@ -149,7 +150,7 @@ export class EditAddressPatientsCardComponent implements OnInit {
       if (!this.address) return;
 
       this._addressService.deleteAddress(this.address.id).subscribe({
-        next: (response: any) => {
+        next: (response: MessageResponse) => {
           this._notificationService.showSuccessToast(response.message);
           this.form.reset();
           this.refreshPatient.emit();

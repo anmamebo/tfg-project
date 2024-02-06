@@ -18,6 +18,7 @@ import {
 import { PatientService } from 'src/app/core/services/entities/patient.service';
 import { NotificationService } from 'src/app/core/services/notifications/notification.service';
 import { CountriesService } from 'src/app/core/services/entities/countries.service';
+import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
 
 /**
  * Componente que representa la tarjeta de creación de un paciente
@@ -185,7 +186,7 @@ export class CreatePatientsCardComponent implements OnInit {
     }
 
     this._patientService.create(patient).subscribe({
-      next: (response) => {
+      next: (response: MessageResponse) => {
         this.createPatientForm.reset();
         this.submitted = false;
         this._notificationService.showSuccessToast(response.message);

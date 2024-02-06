@@ -43,7 +43,7 @@ export class AvatarComponent implements OnInit {
 
   ngOnInit(): void {
     this._userService.getProfilePicture().subscribe({
-      next: (response) => {
+      next: (response: any) => {
         this.profile_picture = response.profile_picture;
       },
       error: (error) => {

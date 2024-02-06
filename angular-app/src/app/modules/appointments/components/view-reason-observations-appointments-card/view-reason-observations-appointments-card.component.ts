@@ -7,6 +7,7 @@ import { NotificationService } from 'src/app/core/services/notifications/notific
 
 // Modelos
 import { Appointment } from 'src/app/core/models/appointment.interface';
+import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
 
 @Component({
   selector: 'app-view-reason-observations-appointments-card',
@@ -83,7 +84,7 @@ export class ViewReasonObservationsAppointmentsCardComponent implements OnInit {
     this._appointmentService
       .update(this.appointment.id, appointment)
       .subscribe({
-        next: (response: any) => {
+        next: (response: MessageResponse) => {
           this._notificationService.showSuccessToast(
             'Observaciones actualizadas correctamente.'
           );

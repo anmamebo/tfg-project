@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { INTEGER_REGEXP } from 'src/app/core/constants/regex.constants';
+import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
 
 // Servicios
 import { AddressService } from 'src/app/core/services/entities/address.service';
@@ -79,7 +80,7 @@ export class FormCreateAddressComponent {
     };
 
     this._addressService.createAddress(addressData).subscribe({
-      next: (response) => {
+      next: (response: MessageResponse) => {
         this.submitted = false;
         this.createdAddress.emit();
         this._notificationService.showSuccessToast(response.message);

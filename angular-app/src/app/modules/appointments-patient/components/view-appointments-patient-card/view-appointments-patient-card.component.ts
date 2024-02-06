@@ -13,6 +13,7 @@ import {
   StatusBadgeClasses,
   STATUS_BADGE_CLASSES,
 } from 'src/app/core/models/appointment.interface';
+import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
 
 /**
  * Componente que representa una tarjeta de visualización de citas para el rol de paciente.
@@ -77,7 +78,7 @@ export class ViewAppointmentsPatientCardComponent implements OnInit {
         this._appointmentService
           .updateStatus(this.appointment.id, 'cancelled')
           .subscribe({
-            next: (response: any) => {
+            next: (response: MessageResponse) => {
               this.appointmentCancelled.emit();
             },
             error: (error: any) => {
@@ -124,7 +125,7 @@ export class ViewAppointmentsPatientCardComponent implements OnInit {
     this._pdfAppointmentService
       .downloadAppointmentPdf(this.appointment.id)
       .subscribe({
-        next: (response: any) => {
+        next: (response: Blob) => {
           console.log(response);
         },
         error: (error: any) => {
@@ -144,7 +145,7 @@ export class ViewAppointmentsPatientCardComponent implements OnInit {
     this._pdfAppointmentService
       .printAppointmentPdf(this.appointment.id)
       .subscribe({
-        next: (response: any) => {
+        next: (response: Blob) => {
           console.log(response);
         },
         error: (error: any) => {

@@ -5,6 +5,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DepartmentService } from 'src/app/core/services/entities/department.service';
 import { NotificationService } from 'src/app/core/services/notifications/notification.service';
 
+// Modelos
+import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
+
 /**
  * Componente que representa la tarjeta de creación de un departamento
  */
@@ -58,7 +61,7 @@ export class CreateDepartmentsCardComponent {
     };
 
     this._departmentService.create(department).subscribe({
-      next: (response: any) => {
+      next: (response: MessageResponse) => {
         this.form.reset();
         this.submitted = false;
         this._notificationService.showSuccessToast(response.message);

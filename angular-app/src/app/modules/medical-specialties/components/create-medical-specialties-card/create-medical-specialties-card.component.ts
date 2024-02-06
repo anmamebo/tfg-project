@@ -5,6 +5,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MedicalspecialtyService } from 'src/app/core/services/entities/medicalspecialty.service';
 import { NotificationService } from 'src/app/core/services/notifications/notification.service';
 
+// Modelos
+import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
+
 /**
  * Componente que representa la tarjeta de creación de una especialidad médica
  */
@@ -57,7 +60,7 @@ export class CreateMedicalSpecialtiesCardComponent {
     };
 
     this._medicalSpecialtyService.create(medicalSpecialty).subscribe({
-      next: (response: any) => {
+      next: (response: MessageResponse) => {
         this.form.reset();
         this.submitted = false;
         this._notificationService.showSuccessToast(response.message);

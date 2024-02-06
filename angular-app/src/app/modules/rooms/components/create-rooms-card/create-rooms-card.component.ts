@@ -9,6 +9,11 @@ import { RoomService } from 'src/app/core/services/entities/room.service';
 import { DepartmentService } from 'src/app/core/services/entities/department.service';
 import { NotificationService } from 'src/app/core/services/notifications/notification.service';
 
+// Modelos
+import { ListResponse } from 'src/app/core/models/response/list-response.interface';
+import { Department } from 'src/app/core/models/department.interface';
+import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
+
 /**
  * Componente que representa la tarjeta de creación de una sala
  */
@@ -93,7 +98,7 @@ export class CreateRoomsCardComponent implements OnInit {
     };
 
     this._roomService.create(room).subscribe({
-      next: (response) => {
+      next: (response: MessageResponse) => {
         this.form.reset();
         this.submitted = false;
         this._notificationService.showSuccessToast(response.message);
@@ -111,13 +116,15 @@ export class CreateRoomsCardComponent implements OnInit {
    */
   public getDepartments(): void {
     this._departmentService.getItems().subscribe({
-      next: (response) => {
-        this.departments = response.map(
-          (item: { id: String; name: String }) => ({
-            item_id: item.id,
-            item_text: item.name,
-          })
-        );
+      next: (response: ListResponse<Department>) => {
+        if (Array.isArray(response)) {
+          this.departments = response.map(
+            (item: { id: String; name: String }) => ({
+              item_id: item.id,
+              item_text: item.name,
+            })
+          );
+        }
       },
       error: (error) => {
         this._notificationService.showErrorToast(error.message);

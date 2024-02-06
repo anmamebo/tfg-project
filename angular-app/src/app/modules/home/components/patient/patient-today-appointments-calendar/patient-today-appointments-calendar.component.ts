@@ -15,6 +15,7 @@ import { AppointmentService } from 'src/app/core/services/entities/appointment.s
 
 // Modelos
 import { Appointment } from 'src/app/core/models/appointment.interface';
+import { ListResponse } from 'src/app/core/models/response/list-response.interface';
 
 /**
  * Componente que representa la tarjeta de citas del día actual de un paciente.
@@ -96,10 +97,11 @@ export class PatientTodayAppointmentsCalendarComponent
         ],
       })
       .subscribe({
-        next: (response: Appointment[]) => {
-          this.events = this._formatData(response);
-
-          this._cdr.detectChanges();
+        next: (response: ListResponse<Appointment>) => {
+          if (Array.isArray(response)) {
+            this.events = this._formatData(response);
+            this._cdr.detectChanges();
+          }
         },
         error: (error) => {
           console.error(error);

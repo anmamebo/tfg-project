@@ -7,6 +7,7 @@ import { NotificationService } from 'src/app/core/services/notifications/notific
 
 // Modelos
 import { MedicalSpecialty } from 'src/app/core/models/medical-specialty.interface';
+import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
 
 /**
  * Componente que representa la tarjeta de edición de la
@@ -83,7 +84,7 @@ export class EditMedicalSpecialtiesCardComponent {
     this._medicalSpecialtyService
       .update(this.medicalSpecialty.id, updateMedicalSpecialty)
       .subscribe({
-        next: (response: any) => {
+        next: (response: MessageResponse) => {
           this.submitted = false;
           this._notificationService.showSuccessToast(response.message);
         },

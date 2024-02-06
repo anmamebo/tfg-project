@@ -7,6 +7,7 @@ import { NotificationService } from 'src/app/core/services/notifications/notific
 
 // Modelos
 import { Group } from 'src/app/core/models/group.interface';
+import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
 
 /**
  * Componente que representa la tarjeta para crear un grupo
@@ -59,7 +60,7 @@ export class CreateGroupCardComponent {
     const group: Group = { id: '', name: this.form.value.name };
 
     this._groupService.create(group).subscribe({
-      next: (response) => {
+      next: (response: MessageResponse) => {
         this.submitted = false;
         this._notificationService.showSuccessToast(response.message);
         this.groupCreated.emit();

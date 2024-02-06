@@ -11,6 +11,10 @@ import { NotificationService } from 'src/app/core/services/notifications/notific
 
 // Modelos
 import { Doctor } from 'src/app/core/models/doctor.interface';
+import { ListResponse } from 'src/app/core/models/response/list-response.interface';
+import { MedicalSpecialty } from 'src/app/core/models/medical-specialty.interface';
+import { Department } from 'src/app/core/models/department.interface';
+import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
 
 /**
  * Componente que representa la tarjeta de edición de la
@@ -144,7 +148,7 @@ export class EditBasicInfoDoctorsCardComponent implements OnInit {
     };
 
     this._doctorService.update(this.doctor.id, updatedData).subscribe({
-      next: (response) => {
+      next: (response: MessageResponse) => {
         this.submitted = false;
         this._notificationService.showSuccessToast(response.message);
         this.refreshDoctor.emit();
@@ -162,13 +166,15 @@ export class EditBasicInfoDoctorsCardComponent implements OnInit {
    */
   public getMedicalSpecialties(): void {
     this._medicalSpecialtyService.getItems().subscribe({
-      next: (response) => {
-        this.medicalSpecialties = response.map(
-          (item: { id: String; name: String }) => ({
-            item_id: item.id,
-            item_text: item.name,
-          })
-        );
+      next: (response: ListResponse<MedicalSpecialty>) => {
+        if (Array.isArray(response)) {
+          this.medicalSpecialties = response.map(
+            (item: { id: String; name: String }) => ({
+              item_id: item.id,
+              item_text: item.name,
+            })
+          );
+        }
       },
       error: (error) => {
         this._notificationService.showErrorToast(error.message);
@@ -183,13 +189,15 @@ export class EditBasicInfoDoctorsCardComponent implements OnInit {
    */
   public getDepartments(): void {
     this._departmentService.getItems().subscribe({
-      next: (response) => {
-        this.departments = response.map(
-          (item: { id: String; name: String }) => ({
-            item_id: item.id,
-            item_text: item.name,
-          })
-        );
+      next: (response: ListResponse<Department>) => {
+        if (Array.isArray(response)) {
+          this.departments = response.map(
+            (item: { id: String; name: String }) => ({
+              item_id: item.id,
+              item_text: item.name,
+            })
+          );
+        }
       },
       error: (error) => {
         this._notificationService.showErrorToast(error.message);

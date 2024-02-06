@@ -7,6 +7,7 @@ import { NotificationService } from 'src/app/core/services/notifications/notific
 
 // Modelos
 import { User } from 'src/app/core/models/user.interface';
+import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
 
 /**
  * Componente que representa la tarjeta de información básica del usuario
@@ -83,16 +84,13 @@ export class BasicInfoCardComponent implements OnInit {
       last_name: this.form.value.last_name,
     };
 
-    // Envía la solicitud de actualización de usuario al servicio
     this._userService.update(this.user.id, updateUser).subscribe({
-      next: (response) => {
+      next: (response: MessageResponse) => {
         this.submitted = false;
         this.updatedUserEvent.emit();
-        // Muestra un toast de éxito
         this._notificationService.showSuccessToast(response.message);
       },
       error: (error) => {
-        // Muestra un toast de error
         this._notificationService.showErrorToast(error.message);
       },
     });

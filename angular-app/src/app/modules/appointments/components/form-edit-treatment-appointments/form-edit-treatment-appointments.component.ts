@@ -10,6 +10,7 @@ import { NotificationService } from 'src/app/core/services/notifications/notific
 
 // Modelos
 import { Treatment } from 'src/app/core/models/treatment.interface';
+import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
 
 /**
  * Componente que representa la tarjeta de edición de un tratamiento
@@ -98,7 +99,7 @@ export class FormEditTreatmentAppointmentsComponent implements OnInit {
     this._treatmentService
       .updateTreatment(this.treatment.id, treatment)
       .subscribe({
-        next: (response: any) => {
+        next: (response: MessageResponse) => {
           this.editTreatmentForm.reset();
           this.submitted = false;
           this.editedTreatment.emit();

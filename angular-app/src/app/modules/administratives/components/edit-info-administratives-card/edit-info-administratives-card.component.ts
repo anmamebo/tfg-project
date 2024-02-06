@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
+
 // Servicios
 import { AdministrativeService } from 'src/app/core/services/entities/administrative.service';
 import { NotificationService } from 'src/app/core/services/notifications/notification.service';
@@ -87,7 +89,7 @@ export class EditInfoAdministrativesCardComponent implements OnInit {
     this._administrativeService
       .update(this.administrative.id, administrativeData)
       .subscribe({
-        next: (response) => {
+        next: (response: MessageResponse) => {
           this.submitted = false;
           this._notificationService.showSuccessToast(response.message);
           this.refreshAdministrative.emit();

@@ -20,6 +20,7 @@ import { CountriesService } from 'src/app/core/services/entities/countries.servi
 
 // Modelos
 import { Patient } from 'src/app/core/models/patient.interface';
+import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
 
 /**
  * Componente que representa una tarjeta de información de paciente.
@@ -152,7 +153,7 @@ export class PatientInfoCardComponent implements OnInit {
     };
 
     this._patientService.update(this.patient.id, updatePatient).subscribe({
-      next: (response) => {
+      next: (response: MessageResponse) => {
         this.submitted = false;
         this.updatedPatientEvent.emit();
         this._notificationService.showSuccessToast(response.message);

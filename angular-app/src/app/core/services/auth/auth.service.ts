@@ -9,7 +9,8 @@ import { API_URL } from 'src/app/core/constants/API-URL.constants';
 import { TokenStorageService } from 'src/app/core/services/auth/token-storage.service';
 
 // Modelos
-import { AuthResponse } from 'src/app/core/models/auth-response.interface';
+import { AuthResponse } from 'src/app/core/models/response/auth-response.interface';
+import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
 
 // Configuración de encabezados HTTP
 const httpOptions = {
@@ -64,9 +65,9 @@ export class AuthService {
 
   /**
    * Cierra la sesión del usuario actual.
-   * @returns {Observable<any>} Un observable que emite la respuesta del servidor.
+   * @returns {Observable<MessageResponse>} Un observable que emite la respuesta del servidor.
    */
-  public logOut(): Observable<any> {
+  public logOut(): Observable<MessageResponse> {
     let user = this._tokenStorageService.signOut();
     let user_id = { user: user.user.id };
     const headers = new HttpHeaders({
@@ -75,7 +76,11 @@ export class AuthService {
     });
     const httpOptions = { headers };
 
-    return this._http.post<any>(`${this.url}logout/`, user_id, httpOptions);
+    return this._http.post<MessageResponse>(
+      `${this.url}logout/`,
+      user_id,
+      httpOptions
+    );
   }
 
   /**
@@ -93,12 +98,12 @@ export class AuthService {
   /**
    * Envia un correo electrónico con un enlace para restablecer la contraseña.
    * @param email Correo electrónico del usuario.
-   * @returns {Observable<any>} Un observable que emite la respuesta del servidor.
+   * @returns {Observable<MessageResponse>} Un observable que emite la respuesta del servidor.
    */
-  public forgotPassword(email: string): Observable<any> {
+  public forgotPassword(email: string): Observable<MessageResponse> {
     let params = JSON.stringify({ email });
 
-    return this._http.post<any>(
+    return this._http.post<MessageResponse>(
       `${this.url}forget-password/`,
       params,
       httpOptions
@@ -112,16 +117,16 @@ export class AuthService {
    *   token: string;
    *   id: string;
    * }} data Datos para restablecer la contraseña.
-   * @returns {Observable<any>} Un observable que emite la respuesta del servidor.
+   * @returns {Observable<MessageResponse>} Un observable que emite la respuesta del servidor.
    */
   public resetPassword(data: {
     password: string;
     token: string;
     id: string;
-  }): Observable<any> {
+  }): Observable<MessageResponse> {
     let params = JSON.stringify(data);
 
-    return this._http.post<any>(
+    return this._http.post<MessageResponse>(
       `${this.url}reset-password/`,
       params,
       httpOptions

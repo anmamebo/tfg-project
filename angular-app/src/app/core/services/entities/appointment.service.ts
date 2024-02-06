@@ -4,6 +4,9 @@ import { Observable } from 'rxjs';
 
 import { API_URL } from 'src/app/core/constants/API-URL.constants';
 
+import { ListResponse } from 'src/app/core/models/response/list-response.interface';
+import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
+
 // Servicios
 import { HttpCommonService } from 'src/app/core/services/http-common/http-common.service';
 
@@ -49,15 +52,19 @@ export class AppointmentService {
    * Actualiza la cita.
    * @param {string} id El identificador de la cita.
    * @param {Appointment} item El objeto con los datos de la cita.
-   * @returns {Observable<any>} Un observable que emite la respuesta del servidor.
+   * @returns {Observable<MessageResponse>} Un observable que emite la respuesta del servidor.
    */
-  public update(id: string, item: Appointment): Observable<any> {
+  public update(id: string, item: Appointment): Observable<MessageResponse> {
     const headers = this._httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
     let params = JSON.stringify(item);
 
-    return this._http.put<any>(`${this.url}${id}/`, params, httpOptions);
+    return this._http.put<MessageResponse>(
+      `${this.url}${id}/`,
+      params,
+      httpOptions
+    );
   }
 
   /**
@@ -184,17 +191,17 @@ export class AppointmentService {
   /**
    * Obtiene las citas de un médico con opciones específicas.
    * @param {AppointmentOptions} options - Opciones para filtrar las citas del medico.
-   * @returns {Observable<any>} Un observable que emite la respuesta del servidor.
+   * @returns {Observable<ListResponse<Appointment>>} Un observable que emite la respuesta del servidor.
    */
   public getAppointmentsByDoctor(
     options: AppointmentOptions = {}
-  ): Observable<any> {
+  ): Observable<ListResponse<Appointment>> {
     const params = this._buildParams(options);
 
     const headers = this._httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
-    return this._http.get<any>(`${this.url}doctor/`, {
+    return this._http.get<ListResponse<Appointment>>(`${this.url}doctor/`, {
       params,
       ...httpOptions,
     });
@@ -204,12 +211,12 @@ export class AppointmentService {
    * Obtiene las citas de un paciente con opciones específicas.
    * @param {AppointmentOptions} options - Opciones para filtrar las citas del paciente.
    * @param {string | null} patientId - Id del paciente.
-   * @returns {Observable<any>} Un observable que emite la respuesta del servidor.
+   * @returns {Observable<ListResponse<Appointment>>} Un observable que emite la respuesta del servidor.
    */
   public getAppointmentsByPatient(
     options: AppointmentOptions = {},
     patientId: string | null = null
-  ): Observable<any> {
+  ): Observable<ListResponse<Appointment>> {
     let params = this._buildParams(options);
 
     if (patientId) {
@@ -219,7 +226,7 @@ export class AppointmentService {
     const headers = this._httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
-    return this._http.get<any>(`${this.url}patient/`, {
+    return this._http.get<ListResponse<Appointment>>(`${this.url}patient/`, {
       params,
       ...httpOptions,
     });
@@ -228,70 +235,78 @@ export class AppointmentService {
   /**
    * Obtiene las citas de un médico para un día específico, con opciones específicas.
    * @param {AppointmentOptions} options - Opciones para filtrar las citas del médico.
-   * @returns {Observable<any>} Un observable que emite la respuesta del servidor.
+   * @returns {Observable<ListResponse<Appointment>>} Un observable que emite la respuesta del servidor.
    */
   public getAppointmentsByDoctorAndDay(
     options: AppointmentOptions = {
       date: new Date().toISOString().slice(0, 10),
     }
-  ): Observable<any> {
+  ): Observable<ListResponse<Appointment>> {
     const params = this._buildParams(options);
 
     const headers = this._httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
-    return this._http.get<any>(`${this.url}doctor/date/`, {
-      params,
-      ...httpOptions,
-    });
+    return this._http.get<ListResponse<Appointment>>(
+      `${this.url}doctor/date/`,
+      {
+        params,
+        ...httpOptions,
+      }
+    );
   }
 
   /**
    * Obtiene las citas de un paciente para un día específico, con opciones específicas.
    * @param {AppointmentOptions} options - Opciones para filtrar las citas del paciente.
-   * @returns {Observable<any>} Un observable que emite la respuesta del servidor.
+   * @returns {Observable<ListResponse<Appointment>>} Un observable que emite la respuesta del servidor.
    */
   public getAppointmentsByPatientAndDay(
     options: AppointmentOptions = {
       date: new Date().toISOString().slice(0, 10),
     }
-  ): Observable<any> {
+  ): Observable<ListResponse<Appointment>> {
     const params = this._buildParams(options);
 
     const headers = this._httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
-    return this._http.get<any>(`${this.url}patient/date/`, {
-      params,
-      ...httpOptions,
-    });
+    return this._http.get<ListResponse<Appointment>>(
+      `${this.url}patient/date/`,
+      {
+        params,
+        ...httpOptions,
+      }
+    );
   }
 
   /**
    * Crea una cita.
    * @param {Appointment} appointment Objeto con los datos de la cita.
-   * @returns {Observable<any>} Un observable que emite la respuesta del servidor.
+   * @returns {Observable<MessageResponse>} Un observable que emite la respuesta del servidor.
    */
-  public createAppointment(appointment: Appointment): Observable<any> {
+  public createAppointment(
+    appointment: Appointment
+  ): Observable<MessageResponse> {
     const headers = this._httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
     let params = JSON.stringify(appointment);
 
-    return this._http.post<any>(`${this.url}`, params, httpOptions);
+    return this._http.post<MessageResponse>(`${this.url}`, params, httpOptions);
   }
 
   /**
    * Actualiza el estado de una cita.
    * @param {string} id ID de la cita.
    * @param {string} status Estado de la cita.
-   * @returns {Observable<any>} Un observable que emite la respuesta del servidor.
+   * @returns {Observable<MessageResponse>} Un observable que emite la respuesta del servidor.
    */
-  public updateStatus(id: string, status: string): Observable<any> {
+  public updateStatus(id: string, status: string): Observable<MessageResponse> {
     const headers = this._httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
-    return this._http.put<any>(
+    return this._http.put<MessageResponse>(
       `${this.url}${id}/status/`,
       { status },
       httpOptions

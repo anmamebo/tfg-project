@@ -18,6 +18,7 @@ import { NotificationService } from 'src/app/core/services/notifications/notific
 
 // Modelos
 import { MedicalSpecialty } from 'src/app/core/models/medical-specialty.interface';
+import { ListResponse } from 'src/app/core/models/response/list-response.interface';
 
 interface FilterDate {
   from: string | null;
@@ -211,13 +212,15 @@ export class FiltersAppointmentsPatientCardComponent implements OnInit {
    */
   private _getSpecialties(): void {
     this._medicalSpecialtyService.getItems().subscribe({
-      next: (response: MedicalSpecialty[]) => {
-        this.medicalSpecialties = response.map(
-          (specialty: MedicalSpecialty) => ({
-            item_id: specialty.id,
-            item_text: specialty.name,
-          })
-        );
+      next: (response: ListResponse<MedicalSpecialty>) => {
+        if (Array.isArray(response)) {
+          this.medicalSpecialties = response.map(
+            (specialty: MedicalSpecialty) => ({
+              item_id: specialty.id,
+              item_text: specialty.name,
+            })
+          );
+        }
       },
       error: (error: any) => {
         this._notificationService.showErrorToast(

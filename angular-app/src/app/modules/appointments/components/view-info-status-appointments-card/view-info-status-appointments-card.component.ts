@@ -10,6 +10,7 @@ import {
   StatusBadgeClasses,
   STATUS_BADGE_CLASSES,
 } from 'src/app/core/models/appointment.interface';
+import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
 
 /**
  * Componente para la tarjeta de visualización de la información
@@ -53,7 +54,7 @@ export class ViewInfoStatusAppointmentsCardComponent {
     this._appointmentService
       .updateStatus(this.appointment.id, status)
       .subscribe({
-        next: (response: any) => {
+        next: (response: MessageResponse) => {
           this._notificationService.showSuccessToast(response.message);
           this.refreshAppointment.emit();
         },

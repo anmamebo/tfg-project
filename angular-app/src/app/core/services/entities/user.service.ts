@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
+
 // Servicios
 import { EntityService } from 'src/app/core/services/generics/entity.service';
 import { HttpCommonService } from 'src/app/core/services/http-common/http-common.service';
@@ -38,19 +40,19 @@ export class UserService extends EntityService<User> {
    *   password: string;
    *   password2: string;
    * }} data - Los datos necesarios para actualizar la contraseña, como la nueva contraseña.
-   * @returns {Observable<any>} Un Observable que se suscribe a la solicitud HTTP para actualizar la contraseña.
+   * @returns {Observable<MessageResponse>} Un Observable que se suscribe a la solicitud HTTP para actualizar la contraseña.
    */
   public updatePassword(data: {
     old_password: string;
     password: string;
     password2: string;
-  }): Observable<any> {
+  }): Observable<MessageResponse> {
     const headers = this.httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
     let params = JSON.stringify(data);
 
-    return this.http.post<any>(
+    return this.http.post<MessageResponse>(
       `${this.url}${this.endpoint}set-password/`,
       params,
       httpOptions
@@ -93,13 +95,13 @@ export class UserService extends EntityService<User> {
 
   /**
    * Elimina la imagen de perfil del usuario.
-   * @returns {Observable<any>} Un Observable que se suscribe a la solicitud HTTP para eliminar la imagen de perfil.
+   * @returns {Observable<MessageResponse>} Un Observable que se suscribe a la solicitud HTTP para eliminar la imagen de perfil.
    */
-  public deleteProfilePicture(): Observable<any> {
+  public deleteProfilePicture(): Observable<MessageResponse> {
     const headers = this.httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
-    return this.http.delete<any>(
+    return this.http.delete<MessageResponse>(
       `${this.url}${this.endpoint}profile-picture/`,
       httpOptions
     );

@@ -9,6 +9,7 @@ import { NotificationService } from 'src/app/core/services/notifications/notific
 
 // Modelos
 import { Doctor } from 'src/app/core/models/doctor.interface';
+import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
 
 /**
  * Componente que representa una tarjeta de información de doctor.
@@ -88,7 +89,7 @@ export class DoctorInfoCardComponent implements OnInit {
     };
 
     this._doctorService.update(this.doctor.id, updateDoctor).subscribe({
-      next: (response) => {
+      next: (response: MessageResponse) => {
         this.submitted = false;
         this._notificationService.showSuccessToast(response.message);
         this.updatedDoctorEvent.emit();

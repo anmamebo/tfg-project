@@ -5,6 +5,13 @@ import { GenericListCardComponent } from 'src/app/shared/components/generic-list
 import { MedicalTestService } from 'src/app/core/services/entities/medicaltest.service';
 import { NotificationService } from 'src/app/core/services/notifications/notification.service';
 
+// Modelos
+import {
+  ListResponse,
+  PaginatedResponse,
+} from 'src/app/core/models/response/list-response.interface';
+import { MedicalTest } from 'src/app/core/models/medical-test.interface';
+
 /**
  * Componente que representa una tarjeta de listado de pruebas médicas.
  */
@@ -67,9 +74,10 @@ export class ListMedicalTestsCardComponent extends GenericListCardComponent {
         this.patientId
       )
       .subscribe({
-        next: (response: any) => {
-          this.entityData.items = response.results;
-          this.entityData.numItems = response.count;
+        next: (response: ListResponse<MedicalTest>) => {
+          const paginatedResponse = response as PaginatedResponse<MedicalTest>;
+          this.entityData.items = paginatedResponse.results;
+          this.entityData.numItems = paginatedResponse.count;
           this.entityData.totalPages = Math.ceil(
             this.entityData.numItems / this.entityData.numResults
           );

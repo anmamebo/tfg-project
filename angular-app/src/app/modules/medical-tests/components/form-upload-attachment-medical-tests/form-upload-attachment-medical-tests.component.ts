@@ -5,6 +5,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MedicalTestService } from 'src/app/core/services/entities/medicaltest.service';
 import { NotificationService } from 'src/app/core/services/notifications/notification.service';
 
+// Modelos
+import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
+
 // Constantes
 import { ATTACHMENTS_ALLOWED_FILE_EXTENSIONS } from 'src/app/core/constants/file-extensions.constants';
 
@@ -93,7 +96,7 @@ export class FormUploadAttachmentMedicalTestsComponent {
     };
 
     this._medicalTestService.uploadMedicalTestAttachment(attachment).subscribe({
-      next: (response: any) => {
+      next: (response: MessageResponse) => {
         this.uploadAttachmentForm.reset();
         this.submitted = false;
         this.uploadedAttachment.emit();

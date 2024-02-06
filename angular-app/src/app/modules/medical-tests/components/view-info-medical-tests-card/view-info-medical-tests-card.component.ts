@@ -8,6 +8,7 @@ import { NotificationService } from 'src/app/core/services/notifications/notific
 
 // Modelos
 import { MedicalTest } from 'src/app/core/models/medical-test.interface';
+import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
 
 /**
  * Componente para mostrar la información de un examen médico
@@ -42,7 +43,7 @@ export class ViewInfoMedicalTestsCardComponent {
   public onDelete(id: string): void {
     this._notificationService.showConfirmDeleteDialog(() => {
       this._medicalTestService.deleteMedicalTest(id).subscribe({
-        next: (response) => {
+        next: (response: MessageResponse) => {
           this._notificationService.showSuccessToast(response.message);
           this.updatedMedicalTest.emit();
         },
@@ -64,7 +65,7 @@ export class ViewInfoMedicalTestsCardComponent {
   public onActivate(id: string): void {
     this._notificationService.showConfirmReactivateDialog(() => {
       this._medicalTestService.activateMedicalTest(id).subscribe({
-        next: (response) => {
+        next: (response: MessageResponse) => {
           this._notificationService.showSuccessToast(response.message);
           this.updatedMedicalTest.emit();
         },

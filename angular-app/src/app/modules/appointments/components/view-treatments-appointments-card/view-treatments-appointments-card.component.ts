@@ -9,6 +9,11 @@ import { NotificationService } from 'src/app/core/services/notifications/notific
 
 // Modelos
 import { Appointment } from 'src/app/core/models/appointment.interface';
+import {
+  ListResponse,
+  PaginatedResponse,
+} from 'src/app/core/models/response/list-response.interface';
+import { Treatment } from 'src/app/core/models/treatment.interface';
 
 /**
  * Componente que representa una tarjeta de listado de tratamientos de una cita.
@@ -57,9 +62,10 @@ export class ViewTreatmentsAppointmentsCardComponent extends GenericListCardComp
         paginate: true,
       })
       .subscribe({
-        next: (response: any) => {
-          this.entityData.items = response.results;
-          this.entityData.numItems = response.count;
+        next: (response: ListResponse<Treatment>) => {
+          const paginatedResponse = response as PaginatedResponse<Treatment>;
+          this.entityData.items = paginatedResponse.results;
+          this.entityData.numItems = paginatedResponse.count;
           this.entityData.totalPages = Math.ceil(
             this.entityData.numItems / this.entityData.numResults
           );

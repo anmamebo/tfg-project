@@ -11,6 +11,9 @@ import { NotificationService } from 'src/app/core/services/notifications/notific
 
 // Modelos
 import { Room } from 'src/app/core/models/room.interface';
+import { ListResponse } from 'src/app/core/models/response/list-response.interface';
+import { Department } from 'src/app/core/models/department.interface';
+import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
 
 /**
  * Componente que representa la tarjeta de edición de la
@@ -122,7 +125,7 @@ export class EditInfoRoomsCardComponent implements OnInit {
     };
 
     this._roomService.update(this.room.id, updatedData).subscribe({
-      next: (response: any) => {
+      next: (response: MessageResponse) => {
         this.submitted = false;
         this._notificationService.showSuccessToast(response.message);
       },
@@ -139,13 +142,15 @@ export class EditInfoRoomsCardComponent implements OnInit {
    */
   public getDepartments(): void {
     this._departmentService.getItems().subscribe({
-      next: (response) => {
-        this.departments = response.map(
-          (item: { id: String; name: String }) => ({
-            item_id: item.id,
-            item_text: item.name,
-          })
-        );
+      next: (response: ListResponse<Department>) => {
+        if (Array.isArray(response)) {
+          this.departments = response.map(
+            (item: { id: String; name: String }) => ({
+              item_id: item.id,
+              item_text: item.name,
+            })
+          );
+        }
       },
       error: (error) => {
         this._notificationService.showErrorToast(error.message);

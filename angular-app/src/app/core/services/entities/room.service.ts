@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+import { ListResponse } from 'src/app/core/models/response/list-response.interface';
+
 // Servicios
 import { EntityService } from 'src/app/core/services/generics/entity.service';
 import { HttpCommonService } from 'src/app/core/services/http-common/http-common.service';
@@ -75,21 +77,24 @@ export class RoomService extends EntityService<Room> {
    * Obtiene listado de salas de un departamento.
    * @param {string} departmentId ID del departamento.
    * @param {RoomOptions} options - Opciones para filtrar los resultados.
-   * @returns {Observable<any>} Un observable que emite un objeto la respuesta del servidor.
+   * @returns {Observable<ListResponse<Room>>} Un observable que emite un objeto la respuesta del servidor.
    */
   public getRoomsByDepartmentId(
     departmentId: string,
     options: RoomOptions = {}
-  ): Observable<any> {
+  ): Observable<ListResponse<Room>> {
     let params = this._buildParams(options);
     params = params.set('department', departmentId);
 
     const headers = this.httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
-    return this.http.get<any>(`${this.url}${this.endpoint}department`, {
-      params,
-      ...httpOptions,
-    });
+    return this.http.get<ListResponse<Room>>(
+      `${this.url}${this.endpoint}department`,
+      {
+        params,
+        ...httpOptions,
+      }
+    );
   }
 }

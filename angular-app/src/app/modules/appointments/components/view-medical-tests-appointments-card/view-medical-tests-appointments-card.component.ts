@@ -9,6 +9,11 @@ import { NotificationService } from 'src/app/core/services/notifications/notific
 
 // Modelos
 import { Appointment } from 'src/app/core/models/appointment.interface';
+import {
+  ListResponse,
+  PaginatedResponse,
+} from 'src/app/core/models/response/list-response.interface';
+import { MedicalTest } from 'src/app/core/models/medical-test.interface';
 
 /**
  * Componente que representa una tarjeta de listado de pruebas médicas de una cita.
@@ -57,9 +62,10 @@ export class ViewMedicalTestsAppointmentsCardComponent extends GenericListCardCo
         paginate: true,
       })
       .subscribe({
-        next: (response: any) => {
-          this.entityData.items = response.results;
-          this.entityData.numItems = response.count;
+        next: (response: ListResponse<MedicalTest>) => {
+          const paginatedResponse = response as PaginatedResponse<MedicalTest>;
+          this.entityData.items = paginatedResponse.results;
+          this.entityData.numItems = paginatedResponse.count;
           this.entityData.totalPages = Math.ceil(
             this.entityData.numItems / this.entityData.numResults
           );

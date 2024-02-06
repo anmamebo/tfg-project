@@ -9,6 +9,7 @@ import { PatientService } from 'src/app/core/services/entities/patient.service';
 
 // Modelos
 import { Patient } from 'src/app/core/models/patient.interface';
+import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
 
 /**
  * Componente que representa la tarjeta de edición de la
@@ -95,7 +96,7 @@ export class EditContactInfoPatientsCardComponent implements OnInit {
     };
 
     this._patientService.update(this.patient.id, updatedData).subscribe({
-      next: (response) => {
+      next: (response: MessageResponse) => {
         this.submitted = false;
         this._notificationService.showSuccessToast(response.message);
         this.refreshPatient.emit();

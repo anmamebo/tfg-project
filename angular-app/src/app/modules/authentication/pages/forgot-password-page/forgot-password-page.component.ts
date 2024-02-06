@@ -5,6 +5,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { NotificationService } from 'src/app/core/services/notifications/notification.service';
 
+// Modelos
+import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
+
 /**
  * Componente que representa la página de recuperación de contraseña.
  */
@@ -55,7 +58,7 @@ export class ForgotPasswordPageComponent {
     const email: string = this.form.value.email;
 
     this._authService.forgotPassword(email).subscribe({
-      next: (response) => {
+      next: (response: MessageResponse) => {
         this.errorMessage = '';
         this._notificationService.showSuccessToast(response.message);
       },

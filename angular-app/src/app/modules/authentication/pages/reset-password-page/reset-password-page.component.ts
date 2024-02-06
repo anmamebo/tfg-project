@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
+import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
 
 // Servicios
 import { AuthService } from 'src/app/core/services/auth/auth.service';
@@ -88,7 +89,7 @@ export class ResetPasswordPageComponent implements OnInit {
     };
 
     this._authService.resetPassword(data).subscribe({
-      next: (response) => {
+      next: (response: MessageResponse) => {
         this.errorMessage = '';
         this._router.navigate(['/']);
       },

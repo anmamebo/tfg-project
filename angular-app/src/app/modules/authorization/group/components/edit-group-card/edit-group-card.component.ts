@@ -7,6 +7,7 @@ import { NotificationService } from 'src/app/core/services/notifications/notific
 
 // Modelos
 import { Group } from 'src/app/core/models/group.interface';
+import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
 
 /**
  * Componente que representa la tarjeta para editar un grupo
@@ -64,7 +65,7 @@ export class EditGroupCardComponent implements OnInit {
     };
 
     this._groupService.update(this.group.id, groupEdited).subscribe({
-      next: (response) => {
+      next: (response: MessageResponse) => {
         this.submitted = false;
         this._notificationService.showSuccessToast(response.message);
       },

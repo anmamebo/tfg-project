@@ -6,6 +6,10 @@ import { NotificationService } from 'src/app/core/services/notifications/notific
 
 // Modelos
 import { Doctor } from 'src/app/core/models/doctor.interface';
+import {
+  ListResponse,
+  PaginatedResponse,
+} from 'src/app/core/models/response/list-response.interface';
 
 /**
  * Componente que representa la tarjeta de visualización de los médicos
@@ -105,9 +109,10 @@ export class ViewDoctorsDepartmentsCardComponent implements OnInit {
         pageSize: this.numResults,
       })
       .subscribe({
-        next: (response: any) => {
-          this.doctors = response.results;
-          this.numDoctors = response.count;
+        next: (response: ListResponse<Doctor>) => {
+          const paginatedResponse = response as PaginatedResponse<Doctor>;
+          this.doctors = paginatedResponse.results;
+          this.numDoctors = paginatedResponse.count;
           this.totalPages = Math.ceil(this.numDoctors / this.numResults);
         },
         error: (error: any) => {

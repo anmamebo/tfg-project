@@ -7,6 +7,7 @@ import { DoctorService } from 'src/app/core/services/entities/doctor.service';
 
 // Modelos
 import { Doctor } from 'src/app/core/models/doctor.interface';
+import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
 
 /**
  * Componente que representa la tarjeta de edición de la
@@ -89,7 +90,7 @@ export class EditContactInfoDoctorsCardComponent implements OnInit {
     };
 
     this._doctorService.update(this.doctor.id, updatedData).subscribe({
-      next: (response) => {
+      next: (response: MessageResponse) => {
         this.submitted = false;
         this._notificationService.showSuccessToast(response.message);
         this.refreshDoctor.emit();

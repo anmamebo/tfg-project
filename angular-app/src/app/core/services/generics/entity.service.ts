@@ -4,6 +4,9 @@ import { Observable } from 'rxjs';
 
 import { API_URL } from 'src/app/core/constants/API-URL.constants';
 
+import { ListResponse } from 'src/app/core/models/response/list-response.interface';
+import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
+
 // Servicios
 import { HttpCommonService } from 'src/app/core/services/http-common/http-common.service';
 
@@ -33,7 +36,7 @@ export abstract class EntityService<T> {
   /**
    * Obtiene el lista de elementos de la entidad.
    * @param options Opciones de la petición.
-   * @returns {Observable<any>} Un observable que emite un objeto `any`.
+   * @returns {Observable<ListResponse<T>>} Un observable que emite un objeto `ListResponse<T>`.
    */
   public getItems(
     options: {
@@ -45,7 +48,7 @@ export abstract class EntityService<T> {
       sortBy?: string;
       sortOrder?: string;
     } = {}
-  ): Observable<any> {
+  ): Observable<ListResponse<T>> {
     const {
       page,
       numResults,
@@ -94,7 +97,7 @@ export abstract class EntityService<T> {
       );
     }
 
-    return this.http.get<any>(`${this.url}${this.getEndpoint()}`, {
+    return this.http.get<ListResponse<T>>(`${this.url}${this.getEndpoint()}`, {
       params,
       ...httpOptions,
     });
@@ -103,13 +106,13 @@ export abstract class EntityService<T> {
   /**
    * Obtiene un elemento de la entidad.
    * @param {string} id El identificador del elemento.
-   * @returns {Observable<T>} Un observable que emite un objeto `any`.
+   * @returns {Observable<T>} Un observable que emite un objeto `T`.
    */
   public getItemById(id: string): Observable<T> {
     const headers = this.httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
-    return this.http.get<any>(
+    return this.http.get<T>(
       `${this.url}${this.getEndpoint()}${id}/`,
       httpOptions
     );
@@ -118,15 +121,15 @@ export abstract class EntityService<T> {
   /**
    * Crea un elemento de la entidad.
    * @param {T} item El objeto con los datos del elemento.
-   * @returns {Observable<any>} Un observable que emite un objeto `any`.
+   * @returns {Observable<MessageResponse>} Un observable que emite un objeto `MessageResponse`.
    */
-  public create(item: T): Observable<any> {
+  public create(item: T): Observable<MessageResponse> {
     const headers = this.httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
     let params = JSON.stringify(item);
 
-    return this.http.post(
+    return this.http.post<MessageResponse>(
       `${this.url}${this.getEndpoint()}`,
       params,
       httpOptions
@@ -137,15 +140,15 @@ export abstract class EntityService<T> {
    * Actualiza un elemento de la entidad.
    * @param {string} id El identificador del elemento.
    * @param {T} item El objeto con los datos del elemento.
-   * @returns {Observable<any>} Un observable que emite un objeto `any`.
+   * @returns {Observable<MessageResponse>} Un observable que emite un objeto `MessageResponse`.
    */
-  public update(id: string, item: T): Observable<any> {
+  public update(id: string, item: T): Observable<MessageResponse> {
     const headers = this.httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
     let params = JSON.stringify(item);
 
-    return this.http.put(
+    return this.http.put<MessageResponse>(
       `${this.url}${this.getEndpoint()}${id}/`,
       params,
       httpOptions
@@ -155,13 +158,13 @@ export abstract class EntityService<T> {
   /**
    * Elimina un elemento de la entidad.
    * @param {string} id El identificador del elemento.
-   * @returns {Observable<any>} Un observable que emite un objeto `any`.
+   * @returns {Observable<MessageResponse>} Un observable que emite un objeto `MessageResponse`.
    */
-  public delete(id: string): Observable<any> {
+  public delete(id: string): Observable<MessageResponse> {
     const headers = this.httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
-    return this.http.delete(
+    return this.http.delete<MessageResponse>(
       `${this.url}${this.getEndpoint()}${id}/`,
       httpOptions
     );
@@ -170,13 +173,13 @@ export abstract class EntityService<T> {
   /**
    * Activa un elemento de la entidad.
    * @param {string} id El identificador del elemento.
-   * @returns {Observable<any>} Un observable que emite un objeto `any`.
+   * @returns {Observable<MessageResponse>} Un observable que emite un objeto `MessageResponse`.
    */
-  public activate(id: string): Observable<any> {
+  public activate(id: string): Observable<MessageResponse> {
     const headers = this.httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
-    return this.http.put(
+    return this.http.put<MessageResponse>(
       `${this.url}${this.getEndpoint()}${id}/activate/`,
       {},
       httpOptions

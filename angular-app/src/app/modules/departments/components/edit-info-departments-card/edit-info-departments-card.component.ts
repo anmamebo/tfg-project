@@ -7,6 +7,7 @@ import { NotificationService } from 'src/app/core/services/notifications/notific
 
 // Modelos
 import { Department } from 'src/app/core/models/department.interface';
+import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
 
 /**
  * Componente que representa la tarjeta de edición de la
@@ -79,7 +80,7 @@ export class EditInfoDepartmentsCardComponent implements OnInit {
     };
 
     this._departmentService.update(this.department.id, updatedData).subscribe({
-      next: (response: any) => {
+      next: (response: MessageResponse) => {
         this.submitted = false;
         this._notificationService.showSuccessToast(response.message);
       },

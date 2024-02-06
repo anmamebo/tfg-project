@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
 
 // Servicios
 import { AuthService } from 'src/app/core/services/auth/auth.service';
@@ -32,7 +33,7 @@ export class UserDropdownComponent implements OnInit {
    */
   public logout(): void {
     this._authService.logOut().subscribe({
-      next: (response) => {
+      next: (response: MessageResponse) => {
         // Recargar la página después del cierre de sesión.
         window.location.reload();
       },

@@ -4,11 +4,17 @@ import { Observable, map } from 'rxjs';
 
 import { API_URL } from 'src/app/core/constants/API-URL.constants';
 
+import { ListResponse } from 'src/app/core/models/response/list-response.interface';
+import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
+
 // Servicios
 import { HttpCommonService } from 'src/app/core/services/http-common/http-common.service';
 
 // Modelos
-import { MedicalTest } from 'src/app/core/models/medical-test.interface';
+import {
+  MedicalTest,
+  MedicalTestAttachment,
+} from 'src/app/core/models/medical-test.interface';
 
 interface MedicalTestOptions {
   page?: number;
@@ -103,34 +109,37 @@ export class MedicalTestService {
    * Obtiene todas las pruebas médicas de una cita.
    * @param {string} appointmentId ID de la cita.
    * @param {MedicalTestOptions} options Opciones para filtrar las pruebas médicas.
-   * @returns {Observable<any>} Un observable que emite un objeto `any`.
+   * @returns {Observable<ListResponse<MedicalTest>>} Un observable que emite un objeto `ListResponse<MedicalTest>`.
    */
   public getMedicalTestsByAppointment(
     appointmentId: string,
     options: MedicalTestOptions = {}
-  ): Observable<any> {
+  ): Observable<ListResponse<MedicalTest>> {
     let params = this._buildParams(options);
     params = params.set('appointment_id', appointmentId);
 
     const headers = this._httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
-    return this._http.get<any>(`${this.url}appointment/`, {
-      params,
-      ...httpOptions,
-    });
+    return this._http.get<ListResponse<MedicalTest>>(
+      `${this.url}appointment/`,
+      {
+        params,
+        ...httpOptions,
+      }
+    );
   }
 
   /**
    * Obtiene todas las pruebas médicas de un paciente.
    * @param {MedicalTestOptions} options Opciones para filtrar las pruebas médicas.
    * @param {string | null} patientId ID del paciente.
-   * @returns {Observable<any>} Un observable que emite un objeto `any`.
+   * @returns {Observable<ListResponse<MedicalTest>>} Un observable que emite un objeto `ListResponse<MedicalTest>`.
    */
   public getMedicalTestsByPatient(
     options: MedicalTestOptions = {},
     patientId: string | null = null
-  ): Observable<any> {
+  ): Observable<ListResponse<MedicalTest>> {
     let params = this._buildParams(options);
     if (patientId) {
       params = params.set('patient_id', patientId);
@@ -139,7 +148,7 @@ export class MedicalTestService {
     const headers = this._httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
-    return this._http.get<any>(`${this.url}patient/`, {
+    return this._http.get<ListResponse<MedicalTest>>(`${this.url}patient/`, {
       params,
       ...httpOptions,
     });
@@ -148,66 +157,79 @@ export class MedicalTestService {
   /**
    * Obtiene una prueba médica por su ID.
    * @param {string} id - El ID de la prueba médica.
-   * @returns {Observable<any>} Un observable que emite un objeto `any`.
+   * @returns {Observable<MedicalTest>} Un observable que emite un objeto `MedicalTest`.
    */
-  public getMedicalTestById(id: string): Observable<any> {
+  public getMedicalTestById(id: string): Observable<MedicalTest> {
     const headers = this._httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
-    return this._http.get<any>(`${this.url}${id}/`, httpOptions);
+    return this._http.get<MedicalTest>(`${this.url}${id}/`, httpOptions);
   }
 
   /**
    * Crea una prueba médica.
    * @param {MedicalTest} medicalTest - Datos de la prueba médica.
-   * @returns {Observable<any>} Un observable que emite un objeto `any`.
+   * @returns {Observable<MessageResponse>} Un observable que emite un objeto `MessageResponse`.
    */
-  public createMedicalTest(medicalTest: MedicalTest): Observable<any> {
+  public createMedicalTest(
+    medicalTest: MedicalTest
+  ): Observable<MessageResponse> {
     const headers = this._httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
     let params = JSON.stringify(medicalTest);
 
-    return this._http.post<any>(`${this.url}`, params, httpOptions);
+    return this._http.post<MessageResponse>(`${this.url}`, params, httpOptions);
   }
 
   /**
    * Actualiza una prueba médica.
    * @param {string} id - ID de la prueba médica.
-   * @param {any} medicalTest - Datos de la prueba médica.
-   * @returns {Observable<any>} Un observable que emite un objeto `any`.
+   * @param {MedicalTest} medicalTest - Datos de la prueba médica.
+   * @returns {Observable<MessageResponse>} Un observable que emite un objeto `MessageResponse`.
    */
-  public updateMedicalTest(id: string, medicalTest: any): Observable<any> {
+  public updateMedicalTest(
+    id: string,
+    medicalTest: MedicalTest
+  ): Observable<MessageResponse> {
     const headers = this._httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
     let params = JSON.stringify(medicalTest);
 
-    return this._http.put<any>(`${this.url}${id}/`, params, httpOptions);
+    return this._http.put<MessageResponse>(
+      `${this.url}${id}/`,
+      params,
+      httpOptions
+    );
   }
 
   /**
    * Elimina una prueba médica.
    * @param {string} id - ID de la prueba médica.
-   * @returns {Observable<any>} Un observable que emite un objeto `any`.
+   * @returns {Observable<MessageResponse>} Un observable que emite un objeto `MessageResponse`.
    */
-  public deleteMedicalTest(id: string): Observable<any> {
+  public deleteMedicalTest(id: string): Observable<MessageResponse> {
     const headers = this._httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
-    return this._http.delete<any>(`${this.url}${id}/`, httpOptions);
+    return this._http.delete<MessageResponse>(`${this.url}${id}/`, httpOptions);
   }
 
   /**
    * Activa una prueba médica.
    * @param {string} id - ID de la prueba médica.
-   * @returns {Observable<any>} Un observable que emite un objeto `any`.
+   * @returns {Observable<MessageResponse>} Un observable que emite un objeto `MessageResponse`.
    */
-  public activateMedicalTest(id: string): Observable<any> {
+  public activateMedicalTest(id: string): Observable<MessageResponse> {
     const headers = this._httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
-    return this._http.put<any>(`${this.url}${id}/activate/`, {}, httpOptions);
+    return this._http.put<MessageResponse>(
+      `${this.url}${id}/activate/`,
+      {},
+      httpOptions
+    );
   }
 
   /**
@@ -250,23 +272,25 @@ export class MedicalTestService {
 
   /**
    * Sube un fichero adjunto a una prueba médica.
-   * @param {any} attachment Fichero adjunto.
-   * @returns {Observable<any>} Un observable que emite un objeto `any`.
+   * @param {MedicalTestAttachment} attachment Fichero adjunto.
+   * @returns {Observable<MessageResponse>} Un observable que emite un objeto `MessageResponse`.
    */
-  public uploadMedicalTestAttachment(attachment: any): Observable<any> {
+  public uploadMedicalTestAttachment(
+    attachment: MedicalTestAttachment
+  ): Observable<MessageResponse> {
     let headers = this._httpCommonService.getCommonHeaders();
     headers = headers.delete('Content-Type');
     const httpOptions = { headers };
 
     let formData = new FormData();
     formData.append('file', attachment.file);
-    formData.append('name', attachment.name);
-    if (attachment.description) {
+    if (attachment.name) formData.append('name', attachment.name);
+    if (attachment.description)
       formData.append('description', attachment.description);
-    }
-    formData.append('medical_test', attachment.medical_test);
+    if (attachment.medical_test && typeof attachment.medical_test === 'string')
+      formData.append('medical_test', attachment.medical_test);
 
-    return this._http.post<any>(
+    return this._http.post<MessageResponse>(
       `${API_URL}medicaltestattachments/upload-attachment/`,
       formData,
       httpOptions
@@ -276,13 +300,15 @@ export class MedicalTestService {
   /**
    * Elimina un fichero adjunto de una prueba médica.
    * @param {string} attachmentId ID del fichero adjunto.
-   * @returns {Observable<any>} Un observable que emite un objeto `any`.
+   * @returns {Observable<MessageResponse>} Un observable que emite un objeto `MessageResponse`.
    */
-  public deleteMedicalTestAttachment(attachmentId: string): Observable<any> {
+  public deleteMedicalTestAttachment(
+    attachmentId: string
+  ): Observable<MessageResponse> {
     const headers = this._httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
-    return this._http.delete<any>(
+    return this._http.delete<MessageResponse>(
       `${API_URL}medicaltestattachments/${attachmentId}/delete-attachment/`,
       httpOptions
     );

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
 
 // Servicios
 import { UserService } from 'src/app/core/services/entities/user.service';
@@ -74,7 +75,7 @@ export class ChangePasswordCardComponent {
       };
 
     this._userService.updatePassword(data).subscribe({
-      next: (response) => {
+      next: (response: MessageResponse) => {
         this.submitted = false;
         this.form.reset();
         this._notificationService.showSuccessToast(response.message);

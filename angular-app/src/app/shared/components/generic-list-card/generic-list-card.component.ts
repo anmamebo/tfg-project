@@ -6,6 +6,10 @@ import { NotificationService } from 'src/app/core/services/notifications/notific
 // Modelos
 import { EntityData } from 'src/app/core/models/entity-data.interface';
 import { SortEvent } from 'src/app/core/models/sort-event.interface';
+import {
+  ListResponse,
+  PaginatedResponse,
+} from 'src/app/core/models/response/list-response.interface';
 
 /**
  * Componente que representa una tarjeta de listado genérica.
@@ -146,9 +150,10 @@ export class GenericListCardComponent implements OnInit {
         sortOrder: this.sort.order,
       })
       .subscribe({
-        next: (response: any) => {
-          this.entityData.items = response.results;
-          this.entityData.numItems = response.count;
+        next: (response: ListResponse<any>) => {
+          const paginatedResponse = response as PaginatedResponse<any>;
+          this.entityData.items = paginatedResponse.results;
+          this.entityData.numItems = paginatedResponse.count;
           this.entityData.totalPages = Math.ceil(
             this.entityData.numItems / this.entityData.numResults
           );

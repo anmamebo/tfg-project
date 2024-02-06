@@ -17,6 +17,7 @@ import { PROFILE_PICTURE_ALLOWED_FILE_EXTENSIONS } from 'src/app/core/constants/
 
 // Validadores
 import Validation from 'src/app/core/validators/general.validator';
+import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
 
 /**
  * Componente que representa una tarjeta de avatar de usuario.
@@ -116,7 +117,7 @@ export class AvatarCardComponent {
 
     if (file) {
       this._userService.updateProfilePicture(file).subscribe({
-        next: (response) => {
+        next: (response: any) => {
           this.submitted = false;
           this._profileImageService.emitProfileImageUpdated(
             response.profile_picture_url
@@ -140,10 +141,8 @@ export class AvatarCardComponent {
    */
   public onDeleteProfilePicture(): void {
     this._userService.deleteProfilePicture().subscribe({
-      next: (response) => {
-        this._profileImageService.emitProfileImageUpdated(
-          response.profile_picture_url
-        );
+      next: (response: MessageResponse) => {
+        this._profileImageService.emitProfileImageUpdated('');
         this._notificationService.showSuccessToast(response.message);
       },
       error: (error) => {

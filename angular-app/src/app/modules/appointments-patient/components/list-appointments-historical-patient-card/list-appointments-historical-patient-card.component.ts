@@ -5,6 +5,13 @@ import { GenericListCardComponent } from 'src/app/shared/components/generic-list
 import { AppointmentService } from 'src/app/core/services/entities/appointment.service';
 import { NotificationService } from 'src/app/core/services/notifications/notification.service';
 
+// Modelos
+import {
+  ListResponse,
+  PaginatedResponse,
+} from 'src/app/core/models/response/list-response.interface';
+import { Appointment } from 'src/app/core/models/appointment.interface';
+
 /**
  * Componente que representa una tarjeta de listado de citas para el rol de paciente.
  */
@@ -94,9 +101,10 @@ export class ListAppointmentsHistoricalPatientCardComponent extends GenericListC
         this.patientId
       )
       .subscribe({
-        next: (response: any) => {
-          this.entityData.items = response.results;
-          this.entityData.numItems = response.count;
+        next: (response: ListResponse<Appointment>) => {
+          const paginatedResponse = response as PaginatedResponse<Appointment>;
+          this.entityData.items = paginatedResponse.results;
+          this.entityData.numItems = paginatedResponse.count;
           this.entityData.totalPages = Math.ceil(
             this.entityData.numItems / this.entityData.numResults
           );

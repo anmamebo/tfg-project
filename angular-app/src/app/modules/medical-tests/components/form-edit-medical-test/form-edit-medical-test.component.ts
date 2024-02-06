@@ -7,6 +7,7 @@ import { NotificationService } from 'src/app/core/services/notifications/notific
 
 // Modelos
 import { MedicalTest } from 'src/app/core/models/medical-test.interface';
+import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
 
 /**
  * Componente para el formulario de editar una prueba médica.
@@ -71,7 +72,7 @@ export class FormEditMedicalTestComponent implements OnInit {
     this._medicalTestService
       .updateMedicalTest(this.medicalTest.id, medicalTest)
       .subscribe({
-        next: (response: any) => {
+        next: (response: MessageResponse) => {
           this.form.reset();
           this.submitted = false;
           this.updatedMedicalTest.emit();

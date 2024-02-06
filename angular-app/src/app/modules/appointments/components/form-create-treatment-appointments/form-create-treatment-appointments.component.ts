@@ -9,6 +9,7 @@ import { NotificationService } from 'src/app/core/services/notifications/notific
 
 // Modelos
 import { Appointment } from 'src/app/core/models/appointment.interface';
+import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
 
 /**
  * Componente que representa la tarjeta de creación de un tratamiento
@@ -92,7 +93,7 @@ export class FormCreateTreatmentAppointmentsComponent {
     };
 
     this._treatmentService.createTreatment(treatment).subscribe({
-      next: (response: any) => {
+      next: (response: MessageResponse) => {
         this.createTreatmentForm.reset();
         this.submitted = false;
         this.createdTreatment.emit();

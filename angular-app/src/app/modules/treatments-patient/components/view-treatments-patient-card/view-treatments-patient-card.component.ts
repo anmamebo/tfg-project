@@ -188,7 +188,7 @@ export class ViewTreatmentsPatientCardComponent implements OnInit {
     this._pdfTreatmentService
       .downloadTreatmentPdf(this.treatment.id)
       .subscribe({
-        next: (response: any) => {
+        next: (response: Blob) => {
           console.log(response);
         },
         error: (error: any) => {
@@ -206,7 +206,7 @@ export class ViewTreatmentsPatientCardComponent implements OnInit {
     if (!this.treatment) return;
 
     this._pdfTreatmentService.printTreatmentPdf(this.treatment.id).subscribe({
-      next: (response: any) => {
+      next: (response: Blob) => {
         console.log(response);
       },
       error: (error: any) => {

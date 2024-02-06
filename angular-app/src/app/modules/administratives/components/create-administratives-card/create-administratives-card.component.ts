@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
+
 // Servicios
 import { AdministrativeService } from 'src/app/core/services/entities/administrative.service';
 import { NotificationService } from 'src/app/core/services/notifications/notification.service';
@@ -61,7 +63,7 @@ export class CreateAdministrativesCardComponent {
     };
 
     this._administrativeService.create(administrative).subscribe({
-      next: (response) => {
+      next: (response: MessageResponse) => {
         this.form.reset();
         this.submitted = false;
         this._notificationService.showSuccessToast(response.message);

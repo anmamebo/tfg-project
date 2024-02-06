@@ -23,6 +23,7 @@ import { NotificationService } from 'src/app/core/services/notifications/notific
 
 // Modelos
 import { Appointment } from 'src/app/core/models/appointment.interface';
+import { ListResponse } from 'src/app/core/models/response/list-response.interface';
 
 /**
  * Componente que representa la página de la agenda de un paciente
@@ -84,9 +85,11 @@ export class AppointmentsCalendarPatientPageComponent implements OnInit {
         statuses: ['scheduled', 'in_progress', 'completed', 'rescheduled'],
       })
       .subscribe({
-        next: (response: any) => {
-          this.events = this._formatData(response);
-          this._cdr.detectChanges();
+        next: (response: ListResponse<Appointment>) => {
+          if (Array.isArray(response)) {
+            this.events = this._formatData(response);
+            this._cdr.detectChanges();
+          }
         },
         error: (error: any) => {
           this._notificationService.showErrorToast(error.message);

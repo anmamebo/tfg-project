@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 
 import { API_URL } from 'src/app/core/constants/API-URL.constants';
 
+import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
+
 // Servicios
 import { HttpCommonService } from 'src/app/core/services/http-common/http-common.service';
 
@@ -30,29 +32,29 @@ export class AddressService {
   /**
    * Crea una dirección.
    * @param {Address} address El objeto con los datos de la dirección.
-   * @returns {Observable<any>} Un observable que emite la respuesta del servidor.
+   * @returns {Observable<MessageResponse>} Un observable que emite la respuesta del servidor.
    */
-  public createAddress(address: Address): Observable<any> {
+  public createAddress(address: Address): Observable<MessageResponse> {
     const headers = this._httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
     let params = JSON.stringify(address);
 
-    return this._http.post<any>(`${this.url}`, params, httpOptions);
+    return this._http.post<MessageResponse>(`${this.url}`, params, httpOptions);
   }
 
   /**
    * Actualiza los datos de una dirección.
    * @param {Address} address El objeto con los datos actualizados.
-   * @returns {Observable<any>} Un observable que emite la respuesta del servidor.
+   * @returns {Observable<MessageResponse>} Un observable que emite la respuesta del servidor.
    */
-  public updateAddress(address: Address): Observable<any> {
+  public updateAddress(address: Address): Observable<MessageResponse> {
     const headers = this._httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
     let params = JSON.stringify(address);
 
-    return this._http.put<any>(
+    return this._http.put<MessageResponse>(
       `${this.url}${address.id}/`,
       params,
       httpOptions
@@ -62,12 +64,12 @@ export class AddressService {
   /**
    * Elimina una dirección.
    * @param {string} id El identificador de la dirección.
-   * @returns {Observable<any>} Un observable que emite la respuesta del servidor.
+   * @returns {Observable<MessageResponse>} Un observable que emite la respuesta del servidor.
    */
-  public deleteAddress(id: string): Observable<any> {
+  public deleteAddress(id: string): Observable<MessageResponse> {
     const headers = this._httpCommonService.getCommonHeaders();
     const httpOptions = { headers };
 
-    return this._http.delete<any>(`${this.url}${id}/`, httpOptions);
+    return this._http.delete<MessageResponse>(`${this.url}${id}/`, httpOptions);
   }
 }
