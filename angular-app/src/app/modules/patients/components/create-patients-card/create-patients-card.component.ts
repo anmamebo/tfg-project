@@ -12,7 +12,7 @@ import {
   DNI_REGEXP,
   PHONENUMBER_REGEXP,
   INTEGER_REGEXP,
-} from 'src/app/core/constants/reg-exp';
+} from 'src/app/core/constants/regex.constants';
 
 // Servicios
 import { PatientService } from 'src/app/core/services/entities/patient.service';

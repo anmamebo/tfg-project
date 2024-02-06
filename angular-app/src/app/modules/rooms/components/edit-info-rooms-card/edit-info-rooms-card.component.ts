@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
-import { INTEGER_REGEXP } from 'src/app/core/constants/reg-exp';
+import { INTEGER_REGEXP } from 'src/app/core/constants/regex.constants';
 
 // Servicios
 import { RoomService } from 'src/app/core/services/entities/room.service';

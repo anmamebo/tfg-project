@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { INTEGER_REGEXP } from 'src/app/core/constants/reg-exp';
+import { INTEGER_REGEXP } from 'src/app/core/constants/regex.constants';
 
 // Servicios
 import { AddressService } from 'src/app/core/services/entities/address.service';

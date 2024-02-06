@@ -8,7 +8,10 @@ import { Spanish } from 'flatpickr/dist/l10n/es.js';
 
 // Constantes
 import { GENDER_OPTIONS } from 'src/app/core/constants/options/genders-options.constants';
-import { DNI_REGEXP, PHONENUMBER_REGEXP } from 'src/app/core/constants/reg-exp';
+import {
+  DNI_REGEXP,
+  PHONENUMBER_REGEXP,
+} from 'src/app/core/constants/regex.constants';
 
 // Servicios
 import { PatientService } from 'src/app/core/services/entities/patient.service';
