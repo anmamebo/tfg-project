@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import { ROLES } from 'src/app/core/constants/roles.constants';
-import { breadcrumbMedicalSpecialtiesData } from 'src/app/core/constants/breadcrumb-data';
+import { breadcrumbMedicalSpecialtiesData } from 'src/app/core/constants/breadcrumb-data.constants';
 
 // Servicios
 import { MedicalspecialtyService } from 'src/app/core/services/entities/medicalspecialty.service';

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { breadcrumbRoomsCreateData } from 'src/app/core/constants/breadcrumb-data';
+import { breadcrumbRoomsCreateData } from 'src/app/core/constants/breadcrumb-data.constants';
 
 /**
  * Componente para la página de creación de una sala.

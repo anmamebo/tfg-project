@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { breadcrumbAdministrativesEditData } from 'src/app/core/constants/breadcrumb-data';
+import { breadcrumbAdministrativesEditData } from 'src/app/core/constants/breadcrumb-data.constants';
 
 // Servicios
 import { AdministrativeService } from 'src/app/core/services/entities/administrative.service';

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { breadcrumbPatientsEditData } from 'src/app/core/constants/breadcrumb-data';
+import { breadcrumbPatientsEditData } from 'src/app/core/constants/breadcrumb-data.constants';
 
 // Servicios
 import { PatientService } from 'src/app/core/services/entities/patient.service';

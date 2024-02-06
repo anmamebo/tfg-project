@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { ROLES } from 'src/app/core/constants/roles.constants';
-import { breadcrumbRoomsViewData } from 'src/app/core/constants/breadcrumb-data';
+import { breadcrumbRoomsViewData } from 'src/app/core/constants/breadcrumb-data.constants';
 
 // Servicios
 import { RoomService } from 'src/app/core/services/entities/room.service';

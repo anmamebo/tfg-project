@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 
 import { ROLES } from 'src/app/core/constants/roles.constants';
-import { breadcrumbGroupData } from 'src/app/core/constants/breadcrumb-data';
+import { breadcrumbGroupData } from 'src/app/core/constants/breadcrumb-data.constants';
 
 // Servicios
 import { GroupService } from 'src/app/core/services/entities/group.service';

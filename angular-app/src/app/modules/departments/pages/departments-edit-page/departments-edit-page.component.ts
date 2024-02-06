@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { breadcrumbDepartmentsEditData } from 'src/app/core/constants/breadcrumb-data';
+import { breadcrumbDepartmentsEditData } from 'src/app/core/constants/breadcrumb-data.constants';
 
 // Modelos
 import { Department } from 'src/app/core/models/department.interface';

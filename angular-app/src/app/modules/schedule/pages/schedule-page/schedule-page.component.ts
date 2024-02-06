@@ -15,7 +15,7 @@ import {
   CalendarView,
 } from 'angular-calendar';
 
-import { breadcrumbScheduleData } from 'src/app/core/constants/breadcrumb-data';
+import { breadcrumbScheduleData } from 'src/app/core/constants/breadcrumb-data.constants';
 
 // Servicios
 import { AppointmentService } from 'src/app/core/services/entities/appointment.service';

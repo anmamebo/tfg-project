@@ -3,7 +3,7 @@ import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 
-import { sidebarData } from 'src/app/core/constants/sidebar-items';
+import { sidebarData } from 'src/app/core/constants/sidebar-items.constants';
 
 /**
  * Componente que representa el menú lateral de la aplicación.

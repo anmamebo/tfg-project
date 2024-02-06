@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import { ROLES } from 'src/app/core/constants/roles.constants';
-import { breadcrumbRoomsData } from 'src/app/core/constants/breadcrumb-data';
+import { breadcrumbRoomsData } from 'src/app/core/constants/breadcrumb-data.constants';
 
 // Servicios
 import { RoomService } from 'src/app/core/services/entities/room.service';

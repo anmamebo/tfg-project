@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { ROLES } from 'src/app/core/constants/roles.constants';
-import { breadcrumbMedicalSpecialtiesViewData } from 'src/app/core/constants/breadcrumb-data';
+import { breadcrumbMedicalSpecialtiesViewData } from 'src/app/core/constants/breadcrumb-data.constants';
 
 // Servicios
 import { MedicalspecialtyService } from 'src/app/core/services/entities/medicalspecialty.service';

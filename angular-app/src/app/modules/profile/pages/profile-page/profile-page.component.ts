@@ -7,7 +7,7 @@ import { UserService } from 'src/app/core/services/entities/user.service';
 // Modelos
 import { User } from 'src/app/core/models/user.interface';
 
-import { breadcrumbProfileData } from 'src/app/core/constants/breadcrumb-data';
+import { breadcrumbProfileData } from 'src/app/core/constants/breadcrumb-data.constants';
 
 /**
  * Componente que representa la página de perfil de usuario.

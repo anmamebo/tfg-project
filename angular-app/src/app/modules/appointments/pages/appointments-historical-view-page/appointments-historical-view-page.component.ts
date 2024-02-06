@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { breadcrumbAppointmentsHistoricalData } from 'src/app/core/constants/breadcrumb-data';
+import { breadcrumbAppointmentsHistoricalData } from 'src/app/core/constants/breadcrumb-data.constants';
 
 // Modelos
 import { EntityData } from 'src/app/core/models/entity-data.interface';
