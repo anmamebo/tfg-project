@@ -22,4 +22,5 @@ export interface MedicalTest {
   patient: Patient;
   appointment?: Appointment;
   attachments?: MedicalTestAttachment[];
+  state?: boolean;
 }

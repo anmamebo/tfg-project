@@ -6,6 +6,7 @@
         <th class="text-center">Fecha de prescripción</th>
         <th class="text-center">Ficheros adjuntos</th>
         <th class="text-center">Completada</th>
+        <th class="text-center">Estado</th>
       </tr>
     </thead>
     <tbody>
@@ -32,6 +33,23 @@
               [ngClass]="{
                 'bi-check-lg': test.is_completed,
                 'bi-x-lg': !test.is_completed
+              }"
+            ></i>
+          </span>
+        </td>
+        <td class="text-center">
+          <span
+            class="badge rounded-circle"
+            [ngClass]="{
+              'bg-success': test.state,
+              'bg-danger': !test.state
+            }"
+            style="padding: 0.25rem !important; font-size: 10pt"
+            ><i
+              class="bi"
+              [ngClass]="{
+                'bi-check-lg': test.state,
+                'bi-x-lg': !test.state
               }"
             ></i>
           </span>

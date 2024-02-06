@@ -187,6 +187,30 @@ export class MedicalTestService {
   }
 
   /**
+   * Elimina una prueba médica.
+   * @param {string} id - ID de la prueba médica.
+   * @returns {Observable<any>} Un observable que emite un objeto `any`.
+   */
+  public deleteMedicalTest(id: string): Observable<any> {
+    const headers = this._httpCommonService.getCommonHeaders();
+    const httpOptions = { headers };
+
+    return this._http.delete<any>(`${this.url}${id}/`, httpOptions);
+  }
+
+  /**
+   * Activa una prueba médica.
+   * @param {string} id - ID de la prueba médica.
+   * @returns {Observable<any>} Un observable que emite un objeto `any`.
+   */
+  public activateMedicalTest(id: string): Observable<any> {
+    const headers = this._httpCommonService.getCommonHeaders();
+    const httpOptions = { headers };
+
+    return this._http.put<any>(`${this.url}${id}/activate/`, {}, httpOptions);
+  }
+
+  /**
    * Gestiona la descarga de un fichero adjunto de una prueba médica.
    * @param {string} attachmentId ID del fichero adjunto.
    * @returns {Observable<Blob>} El archivo adjunto.
