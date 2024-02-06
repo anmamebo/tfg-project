@@ -85,11 +85,11 @@ export class BasicInfoCardComponent implements OnInit {
 
     // Envía la solicitud de actualización de usuario al servicio
     this._userService.update(this.user.id, updateUser).subscribe({
-      next: (data) => {
+      next: (response) => {
         this.submitted = false;
         this.updatedUserEvent.emit();
         // Muestra un toast de éxito
-        this._notificationService.showSuccessToast(data.message);
+        this._notificationService.showSuccessToast(response.message);
       },
       error: (error) => {
         // Muestra un toast de error

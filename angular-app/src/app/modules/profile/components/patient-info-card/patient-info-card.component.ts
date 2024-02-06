@@ -152,10 +152,10 @@ export class PatientInfoCardComponent implements OnInit {
     };
 
     this._patientService.update(this.patient.id, updatePatient).subscribe({
-      next: (data) => {
+      next: (response) => {
         this.submitted = false;
         this.updatedPatientEvent.emit();
-        this._notificationService.showSuccessToast(data.message);
+        this._notificationService.showSuccessToast(response.message);
       },
       error: (error) => {
         this._notificationService.showErrorToast(error.message);
@@ -172,8 +172,8 @@ export class PatientInfoCardComponent implements OnInit {
    */
   private _getCountries(): void {
     this._countriesService.getCountries().subscribe({
-      next: (data: any) => {
-        this.nationalities = data.map((item: any) => ({
+      next: (response: any) => {
+        this.nationalities = response.map((item: any) => ({
           item_id: item.translations.spa.common,
           item_text: item.translations.spa.common,
         }));

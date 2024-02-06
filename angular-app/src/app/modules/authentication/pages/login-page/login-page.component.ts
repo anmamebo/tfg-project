@@ -64,9 +64,9 @@ export class LoginPageComponent {
     };
 
     this._authService.login(user).subscribe({
-      next: (data) => {
+      next: (response) => {
         this.errorMessage = '';
-        this._tokenStorageService.saveSingIn(data);
+        this._tokenStorageService.saveSingIn(response);
         this._router.navigate(['/']);
       },
       error: (e) => {

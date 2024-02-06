@@ -58,10 +58,10 @@ export class CreateDepartmentsCardComponent {
     };
 
     this._departmentService.create(department).subscribe({
-      next: (data: any) => {
+      next: (response: any) => {
         this.form.reset();
         this.submitted = false;
-        this._notificationService.showSuccessToast(data.message);
+        this._notificationService.showSuccessToast(response.message);
       },
       error: (error: any) => {
         this._notificationService.showErrorToast(error.message);

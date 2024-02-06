@@ -87,9 +87,9 @@ export class EditInfoAdministrativesCardComponent implements OnInit {
     this._administrativeService
       .update(this.administrative.id, administrativeData)
       .subscribe({
-        next: (data) => {
+        next: (response) => {
           this.submitted = false;
-          this._notificationService.showSuccessToast(data.message);
+          this._notificationService.showSuccessToast(response.message);
           this.refreshAdministrative.emit();
         },
         error: (error) => {

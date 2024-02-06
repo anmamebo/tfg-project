@@ -84,8 +84,8 @@ export class SchedulePageComponent implements OnInit {
         statuses: ['scheduled', 'in_progress', 'completed', 'rescheduled'],
       })
       .subscribe({
-        next: (data: any) => {
-          this.events = this._formatData(data);
+        next: (response: any) => {
+          this.events = this._formatData(response);
           this._cdr.detectChanges();
         },
         error: (error) => {

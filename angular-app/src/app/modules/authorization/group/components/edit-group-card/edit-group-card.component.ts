@@ -64,9 +64,9 @@ export class EditGroupCardComponent implements OnInit {
     };
 
     this._groupService.update(this.group.id, groupEdited).subscribe({
-      next: (data) => {
+      next: (response) => {
         this.submitted = false;
-        this._notificationService.showSuccessToast(data.message);
+        this._notificationService.showSuccessToast(response.message);
       },
       error: (error) => {
         this._notificationService.showErrorToast(error);

@@ -110,10 +110,10 @@ export class CreateDoctorsCardComponent implements OnInit {
     };
 
     this._doctorService.create(doctor).subscribe({
-      next: (data) => {
+      next: (response) => {
         this.form.reset();
         this.submitted = false;
-        this._notificationService.showSuccessToast(data.message);
+        this._notificationService.showSuccessToast(response.message);
       },
       error: (error) => {
         this._notificationService.showErrorToast(error.message);
@@ -128,8 +128,8 @@ export class CreateDoctorsCardComponent implements OnInit {
    */
   public getMedicalSpecialties(): void {
     this._medicalSpecialtyService.getItems().subscribe({
-      next: (data) => {
-        this.medicalSpecialties = data.map(
+      next: (response) => {
+        this.medicalSpecialties = response.map(
           (item: { id: String; name: String }) => ({
             item_id: item.id,
             item_text: item.name,
@@ -149,11 +149,13 @@ export class CreateDoctorsCardComponent implements OnInit {
    */
   public getDepartments(): void {
     this._departmentService.getItems().subscribe({
-      next: (data) => {
-        this.departments = data.map((item: { id: String; name: String }) => ({
-          item_id: item.id,
-          item_text: item.name,
-        }));
+      next: (response) => {
+        this.departments = response.map(
+          (item: { id: String; name: String }) => ({
+            item_id: item.id,
+            item_text: item.name,
+          })
+        );
       },
       error: (error) => {
         this._notificationService.showErrorToast(error.message);

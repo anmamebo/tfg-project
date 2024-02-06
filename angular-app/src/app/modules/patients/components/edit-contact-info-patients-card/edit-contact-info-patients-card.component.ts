@@ -95,9 +95,9 @@ export class EditContactInfoPatientsCardComponent implements OnInit {
     };
 
     this._patientService.update(this.patient.id, updatedData).subscribe({
-      next: (data) => {
+      next: (response) => {
         this.submitted = false;
-        this._notificationService.showSuccessToast(data.message);
+        this._notificationService.showSuccessToast(response.message);
         this.refreshPatient.emit();
       },
       error: (error) => {

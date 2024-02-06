@@ -88,9 +88,9 @@ export class DoctorInfoCardComponent implements OnInit {
     };
 
     this._doctorService.update(this.doctor.id, updateDoctor).subscribe({
-      next: (data) => {
+      next: (response) => {
         this.submitted = false;
-        this._notificationService.showSuccessToast(data.message);
+        this._notificationService.showSuccessToast(response.message);
         this.updatedDoctorEvent.emit();
       },
       error: (error) => {

@@ -79,9 +79,9 @@ export class EditInfoDepartmentsCardComponent implements OnInit {
     };
 
     this._departmentService.update(this.department.id, updatedData).subscribe({
-      next: (data: any) => {
+      next: (response: any) => {
         this.submitted = false;
-        this._notificationService.showSuccessToast(data.message);
+        this._notificationService.showSuccessToast(response.message);
       },
       error: (error: any) => {
         this._notificationService.showErrorToast(error.message);

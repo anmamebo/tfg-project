@@ -113,9 +113,9 @@ export class EditAddressPatientsCardComponent implements OnInit {
       address.patient_id = this.patientId;
 
       this._addressService.createAddress(address).subscribe({
-        next: (data) => {
+        next: (response) => {
           this.submitted = false;
-          this._notificationService.showSuccessToast(data.message);
+          this._notificationService.showSuccessToast(response.message);
           this.refreshPatient.emit();
         },
         error: (error) => {
@@ -125,9 +125,9 @@ export class EditAddressPatientsCardComponent implements OnInit {
     } else {
       // Si el paciente tiene dirección, se actualiza
       this._addressService.updateAddress(address).subscribe({
-        next: (data) => {
+        next: (response) => {
           this.submitted = false;
-          this._notificationService.showSuccessToast(data.message);
+          this._notificationService.showSuccessToast(response.message);
           this.refreshPatient.emit();
         },
         error: (error) => {

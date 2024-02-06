@@ -32,7 +32,7 @@ export class UserDropdownComponent implements OnInit {
    */
   public logout(): void {
     this._authService.logOut().subscribe({
-      next: (data) => {
+      next: (response) => {
         // Recargar la página después del cierre de sesión.
         window.location.reload();
       },

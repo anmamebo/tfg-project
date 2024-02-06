@@ -106,9 +106,9 @@ export class AddressInfoCardComponent implements OnInit {
     };
 
     this._addressService.updateAddress(updateAddress).subscribe({
-      next: (data) => {
+      next: (response) => {
         this.submitted = false;
-        this._notificationService.showSuccessToast(data.message);
+        this._notificationService.showSuccessToast(response.message);
       },
       error: (error) => {
         this._notificationService.showErrorToast(error.message);

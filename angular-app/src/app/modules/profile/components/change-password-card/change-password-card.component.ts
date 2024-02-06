@@ -74,10 +74,10 @@ export class ChangePasswordCardComponent {
       };
 
     this._userService.updatePassword(data).subscribe({
-      next: (data) => {
+      next: (response) => {
         this.submitted = false;
         this.form.reset();
-        this._notificationService.showSuccessToast(data.message);
+        this._notificationService.showSuccessToast(response.message);
       },
       error: (error) => {
         this.submitted = false;
