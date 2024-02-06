@@ -160,6 +160,61 @@ class MedicalTestViewSet(viewsets.GenericViewSet, PaginationMixin, ErrorResponse
             status_code=status.HTTP_400_BAD_REQUEST,
         )
 
+    @method_permission_classes([IsAdministratorOrDoctor, IsMedicalTestDoctor])
+    def destroy(self, request, pk=None):
+        """
+        Elimina una prueba médica.
+
+        Este método elimina una prueba médica.
+
+        Permisos requeridos:
+            - El usuario debe ser médico o administrador.
+            - El usuario debe ser el médico de la prueba médica (en el caso de médico).
+
+        Args:
+            request (Request): La solicitud HTTP.
+            pk (int): El id de la prueba médica.
+
+        Returns:
+            Response: La respuesta que indica si la prueba médica fue eliminada o no.
+        """
+        medicaltest = self.get_object(pk)
+        medicaltest.state = False
+        medicaltest.save()
+
+        return Response(
+            {"message": "Prueba médica eliminada correctamente."},
+            status=status.HTTP_200_OK,
+        )
+
+    @method_permission_classes([IsAdministratorOrDoctor, IsMedicalTestDoctor])
+    @action(detail=True, methods=["put"], url_path="activate")
+    def activate(self, request, pk=None):
+        """
+        Activa una prueba médica.
+
+        Este método activa una prueba médica.
+
+        Permisos requeridos:
+            - El usuario debe ser médico o administrador.
+            - El usuario debe ser el médico de la prueba médica (en el caso de médico).
+
+        Args:
+            request (Request): La solicitud HTTP.
+            pk (int): El id de la prueba médica.
+
+        Returns:
+            Response: La respuesta que indica si la prueba médica fue activada o no.
+        """
+        medicaltest = self.get_object(pk)
+        medicaltest.state = True
+        medicaltest.save()
+
+        return Response(
+            {"message": "Prueba médica activada correctamente."},
+            status=status.HTTP_200_OK,
+        )
+
     @method_permission_classes([IsAdministratorOrDoctor])
     @action(detail=False, methods=["get"], url_path="appointment")
     def list_for_appointment(self, request):
@@ -194,7 +249,7 @@ class MedicalTestViewSet(viewsets.GenericViewSet, PaginationMixin, ErrorResponse
         appointment = get_object_or_404(Appointment, pk=appointment_id)
         medicaltests = (
             self.get_queryset()
-            .filter(appointment_id=appointment_id, state=True)
+            .filter(appointment_id=appointment_id)
             .order_by("-created_date")
         )
 
