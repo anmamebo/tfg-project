@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { API_URL } from 'src/app/core/constants/API_URL';
+import { API_URL } from 'src/app/core/constants/API-URL.constants';
 
 // Servicios
 import { HttpCommonService } from 'src/app/core/services/http-common/http-common.service';
@@ -24,7 +24,7 @@ export class AddressService {
     private _http: HttpClient,
     private _httpCommonService: HttpCommonService
   ) {
-    this.url = API_URL.url + 'addresses/';
+    this.url = API_URL + 'addresses/';
   }
 
   /**

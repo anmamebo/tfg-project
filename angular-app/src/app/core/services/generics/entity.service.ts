@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { API_URL } from 'src/app/core/constants/API_URL';
+import { API_URL } from 'src/app/core/constants/API-URL.constants';
 
 // Servicios
 import { HttpCommonService } from 'src/app/core/services/http-common/http-common.service';
@@ -21,7 +21,7 @@ export abstract class EntityService<T> {
     protected http: HttpClient,
     protected httpCommonService: HttpCommonService
   ) {
-    this.url = API_URL.url;
+    this.url = API_URL;
   }
 
   /**

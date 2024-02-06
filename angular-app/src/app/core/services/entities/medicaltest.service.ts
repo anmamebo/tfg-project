@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 
-import { API_URL } from 'src/app/core/constants/API_URL';
+import { API_URL } from 'src/app/core/constants/API-URL.constants';
 
 // Servicios
 import { HttpCommonService } from 'src/app/core/services/http-common/http-common.service';
@@ -36,7 +36,7 @@ export class MedicalTestService {
     private _http: HttpClient,
     private _httpCommonService: HttpCommonService
   ) {
-    this.url = API_URL.url + 'medicaltests/';
+    this.url = API_URL + 'medicaltests/';
   }
 
   /**
@@ -220,7 +220,7 @@ export class MedicalTestService {
 
     return this._http
       .get(
-        `${API_URL.url}medicaltestattachments/${attachmentId}/download-attachment/`,
+        `${API_URL}medicaltestattachments/${attachmentId}/download-attachment/`,
         {
           headers,
           responseType: 'blob',
@@ -267,7 +267,7 @@ export class MedicalTestService {
     formData.append('medical_test', attachment.medical_test);
 
     return this._http.post<any>(
-      `${API_URL.url}medicaltestattachments/upload-attachment/`,
+      `${API_URL}medicaltestattachments/upload-attachment/`,
       formData,
       httpOptions
     );
@@ -283,7 +283,7 @@ export class MedicalTestService {
     const httpOptions = { headers };
 
     return this._http.delete<any>(
-      `${API_URL.url}medicaltestattachments/${attachmentId}/delete-attachment/`,
+      `${API_URL}medicaltestattachments/${attachmentId}/delete-attachment/`,
       httpOptions
     );
   }

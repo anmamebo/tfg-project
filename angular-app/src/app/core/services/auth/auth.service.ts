@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
 
-import { API_URL } from 'src/app/core/constants/API_URL';
+import { API_URL } from 'src/app/core/constants/API-URL.constants';
 
 // Servicios
 import { TokenStorageService } from 'src/app/core/services/auth/token-storage.service';
@@ -30,7 +30,7 @@ export class AuthService {
     private _http: HttpClient,
     private _tokenStorageService: TokenStorageService
   ) {
-    this.url = API_URL.url;
+    this.url = API_URL;
   }
 
   /**
