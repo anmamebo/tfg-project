@@ -30,6 +30,8 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
         if (error.status === 400) {
           errorMessage =
             error.error.message || 'Hubo un problema con la solicitud.';
+        } else if (error.status === 401) {
+          errorMessage = error.error.message || 'No estás autorizado.';
         } else if (error.status === 404) {
           errorMessage =
             error.error.message || 'No se encontró el recurso solicitado.';
