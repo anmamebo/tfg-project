@@ -1,6 +1,6 @@
+import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 import { AuthService } from '../services/auth/auth.service';
-import { inject } from '@angular/core';
 
 /**
  * Función de guardia de ruta que restringe el acceso a rutas basado en los roles proporcionados.

@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { AdministrativesCreatePageComponent } from './administratives-create-page.component';
 
 describe('AdministrativesCreatePageComponent', () => {
@@ -8,7 +7,7 @@ describe('AdministrativesCreatePageComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [AdministrativesCreatePageComponent]
+      declarations: [AdministrativesCreatePageComponent],
     });
     fixture = TestBed.createComponent(AdministrativesCreatePageComponent);
     component = fixture.componentInstance;

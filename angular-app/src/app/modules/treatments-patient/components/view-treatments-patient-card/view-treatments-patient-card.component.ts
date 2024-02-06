@@ -1,18 +1,14 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { format } from 'date-fns';
 import { es } from 'date-fns/locale';
-
-// Servicios
+import {
+  STATUS_BADGE_CLASSES,
+  StatusBadgeClasses,
+  Treatment,
+} from 'src/app/core/models/treatment.interface';
 import { TreatmentService } from 'src/app/core/services/entities/treatment.service';
 import { NotificationService } from 'src/app/core/services/notifications/notification.service';
 import { PdfTreatmentService } from 'src/app/core/services/pdfs/pdf-treatment.service';
-
-// Modelos
-import {
-  Treatment,
-  StatusBadgeClasses,
-  STATUS_BADGE_CLASSES,
-} from 'src/app/core/models/treatment.interface';
 
 /**
  * Componente que representa una tarjeta de visualización de tratamientos para el rol de paciente.

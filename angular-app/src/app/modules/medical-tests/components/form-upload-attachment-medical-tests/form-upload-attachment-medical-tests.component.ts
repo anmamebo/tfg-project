@@ -1,17 +1,9 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
-// Servicios
+import { ATTACHMENTS_ALLOWED_FILE_EXTENSIONS } from 'src/app/core/constants/file-extensions.constants';
+import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
 import { MedicalTestService } from 'src/app/core/services/entities/medicaltest.service';
 import { NotificationService } from 'src/app/core/services/notifications/notification.service';
-
-// Modelos
-import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
-
-// Constantes
-import { ATTACHMENTS_ALLOWED_FILE_EXTENSIONS } from 'src/app/core/constants/file-extensions.constants';
-
-// Validadores
 import Validation from 'src/app/core/validators/general.validator';
 
 /**

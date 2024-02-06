@@ -1,16 +1,12 @@
 import { Component } from '@angular/core';
-import { GenericListCardComponent } from 'src/app/shared/components/generic-list-card/generic-list-card.component';
-
-// Servicios
-import { AppointmentService } from 'src/app/core/services/entities/appointment.service';
-import { NotificationService } from 'src/app/core/services/notifications/notification.service';
-
-// Modelos
+import { Appointment } from 'src/app/core/models/appointment.interface';
 import {
   ListResponse,
   PaginatedResponse,
 } from 'src/app/core/models/response/list-response.interface';
-import { Appointment } from 'src/app/core/models/appointment.interface';
+import { AppointmentService } from 'src/app/core/services/entities/appointment.service';
+import { NotificationService } from 'src/app/core/services/notifications/notification.service';
+import { GenericListCardComponent } from 'src/app/shared/components/generic-list-card/generic-list-card.component';
 
 /**
  * Componente que representa una tarjeta de listado de citas para el rol de doctor.

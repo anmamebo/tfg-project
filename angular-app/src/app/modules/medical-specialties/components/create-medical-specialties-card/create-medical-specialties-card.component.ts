@@ -1,12 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
-// Servicios
+import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
 import { MedicalspecialtyService } from 'src/app/core/services/entities/medicalspecialty.service';
 import { NotificationService } from 'src/app/core/services/notifications/notification.service';
-
-// Modelos
-import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
 
 /**
  * Componente que representa la tarjeta de creación de una especialidad médica

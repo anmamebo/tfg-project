@@ -1,22 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-
 import {
   ApexAxisChartSeries,
   ApexChart,
   ApexDataLabels,
+  ApexFill,
+  ApexLegend,
+  ApexNoData,
   ApexPlotOptions,
   ApexResponsive,
-  ApexYAxis,
   ApexXAxis,
-  ApexLegend,
-  ApexFill,
-  ApexNoData,
+  ApexYAxis,
 } from 'ng-apexcharts';
-
-// Constantes
 import { TYPE_APPOINTMENT_OPTIONS } from 'src/app/core/constants/options/type-appointment-options.constants';
-
-// Servicios
 import { StatisticsService } from 'src/app/core/services/statistics/statistics.service';
 
 interface TypesData {

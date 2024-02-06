@@ -1,6 +1,5 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ViewMedicalTestsAppointmentsCardComponent } from './view-medical-tests-appointments-card.component';
 
 describe('ViewMedicalTestsAppointmentsCardComponent', () => {

@@ -1,20 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
-
-// Constantes
 import { TYPE_APPOINTMENT_OPTIONS } from 'src/app/core/constants/options/type-appointment-options.constants';
-
-// Servicios
+import { MedicalSpecialty } from 'src/app/core/models/medical-specialty.interface';
+import { ListResponse } from 'src/app/core/models/response/list-response.interface';
+import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
 import { AppointmentService } from 'src/app/core/services/entities/appointment.service';
 import { MedicalspecialtyService } from 'src/app/core/services/entities/medicalspecialty.service';
 import { NotificationService } from 'src/app/core/services/notifications/notification.service';
-
-// Modelos
-import { MedicalSpecialty } from 'src/app/core/models/medical-specialty.interface';
-import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
-import { ListResponse } from 'src/app/core/models/response/list-response.interface';
 
 /**
  * Componente que representa la tarjeta de creación de una solicitud de cita

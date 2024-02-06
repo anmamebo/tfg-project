@@ -1,6 +1,5 @@
-import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-
+import { TestBed } from '@angular/core/testing';
 import { PatientService } from './patient.service';
 
 describe('PatientService', () => {

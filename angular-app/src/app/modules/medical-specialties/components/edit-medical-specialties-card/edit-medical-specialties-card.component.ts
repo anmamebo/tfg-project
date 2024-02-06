@@ -1,13 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
-// Servicios
-import { MedicalspecialtyService } from 'src/app/core/services/entities/medicalspecialty.service';
-import { NotificationService } from 'src/app/core/services/notifications/notification.service';
-
-// Modelos
 import { MedicalSpecialty } from 'src/app/core/models/medical-specialty.interface';
 import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
+import { MedicalspecialtyService } from 'src/app/core/services/entities/medicalspecialty.service';
+import { NotificationService } from 'src/app/core/services/notifications/notification.service';
 
 /**
  * Componente que representa la tarjeta de edición de la

@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { GenericPageComponent } from './generic-page.component';
 
 describe('GenericPageComponent', () => {

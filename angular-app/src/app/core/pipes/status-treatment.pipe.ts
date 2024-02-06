@@ -1,5 +1,4 @@
 import { Pipe, PipeTransform } from '@angular/core';
-
 import { STATUS_TREATMENT_OPTIONS } from 'src/app/core/constants/options/status-treatment-options.constants';
 
 /**

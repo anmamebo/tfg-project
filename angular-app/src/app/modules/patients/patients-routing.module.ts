@@ -1,15 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-
-import { PatientsPageComponent } from './pages/patients-page/patients-page.component';
-import { PatientsEditPageComponent } from './pages/patients-edit-page/patients-edit-page.component';
-import { PatientsViewPageComponent } from './pages/patients-view-page/patients-view-page.component';
-import { PatientsCreatePageComponent } from './pages/patients-create-page/patients-create-page.component';
-import { PatientsMedicalHistoryPageComponent } from './pages/patients-medical-history-page/patients-medical-history-page.component';
-import { PatientsTreatmentsPageComponent } from './pages/patients-treatments-page/patients-treatments-page.component';
-import { PatientsMedicalTestsPageComponent } from './pages/patients-medical-tests-page/patients-medical-tests-page.component';
-
 import { patientResolver } from 'src/app/core/resolvers/patient.resolver';
+import { PatientsCreatePageComponent } from './pages/patients-create-page/patients-create-page.component';
+import { PatientsEditPageComponent } from './pages/patients-edit-page/patients-edit-page.component';
+import { PatientsMedicalHistoryPageComponent } from './pages/patients-medical-history-page/patients-medical-history-page.component';
+import { PatientsMedicalTestsPageComponent } from './pages/patients-medical-tests-page/patients-medical-tests-page.component';
+import { PatientsPageComponent } from './pages/patients-page/patients-page.component';
+import { PatientsTreatmentsPageComponent } from './pages/patients-treatments-page/patients-treatments-page.component';
+import { PatientsViewPageComponent } from './pages/patients-view-page/patients-view-page.component';
 
 const routes: Routes = [
   {

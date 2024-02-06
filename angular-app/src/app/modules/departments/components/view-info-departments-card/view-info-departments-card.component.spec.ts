@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ViewInfoDepartmentsCardComponent } from './view-info-departments-card.component';
 
 describe('ViewInfoDepartmentsCardComponent', () => {

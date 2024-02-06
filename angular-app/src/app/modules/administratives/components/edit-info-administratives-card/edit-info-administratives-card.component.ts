@@ -1,14 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
 import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
-
-// Servicios
+import { User } from 'src/app/core/models/user.interface';
 import { AdministrativeService } from 'src/app/core/services/entities/administrative.service';
 import { NotificationService } from 'src/app/core/services/notifications/notification.service';
-
-// Modelos
-import { User } from 'src/app/core/models/user.interface';
 
 /**
  * Componente que representa la tarjeta de edición de la

@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-
 import { breadcrumbPatientsCreateData } from 'src/app/core/constants/breadcrumb-data.constants';
 
 /**

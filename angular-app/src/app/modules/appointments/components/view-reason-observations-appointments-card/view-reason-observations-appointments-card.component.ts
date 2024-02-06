@@ -1,13 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
-// Servicios
-import { AppointmentService } from 'src/app/core/services/entities/appointment.service';
-import { NotificationService } from 'src/app/core/services/notifications/notification.service';
-
-// Modelos
 import { Appointment } from 'src/app/core/models/appointment.interface';
 import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
+import { AppointmentService } from 'src/app/core/services/entities/appointment.service';
+import { NotificationService } from 'src/app/core/services/notifications/notification.service';
 
 @Component({
   selector: 'app-view-reason-observations-appointments-card',

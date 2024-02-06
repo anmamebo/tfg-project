@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { GenericCardComponent } from './generic-card.component';
 
 describe('GenericCardComponent', () => {

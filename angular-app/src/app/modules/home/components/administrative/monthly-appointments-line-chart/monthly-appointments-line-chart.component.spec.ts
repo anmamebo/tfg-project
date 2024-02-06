@@ -1,6 +1,5 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MonthlyAppointmentsLineChartComponent } from './monthly-appointments-line-chart.component';
 
 describe('MonthlyAppointmentsLineChartComponent', () => {

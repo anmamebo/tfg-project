@@ -1,9 +1,8 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
 import { DatePipe } from '@angular/common';
-
-import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Spanish } from 'flatpickr/dist/l10n/es.js';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 
 interface FilterDate {
   from: string | null;

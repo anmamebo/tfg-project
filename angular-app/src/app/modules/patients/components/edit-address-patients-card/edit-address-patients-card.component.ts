@@ -1,15 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
 import { INTEGER_REGEXP } from 'src/app/core/constants/regex.constants';
-
-// Servicios
-import { AddressService } from 'src/app/core/services/entities/address.service';
-import { NotificationService } from 'src/app/core/services/notifications/notification.service';
-
-// Modelos
 import { Address } from 'src/app/core/models/address.interface';
 import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
+import { AddressService } from 'src/app/core/services/entities/address.service';
+import { NotificationService } from 'src/app/core/services/notifications/notification.service';
 
 /**
  * Componente que representa la tarjeta de edición de la

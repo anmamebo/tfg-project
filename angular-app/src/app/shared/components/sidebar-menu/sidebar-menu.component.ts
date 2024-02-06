@@ -1,8 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
-import { filter } from 'rxjs/operators';
+import { NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-
+import { filter } from 'rxjs/operators';
 import { sidebarData } from 'src/app/core/constants/sidebar-items.constants';
 
 /**

@@ -1,8 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { HasRoleDirective } from './has-role.directive';
-import { AuthService } from 'src/app/core/services/auth/auth.service';
-import { TemplateRef, ViewContainerRef } from '@angular/core';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { TemplateRef, ViewContainerRef } from '@angular/core';
+import { TestBed } from '@angular/core/testing';
+import { AuthService } from 'src/app/core/services/auth/auth.service';
+import { HasRoleDirective } from './has-role.directive';
 
 describe('HasRoleDirective', () => {
   it('should create an instance', () => {

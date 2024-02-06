@@ -1,13 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-
 import {
-  ApexNonAxisChartSeries,
-  ApexResponsive,
   ApexChart,
   ApexNoData,
+  ApexNonAxisChartSeries,
+  ApexResponsive,
 } from 'ng-apexcharts';
-
-// Servicios
 import { DoctorStatisticsService } from 'src/app/core/services/statistics/doctor-statistics.service';
 
 interface AppointmentsPerGender {

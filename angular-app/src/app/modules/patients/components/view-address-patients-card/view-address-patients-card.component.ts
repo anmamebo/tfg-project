@@ -1,6 +1,4 @@
 import { Component, Input } from '@angular/core';
-
-// Modelos
 import { Address } from 'src/app/core/models/address.interface';
 
 /**

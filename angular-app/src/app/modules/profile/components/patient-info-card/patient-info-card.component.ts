@@ -1,26 +1,19 @@
+import { DatePipe } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { DatePipe } from '@angular/common';
-
 import { SwalPortalTargets } from '@sweetalert2/ngx-sweetalert2';
-import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { Spanish } from 'flatpickr/dist/l10n/es.js';
-
-// Constantes
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { GENDER_OPTIONS } from 'src/app/core/constants/options/genders-options.constants';
 import {
   DNI_REGEXP,
   PHONENUMBER_REGEXP,
 } from 'src/app/core/constants/regex.constants';
-
-// Servicios
-import { PatientService } from 'src/app/core/services/entities/patient.service';
-import { NotificationService } from 'src/app/core/services/notifications/notification.service';
-import { CountriesService } from 'src/app/core/services/entities/countries.service';
-
-// Modelos
 import { Patient } from 'src/app/core/models/patient.interface';
 import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
+import { CountriesService } from 'src/app/core/services/entities/countries.service';
+import { PatientService } from 'src/app/core/services/entities/patient.service';
+import { NotificationService } from 'src/app/core/services/notifications/notification.service';
 
 /**
  * Componente que representa una tarjeta de información de paciente.

@@ -1,6 +1,4 @@
 import { Component, Input } from '@angular/core';
-
-// Modelos
 import { Room } from 'src/app/core/models/room.interface';
 
 /**

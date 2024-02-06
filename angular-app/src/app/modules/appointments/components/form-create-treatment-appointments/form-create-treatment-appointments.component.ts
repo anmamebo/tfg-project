@@ -1,15 +1,10 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
 import { Spanish } from 'flatpickr/dist/l10n/es.js';
-
-// Servicios
-import { TreatmentService } from 'src/app/core/services/entities/treatment.service';
-import { NotificationService } from 'src/app/core/services/notifications/notification.service';
-
-// Modelos
 import { Appointment } from 'src/app/core/models/appointment.interface';
 import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
+import { TreatmentService } from 'src/app/core/services/entities/treatment.service';
+import { NotificationService } from 'src/app/core/services/notifications/notification.service';
 
 /**
  * Componente que representa la tarjeta de creación de un tratamiento

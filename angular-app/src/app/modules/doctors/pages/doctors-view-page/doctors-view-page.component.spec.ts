@@ -1,8 +1,7 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-
-import { DoctorsViewPageComponent } from './doctors-view-page.component';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
+import { DoctorsViewPageComponent } from './doctors-view-page.component';
 
 describe('DoctorsViewPageComponent', () => {
   let component: DoctorsViewPageComponent;

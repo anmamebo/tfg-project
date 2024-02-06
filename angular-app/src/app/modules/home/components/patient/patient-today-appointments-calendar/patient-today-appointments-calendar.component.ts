@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
@@ -6,16 +7,11 @@ import {
   ElementRef,
   ViewChild,
 } from '@angular/core';
-import { DatePipe } from '@angular/common';
 import { CalendarEvent, CalendarView } from 'angular-calendar';
 import { differenceInMinutes, startOfDay, startOfHour } from 'date-fns';
-
-// Servicios
-import { AppointmentService } from 'src/app/core/services/entities/appointment.service';
-
-// Modelos
 import { Appointment } from 'src/app/core/models/appointment.interface';
 import { ListResponse } from 'src/app/core/models/response/list-response.interface';
+import { AppointmentService } from 'src/app/core/services/entities/appointment.service';
 
 /**
  * Componente que representa la tarjeta de citas del día actual de un paciente.

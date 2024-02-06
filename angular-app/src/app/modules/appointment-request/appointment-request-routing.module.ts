@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-
 import { AppointmentRequestPageComponent } from './pages/appointment-request-page/appointment-request-page.component';
 
 const routes: Routes = [

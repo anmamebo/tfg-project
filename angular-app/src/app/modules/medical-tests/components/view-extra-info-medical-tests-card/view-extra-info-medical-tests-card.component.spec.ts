@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ViewExtraInfoMedicalTestsCardComponent } from './view-extra-info-medical-tests-card.component';
 
 describe('ViewExtraInfoMedicalTestsCardComponent', () => {
@@ -8,7 +7,7 @@ describe('ViewExtraInfoMedicalTestsCardComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ViewExtraInfoMedicalTestsCardComponent]
+      declarations: [ViewExtraInfoMedicalTestsCardComponent],
     });
     fixture = TestBed.createComponent(ViewExtraInfoMedicalTestsCardComponent);
     component = fixture.componentInstance;

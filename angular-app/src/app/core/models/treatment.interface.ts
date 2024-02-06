@@ -1,6 +1,6 @@
-import { Patient } from './patient.interface';
-import { Doctor } from './doctor.interface';
 import { Appointment } from './appointment.interface';
+import { Doctor } from './doctor.interface';
+import { Patient } from './patient.interface';
 
 export interface StatusBadgeClasses {
   [status: string]: string;

@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-
 import { breadcrumbMedicalSpecialtiesEditData } from 'src/app/core/constants/breadcrumb-data.constants';
-
-// Modelos
 import { MedicalSpecialty } from 'src/app/core/models/medical-specialty.interface';
 
 /**

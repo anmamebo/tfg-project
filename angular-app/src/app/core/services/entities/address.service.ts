@@ -1,16 +1,10 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-
 import { API_URL } from 'src/app/core/constants/API-URL.constants';
-
-import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
-
-// Servicios
-import { HttpCommonService } from 'src/app/core/services/http-common/http-common.service';
-
-// Modelos
 import { Address } from 'src/app/core/models/address.interface';
+import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
+import { HttpCommonService } from 'src/app/core/services/http-common/http-common.service';
 
 /**
  * Servicio para la gestión de direcciones.

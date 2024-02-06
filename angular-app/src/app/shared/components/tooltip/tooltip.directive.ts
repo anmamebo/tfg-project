@@ -8,7 +8,6 @@ import {
   Input,
   ViewContainerRef,
 } from '@angular/core';
-
 import { TooltipComponent } from './tooltip.component';
 
 /**

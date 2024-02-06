@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-
 import { breadcrumbGroupViewData } from 'src/app/core/constants/breadcrumb-data.constants';
-
-// Modelos
 import { Group } from 'src/app/core/models/group.interface';
 
 /**

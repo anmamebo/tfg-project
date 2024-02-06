@@ -1,17 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-
 import {
-  ApexChart,
   ApexAxisChartSeries,
+  ApexChart,
   ApexDataLabels,
+  ApexGrid,
+  ApexLegend,
+  ApexNoData,
   ApexPlotOptions,
   ApexXAxis,
-  ApexLegend,
-  ApexGrid,
-  ApexNoData,
 } from 'ng-apexcharts';
-
-// Servicios
 import { StatisticsService } from 'src/app/core/services/statistics/statistics.service';
 
 interface AppointmentsPerAge {

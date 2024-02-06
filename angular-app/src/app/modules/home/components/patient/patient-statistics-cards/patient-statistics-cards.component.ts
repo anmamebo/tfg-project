@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-
-// Servicios
 import { PatientStatisticsService } from 'src/app/core/services/statistics/patient-statistics.service';
 
 interface Statistics {

@@ -1,13 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
-// Servicios
-import { DepartmentService } from 'src/app/core/services/entities/department.service';
-import { NotificationService } from 'src/app/core/services/notifications/notification.service';
-
-// Modelos
 import { Department } from 'src/app/core/models/department.interface';
 import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
+import { DepartmentService } from 'src/app/core/services/entities/department.service';
+import { NotificationService } from 'src/app/core/services/notifications/notification.service';
 
 /**
  * Componente que representa la tarjeta de edición de la

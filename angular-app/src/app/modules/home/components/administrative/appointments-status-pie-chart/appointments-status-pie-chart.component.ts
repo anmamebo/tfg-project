@@ -1,16 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-
 import {
-  ApexNonAxisChartSeries,
-  ApexResponsive,
   ApexChart,
   ApexLegend,
+  ApexNonAxisChartSeries,
+  ApexResponsive,
 } from 'ng-apexcharts';
-
-// Constantes
 import { STATUS_APPOINTMENT_OPTIONS } from 'src/app/core/constants/options/status-appointment-options.constants';
-
-// Servicios
 import { StatisticsService } from 'src/app/core/services/statistics/statistics.service';
 
 interface AppointmentsPerStatus {

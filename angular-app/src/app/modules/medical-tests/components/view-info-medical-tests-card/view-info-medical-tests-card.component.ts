@@ -1,14 +1,9 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-
 import { SwalPortalTargets } from '@sweetalert2/ngx-sweetalert2';
-
-// Servicios
-import { MedicalTestService } from 'src/app/core/services/entities/medicaltest.service';
-import { NotificationService } from 'src/app/core/services/notifications/notification.service';
-
-// Modelos
 import { MedicalTest } from 'src/app/core/models/medical-test.interface';
 import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
+import { MedicalTestService } from 'src/app/core/services/entities/medicaltest.service';
+import { NotificationService } from 'src/app/core/services/notifications/notification.service';
 
 /**
  * Componente para mostrar la información de un examen médico

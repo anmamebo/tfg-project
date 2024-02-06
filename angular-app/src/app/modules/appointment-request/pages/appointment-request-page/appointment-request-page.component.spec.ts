@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { AppointmentRequestPageComponent } from './appointment-request-page.component';
 
 describe('AppointmentRequestPageComponent', () => {
@@ -8,7 +7,7 @@ describe('AppointmentRequestPageComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [AppointmentRequestPageComponent]
+      declarations: [AppointmentRequestPageComponent],
     });
     fixture = TestBed.createComponent(AppointmentRequestPageComponent);
     component = fixture.componentInstance;

@@ -1,16 +1,9 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-
 import { SwalPortalTargets } from '@sweetalert2/ngx-sweetalert2';
-
-// Servicios
+import { ATTACHMENTS_ALLOWED_FILE_EXTENSIONS } from 'src/app/core/constants/file-extensions.constants';
+import { MedicalTestAttachment } from 'src/app/core/models/medical-test.interface';
 import { MedicalTestService } from 'src/app/core/services/entities/medicaltest.service';
 import { NotificationService } from 'src/app/core/services/notifications/notification.service';
-
-// Modelos
-import { MedicalTestAttachment } from 'src/app/core/models/medical-test.interface';
-
-// Constantes
-import { ATTACHMENTS_ALLOWED_FILE_EXTENSIONS } from 'src/app/core/constants/file-extensions.constants';
 
 /**
  * Componente para la visualización de los ficheros adjuntos de una prueba médica.

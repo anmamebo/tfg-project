@@ -1,6 +1,5 @@
 import { TestBed } from '@angular/core/testing';
 import { ResolveFn } from '@angular/router';
-
 import { departmentResolver } from './department.resolver';
 
 describe('departmentResolver', () => {

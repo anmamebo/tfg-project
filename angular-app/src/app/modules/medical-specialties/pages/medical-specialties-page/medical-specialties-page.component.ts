@@ -1,13 +1,8 @@
 import { Component } from '@angular/core';
-
-import { ROLES } from 'src/app/core/constants/roles.constants';
 import { breadcrumbMedicalSpecialtiesData } from 'src/app/core/constants/breadcrumb-data.constants';
-
-// Servicios
-import { MedicalspecialtyService } from 'src/app/core/services/entities/medicalspecialty.service';
-
-// Modelos
+import { ROLES } from 'src/app/core/constants/roles.constants';
 import { EntityData } from 'src/app/core/models/entity-data.interface';
+import { MedicalspecialtyService } from 'src/app/core/services/entities/medicalspecialty.service';
 
 /**
  * Componente para la página de listado de especialidades médicas.

@@ -1,10 +1,8 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-
-// Servicios
-import { HttpCommonService } from 'src/app/core/services/http-common/http-common.service';
 import { PdfService } from 'src/app/core/services/generics/pdf.service';
+import { HttpCommonService } from 'src/app/core/services/http-common/http-common.service';
 
 /**
  * Servicio para gestionar la descarga e impresión de pdfs de citas.

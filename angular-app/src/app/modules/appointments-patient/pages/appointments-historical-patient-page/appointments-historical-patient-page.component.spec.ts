@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { AppointmentsHistoricalPatientPageComponent } from './appointments-historical-patient-page.component';
 
 describe('AppointmentsHistoricalPatientPageComponent', () => {
@@ -8,9 +7,11 @@ describe('AppointmentsHistoricalPatientPageComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [AppointmentsHistoricalPatientPageComponent]
+      declarations: [AppointmentsHistoricalPatientPageComponent],
     });
-    fixture = TestBed.createComponent(AppointmentsHistoricalPatientPageComponent);
+    fixture = TestBed.createComponent(
+      AppointmentsHistoricalPatientPageComponent
+    );
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

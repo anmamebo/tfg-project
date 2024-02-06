@@ -1,13 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-
-// Servicios
+import { AuthResponse } from 'src/app/core/models/response/auth-response.interface';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { TokenStorageService } from 'src/app/core/services/auth/token-storage.service';
-
-// Modelos
-import { AuthResponse } from 'src/app/core/models/response/auth-response.interface';
 
 /**
  * Componente que representa la página de inicio de sesión.

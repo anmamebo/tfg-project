@@ -1,15 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
-
-// Servicios
-import { RoomService } from 'src/app/core/services/entities/room.service';
-import { NotificationService } from 'src/app/core/services/notifications/notification.service';
-
-// Modelos
-import { Room } from 'src/app/core/models/room.interface';
 import {
   ListResponse,
   PaginatedResponse,
 } from 'src/app/core/models/response/list-response.interface';
+import { Room } from 'src/app/core/models/room.interface';
+import { RoomService } from 'src/app/core/services/entities/room.service';
+import { NotificationService } from 'src/app/core/services/notifications/notification.service';
 
 /**
  * Componente que representa la tarjeta de visualización de las salas

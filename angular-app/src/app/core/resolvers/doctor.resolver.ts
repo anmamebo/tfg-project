@@ -1,3 +1,4 @@
+import { inject } from '@angular/core';
 import {
   ActivatedRouteSnapshot,
   ResolveFn,
@@ -5,8 +6,6 @@ import {
   RouterStateSnapshot,
 } from '@angular/router';
 import { Observable, catchError, map, of } from 'rxjs';
-import { inject } from '@angular/core';
-
 import { DoctorService } from '../services/entities/doctor.service';
 
 /**

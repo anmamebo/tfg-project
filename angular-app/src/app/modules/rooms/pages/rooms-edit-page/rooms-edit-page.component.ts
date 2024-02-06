@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-
 import { breadcrumbRoomsEditData } from 'src/app/core/constants/breadcrumb-data.constants';
-
-// Modelos
 import { Room } from 'src/app/core/models/room.interface';
 
 /**

@@ -1,6 +1,6 @@
-import { User } from './user.interface';
-import { MedicalSpecialty } from './medical-specialty.interface';
 import { Department } from './department.interface';
+import { MedicalSpecialty } from './medical-specialty.interface';
+import { User } from './user.interface';
 
 export interface Doctor {
   id: string;

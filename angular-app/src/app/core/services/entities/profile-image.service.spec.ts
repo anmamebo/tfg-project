@@ -1,5 +1,4 @@
 import { TestBed } from '@angular/core/testing';
-
 import { ProfileImageService } from './profile-image.service';
 
 describe('ProfileImageService', () => {

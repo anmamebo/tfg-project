@@ -1,8 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { format } from 'date-fns';
 import { es } from 'date-fns/locale';
-
-// Modelo
 import { MedicalTest } from 'src/app/core/models/medical-test.interface';
 
 /**

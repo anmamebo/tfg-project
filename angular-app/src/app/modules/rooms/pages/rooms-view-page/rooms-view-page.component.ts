@@ -1,14 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-
-import { ROLES } from 'src/app/core/constants/roles.constants';
 import { breadcrumbRoomsViewData } from 'src/app/core/constants/breadcrumb-data.constants';
-
-// Servicios
-import { RoomService } from 'src/app/core/services/entities/room.service';
-
-// Modelos
+import { ROLES } from 'src/app/core/constants/roles.constants';
 import { Room } from 'src/app/core/models/room.interface';
+import { RoomService } from 'src/app/core/services/entities/room.service';
 
 /**
  * Componente para la página de visualización de una sala

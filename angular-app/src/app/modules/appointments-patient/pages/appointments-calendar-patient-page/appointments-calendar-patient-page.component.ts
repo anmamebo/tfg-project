@@ -1,29 +1,22 @@
+import { DatePipe } from '@angular/common';
 import {
-  Component,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
+  Component,
   OnInit,
 } from '@angular/core';
-import { DatePipe } from '@angular/common';
-import { Subject } from 'rxjs';
-
-// Calendario
-import { isSameDay, isSameMonth } from 'date-fns';
 import {
   CalendarEvent,
   CalendarEventTimesChangedEvent,
   CalendarView,
 } from 'angular-calendar';
-
+import { isSameDay, isSameMonth } from 'date-fns';
+import { Subject } from 'rxjs';
 import { breadcrumbAppointmentsCalendarPatientData } from 'src/app/core/constants/breadcrumb-data.constants';
-
-// Servicios
-import { AppointmentService } from 'src/app/core/services/entities/appointment.service';
-import { NotificationService } from 'src/app/core/services/notifications/notification.service';
-
-// Modelos
 import { Appointment } from 'src/app/core/models/appointment.interface';
 import { ListResponse } from 'src/app/core/models/response/list-response.interface';
+import { AppointmentService } from 'src/app/core/services/entities/appointment.service';
+import { NotificationService } from 'src/app/core/services/notifications/notification.service';
 
 /**
  * Componente que representa la página de la agenda de un paciente

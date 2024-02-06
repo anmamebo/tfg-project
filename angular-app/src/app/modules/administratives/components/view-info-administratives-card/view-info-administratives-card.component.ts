@@ -1,6 +1,4 @@
 import { Component, Input } from '@angular/core';
-
-// Modelos
 import { User } from 'src/app/core/models/user.interface';
 
 /**

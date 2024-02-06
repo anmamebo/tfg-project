@@ -1,15 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
-
-import { ROLES } from 'src/app/core/constants/roles.constants';
 import { breadcrumbGroupData } from 'src/app/core/constants/breadcrumb-data.constants';
-
-// Servicios
-import { GroupService } from 'src/app/core/services/entities/group.service';
-
-// Modelos
+import { ROLES } from 'src/app/core/constants/roles.constants';
 import { EntityData } from 'src/app/core/models/entity-data.interface';
-
-// Componentes
+import { GroupService } from 'src/app/core/services/entities/group.service';
 import { GenericListCardComponent } from 'src/app/shared/components/generic-list-card/generic-list-card.component';
 
 /**

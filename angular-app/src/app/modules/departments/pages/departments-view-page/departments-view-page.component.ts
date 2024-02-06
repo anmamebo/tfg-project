@@ -1,13 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-
 import { breadcrumbDepartmentsViewData } from 'src/app/core/constants/breadcrumb-data.constants';
-
-// Servicios
-import { DepartmentService } from 'src/app/core/services/entities/department.service';
-
-// Modelos
 import { Department } from 'src/app/core/models/department.interface';
+import { DepartmentService } from 'src/app/core/services/entities/department.service';
 
 /**
  * Componente para la página de visualización de un departamento

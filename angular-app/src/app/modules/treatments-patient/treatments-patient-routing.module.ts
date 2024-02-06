@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-
-import { TreatmentsPatientPageComponent } from './pages/treatments-patient-page/treatments-patient-page.component';
 import { TreatmentsHistoricalPatientPageComponent } from './pages/treatments-historical-patient-page/treatments-historical-patient-page.component';
+import { TreatmentsPatientPageComponent } from './pages/treatments-patient-page/treatments-patient-page.component';
 
 const routes: Routes = [
   {

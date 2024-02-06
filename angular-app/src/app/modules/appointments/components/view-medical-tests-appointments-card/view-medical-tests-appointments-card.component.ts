@@ -1,19 +1,14 @@
 import { Component, Input } from '@angular/core';
-import { GenericListCardComponent } from 'src/app/shared/components/generic-list-card/generic-list-card.component';
-
 import { SwalPortalTargets } from '@sweetalert2/ngx-sweetalert2';
-
-// Servicios
-import { MedicalTestService } from 'src/app/core/services/entities/medicaltest.service';
-import { NotificationService } from 'src/app/core/services/notifications/notification.service';
-
-// Modelos
 import { Appointment } from 'src/app/core/models/appointment.interface';
+import { MedicalTest } from 'src/app/core/models/medical-test.interface';
 import {
   ListResponse,
   PaginatedResponse,
 } from 'src/app/core/models/response/list-response.interface';
-import { MedicalTest } from 'src/app/core/models/medical-test.interface';
+import { MedicalTestService } from 'src/app/core/services/entities/medicaltest.service';
+import { NotificationService } from 'src/app/core/services/notifications/notification.service';
+import { GenericListCardComponent } from 'src/app/shared/components/generic-list-card/generic-list-card.component';
 
 /**
  * Componente que representa una tarjeta de listado de pruebas médicas de una cita.

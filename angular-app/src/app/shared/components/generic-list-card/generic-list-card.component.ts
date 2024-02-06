@@ -1,15 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
-
-// Servicios
-import { NotificationService } from 'src/app/core/services/notifications/notification.service';
-
-// Modelos
 import { EntityData } from 'src/app/core/models/entity-data.interface';
-import { SortEvent } from 'src/app/core/models/sort-event.interface';
 import {
   ListResponse,
   PaginatedResponse,
 } from 'src/app/core/models/response/list-response.interface';
+import { SortEvent } from 'src/app/core/models/sort-event.interface';
+import { NotificationService } from 'src/app/core/services/notifications/notification.service';
 
 /**
  * Componente que representa una tarjeta de listado genérica.

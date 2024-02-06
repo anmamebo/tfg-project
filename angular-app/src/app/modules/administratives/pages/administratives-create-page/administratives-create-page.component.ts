@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-
 import { breadcrumbAdministrativesCreateData } from 'src/app/core/constants/breadcrumb-data.constants';
 
 /**

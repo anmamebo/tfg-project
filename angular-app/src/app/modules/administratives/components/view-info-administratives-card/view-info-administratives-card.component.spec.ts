@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ViewInfoAdministrativesCardComponent } from './view-info-administratives-card.component';
 
 describe('ViewInfoAdministrativesCardComponent', () => {
@@ -8,7 +7,7 @@ describe('ViewInfoAdministrativesCardComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ViewInfoAdministrativesCardComponent]
+      declarations: [ViewInfoAdministrativesCardComponent],
     });
     fixture = TestBed.createComponent(ViewInfoAdministrativesCardComponent);
     component = fixture.componentInstance;

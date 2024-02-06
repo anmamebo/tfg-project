@@ -1,6 +1,4 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-
-// Modelos
 import { SortEvent } from 'src/app/core/models/sort-event.interface';
 
 interface ActionsUrls {

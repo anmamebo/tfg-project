@@ -1,15 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-
+import { ROLES } from 'src/app/core/constants/roles.constants';
+import { roleGuard } from 'src/app/core/guards/role.guard';
+import { roomResolver } from 'src/app/core/resolvers/room.resolver';
+import { RoomsCreatePageComponent } from './pages/rooms-create-page/rooms-create-page.component';
+import { RoomsEditPageComponent } from './pages/rooms-edit-page/rooms-edit-page.component';
 import { RoomsPageComponent } from './pages/rooms-page/rooms-page.component';
 import { RoomsViewPageComponent } from './pages/rooms-view-page/rooms-view-page.component';
-import { RoomsEditPageComponent } from './pages/rooms-edit-page/rooms-edit-page.component';
-import { RoomsCreatePageComponent } from './pages/rooms-create-page/rooms-create-page.component';
-
-import { roomResolver } from 'src/app/core/resolvers/room.resolver';
-
-import { roleGuard } from 'src/app/core/guards/role.guard';
-import { ROLES } from 'src/app/core/constants/roles.constants';
 
 const routes: Routes = [
   {

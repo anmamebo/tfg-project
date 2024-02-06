@@ -1,17 +1,12 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-
 import { SwalPortalTargets } from '@sweetalert2/ngx-sweetalert2';
-
-// Servicios
+import {
+  STATUS_BADGE_CLASSES,
+  StatusBadgeClasses,
+  Treatment,
+} from 'src/app/core/models/treatment.interface';
 import { TreatmentService } from 'src/app/core/services/entities/treatment.service';
 import { NotificationService } from 'src/app/core/services/notifications/notification.service';
-
-// Modelos
-import {
-  Treatment,
-  StatusBadgeClasses,
-  STATUS_BADGE_CLASSES,
-} from 'src/app/core/models/treatment.interface';
 
 /**
  * Componente que representa un acordeón de tratamientos de una cita.

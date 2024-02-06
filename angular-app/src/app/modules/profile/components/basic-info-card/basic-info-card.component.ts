@@ -1,13 +1,9 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
-// Servicios
+import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
+import { User } from 'src/app/core/models/user.interface';
 import { UserService } from 'src/app/core/services/entities/user.service';
 import { NotificationService } from 'src/app/core/services/notifications/notification.service';
-
-// Modelos
-import { User } from 'src/app/core/models/user.interface';
-import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
 
 /**
  * Componente que representa la tarjeta de información básica del usuario

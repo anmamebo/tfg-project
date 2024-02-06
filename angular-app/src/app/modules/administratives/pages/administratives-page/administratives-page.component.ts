@@ -1,13 +1,8 @@
 import { Component } from '@angular/core';
-
-import { ROLES } from 'src/app/core/constants/roles.constants';
 import { breadcrumbAdministrativesData } from 'src/app/core/constants/breadcrumb-data.constants';
-
-// Servicios
-import { AdministrativeService } from 'src/app/core/services/entities/administrative.service';
-
-// Modelos
+import { ROLES } from 'src/app/core/constants/roles.constants';
 import { EntityData } from 'src/app/core/models/entity-data.interface';
+import { AdministrativeService } from 'src/app/core/services/entities/administrative.service';
 
 /**
  * Componente para la página de administrativos.

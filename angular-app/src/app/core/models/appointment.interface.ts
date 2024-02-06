@@ -1,7 +1,7 @@
-import { Patient } from './patient.interface';
-import { Room } from './room.interface';
 import { Doctor } from './doctor.interface';
 import { MedicalSpecialty } from './medical-specialty.interface';
+import { Patient } from './patient.interface';
+import { Room } from './room.interface';
 import { Schedule } from './schedule.interface';
 
 export interface StatusBadgeClasses {

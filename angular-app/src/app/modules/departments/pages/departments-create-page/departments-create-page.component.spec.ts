@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { DepartmentsCreatePageComponent } from './departments-create-page.component';
 
 describe('DepartmentsCreatePageComponent', () => {

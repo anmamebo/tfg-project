@@ -1,8 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-
 import { ROLES } from 'src/app/core/constants/roles.constants';
-
-// Servicios
 import { PatientService } from 'src/app/core/services/entities/patient.service';
 import { NotificationService } from 'src/app/core/services/notifications/notification.service';
 

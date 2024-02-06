@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ElementsPerPageComponent } from './elements-per-page.component';
 
 describe('ElementsPerPageComponent', () => {

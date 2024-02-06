@@ -1,14 +1,11 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
 import { DatePipe } from '@angular/common';
-
-import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Spanish } from 'flatpickr/dist/l10n/es.js';
-
-// Constantes
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import {
-  STATUS_NEXT_TREATMENT_OPTIONS,
   STATUS_HISTORICAL_TREATMENT_OPTIONS,
+  STATUS_NEXT_TREATMENT_OPTIONS,
 } from 'src/app/core/constants/options/status-treatment-options.constants';
 
 interface FilterDate {

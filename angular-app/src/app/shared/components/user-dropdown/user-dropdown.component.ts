@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
-
-// Servicios
 import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { TokenStorageService } from 'src/app/core/services/auth/token-storage.service';
 

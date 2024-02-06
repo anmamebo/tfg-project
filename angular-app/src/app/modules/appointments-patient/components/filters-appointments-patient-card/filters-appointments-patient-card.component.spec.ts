@@ -1,6 +1,5 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FiltersAppointmentsPatientCardComponent } from './filters-appointments-patient-card.component';
 
 describe('FiltersAppointmentsPatientCardComponent', () => {
@@ -14,7 +13,6 @@ describe('FiltersAppointmentsPatientCardComponent', () => {
     });
     fixture = TestBed.createComponent(FiltersAppointmentsPatientCardComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {

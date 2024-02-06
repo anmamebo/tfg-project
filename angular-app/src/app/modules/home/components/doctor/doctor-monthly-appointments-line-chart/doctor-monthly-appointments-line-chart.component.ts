@@ -1,18 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-
 import {
   ApexAxisChartSeries,
   ApexChart,
   ApexDataLabels,
   ApexFill,
   ApexMarkers,
-  ApexYAxis,
-  ApexXAxis,
-  ApexTooltip,
   ApexNoData,
+  ApexTooltip,
+  ApexXAxis,
+  ApexYAxis,
 } from 'ng-apexcharts';
-
-// Servicios
 import { DoctorStatisticsService } from 'src/app/core/services/statistics/doctor-statistics.service';
 
 interface AppointmentsPerDay {

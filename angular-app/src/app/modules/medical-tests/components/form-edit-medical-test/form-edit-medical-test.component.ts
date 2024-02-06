@@ -1,13 +1,9 @@
-import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
-// Servicios
-import { MedicalTestService } from 'src/app/core/services/entities/medicaltest.service';
-import { NotificationService } from 'src/app/core/services/notifications/notification.service';
-
-// Modelos
 import { MedicalTest } from 'src/app/core/models/medical-test.interface';
 import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
+import { MedicalTestService } from 'src/app/core/services/entities/medicaltest.service';
+import { NotificationService } from 'src/app/core/services/notifications/notification.service';
 
 /**
  * Componente para el formulario de editar una prueba médica.

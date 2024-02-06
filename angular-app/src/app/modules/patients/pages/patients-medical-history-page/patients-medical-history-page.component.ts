@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-
 import { breadcrumbPatientsMedicalHistoryData } from 'src/app/core/constants/breadcrumb-data.constants';
-
-// Modelos
 import { Patient } from 'src/app/core/models/patient.interface';
 
 /**

@@ -1,13 +1,8 @@
 import { Component } from '@angular/core';
-
-import { ROLES } from 'src/app/core/constants/roles.constants';
 import { breadcrumbDepartmentsData } from 'src/app/core/constants/breadcrumb-data.constants';
-
-// Servicios
-import { DepartmentService } from 'src/app/core/services/entities/department.service';
-
-// Modelos
+import { ROLES } from 'src/app/core/constants/roles.constants';
 import { EntityData } from 'src/app/core/models/entity-data.interface';
+import { DepartmentService } from 'src/app/core/services/entities/department.service';
 
 /**
  * Componente para la página de departamentos.

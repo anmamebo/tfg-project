@@ -1,6 +1,4 @@
 import { Component, Input } from '@angular/core';
-
-// Modelos
 import { MedicalTest } from 'src/app/core/models/medical-test.interface';
 
 /**

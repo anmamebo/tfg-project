@@ -1,5 +1,4 @@
 import { TestBed } from '@angular/core/testing';
-
 import { HttpCommonService } from './http-common.service';
 
 describe('HttpCommonService', () => {

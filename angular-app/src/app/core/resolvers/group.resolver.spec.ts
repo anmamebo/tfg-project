@@ -1,6 +1,5 @@
 import { TestBed } from '@angular/core/testing';
 import { ResolveFn } from '@angular/router';
-
 import { groupResolver } from './group.resolver';
 
 describe('groupResolver', () => {

@@ -1,17 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-
 import {
   ApexAxisChartSeries,
   ApexChart,
-  ApexYAxis,
-  ApexXAxis,
   ApexDataLabels,
-  ApexTooltip,
-  ApexStroke,
   ApexNoData,
+  ApexStroke,
+  ApexTooltip,
+  ApexXAxis,
+  ApexYAxis,
 } from 'ng-apexcharts';
-
-// Servicios
 import { StatisticsService } from 'src/app/core/services/statistics/statistics.service';
 
 interface GenderData {

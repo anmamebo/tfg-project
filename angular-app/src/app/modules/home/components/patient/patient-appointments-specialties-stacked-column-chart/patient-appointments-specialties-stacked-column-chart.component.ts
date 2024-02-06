@@ -1,19 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-
 import {
   ApexAxisChartSeries,
   ApexChart,
   ApexDataLabels,
+  ApexFill,
+  ApexLegend,
+  ApexNoData,
   ApexPlotOptions,
   ApexResponsive,
-  ApexYAxis,
   ApexXAxis,
-  ApexLegend,
-  ApexFill,
-  ApexNoData,
+  ApexYAxis,
 } from 'ng-apexcharts';
-
-// Servicios
 import { PatientStatisticsService } from 'src/app/core/services/statistics/patient-statistics.service';
 
 interface SpecialtiesData {

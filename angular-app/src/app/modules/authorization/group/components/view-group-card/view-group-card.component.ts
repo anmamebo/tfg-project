@@ -1,6 +1,4 @@
 import { Component, Input } from '@angular/core';
-
-// Modelos
 import { Group } from 'src/app/core/models/group.interface';
 
 /**

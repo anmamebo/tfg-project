@@ -1,13 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
-
-// Servicios
 import { AuthService } from 'src/app/core/services/auth/auth.service';
-
-// Validadores
 import Validation from 'src/app/core/validators/general.validator';
 
 /**

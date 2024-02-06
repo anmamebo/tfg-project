@@ -1,16 +1,12 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-
-// Servicios
-import { AppointmentService } from 'src/app/core/services/entities/appointment.service';
-import { NotificationService } from 'src/app/core/services/notifications/notification.service';
-
-// Modelos
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import {
   Appointment,
-  StatusBadgeClasses,
   STATUS_BADGE_CLASSES,
+  StatusBadgeClasses,
 } from 'src/app/core/models/appointment.interface';
 import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
+import { AppointmentService } from 'src/app/core/services/entities/appointment.service';
+import { NotificationService } from 'src/app/core/services/notifications/notification.service';
 
 /**
  * Componente para la tarjeta de visualización de la información

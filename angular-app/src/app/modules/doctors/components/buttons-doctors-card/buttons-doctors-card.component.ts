@@ -1,6 +1,4 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-
-// Servicios
 import { DoctorService } from 'src/app/core/services/entities/doctor.service';
 import { NotificationService } from 'src/app/core/services/notifications/notification.service';
 
