@@ -1,6 +1,5 @@
 from datetime import datetime, timedelta
 
-import pytz
 from apps.appointments.mixins import GeneratePDFMixin
 from apps.appointments.models import Appointment
 from apps.appointments.permissions import (
@@ -19,7 +18,6 @@ from config.permissions import (
     IsDoctor,
     IsPatient,
 )
-from config.settings import TIME_ZONE
 from django.db.models import F, Q
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
@@ -29,8 +27,6 @@ from rest_framework import status, viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from utilities.permissions_helper import method_permission_classes
-
-tz = pytz.timezone(TIME_ZONE)  # Zona horaria de la aplicación
 
 
 class AppointmentViewSet(
@@ -602,7 +598,7 @@ class AppointmentViewSet(
             Appointment: La cita marcada como completada.
         """
         appointment.status = "completed"
-        appointment.end_time = tz.localize(datetime.now())
+        appointment.end_time = datetime.now()
         appointment.actual_duration = (
             appointment.end_time - appointment.time_patient_arrived
         ).total_seconds() / 60
@@ -621,7 +617,7 @@ class AppointmentViewSet(
             Appointment: La cita marcada como en progreso.
         """
         appointment.status = "in_progress"
-        appointment.time_patient_arrived = tz.localize(datetime.now())
+        appointment.time_patient_arrived = datetime.now()
         appointment.save()
 
         return appointment

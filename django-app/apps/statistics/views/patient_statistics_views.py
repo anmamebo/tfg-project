@@ -1,17 +1,13 @@
 import math
 from datetime import date, datetime
 
-import pytz
 from apps.appointments.models import Appointment
 from apps.medicalspecialties.models import MedicalSpecialty
 from apps.treatments.models import Treatment
-from config.settings import TIME_ZONE
 from django.db.models import Avg, DurationField, ExpressionWrapper, F
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-
-tz = pytz.timezone(TIME_ZONE)  # Zona horaria de la aplicación
 
 
 @api_view(["GET"])

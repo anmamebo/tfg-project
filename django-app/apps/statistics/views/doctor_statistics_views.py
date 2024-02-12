@@ -2,17 +2,13 @@ import math
 from collections import defaultdict
 from datetime import date, datetime, timedelta
 
-import pytz
 from apps.appointments.models import Appointment
 from apps.schedules.models import Schedule
 from apps.treatments.models import Treatment
-from config.settings import TIME_ZONE
 from django.db.models import Avg, Count, DurationField, ExpressionWrapper, F, Sum
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-
-tz = pytz.timezone(TIME_ZONE)  # Zona horaria de la aplicación
 
 
 @api_view(["GET"])
@@ -312,9 +308,6 @@ def get_date_range(year, month):
     next_year = year if next_month != 1 else year + 1
     start_next_month = datetime(next_year, next_month, 1)
     end_date = start_next_month - timedelta(seconds=1)
-
-    start_date = tz.localize(start_date)
-    end_date = tz.localize(end_date)
 
     date_range = [
         start_date + timedelta(days=x) for x in range((end_date - start_date).days + 1)

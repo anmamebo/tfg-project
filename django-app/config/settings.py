@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
+
 import os
 from datetime import timedelta
 from pathlib import Path
@@ -171,9 +172,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Configuración de internacionalización
 LANGUAGE_CODE = "es-es"
-TIME_ZONE = "Europe/Madrid"
 USE_I18N = True
-USE_TZ = True
+USE_TZ = False
 
 # Modelo personalizado de usuario
 AUTH_USER_MODEL = "users.User"
