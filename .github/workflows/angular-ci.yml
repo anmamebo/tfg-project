@@ -13,7 +13,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-          path: 'angular-app'
+          path: 'tfg-project/angular-app'
       
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -21,14 +21,14 @@ jobs:
           node-version: '18'
       
       - name: Install dependencies
-        working-directory: angular-app
+        working-directory: tfg-project/angular-app
         run: npm install
 
       - name: Build
-        working-directory: angular-app
+        working-directory: tfg-project/angular-app
         run: npm run build
 
       - name: Run tests
-        working-directory: angular-app
+        working-directory: tfg-project/angular-app
         run: npm test
       
