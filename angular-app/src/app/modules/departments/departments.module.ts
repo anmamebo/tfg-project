@@ -25,6 +25,7 @@ import { EditInfoDepartmentsCardComponent } from './components/edit-info-departm
 import { ViewDoctorsDepartmentsCardComponent } from './components/view-doctors-departments-card/view-doctors-departments-card.component';
 import { ViewInfoDepartmentsCardComponent } from './components/view-info-departments-card/view-info-departments-card.component';
 import { ViewRoomsDepartmentsCardComponent } from './components/view-rooms-departments-card/view-rooms-departments-card.component';
+import { ViewSpecialtiesDepartmentsCardComponent } from './components/view-specialties-departments-card/view-specialties-departments-card.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { ViewRoomsDepartmentsCardComponent } from './components/view-rooms-depar
     EditInfoDepartmentsCardComponent,
     DepartmentsCreatePageComponent,
     CreateDepartmentsCardComponent,
+    ViewSpecialtiesDepartmentsCardComponent,
   ],
   imports: [
     CommonModule,

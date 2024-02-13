@@ -1,0 +1,27 @@
+<app-generic-card [title]="titleCard">
+  <div class="card-content">
+    <div class="row justify-content-start">
+      <div class="col-md-6">
+        <app-search
+          [infoTooltipText]="searchInfoTooltip"
+          (searchSubmitted)="onSearchSubmitted($event)"
+        ></app-search>
+      </div>
+    </div>
+
+    <div class="row">
+      <app-generic-table
+        [columns]="columns"
+        [data]="specialties"
+        [striped]="true"
+      ></app-generic-table>
+
+      <app-pagination
+        (pageEmitter)="goToPage($event)"
+        [page]="page"
+        [totalPages]="totalPages"
+        [numItems]="numSpecialties"
+      ></app-pagination>
+    </div>
+  </div>
+</app-generic-card>
