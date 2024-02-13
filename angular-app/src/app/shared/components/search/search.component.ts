@@ -34,4 +34,14 @@ export class SearchComponent {
     const searchTerm = this.formSearch.get('searchTerm')?.value;
     this.searchSubmitted.emit(searchTerm);
   }
+
+  /**
+   * Limpia el formulario de búsqueda.
+   * @public
+   * @returns {void}
+   */
+  public clearSearch(): void {
+    this.formSearch.reset();
+    this.searchSubmitted.emit('');
+  }
 }

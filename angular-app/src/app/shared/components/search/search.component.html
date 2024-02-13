@@ -1,11 +1,13 @@
 <form [formGroup]="formSearch" (ngSubmit)="submitSearch()">
   <div class="form-group position-relative has-icon-left">
+    <!-- Input búsqueda -->
     <input
       type="text"
       class="form-control"
       placeholder="Buscar"
       formControlName="searchTerm"
     />
+    <!-- Botón buscar -->
     <div
       class="form-control-icon"
       (click)="submitSearch()"
@@ -13,6 +15,22 @@
     >
       <i class="bi bi-search"></i>
     </div>
+    <!-- Bóton borrar búsqueda -->
+    <div
+      *ngIf="formSearch.get('searchTerm')?.value"
+      (click)="clearSearch()"
+      class="form-control-icon form-control-icon-right cancel-search"
+      style="
+        cursor: pointer;
+        position: absolute;
+        right: 42px !important;
+        left: auto !important;
+        padding-right: 1rem !important;
+      "
+    >
+      <i class="bi bi-x-circle-fill"></i>
+    </div>
+    <!-- Bóton info -->
     <div
       *ngIf="infoTooltipText"
       class="form-control-icon form-control-icon-right"
