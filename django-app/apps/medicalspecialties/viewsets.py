@@ -3,7 +3,11 @@ from apps.medicalspecialties.serializers import (
     BasicMedicalSpecialtySerializer,
     MedicalSpecialtySerializer,
 )
-from config.permissions import IsAdministrator, IsAdministratorOrDoctorOrPatient
+from config.permissions import (
+    IsAdministrator,
+    IsAdministratorOrDoctor,
+    IsAdministratorOrDoctorOrPatient,
+)
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from mixins.error_mixin import ErrorResponseMixin
@@ -201,6 +205,44 @@ class MedicalSpecialtyViewSet(
             {"message": "Especialidad médica activada correctamente."},
             status=status.HTTP_200_OK,
         )
+
+    @method_permission_classes([IsAdministratorOrDoctor])
+    @action(detail=False, methods=["get"], url_path="department")
+    def medical_specialties_by_department(self, request):
+        """
+        Obtiene las especialidades médicas por departamento.
+
+        Permisos requeridos:
+            - El usuario debe ser administrador o doctor.
+
+        Parámetros:
+            department (str): El id del departamento.
+
+        Parámetros opcionales:
+            state (bool): El estado de las salas a listar.
+            search (str): Una cadena de texto para buscar salas.
+            ordering (str): El campo por el que se ordenarán las salas.
+            paginate (bool): Indica si se desea paginar los resultados.
+
+        Args:
+            request (Request): La solicitud HTTP.
+
+        Returns:
+            Response: La respuesta que contiene la lista de especialidades médicas por departamento.
+        """
+        queryset = self.get_queryset().filter(state=True)
+
+        department_id = self.request.query_params.get("department", None)
+        if not department_id:
+            return self.error_response(
+                message="No se encontró el departamento.",
+                status_code=status.HTTP_400_BAD_REQUEST,
+            )
+
+        queryset = queryset.filter(department_id=department_id)
+        queryset = self.filter_and_order_specialties(queryset)
+
+        return self.conditional_paginated_response(queryset, self.list_serializer_class)
 
     def filter_and_order_specialties(self, medical_specialties):
         """
