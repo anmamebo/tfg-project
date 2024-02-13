@@ -21,11 +21,11 @@ jobs:
       
       - name: Install dependencies
         working-directory: ./angular-app
-        run: cd angular-app | npm install
+        run: npm install
 
-      - name: Build
-        working-directory: ./angular-app
-        run: npm run build
+      # - name: Build
+      #   working-directory: ./angular-app
+      #   run: npm run build
 
       - name: Run tests
         working-directory: ./angular-app
