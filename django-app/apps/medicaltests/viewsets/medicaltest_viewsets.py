@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from apps.appointments.models import Appointment
 from apps.medicaltests.models import MedicalTest
@@ -15,7 +15,6 @@ from config.permissions import (
 )
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
-from django.utils import timezone
 from mixins.error_mixin import ErrorResponseMixin
 from mixins.pagination_mixin import PaginationMixin
 from rest_framework import status, viewsets
@@ -354,13 +353,9 @@ class MedicalTestViewSet(viewsets.GenericViewSet, PaginationMixin, ErrorResponse
         if start_date_str and end_date_str:
             try:
                 start_date = datetime.strptime(start_date_str, "%Y-%m-%d").date()
-                end_date = datetime.strptime(end_date_str, "%Y-%m-%d").date()
-                start_date = timezone.make_aware(
-                    datetime.combine(start_date, datetime.min.time())
-                )
-                end_date = timezone.make_aware(
-                    datetime.combine(end_date, datetime.max.time())
-                )
+                end_date = datetime.strptime(
+                    end_date_str, "%Y-%m-%d"
+                ).date() + timedelta(days=1)
             except ValueError:
                 return self.error_response(
                     message="La fecha no es válida.",

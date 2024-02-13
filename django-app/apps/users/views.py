@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from apps.users.models import User
 from apps.users.serializers import (
     CustomTokenObtainPairSerializer,
@@ -6,7 +8,6 @@ from apps.users.serializers import (
 )
 from django.contrib.auth import authenticate
 from django.contrib.auth.tokens import default_token_generator
-from django.utils import timezone
 from mixins.error_mixin import ErrorResponseMixin
 from rest_framework import status
 from rest_framework.generics import GenericAPIView
@@ -55,7 +56,7 @@ class Login(TokenObtainPairView, ErrorResponseMixin):
         if user:
             login_serializer = self.serializer_class(data=request.data)
             if login_serializer.is_valid():
-                user.last_login = timezone.now()
+                user.last_login = datetime.now()
                 user.save(update_fields=["last_login"])
 
                 user_serializer = CustomUserSerializer(user)
