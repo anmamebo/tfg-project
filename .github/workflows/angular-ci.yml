@@ -6,14 +6,13 @@ on:
       - main
   
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-          path: 'tfg-project/angular-app'
       
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -21,14 +20,14 @@ jobs:
           node-version: '18'
       
       - name: Install dependencies
-        working-directory: angular-app
-        run: npm install
+        working-directory: ./angular-app
+        run: cd angular-app | npm install
 
       - name: Build
-        working-directory: angular-app
+        working-directory: ./angular-app
         run: npm run build
 
       - name: Run tests
-        working-directory: angular-app
+        working-directory: ./angular-app
         run: npm test
       
