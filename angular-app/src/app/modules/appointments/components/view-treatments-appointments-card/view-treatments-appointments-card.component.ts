@@ -34,15 +34,14 @@ export class ViewTreatmentsAppointmentsCardComponent extends GenericListCardComp
   /**
    * Obtiene los tratamientos relacionados con una cita específica para mostrarlos en la interfaz.
    * @public
-   * @param {number} page - Página actual de la lista de tratamientos.
    * @returns {void}
    */
-  public override getItems(page: number): void {
+  public override getItems(): void {
     if (!this.appointment) return;
 
     this._treatmentService
       .getTreatmentsByAppointment(this.appointment.id, {
-        page: page,
+        page: this.entityData.page,
         numResults: this.entityData.numResults,
         paginate: true,
       })

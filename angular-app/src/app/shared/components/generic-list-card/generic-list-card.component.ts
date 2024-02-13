@@ -55,7 +55,7 @@ export class GenericListCardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getItems(this.entityData.page);
+    this.getItems();
   }
 
   /**
@@ -66,7 +66,8 @@ export class GenericListCardComponent implements OnInit {
    */
   public filterItems(filterValue: boolean | null): void {
     this.filterState = filterValue;
-    this.getItems(this.entityData.page);
+    this.entityData.page = 1;
+    this.getItems();
   }
 
   /**
@@ -78,7 +79,7 @@ export class GenericListCardComponent implements OnInit {
 
   public sortItems(sortEvent: SortEvent): void {
     this.sort = sortEvent;
-    this.getItems(this.entityData.page);
+    this.getItems();
   }
 
   /**
@@ -89,7 +90,7 @@ export class GenericListCardComponent implements OnInit {
    */
   public goToPage(page: number): void {
     this.entityData.page = page;
-    this.getItems(this.entityData.page);
+    this.getItems();
   }
 
   /**
@@ -101,7 +102,7 @@ export class GenericListCardComponent implements OnInit {
   public onSearchSubmitted(searchTerm: string): void {
     this.entityData.search.search = searchTerm;
     this.entityData.page = 1;
-    this.getItems(1);
+    this.getItems();
   }
 
   /**
@@ -113,23 +114,22 @@ export class GenericListCardComponent implements OnInit {
   public onEntriesPerPageChanged(elementsPerPage: number): void {
     this.entityData.numResults = elementsPerPage;
     this.entityData.page = 1;
-    this.getItems(this.entityData.page);
+    this.getItems();
   }
 
   /**
    * Obtiene los elementos de una página específica utilizando un servicio de datos, aplicando filtros de búsqueda, paginación y ordenamiento si se proporcionan.
    * @public
-   * @param {number} page - Número de la página que se desea obtener.
    * @returns {void}
    */
-  public getItems(page: number): void {
+  public getItems(): void {
     if (this.entityData.service == null) {
       return;
     }
 
     this.entityData.service
       .getItems({
-        page: page,
+        page: this.entityData.page,
         numResults: this.entityData.numResults,
         searchTerm: this.entityData.search.search,
         paginated: true,
@@ -168,7 +168,7 @@ export class GenericListCardComponent implements OnInit {
       }
       this.entityData.service.delete(id).subscribe({
         next: () => {
-          this.getItems(this.entityData.page);
+          this.getItems();
         },
         error: () => {
           this.notificationService.showErrorToast(

@@ -34,10 +34,9 @@ export class ListAppointmentsHistoricalPatientCardComponent extends GenericListC
   /**
    * Obtiene citas de pacientes con estados específicos y opciones de búsqueda.
    * @public
-   * @param {number} page - Número de página actual.
    * @returns {void}
    */
-  public override getItems(page: number): void {
+  public override getItems(): void {
     let statuses: string[] = ['completed', 'no_show', 'cancelled'];
     let types: string[] | undefined = undefined;
     let specialties: string[] | undefined = undefined;
@@ -72,7 +71,7 @@ export class ListAppointmentsHistoricalPatientCardComponent extends GenericListC
           statuses: statuses,
           types: types,
           specialties: specialties,
-          page: page,
+          page: this.entityData.page,
           numResults: this.entityData.numResults,
           searchTerm: this.entityData.search.search,
           paginate: true,
@@ -110,6 +109,6 @@ export class ListAppointmentsHistoricalPatientCardComponent extends GenericListC
   public applyFilters(event: any): void {
     this.filters = event;
     this.entityData.page = 1;
-    this.getItems(1);
+    this.getItems();
   }
 }

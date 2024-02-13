@@ -34,15 +34,14 @@ export class ViewMedicalTestsAppointmentsCardComponent extends GenericListCardCo
   /**
    * Obtiene las pruebas médicas relacionadas con una cita específica para mostrarlas en la interfaz.
    * @public
-   * @param {number} page - Página actual de la lista de pruebas médicas.
    * @returns {void}
    */
-  public override getItems(page: number): void {
+  public override getItems(): void {
     if (!this.appointment) return;
 
     this._medicalTestService
       .getMedicalTestsByAppointment(this.appointment.id, {
-        page: page,
+        page: this.entityData.page,
         numResults: this.entityData.numResults,
         paginate: true,
       })

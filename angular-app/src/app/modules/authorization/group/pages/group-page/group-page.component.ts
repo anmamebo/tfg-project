@@ -82,6 +82,6 @@ export class GroupPageComponent {
     if (!this.listGroupCardComponent) {
       return;
     }
-    this.listGroupCardComponent.getItems(this.entityData.page);
+    this.listGroupCardComponent.getItems();
   }
 }

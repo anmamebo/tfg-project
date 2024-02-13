@@ -31,11 +31,10 @@ export class ListMedicalTestsCardComponent extends GenericListCardComponent {
 
   /**
    * Obtiene pruebas médicas de pacientes con estados específicos y opciones de búsqueda.
-   * @param {number} page - Número de la página actual.
    * @returns {void}
    * @public
    */
-  public override getItems(page: number): void {
+  public override getItems(): void {
     let completed: 'true' | 'false' | undefined = undefined;
     let dateFrom: string | undefined = undefined;
     let dateTo: string | undefined = undefined;
@@ -54,7 +53,7 @@ export class ListMedicalTestsCardComponent extends GenericListCardComponent {
     this._medicalTestService
       .getMedicalTestsByPatient(
         {
-          page: page,
+          page: this.entityData.page,
           numResults: this.entityData.numResults,
           searchTerm: this.entityData.search.search,
           paginate: true,
@@ -90,6 +89,6 @@ export class ListMedicalTestsCardComponent extends GenericListCardComponent {
   public applyFilters(event: any): void {
     this.filters = event;
     this.entityData.page = 1;
-    this.getItems(1);
+    this.getItems();
   }
 }

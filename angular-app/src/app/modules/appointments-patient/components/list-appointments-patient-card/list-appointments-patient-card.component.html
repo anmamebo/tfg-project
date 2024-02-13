@@ -12,7 +12,7 @@
     <ng-container *ngFor="let appointment of entityData.items">
       <app-view-appointments-patient-card
         [appointment]="appointment"
-        (appointmentCancelled)="getItems(entityData.page)"
+        (appointmentCancelled)="getItems()"
       ></app-view-appointments-patient-card>
     </ng-container>
 

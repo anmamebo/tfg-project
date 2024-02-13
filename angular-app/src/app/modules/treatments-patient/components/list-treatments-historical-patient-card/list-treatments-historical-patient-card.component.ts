@@ -34,10 +34,9 @@ export class ListTreatmentsHistoricalPatientCardComponent extends GenericListCar
   /**
    * Obtiene los elementos correspondientes a una página específica y un término de búsqueda opcional.
    * @public
-   * @param {number} page - El número de página a obtener.
    * @returns {void}
    */
-  public override getItems(page: number): void {
+  public override getItems(): void {
     let statuses: string[] = ['completed', 'interrupted', 'cancelled'];
     let startDateFrom: string | undefined = undefined;
     let startDateTo: string | undefined = undefined;
@@ -62,7 +61,7 @@ export class ListTreatmentsHistoricalPatientCardComponent extends GenericListCar
       .getTreatmentsByPatient(
         {
           statuses: statuses,
-          page: page,
+          page: this.entityData.page,
           numResults: this.entityData.numResults,
           searchTerm: this.entityData.search.search,
           paginate: true,
@@ -99,6 +98,6 @@ export class ListTreatmentsHistoricalPatientCardComponent extends GenericListCar
   public applyFilters(event: any): void {
     this.filters = event;
     this.entityData.page = 1;
-    this.getItems(1);
+    this.getItems();
   }
 }

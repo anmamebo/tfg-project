@@ -32,10 +32,9 @@ export class ListTreatmentsPatientCardComponent extends GenericListCardComponent
   /**
    * Obtiene los elementos correspondientes a una página específica y un término de búsqueda opcional, mostrando solo los tratamientos en progreso.
    * @public
-   * @param {number} page - El número de página a obtener.
    * @returns {void}
    */
-  public override getItems(page: number): void {
+  public override getItems(): void {
     let statuses: string[] = ['in_progress'];
     let startDateFrom: string | undefined = undefined;
     let startDateTo: string | undefined = undefined;
@@ -60,7 +59,7 @@ export class ListTreatmentsPatientCardComponent extends GenericListCardComponent
       .getTreatmentsByPatient(
         {
           statuses: statuses,
-          page: page,
+          page: this.entityData.page,
           numResults: this.entityData.numResults,
           searchTerm: this.entityData.search.search,
           paginate: true,
@@ -97,6 +96,6 @@ export class ListTreatmentsPatientCardComponent extends GenericListCardComponent
   public applyFilters(event: any): void {
     this.filters = event;
     this.entityData.page = 1;
-    this.getItems(1);
+    this.getItems();
   }
 }

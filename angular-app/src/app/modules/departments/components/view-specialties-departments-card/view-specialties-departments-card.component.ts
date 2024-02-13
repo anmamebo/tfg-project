@@ -54,7 +54,7 @@ export class ViewSpecialtiesDepartmentsCardComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getSpecialtiesByDepartmentId(this.page);
+    this.getSpecialtiesByDepartmentId();
   }
 
   /**
@@ -65,7 +65,7 @@ export class ViewSpecialtiesDepartmentsCardComponent implements OnInit {
    */
   public goToPage(page: number): void {
     this.page = page;
-    this.getSpecialtiesByDepartmentId(this.page);
+    this.getSpecialtiesByDepartmentId();
   }
 
   /**
@@ -77,19 +77,18 @@ export class ViewSpecialtiesDepartmentsCardComponent implements OnInit {
   public onSearchSubmitted(searchTerm: string): void {
     this.search = searchTerm;
     this.page = 1;
-    this.getSpecialtiesByDepartmentId(1);
+    this.getSpecialtiesByDepartmentId();
   }
 
   /**
    * Obtiene la lista de especialidades médicas por departamento, opcionalmente filtrada por término de búsqueda y paginada.
-   * @param {number} page - Número de página para la paginación.
    * @returns {void}
    * @public
    */
-  public getSpecialtiesByDepartmentId(page: number): void {
+  public getSpecialtiesByDepartmentId(): void {
     this._medicalSpecialtyService
       .getRoomsByDepartmentId(this.departmentId, {
-        page: page,
+        page: this.page,
         paginate: true,
         searchTerm: this.search,
         pageSize: this.numResults,

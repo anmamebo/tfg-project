@@ -44,16 +44,15 @@ export class ListAppointmentsHistoricalDoctorCardComponent extends GenericListCa
    */
   public filterElements(filterValue: string): void {
     this.filter = filterValue;
-    this.getItems(this.entityData.page);
+    this.getItems();
   }
 
   /**
    * Obtiene elementos para mostrar en la página, teniendo en cuenta la paginación y los criterios de búsqueda.
    * @public
-   * @param {number} page - Número de página actual.
    * @returns {void}
    */
-  public override getItems(page: number): void {
+  public override getItems(): void {
     const statusMapping: { [key: string]: string[] } = {
       all: ['completed', 'no_show', 'cancelled'],
       completed: ['completed'],
@@ -66,7 +65,7 @@ export class ListAppointmentsHistoricalDoctorCardComponent extends GenericListCa
     this._appointmentService
       .getAppointmentsByDoctor({
         statuses: statuses,
-        page: page,
+        page: this.entityData.page,
         numResults: this.entityData.numResults,
         searchTerm: this.entityData.search.search,
         paginate: true,

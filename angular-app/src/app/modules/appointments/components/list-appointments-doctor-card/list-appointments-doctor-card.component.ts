@@ -44,16 +44,15 @@ export class ListAppointmentsDoctorCardComponent extends GenericListCardComponen
    */
   public filterElements(filterValue: string): void {
     this.filter = filterValue;
-    this.getItems(this.entityData.page);
+    this.getItems();
   }
 
   /**
    * Obtiene elementos para mostrar en la página, según la paginación y los criterios de búsqueda.
    * @public
-   * @param {number} page - Número de página actual.
    * @returns {void}
    */
-  public override getItems(page: number): void {
+  public override getItems(): void {
     const statusMappings: { [key: string]: string[] } = {
       all: ['scheduled', 'rescheduled', 'in_progress'],
       scheduled: ['scheduled'],
@@ -66,7 +65,7 @@ export class ListAppointmentsDoctorCardComponent extends GenericListCardComponen
     this._appointmentService
       .getAppointmentsByDoctor({
         statuses: statuses,
-        page: page,
+        page: this.entityData.page,
         numResults: this.entityData.numResults,
         searchTerm: this.entityData.search.search,
         paginate: true,

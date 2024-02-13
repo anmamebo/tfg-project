@@ -23,7 +23,7 @@
       <div *swalPortal="swalTargets.content">
         <app-form-create-treatment-appointments
           [appointment]="appointment"
-          (createdTreatment)="getItems(this.entityData.page)"
+          (createdTreatment)="getItems()"
         ></app-form-create-treatment-appointments>
       </div>
     </swal>
@@ -32,7 +32,7 @@
       <ng-container *ngIf="entityData.items.length > 0; else lengthZero">
         <app-accordion-treatments-appointments
           [treatments]="entityData.items"
-          (refreshTreatments)="getItems(this.entityData.page)"
+          (refreshTreatments)="getItems()"
         ></app-accordion-treatments-appointments>
 
         <app-elements-per-page

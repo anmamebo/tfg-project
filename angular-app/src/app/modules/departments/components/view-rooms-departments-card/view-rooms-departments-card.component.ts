@@ -59,7 +59,7 @@ export class ViewRoomsDepartmentsCardComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getRoomsByDepartmentId(this.page);
+    this.getRoomsByDepartmentId();
   }
 
   /**
@@ -70,7 +70,7 @@ export class ViewRoomsDepartmentsCardComponent implements OnInit {
    */
   public goToPage(page: number): void {
     this.page = page;
-    this.getRoomsByDepartmentId(this.page);
+    this.getRoomsByDepartmentId();
   }
 
   /**
@@ -82,19 +82,18 @@ export class ViewRoomsDepartmentsCardComponent implements OnInit {
   public onSearchSubmitted(searchTerm: string): void {
     this.search = searchTerm;
     this.page = 1;
-    this.getRoomsByDepartmentId(1);
+    this.getRoomsByDepartmentId();
   }
 
   /**
    * Obtiene la lista de habitaciones por departamento, opcionalmente filtrada por término de búsqueda y paginada.
-   * @param {number} page - Número de página para la paginación.
    * @returns {void}
    * @public
    */
-  public getRoomsByDepartmentId(page: number): void {
+  public getRoomsByDepartmentId(): void {
     this._roomService
       .getRoomsByDepartmentId(this.departmentId, {
-        page: page,
+        page: this.page,
         paginate: true,
         searchTerm: this.search,
         pageSize: this.numResults,
