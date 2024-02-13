@@ -35,20 +35,10 @@ export class ViewTreatmentsAppointmentsCardComponent extends GenericListCardComp
    * Obtiene los tratamientos relacionados con una cita específica para mostrarlos en la interfaz.
    * @public
    * @param {number} page - Página actual de la lista de tratamientos.
-   * @param {string} [searchTerm] - Término de búsqueda opcional para filtrar los tratamientos.
    * @returns {void}
    */
-  public override getItems(page: number, searchTerm?: string): void {
+  public override getItems(page: number): void {
     if (!this.appointment) return;
-
-    if (
-      searchTerm != undefined &&
-      searchTerm != this.entityData.search.search
-    ) {
-      this.entityData.search.search = searchTerm || '';
-      page = 1;
-      this.entityData.page = 1;
-    }
 
     this._treatmentService
       .getTreatmentsByAppointment(this.appointment.id, {

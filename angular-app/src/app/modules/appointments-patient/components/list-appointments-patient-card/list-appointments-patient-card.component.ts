@@ -33,19 +33,9 @@ export class ListAppointmentsPatientCardComponent extends GenericListCardCompone
    * Obtiene citas de pacientes con ciertos estados y opciones de búsqueda.
    * @public
    * @param {number} page - Número de la página actual.
-   * @param {string} [searchTerm] - Término de búsqueda opcional.
    * @returns {void}
    */
-  public override getItems(page: number, searchTerm?: string): void {
-    if (
-      searchTerm != undefined &&
-      searchTerm != this.entityData.search.search
-    ) {
-      this.entityData.search.search = searchTerm || '';
-      page = 1;
-      this.entityData.page = 1;
-    }
-
+  public override getItems(page: number): void {
     let statuses: string[] = [
       'pending',
       'scheduled',

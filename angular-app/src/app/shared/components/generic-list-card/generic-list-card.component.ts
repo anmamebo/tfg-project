@@ -99,7 +99,9 @@ export class GenericListCardComponent implements OnInit {
    * @returns {void}
    */
   public onSearchSubmitted(searchTerm: string): void {
-    this.getItems(this.entityData.page, searchTerm);
+    this.entityData.search.search = searchTerm;
+    this.entityData.page = 1;
+    this.getItems(1);
   }
 
   /**
@@ -118,19 +120,9 @@ export class GenericListCardComponent implements OnInit {
    * Obtiene los elementos de una página específica utilizando un servicio de datos, aplicando filtros de búsqueda, paginación y ordenamiento si se proporcionan.
    * @public
    * @param {number} page - Número de la página que se desea obtener.
-   * @param {string} [searchTerm] - Término de búsqueda para filtrar los resultados (opcional).
    * @returns {void}
    */
-  public getItems(page: number, searchTerm?: string): void {
-    if (
-      searchTerm != undefined &&
-      searchTerm != this.entityData.search.search
-    ) {
-      this.entityData.search.search = searchTerm || '';
-      page = 1;
-      this.entityData.page = 1;
-    }
-
+  public getItems(page: number): void {
     if (this.entityData.service == null) {
       return;
     }

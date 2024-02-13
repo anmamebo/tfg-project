@@ -35,19 +35,9 @@ export class ListTreatmentsHistoricalPatientCardComponent extends GenericListCar
    * Obtiene los elementos correspondientes a una página específica y un término de búsqueda opcional.
    * @public
    * @param {number} page - El número de página a obtener.
-   * @param {string} [searchTerm] - El término de búsqueda opcional.
    * @returns {void}
    */
-  public override getItems(page: number, searchTerm?: string): void {
-    if (
-      searchTerm != undefined &&
-      searchTerm != this.entityData.search.search
-    ) {
-      this.entityData.search.search = searchTerm || '';
-      page = 1;
-      this.entityData.page = 1;
-    }
-
+  public override getItems(page: number): void {
     let statuses: string[] = ['completed', 'interrupted', 'cancelled'];
     let startDateFrom: string | undefined = undefined;
     let startDateTo: string | undefined = undefined;

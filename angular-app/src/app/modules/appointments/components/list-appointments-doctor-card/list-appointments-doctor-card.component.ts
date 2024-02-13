@@ -51,19 +51,9 @@ export class ListAppointmentsDoctorCardComponent extends GenericListCardComponen
    * Obtiene elementos para mostrar en la página, según la paginación y los criterios de búsqueda.
    * @public
    * @param {number} page - Número de página actual.
-   * @param {string} [searchTerm] - Término de búsqueda opcional para filtrar elementos.
    * @returns {void}
    */
-  public override getItems(page: number, searchTerm?: string): void {
-    if (
-      searchTerm != undefined &&
-      searchTerm != this.entityData.search.search
-    ) {
-      this.entityData.search.search = searchTerm || '';
-      page = 1;
-      this.entityData.page = 1;
-    }
-
+  public override getItems(page: number): void {
     const statusMappings: { [key: string]: string[] } = {
       all: ['scheduled', 'rescheduled', 'in_progress'],
       scheduled: ['scheduled'],

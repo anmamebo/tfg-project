@@ -29,16 +29,13 @@ export class ListMedicalTestsCardComponent extends GenericListCardComponent {
     super(notificationService);
   }
 
-  public override getItems(page: number, searchTerm?: string): void {
-    if (
-      searchTerm != undefined &&
-      searchTerm != this.entityData.search.search
-    ) {
-      this.entityData.search.search = searchTerm || '';
-      page = 1;
-      this.entityData.page = 1;
-    }
-
+  /**
+   * Obtiene pruebas médicas de pacientes con estados específicos y opciones de búsqueda.
+   * @param {number} page - Número de la página actual.
+   * @returns {void}
+   * @public
+   */
+  public override getItems(page: number): void {
     let completed: 'true' | 'false' | undefined = undefined;
     let dateFrom: string | undefined = undefined;
     let dateTo: string | undefined = undefined;

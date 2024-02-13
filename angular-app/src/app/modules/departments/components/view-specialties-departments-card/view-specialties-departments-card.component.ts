@@ -75,24 +75,18 @@ export class ViewSpecialtiesDepartmentsCardComponent implements OnInit {
    * @public
    */
   public onSearchSubmitted(searchTerm: string): void {
-    this.getSpecialtiesByDepartmentId(this.page, searchTerm);
+    this.search = searchTerm;
+    this.page = 1;
+    this.getSpecialtiesByDepartmentId(1);
   }
 
   /**
    * Obtiene la lista de especialidades médicas por departamento, opcionalmente filtrada por término de búsqueda y paginada.
    * @param {number} page - Número de página para la paginación.
-   * @param {string} [searchTerm] - Término opcional para filtrar la lista de especialidades.
    * @returns {void}
    * @public
    */
-  public getSpecialtiesByDepartmentId(page: number, searchTerm?: string): void {
-    // Comprueba si el término de búsqueda ha cambiado
-    if (searchTerm != undefined && searchTerm != this.search) {
-      this.search = searchTerm || '';
-      page = 1;
-      this.page = 1;
-    }
-
+  public getSpecialtiesByDepartmentId(page: number): void {
     this._medicalSpecialtyService
       .getRoomsByDepartmentId(this.departmentId, {
         page: page,

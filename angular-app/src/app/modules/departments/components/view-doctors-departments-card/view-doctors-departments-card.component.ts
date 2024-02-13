@@ -79,24 +79,18 @@ export class ViewDoctorsDepartmentsCardComponent implements OnInit {
    * @public
    */
   public onSearchSubmitted(searchTerm: string): void {
-    this.getDoctorsByDepartmentId(this.page, searchTerm);
+    this.search = searchTerm;
+    this.page = 1;
+    this.getDoctorsByDepartmentId(1);
   }
 
   /**
    * Obtiene la lista de doctores por departamento, opcionalmente filtrada por término de búsqueda y paginada.
    * @param {number} page - Número de página para la paginación.
-   * @param {string} [searchTerm] - Término opcional para filtrar la lista de doctores.
    * @returns {void}
    * @public
    */
-  public getDoctorsByDepartmentId(page: number, searchTerm?: string): void {
-    // Comprueba si el término de búsqueda ha cambiado
-    if (searchTerm != undefined && searchTerm != this.search) {
-      this.search = searchTerm || '';
-      page = 1;
-      this.page = 1;
-    }
-
+  public getDoctorsByDepartmentId(page: number): void {
     this._doctorService
       .getDoctorsByDepartmentId(this.departmentId, {
         page: page,

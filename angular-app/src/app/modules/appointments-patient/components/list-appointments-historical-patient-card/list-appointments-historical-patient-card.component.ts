@@ -35,19 +35,9 @@ export class ListAppointmentsHistoricalPatientCardComponent extends GenericListC
    * Obtiene citas de pacientes con estados específicos y opciones de búsqueda.
    * @public
    * @param {number} page - Número de página actual.
-   * @param {string} [searchTerm] - Término de búsqueda opcional.
    * @returns {void}
    */
-  public override getItems(page: number, searchTerm?: string): void {
-    if (
-      searchTerm != undefined &&
-      searchTerm != this.entityData.search.search
-    ) {
-      this.entityData.search.search = searchTerm || '';
-      page = 1;
-      this.entityData.page = 1;
-    }
-
+  public override getItems(page: number): void {
     let statuses: string[] = ['completed', 'no_show', 'cancelled'];
     let types: string[] | undefined = undefined;
     let specialties: string[] | undefined = undefined;
