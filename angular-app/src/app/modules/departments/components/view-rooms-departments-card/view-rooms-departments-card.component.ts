@@ -103,7 +103,7 @@ export class ViewRoomsDepartmentsCardComponent implements OnInit {
           const paginatedResponse = response as PaginatedResponse<Room>;
           this.rooms = paginatedResponse.results;
           this.numRooms = paginatedResponse.count;
-          this.totalPages = Math.ceil(this.numRooms / this.numResults);
+          this.totalPages = paginatedResponse.total_pages;
         },
         error: (error: any) => {
           this._notificationService.showErrorToast(error.message);

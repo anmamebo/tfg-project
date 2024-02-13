@@ -142,9 +142,7 @@ export class GenericListCardComponent implements OnInit {
           const paginatedResponse = response as PaginatedResponse<any>;
           this.entityData.items = paginatedResponse.results;
           this.entityData.numItems = paginatedResponse.count;
-          this.entityData.totalPages = Math.ceil(
-            this.entityData.numItems / this.entityData.numResults
-          );
+          this.entityData.totalPages = paginatedResponse.total_pages;
         },
         error: (error: any) => {
           this.notificationService.showErrorToast(error.message);

@@ -99,7 +99,7 @@ export class ViewSpecialtiesDepartmentsCardComponent implements OnInit {
             response as PaginatedResponse<MedicalSpecialty>;
           this.specialties = paginatedResponse.results;
           this.numSpecialties = paginatedResponse.count;
-          this.totalPages = Math.ceil(this.numSpecialties / this.numResults);
+          this.totalPages = paginatedResponse.total_pages;
         },
         error: (error: any) => {
           this._notificationService.showErrorToast(error.message);
