@@ -6,15 +6,18 @@ import {
   OnInit,
 } from '@angular/core';
 import {
+  CalendarDateFormatter,
   CalendarEvent,
   CalendarEventTimesChangedEvent,
   CalendarView,
+  DAYS_OF_WEEK,
 } from 'angular-calendar';
 import { isSameDay, isSameMonth } from 'date-fns';
 import { Subject } from 'rxjs';
 import { breadcrumbAppointmentsCalendarPatientData } from 'src/app/core/constants/breadcrumb-data.constants';
 import { Appointment } from 'src/app/core/models/appointment.interface';
 import { ListResponse } from 'src/app/core/models/response/list-response.interface';
+import { CustomDateFormatter } from 'src/app/core/providers/custom-date-formatter.provider';
 import { AppointmentService } from 'src/app/core/services/entities/appointment.service';
 import { NotificationService } from 'src/app/core/services/notifications/notification.service';
 
@@ -26,7 +29,11 @@ import { NotificationService } from 'src/app/core/services/notifications/notific
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './appointments-calendar-patient-page.component.html',
   styleUrls: ['./appointments-calendar-patient-page.component.scss'],
-  providers: [AppointmentService, DatePipe],
+  providers: [
+    AppointmentService,
+    DatePipe,
+    { provide: CalendarDateFormatter, useClass: CustomDateFormatter },
+  ],
 })
 export class AppointmentsCalendarPatientPageComponent implements OnInit {
   /** Título de la página. */
@@ -55,6 +62,12 @@ export class AppointmentsCalendarPatientPageComponent implements OnInit {
 
   /** Indica si un día está abierto en la vista mensual del calendario. */
   activeDayIsOpen: boolean = false;
+
+  /** Día de comienzo de la semana */
+  weekStartsOn: number = DAYS_OF_WEEK.MONDAY;
+
+  /** Idioma del calendario */
+  locale: string = 'es';
 
   constructor(
     private _appointmentService: AppointmentService,
