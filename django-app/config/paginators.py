@@ -8,4 +8,10 @@ class CustomResultSetPagination(PageNumberPagination):
     page_size_query_param = "page_size"
 
     def get_paginated_response(self, data):
-        return Response({"count": self.page.paginator.count, "results": data})
+        return Response(
+            {
+                "count": self.page.paginator.count,
+                "total_pages": self.page.paginator.num_pages,
+                "results": data,
+            }
+        )
