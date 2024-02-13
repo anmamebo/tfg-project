@@ -56,14 +56,14 @@ class Appointment(BaseModel):
     )
     room = models.ForeignKey(
         "rooms.Room",
-        on_delete=models.CASCADE,
+        on_delete=models.SET_NULL,
         verbose_name="Sala",
         blank=True,
         null=True,
     )
     doctor = models.ForeignKey(
         "doctors.Doctor",
-        on_delete=models.CASCADE,
+        on_delete=models.SET_NULL,
         verbose_name="Médico",
         blank=True,
         null=True,
@@ -75,7 +75,7 @@ class Appointment(BaseModel):
     )
     schedule = models.ForeignKey(
         "schedules.Schedule",
-        on_delete=models.CASCADE,
+        on_delete=models.SET_NULL,
         verbose_name="Horario",
         blank=True,
         null=True,

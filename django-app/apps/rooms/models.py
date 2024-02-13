@@ -17,7 +17,7 @@ class Room(BaseModel):
     is_available = models.BooleanField(verbose_name="Disponible", default=True)
     department = models.ForeignKey(
         Department,
-        on_delete=models.CASCADE,
+        on_delete=models.SET_NULL,
         verbose_name="Departamento",
         blank=True,
         null=True,

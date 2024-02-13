@@ -10,7 +10,7 @@ class MedicalSpecialty(BaseModel):
     )
     department = models.ForeignKey(
         Department,
-        on_delete=models.CASCADE,
+        on_delete=models.SET_NULL,
         verbose_name="Departamento",
         blank=True,
         null=True,
