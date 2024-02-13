@@ -26,7 +26,7 @@ class AppointmentAdmin(admin.ModelAdmin):
         "doctor__user__name",
         "doctor__user__last_name",
     )
-    list_filter = ("status", "type")
+    list_filter = ("status", "type", "specialty__name")
     ordering = ("-request_date",)
 
 

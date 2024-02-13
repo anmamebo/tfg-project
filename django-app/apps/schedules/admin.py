@@ -4,8 +4,8 @@ from django.contrib import admin
 
 class ScheduleAdmin(admin.ModelAdmin):
     list_display = (
-        "end_time",
         "start_time",
+        "end_time",
         "doctor",
     )
     readonly_fields = (
