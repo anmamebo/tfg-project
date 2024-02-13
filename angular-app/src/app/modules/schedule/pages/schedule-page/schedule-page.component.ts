@@ -120,8 +120,11 @@ export class SchedulePageComponent implements OnInit {
         titleParts.push(`${roomName} ${roomLocation}`);
       }
 
+      let title = titleParts.join(' | ');
+      title = `${title} - ${appointment.reason}`;
+
       return {
-        title: titleParts.join(' | '),
+        title: title,
         start: scheduleStartTime ? new Date(scheduleStartTime) : new Date(),
       };
     });
