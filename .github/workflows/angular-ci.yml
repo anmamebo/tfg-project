@@ -21,14 +21,14 @@ jobs:
           node-version: '18'
       
       - name: Install dependencies
-        working-directory: ./angular-app
+        working-directory: angular-app
         run: npm install
 
       - name: Build
-        working-directory: ./angular-app
+        working-directory: angular-app
         run: npm run build
 
       - name: Run tests
-        working-directory: ./angular-app
+        working-directory: angular-app
         run: npm test
       
