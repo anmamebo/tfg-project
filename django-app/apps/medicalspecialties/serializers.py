@@ -1,5 +1,25 @@
+from apps.departments.serializers import DepartmentSerializer
 from apps.medicalspecialties.models import MedicalSpecialty
 from rest_framework import serializers
+
+
+class BasicMedicalSpecialtySerializer(serializers.ModelSerializer):
+    """
+    Serializador para representar los datos básicos de una especialidad médica.
+
+    Este serializador maneja la representación de los datos básicos de una especialidad médica,
+    incluyendo información sobre el nombre.
+
+    Args:
+        validated_data (dict): Datos validados para la representación de la especialidad médica.
+
+    Returns:
+        dict: Diccionario con los datos básicos de la especialidad médica.
+    """
+
+    class Meta:
+        model = MedicalSpecialty
+        exclude = ["state", "created_date", "modified_date", "deleted_date"]
 
 
 class MedicalSpecialtySerializer(serializers.ModelSerializer):
@@ -15,6 +35,8 @@ class MedicalSpecialtySerializer(serializers.ModelSerializer):
     Returns:
         dict: Diccionario con los datos de la especialidad médica.
     """
+
+    department = DepartmentSerializer(read_only=True)
 
     class Meta:
         model = MedicalSpecialty

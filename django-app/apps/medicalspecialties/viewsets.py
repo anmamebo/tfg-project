@@ -1,5 +1,8 @@
 from apps.medicalspecialties.models import MedicalSpecialty
-from apps.medicalspecialties.serializers import MedicalSpecialtySerializer
+from apps.medicalspecialties.serializers import (
+    BasicMedicalSpecialtySerializer,
+    MedicalSpecialtySerializer,
+)
 from config.permissions import IsAdministrator, IsAdministratorOrDoctorOrPatient
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
@@ -124,7 +127,7 @@ class MedicalSpecialtyViewSet(
             Response: La respuesta que contiene la especialidad médica actualizada.
         """
         medical_specialty = self.get_object(pk)
-        serializer = self.serializer_class(
+        serializer = BasicMedicalSpecialtySerializer(
             medical_specialty, data=request.data, partial=True
         )
         if serializer.is_valid():
