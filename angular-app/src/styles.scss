@@ -79,15 +79,27 @@ html[data-bs-theme="dark"] {
 /* angular-cli file: src/styles.css */
 @import "../node_modules/angular-calendar/css/angular-calendar.css";
 
+// CALENDARIO
 .cal-month-view .cal-open-day-events {
-  background-color: $light !important;
+  // background-color: $light !important;
+  background-color: $primary !important;
   box-shadow: inset 0 0 15px 0 rgba(0, 0, 0, 0.1) !important;
+}
+
+.cal-day-cell.cal-today {
+  background-color: #f2f7ff !important;
+  color: $primary !important;
 }
 
 .cal-month-view .cal-day-badge {
   background-color: $primary !important;
 }
 
+.cal-header.cal-today {
+  background-color: #f2f7ff !important;
+}
+
+// Multiselect
 .multiselect-dropdown {
   .dropdown-btn {
     border: 1px solid #dce7f1 !important;
@@ -144,6 +156,7 @@ html[data-bs-theme="dark"] {
   box-shadow: none !important;
 }
 
+// General
 button:focus,
 input:focus,
 select:focus,
