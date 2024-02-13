@@ -1,0 +1,34 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  
+jobs:
+  deploy:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          path: 'angular-app'
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18'
+      
+      - name: Install dependencies
+        working-directory: ./angular-app
+        run: npm install
+
+      - name: Build
+        working-directory: ./angular-app
+        run: npm run build
+
+      - name: Run tests
+        working-directory: ./angular-app
+        run: npm test
+      
