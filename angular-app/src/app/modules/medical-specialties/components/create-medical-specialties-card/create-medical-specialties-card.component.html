@@ -7,8 +7,8 @@
     >
       <div class="form-body">
         <div class="row">
-          <!-- Nombre -->
           <div class="col-md-6">
+            <!-- Nombre -->
             <div class="form-group">
               <label for="name">Nombre*</label>
               <input
@@ -27,6 +27,26 @@
                 [submitted]="submitted"
               ></app-form-errors>
             </div>
+
+            <!-- Departamento -->
+            <div class="form-group">
+              <label for="department">Departamento*</label>
+
+              <ng-multiselect-dropdown
+                [placeholder]="'Seleccionar departamento'"
+                [data]="departments"
+                [settings]="dropdownSettings"
+                formControlName="department"
+                [ngClass]="{
+                  'is-invalid': submitted && form.get('department')?.errors
+                }"
+              ></ng-multiselect-dropdown>
+
+              <app-form-errors
+                [control]="form.get('department')"
+                [submitted]="submitted"
+              ></app-form-errors>
+            </div>
           </div>
 
           <!-- Descripción -->
@@ -37,7 +57,7 @@
                 formControlName="description"
                 class="form-control"
                 id="description"
-                rows="5"
+                rows="4"
                 [ngClass]="{
                   'is-invalid': submitted && form.get('description')?.errors
                 }"

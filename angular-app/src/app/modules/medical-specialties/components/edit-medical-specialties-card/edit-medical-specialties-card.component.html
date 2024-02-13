@@ -8,8 +8,8 @@
     >
       <div class="form-body">
         <div class="row">
-          <!-- Nombre -->
           <div class="col-md-6">
+            <!-- Nombre -->
             <div class="form-group">
               <label for="name">Nombre*</label>
               <input
@@ -25,6 +25,23 @@
 
               <app-form-errors
                 [control]="form.get('name')"
+                [submitted]="submitted"
+              ></app-form-errors>
+            </div>
+
+            <!-- Departamento -->
+            <div class="form-group">
+              <label for="department">Departamento*</label>
+
+              <ng-multiselect-dropdown
+                [placeholder]="'Selecciona un departamento'"
+                [settings]="dropdownSettings"
+                [data]="departments"
+                formControlName="department"
+              ></ng-multiselect-dropdown>
+
+              <app-form-errors
+                [control]="form.get('department')"
                 [submitted]="submitted"
               ></app-form-errors>
             </div>
