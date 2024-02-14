@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { MedicalTest } from 'src/app/core/models/medical-test.interface';
 import {
   ListResponse,
@@ -24,9 +25,11 @@ export class ListMedicalTestsCardComponent extends GenericListCardComponent {
 
   constructor(
     private _medicalTestService: MedicalTestService,
-    notificationService: NotificationService
+    notificationService: NotificationService,
+    route: ActivatedRoute
   ) {
-    super(notificationService);
+    super(notificationService, route);
+    this.urlSearch = false;
   }
 
   /**

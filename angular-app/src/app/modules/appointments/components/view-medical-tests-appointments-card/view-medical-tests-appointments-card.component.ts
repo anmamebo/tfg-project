@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { SwalPortalTargets } from '@sweetalert2/ngx-sweetalert2';
 import { Appointment } from 'src/app/core/models/appointment.interface';
 import { MedicalTest } from 'src/app/core/models/medical-test.interface';
@@ -25,9 +26,11 @@ export class ViewMedicalTestsAppointmentsCardComponent extends GenericListCardCo
   constructor(
     private _medicalTestService: MedicalTestService,
     notificationService: NotificationService,
+    route: ActivatedRoute,
     public readonly swalTargets: SwalPortalTargets
   ) {
-    super(notificationService);
+    super(notificationService, route);
+    this.urlSearch = false;
     this.entityData.numResults = 5;
   }
 

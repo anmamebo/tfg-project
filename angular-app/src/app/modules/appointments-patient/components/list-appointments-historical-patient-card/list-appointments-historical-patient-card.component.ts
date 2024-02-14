@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Appointment } from 'src/app/core/models/appointment.interface';
 import {
   ListResponse,
@@ -24,9 +25,11 @@ export class ListAppointmentsHistoricalPatientCardComponent extends GenericListC
 
   constructor(
     private _appointmentService: AppointmentService,
-    notificationService: NotificationService
+    notificationService: NotificationService,
+    route: ActivatedRoute
   ) {
-    super(notificationService);
+    super(notificationService, route);
+    this.urlSearch = false;
     this.sort.column = 'request_date';
     this.sort.order = 'desc';
   }

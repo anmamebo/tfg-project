@@ -48,6 +48,9 @@ export class ViewSpecialtiesDepartmentsCardComponent implements OnInit {
   /** Término de búsqueda */
   public search: string = '';
 
+  /** Indica si la búsqueda se realiza en la URL. */
+  public urlSearch: boolean = false;
+
   constructor(
     private _medicalSpecialtyService: MedicalspecialtyService,
     private _notificationService: NotificationService

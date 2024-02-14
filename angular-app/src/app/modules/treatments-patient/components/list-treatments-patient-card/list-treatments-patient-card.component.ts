@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import {
   ListResponse,
   PaginatedResponse,
@@ -24,9 +25,11 @@ export class ListTreatmentsPatientCardComponent extends GenericListCardComponent
 
   constructor(
     private _treatmentService: TreatmentService,
-    notificationService: NotificationService
+    notificationService: NotificationService,
+    route: ActivatedRoute
   ) {
-    super(notificationService);
+    super(notificationService, route);
+    this.urlSearch = false;
   }
 
   /**

@@ -52,6 +52,9 @@ export class ViewDoctorsDepartmentsCardComponent implements OnInit {
   /** Término de búsqueda */
   public search: string = '';
 
+  /** Indica si la búsqueda se realiza en la URL. */
+  public urlSearch: boolean = false;
+
   constructor(
     private _doctorService: DoctorService,
     private _notificationService: NotificationService

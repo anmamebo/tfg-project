@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { EntityData } from 'src/app/core/models/entity-data.interface';
 import {
   ListResponse,
@@ -27,7 +28,13 @@ export class GenericListCardComponent implements OnInit {
     order: '',
   };
 
-  constructor(protected notificationService: NotificationService) {
+  /** Indica si coge los parámetros de la url para la búsqueda. */
+  public urlSearch: boolean = true;
+
+  constructor(
+    protected notificationService: NotificationService,
+    protected route: ActivatedRoute
+  ) {
     this.entityData = {
       title: {
         hasTitle: false,
@@ -55,7 +62,25 @@ export class GenericListCardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (this.entityData.search.hasSearch && this.urlSearch) {
+      this._setQueryParamFromUrl();
+    }
+
     this.getItems();
+  }
+
+  /**
+   * Obtiene el término de búsqueda de la URL y lo establece en la variable de búsqueda de la entidad.
+   * @private
+   * @returns {void}
+   */
+  private _setQueryParamFromUrl(): void {
+    this.route.queryParams.subscribe((params) => {
+      const searchTerm = params['q'];
+      if (searchTerm) {
+        this.entityData.search.search = searchTerm;
+      }
+    });
   }
 
   /**
