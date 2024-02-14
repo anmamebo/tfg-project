@@ -1,0 +1,59 @@
+<app-generic-card [hasCardHeader]="entityData.title.hasTitle">
+  <div class="card-content">
+    <div class="row justify-content-between">
+      <div class="col-sm-8">
+        <h4 class="mb-4">Pruebas médicas</h4>
+      </div>
+      <div class="col-xxl-3 col-sm-4 mb-3 mb-sm-0">
+        <button [swal]="createMedicalTest" class="btn btn-primary w-100">
+          Añadir
+        </button>
+      </div>
+    </div>
+    <swal
+      #createMedicalTest
+      [showCloseButton]="true"
+      [showCancelButton]="false"
+      [showConfirmButton]="false"
+      [width]="'1000px'"
+    >
+      <div *swalPortal="swalTargets.title">
+        <h4 class="mb-4 text-start text-uppercase">Nuevo prueba médica</h4>
+      </div>
+      <div *swalPortal="swalTargets.content">
+        <app-form-create-medical-test-appointments
+          [appointment]="appointment"
+          (createdMedicalTest)="getItems()"
+        ></app-form-create-medical-test-appointments>
+      </div>
+    </swal>
+
+    <ng-container *ngIf="entityData.items; else noItems">
+      <ng-container *ngIf="entityData.items.length > 0; else lengthZero">
+        <app-table-medical-tests-appointments-doctor
+          [medicalTests]="entityData.items"
+        ></app-table-medical-tests-appointments-doctor>
+
+        <app-elements-per-page
+          [totalElements]="entityData.numItems"
+          [elementsPerPage]="entityData.numResults"
+          (elementsPerPageChangedEvent)="onEntriesPerPageChanged($event)"
+        ></app-elements-per-page>
+
+        <app-pagination
+          [page]="entityData.page"
+          [totalPages]="entityData.totalPages"
+          [numItems]="entityData.numItems"
+          (pageEmitter)="goToPage($event)"
+        ></app-pagination>
+      </ng-container>
+      <ng-template #lengthZero
+        >No hay pruebas médicas para mostrar.</ng-template
+      >
+    </ng-container>
+
+    <ng-template #noItems>
+      <app-loading-spinner></app-loading-spinner>
+    </ng-template>
+  </div>
+</app-generic-card>

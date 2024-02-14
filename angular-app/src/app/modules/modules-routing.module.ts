@@ -93,8 +93,8 @@ const routes: Routes = [
   {
     path: 'm/citas',
     loadChildren: () =>
-      import('./appointments/appointments.module').then(
-        (m) => m.AppointmentsModule
+      import('./appointments-doctor/appointments-doctor.module').then(
+        (m) => m.AppointmentsDoctorModule
       ),
     canActivate: [roleGuard],
     data: { roles: [ROLES.DOCTOR] },
