@@ -52,7 +52,7 @@ urlpatterns = [
     path("api/forget-password/", ForgetPassword.as_view(), name="forget_password"),
     path("api/reset-password/", ResetPassword.as_view(), name="reset_password"),
     path("api/token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
-    path("api/token/refresh/", TokenRefreshView.as_view, name="token_refresh"),
+    path("api/token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
     path("api/users/", include("apps.users.routers")),
     path("api/groups/", include("apps.groups.routers")),
     path("api/patients/", include("apps.patients.routers")),
