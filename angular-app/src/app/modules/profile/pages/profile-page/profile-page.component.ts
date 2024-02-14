@@ -45,8 +45,8 @@ export class ProfilePageComponent implements OnInit {
   public getUser(): void {
     const userSession = this._tokenStorageService.getUser();
 
-    if (userSession.user) {
-      this._userService.getItemById(userSession.user.id).subscribe({
+    if (userSession) {
+      this._userService.getItemById(userSession.id).subscribe({
         next: (user: User) => {
           this.user = user;
           this._tokenStorageService.updateUser(user);

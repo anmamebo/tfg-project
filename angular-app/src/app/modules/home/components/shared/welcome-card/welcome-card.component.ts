@@ -54,8 +54,8 @@ export class WelcomeCardComponent implements OnInit {
    */
   private _getUser(): void {
     let user = this._tokenStorageService.getUser();
-    if (user && user.user && user.user.name) {
-      this.name = user.user.name;
+    if (user && user.name) {
+      this.name = user.name;
     }
   }
 }

@@ -64,7 +64,7 @@ export class AuthService {
    */
   public logOut(): Observable<MessageResponse> {
     let user = this._tokenStorageService.signOut();
-    let user_id = { user: user.user.id };
+    let user_id = { user: user.id };
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: 'Bearer ' + user.token,
@@ -76,6 +76,18 @@ export class AuthService {
       user_id,
       httpOptions
     );
+  }
+
+  /**
+   * Refresca el token de autenticación.
+   * @returns {Observable<any>} Un observable que emite la respuesta del servidor.
+   */
+  public refreshToken(): Observable<any> {
+    const refreshToken = this._tokenStorageService.getRefreshToken();
+
+    return this._http.post(`${this.url}token/refresh/`, {
+      refresh: refreshToken,
+    });
   }
 
   /**

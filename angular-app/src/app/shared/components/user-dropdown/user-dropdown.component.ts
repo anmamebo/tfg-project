@@ -48,8 +48,8 @@ export class UserDropdownComponent implements OnInit {
    */
   private _getUser(): void {
     let user = this._tokenStorageService.getUser();
-    if (user && user.user && user.user.username) {
-      this.username = user.user.name;
+    if (user && user.username) {
+      this.username = user.name;
     }
   }
 }

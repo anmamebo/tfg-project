@@ -6,6 +6,9 @@ const TOKEN_KEY = 'auth-token';
 /** Clave para almacenar los datos del usuario en el almacenamiento de sesión. */
 const USER_KEY = 'auth-user';
 
+/** Clave para almacenar el token de actualización en el almacenamiento de sesión. */
+const REFRESH_TOKEN_KEY = 'auth-refresh-token';
+
 /**
  * Servicio para el almacenamiento y gestión de tokens de autenticación y datos de usuario en el almacenamiento de sesión.
  */
@@ -22,6 +25,7 @@ export class TokenStorageService {
   public signOut(): any {
     let user = this.getUser();
     window.sessionStorage.removeItem(TOKEN_KEY);
+    window.sessionStorage.removeItem(REFRESH_TOKEN_KEY);
     window.sessionStorage.removeItem(USER_KEY);
 
     return user;
@@ -38,15 +42,27 @@ export class TokenStorageService {
 
   /**
    * Obtiene el token de autenticación almacenado en el almacenamiento de sesión.
-   * @returns El token de autenticación.
+   * @returns {string} El token de autenticación.
    */
   public getToken(): string {
-    if (sessionStorage.getItem(TOKEN_KEY)) {
-      return sessionStorage.getItem(TOKEN_KEY) || '';
-    } else if (localStorage.getItem(TOKEN_KEY)) {
-      return localStorage.getItem(TOKEN_KEY) || '';
-    }
-    return '';
+    return sessionStorage.getItem(TOKEN_KEY) || '';
+  }
+
+  /**
+   * Almacena el token de actualización en el almacenamiento de sesión.
+   * @param {string} token El token de actualización a almacenar.
+   */
+  public saveRefreshTokenSession(token: string): void {
+    window.sessionStorage.removeItem(REFRESH_TOKEN_KEY);
+    window.sessionStorage.setItem(REFRESH_TOKEN_KEY, token);
+  }
+
+  /**
+   * Obtiene el token de actualización almacenado en el almacenamiento de sesión.
+   * @returns {string} El token de actualización.
+   */
+  public getRefreshToken(): string {
+    return sessionStorage.getItem(REFRESH_TOKEN_KEY) || '';
   }
 
   /**
@@ -74,13 +90,13 @@ export class TokenStorageService {
     let user = this.getUser();
 
     if (
-      user.user.email != userUpdated.email ||
-      user.user.name != userUpdated.name ||
-      user.user.last_name != userUpdated.last_name
+      user.email != userUpdated.email ||
+      user.name != userUpdated.name ||
+      user.last_name != userUpdated.last_name
     ) {
-      user.user.email = userUpdated.email;
-      user.user.name = userUpdated.name;
-      user.user.last_name = userUpdated.last_name;
+      user.email = userUpdated.email;
+      user.name = userUpdated.name;
+      user.last_name = userUpdated.last_name;
 
       this.saveUserSession(user);
     }
@@ -92,7 +108,8 @@ export class TokenStorageService {
    */
   public saveSession(user: any): void {
     this.saveTokenSession(user.token);
-    this.saveUserSession(user);
+    this.saveRefreshTokenSession(user.refresh_token);
+    this.saveUserSession(user.user);
   }
 
   /**
