@@ -172,6 +172,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Configuración de internacionalización
 LANGUAGE_CODE = "es-es"
+TIME_ZONE = "Europe/Madrid"
 USE_I18N = True
 USE_TZ = False
 
