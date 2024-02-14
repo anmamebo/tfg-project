@@ -62,7 +62,7 @@ class AdministrativeViewSet(
             group_name = "Administrativo"
             try:
                 group = Group.objects.get(name=group_name)
-                self.queryset = group.user_set.all()
+                self.queryset = group.user_set.all().order_by("-last_login")
                 return self.queryset
             except Group.DoesNotExist:
                 return self.model.objects.none()
