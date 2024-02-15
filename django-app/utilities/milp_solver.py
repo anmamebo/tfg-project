@@ -27,65 +27,14 @@ AFTERNOON_PREFERENCE = 2
 
 def solve_milp(appointment, hours_preferences_selection):
     print("Solving MILP...")
-    print(appointment)
 
-    print(hours_preferences_selection)
+    start_date, end_date, days = prepare_date_range()
 
-    # Definir el rango de fechas en el que se va a buscar la cita
-    start_date = datetime.strptime(START_DATE, "%Y-%m-%d")
-    end_date = datetime.strptime(END_DATE, "%Y-%m-%d")
+    morning_hours, afternoon_hours, hours = prepare_hours_ranges()
 
-    # Obtiene los días pertenecientes al rango de fechas
-    days = [
-        (start_date + timedelta(days=i)).strftime("%Y-%m-%d")
-        for i in range((end_date - start_date).days + 1)
-    ]
-
-    # Obtiene el rango de horas en el turno de la mañana
-    morning_hours = [
-        f"{h:02}:{m:02}"
-        for h in range(MORNING_START_TIME, MORNING_END_TIME + 1)
-        for m in range(0, 60, APPOINTMENT_DURATION)
-    ]
-
-    # Obtiene el rango de horas en el turno de la tarde
-    afternoon_hours = [
-        f"{h:02}:{m:02}"
-        for h in range(AFTERNOON_START_TIME, AFTERNOON_END_TIME + 1)
-        for m in range(0, 60, APPOINTMENT_DURATION)
-    ]
-
-    # Define el rango de horas en el que se puede agendar una cita
-    hours = morning_hours + afternoon_hours
-
-    # Diccionario de preferencias de horas
-    hours_preferences_dict = {0: hours, 1: morning_hours, 2: afternoon_hours}
-
-    # Obtener la especialidad de la cita
-    specialty = appointment.specialty
-
-    # Obtener los ids de los doctores que tienen la especialidad de la cita
-    # y que tienen horarios en el rango de fechas
-    doctors_with_specialty = get_doctors_by_specialty(specialty)
-    doctors = get_doctors_with_schedules_in_range(
-        doctors_with_specialty, start_date, end_date
+    hours_preferences_dict = prepare_hours_preferences(
+        hours, morning_hours, afternoon_hours
     )
-    doctors_ids = get_ids(doctors)
-
-    print(doctors_ids)
-
-    # Obtener los horarios de los médicos en el rango de fechas
-    schedules_objs = get_all_doctors_schedules(doctors, start_date, end_date)
-    schedules = assign_schedules_to_doctors(days, doctors, schedules_objs)
-
-    print(schedules)
-
-    # Obtener las salas de consulta de la especialidad
-    department = get_department_by_specialty(specialty)
-    rooms = get_rooms_by_department(department)
-    rooms_ids = get_ids(rooms)
-
-    print(rooms_ids)
 
     # Obtiene la cita que se va a programar
     appointments = [appointment.id]
@@ -94,28 +43,16 @@ def solve_milp(appointment, hours_preferences_selection):
         appointment.id: hours_preferences_dict[hours_preferences_selection]
     }
 
-    print("preferencias", hours_preferences)
-
-    # Obtiene las citas que ya están programadas en el rango de fechas
-    schedules_appointments = get_appointments_by_doctors_in_range(
-        doctors, start_date, end_date
-    )
-    schedules_appointments = format_appointments(schedules_appointments)
-
-    # Obtiene las salas de consulta de las citas programadas
-    schedules_appointments_rooms_ids = [
-        appointment[4] for appointment in schedules_appointments
-    ]
-
-    # Obtener todas las salas de consulta
-    all_rooms = list(set(rooms_ids).union(set(schedules_appointments_rooms_ids)))
-    # Obtener todas las citas
-    all_appointments = appointments + [
-        appointment[0] for appointment in schedules_appointments
-    ]
-    all_doctors = doctors_ids
-    all_hours = hours
-    all_days = days
+    (
+        all_appointments,
+        all_doctors,
+        all_days,
+        all_hours,
+        all_rooms,
+        scheduled_appointments,
+        schedules,
+        specialty_rooms_ids,
+    ) = prepare_data(appointment, appointments, start_date, end_date, days, hours)
 
     # Crear un problema de programación lineal
     prob = LpProblem("Asignación_de_Citas", LpMinimize)
@@ -136,7 +73,7 @@ def solve_milp(appointment, hours_preferences_selection):
 
     # Restricción de citas programadas
     # Para cada cita programada, la variable correspondiente debe ser igual a 1
-    for a, doc, d, h, r in schedules_appointments:
+    for a, doc, d, h, r in scheduled_appointments:
         prob += X[a, doc, d, h, r] == 1
 
     # Restricción de asignación de médico
@@ -195,7 +132,7 @@ def solve_milp(appointment, hours_preferences_selection):
 
     # Restriccón de salas no pertenecientes a la especialidad
     for r in all_rooms:
-        if r not in rooms_ids:
+        if r not in specialty_rooms_ids:
             prob += (
                 lpSum(
                     X[a, doc, d, h, r]
@@ -298,9 +235,6 @@ def solve_milp(appointment, hours_preferences_selection):
     # Convertir la lista de resultados en un DataFrame de Pandas
     df_resultados = pd.DataFrame(resultados)
 
-    # Mostrar el DataFrame
-    print(df_resultados)
-
     # ---------------------------------------------------------
     # Exportar el DataFrame a un archivo de texto
     # ---------------------------------------------------------
@@ -313,6 +247,108 @@ def solve_milp(appointment, hours_preferences_selection):
         archivo.write(df_resultados.to_string(index=False))
 
     return True
+
+
+def prepare_date_range():
+    # Definir el rango de fechas en el que se va a buscar la cita
+    start_date = datetime.strptime(START_DATE, "%Y-%m-%d")
+    end_date = datetime.strptime(END_DATE, "%Y-%m-%d")
+
+    # Obtiene los días pertenecientes al rango de fechas
+    days = [
+        (start_date + timedelta(days=i)).strftime("%Y-%m-%d")
+        for i in range((end_date - start_date).days + 1)
+    ]
+
+    return start_date, end_date, days
+
+
+def prepare_hours_ranges():
+    # Obtiene el rango de horas en el turno de la mañana
+    morning_hours = [
+        f"{h:02}:{m:02}"
+        for h in range(MORNING_START_TIME, MORNING_END_TIME + 1)
+        for m in range(0, 60, APPOINTMENT_DURATION)
+    ]
+
+    # Obtiene el rango de horas en el turno de la tarde
+    afternoon_hours = [
+        f"{h:02}:{m:02}"
+        for h in range(AFTERNOON_START_TIME, AFTERNOON_END_TIME + 1)
+        for m in range(0, 60, APPOINTMENT_DURATION)
+    ]
+
+    # Define el rango de horas en el que se puede agendar una cita
+    hours = morning_hours + afternoon_hours
+
+    return morning_hours, afternoon_hours, hours
+
+
+def prepare_hours_preferences(hours, morning_hours, afternoon_hours):
+    # Diccionario de preferencias de horas
+    hours_preferences_dict = {
+        NO_PREFERENCE: hours,
+        MORNING_PREFERENCE: morning_hours,
+        AFTERNOON_PREFERENCE: afternoon_hours,
+    }
+
+    return hours_preferences_dict
+
+
+def prepare_data(appointment, appointments, start_date, end_date, days, hours):
+    # Obtener la especialidad de la cita
+    specialty = appointment.specialty
+
+    # Obtener los ids de los doctores que tienen la especialidad de la cita
+    # y que tienen horarios en el rango de fechas
+    doctors_with_specialty = get_doctors_by_specialty(specialty)
+    doctors = get_doctors_with_schedules_in_range(
+        doctors_with_specialty, start_date, end_date
+    )
+    doctors_ids = get_ids(doctors)
+
+    # Obtener los horarios de los médicos en el rango de fechas
+    schedules_objs = get_all_doctors_schedules(doctors, start_date, end_date)
+    schedules = assign_schedules_to_doctors(days, doctors, schedules_objs)
+
+    # Obtener las salas de consulta de la especialidad
+    department = get_department_by_specialty(specialty)
+    rooms = get_rooms_by_department(department)
+    specialty_rooms_ids = get_ids(rooms)
+
+    # Obtiene las citas que ya están programadas en el rango de fechas
+    scheduled_appointments = get_appointments_by_doctors_in_range(
+        doctors, start_date, end_date
+    )
+    scheduled_appointments = format_appointments(scheduled_appointments)
+
+    # Obtiene las salas de consulta de las citas programadas
+    scheduled_appointments_rooms_ids = [
+        appointment[4] for appointment in scheduled_appointments
+    ]
+
+    # Obtener todas las salas de consulta
+    all_rooms = list(
+        set(specialty_rooms_ids).union(set(scheduled_appointments_rooms_ids))
+    )
+    # Obtener todas las citas
+    all_appointments = appointments + [
+        appointment[0] for appointment in scheduled_appointments
+    ]
+    all_doctors = doctors_ids
+    all_hours = hours
+    all_days = days
+
+    return (
+        all_appointments,
+        all_doctors,
+        all_days,
+        all_hours,
+        all_rooms,
+        scheduled_appointments,
+        schedules,
+        specialty_rooms_ids,
+    )
 
 
 def get_doctors_by_specialty(specialty):
@@ -373,7 +409,7 @@ def get_appointments_by_doctors_in_range(doctors, start_date, end_date):
 
 
 def format_appointments(appointments):
-    schedules_appointments = []
+    scheduled_appointments = []
     for appointment in appointments:
         appointment_info = (
             str(appointment.id),
@@ -382,6 +418,6 @@ def format_appointments(appointments):
             appointment.schedule.start_time.strftime("%H:%M"),
             str(appointment.room.id),
         )
-        schedules_appointments.append(appointment_info)
+        scheduled_appointments.append(appointment_info)
 
-    return schedules_appointments
+    return scheduled_appointments
