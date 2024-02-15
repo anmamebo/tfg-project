@@ -138,6 +138,7 @@ export class DoctorTodayAppointmentsCalendarComponent implements AfterViewInit {
       return {
         title: titleParts.join(' | '),
         start: scheduleStartTime ? new Date(scheduleStartTime) : new Date(),
+        end: scheduleEndTime ? new Date(scheduleEndTime) : new Date(),
       };
     });
   }

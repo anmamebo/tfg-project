@@ -140,6 +140,7 @@ export class PatientTodayAppointmentsCalendarComponent
       return {
         title: titleParts.join(' | '),
         start: scheduleStartTime ? new Date(scheduleStartTime) : new Date(),
+        end: scheduleEndTime ? new Date(scheduleEndTime) : new Date(),
       };
     });
   }
