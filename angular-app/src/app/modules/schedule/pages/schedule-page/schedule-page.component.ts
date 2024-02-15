@@ -1,13 +1,27 @@
 import { DatePipe } from '@angular/common';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CalendarDateFormatter, CalendarEvent } from 'angular-calendar';
+import { EventColor } from 'calendar-utils';
 import { breadcrumbScheduleData } from 'src/app/core/constants/breadcrumb-data.constants';
 import { Appointment } from 'src/app/core/models/appointment.interface';
 import { ListResponse } from 'src/app/core/models/response/list-response.interface';
+import { Schedule } from 'src/app/core/models/schedule.interface';
 import { CustomDateFormatter } from 'src/app/core/providers/custom-date-formatter.provider';
 import { AppointmentService } from 'src/app/core/services/entities/appointment.service';
+import { ScheduleService } from 'src/app/core/services/entities/schedule.service';
 import { NotificationService } from 'src/app/core/services/notifications/notification.service';
 import { BaseCalendarComponent } from 'src/app/shared/components/base-calendar/base-calendar.component';
+
+const colors: Record<string, EventColor> = {
+  blue: {
+    primary: '#1e90ff',
+    secondary: '#D1E8FF',
+  },
+  yellow: {
+    primary: '#e3bc08',
+    secondary: '#FDF1BA',
+  },
+};
 
 /**
  * Componente que representa la página de mi horario
@@ -18,6 +32,7 @@ import { BaseCalendarComponent } from 'src/app/shared/components/base-calendar/b
   styleUrls: ['./schedule-page.component.scss'],
   providers: [
     AppointmentService,
+    ScheduleService,
     DatePipe,
     { provide: CalendarDateFormatter, useClass: CustomDateFormatter },
   ],
@@ -37,6 +52,7 @@ export class SchedulePageComponent
 
   constructor(
     private _appointmentService: AppointmentService,
+    private _scheduleService: ScheduleService,
     private _notificationService: NotificationService,
     private _datePipe: DatePipe,
     _cdr: ChangeDetectorRef
@@ -46,6 +62,7 @@ export class SchedulePageComponent
 
   ngOnInit(): void {
     this.getAppointments();
+    this.getNotAssignedSchedules();
   }
 
   /**
@@ -61,7 +78,8 @@ export class SchedulePageComponent
       .subscribe({
         next: (response: ListResponse<Appointment>) => {
           if (Array.isArray(response)) {
-            this.events = this._formatData(response);
+            const newEvents = this._formatData(response);
+            this.events = [...this.events, ...newEvents];
             this._cdr.detectChanges();
           }
         },
@@ -80,6 +98,7 @@ export class SchedulePageComponent
   private _formatData(appointments: Appointment[]): CalendarEvent[] {
     return appointments.map((appointment: Appointment) => {
       const scheduleStartTime = appointment.schedule?.start_time;
+      const scheduleEndTime = appointment.schedule?.end_time;
       const patientName = appointment.patient?.user?.name;
       const patientLastName = appointment.patient?.user?.last_name;
       const roomName = appointment.room?.name;
@@ -88,9 +107,17 @@ export class SchedulePageComponent
       const titleParts: string[] = [];
 
       if (scheduleStartTime) {
-        titleParts.push(
+        let date = `${
           this._datePipe.transform(scheduleStartTime, 'HH:mm') || ''
-        );
+        }`;
+
+        if (scheduleEndTime) {
+          date = `${date} - ${
+            this._datePipe.transform(scheduleEndTime, 'HH:mm') || ''
+          }`;
+        }
+
+        titleParts.push(date);
       }
 
       if (patientName && patientLastName) {
@@ -107,6 +134,54 @@ export class SchedulePageComponent
       return {
         title: title,
         start: scheduleStartTime ? new Date(scheduleStartTime) : new Date(),
+        color: { ...colors['blue'] },
+      };
+    });
+  }
+
+  /**
+   * Obtiene los horarios que no han sido asignados a citas y actualiza los eventos en la interfaz.
+   * @public
+   * @returns {void}
+   */
+  public getNotAssignedSchedules(): void {
+    this._scheduleService.getNotAssignedSchedulesForDoctor().subscribe({
+      next: (response: ListResponse<Schedule>) => {
+        if (Array.isArray(response)) {
+          const newEvents = this._formatNotAssignedSchedules(response);
+          this.events = [...this.events, ...newEvents];
+          this._cdr.detectChanges();
+        }
+      },
+      error: (error) => {
+        this._notificationService.showErrorToast(error.message);
+      },
+    });
+  }
+
+  /**
+   * Formatea los datos de los horarios que no han sido asignados a citas para su visualización en el calendario.
+   * @private
+   * @param {Schedule[]} schedules - Lista de horarios a formatear.
+   * @returns {CalendarEvent[]} - Lista de eventos formateados para el calendario.
+   */
+  private _formatNotAssignedSchedules(schedules: Schedule[]): CalendarEvent[] {
+    return schedules.map((schedule: Schedule) => {
+      const startTime = schedule.start_time;
+      const endTime = schedule.end_time;
+
+      const title = `${this._datePipe.transform(
+        startTime,
+        'HH:mm'
+      )} - ${this._datePipe.transform(
+        endTime,
+        'HH:mm'
+      )} | Horario sin cita asignada`;
+
+      return {
+        title: title,
+        start: startTime ? new Date(startTime) : new Date(),
+        color: { ...colors['yellow'] },
       };
     });
   }
