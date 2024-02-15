@@ -25,6 +25,7 @@ from mixins.pagination_mixin import PaginationMixin
 from rest_framework import status, viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
+from utilities.milp_solver import solve_milp
 from utilities.permissions_helper import method_permission_classes
 
 
@@ -128,6 +129,14 @@ class AppointmentViewSet(
             appointment = serializer.save()
 
             # TODO: Implemntar lógica de generar cita
+            is_assigned = solve_milp(appointment, hours_preference)
+
+            if not is_assigned:
+                appointment.delete()
+                return self.error_response(
+                    message="No se pudo asignar la cita, inténtalo más tarde.",
+                    status_code=status.HTTP_400_BAD_REQUEST,
+                )
 
             # TODO: Implemntar lógica de enviar correo
 
