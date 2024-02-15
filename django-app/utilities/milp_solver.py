@@ -181,70 +181,11 @@ def solve_milp(appointment, hours_preferences_selection):
         print("El problema no tiene solución")
         return False
 
-    # Imprimir el valor de la función objetivo
-    print(f"\nValor de la función objetivo: {value(prob.objective)}\n")
+    handle_results(X, appointments, all_doctors, all_days, all_hours, all_rooms)
 
-    # ---------------------------------------------------------
-    # MOSTRAR PANDAS DATAFRAME
-    # ---------------------------------------------------------
-    # Crear un DataFrame para almacenar los resultados
-    resultados = []
-
-    # Recorrer todas las variables de decisión y agregar las asignaciones a la lista de resultados
-    for a in all_appointments:
-        for doc in all_doctors:
-            for d in all_days:
-                for h in all_hours:
-                    for r in all_rooms:
-                        if X[a, doc, d, h, r].varValue == 1:
-                            resultados.append(
-                                {
-                                    "Cita": a,
-                                    "Medico": doc,
-                                    "Fecha": d,
-                                    "Hora": h,
-                                    "Sala": r,
-                                }
-                            )
-
-    for a in appointments:
-        for doc in all_doctors:
-            for d in all_days:
-                for h in all_hours:
-                    for r in all_rooms:
-                        if X[a, doc, d, h, r].varValue == 1:
-
-                            request_appointment = Appointment.objects.get(id=a)
-                            assigned_doctor = Doctor.objects.get(id=doc)
-                            assigned_room = Room.objects.get(id=r)
-                            assigned_datetime = datetime.strptime(
-                                f"{d} {h}", "%Y-%m-%d %H:%M"
-                            )
-                            assigned_schedule = Schedule.objects.get(
-                                doctor=assigned_doctor,
-                                start_time=assigned_datetime,
-                            )
-
-                            request_appointment.doctor = assigned_doctor
-                            request_appointment.room = assigned_room
-                            request_appointment.schedule = assigned_schedule
-                            request_appointment.status = "scheduled"
-
-                            request_appointment.save()
-
-    # Convertir la lista de resultados en un DataFrame de Pandas
-    df_resultados = pd.DataFrame(resultados)
-
-    # ---------------------------------------------------------
-    # Exportar el DataFrame a un archivo de texto
-    # ---------------------------------------------------------
-    # Obtener la marca temporal actual
-    marca_temporal = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-    # Nombre del archivo de texto
-    nombre_archivo = f"milp_results/resultados_{marca_temporal}.txt"
-    # Escribir el DataFrame en un archivo de texto
-    with open(nombre_archivo, "w") as archivo:
-        archivo.write(df_resultados.to_string(index=False))
+    print_results_to_txt(
+        prob, X, all_appointments, all_doctors, all_days, all_hours, all_rooms
+    )
 
     return True
 
@@ -349,6 +290,68 @@ def prepare_data(appointment, appointments, start_date, end_date, days, hours):
         schedules,
         specialty_rooms_ids,
     )
+
+
+def handle_results(X, appointments, doctors, days, hours, rooms):
+    for a in appointments:
+        for doc in doctors:
+            for d in days:
+                for h in hours:
+                    for r in rooms:
+                        if X[a, doc, d, h, r].varValue == 1:
+                            assign_appointment(a, doc, d, h, r)
+
+
+def assign_appointment(appointment_id, doctor_id, day, hour, room_id):
+    request_appointment = Appointment.objects.get(id=appointment_id)
+    assigned_doctor = Doctor.objects.get(id=doctor_id)
+    assigned_room = Room.objects.get(id=room_id)
+    assigned_datetime = datetime.strptime(f"{day} {hour}", "%Y-%m-%d %H:%M")
+    assigned_schedule = Schedule.objects.get(
+        doctor=assigned_doctor,
+        start_time=assigned_datetime,
+    )
+
+    request_appointment.doctor = assigned_doctor
+    request_appointment.room = assigned_room
+    request_appointment.schedule = assigned_schedule
+    request_appointment.status = "scheduled"
+
+    request_appointment.save()
+
+
+def print_results_to_txt(prob, X, appointments, doctors, days, hours, rooms):
+    # Crear un DataFrame para almacenar los resultados
+    resultados = []
+
+    # Recorrer todas las variables de decisión y agregar las asignaciones a la lista de resultados
+    for a in appointments:
+        for doc in doctors:
+            for d in days:
+                for h in hours:
+                    for r in rooms:
+                        if X[a, doc, d, h, r].varValue == 1:
+                            resultados.append(
+                                {
+                                    "Cita": a,
+                                    "Medico": doc,
+                                    "Fecha": d,
+                                    "Hora": h,
+                                    "Sala": r,
+                                }
+                            )
+
+    # Convertir la lista de resultados en un DataFrame de Pandas
+    df_resultados = pd.DataFrame(resultados)
+
+    # Obtener la marca temporal actual
+    marca_temporal = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+    # Nombre del archivo de texto
+    nombre_archivo = f"milp_results/resultados_{marca_temporal}.txt"
+    # Escribir el DataFrame en un archivo de texto
+    with open(nombre_archivo, "w") as archivo:
+        archivo.write(f"Valor de la funcion objetivo: {value(prob.objective)}\n\n")
+        archivo.write(df_resultados.to_string(index=False))
 
 
 def get_doctors_by_specialty(specialty):
