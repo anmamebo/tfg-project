@@ -119,6 +119,7 @@ class AppointmentViewSet(
         """
         patient = getattr(request.user, "patient", None)
         request.data["patient"] = patient.id
+        request.data["type"] = "consultation"
 
         serializer = CreateAppointmentSerializer(data=request.data)
         if serializer.is_valid():
