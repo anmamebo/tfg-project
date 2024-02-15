@@ -595,7 +595,7 @@ class AppointmentViewSet(
         """
         appointment.status = "completed"
         appointment.end_time = datetime.now()
-        appointment.actual_duration = (
+        appointment.duration = (
             appointment.end_time - appointment.time_patient_arrived
         ).total_seconds() / 60
         appointment.save()

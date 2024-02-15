@@ -33,12 +33,7 @@ class Appointment(BaseModel):
     observations = models.TextField(
         verbose_name="Observaciones", max_length=255, blank=True, null=True
     )
-    estimated_duration = models.IntegerField(
-        verbose_name="Duración estimada", blank=True, null=True
-    )
-    actual_duration = models.IntegerField(
-        verbose_name="Duración real", blank=True, null=True
-    )
+    duration = models.IntegerField(verbose_name="Duración", blank=True, null=True)
     time_patient_arrived = models.DateTimeField(
         verbose_name="Hora de llegada del paciente", blank=True, null=True
     )
