@@ -17,6 +17,10 @@ import { NotificationService } from 'src/app/core/services/notifications/notific
   providers: [AppointmentService, MedicalspecialtyService],
 })
 export class CreateAppointmentRequestCardComponent implements OnInit {
+  NO_PREFERENCE = 0;
+  MORNING_PREFERENCE = 1;
+  AFTERNOON_PREFERENCE = 2;
+
   /** Formulario para la información de la cita */
   public createAppointmentRequestForm: FormGroup = new FormGroup({});
 
@@ -38,6 +42,7 @@ export class CreateAppointmentRequestCardComponent implements OnInit {
     this.createAppointmentRequestForm = this._fb.group({
       reason: ['', [Validators.required, Validators.maxLength(255)]],
       specialty: ['', Validators.required],
+      hourPreference: [0, Validators.required],
     });
   }
 
@@ -75,18 +80,31 @@ export class CreateAppointmentRequestCardComponent implements OnInit {
     const appointment: any = {
       reason: this.form.value.reason,
       specialty: this.form.value.specialty[0].item_id,
+      hours_preference: this.form.value.hourPreference,
     };
 
     this._appointmentService.createAppointment(appointment).subscribe({
       next: (response: MessageResponse) => {
-        this.createAppointmentRequestForm.reset();
-        this.submitted = false;
+        this._resetForm();
         this._notificationService.showSuccessToast(response.message);
       },
       error: (error: any) => {
+        this._resetForm();
         this._notificationService.showErrorToast(error.message);
       },
     });
+  }
+
+  /**
+   * Reinicia el formulario.
+   * @private
+   * @returns {void}
+   */
+  private _resetForm(): void {
+    this.submitted = false;
+    this.form.get('reason')?.setValue('');
+    this.form.get('specialty')?.setValue('');
+    this.form.get('hourPreference')?.setValue(0);
   }
 
   /**

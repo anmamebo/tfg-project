@@ -24,6 +24,54 @@
                 [submitted]="submitted"
               ></app-form-errors>
             </div>
+
+            <!-- Preferencia horaria -->
+            <div class="form-group mt-3">
+              <label class="mb-2" for="preference">Preferencia horaria</label>
+
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  formControlName="hourPreference"
+                  id="hourPreference1"
+                  [value]="NO_PREFERENCE"
+                  checked
+                />
+                <label class="form-check-label" for="hourPreference1"
+                  >Sin preferencia</label
+                >
+              </div>
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  formControlName="hourPreference"
+                  id="hourPreference2"
+                  [value]="MORNING_PREFERENCE"
+                />
+                <label class="form-check-label" for="hourPreference2"
+                  >Mañana (09:00 - 14:00)</label
+                >
+              </div>
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  formControlName="hourPreference"
+                  id="hourPreference3"
+                  [value]="AFTERNOON_PREFERENCE"
+                />
+                <label class="form-check-label" for="hourPreference3"
+                  >Tarde (15:00 - 21:00)</label
+                >
+              </div>
+
+              <app-form-errors
+                [control]="form.get('hourPreference')"
+                [submitted]="submitted"
+              ></app-form-errors>
+            </div>
           </div>
 
           <!-- Motivo -->
@@ -34,7 +82,7 @@
                 formControlName="reason"
                 class="form-control"
                 id="reason"
-                rows="5"
+                rows="6"
                 placeholder="Motivo"
                 [ngClass]="{
                   'is-invalid': submitted && form.get('reason')?.errors
