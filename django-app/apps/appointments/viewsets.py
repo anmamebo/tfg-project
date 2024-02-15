@@ -121,6 +121,8 @@ class AppointmentViewSet(
         request.data["patient"] = patient.id
         request.data["type"] = "consultation"
 
+        hours_preference = request.data.pop("hours_preference", None)
+
         serializer = CreateAppointmentSerializer(data=request.data)
         if serializer.is_valid():
             appointment = serializer.save()
