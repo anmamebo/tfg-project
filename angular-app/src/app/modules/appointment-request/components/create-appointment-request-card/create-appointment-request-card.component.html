@@ -8,23 +8,6 @@
       <div class="form-body">
         <div class="row">
           <div class="col-md-6">
-            <!-- Tipo de cita -->
-            <div class="form-group">
-              <label for="type">Tipo de cita</label>
-
-              <ng-multiselect-dropdown
-                [placeholder]="'Selecciona un tipo'"
-                [settings]="dropdownSettings"
-                [data]="types"
-                formControlName="type"
-              ></ng-multiselect-dropdown>
-
-              <app-form-errors
-                [control]="form.get('type')"
-                [submitted]="submitted"
-              ></app-form-errors>
-            </div>
-
             <!-- Especialidad -->
             <div class="form-group">
               <label for="specialty">Especialidad</label>

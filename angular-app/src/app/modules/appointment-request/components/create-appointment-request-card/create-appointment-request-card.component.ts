@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
-import { TYPE_APPOINTMENT_OPTIONS } from 'src/app/core/constants/options/type-appointment-options.constants';
 import { MedicalSpecialty } from 'src/app/core/models/medical-specialty.interface';
 import { ListResponse } from 'src/app/core/models/response/list-response.interface';
 import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
@@ -24,9 +23,6 @@ export class CreateAppointmentRequestCardComponent implements OnInit {
   /** Indica si se ha enviado el formulario */
   public submitted: boolean = false;
 
-  /** Tipos de cita */
-  public types: any = [];
-
   /** Especialidades médicas */
   public medicalSpecialties: any = [];
 
@@ -41,7 +37,6 @@ export class CreateAppointmentRequestCardComponent implements OnInit {
   ) {
     this.createAppointmentRequestForm = this._fb.group({
       reason: ['', [Validators.required, Validators.maxLength(255)]],
-      type: ['', [Validators.required]],
       specialty: ['', Validators.required],
     });
   }
@@ -57,7 +52,6 @@ export class CreateAppointmentRequestCardComponent implements OnInit {
       allowSearchFilter: true,
     };
 
-    this._formatTypes();
     this._getSpecialties();
   }
 
@@ -80,7 +74,6 @@ export class CreateAppointmentRequestCardComponent implements OnInit {
 
     const appointment: any = {
       reason: this.form.value.reason,
-      type: this.form.value.type[0].item_id,
       specialty: this.form.value.specialty[0].item_id,
     };
 
@@ -117,22 +110,5 @@ export class CreateAppointmentRequestCardComponent implements OnInit {
         this._notificationService.showErrorToast(error.message);
       },
     });
-  }
-
-  /**
-   * Formatea y actualiza la lista de tipos de citas.
-   * @private
-   * @returns {void}
-   */
-
-  private _formatTypes(): void {
-    this.types = TYPE_APPOINTMENT_OPTIONS.map(
-      (type: { value: string; text: string }) => {
-        return {
-          item_id: type.value,
-          item_text: type.text,
-        };
-      }
-    );
   }
 }
