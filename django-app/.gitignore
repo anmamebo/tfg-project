@@ -35,3 +35,6 @@ local_settings.py
 # Archivos de registro de dependencias de pip (pipenv, poetry, etc.)
 pip-lock.txt
 Pipfile.lock
+
+pruebas/
+milp_results/
