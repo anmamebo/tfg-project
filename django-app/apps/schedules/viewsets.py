@@ -2,13 +2,14 @@ from apps.schedules.models import Schedule
 from apps.schedules.serializers import ScheduleSerializer
 from config.permissions import IsDoctor
 from django.shortcuts import get_object_or_404
+from mixins.error_mixin import ErrorResponseMixin
 from rest_framework import status, viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from utilities.permissions_helper import method_permission_classes
 
 
-class ScheduleViewSet(viewsets.GenericViewSet):
+class ScheduleViewSet(viewsets.GenericViewSet, ErrorResponseMixin):
     """
     Vista para gestionar horarios.
 
@@ -51,6 +52,43 @@ class ScheduleViewSet(viewsets.GenericViewSet):
         """
         doctor = getattr(request.user, "doctor", None)
 
+        if doctor is None:
+            return self.error_response(
+                message="El médico no ha sido encontrado",
+                status_code=status.HTTP_400_BAD_REQUEST,
+            )
+
         schedules = self.get_queryset().filter(doctor=doctor).order_by("start_time")
+        serializer = self.get_serializer(schedules, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    @method_permission_classes([IsDoctor])
+    @action(detail=False, methods=["get"], url_path="doctor/not-assigned")
+    def get_not_asigned_schedules_by_doctor(self, request):
+        """
+        Recupera los horarios que no tienen una cita asignada
+
+        Permisos requeridos:
+            - El usuario debe ser médico.
+
+        Args:
+            request (Request): La solicitud HTTP.
+
+        Returns:
+            Response: La respuesta que contiene los horarios no asignados.
+        """
+        doctor = getattr(request.user, "doctor", None)
+
+        if doctor is None:
+            return self.error_response(
+                message="El médico no ha sido encontrado",
+                status_code=status.HTTP_400_BAD_REQUEST,
+            )
+
+        schedules = (
+            self.get_queryset()
+            .filter(doctor=doctor, appointment__isnull=True)
+            .order_by("start_time")
+        )
         serializer = self.get_serializer(schedules, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
