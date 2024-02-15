@@ -27,8 +27,7 @@ export interface Appointment {
   specialty: MedicalSpecialty;
   reason?: string;
   observations?: string;
-  estimated_duration?: number;
-  actual_duration?: number;
+  duration?: number;
   time_patient_arrived?: Date;
   end_time?: Date;
   priority?: number;
