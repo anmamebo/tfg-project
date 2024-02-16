@@ -9,6 +9,7 @@ from apps.rooms.models import Room
 from apps.schedules.models import Schedule
 from django.db.models import Count, Q
 from pulp import LpMinimize, LpProblem, LpVariable, lpSum, value
+from utilities.exceptions import SchedulingError
 
 START_DATE = "2024-02-12"
 END_DATE = "2024-02-28"
@@ -26,8 +27,16 @@ AFTERNOON_PREFERENCE = 2
 
 
 def solve_milp(appointment, hours_preferences_selection):
-    print("Solving MILP...")
+    """
+    Resuelve el problema de programación lineal entera mixta para programar una cita.
 
+    Args:
+        appointment (Appointment): Cita que se va a programar
+        hours_preferences_selection (int): Preferencias de horas para la cita
+
+    Returns:
+        bool: True si el problema se resolvió correctamente, False en caso contrario
+    """
     start_date, end_date, days = prepare_date_range()
 
     morning_hours, afternoon_hours, hours = prepare_hours_ranges()
@@ -191,6 +200,12 @@ def solve_milp(appointment, hours_preferences_selection):
 
 
 def prepare_date_range():
+    """
+    Prepara el rango de fechas en el que se va a buscar la cita.
+
+    Returns:
+        tuple: Fecha de inicio, fecha de fin y días pertenecientes al rango de fechas
+    """
     # Definir el rango de fechas en el que se va a buscar la cita
     start_date = datetime.strptime(START_DATE, "%Y-%m-%d")
     end_date = datetime.strptime(END_DATE, "%Y-%m-%d")
@@ -205,6 +220,12 @@ def prepare_date_range():
 
 
 def prepare_hours_ranges():
+    """
+    Prepara el rango de horas en el que se puede agendar una cita.
+
+    Returns:
+        tuple: Rango de horas en el turno de la mañana, rango de horas en el turno de la tarde y rango de horas en el que se puede agendar una cita
+    """
     # Obtiene el rango de horas en el turno de la mañana
     morning_hours = [
         f"{h:02}:{m:02}"
@@ -226,6 +247,17 @@ def prepare_hours_ranges():
 
 
 def prepare_hours_preferences(hours, morning_hours, afternoon_hours):
+    """
+    Prepara las preferencias de horas para las citas.
+
+    Args:
+        hours (list): Rango de horas en el que se puede agendar una cita
+        morning_hours (list): Rango de horas en el turno de la mañana
+        afternoon_hours (list): Rango de horas en el turno de la tarde
+
+    Returns:
+        dict: Diccionario de preferencias de horas
+    """
     # Diccionario de preferencias de horas
     hours_preferences_dict = {
         NO_PREFERENCE: hours,
@@ -237,6 +269,20 @@ def prepare_hours_preferences(hours, morning_hours, afternoon_hours):
 
 
 def prepare_data(appointment, appointments, start_date, end_date, days, hours):
+    """
+    Prepara los datos necesarios para resolver el problema de programación lineal entera mixta.
+
+    Args:
+        appointment (Appointment): Cita que se va a programar
+        appointments (list): Citas que se van a programar
+        start_date (datetime): Fecha de inicio
+        end_date (datetime): Fecha de fin
+        days (list): Días pertenecientes al rango de fechas
+        hours (list): Rango de horas en el que se puede agendar una cita
+
+    Returns:
+        tuple: Datos necesarios para resolver el problema de programación lineal entera mixta
+    """
     # Obtener la especialidad de la cita
     specialty = appointment.specialty
 
@@ -293,6 +339,18 @@ def prepare_data(appointment, appointments, start_date, end_date, days, hours):
 
 
 def handle_results(X, appointments, doctors, days, hours, rooms):
+    """
+    Maneja los resultados de la programación lineal entera mixta,
+    asigna a la cita programada el médico, la fecha, la hora y la sala de consulta correspondientes.
+
+    Args:
+        X: Variables de decisión
+        appointments (list): Citas que se van a programar
+        doctors (list): Médicos
+        days (list): Días pertenecientes al rango de fechas
+        hours (list): Rango de horas en el que se puede agendar una cita
+        rooms (list): Salas de consulta
+    """
     for a in appointments:
         for doc in doctors:
             for d in days:
@@ -303,6 +361,16 @@ def handle_results(X, appointments, doctors, days, hours, rooms):
 
 
 def assign_appointment(appointment_id, doctor_id, day, hour, room_id):
+    """
+    Asigna a la cita programada el médico, la fecha, la hora y la sala de consulta correspondientes.
+
+    Args:
+        appointment_id (str): Id de la cita
+        doctor_id (str): Id del médico
+        day (str): Fecha
+        hour (str): Hora
+        room_id (str): Id de la sala de consulta
+    """
     request_appointment = Appointment.objects.get(id=appointment_id)
     assigned_doctor = Doctor.objects.get(id=doctor_id)
     assigned_room = Room.objects.get(id=room_id)
@@ -321,6 +389,18 @@ def assign_appointment(appointment_id, doctor_id, day, hour, room_id):
 
 
 def print_results_to_txt(prob, X, appointments, doctors, days, hours, rooms):
+    """
+    Imprime los resultados de la programación lineal entera mixta en un archivo de texto.
+
+    Args:
+        prob: Problema de programación lineal entera mixta
+        X: Variables de decisión
+        appointments (list): Citas que se van a programar
+        doctors (list): Médicos
+        days (list): Días pertenecientes al rango de fechas
+        hours (list): Rango de horas en el que se puede agendar una cita
+        rooms (list): Salas de consulta
+    """
     # Crear un DataFrame para almacenar los resultados
     resultados = []
 
@@ -355,31 +435,131 @@ def print_results_to_txt(prob, X, appointments, doctors, days, hours, rooms):
 
 
 def get_doctors_by_specialty(specialty):
-    return Doctor.objects.filter(state=True, medical_specialties=specialty)
+    """
+    Obtiene los médicos que tienen una especialidad específica y que están disponibles.
+
+    Args:
+        specialty (MedicalSpecialty): Especialidad médica
+
+    Raises:
+        SchedulingError: No hay médicos disponibles para la especialidad seleccionada
+
+    Returns:
+        QuerySet: Médicos que tienen la especialidad seleccionada y que están disponibles
+    """
+    try:
+        doctors = Doctor.objects.filter(state=True, medical_specialties=specialty)
+
+        if not doctors.exists():
+            raise SchedulingError(
+                f"No hay médicos disponibles para la especialidad seleccionada {specialty.name}"
+            )
+
+        return doctors
+
+    except Exception as e:
+        raise SchedulingError(
+            f"No hay médicos disponibles para la especialidad seleccionada {specialty.name}",
+            e,
+        ) from e
 
 
 def get_doctors_with_schedules_in_range(doctors, start_date, end_date):
-    return doctors.annotate(
-        num_schedules=Count(
-            "schedule",
-            filter=Q(
-                schedule__start_time__range=[start_date, end_date + timedelta(days=1)]
-            ),
-        )
-    ).filter(num_schedules__gt=0)
+    """
+    Obtiene los médicos que tienen horarios en un rango de fechas específico.
+
+    Args:
+        doctors (QuerySet): Médicos
+        start_date (datetime): Fecha de inicio
+        end_date (datetime): Fecha de fin
+
+    Raises:
+        SchedulingError: No hay médicos disponibles
+
+    Returns:
+        QuerySet: Médicos que tienen horarios en el rango de fechas especificado
+    """
+    try:
+        doctors = doctors.annotate(
+            num_schedules=Count(
+                "schedule",
+                filter=Q(
+                    schedule__start_time__range=[
+                        start_date,
+                        end_date + timedelta(days=1),
+                    ]
+                ),
+            )
+        ).filter(num_schedules__gt=0)
+
+        if not doctors.exists():
+            raise SchedulingError("No hay médicos disponibles")
+
+        return doctors
+
+    except Exception as e:
+        raise SchedulingError("No hay médicos disponibles", e) from e
 
 
 def get_ids(objects):
+    """
+    Obtiene los ids de los objetos.
+
+    Args:
+        objects (QuerySet): Objetos
+
+    Returns:
+        list: Lista de ids de los objetos
+    """
     return [str(obj_id) for obj_id in objects.values_list("id", flat=True)]
 
 
 def get_all_doctors_schedules(doctors, start_date, end_date):
-    return Schedule.objects.filter(
-        doctor__in=doctors, start_time__range=[start_date, end_date + timedelta(days=1)]
-    )
+    """
+    Obtiene los horarios de los médicos en un rango de fechas específico.
+
+    Args:
+        doctors (QuerySet): Médicos
+        start_date (datetime): Fecha de inicio
+        end_date (datetime): Fecha de fin
+
+    Raises:
+        SchedulingError: No hay horarios disponibles para los médicos seleccionados
+
+    Returns:
+        QuerySet: Horarios de los médicos en el rango de fechas especificado
+    """
+    try:
+        schedules = Schedule.objects.filter(
+            doctor__in=doctors,
+            start_time__range=[start_date, end_date + timedelta(days=1)],
+        )
+
+        if not schedules.exists():
+            raise SchedulingError(
+                "No hay horarios disponibles para los médicos seleccionados"
+            )
+
+        return schedules
+
+    except Exception as e:
+        raise SchedulingError(
+            "No hay horarios disponibles para los médicos seleccionados", e
+        ) from e
 
 
 def assign_schedules_to_doctors(dates, doctors, schedules):
+    """
+    Asigna los horarios de los médicos a un diccionario.
+
+    Args:
+        dates (list): Fechas
+        doctors (QuerySet): Médicos
+        schedules (QuerySet): Horarios
+
+    Returns:
+        dict: Horarios de los médicos en un diccionario
+    """
     # Creamos un diccionario con listas vacías para cada médico y fecha dentro del rango
     schedules_dict = defaultdict(lambda: defaultdict(list))
     for doctor in doctors:
@@ -397,30 +577,118 @@ def assign_schedules_to_doctors(dates, doctors, schedules):
 
 
 def get_department_by_specialty(specialty):
-    return Department.objects.get(medicalspecialty=specialty)
+    """
+    Obtiene el departamento que tiene una especialidad médica específica.
+
+    Args:
+        specialty (MedicalSpecialty): Especialidad médica
+
+    Raises:
+        SchedulingError: No se encontró el departamento para la especialidad seleccionada
+
+    Returns:
+        Department: Departamento que tiene la especialidad seleccionada
+    """
+    try:
+        department = Department.objects.get(medicalspecialty=specialty)
+
+        return department
+
+    except Department.DoesNotExist:
+        raise SchedulingError(
+            f"No se encontró el departamento para la especialidad seleccionada {specialty.name}",
+        )
+
+    except Exception as e:
+        raise SchedulingError(
+            f"No se encontró el departamento para la especialidad seleccionada {specialty.name}",
+            e,
+        ) from e
 
 
 def get_rooms_by_department(department):
-    return Room.objects.filter(department=department)
+    """
+    Obtiene las salas de consulta que pertenecen a un departamento específico.
+
+    Args:
+        department (Department): Departamento
+
+    Raises:
+        SchedulingError: No hay salas de consulta disponibles para el departamento seleccionado
+
+    Returns:
+        QuerySet: Salas de consulta que pertenecen al departamento seleccionado
+    """
+    try:
+        rooms = Room.objects.filter(department=department)
+
+        if not rooms.exists():
+            raise SchedulingError(
+                f"No hay salas de consulta disponibles para el departamento {department.name}"
+            )
+
+        return rooms
+
+    except Exception as e:
+        raise SchedulingError(
+            f"No hay salas de consulta disponibles para el departamento {department.name}",
+            e,
+        ) from e
 
 
 def get_appointments_by_doctors_in_range(doctors, start_date, end_date):
-    return Appointment.objects.filter(
-        doctor__in=doctors,
-        schedule__start_time__range=[start_date, end_date + timedelta(days=1)],
-    )
+    """
+    Obtiene las citas programadas para los médicos en un rango de fechas específico.
+
+    Args:
+        doctors (QuerySet): Médicos
+        start_date (datetime): Fecha de inicio
+        end_date (datetime): Fecha de fin
+
+    Raises:
+        SchedulingError: Error al obtener las citas programadas
+
+    Returns:
+        QuerySet: Citas programadas para los médicos en el rango de fechas especificado
+    """
+    try:
+        appointments = Appointment.objects.filter(
+            doctor__in=doctors,
+            schedule__start_time__range=[start_date, end_date + timedelta(days=1)],
+        )
+
+        return appointments
+
+    except Exception as e:
+        raise SchedulingError("Error al obtener las citas programadas", e) from e
 
 
 def format_appointments(appointments):
-    scheduled_appointments = []
-    for appointment in appointments:
-        appointment_info = (
-            str(appointment.id),
-            str(appointment.doctor.id),
-            appointment.schedule.start_time.strftime("%Y-%m-%d"),
-            appointment.schedule.start_time.strftime("%H:%M"),
-            str(appointment.room.id),
-        )
-        scheduled_appointments.append(appointment_info)
+    """
+    Formatea las citas programadas.
 
-    return scheduled_appointments
+    Args:
+        appointments (QuerySet): Citas programadas
+
+    Raises:
+        SchedulingError: Error al formatear las citas programadas
+
+    Returns:
+        list: Citas programadas formateadas
+    """
+    try:
+        scheduled_appointments = []
+        for appointment in appointments:
+            appointment_info = (
+                str(appointment.id),
+                str(appointment.doctor.id),
+                appointment.schedule.start_time.strftime("%Y-%m-%d"),
+                appointment.schedule.start_time.strftime("%H:%M"),
+                str(appointment.room.id),
+            )
+            scheduled_appointments.append(appointment_info)
+
+        return scheduled_appointments
+
+    except Exception as e:
+        raise SchedulingError("Error al formatear las citas programadas", e) from e

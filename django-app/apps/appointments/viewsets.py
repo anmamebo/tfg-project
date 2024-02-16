@@ -129,7 +129,14 @@ class AppointmentViewSet(
             appointment = serializer.save()
 
             # TODO: Implemntar lógica de generar cita
-            is_assigned = solve_milp(appointment, hours_preference)
+            try:
+                is_assigned = solve_milp(appointment, hours_preference)
+            except Exception as e:
+                print(e)
+                return self.error_response(
+                    message="No se pudo asignar la cita, inténtalo más tarde.",
+                    status_code=status.HTTP_400_BAD_REQUEST,
+                )
 
             if not is_assigned:
                 appointment.delete()
