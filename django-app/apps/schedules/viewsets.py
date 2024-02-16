@@ -1,6 +1,7 @@
+from apps.doctors.models import Doctor
 from apps.schedules.models import Schedule
-from apps.schedules.serializers import ScheduleSerializer
-from config.permissions import IsDoctor
+from apps.schedules.serializers import CreateScheduleSerializer, ScheduleSerializer
+from config.permissions import IsAdministrator, IsAdministratorOrDoctor, IsDoctor
 from django.shortcuts import get_object_or_404
 from mixins.error_mixin import ErrorResponseMixin
 from rest_framework import status, viewsets
@@ -35,7 +36,35 @@ class ScheduleViewSet(viewsets.GenericViewSet, ErrorResponseMixin):
             self.queryset = self.model.objects.filter(state=True).all()
         return self.queryset
 
-    @method_permission_classes([IsDoctor])
+    @method_permission_classes([IsAdministrator])
+    def create(self, request):
+        """
+        Crea un nuevo horario.
+
+        Permisos requeridos:
+            - El usuario debe ser administrador.
+
+        Args:
+            request (Request): La solicitud HTTP.
+
+        Returns:
+            Response: La respuesta que indica si el horario fue creado o no.
+        """
+        serializer = CreateScheduleSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(
+                {"message": "Turno añadido correctamente."},
+                status=status.HTTP_201_CREATED,
+            )
+
+        return self.error_response(
+            message="No se pudo añadir el turno.",
+            errors=serializer.errors,
+            status_code=status.HTTP_400_BAD_REQUEST,
+        )
+
+    @method_permission_classes([IsAdministratorOrDoctor])
     @action(detail=False, methods=["get"], url_path="doctor")
     def get_by_doctor(self, request):
         """
@@ -50,13 +79,8 @@ class ScheduleViewSet(viewsets.GenericViewSet, ErrorResponseMixin):
         Returns:
             Response: La respuesta que contiene los horarios del médico.
         """
-        doctor = getattr(request.user, "doctor", None)
-
-        if doctor is None:
-            return self.error_response(
-                message="El médico no ha sido encontrado",
-                status_code=status.HTTP_400_BAD_REQUEST,
-            )
+        doctor_id = request.GET.get("doctor_id", None)
+        doctor = get_object_or_404(Doctor, pk=doctor_id)
 
         schedules = self.get_queryset().filter(doctor=doctor).order_by("start_time")
         serializer = self.get_serializer(schedules, many=True)

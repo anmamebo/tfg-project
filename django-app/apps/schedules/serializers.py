@@ -39,3 +39,21 @@ class ScheduleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Schedule
         exclude = ["state", "created_date", "modified_date", "deleted_date"]
+
+
+class CreateScheduleSerializer(serializers.ModelSerializer):
+    """
+    Serializador para representar los datos de un horario.
+
+    Este serializador maneja la representación de los datos de un horario,
+
+    Args:
+        validated_data (dict): Datos validados para la representación del horario.
+
+    Returns:
+        dict: Diccionario con los datos del horario.
+    """
+
+    class Meta:
+        model = Schedule
+        exclude = ["state", "created_date", "modified_date", "deleted_date"]
