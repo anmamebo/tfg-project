@@ -27,7 +27,6 @@ import { AppointmentsStatusPieChartComponent } from './components/administrative
 import { AppointmentsTypesStackedColumnChartComponent } from './components/administrative/appointments-types-stacked-column-chart/appointments-types-stacked-column-chart.component';
 import { DoctorsMedicalSpecialtiesDonutChartComponent } from './components/administrative/doctors-medical-specialties-donut-chart/doctors-medical-specialties-donut-chart.component';
 import { MonthlyAppointmentsLineChartComponent } from './components/administrative/monthly-appointments-line-chart/monthly-appointments-line-chart.component';
-import { PatientsTableComponent } from './components/administrative/patients-table/patients-table.component';
 import { StatisticsCardsComponent } from './components/administrative/statistics-cards/statistics-cards.component';
 import { DoctorAppointmentsAgeColumnsChartComponent } from './components/doctor/doctor-appointments-age-columns-chart/doctor-appointments-age-columns-chart.component';
 import { DoctorAppointmentsGenderDonutChartComponent } from './components/doctor/doctor-appointments-gender-donut-chart/doctor-appointments-gender-donut-chart.component';
@@ -50,7 +49,6 @@ import { WelcomeCardComponent } from './components/shared/welcome-card/welcome-c
     AppointmentsTypesStackedColumnChartComponent,
     AppointmentsGenderAreaSplineChartComponent,
     DoctorsMedicalSpecialtiesDonutChartComponent,
-    PatientsTableComponent,
     StatisticsCardsComponent,
     WelcomeCardComponent,
     AverageWaitingTimeCardComponent,
