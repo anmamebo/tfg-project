@@ -90,11 +90,9 @@ export class AppointmentsStatusPieChartComponent implements OnInit {
     this._statisticsService.getAppointmentsPerStatus().subscribe({
       next: (response: AppointmentsPerStatus[]) => {
         this.series = response.map((item: AppointmentsPerStatus) => item.count);
-        this.labels = response
-          .map((item: AppointmentsPerStatus) =>
-            this._getTextByValue(item.status)
-          )
-          .sort();
+        this.labels = response.map((item: AppointmentsPerStatus) =>
+          this._getTextByValue(item.status)
+        );
       },
       error: (error) => {
         console.error(error);
