@@ -4,6 +4,7 @@ import { doctorResolver } from 'src/app/core/resolvers/doctor.resolver';
 import { DoctorsCreatePageComponent } from './pages/doctors-create-page/doctors-create-page.component';
 import { DoctorsEditPageComponent } from './pages/doctors-edit-page/doctors-edit-page.component';
 import { DoctorsPageComponent } from './pages/doctors-page/doctors-page.component';
+import { DoctorsSchedulesPageComponent } from './pages/doctors-schedules-page/doctors-schedules-page.component';
 import { DoctorsViewPageComponent } from './pages/doctors-view-page/doctors-view-page.component';
 
 const routes: Routes = [
@@ -29,6 +30,14 @@ const routes: Routes = [
     path: 'editar/:id',
     component: DoctorsEditPageComponent,
     title: 'Editar médico | HospitalSys',
+    resolve: {
+      data: doctorResolver, // Resolver para obtener los datos del médico
+    },
+  },
+  {
+    path: 'horarios/:id',
+    component: DoctorsSchedulesPageComponent,
+    title: 'Horarios | HospitalSys',
     resolve: {
       data: doctorResolver, // Resolver para obtener los datos del médico
     },

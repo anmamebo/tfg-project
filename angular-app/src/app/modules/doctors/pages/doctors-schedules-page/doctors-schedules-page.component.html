@@ -1,0 +1,84 @@
+<app-generic-page
+  [pageTitle]="pageTitle"
+  [pageDescription]="pageDescription"
+  [breadcrumbData]="breadcrumbData"
+>
+  <div class="page-content">
+    <div class="row text-center">
+      <div class="col-md-4">
+        <div class="btn-group">
+          <div
+            class="btn btn-primary"
+            mwlCalendarPreviousView
+            [view]="view"
+            [(viewDate)]="viewDate"
+            (viewDateChange)="closeOpenMonthViewDay()"
+          >
+            Anterior
+          </div>
+          <div
+            class="btn btn-outline-secondary"
+            mwlCalendarToday
+            [(viewDate)]="viewDate"
+          >
+            Hoy
+          </div>
+          <div
+            class="btn btn-primary"
+            mwlCalendarNextView
+            [view]="view"
+            [(viewDate)]="viewDate"
+            (viewDateChange)="closeOpenMonthViewDay()"
+          >
+            Siguiente
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <h3>
+          {{
+            viewDate | calendarDate : view + "ViewTitle" : locale : weekStartsOn
+          }}
+        </h3>
+      </div>
+    </div>
+    <br />
+    <div [ngSwitch]="view">
+      <mwl-calendar-week-view
+        *ngSwitchCase="CalendarView.Week"
+        [viewDate]="viewDate"
+        [events]="events"
+        [refresh]="refresh"
+        [dayStartHour]="DAY_START_HOUR"
+        [dayEndHour]="DAY_END_HOUR"
+        [weekStartsOn]="1"
+        [locale]="'es-ES'"
+        (hourSegmentClicked)="clickedDate = $event.date; createSchedule.fire()"
+        (eventTimesChanged)="eventTimesChanged($event)"
+      >
+      </mwl-calendar-week-view>
+    </div>
+  </div>
+</app-generic-page>
+<swal
+  #createSchedule
+  [showCloseButton]="true"
+  [showCancelButton]="false"
+  [swalOptions]="{
+    confirmButtonText: 'Agregar turno',
+    confirmButtonColor: '#435ebe'
+  }"
+  (confirm)="createScheduleEvent()"
+>
+  <div *swalPortal="swalTargets.title">
+    <h4 class="mb-4 text-start text-uppercase">Nuevo turno</h4>
+  </div>
+  <div *swalPortal="swalTargets.content">
+    <div *ngIf="clickedDate">
+      <p class="mb-1">Has seleccionado la fecha:</p>
+      <p class="fw-bold">{{ clickedDate | date : "dd-MM-yyyy" }}</p>
+      <p class="mb-1">Y la hora:</p>
+      <p class="fw-bold">{{ clickedDate | date : "HH:mm" }}</p>
+    </div>
+  </div>
+</swal>

@@ -132,6 +132,13 @@ export const breadcrumbDoctorsViewData = [
   { label: 'Ver médico', url: '' },
 ];
 
+// Médicos horario
+export const breadcrumbDoctorsScheduleData = [
+  { label: 'Panel Principal', url: '/' },
+  { label: 'Médicos', url: '/medicos' },
+  { label: 'Horario', url: '' },
+];
+
 // Departamentos
 export const breadcrumbDepartmentsData = [
   { label: 'Panel Principal', url: '/' },

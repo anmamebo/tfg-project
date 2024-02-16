@@ -2,6 +2,13 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+// Módulos de terceros
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+
+// Calendario
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+
 // Módulos
 import { ElementsPerPageModule } from 'src/app/shared/components/elements-per-page/elements-per-page.module';
 import { FormErrorsModule } from 'src/app/shared/components/form-errors/form-errors.module';
@@ -20,6 +27,7 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { DoctorsCreatePageComponent } from './pages/doctors-create-page/doctors-create-page.component';
 import { DoctorsEditPageComponent } from './pages/doctors-edit-page/doctors-edit-page.component';
 import { DoctorsPageComponent } from './pages/doctors-page/doctors-page.component';
+import { DoctorsSchedulesPageComponent } from './pages/doctors-schedules-page/doctors-schedules-page.component';
 import { DoctorsViewPageComponent } from './pages/doctors-view-page/doctors-view-page.component';
 
 // Componentes tarjetas
@@ -42,6 +50,7 @@ import { ViewContactInfoDoctorsCardComponent } from './components/view-contact-i
     DoctorsCreatePageComponent,
     CreateDoctorsCardComponent,
     ButtonsDoctorsCardComponent,
+    DoctorsSchedulesPageComponent,
   ],
   imports: [
     CommonModule,
@@ -57,6 +66,11 @@ import { ViewContactInfoDoctorsCardComponent } from './components/view-contact-i
     FormErrorsModule,
     NgMultiSelectDropDownModule.forRoot(),
     GenericListCardModule,
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory,
+    }),
+    SweetAlert2Module.forRoot(),
   ],
 })
 export class DoctorsModule {}
