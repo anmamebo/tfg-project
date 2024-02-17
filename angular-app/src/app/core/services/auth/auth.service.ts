@@ -6,6 +6,7 @@ import { API_URL } from 'src/app/core/constants/API-URL.constants';
 import { AuthResponse } from 'src/app/core/models/response/auth-response.interface';
 import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
 import { TokenStorageService } from 'src/app/core/services/auth/token-storage.service';
+import { HttpCommonService } from 'src/app/core/services/http-common/http-common.service';
 
 // Configuración de encabezados HTTP
 const httpOptions = {
@@ -24,7 +25,8 @@ export class AuthService {
 
   constructor(
     private _http: HttpClient,
-    private _tokenStorageService: TokenStorageService
+    private _tokenStorageService: TokenStorageService,
+    private _httpCommonService: HttpCommonService
   ) {
     this.url = API_URL;
   }
@@ -63,13 +65,10 @@ export class AuthService {
    * @returns {Observable<MessageResponse>} Un observable que emite la respuesta del servidor.
    */
   public logOut(): Observable<MessageResponse> {
+    const headers = this._httpCommonService.getCommonHeaders();
+    const httpOptions = { headers };
     let user = this._tokenStorageService.signOut();
     let user_id = { user: user.id };
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + user.token,
-    });
-    const httpOptions = { headers };
 
     return this._http.post<MessageResponse>(
       `${this.url}logout/`,
