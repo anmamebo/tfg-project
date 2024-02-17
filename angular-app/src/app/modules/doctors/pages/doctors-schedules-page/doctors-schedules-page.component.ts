@@ -42,7 +42,7 @@ export class DoctorsSchedulesPageComponent
 
   /** Descripción de la página. */
   public pageDescription: string =
-    'Aquí puedes consultar los horarios de los médicos.';
+    'Pulsa sobre un día para añadir un nuevo horario al médico seleccionado.';
 
   /** Datos del breadcrumb. */
   public breadcrumbData = breadcrumbDoctorsScheduleData;
