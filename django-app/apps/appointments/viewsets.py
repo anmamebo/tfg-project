@@ -25,6 +25,8 @@ from mixins.pagination_mixin import PaginationMixin
 from rest_framework import status, viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
+from utilities.email_utils import send_appointment_assigned_email
+from utilities.milp_solver import solve_milp
 from utilities.permissions_helper import method_permission_classes
 
 
@@ -102,7 +104,6 @@ class AppointmentViewSet(
             appointments, self.list_serializer_class
         )
 
-    # TODO: Implementar también para el médico
     @method_permission_classes([IsPatient])
     def create(self, request):
         """
@@ -127,12 +128,44 @@ class AppointmentViewSet(
         if serializer.is_valid():
             appointment = serializer.save()
 
-            # TODO: Implemntar lógica de generar cita
+            try:
+                is_assigned = solve_milp(appointment, hours_preference)
+            except Exception as e:
+                print(e)
+                appointment.delete()
+                return self.error_response(
+                    message="No se pudo asignar la cita, inténtalo más tarde.",
+                    status_code=status.HTTP_400_BAD_REQUEST,
+                )
 
-            # TODO: Implemntar lógica de enviar correo
+            if not is_assigned:
+                appointment.delete()
+                return self.error_response(
+                    message="No se pudo asignar la cita, inténtalo más tarde.",
+                    status_code=status.HTTP_400_BAD_REQUEST,
+                )
+
+            appointment = Appointment.objects.get(pk=appointment.id)
+
+            # Envía el correo electrónico al paciente
+            try:
+                if not send_appointment_assigned_email(appointment):
+                    return self.error_response(
+                        message="No se pudo enviar el correo electrónico, consulte su apartado de citas.",
+                        status_code=status.HTTP_400_BAD_REQUEST,
+                    )
+            except Exception as e:
+                print(e)
+                return self.error_response(
+                    message="No se pudo enviar el correo electrónico, consulte su apartado de citas.",
+                    status_code=status.HTTP_400_BAD_REQUEST,
+                )
 
             return Response(
-                {"message": "La cita ha sido creada."}, status=status.HTTP_201_CREATED
+                {
+                    "message": "La cita ha sido asignada, consulte su correo electrónico o su apartado de citas."
+                },
+                status=status.HTTP_201_CREATED,
             )
 
         return self.error_response(
