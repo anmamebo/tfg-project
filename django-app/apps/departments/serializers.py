@@ -61,4 +61,4 @@ class DepartmentWithDoctorsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Department
-        exclude = ["state", "created_date", "modified_date", "deleted_date"]
+        exclude = ["created_date", "modified_date", "deleted_date"]
