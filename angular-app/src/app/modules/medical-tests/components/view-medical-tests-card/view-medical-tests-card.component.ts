@@ -18,8 +18,19 @@ export class ViewMedicalTestsCardComponent implements OnInit {
   /** Título de la tarjeta */
   public cardTitle: string = 'Prueba médica';
 
+  /** Bandera para mostrar el botón de adjuntos */
+  public showAttachmentsButton: boolean = false;
+
   ngOnInit(): void {
     this._generateTitle();
+  }
+
+  /**
+   * Cambia el estado de la bandera para mostrar el botón de adjuntos.
+   * @returns {void}
+   */
+  togglesShowAttachmentsButton(): void {
+    this.showAttachmentsButton = !this.showAttachmentsButton;
   }
 
   /**

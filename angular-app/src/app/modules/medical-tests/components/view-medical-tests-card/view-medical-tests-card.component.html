@@ -130,14 +130,23 @@
         class="col-12 mt-3"
       >
         <button
-          class="btn btn-primary collapsed"
+          class="btn collapsed"
           type="button"
           data-bs-toggle="collapse"
           [attr.data-bs-target]="'#collapseAttachments' + medicalTest.id"
           aria-expanded="false"
           aria-controls="collapseExample"
+          (click)="togglesShowAttachmentsButton()"
+          [ngClass]="{
+            'btn-outline-primary': showAttachmentsButton,
+            'btn-primary': !showAttachmentsButton
+          }"
         >
-          Mostrar archivos adjuntos
+          {{
+            showAttachmentsButton
+              ? "Ocultar archivos adjuntos"
+              : "Mostrar archivos adjuntos"
+          }}
         </button>
         <div
           class="collapse"
