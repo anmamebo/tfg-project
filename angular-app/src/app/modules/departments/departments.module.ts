@@ -11,6 +11,7 @@ import { GenericPageModule } from 'src/app/shared/components/generic-page/generi
 import { GenericTableModule } from 'src/app/shared/components/generic-table/generic-table.module';
 import { PaginationModule } from 'src/app/shared/components/pagination/pagination.module';
 import { SearchModule } from 'src/app/shared/components/search/search.module';
+import { SharedModule } from 'src/app/shared/shared.module';
 import { DepartmentsRoutingModule } from './departments-routing.module';
 
 // Componentes páginas
@@ -20,6 +21,7 @@ import { DepartmentsPageComponent } from './pages/departments-page/departments-p
 import { DepartmentsViewPageComponent } from './pages/departments-view-page/departments-view-page.component';
 
 // Componentes tarjetas
+import { ButtonsDepartmentsCardComponent } from './components/buttons-departments-card/buttons-departments-card.component';
 import { CreateDepartmentsCardComponent } from './components/create-departments-card/create-departments-card.component';
 import { EditInfoDepartmentsCardComponent } from './components/edit-info-departments-card/edit-info-departments-card.component';
 import { ViewDoctorsDepartmentsCardComponent } from './components/view-doctors-departments-card/view-doctors-departments-card.component';
@@ -39,6 +41,7 @@ import { ViewSpecialtiesDepartmentsCardComponent } from './components/view-speci
     DepartmentsCreatePageComponent,
     CreateDepartmentsCardComponent,
     ViewSpecialtiesDepartmentsCardComponent,
+    ButtonsDepartmentsCardComponent,
   ],
   imports: [
     CommonModule,
@@ -52,6 +55,7 @@ import { ViewSpecialtiesDepartmentsCardComponent } from './components/view-speci
     PaginationModule,
     GenericListCardModule,
     FormErrorsModule,
+    SharedModule,
   ],
 })
 export class DepartmentsModule {}

@@ -5,6 +5,15 @@
 >
   <div class="page-content">
     <ng-container *ngIf="department">
+      <section *appHasRole="buttonsRoles" class="section">
+        <app-buttons-departments-card
+          *ngIf="department.id && department.state !== undefined"
+          [departmentId]="department.id"
+          [isActive]="department.state"
+          (refreshDepartment)="onRefreshDepartment()"
+        ></app-buttons-departments-card>
+      </section>
+
       <section class="section">
         <div class="row">
           <div class="col-12">

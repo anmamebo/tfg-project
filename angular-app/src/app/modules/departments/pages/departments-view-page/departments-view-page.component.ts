@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { breadcrumbDepartmentsViewData } from 'src/app/core/constants/breadcrumb-data.constants';
+import { ROLES } from 'src/app/core/constants/roles.constants';
 import { Department } from 'src/app/core/models/department.interface';
 import { DepartmentService } from 'src/app/core/services/entities/department.service';
 
@@ -21,6 +22,9 @@ export class DepartmentsViewPageComponent implements OnInit {
 
   /** Datos para el breadcrumb */
   public breadcrumbData = breadcrumbDepartmentsViewData;
+
+  /** Roles que pueden visualizar los botones de acciones */
+  public buttonsRoles: string[] = [ROLES.ADMIN];
 
   /** Departamento que se visualizará */
   public department: Department | null = null;
