@@ -7,10 +7,15 @@ import {
   ElementRef,
   ViewChild,
 } from '@angular/core';
-import { CalendarEvent, CalendarView } from 'angular-calendar';
+import {
+  CalendarDateFormatter,
+  CalendarEvent,
+  CalendarView,
+} from 'angular-calendar';
 import { differenceInMinutes, startOfDay, startOfHour } from 'date-fns';
 import { Appointment } from 'src/app/core/models/appointment.interface';
 import { ListResponse } from 'src/app/core/models/response/list-response.interface';
+import { CustomDateFormatter } from 'src/app/core/providers/custom-date-formatter.provider';
 import { AppointmentService } from 'src/app/core/services/entities/appointment.service';
 
 /**
@@ -28,7 +33,11 @@ import { AppointmentService } from 'src/app/core/services/entities/appointment.s
       }
     `,
   ],
-  providers: [AppointmentService, DatePipe],
+  providers: [
+    AppointmentService,
+    DatePipe,
+    { provide: CalendarDateFormatter, useClass: CustomDateFormatter },
+  ],
 })
 export class PatientTodayAppointmentsCalendarComponent
   implements AfterViewInit
