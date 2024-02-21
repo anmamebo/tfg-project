@@ -15,5 +15,11 @@ RUN pip install -r requirements.txt
 # Expose the default Django development port
 EXPOSE 8000
 
-# Start the Django development server
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+# Copy entrypoint script into the container
+COPY entrypoint.sh /app/entrypoint.sh
+
+# Grant execution permissions to the entrypoint script
+RUN chmod +x /app/entrypoint.sh
+
+# Specify the command to run on container startup
+CMD ["/app/entrypoint.sh"]
