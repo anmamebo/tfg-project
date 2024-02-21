@@ -30,7 +30,7 @@ media/
 migrations/
 
 # Archivos de configuración local (pueden variar según tu configuración)
-local_settings.py
+# local_settings.py
 
 # Archivos de registro de dependencias de pip (pipenv, poetry, etc.)
 pip-lock.txt
