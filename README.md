@@ -1,10 +1,8 @@
 [![Python: Black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![Python](https://img.shields.io/badge/Python-3.11.1-blue.svg)](https://www.python.org/downloads/release/python-3111/)
 [![Django REST Framework](https://img.shields.io/badge/Django_REST_Framework-ff1709?style=flat&logo=django&logoColor=white&color=ff1709&labelColor=gray)](https://www.django-rest-framework.org/)
-
 [![Prettier](https://img.shields.io/badge/Prettier-%23F7B93E.svg?style=flat&logo=prettier&logoColor=white)](https://prettier.io/)
 [![Angular](https://img.shields.io/badge/Angular-%23DD0031.svg?style=flat&logo=angular&logoColor=white)](https://angular.io/)
-
 [![MySQL](https://img.shields.io/badge/MySQL-%2300f.svg?style=flat&logo=mysql&logoColor=white)](https://www.mysql.com/)
 
 
