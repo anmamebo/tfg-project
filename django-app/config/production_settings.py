@@ -104,7 +104,10 @@ MIDDLEWARE = [
 
 # Configuración de CORS
 CORS_ORIGIN_ALLOW_ALL = False
-CORS_ORIGIN_WHITELIST = ("http://localhost:4200",)
+CORS_ORIGIN_WHITELIST = (
+    "http://localhost:4200",
+    "https://tfg-project-jnub-git-feature-probar-d-c2a27d-anmamebos-projects.vercel.app/",
+)
 CORS_EXPOSE_HEADERS = ["Content-Disposition"]
 
 # Configuración de plantillas
