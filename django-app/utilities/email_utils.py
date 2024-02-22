@@ -59,6 +59,28 @@ def send_welcome_email(user, password):
     )
 
 
+def send_welcome_signup_email(user):
+    """
+    Envía un correo electrónico de bienvenida al usuario que se ha registrado con su nombre de usuario.
+
+    Args:
+        user (User): Usuario al que se le enviará el correo electrónico.
+
+    Returns:
+        bool: True si el correo electrónico se envió correctamente, False en caso contrario.
+    """
+    return send_email(
+        "Bienvenido/a a la aplicación de citas médicas HospitalSys",
+        "welcome_email_signup_template",
+        [user.email],
+        {
+            "name": user.name,
+            "last_name": user.last_name,
+            "username": user.username,
+        },
+    )
+
+
 def send_reset_password_email(user, url):
     """
     Envía un correo electrónico al usuario con el enlace para restablecer su contraseña.
@@ -101,12 +123,13 @@ def send_success_password_reset_email(user):
     )
 
 
-def send_appointment_assigned_email(appointment):
+def send_appointment_assigned_email(appointment, url):
     """
     Envía un correo electrónico al paciente para notificarle que se le ha asignado una cita médica.
 
     Args:
         appointment (Appointment): Cita médica que se le ha asignado al paciente.
+        url (str): URL para crear un evento en Google Calendar con la información de la cita médica.
 
     Returns:
         bool: True si el correo electrónico se envió correctamente, False en caso contrario.
@@ -116,6 +139,7 @@ def send_appointment_assigned_email(appointment):
         "appointment_assigned_email_template",
         [appointment.patient.user.email],
         {
+            "url": url,
             "name": appointment.patient.user.name,
             "request_date": appointment.request_date.strftime("%d/%m/%Y %H:%M"),
             "doctor_name": f"{appointment.doctor.user.name} {appointment.doctor.user.last_name}",

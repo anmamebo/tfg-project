@@ -4,7 +4,7 @@ body {
   background-color: var(--bs-body-bg);
 }
 
-#forgot-password {
+#auth {
   height: 100vh;
   overflow-x: hidden;
 
@@ -28,7 +28,7 @@ body {
     }
 
     .auth-logo {
-      margin-bottom: 7rem;
+      margin-bottom: 4rem;
 
       img {
         height: 5rem;

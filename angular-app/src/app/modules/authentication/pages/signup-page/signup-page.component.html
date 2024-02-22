@@ -1,0 +1,226 @@
+<div id="auth">
+  <div class="row h-100">
+    <div class="col-lg-5 col-12">
+      <div id="auth-left">
+        <div class="auth-logo">
+          <img [src]="'/assets/images/logo/logo-long.png'" alt="Logo" />
+        </div>
+
+        <h1 class="auth-title">Registro</h1>
+        <p class="auth-subtitle mb-5">
+          Introduce tus datos para registrarte en el sistema.
+        </p>
+
+        <form (ngSubmit)="onSubmit()" [formGroup]="signupForm">
+          <!-- Nombre -->
+          <div class="form-group position-relative has-icon-left mb-4">
+            <input
+              type="text"
+              formControlName="name"
+              class="form-control form-control-xl"
+              placeholder="Nombre"
+              [ngClass]="{
+                'is-invalid': submitted && form.get('name')?.errors
+              }"
+            />
+            <div class="form-control-icon">
+              <i class="bi bi-person"></i>
+            </div>
+
+            <app-form-errors
+              [control]="form.get('name')"
+              [submitted]="submitted"
+            ></app-form-errors>
+          </div>
+
+          <!-- Apellidos -->
+          <div class="form-group position-relative has-icon-left mb-4">
+            <input
+              type="text"
+              formControlName="last_name"
+              class="form-control form-control-xl"
+              placeholder="Apellidos"
+              [ngClass]="{
+                'is-invalid': submitted && form.get('last_name')?.errors
+              }"
+            />
+            <div class="form-control-icon">
+              <i class="bi bi-person"></i>
+            </div>
+
+            <app-form-errors
+              [control]="form.get('last_name')"
+              [submitted]="submitted"
+            ></app-form-errors>
+          </div>
+
+          <!-- Correo electrónico -->
+          <div class="form-group position-relative has-icon-left mb-4">
+            <input
+              type="text"
+              formControlName="email"
+              class="form-control form-control-xl"
+              placeholder="Correo electrónico"
+              [ngClass]="{
+                'is-invalid': submitted && form.get('email')?.errors
+              }"
+            />
+            <div class="form-control-icon">
+              <i class="bi bi-envelope"></i>
+            </div>
+
+            <app-form-errors
+              [control]="form.get('email')"
+              [submitted]="submitted"
+            ></app-form-errors>
+          </div>
+
+          <!-- Contraseña -->
+          <div
+            class="password-form-group form-group position-relative has-icon-left mb-4"
+          >
+            <input
+              [type]="showPassword ? 'text' : 'password'"
+              formControlName="password"
+              class="form-control form-control-xl"
+              placeholder="Contraseña"
+              [ngClass]="{
+                'is-invalid': submitted && form.get('password')?.errors
+              }"
+            />
+            <div class="form-control-icon">
+              <i class="bi bi-shield-lock"></i>
+            </div>
+            <div class="form-control-icon form-control-icon-right">
+              <a href="javascript:void(0);">
+                <i
+                  class="bi"
+                  [ngClass]="{
+                    'bi-eye': !showPassword,
+                    'bi-eye-slash': showPassword
+                  }"
+                  (click)="showPassword = !showPassword"
+                ></i>
+              </a>
+            </div>
+
+            <app-form-errors
+              [control]="form.get('password')"
+              [submitted]="submitted"
+            ></app-form-errors>
+          </div>
+
+          <!-- Dni -->
+          <div class="form-group position-relative has-icon-left mb-4">
+            <input
+              type="text"
+              formControlName="dni"
+              class="form-control form-control-xl"
+              placeholder="DNI"
+              [ngClass]="{
+                'is-invalid': submitted && form.get('dni')?.errors
+              }"
+            />
+            <div class="form-control-icon">
+              <i class="bi bi-person-vcard"></i>
+            </div>
+
+            <app-form-errors
+              [control]="form.get('dni')"
+              [submitted]="submitted"
+            ></app-form-errors>
+          </div>
+
+          <!-- Fecha nacimiento -->
+          <div class="form-group position-relative has-icon-left mb-4">
+            <input
+              type="text"
+              formControlName="birthdate"
+              class="form-control form-control-xl"
+              placeholder="Fecha de nacimiento"
+              [ngClass]="{
+                'is-invalid': submitted && form.get('birthdate')?.errors
+              }"
+              mwlFlatpickr
+              [convertModelValue]="true"
+              [locale]="locale"
+              [maxDate]="'today'"
+              [allowInput]="true"
+              [dateFormat]="'d-m-Y'"
+              [monthSelectorType]="'dropdown'"
+            />
+            <div class="form-control-icon">
+              <i class="bi bi-calendar2-week"></i>
+            </div>
+
+            <app-form-errors
+              [control]="form.get('username')"
+              [submitted]="submitted"
+            ></app-form-errors>
+          </div>
+
+          <!-- Género -->
+          <div class="form-group position-relative has-icon-left mb-4">
+            <select
+              class="form-control form-control-xl form-select"
+              formControlName="gender"
+              [ngClass]="{
+                'is-invalid': submitted && form.get('gender')?.errors
+              }"
+            >
+              <option value="" disabled selected>Género</option>
+              <option
+                *ngFor="let option of gender_options"
+                [value]="option.value"
+              >
+                {{ option.text }}
+              </option>
+            </select>
+            <div class="form-control-icon">
+              <i class="bi bi-patch-question"></i>
+            </div>
+
+            <app-form-errors
+              [control]="form.get('gender')"
+              [submitted]="submitted"
+            ></app-form-errors>
+          </div>
+
+          <!-- Mensajes -->
+          <div
+            *ngIf="message != ''"
+            class="alert"
+            [ngClass]="{
+              'alert-light-danger color-danger': !success,
+              'alert-light-success color-success': success
+            }"
+          >
+            <i class="bi bi-exclamation-circle"></i>
+            {{ message }}
+          </div>
+
+          <button
+            class="btn btn-primary btn-block btn-lg shadow-lg mt-md-5 mt-1"
+          >
+            Registrar
+          </button>
+        </form>
+
+        <div class="text-center mt-4 text-lg fs-5">
+          <p class="text-gray-600">
+            ¿Tienes cuenta?
+            <a
+              class="d-md-inline d-block"
+              [routerLink]="['/auth/login']"
+              style="font-weight: 700"
+              >Inicia sesión</a
+            >
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-7 d-none d-lg-block">
+      <div id="auth-right"></div>
+    </div>
+  </div>
+</div>

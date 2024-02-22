@@ -1,5 +1,6 @@
 from datetime import datetime
 
+from apps.patients.serializers import CreatePatientSerializer
 from apps.users.models import User
 from apps.users.serializers import (
     CustomTokenObtainPairSerializer,
@@ -18,6 +19,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 from utilities.email_utils import (
     send_reset_password_email,
     send_success_password_reset_email,
+    send_welcome_signup_email,
 )
 
 
@@ -72,6 +74,55 @@ class Login(TokenObtainPairView, ErrorResponseMixin):
 
         return self.error_response(
             message="Contraseña o nombre de usuario incorrectos",
+            status_code=status.HTTP_400_BAD_REQUEST,
+        )
+
+
+class Signup(GenericAPIView, ErrorResponseMixin):
+    """
+    Vista para registrar un nuevo usuario.
+
+    Esta vista permite a los usuarios registrarse en la aplicación.
+
+    Attributes:
+        No se requieren atributos específicos para esta vista.
+    """
+
+    serializer_class = CreatePatientSerializer
+    permission_classes = [AllowAny]
+
+    def post(self, request, *args, **kwargs):
+        if "user" not in request.data or "dni" not in request.data:
+            return self.error_response(
+                message="Datos incompletos", status_code=status.HTTP_400_BAD_REQUEST
+            )
+
+        request.data["user"]["username"] = request.data["dni"]
+        request.data["user"]["is_active"] = False
+        request.data["state"] = False
+
+        serializer = self.serializer_class(data=request.data)
+        if serializer.is_valid():
+            patient = serializer.save()
+
+            if not send_welcome_signup_email(patient.user):
+                return Response(
+                    {
+                        "message": "Usuario creado, pero no se pudo enviar el correo electrónico"
+                    },
+                    status=status.HTTP_201_CREATED,
+                )
+
+            return Response(
+                {
+                    "message": "Usuario creado, recibirá un correo cuando su cuenta sea activada"
+                },
+                status=status.HTTP_201_CREATED,
+            )
+
+        return self.error_response(
+            message="Error al crear el usuario",
+            errors=serializer.errors,
             status_code=status.HTTP_400_BAD_REQUEST,
         )
 
