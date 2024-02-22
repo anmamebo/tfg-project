@@ -655,6 +655,7 @@ def get_appointments_by_doctors_in_range(doctors, start_date, end_date):
         appointments = Appointment.objects.filter(
             doctor__in=doctors,
             schedule__start_time__range=[start_date, end_date + timedelta(days=1)],
+            status__in=["scheduled", "rescheduled", "in_progress"],
         )
 
         return appointments
