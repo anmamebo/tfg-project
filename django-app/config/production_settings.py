@@ -27,6 +27,7 @@ DEBUG = True
 # Lista de hosts permitidos en producción (debería especificarse en producción)
 ALLOWED_HOSTS = ["*"]
 
+# Origenes de confianza para CSRF
 CSRF_TRUSTED_ORIGINS = ["https://*.up.railway.app", "https://*.vercel.app"]
 
 # Aplicaciones instaladas en el proyecto
@@ -137,39 +138,15 @@ WSGI_APPLICATION = "config.wsgi.application"
 
 # Configuración de la base de datos
 
-# Configuración para trabajar con Docker
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'hospital_db',
-#         'USER': 'user',
-#         'PASSWORD': 'password',
-#         'HOST': 'mysql',
-#         'PORT': 3306
-#     }
-# }
-
-# Configuración para trabajar en entorno local
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.mysql",
-#         "NAME": "hospital_db",
-#         "USER": "root",
-#         "PASSWORD": "",
-#         "HOST": "localhost",
-#         "PORT": 3306,
-#     }
-# }
-
 # Configuración para trabajar con base de datos en railway
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
-        "NAME": "railway",
-        "USER": "root",
-        "PASSWORD": "d5cGcD6g52DffGAD1Gch6-13hAegH-4c",
-        "HOST": "viaduct.proxy.rlwy.net",
-        "PORT": 20160,
+        "NAME": os.environ["DB_DATABASE"],
+        "USER": os.environ["DB_USER"],
+        "PASSWORD": os.environ["DB_PASSWORD"],
+        "HOST": os.environ["DB_HOST"],
+        "PORT": os.environ["DB_PORT"],
     }
 }
 

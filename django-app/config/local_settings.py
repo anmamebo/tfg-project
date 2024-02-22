@@ -154,18 +154,6 @@ DATABASES = {
     }
 }
 
-# Configuración para trabajar con base de datos en railway
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.mysql",
-#         "NAME": "railway",
-#         "USER": "root",
-#         "PASSWORD": "d5cGcD6g52DffGAD1Gch6-13hAegH-4c",
-#         "HOST": "viaduct.proxy.rlwy.net",
-#         "PORT": 20160,
-#     }
-# }
-
 # Configuración de validación de contraseñas
 AUTH_PASSWORD_VALIDATORS = [
     {
