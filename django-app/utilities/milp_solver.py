@@ -11,8 +11,8 @@ from django.db.models import Count, Q
 from pulp import LpMinimize, LpProblem, LpVariable, lpSum, value
 from utilities.exceptions import SchedulingError
 
-START_DATE = "2024-02-12"
-END_DATE = "2024-02-28"
+START_DATE = (datetime.now() + timedelta(days=1)).strftime("%Y-%m-%d")  # Mañana
+END_DATE = (datetime.now() + timedelta(days=30)).strftime("%Y-%m-%d")  # 30 días después
 
 MORNING_START_TIME = 9
 MORNING_END_TIME = 14
