@@ -27,7 +27,7 @@ DEBUG = True
 # Lista de hosts permitidos en producción (debería especificarse en producción)
 ALLOWED_HOSTS = ["*"]
 
-CSRF_TRUSTED_ORIGINS = ["https://*.up.railway.app"]
+CSRF_TRUSTED_ORIGINS = ["https://*.up.railway.app", "https://*.vercel.app"]
 
 # Aplicaciones instaladas en el proyecto
 
