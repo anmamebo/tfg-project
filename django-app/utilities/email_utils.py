@@ -59,6 +59,28 @@ def send_welcome_email(user, password):
     )
 
 
+def send_welcome_signup_email(user):
+    """
+    Envía un correo electrónico de bienvenida al usuario que se ha registrado con su nombre de usuario.
+
+    Args:
+        user (User): Usuario al que se le enviará el correo electrónico.
+
+    Returns:
+        bool: True si el correo electrónico se envió correctamente, False en caso contrario.
+    """
+    return send_email(
+        "Bienvenido/a a la aplicación de citas médicas HospitalSys",
+        "welcome_email_signup_template",
+        [user.email],
+        {
+            "name": user.name,
+            "last_name": user.last_name,
+            "username": user.username,
+        },
+    )
+
+
 def send_reset_password_email(user, url):
     """
     Envía un correo electrónico al usuario con el enlace para restablecer su contraseña.
