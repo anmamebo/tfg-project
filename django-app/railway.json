@@ -4,7 +4,7 @@
     "builder": "NIXPACKS"
   },
   "deploy": {
-    "startCommand": "python manage.py makemigrations && python manage.py migrate && python manage.py collectstatic --noinput && gunicorn --timeout 500 config.wsgi",
+    "startCommand": "python manage.py makemigrations && python manage.py migrate && python manage.py createsuperuser --noinput && python manage.py collectstatic --noinput && gunicorn --timeout 500 config.wsgi",
     "restartPolicyType": "NEVER",
     "restartPolicyMaxRetries": 10
   }
