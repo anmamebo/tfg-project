@@ -101,12 +101,13 @@ def send_success_password_reset_email(user):
     )
 
 
-def send_appointment_assigned_email(appointment):
+def send_appointment_assigned_email(appointment, url):
     """
     Envía un correo electrónico al paciente para notificarle que se le ha asignado una cita médica.
 
     Args:
         appointment (Appointment): Cita médica que se le ha asignado al paciente.
+        url (str): URL para crear un evento en Google Calendar con la información de la cita médica.
 
     Returns:
         bool: True si el correo electrónico se envió correctamente, False en caso contrario.
@@ -116,6 +117,7 @@ def send_appointment_assigned_email(appointment):
         "appointment_assigned_email_template",
         [appointment.patient.user.email],
         {
+            "url": url,
             "name": appointment.patient.user.name,
             "request_date": appointment.request_date.strftime("%d/%m/%Y %H:%M"),
             "doctor_name": f"{appointment.doctor.user.name} {appointment.doctor.user.last_name}",

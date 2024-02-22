@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta
+from urllib.parse import quote
 
 from apps.appointments.mixins import GeneratePDFMixin
 from apps.appointments.models import Appointment
@@ -25,6 +26,7 @@ from mixins.pagination_mixin import PaginationMixin
 from rest_framework import status, viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
+from utilities.appointment_url_generator import build_appointment_url
 from utilities.email_utils import send_appointment_assigned_email
 from utilities.milp_solver import solve_milp
 from utilities.permissions_helper import method_permission_classes
@@ -147,9 +149,13 @@ class AppointmentViewSet(
 
             appointment = Appointment.objects.get(pk=appointment.id)
 
+            google_calendar_url = build_appointment_url(appointment)
+
             # Envía el correo electrónico al paciente
             try:
-                if not send_appointment_assigned_email(appointment):
+                if not send_appointment_assigned_email(
+                    appointment, google_calendar_url
+                ):
                     return self.error_response(
                         message="No se pudo enviar el correo electrónico, consulte su apartado de citas.",
                         status_code=status.HTTP_400_BAD_REQUEST,
