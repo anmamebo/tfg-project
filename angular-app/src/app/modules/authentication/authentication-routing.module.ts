@@ -3,12 +3,18 @@ import { RouterModule, Routes } from '@angular/router';
 import { ForgotPasswordPageComponent } from './pages/forgot-password-page/forgot-password-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { ResetPasswordPageComponent } from './pages/reset-password-page/reset-password-page.component';
+import { SignupPageComponent } from './pages/signup-page/signup-page.component';
 
 const routes: Routes = [
   {
     path: 'login',
     component: LoginPageComponent,
     title: 'Iniciar sesión | HospitalSys',
+  },
+  {
+    path: 'registro',
+    component: SignupPageComponent,
+    title: 'Registro | HospitalSys',
   },
   {
     path: 'olvide-contrasena',

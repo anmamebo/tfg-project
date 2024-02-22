@@ -85,6 +85,15 @@
         </form>
 
         <div class="text-center mt-4 text-lg fs-5">
+          <p class="text-gray-600">
+            ¿No tienes cuenta?
+            <a
+              class="d-md-inline d-block"
+              [routerLink]="['/auth/registro']"
+              style="font-weight: 700"
+              >Registrate</a
+            >
+          </p>
           <p>
             <a
               [routerLink]="['/auth/olvide-contrasena']"

@@ -53,6 +53,21 @@ export class AuthService {
   }
 
   /**
+   * Registra un nuevo usuario.
+   * @param {any} user Datos del usuario a registrar.
+   * @returns {Observable<MessageResponse>} Un observable que emite la respuesta del servidor.
+   */
+  public signup(user: any): Observable<MessageResponse> {
+    let params = JSON.stringify(user);
+
+    return this._http.post<MessageResponse>(
+      `${this.url}signup/`,
+      params,
+      httpOptions
+    );
+  }
+
+  /**
    * Verifica si el usuario ha iniciado sesión.
    * @returns {boolean} `true` si el usuario ha iniciado sesión, de lo contrario `false`.
    */
