@@ -12,6 +12,23 @@ import { NotificationService } from 'src/app/core/services/notifications/notific
 @Component({
   selector: 'app-address-info-card',
   templateUrl: './address-info-card.component.html',
+  styles: [
+    `
+      .address-button {
+        position: absolute;
+        right: 25px;
+        top: -55px;
+      }
+
+      @media screen and (max-width: 576px) {
+        .address-button {
+          position: relative;
+          top: -30px;
+          right: 0;
+        }
+      }
+    `,
+  ],
   providers: [AddressService, NotificationService],
 })
 export class AddressInfoCardComponent implements OnInit {
