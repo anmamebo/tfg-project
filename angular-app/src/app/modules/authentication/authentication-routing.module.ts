@@ -7,7 +7,7 @@ import { SignupPageComponent } from './pages/signup-page/signup-page.component';
 
 const routes: Routes = [
   {
-    path: 'login',
+    path: 'iniciar-sesion',
     component: LoginPageComponent,
     title: 'Iniciar sesión | HospitalSys',
   },
