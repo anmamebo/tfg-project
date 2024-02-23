@@ -15,6 +15,12 @@
     font-size: 3rem;
     margin-top: 1rem;
   }
+
+  @media screen and (max-width: 576px) {
+    .img-error {
+      height: 335px;
+    }
+  }
 }
 
 html[data-bs-theme="dark"] {
