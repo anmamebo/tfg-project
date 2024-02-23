@@ -1,24 +1,31 @@
-<div class="row mt-2">
-  <div class="col-lg-1 col-2">
-    <div class="form-group row">
-      <select
-        id="entriesPerPage"
-        class="form-select col-6"
-        [(ngModel)]="elementsPerPage"
-        (change)="onSelectChanged()"
-      >
-        <option *ngFor="let number of quantityOptions" [value]="number">
-          {{ number }}
-        </option>
-      </select>
+<div class="container mt-2">
+  <div class="row">
+    <!-- Elementos por página -->
+    <div class="col-3 col-md-2 col-5">
+      <div class="form-group">
+        <select
+          id="entriesPerPage"
+          class="form-select"
+          [(ngModel)]="elementsPerPage"
+          (change)="onSelectChanged()"
+        >
+          <option *ngFor="let number of quantityOptions" [value]="number">
+            {{ number }}
+          </option>
+        </select>
+      </div>
     </div>
-  </div>
-  <div class="col-lg-5 col-4">
-    <p class="text-muted mt-2 m-0">elementos por página</p>
-  </div>
-  <div class="col-6">
-    <p class="text-muted mt-2 mb-0 text-end">
-      Total {{ totalElements }} elementos
-    </p>
+    <div class="col d-sm-block d-none">
+      <p class="text-muted mt-2 m-0 text-sm-start text-end">
+        elementos por página
+      </p>
+    </div>
+
+    <!-- Total elementos -->
+    <div class="col">
+      <p class="text-muted mt-2 m-0 text-end">
+        Total {{ totalElements }} elementos
+      </p>
+    </div>
   </div>
 </div>

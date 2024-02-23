@@ -2,7 +2,9 @@
   <div class="page-title">
     <div class="row">
       <div class="col-12 col-md-6 order-md-1 order-last">
+        <!-- Título y descripción -->
         <h3>
+          <!-- Bóton volver atrás -->
           <a class="me-2" style="cursor: pointer" (click)="goBack()">
             <svg
               style="margin-bottom: 4px"
@@ -18,12 +20,18 @@
               />
             </svg>
           </a>
+
+          <!-- Título -->
           {{ pageTitle }}
         </h3>
+
+        <!-- Descripción -->
         <p class="text-subtitle text-muted">
           {{ pageDescription }}
         </p>
       </div>
+
+      <!-- Breadcrumb -->
       <div class="col-12 col-md-6 order-md-2 order-first">
         <app-breadcrumb
           [breadcrumbs]="breadcrumbData"
