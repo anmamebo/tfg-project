@@ -16,12 +16,15 @@
   </div>
 </section>
 
-<section class="row mb-4" style="height: 480px">
+<section class="row">
   <!-- Calendario citas diarias -->
-  <div class="col-xl-6 col-12 h-100">
-    <app-patient-today-appointments-calendar></app-patient-today-appointments-calendar>
+  <div class="col-lg-6 col-12">
+    <app-patient-today-appointments-calendar
+      class="today-calendar"
+    ></app-patient-today-appointments-calendar>
   </div>
-  <div class="col-xl-6 col-12">
+  <!-- Gráfica de citas por especialidad -->
+  <div class="col-lg-6 col-12 mt-lg-0 mt-5">
     <app-patient-appointments-specialties-stacked-column-chart></app-patient-appointments-specialties-stacked-column-chart>
   </div>
 </section>

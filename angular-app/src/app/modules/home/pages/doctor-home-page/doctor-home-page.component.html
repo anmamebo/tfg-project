@@ -16,18 +16,20 @@
   </div>
 </section>
 
-<section class="row" style="height: 480px">
+<section class="row">
   <!-- Calendario citas diarias -->
-  <div class="col-xl-6 col-12 h-100">
-    <app-doctor-today-appointments-calendar></app-doctor-today-appointments-calendar>
+  <div class="col-lg-6 col-12">
+    <app-doctor-today-appointments-calendar
+      class="today-calendar"
+    ></app-doctor-today-appointments-calendar>
   </div>
   <!-- Grafica citas diarias por mes -->
-  <div class="col-xl-6 col-12">
+  <div class="col-lg-6 col-12 mt-lg-0 mt-5">
     <app-doctor-monthly-appointments-line-chart></app-doctor-monthly-appointments-line-chart>
   </div>
 </section>
 
-<section class="row mt-4">
+<section class="row">
   <!-- Gráfica citas por género -->
   <div class="col-lg-4 col-12">
     <app-doctor-appointments-gender-donut-chart></app-doctor-appointments-gender-donut-chart>
