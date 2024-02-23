@@ -1,76 +1,74 @@
 <app-generic-card [title]="titleCard">
-  <div class="card-content">
-    <div *ngIf="doctor && doctor.user" class="row">
-      <div class="col-12">
-        <div class="form-group">
-          <label for="id">ID:</label>
-          <p class="form-control-static" id="id">
-            {{ doctor.id }}
-          </p>
-        </div>
-      </div>
-
-      <div class="col-md-6">
-        <div class="form-group">
-          <label for="name">Nombre:</label>
-          <p class="form-control-static" id="name">
-            {{ doctor.user.name }}
-          </p>
-        </div>
-      </div>
-
-      <div class="col-md-6">
-        <div class="form-group">
-          <label for="last_name">Apellidos:</label>
-          <p class="form-control-static" id="last_name">
-            {{ doctor.user.last_name }}
-          </p>
-        </div>
-      </div>
-
-      <div class="col-md-6">
-        <div class="form-group">
-          <label for="collegiate_number">Nº de Colegiado:</label>
-          <p class="form-control-static" id="collegiate_number">
-            {{ doctor.collegiate_number }}
-          </p>
-        </div>
-      </div>
-
-      <div class="col-md-6">
-        <div class="form-group">
-          <label for="is_available">Disponibilidad:</label>
-          <p class="form-control-static" id="is_available">
-            <span
-              class="badge"
-              [ngClass]="{
-                'bg-light-success': doctor.is_available,
-                'bg-light-danger': !doctor.is_available
-              }"
-            >
-              {{ doctor.is_available ? "Disponible" : "No disponible" }}
-            </span>
-          </p>
-        </div>
+  <div *ngIf="doctor && doctor.user" class="row">
+    <div class="col-12">
+      <div class="form-group">
+        <label for="id">ID:</label>
+        <p class="form-control-static" id="id">
+          {{ doctor.id }}
+        </p>
       </div>
     </div>
 
-    <div class="row mt-3">
-      <div class="col-md-6">
-        <h6>Especialidades Médicas</h6>
-        <app-generic-table
-          [columns]="columnsMedicalSpecialty"
-          [data]="doctor?.medical_specialties ?? []"
-        ></app-generic-table>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="name">Nombre:</label>
+        <p class="form-control-static" id="name">
+          {{ doctor.user.name }}
+        </p>
       </div>
+    </div>
 
-      <div class="col-md-6">
-        <h6>Departamentos</h6>
-        <app-generic-table
-          [columns]="columnsDepartment"
-          [data]="doctor?.departments ?? []"
-        ></app-generic-table>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="last_name">Apellidos:</label>
+        <p class="form-control-static" id="last_name">
+          {{ doctor.user.last_name }}
+        </p>
       </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="collegiate_number">Nº de Colegiado:</label>
+        <p class="form-control-static" id="collegiate_number">
+          {{ doctor.collegiate_number }}
+        </p>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="is_available">Disponibilidad:</label>
+        <p class="form-control-static" id="is_available">
+          <span
+            class="badge"
+            [ngClass]="{
+              'bg-light-success': doctor.is_available,
+              'bg-light-danger': !doctor.is_available
+            }"
+          >
+            {{ doctor.is_available ? "Disponible" : "No disponible" }}
+          </span>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-3">
+    <div class="col-md-6">
+      <h6>Especialidades Médicas</h6>
+      <app-generic-table
+        [columns]="columnsMedicalSpecialty"
+        [data]="doctor?.medical_specialties ?? []"
+      ></app-generic-table>
+    </div>
+
+    <div class="col-md-6">
+      <h6>Departamentos</h6>
+      <app-generic-table
+        [columns]="columnsDepartment"
+        [data]="doctor?.departments ?? []"
+      ></app-generic-table>
     </div>
   </div>
 </app-generic-card>

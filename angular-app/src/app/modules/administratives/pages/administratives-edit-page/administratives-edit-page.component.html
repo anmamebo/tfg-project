@@ -3,18 +3,16 @@
   [pageDescription]="pageDescription"
   [breadcrumbData]="breadcrumbData"
 >
-  <div class="page-content">
-    <ng-container *ngIf="administrative">
-      <section class="section">
-        <div class="row">
-          <div class="col-12">
-            <app-edit-info-administratives-card
-              [administrative]="administrative"
-              (refreshAdministrative)="onRefreshAdministrative()"
-            ></app-edit-info-administratives-card>
-          </div>
+  <ng-container *ngIf="administrative">
+    <section class="section">
+      <div class="row">
+        <div class="col-12">
+          <app-edit-info-administratives-card
+            [administrative]="administrative"
+            (refreshAdministrative)="onRefreshAdministrative()"
+          ></app-edit-info-administratives-card>
         </div>
-      </section>
-    </ng-container>
-  </div>
+      </div>
+    </section>
+  </ng-container>
 </app-generic-page>

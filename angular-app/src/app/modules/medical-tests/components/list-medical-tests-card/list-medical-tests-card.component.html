@@ -35,7 +35,7 @@
   <!-- No hay pruebas médicas -->
   <ng-template #lengthZero>
     <app-generic-card [hasCardHeader]="false">
-      <div class="card-content">No hay pruebas médicas.</div>
+      <div>No hay pruebas médicas.</div>
     </app-generic-card>
   </ng-template>
 </ng-container>
@@ -43,6 +43,6 @@
 <!-- Cargando citas -->
 <ng-template #noItems>
   <app-generic-card [hasCardHeader]="false">
-    <div class="card-content"><app-loading-spinner></app-loading-spinner></div>
+    <div><app-loading-spinner></app-loading-spinner></div>
   </app-generic-card>
 </ng-template>

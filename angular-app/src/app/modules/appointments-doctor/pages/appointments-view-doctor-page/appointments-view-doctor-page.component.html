@@ -3,53 +3,51 @@
   [pageDescription]="pageDescription"
   [breadcrumbData]="breadcrumbData"
 >
-  <div class="page-content">
-    <ng-container *ngIf="appointment && appointment.patient">
-      <section class="section">
-        <div class="row">
-          <div class="col-12">
-            <app-view-info-status-appointments-doctor-card
-              [appointment]="appointment"
-              (refreshAppointment)="onRefreshAppointment()"
-            ></app-view-info-status-appointments-doctor-card>
-          </div>
+  <ng-container *ngIf="appointment && appointment.patient">
+    <section class="section">
+      <div class="row">
+        <div class="col-12">
+          <app-view-info-status-appointments-doctor-card
+            [appointment]="appointment"
+            (refreshAppointment)="onRefreshAppointment()"
+          ></app-view-info-status-appointments-doctor-card>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section class="section">
-        <div class="row">
-          <!-- Información del paciente -->
-          <div class="col-lg-6">
-            <app-view-patient-appointments-doctor-card
-              [patient]="appointment.patient"
-            ></app-view-patient-appointments-doctor-card>
-          </div>
-
-          <!-- Motivo y observaciones de la cita -->
-          <div class="col-lg-6">
-            <app-view-reason-observations-appointments-doctor-card
-              [appointment]="appointment"
-              (refreshAppointment)="onRefreshAppointment()"
-            ></app-view-reason-observations-appointments-doctor-card>
-          </div>
+    <section class="section">
+      <div class="row">
+        <!-- Información del paciente -->
+        <div class="col-lg-6">
+          <app-view-patient-appointments-doctor-card
+            [patient]="appointment.patient"
+          ></app-view-patient-appointments-doctor-card>
         </div>
 
-        <div class="row">
-          <!-- Tratamientos -->
-          <div class="col-xxl-6">
-            <app-view-treatments-appointments-doctor-card
-              [appointment]="appointment"
-            ></app-view-treatments-appointments-doctor-card>
-          </div>
-
-          <!-- Pruebas médicas -->
-          <div class="col-xxl-6">
-            <app-view-medical-tests-appointments-doctor-card
-              [appointment]="appointment"
-            ></app-view-medical-tests-appointments-doctor-card>
-          </div>
+        <!-- Motivo y observaciones de la cita -->
+        <div class="col-lg-6">
+          <app-view-reason-observations-appointments-doctor-card
+            [appointment]="appointment"
+            (refreshAppointment)="onRefreshAppointment()"
+          ></app-view-reason-observations-appointments-doctor-card>
         </div>
-      </section>
-    </ng-container>
-  </div>
+      </div>
+
+      <div class="row">
+        <!-- Tratamientos -->
+        <div class="col-xxl-6">
+          <app-view-treatments-appointments-doctor-card
+            [appointment]="appointment"
+          ></app-view-treatments-appointments-doctor-card>
+        </div>
+
+        <!-- Pruebas médicas -->
+        <div class="col-xxl-6">
+          <app-view-medical-tests-appointments-doctor-card
+            [appointment]="appointment"
+          ></app-view-medical-tests-appointments-doctor-card>
+        </div>
+      </div>
+    </section>
+  </ng-container>
 </app-generic-page>

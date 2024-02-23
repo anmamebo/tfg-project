@@ -1,76 +1,74 @@
 <app-generic-card [title]="titleCard">
-  <div class="card-content">
-    <div *ngIf="patient && patient.user" class="row">
-      <div class="col-md-8">
-        <div class="form-group">
-          <label for="id">ID:</label>
-          <p class="form-control-static" id="id">
-            {{ patient.id }}
-          </p>
-        </div>
+  <div *ngIf="patient && patient.user" class="row">
+    <div class="col-md-8">
+      <div class="form-group">
+        <label for="id">ID:</label>
+        <p class="form-control-static" id="id">
+          {{ patient.id }}
+        </p>
       </div>
+    </div>
 
-      <div class="col-md-4">
-        <div class="form-group">
-          <label for="dni">DNI:</label>
-          <p class="form-control-static" id="dni">
-            {{ patient.dni }}
-          </p>
-        </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="dni">DNI:</label>
+        <p class="form-control-static" id="dni">
+          {{ patient.dni }}
+        </p>
       </div>
+    </div>
 
-      <div class="col-md-4">
-        <div class="form-group">
-          <label for="name">Nombre:</label>
-          <p class="form-control-static" id="name">
-            {{ patient.user.name }}
-          </p>
-        </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="name">Nombre:</label>
+        <p class="form-control-static" id="name">
+          {{ patient.user.name }}
+        </p>
       </div>
+    </div>
 
-      <div class="col-md-4">
-        <div class="form-group">
-          <label for="last_name">Apellidos:</label>
-          <p class="form-control-static" id="last_name">
-            {{ patient.user.last_name }}
-          </p>
-        </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="last_name">Apellidos:</label>
+        <p class="form-control-static" id="last_name">
+          {{ patient.user.last_name }}
+        </p>
       </div>
+    </div>
 
-      <div class="col-md-4">
-        <div class="form-group">
-          <label for="birthdate">Fecha de nacimiento:</label>
-          <p class="form-control-static" id="birthdate">
-            {{ patient.birthdate | date : "d MMMM, y" }}
-          </p>
-        </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="birthdate">Fecha de nacimiento:</label>
+        <p class="form-control-static" id="birthdate">
+          {{ patient.birthdate | date : "d MMMM, y" }}
+        </p>
       </div>
+    </div>
 
-      <div class="col-md-4">
-        <div class="form-group">
-          <label for="social_security">Nº de la seguridad social:</label>
-          <p class="form-control-static" id="social_security">
-            {{ patient.social_security }}
-          </p>
-        </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="social_security">Nº de la seguridad social:</label>
+        <p class="form-control-static" id="social_security">
+          {{ patient.social_security }}
+        </p>
       </div>
+    </div>
 
-      <div class="col-md-4">
-        <div class="form-group">
-          <label for="gender">Género:</label>
-          <p class="form-control-static" id="gender">
-            {{ patient.gender | gender }}
-          </p>
-        </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="gender">Género:</label>
+        <p class="form-control-static" id="gender">
+          {{ patient.gender | gender }}
+        </p>
       </div>
+    </div>
 
-      <div class="col-md-4">
-        <div class="form-group">
-          <label for="nationality">Nacionalidad:</label>
-          <p class="form-control-static" id="nationality">
-            {{ patient.nationality || "--" }}
-          </p>
-        </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="nationality">Nacionalidad:</label>
+        <p class="form-control-static" id="nationality">
+          {{ patient.nationality || "--" }}
+        </p>
       </div>
     </div>
   </div>

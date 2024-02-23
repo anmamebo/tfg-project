@@ -3,35 +3,33 @@
   [pageDescription]="pageDescription"
   [breadcrumbData]="breadcrumbData"
 >
-  <div class="page-content">
-    <ng-container *ngIf="patient">
-      <section class="section">
-        <div class="row">
-          <div class="col-lg-8">
-            <app-edit-basic-info-patients-card
-              [patient]="patient"
-              (refreshPatient)="onRefreshPatient()"
-            ></app-edit-basic-info-patients-card>
-          </div>
-
-          <div class="col-lg-4">
-            <app-edit-contact-info-patients-card
-              [patient]="patient"
-              (refreshPatient)="onRefreshPatient()"
-            ></app-edit-contact-info-patients-card>
-          </div>
+  <ng-container *ngIf="patient">
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-8">
+          <app-edit-basic-info-patients-card
+            [patient]="patient"
+            (refreshPatient)="onRefreshPatient()"
+          ></app-edit-basic-info-patients-card>
         </div>
 
-        <div class="row">
-          <div class="col-12">
-            <app-edit-address-patients-card
-              [address]="patient.address"
-              [patientId]="patient.id"
-              (refreshPatient)="onRefreshPatient()"
-            ></app-edit-address-patients-card>
-          </div>
+        <div class="col-lg-4">
+          <app-edit-contact-info-patients-card
+            [patient]="patient"
+            (refreshPatient)="onRefreshPatient()"
+          ></app-edit-contact-info-patients-card>
         </div>
-      </section>
-    </ng-container>
-  </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <app-edit-address-patients-card
+            [address]="patient.address"
+            [patientId]="patient.id"
+            (refreshPatient)="onRefreshPatient()"
+          ></app-edit-address-patients-card>
+        </div>
+      </div>
+    </section>
+  </ng-container>
 </app-generic-page>

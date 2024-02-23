@@ -1,7 +1,7 @@
 <div class="row justify-content-between">
   <div class="col-sm-8">
     <app-generic-card [hasCardHeader]="false">
-      <div class="card-content row justify-content-around">
+      <div class="row justify-content-around">
         <a
           [routerLink]="['/pacientes/historial-medico/', patientId]"
           class="btn btn-primary col-xl-3 col-lg-4 mb-2 mb-lg-0 me-0"
@@ -27,7 +27,7 @@
 
   <div class="col-sm-4">
     <app-generic-card [hasCardHeader]="false">
-      <div class="card-content row justify-content-around">
+      <div class="row justify-content-around">
         <a
           *appHasRole="editRoles"
           [routerLink]="['/pacientes/editar/', patientId]"

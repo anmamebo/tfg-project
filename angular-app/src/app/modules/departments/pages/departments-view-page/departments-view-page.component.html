@@ -3,44 +3,42 @@
   [pageDescription]="pageDescription"
   [breadcrumbData]="breadcrumbData"
 >
-  <div class="page-content">
-    <ng-container *ngIf="department">
-      <section *appHasRole="buttonsRoles" class="section">
-        <app-buttons-departments-card
-          *ngIf="department.id && department.state !== undefined"
-          [departmentId]="department.id"
-          [isActive]="department.state"
-          (refreshDepartment)="onRefreshDepartment()"
-        ></app-buttons-departments-card>
-      </section>
+  <ng-container *ngIf="department">
+    <section *appHasRole="buttonsRoles" class="section">
+      <app-buttons-departments-card
+        *ngIf="department.id && department.state !== undefined"
+        [departmentId]="department.id"
+        [isActive]="department.state"
+        (refreshDepartment)="onRefreshDepartment()"
+      ></app-buttons-departments-card>
+    </section>
 
-      <section class="section">
-        <div class="row">
-          <div class="col-12">
-            <app-view-info-departments-card
-              [department]="department"
-            ></app-view-info-departments-card>
-          </div>
-
-          <div class="col-xxl-6">
-            <app-view-rooms-departments-card
-              [departmentId]="department.id"
-            ></app-view-rooms-departments-card>
-          </div>
-
-          <div class="col-xxl-6">
-            <app-view-specialties-departments-card
-              [departmentId]="department.id"
-            ></app-view-specialties-departments-card>
-          </div>
-
-          <div class="col-12">
-            <app-view-doctors-departments-card
-              [departmentId]="department.id"
-            ></app-view-doctors-departments-card>
-          </div>
+    <section class="section">
+      <div class="row">
+        <div class="col-12">
+          <app-view-info-departments-card
+            [department]="department"
+          ></app-view-info-departments-card>
         </div>
-      </section>
-    </ng-container>
-  </div>
+
+        <div class="col-xxl-6">
+          <app-view-rooms-departments-card
+            [departmentId]="department.id"
+          ></app-view-rooms-departments-card>
+        </div>
+
+        <div class="col-xxl-6">
+          <app-view-specialties-departments-card
+            [departmentId]="department.id"
+          ></app-view-specialties-departments-card>
+        </div>
+
+        <div class="col-12">
+          <app-view-doctors-departments-card
+            [departmentId]="department.id"
+          ></app-view-doctors-departments-card>
+        </div>
+      </div>
+    </section>
+  </ng-container>
 </app-generic-page>

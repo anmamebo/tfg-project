@@ -3,40 +3,38 @@
   [pageDescription]="pageDescription"
   [breadcrumbData]="breadcrumbData"
 >
-  <div class="page-content">
-    <ng-container *ngIf="patient">
-      <section class="section">
-        <app-buttons-patients-card
-          *ngIf="patient.id && patient.state !== undefined"
-          [patientId]="patient.id"
-          [isActive]="patient.state"
-          (refreshPatient)="onRefreshPatient()"
-        ></app-buttons-patients-card>
-      </section>
+  <ng-container *ngIf="patient">
+    <section class="section">
+      <app-buttons-patients-card
+        *ngIf="patient.id && patient.state !== undefined"
+        [patientId]="patient.id"
+        [isActive]="patient.state"
+        (refreshPatient)="onRefreshPatient()"
+      ></app-buttons-patients-card>
+    </section>
 
-      <section class="section">
-        <div class="row">
-          <div class="col-lg-8">
-            <app-view-basic-info-patients-card
-              [patient]="patient"
-            ></app-view-basic-info-patients-card>
-          </div>
-
-          <div class="col-lg-4">
-            <app-view-contact-info-patients-card
-              [patient]="patient"
-            ></app-view-contact-info-patients-card>
-          </div>
-
-          <ng-container *ngIf="patient.address">
-            <div class="col-12">
-              <app-view-address-patients-card
-                [address]="patient.address"
-              ></app-view-address-patients-card>
-            </div>
-          </ng-container>
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-8">
+          <app-view-basic-info-patients-card
+            [patient]="patient"
+          ></app-view-basic-info-patients-card>
         </div>
-      </section>
-    </ng-container>
-  </div>
+
+        <div class="col-lg-4">
+          <app-view-contact-info-patients-card
+            [patient]="patient"
+          ></app-view-contact-info-patients-card>
+        </div>
+
+        <ng-container *ngIf="patient.address">
+          <div class="col-12">
+            <app-view-address-patients-card
+              [address]="patient.address"
+            ></app-view-address-patients-card>
+          </div>
+        </ng-container>
+      </div>
+    </section>
+  </ng-container>
 </app-generic-page>

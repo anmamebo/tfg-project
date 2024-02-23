@@ -1,40 +1,38 @@
 <app-generic-card [title]="titleCard">
-  <div class="card-content">
-    <div *ngIf="medicalSpecialty" class="row">
-      <div class="col-12">
-        <div class="form-group">
-          <label for="id">ID:</label>
-          <p class="form-control-static" id="id">
-            {{ medicalSpecialty.id }}
-          </p>
-        </div>
+  <div *ngIf="medicalSpecialty" class="row">
+    <div class="col-12">
+      <div class="form-group">
+        <label for="id">ID:</label>
+        <p class="form-control-static" id="id">
+          {{ medicalSpecialty.id }}
+        </p>
       </div>
+    </div>
 
-      <div class="col-md-4">
-        <div class="form-group">
-          <label for="name">Nombre:</label>
-          <p class="form-control-static" id="name">
-            {{ medicalSpecialty.name }}
-          </p>
-        </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="name">Nombre:</label>
+        <p class="form-control-static" id="name">
+          {{ medicalSpecialty.name }}
+        </p>
       </div>
+    </div>
 
-      <div class="col-md-8">
-        <div class="form-group">
-          <label for="description">Descripción:</label>
-          <p class="form-control-static" id="description">
-            {{ medicalSpecialty.description }}
-          </p>
-        </div>
+    <div class="col-md-8">
+      <div class="form-group">
+        <label for="description">Descripción:</label>
+        <p class="form-control-static" id="description">
+          {{ medicalSpecialty.description }}
+        </p>
       </div>
+    </div>
 
-      <div class="col-md-4">
-        <div class="form-group">
-          <label for="department">Departamento:</label>
-          <p class="form-control-static" id="department">
-            {{ medicalSpecialty.department?.name || "--" }}
-          </p>
-        </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="department">Departamento:</label>
+        <p class="form-control-static" id="department">
+          {{ medicalSpecialty.department?.name || "--" }}
+        </p>
       </div>
     </div>
   </div>

@@ -1,28 +1,26 @@
 <app-generic-card [title]="titleCard">
-  <div class="card-content">
-    <div class="row justify-content-start">
-      <div class="col-md-6">
-        <app-search
-          [infoTooltipText]="searchInfoTooltip"
-          [urlSearch]="urlSearch"
-          (searchSubmitted)="onSearchSubmitted($event)"
-        ></app-search>
-      </div>
+  <div class="row justify-content-start">
+    <div class="col-md-6">
+      <app-search
+        [infoTooltipText]="searchInfoTooltip"
+        [urlSearch]="urlSearch"
+        (searchSubmitted)="onSearchSubmitted($event)"
+      ></app-search>
     </div>
+  </div>
 
-    <div class="row">
-      <app-generic-table
-        [columns]="columns"
-        [data]="rooms"
-        [striped]="true"
-      ></app-generic-table>
+  <div class="row">
+    <app-generic-table
+      [columns]="columns"
+      [data]="rooms"
+      [striped]="true"
+    ></app-generic-table>
 
-      <app-pagination
-        (pageEmitter)="goToPage($event)"
-        [page]="page"
-        [totalPages]="totalPages"
-        [numItems]="numRooms"
-      ></app-pagination>
-    </div>
+    <app-pagination
+      (pageEmitter)="goToPage($event)"
+      [page]="page"
+      [totalPages]="totalPages"
+      [numItems]="numRooms"
+    ></app-pagination>
   </div>
 </app-generic-card>

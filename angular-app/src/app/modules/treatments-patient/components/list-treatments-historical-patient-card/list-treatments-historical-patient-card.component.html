@@ -37,7 +37,7 @@
   <!-- No hay tratamientos -->
   <ng-template #lengthZero>
     <app-generic-card [hasCardHeader]="false">
-      <div class="card-content">No tratamientos en el historico.</div>
+      <div>No tratamientos en el historico.</div>
     </app-generic-card>
   </ng-template>
 </ng-container>
@@ -45,6 +45,6 @@
 <!-- Cargando tratamientos -->
 <ng-template #noItems>
   <app-generic-card [hasCardHeader]="false">
-    <div class="card-content"><app-loading-spinner></app-loading-spinner></div>
+    <div><app-loading-spinner></app-loading-spinner></div>
   </app-generic-card>
 </ng-template>

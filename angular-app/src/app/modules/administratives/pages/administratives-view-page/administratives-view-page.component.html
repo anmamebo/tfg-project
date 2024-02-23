@@ -3,26 +3,24 @@
   [pageDescription]="pageDescription"
   [breadcrumbData]="breadcrumbData"
 >
-  <div class="page-content">
-    <ng-container *ngIf="administrative">
-      <section class="section">
-        <app-buttons-administratives-card
-          *ngIf="administrative.id && administrative.is_active !== undefined"
-          [administrativeId]="administrative.id"
-          [isActive]="administrative.is_active"
-          (refreshAdministrative)="onRefreshAdministrative()"
-        ></app-buttons-administratives-card>
-      </section>
+  <ng-container *ngIf="administrative">
+    <section class="section">
+      <app-buttons-administratives-card
+        *ngIf="administrative.id && administrative.is_active !== undefined"
+        [administrativeId]="administrative.id"
+        [isActive]="administrative.is_active"
+        (refreshAdministrative)="onRefreshAdministrative()"
+      ></app-buttons-administratives-card>
+    </section>
 
-      <section class="section">
-        <div class="row">
-          <div class="col-12">
-            <app-view-info-administratives-card
-              [administrative]="administrative"
-            ></app-view-info-administratives-card>
-          </div>
+    <section class="section">
+      <div class="row">
+        <div class="col-12">
+          <app-view-info-administratives-card
+            [administrative]="administrative"
+          ></app-view-info-administratives-card>
         </div>
-      </section>
-    </ng-container>
-  </div>
+      </div>
+    </section>
+  </ng-container>
 </app-generic-page>

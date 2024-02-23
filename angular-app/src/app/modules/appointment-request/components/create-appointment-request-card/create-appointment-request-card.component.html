@@ -1,108 +1,106 @@
 <app-generic-card [hasCardHeader]="false">
-  <div class="card-content">
-    <form
-      (ngSubmit)="onSubmit()"
-      [formGroup]="createAppointmentRequestForm"
-      class="form form-horizontal"
-    >
-      <div class="form-body">
-        <div class="row">
-          <div class="col-md-6">
-            <!-- Especialidad -->
-            <div class="form-group">
-              <label for="specialty">Especialidad</label>
+  <form
+    (ngSubmit)="onSubmit()"
+    [formGroup]="createAppointmentRequestForm"
+    class="form form-horizontal"
+  >
+    <div class="form-body">
+      <div class="row">
+        <div class="col-md-6">
+          <!-- Especialidad -->
+          <div class="form-group">
+            <label for="specialty">Especialidad</label>
 
-              <ng-multiselect-dropdown
-                [placeholder]="'Selecciona una especialidad'"
-                [settings]="dropdownSettings"
-                [data]="medicalSpecialties"
-                formControlName="specialty"
-              ></ng-multiselect-dropdown>
+            <ng-multiselect-dropdown
+              [placeholder]="'Selecciona una especialidad'"
+              [settings]="dropdownSettings"
+              [data]="medicalSpecialties"
+              formControlName="specialty"
+            ></ng-multiselect-dropdown>
 
-              <app-form-errors
-                [control]="form.get('specialty')"
-                [submitted]="submitted"
-              ></app-form-errors>
-            </div>
-
-            <!-- Preferencia horaria -->
-            <div class="form-group mt-3">
-              <label class="mb-2" for="preference">Preferencia horaria</label>
-
-              <div class="form-check">
-                <input
-                  class="form-check-input"
-                  type="radio"
-                  formControlName="hourPreference"
-                  id="hourPreference1"
-                  [value]="NO_PREFERENCE"
-                  checked
-                />
-                <label class="form-check-label" for="hourPreference1"
-                  >Sin preferencia</label
-                >
-              </div>
-              <div class="form-check">
-                <input
-                  class="form-check-input"
-                  type="radio"
-                  formControlName="hourPreference"
-                  id="hourPreference2"
-                  [value]="MORNING_PREFERENCE"
-                />
-                <label class="form-check-label" for="hourPreference2"
-                  >Mañana (09:00 - 14:00)</label
-                >
-              </div>
-              <div class="form-check">
-                <input
-                  class="form-check-input"
-                  type="radio"
-                  formControlName="hourPreference"
-                  id="hourPreference3"
-                  [value]="AFTERNOON_PREFERENCE"
-                />
-                <label class="form-check-label" for="hourPreference3"
-                  >Tarde (15:00 - 21:00)</label
-                >
-              </div>
-
-              <app-form-errors
-                [control]="form.get('hourPreference')"
-                [submitted]="submitted"
-              ></app-form-errors>
-            </div>
+            <app-form-errors
+              [control]="form.get('specialty')"
+              [submitted]="submitted"
+            ></app-form-errors>
           </div>
 
-          <!-- Motivo -->
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="reason">Motivo</label>
-              <textarea
-                formControlName="reason"
-                class="form-control"
-                id="reason"
-                rows="6"
-                placeholder="Motivo"
-                [ngClass]="{
-                  'is-invalid': submitted && form.get('reason')?.errors
-                }"
-                style="resize: none"
-              ></textarea>
+          <!-- Preferencia horaria -->
+          <div class="form-group mt-3">
+            <label class="mb-2" for="preference">Preferencia horaria</label>
 
-              <app-form-errors
-                [control]="form.get('reason')"
-                [submitted]="submitted"
-              ></app-form-errors>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                formControlName="hourPreference"
+                id="hourPreference1"
+                [value]="NO_PREFERENCE"
+                checked
+              />
+              <label class="form-check-label" for="hourPreference1"
+                >Sin preferencia</label
+              >
             </div>
-          </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                formControlName="hourPreference"
+                id="hourPreference2"
+                [value]="MORNING_PREFERENCE"
+              />
+              <label class="form-check-label" for="hourPreference2"
+                >Mañana (09:00 - 14:00)</label
+              >
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                formControlName="hourPreference"
+                id="hourPreference3"
+                [value]="AFTERNOON_PREFERENCE"
+              />
+              <label class="form-check-label" for="hourPreference3"
+                >Tarde (15:00 - 21:00)</label
+              >
+            </div>
 
-          <!-- Botones -->
-          <div class="col-12 d-flex justify-content-end">
-            <button type="submit" class="btn btn-primary">Solicitar</button>
+            <app-form-errors
+              [control]="form.get('hourPreference')"
+              [submitted]="submitted"
+            ></app-form-errors>
           </div>
         </div>
+
+        <!-- Motivo -->
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="reason">Motivo</label>
+            <textarea
+              formControlName="reason"
+              class="form-control"
+              id="reason"
+              rows="6"
+              placeholder="Motivo"
+              [ngClass]="{
+                'is-invalid': submitted && form.get('reason')?.errors
+              }"
+              style="resize: none"
+            ></textarea>
+
+            <app-form-errors
+              [control]="form.get('reason')"
+              [submitted]="submitted"
+            ></app-form-errors>
+          </div>
+        </div>
+
+        <!-- Botones -->
+        <div class="col-12 d-flex justify-content-end">
+          <button type="submit" class="btn btn-primary">Solicitar</button>
+        </div>
       </div>
-    </form>
-  </div>
+    </div>
+  </form>
 </app-generic-card>

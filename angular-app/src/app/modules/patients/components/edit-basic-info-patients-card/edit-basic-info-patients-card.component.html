@@ -1,186 +1,182 @@
 <app-generic-card [title]="titleCard">
-  <div class="card-content">
-    <form
-      *ngIf="patient"
-      (ngSubmit)="onSubmit()"
-      [formGroup]="editBasicInfoPatientForm"
-      class="form form-horizontal"
-    >
-      <div class="form-body">
-        <div class="row">
-          <!-- Nombre -->
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="name">Nombre*</label>
-              <input
-                type="text"
-                formControlName="name"
-                class="form-control"
-                id="name"
-                placeholder="Nombre"
-                [ngClass]="{
-                  'is-invalid': submitted && form.get('name')?.errors
-                }"
-              />
+  <form
+    *ngIf="patient"
+    (ngSubmit)="onSubmit()"
+    [formGroup]="editBasicInfoPatientForm"
+    class="form form-horizontal"
+  >
+    <div class="form-body">
+      <div class="row">
+        <!-- Nombre -->
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="name">Nombre*</label>
+            <input
+              type="text"
+              formControlName="name"
+              class="form-control"
+              id="name"
+              placeholder="Nombre"
+              [ngClass]="{
+                'is-invalid': submitted && form.get('name')?.errors
+              }"
+            />
 
-              <app-form-errors
-                [control]="form.get('name')"
-                [submitted]="submitted"
-              ></app-form-errors>
-            </div>
-          </div>
-
-          <!-- Apellidos -->
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="last_name">Apellidos*</label>
-              <input
-                type="text"
-                formControlName="last_name"
-                class="form-control"
-                id="last_name"
-                placeholder="Apellidos"
-                [ngClass]="{
-                  'is-invalid': submitted && form.get('last_name')?.errors
-                }"
-              />
-
-              <app-form-errors
-                [control]="form.get('last_name')"
-                [submitted]="submitted"
-              ></app-form-errors>
-            </div>
-          </div>
-
-          <!-- DNI -->
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="dni">DNI*</label>
-              <input
-                type="text"
-                formControlName="dni"
-                class="form-control"
-                id="dni"
-                placeholder="DNI"
-                [ngClass]="{
-                  'is-invalid': submitted && form.get('dni')?.errors
-                }"
-              />
-
-              <app-form-errors
-                [control]="form.get('dni')"
-                [submitted]="submitted"
-              ></app-form-errors>
-            </div>
-          </div>
-
-          <!-- Nº de la seguridad social -->
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="social_security">Nº de la seguridad social</label>
-              <input
-                type="text"
-                formControlName="social_security"
-                class="form-control"
-                id="social_security"
-                placeholder="Nº de la seguridad social"
-                [ngClass]="{
-                  'is-invalid': submitted && form.get('social_security')?.errors
-                }"
-              />
-
-              <app-form-errors
-                [control]="form.get('social_security')"
-                [submitted]="submitted"
-              ></app-form-errors>
-            </div>
-          </div>
-
-          <!-- Fecha nacimiento -->
-          <div class="col-md-6 col-12">
-            <div class="form-group">
-              <label for="birthdate">Fecha de nacimiento</label>
-              <input
-                type="text"
-                formControlName="birthdate"
-                id="birthdate"
-                class="form-control"
-                [ngClass]="{
-                  'is-invalid': submitted && form.get('birthdate')?.errors
-                }"
-                mwlFlatpickr
-                [altInput]="true"
-                [convertModelValue]="true"
-                [defaultValue]="patient.birthdate"
-                [locale]="locale"
-                [maxDate]="'today'"
-                [dateFormat]="'Y-m-d'"
-              />
-
-              <app-form-errors
-                [control]="form.get('birthdate')"
-                [submitted]="submitted"
-              ></app-form-errors>
-            </div>
-          </div>
-
-          <!-- Género -->
-          <div class="col-md-3">
-            <fieldset class="form-group">
-              <label for="gender">Género*</label>
-              <select
-                class="form-select"
-                formControlName="gender"
-                id="gender"
-                [ngClass]="{
-                  'is-invalid': submitted && form.get('gender')?.errors
-                }"
-              >
-                <option
-                  *ngFor="let option of gender_options"
-                  [value]="option.value"
-                  [attr.selected]="
-                    option.value === patient.gender ? true : null
-                  "
-                >
-                  {{ option.text }}
-                </option>
-              </select>
-
-              <app-form-errors
-                [control]="form.get('gender')"
-                [submitted]="submitted"
-              ></app-form-errors>
-            </fieldset>
-          </div>
-
-          <!-- Nacionalidad -->
-          <div class="col-md-3">
-            <div class="form-group">
-              <label for="nationality">Nacionalidad</label>
-
-              <ng-multiselect-dropdown
-                [placeholder]="'Nacionalidad'"
-                [settings]="dropdownSettings"
-                [data]="nationalities"
-                formControlName="nationality"
-              ></ng-multiselect-dropdown>
-
-              <app-form-errors
-                [control]="form.get('nationality')"
-                [submitted]="submitted"
-              ></app-form-errors>
-            </div>
-          </div>
-
-          <!-- Botones -->
-          <div class="col-12 d-flex justify-content-end">
-            <button type="submit" class="btn btn-primary me-1 mb-1">
-              Actualizar
-            </button>
+            <app-form-errors
+              [control]="form.get('name')"
+              [submitted]="submitted"
+            ></app-form-errors>
           </div>
         </div>
+
+        <!-- Apellidos -->
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="last_name">Apellidos*</label>
+            <input
+              type="text"
+              formControlName="last_name"
+              class="form-control"
+              id="last_name"
+              placeholder="Apellidos"
+              [ngClass]="{
+                'is-invalid': submitted && form.get('last_name')?.errors
+              }"
+            />
+
+            <app-form-errors
+              [control]="form.get('last_name')"
+              [submitted]="submitted"
+            ></app-form-errors>
+          </div>
+        </div>
+
+        <!-- DNI -->
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="dni">DNI*</label>
+            <input
+              type="text"
+              formControlName="dni"
+              class="form-control"
+              id="dni"
+              placeholder="DNI"
+              [ngClass]="{
+                'is-invalid': submitted && form.get('dni')?.errors
+              }"
+            />
+
+            <app-form-errors
+              [control]="form.get('dni')"
+              [submitted]="submitted"
+            ></app-form-errors>
+          </div>
+        </div>
+
+        <!-- Nº de la seguridad social -->
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="social_security">Nº de la seguridad social</label>
+            <input
+              type="text"
+              formControlName="social_security"
+              class="form-control"
+              id="social_security"
+              placeholder="Nº de la seguridad social"
+              [ngClass]="{
+                'is-invalid': submitted && form.get('social_security')?.errors
+              }"
+            />
+
+            <app-form-errors
+              [control]="form.get('social_security')"
+              [submitted]="submitted"
+            ></app-form-errors>
+          </div>
+        </div>
+
+        <!-- Fecha nacimiento -->
+        <div class="col-md-6 col-12">
+          <div class="form-group">
+            <label for="birthdate">Fecha de nacimiento</label>
+            <input
+              type="text"
+              formControlName="birthdate"
+              id="birthdate"
+              class="form-control"
+              [ngClass]="{
+                'is-invalid': submitted && form.get('birthdate')?.errors
+              }"
+              mwlFlatpickr
+              [altInput]="true"
+              [convertModelValue]="true"
+              [defaultValue]="patient.birthdate"
+              [locale]="locale"
+              [maxDate]="'today'"
+              [dateFormat]="'Y-m-d'"
+            />
+
+            <app-form-errors
+              [control]="form.get('birthdate')"
+              [submitted]="submitted"
+            ></app-form-errors>
+          </div>
+        </div>
+
+        <!-- Género -->
+        <div class="col-md-3">
+          <fieldset class="form-group">
+            <label for="gender">Género*</label>
+            <select
+              class="form-select"
+              formControlName="gender"
+              id="gender"
+              [ngClass]="{
+                'is-invalid': submitted && form.get('gender')?.errors
+              }"
+            >
+              <option
+                *ngFor="let option of gender_options"
+                [value]="option.value"
+                [attr.selected]="option.value === patient.gender ? true : null"
+              >
+                {{ option.text }}
+              </option>
+            </select>
+
+            <app-form-errors
+              [control]="form.get('gender')"
+              [submitted]="submitted"
+            ></app-form-errors>
+          </fieldset>
+        </div>
+
+        <!-- Nacionalidad -->
+        <div class="col-md-3">
+          <div class="form-group">
+            <label for="nationality">Nacionalidad</label>
+
+            <ng-multiselect-dropdown
+              [placeholder]="'Nacionalidad'"
+              [settings]="dropdownSettings"
+              [data]="nationalities"
+              formControlName="nationality"
+            ></ng-multiselect-dropdown>
+
+            <app-form-errors
+              [control]="form.get('nationality')"
+              [submitted]="submitted"
+            ></app-form-errors>
+          </div>
+        </div>
+
+        <!-- Botones -->
+        <div class="col-12 d-flex justify-content-end">
+          <button type="submit" class="btn btn-primary me-1 mb-1">
+            Actualizar
+          </button>
+        </div>
       </div>
-    </form>
-  </div>
+    </div>
+  </form>
 </app-generic-card>

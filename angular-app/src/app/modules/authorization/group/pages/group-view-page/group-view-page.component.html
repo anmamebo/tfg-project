@@ -3,15 +3,13 @@
   [pageDescription]="pageDescription"
   [breadcrumbData]="breadcrumbData"
 >
-  <div class="page-content">
-    <section class="section">
-      <div class="row">
-        <div class="col-12">
-          <ng-container *ngIf="group">
-            <app-view-group-card [group]="group"></app-view-group-card>
-          </ng-container>
-        </div>
+  <section class="section">
+    <div class="row">
+      <div class="col-12">
+        <ng-container *ngIf="group">
+          <app-view-group-card [group]="group"></app-view-group-card>
+        </ng-container>
       </div>
-    </section>
-  </div>
+    </div>
+  </section>
 </app-generic-page>

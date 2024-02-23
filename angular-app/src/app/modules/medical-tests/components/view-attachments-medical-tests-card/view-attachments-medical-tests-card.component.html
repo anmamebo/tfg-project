@@ -1,17 +1,15 @@
 <app-generic-card [hasCardHeader]="false">
-  <div class="card-content">
-    <div class="row justify-content-between">
-      <div class="col align-self-center">
-        <h5 class="mb-0">
-          Ficheros adjuntos <span>({{ attachments.length }})</span>
-        </h5>
-      </div>
-      <div *appHasRole="['Médico']" class="col">
-        <div class="d-flex justify-content-end">
-          <button [swal]="uploadFile" class="btn btn-primary">
-            Subir fichero
-          </button>
-        </div>
+  <div class="row justify-content-between">
+    <div class="col align-self-center">
+      <h5 class="mb-0">
+        Ficheros adjuntos <span>({{ attachments.length }})</span>
+      </h5>
+    </div>
+    <div *appHasRole="['Médico']" class="col">
+      <div class="d-flex justify-content-end">
+        <button [swal]="uploadFile" class="btn btn-primary">
+          Subir fichero
+        </button>
       </div>
     </div>
   </div>
@@ -32,7 +30,7 @@
         <i class="bi bi-x-lg"></i>
       </button>
 
-      <div class="card-content text-center">
+      <div class="text-center">
         <!-- Icono extensión fichero -->
         <ng-container
           *ngIf="

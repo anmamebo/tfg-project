@@ -1,28 +1,26 @@
 <app-generic-card [title]="titleCard">
-  <div class="card-content">
-    <div *ngIf="group; else loading" class="row">
-      <div class="col-md-6">
-        <div class="form-group">
-          <label for="id">ID:</label>
-          <p class="form-control-static" id="id">
-            {{ group.id }}
-          </p>
-        </div>
-      </div>
-
-      <div class="col-md-6">
-        <div class="form-group">
-          <label for="name">Nombre:</label>
-          <p class="form-control-static" id="name">
-            {{ group.name }}
-          </p>
-        </div>
+  <div *ngIf="group; else loading" class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="id">ID:</label>
+        <p class="form-control-static" id="id">
+          {{ group.id }}
+        </p>
       </div>
     </div>
-    <ng-template #loading>
-      <div class="row">
-        <app-loading-spinner></app-loading-spinner>
+
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="name">Nombre:</label>
+        <p class="form-control-static" id="name">
+          {{ group.name }}
+        </p>
       </div>
-    </ng-template>
+    </div>
   </div>
+  <ng-template #loading>
+    <div class="row">
+      <app-loading-spinner></app-loading-spinner>
+    </div>
+  </ng-template>
 </app-generic-card>

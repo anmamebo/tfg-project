@@ -3,85 +3,81 @@
   [pageDescription]="pageDescription"
   [breadcrumbData]="breadcrumbData"
 >
-  <div class="page-content">
-    <ng-container *ngIf="patient">
-      <section class="section">
-        <div class="row">
-          <div class="col-lg-8">
-            <app-view-basic-info-patients-card
-              [patient]="patient"
-            ></app-view-basic-info-patients-card>
-          </div>
-
-          <div class="col-lg-4">
-            <app-view-contact-info-patients-card
-              [patient]="patient"
-            ></app-view-contact-info-patients-card>
-          </div>
+  <ng-container *ngIf="patient">
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-8">
+          <app-view-basic-info-patients-card
+            [patient]="patient"
+          ></app-view-basic-info-patients-card>
         </div>
-      </section>
 
-      <section class="section">
-        <div class="row">
-          <div class="col-12">
-            <app-generic-card [hasCardHeader]="false">
-              <div class="card-content">
-                <ul class="nav nav-tabs" id="treatmentsTab" role="tablist">
-                  <li class="nav-item" role="presentation">
-                    <a
-                      class="nav-link active"
-                      id="active-treatments-tab"
-                      data-bs-toggle="tab"
-                      href="#active-treatments"
-                      role="tab"
-                      aria-controls="active-treatments"
-                      aria-selected="true"
-                      >Activos</a
-                    >
-                  </li>
-                  <li class="nav-item" role="presentation">
-                    <a
-                      class="nav-link"
-                      id="historical-treatments-tab"
-                      data-bs-toggle="tab"
-                      href="#historical-treatments"
-                      role="tab"
-                      aria-controls="historical-treatments"
-                      aria-selected="false"
-                      tabindex="-1"
-                      >Historial</a
-                    >
-                  </li>
-                </ul>
+        <div class="col-lg-4">
+          <app-view-contact-info-patients-card
+            [patient]="patient"
+          ></app-view-contact-info-patients-card>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="row">
+        <div class="col-12">
+          <app-generic-card [hasCardHeader]="false">
+            <ul class="nav nav-tabs" id="treatmentsTab" role="tablist">
+              <li class="nav-item" role="presentation">
+                <a
+                  class="nav-link active"
+                  id="active-treatments-tab"
+                  data-bs-toggle="tab"
+                  href="#active-treatments"
+                  role="tab"
+                  aria-controls="active-treatments"
+                  aria-selected="true"
+                  >Activos</a
+                >
+              </li>
+              <li class="nav-item" role="presentation">
+                <a
+                  class="nav-link"
+                  id="historical-treatments-tab"
+                  data-bs-toggle="tab"
+                  href="#historical-treatments"
+                  role="tab"
+                  aria-controls="historical-treatments"
+                  aria-selected="false"
+                  tabindex="-1"
+                  >Historial</a
+                >
+              </li>
+            </ul>
+          </app-generic-card>
+          <div class="card-body">
+            <div class="tab-content" id="treatmentsTabContent">
+              <div
+                class="tab-pane fade active show"
+                id="active-treatments"
+                role="tabpanel"
+                aria-labelledby="active-treatments-tab"
+              >
+                <app-list-treatments-patient-card
+                  [patientId]="patient.id"
+                ></app-list-treatments-patient-card>
               </div>
-            </app-generic-card>
-            <div class="card-body">
-              <div class="tab-content" id="treatmentsTabContent">
-                <div
-                  class="tab-pane fade active show"
-                  id="active-treatments"
-                  role="tabpanel"
-                  aria-labelledby="active-treatments-tab"
-                >
-                  <app-list-treatments-patient-card
-                    [patientId]="patient.id"
-                  ></app-list-treatments-patient-card>
-                </div>
-                <div
-                  class="tab-pane fade"
-                  id="historical-treatments"
-                  role="tabpanel"
-                  aria-labelledby="historical-treatments-tab"
-                >
-                  <app-list-treatments-historical-patient-card
-                    [patientId]="patient.id"
-                  ></app-list-treatments-historical-patient-card>
-                </div>
+              <div
+                class="tab-pane fade"
+                id="historical-treatments"
+                role="tabpanel"
+                aria-labelledby="historical-treatments-tab"
+              >
+                <app-list-treatments-historical-patient-card
+                  [patientId]="patient.id"
+                ></app-list-treatments-historical-patient-card>
               </div>
             </div>
           </div>
         </div>
-      </section>
-    </ng-container>
-  </div>
+      </div>
+    </section>
+  </ng-container>
 </app-generic-page>

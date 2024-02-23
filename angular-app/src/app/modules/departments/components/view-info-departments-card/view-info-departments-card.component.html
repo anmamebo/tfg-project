@@ -1,31 +1,29 @@
 <app-generic-card [title]="titleCard">
-  <div class="card-content">
-    <div *ngIf="department" class="row">
-      <div class="col-12">
-        <div class="form-group">
-          <label for="id">ID:</label>
-          <p class="form-control-static" id="id">
-            {{ department.id }}
-          </p>
-        </div>
+  <div *ngIf="department" class="row">
+    <div class="col-12">
+      <div class="form-group">
+        <label for="id">ID:</label>
+        <p class="form-control-static" id="id">
+          {{ department.id }}
+        </p>
       </div>
+    </div>
 
-      <div class="col-md-4">
-        <div class="form-group">
-          <label for="name">Nombre:</label>
-          <p class="form-control-static" id="name">
-            {{ department.name }}
-          </p>
-        </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="name">Nombre:</label>
+        <p class="form-control-static" id="name">
+          {{ department.name }}
+        </p>
       </div>
+    </div>
 
-      <div class="col-md-8">
-        <div class="form-group">
-          <label for="description">Descripción:</label>
-          <p class="form-control-static" id="description">
-            {{ department.description || "--" }}
-          </p>
-        </div>
+    <div class="col-md-8">
+      <div class="form-group">
+        <label for="description">Descripción:</label>
+        <p class="form-control-static" id="description">
+          {{ department.description || "--" }}
+        </p>
       </div>
     </div>
   </div>

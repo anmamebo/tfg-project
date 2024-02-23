@@ -2,90 +2,88 @@
   [hasCardHeader]="entityData.title.hasTitle"
   [title]="entityData.title.title || ''"
 >
-  <div class="card-content">
-    <div class="row mb-3 justify-content-between">
-      <div
-        *ngIf="entityData.search.hasSearch"
-        class="col-lg-4 col-md-6 col-12 mt-md-0 mt-3"
-      >
-        <app-search
-          [infoTooltipText]="entityData.search.searchInfoTooltip || ''"
-          [urlSearch]="urlSearch"
-          (searchSubmitted)="onSearchSubmitted($event)"
-        ></app-search>
-      </div>
-      <div class="col-lg-5 col-md-6 mt-md-0 mt-2 text-end">
-        <button
-          (click)="filterElements('all')"
-          class="btn btn-sm btn-primary rounded-pill me-2"
-          [ngClass]="{
-            'btn-primary': filter === 'all',
-            'btn-outline-primary': filter !== 'all'
-          }"
-        >
-          Todas
-        </button>
-        <button
-          (click)="filterElements('completed')"
-          class="btn btn-sm btn-primary rounded-pill me-2"
-          [ngClass]="{
-            'btn-primary': filter === 'completed',
-            'btn-outline-primary': filter !== 'completed'
-          }"
-        >
-          Completadas
-        </button>
-        <button
-          (click)="filterElements('no_show')"
-          class="btn btn-sm btn-primary rounded-pill me-2"
-          [ngClass]="{
-            'btn-primary': filter === 'no_show',
-            'btn-outline-primary': filter !== 'no_show'
-          }"
-        >
-          No presentados
-        </button>
-        <button
-          (click)="filterElements('cancelled')"
-          class="btn btn-sm btn-primary rounded-pill me-2"
-          [ngClass]="{
-            'btn-primary': filter === 'cancelled',
-            'btn-outline-primary': filter !== 'cancelled'
-          }"
-        >
-          Canceladas
-        </button>
-      </div>
+  <div class="row mb-3 justify-content-between">
+    <div
+      *ngIf="entityData.search.hasSearch"
+      class="col-lg-4 col-md-6 col-12 mt-md-0 mt-3"
+    >
+      <app-search
+        [infoTooltipText]="entityData.search.searchInfoTooltip || ''"
+        [urlSearch]="urlSearch"
+        (searchSubmitted)="onSearchSubmitted($event)"
+      ></app-search>
     </div>
-
-    <ng-container *ngIf="entityData.items; else noItems">
-      <app-table-appointments-doctor
-        [striped]="true"
-        [columns]="columns"
-        [data]="entityData.items"
-        [actions]="entityData.actions.hasActions"
-        [actionsUrls]="entityData.actions.actions"
-        (sortEvent)="sortItems($event)"
+    <div class="col-lg-5 col-md-6 mt-md-0 mt-2 text-end">
+      <button
+        (click)="filterElements('all')"
+        class="btn btn-sm btn-primary rounded-pill me-2"
+        [ngClass]="{
+          'btn-primary': filter === 'all',
+          'btn-outline-primary': filter !== 'all'
+        }"
       >
-      </app-table-appointments-doctor>
-
-      <app-elements-per-page
-        [totalElements]="entityData.numItems"
-        (elementsPerPageChangedEvent)="onEntriesPerPageChanged($event)"
+        Todas
+      </button>
+      <button
+        (click)="filterElements('completed')"
+        class="btn btn-sm btn-primary rounded-pill me-2"
+        [ngClass]="{
+          'btn-primary': filter === 'completed',
+          'btn-outline-primary': filter !== 'completed'
+        }"
       >
-      </app-elements-per-page>
-
-      <app-pagination
-        [page]="entityData.page"
-        [totalPages]="entityData.totalPages"
-        [numItems]="entityData.numItems"
-        (pageEmitter)="goToPage($event)"
+        Completadas
+      </button>
+      <button
+        (click)="filterElements('no_show')"
+        class="btn btn-sm btn-primary rounded-pill me-2"
+        [ngClass]="{
+          'btn-primary': filter === 'no_show',
+          'btn-outline-primary': filter !== 'no_show'
+        }"
       >
-      </app-pagination>
-    </ng-container>
-
-    <ng-template #noItems>
-      <app-loading-spinner></app-loading-spinner>
-    </ng-template>
+        No presentados
+      </button>
+      <button
+        (click)="filterElements('cancelled')"
+        class="btn btn-sm btn-primary rounded-pill me-2"
+        [ngClass]="{
+          'btn-primary': filter === 'cancelled',
+          'btn-outline-primary': filter !== 'cancelled'
+        }"
+      >
+        Canceladas
+      </button>
+    </div>
   </div>
+
+  <ng-container *ngIf="entityData.items; else noItems">
+    <app-table-appointments-doctor
+      [striped]="true"
+      [columns]="columns"
+      [data]="entityData.items"
+      [actions]="entityData.actions.hasActions"
+      [actionsUrls]="entityData.actions.actions"
+      (sortEvent)="sortItems($event)"
+    >
+    </app-table-appointments-doctor>
+
+    <app-elements-per-page
+      [totalElements]="entityData.numItems"
+      (elementsPerPageChangedEvent)="onEntriesPerPageChanged($event)"
+    >
+    </app-elements-per-page>
+
+    <app-pagination
+      [page]="entityData.page"
+      [totalPages]="entityData.totalPages"
+      [numItems]="entityData.numItems"
+      (pageEmitter)="goToPage($event)"
+    >
+    </app-pagination>
+  </ng-container>
+
+  <ng-template #noItems>
+    <app-loading-spinner></app-loading-spinner>
+  </ng-template>
 </app-generic-card>

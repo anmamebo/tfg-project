@@ -3,85 +3,81 @@
   [pageDescription]="pageDescription"
   [breadcrumbData]="breadcrumbData"
 >
-  <div class="page-content">
-    <ng-container *ngIf="patient">
-      <section class="section">
-        <div class="row">
-          <div class="col-lg-8">
-            <app-view-basic-info-patients-card
-              [patient]="patient"
-            ></app-view-basic-info-patients-card>
-          </div>
-
-          <div class="col-lg-4">
-            <app-view-contact-info-patients-card
-              [patient]="patient"
-            ></app-view-contact-info-patients-card>
-          </div>
+  <ng-container *ngIf="patient">
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-8">
+          <app-view-basic-info-patients-card
+            [patient]="patient"
+          ></app-view-basic-info-patients-card>
         </div>
-      </section>
 
-      <section class="section">
-        <div class="row">
-          <div class="col-12">
-            <app-generic-card [hasCardHeader]="false">
-              <div class="card-content">
-                <ul class="nav nav-tabs" id="appointmentsTab" role="tablist">
-                  <li class="nav-item" role="presentation">
-                    <a
-                      class="nav-link"
-                      id="next-appointments-tab"
-                      data-bs-toggle="tab"
-                      href="#next-appointments"
-                      role="tab"
-                      aria-controls="next-appointments"
-                      aria-selected="false"
-                      >Próximas Citas</a
-                    >
-                  </li>
-                  <li class="nav-item" role="presentation">
-                    <a
-                      class="nav-link active"
-                      id="historical-appointments-tab"
-                      data-bs-toggle="tab"
-                      href="#historical-appointments"
-                      role="tab"
-                      aria-controls="historical-appointments"
-                      aria-selected="true"
-                      tabindex="-1"
-                      >Historial</a
-                    >
-                  </li>
-                </ul>
+        <div class="col-lg-4">
+          <app-view-contact-info-patients-card
+            [patient]="patient"
+          ></app-view-contact-info-patients-card>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="row">
+        <div class="col-12">
+          <app-generic-card [hasCardHeader]="false">
+            <ul class="nav nav-tabs" id="appointmentsTab" role="tablist">
+              <li class="nav-item" role="presentation">
+                <a
+                  class="nav-link"
+                  id="next-appointments-tab"
+                  data-bs-toggle="tab"
+                  href="#next-appointments"
+                  role="tab"
+                  aria-controls="next-appointments"
+                  aria-selected="false"
+                  >Próximas Citas</a
+                >
+              </li>
+              <li class="nav-item" role="presentation">
+                <a
+                  class="nav-link active"
+                  id="historical-appointments-tab"
+                  data-bs-toggle="tab"
+                  href="#historical-appointments"
+                  role="tab"
+                  aria-controls="historical-appointments"
+                  aria-selected="true"
+                  tabindex="-1"
+                  >Historial</a
+                >
+              </li>
+            </ul>
+          </app-generic-card>
+          <div class="card-body">
+            <div class="tab-content" id="appointmentsTabContent">
+              <div
+                class="tab-pane fade"
+                id="next-appointments"
+                role="tabpanel"
+                aria-labelledby="next-appointments-tab"
+              >
+                <app-list-appointments-patient-card
+                  [patientId]="patient.id"
+                ></app-list-appointments-patient-card>
               </div>
-            </app-generic-card>
-            <div class="card-body">
-              <div class="tab-content" id="appointmentsTabContent">
-                <div
-                  class="tab-pane fade"
-                  id="next-appointments"
-                  role="tabpanel"
-                  aria-labelledby="next-appointments-tab"
-                >
-                  <app-list-appointments-patient-card
-                    [patientId]="patient.id"
-                  ></app-list-appointments-patient-card>
-                </div>
-                <div
-                  class="tab-pane fade active show"
-                  id="historical-appointments"
-                  role="tabpanel"
-                  aria-labelledby="historical-appointments-tab"
-                >
-                  <app-list-appointments-historical-patient-card
-                    [patientId]="patient.id"
-                  ></app-list-appointments-historical-patient-card>
-                </div>
+              <div
+                class="tab-pane fade active show"
+                id="historical-appointments"
+                role="tabpanel"
+                aria-labelledby="historical-appointments-tab"
+              >
+                <app-list-appointments-historical-patient-card
+                  [patientId]="patient.id"
+                ></app-list-appointments-historical-patient-card>
               </div>
             </div>
           </div>
         </div>
-      </section>
-    </ng-container>
-  </div>
+      </div>
+    </section>
+  </ng-container>
 </app-generic-page>

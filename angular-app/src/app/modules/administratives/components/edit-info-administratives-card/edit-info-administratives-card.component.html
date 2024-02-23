@@ -1,108 +1,106 @@
 <app-generic-card [title]="titleCard">
-  <div class="card-content">
-    <form
-      (ngSubmit)="onSubmit()"
-      [formGroup]="editInfoAdministrativeForm"
-      class="form form-horizontal"
-    >
-      <div class="form-body">
-        <div class="row">
-          <!-- Nombre de usuario -->
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="username">Nombre de usuario*</label>
-              <input
-                type="text"
-                formControlName="username"
-                class="form-control"
-                id="username"
-                placeholder="Nombre de usuario"
-                [ngClass]="{
-                  'is-invalid': submitted && form.get('username')?.errors
-                }"
-              />
+  <form
+    (ngSubmit)="onSubmit()"
+    [formGroup]="editInfoAdministrativeForm"
+    class="form form-horizontal"
+  >
+    <div class="form-body">
+      <div class="row">
+        <!-- Nombre de usuario -->
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="username">Nombre de usuario*</label>
+            <input
+              type="text"
+              formControlName="username"
+              class="form-control"
+              id="username"
+              placeholder="Nombre de usuario"
+              [ngClass]="{
+                'is-invalid': submitted && form.get('username')?.errors
+              }"
+            />
 
-              <app-form-errors
-                [control]="form.get('username')"
-                [submitted]="submitted"
-              ></app-form-errors>
-            </div>
-          </div>
-
-          <!-- Email -->
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="email">Email*</label>
-              <input
-                type="text"
-                formControlName="email"
-                class="form-control"
-                id="email"
-                placeholder="Email"
-                [ngClass]="{
-                  'is-invalid': submitted && form.get('email')?.errors
-                }"
-              />
-
-              <app-form-errors
-                [control]="form.get('email')"
-                [submitted]="submitted"
-              ></app-form-errors>
-            </div>
-          </div>
-
-          <!-- Nombre -->
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="name">Nombre*</label>
-              <input
-                type="text"
-                formControlName="name"
-                class="form-control"
-                id="name"
-                placeholder="Nombre"
-                [ngClass]="{
-                  'is-invalid': submitted && form.get('name')?.errors
-                }"
-              />
-
-              <app-form-errors
-                [control]="form.get('name')"
-                [submitted]="submitted"
-              ></app-form-errors>
-            </div>
-          </div>
-
-          <!-- Apellidos -->
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="last_name">Apellidos*</label>
-              <input
-                type="text"
-                formControlName="last_name"
-                class="form-control"
-                id="last_name"
-                placeholder="Apellidos"
-                [ngClass]="{
-                  'is-invalid': submitted && form.get('last_name')?.errors
-                }"
-              />
-
-              <app-form-errors
-                [control]="form.get('last_name')"
-                [submitted]="submitted"
-              ></app-form-errors>
-            </div>
-          </div>
-
-          <!-- Botones -->
-          <div class="col-12 d-flex justify-content-end">
-            <button type="submit" class="btn btn-primary me-1 mb-1">
-              Actualizar
-            </button>
+            <app-form-errors
+              [control]="form.get('username')"
+              [submitted]="submitted"
+            ></app-form-errors>
           </div>
         </div>
+
+        <!-- Email -->
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="email">Email*</label>
+            <input
+              type="text"
+              formControlName="email"
+              class="form-control"
+              id="email"
+              placeholder="Email"
+              [ngClass]="{
+                'is-invalid': submitted && form.get('email')?.errors
+              }"
+            />
+
+            <app-form-errors
+              [control]="form.get('email')"
+              [submitted]="submitted"
+            ></app-form-errors>
+          </div>
+        </div>
+
+        <!-- Nombre -->
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="name">Nombre*</label>
+            <input
+              type="text"
+              formControlName="name"
+              class="form-control"
+              id="name"
+              placeholder="Nombre"
+              [ngClass]="{
+                'is-invalid': submitted && form.get('name')?.errors
+              }"
+            />
+
+            <app-form-errors
+              [control]="form.get('name')"
+              [submitted]="submitted"
+            ></app-form-errors>
+          </div>
+        </div>
+
+        <!-- Apellidos -->
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="last_name">Apellidos*</label>
+            <input
+              type="text"
+              formControlName="last_name"
+              class="form-control"
+              id="last_name"
+              placeholder="Apellidos"
+              [ngClass]="{
+                'is-invalid': submitted && form.get('last_name')?.errors
+              }"
+            />
+
+            <app-form-errors
+              [control]="form.get('last_name')"
+              [submitted]="submitted"
+            ></app-form-errors>
+          </div>
+        </div>
+
+        <!-- Botones -->
+        <div class="col-12 d-flex justify-content-end">
+          <button type="submit" class="btn btn-primary me-1 mb-1">
+            Actualizar
+          </button>
+        </div>
       </div>
-    </form>
-  </div>
+    </div>
+  </form>
 </app-generic-card>

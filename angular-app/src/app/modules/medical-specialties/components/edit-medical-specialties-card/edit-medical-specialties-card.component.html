@@ -1,81 +1,79 @@
 <app-generic-card [title]="titleCard">
-  <div class="card-content">
-    <form
-      *ngIf="medicalSpecialty"
-      (ngSubmit)="onSubmit()"
-      [formGroup]="editMedicalSpecialtyForm"
-      class="form form-horizontal"
-    >
-      <div class="form-body">
-        <div class="row">
-          <div class="col-md-6">
-            <!-- Nombre -->
-            <div class="form-group">
-              <label for="name">Nombre*</label>
-              <input
-                type="text"
-                formControlName="name"
-                class="form-control"
-                id="name"
-                placeholder="Nombre"
-                [ngClass]="{
-                  'is-invalid': submitted && form.get('name')?.errors
-                }"
-              />
+  <form
+    *ngIf="medicalSpecialty"
+    (ngSubmit)="onSubmit()"
+    [formGroup]="editMedicalSpecialtyForm"
+    class="form form-horizontal"
+  >
+    <div class="form-body">
+      <div class="row">
+        <div class="col-md-6">
+          <!-- Nombre -->
+          <div class="form-group">
+            <label for="name">Nombre*</label>
+            <input
+              type="text"
+              formControlName="name"
+              class="form-control"
+              id="name"
+              placeholder="Nombre"
+              [ngClass]="{
+                'is-invalid': submitted && form.get('name')?.errors
+              }"
+            />
 
-              <app-form-errors
-                [control]="form.get('name')"
-                [submitted]="submitted"
-              ></app-form-errors>
-            </div>
-
-            <!-- Departamento -->
-            <div class="form-group">
-              <label for="department">Departamento*</label>
-
-              <ng-multiselect-dropdown
-                [placeholder]="'Selecciona un departamento'"
-                [settings]="dropdownSettings"
-                [data]="departments"
-                formControlName="department"
-              ></ng-multiselect-dropdown>
-
-              <app-form-errors
-                [control]="form.get('department')"
-                [submitted]="submitted"
-              ></app-form-errors>
-            </div>
+            <app-form-errors
+              [control]="form.get('name')"
+              [submitted]="submitted"
+            ></app-form-errors>
           </div>
 
-          <!-- Descripción -->
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="description">Descripción</label>
-              <textarea
-                formControlName="description"
-                class="form-control"
-                id="description"
-                rows="5"
-                [ngClass]="{
-                  'is-invalid': submitted && form.get('description')?.errors
-                }"
-              ></textarea>
+          <!-- Departamento -->
+          <div class="form-group">
+            <label for="department">Departamento*</label>
 
-              <app-form-errors
-                [control]="form.get('description')"
-                [submitted]="submitted"
-              ></app-form-errors>
-            </div>
-          </div>
+            <ng-multiselect-dropdown
+              [placeholder]="'Selecciona un departamento'"
+              [settings]="dropdownSettings"
+              [data]="departments"
+              formControlName="department"
+            ></ng-multiselect-dropdown>
 
-          <!-- Botones -->
-          <div class="col-12 d-flex justify-content-end">
-            <button type="submit" class="btn btn-primary me-1 mb-1">
-              Actualizar
-            </button>
+            <app-form-errors
+              [control]="form.get('department')"
+              [submitted]="submitted"
+            ></app-form-errors>
           </div>
         </div>
+
+        <!-- Descripción -->
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="description">Descripción</label>
+            <textarea
+              formControlName="description"
+              class="form-control"
+              id="description"
+              rows="5"
+              [ngClass]="{
+                'is-invalid': submitted && form.get('description')?.errors
+              }"
+            ></textarea>
+
+            <app-form-errors
+              [control]="form.get('description')"
+              [submitted]="submitted"
+            ></app-form-errors>
+          </div>
+        </div>
+
+        <!-- Botones -->
+        <div class="col-12 d-flex justify-content-end">
+          <button type="submit" class="btn btn-primary me-1 mb-1">
+            Actualizar
+          </button>
+        </div>
       </div>
-    </form>
-  </div>
+    </div>
+  </form>
 </app-generic-card>

@@ -1,49 +1,47 @@
 <app-generic-card [title]="titleCard">
-  <div class="card-content">
-    <div *ngIf="administrative" class="row">
-      <div class="col-12">
-        <div class="form-group">
-          <label for="id">ID:</label>
-          <p class="form-control-static" id="id">
-            {{ administrative.id }}
-          </p>
-        </div>
+  <div *ngIf="administrative" class="row">
+    <div class="col-12">
+      <div class="form-group">
+        <label for="id">ID:</label>
+        <p class="form-control-static" id="id">
+          {{ administrative.id }}
+        </p>
       </div>
+    </div>
 
-      <div class="col-md-6">
-        <div class="form-group">
-          <label for="username">Nombre de usuario:</label>
-          <p class="form-control-static" id="username">
-            {{ administrative.username }}
-          </p>
-        </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="username">Nombre de usuario:</label>
+        <p class="form-control-static" id="username">
+          {{ administrative.username }}
+        </p>
       </div>
+    </div>
 
-      <div class="col-md-6">
-        <div class="form-group">
-          <label for="email">Email:</label>
-          <p class="form-control-static" id="email">
-            {{ administrative.email }}
-          </p>
-        </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <p class="form-control-static" id="email">
+          {{ administrative.email }}
+        </p>
       </div>
+    </div>
 
-      <div class="col-md-6">
-        <div class="form-group">
-          <label for="name">Nombre:</label>
-          <p class="form-control-static" id="name">
-            {{ administrative.name }}
-          </p>
-        </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="name">Nombre:</label>
+        <p class="form-control-static" id="name">
+          {{ administrative.name }}
+        </p>
       </div>
+    </div>
 
-      <div class="col-md-6">
-        <div class="form-group">
-          <label for="last_name">Apellidos:</label>
-          <p class="form-control-static" id="last_name">
-            {{ administrative.last_name }}
-          </p>
-        </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="last_name">Apellidos:</label>
+        <p class="form-control-static" id="last_name">
+          {{ administrative.last_name }}
+        </p>
       </div>
     </div>
   </div>

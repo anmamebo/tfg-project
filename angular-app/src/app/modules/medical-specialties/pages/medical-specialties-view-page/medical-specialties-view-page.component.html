@@ -3,26 +3,24 @@
   [pageDescription]="pageDescription"
   [breadcrumbData]="breadcrumbData"
 >
-  <div class="page-content">
-    <ng-container *ngIf="medicalSpecialty">
-      <section *appHasRole="buttonsRoles" class="section">
-        <app-buttons-medical-specialties-card
-          *ngIf="medicalSpecialty.id && medicalSpecialty.state !== undefined"
-          [medicalSpecialtyId]="medicalSpecialty.id"
-          [isActive]="medicalSpecialty.state"
-          (refreshMedicalSpecialty)="onRefreshMedicalSpecialty()"
-        ></app-buttons-medical-specialties-card>
-      </section>
+  <ng-container *ngIf="medicalSpecialty">
+    <section *appHasRole="buttonsRoles" class="section">
+      <app-buttons-medical-specialties-card
+        *ngIf="medicalSpecialty.id && medicalSpecialty.state !== undefined"
+        [medicalSpecialtyId]="medicalSpecialty.id"
+        [isActive]="medicalSpecialty.state"
+        (refreshMedicalSpecialty)="onRefreshMedicalSpecialty()"
+      ></app-buttons-medical-specialties-card>
+    </section>
 
-      <section class="section">
-        <div class="row">
-          <div class="col-12">
-            <app-view-medical-specialties-card
-              [medicalSpecialty]="medicalSpecialty"
-            ></app-view-medical-specialties-card>
-          </div>
+    <section class="section">
+      <div class="row">
+        <div class="col-12">
+          <app-view-medical-specialties-card
+            [medicalSpecialty]="medicalSpecialty"
+          ></app-view-medical-specialties-card>
         </div>
-      </section>
-    </ng-container>
-  </div>
+      </div>
+    </section>
+  </ng-container>
 </app-generic-page>

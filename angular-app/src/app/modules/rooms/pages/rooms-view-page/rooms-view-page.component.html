@@ -3,24 +3,22 @@
   [pageDescription]="pageDescription"
   [breadcrumbData]="breadcrumbData"
 >
-  <div class="page-content">
-    <ng-container *ngIf="room">
-      <section *appHasRole="buttonsRoles" class="section">
-        <app-buttons-rooms-card
-          *ngIf="room.id && room.is_available !== undefined"
-          [roomId]="room.id"
-          [isActive]="room.is_available"
-          (refreshRoom)="onRefreshRoom()"
-        ></app-buttons-rooms-card>
-      </section>
+  <ng-container *ngIf="room">
+    <section *appHasRole="buttonsRoles" class="section">
+      <app-buttons-rooms-card
+        *ngIf="room.id && room.is_available !== undefined"
+        [roomId]="room.id"
+        [isActive]="room.is_available"
+        (refreshRoom)="onRefreshRoom()"
+      ></app-buttons-rooms-card>
+    </section>
 
-      <section class="section">
-        <div class="row">
-          <div class="col-12">
-            <app-view-info-rooms-card [room]="room"></app-view-info-rooms-card>
-          </div>
+    <section class="section">
+      <div class="row">
+        <div class="col-12">
+          <app-view-info-rooms-card [room]="room"></app-view-info-rooms-card>
         </div>
-      </section>
-    </ng-container>
-  </div>
+      </div>
+    </section>
+  </ng-container>
 </app-generic-page>

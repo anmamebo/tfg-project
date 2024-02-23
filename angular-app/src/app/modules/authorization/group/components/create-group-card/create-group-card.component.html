@@ -1,40 +1,36 @@
 <app-generic-card [title]="titleCard">
-  <div class="card-content">
-    <!-- Formulario -->
-    <form
-      (ngSubmit)="onSubmit()"
-      [formGroup]="createGroupForm"
-      class="form form-horizontal"
-    >
-      <div class="form-body">
-        <div class="row">
-          <div class="col-md-1">
-            <label for="group-name">Nombre</label>
-          </div>
-          <div class="col-md-5 col-6 form-group">
-            <input
-              type="text"
-              formControlName="name"
-              id="group-name"
-              class="form-control"
-              placeholder="Nombre"
-              [ngClass]="{
-                'is-invalid': submitted && form.get('name')?.errors
-              }"
-            />
+  <!-- Formulario -->
+  <form
+    (ngSubmit)="onSubmit()"
+    [formGroup]="createGroupForm"
+    class="form form-horizontal"
+  >
+    <div class="form-body">
+      <div class="row">
+        <div class="col-md-1">
+          <label for="group-name">Nombre</label>
+        </div>
+        <div class="col-md-5 col-6 form-group">
+          <input
+            type="text"
+            formControlName="name"
+            id="group-name"
+            class="form-control"
+            placeholder="Nombre"
+            [ngClass]="{
+              'is-invalid': submitted && form.get('name')?.errors
+            }"
+          />
 
-            <app-form-errors
-              [control]="form.get('name')"
-              [submitted]="submitted"
-            ></app-form-errors>
-          </div>
-          <div class="col-md-3 col-6">
-            <button type="submit" class="btn btn-primary me-1 mb-1">
-              Crear
-            </button>
-          </div>
+          <app-form-errors
+            [control]="form.get('name')"
+            [submitted]="submitted"
+          ></app-form-errors>
+        </div>
+        <div class="col-md-3 col-6">
+          <button type="submit" class="btn btn-primary me-1 mb-1">Crear</button>
         </div>
       </div>
-    </form>
-  </div>
+    </div>
+  </form>
 </app-generic-card>

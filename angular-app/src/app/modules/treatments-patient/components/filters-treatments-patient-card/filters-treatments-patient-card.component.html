@@ -14,82 +14,80 @@
   </p>
   <div class="collapse" id="collapseFilters">
     <app-generic-card [hasCardHeader]="false">
-      <div class="card-content">
-        <form
-          (ngSubmit)="onSubmit()"
-          [formGroup]="filtersForm"
-          class="form form-horizontal"
-        >
-          <div class="row">
-            <!-- Estados -->
-            <div class="col-md-4 col-12">
-              <div class="form-group">
-                <label for="status">Estados</label>
-                <ng-multiselect-dropdown
-                  [placeholder]="'Selecciona un/os estado/s'"
-                  [settings]="dropdownSettings"
-                  [data]="statuses"
-                  formControlName="statuses"
-                ></ng-multiselect-dropdown>
-              </div>
-            </div>
-
-            <!-- Fecha comienzo -->
-            <div class="col-md-4 col-12">
-              <div class="form-group">
-                <label for="startDate">Fecha comienzo</label>
-                <input
-                  type="text"
-                  formControlName="startDate"
-                  id="startDate"
-                  class="form-control"
-                  mwlFlatpickr
-                  [convertModelValue]="true"
-                  [locale]="locale"
-                  [dateFormat]="'d-m-Y'"
-                  [monthSelectorType]="'dropdown'"
-                  placeholder="Fecha comienzo"
-                  [mode]="'range'"
-                />
-              </div>
-            </div>
-
-            <!-- Fecha fin -->
-            <div *ngIf="typePage === 'historical'" class="col-md-4 col-12">
-              <div class="form-group">
-                <label for="endDate">Fecha fin</label>
-                <input
-                  type="text"
-                  formControlName="endDate"
-                  id="endDate"
-                  class="form-control"
-                  mwlFlatpickr
-                  [convertModelValue]="true"
-                  [locale]="locale"
-                  [dateFormat]="'d-m-Y'"
-                  [monthSelectorType]="'dropdown'"
-                  placeholder="Fecha fin"
-                  [mode]="'range'"
-                />
-              </div>
+      <form
+        (ngSubmit)="onSubmit()"
+        [formGroup]="filtersForm"
+        class="form form-horizontal"
+      >
+        <div class="row">
+          <!-- Estados -->
+          <div class="col-md-4 col-12">
+            <div class="form-group">
+              <label for="status">Estados</label>
+              <ng-multiselect-dropdown
+                [placeholder]="'Selecciona un/os estado/s'"
+                [settings]="dropdownSettings"
+                [data]="statuses"
+                formControlName="statuses"
+              ></ng-multiselect-dropdown>
             </div>
           </div>
 
-          <div class="row">
-            <!-- Botones -->
-            <div class="col-12 d-flex justify-content-end">
-              <button
-                type="button"
-                class="btn btn-outline-primary me-2"
-                (click)="onReset()"
-              >
-                Resetear
-              </button>
-              <button type="submit" class="btn btn-primary">Aplicar</button>
+          <!-- Fecha comienzo -->
+          <div class="col-md-4 col-12">
+            <div class="form-group">
+              <label for="startDate">Fecha comienzo</label>
+              <input
+                type="text"
+                formControlName="startDate"
+                id="startDate"
+                class="form-control"
+                mwlFlatpickr
+                [convertModelValue]="true"
+                [locale]="locale"
+                [dateFormat]="'d-m-Y'"
+                [monthSelectorType]="'dropdown'"
+                placeholder="Fecha comienzo"
+                [mode]="'range'"
+              />
             </div>
           </div>
-        </form>
-      </div>
+
+          <!-- Fecha fin -->
+          <div *ngIf="typePage === 'historical'" class="col-md-4 col-12">
+            <div class="form-group">
+              <label for="endDate">Fecha fin</label>
+              <input
+                type="text"
+                formControlName="endDate"
+                id="endDate"
+                class="form-control"
+                mwlFlatpickr
+                [convertModelValue]="true"
+                [locale]="locale"
+                [dateFormat]="'d-m-Y'"
+                [monthSelectorType]="'dropdown'"
+                placeholder="Fecha fin"
+                [mode]="'range'"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <!-- Botones -->
+          <div class="col-12 d-flex justify-content-end">
+            <button
+              type="button"
+              class="btn btn-outline-primary me-2"
+              (click)="onReset()"
+            >
+              Resetear
+            </button>
+            <button type="submit" class="btn btn-primary">Aplicar</button>
+          </div>
+        </div>
+      </form>
     </app-generic-card>
   </div>
 </div>

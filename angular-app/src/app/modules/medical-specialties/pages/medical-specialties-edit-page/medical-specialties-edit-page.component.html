@@ -3,17 +3,15 @@
   [pageDescription]="pageDescription"
   [breadcrumbData]="breadcrumbData"
 >
-  <div class="page-content">
-    <ng-container *ngIf="medicalSpecialty">
-      <section class="section">
-        <div class="row">
-          <div class="col-md-12">
-            <app-edit-medical-specialties-card
-              [medicalSpecialty]="medicalSpecialty"
-            ></app-edit-medical-specialties-card>
-          </div>
+  <ng-container *ngIf="medicalSpecialty">
+    <section class="section">
+      <div class="row">
+        <div class="col-md-12">
+          <app-edit-medical-specialties-card
+            [medicalSpecialty]="medicalSpecialty"
+          ></app-edit-medical-specialties-card>
         </div>
-      </section>
-    </ng-container>
-  </div>
+      </div>
+    </section>
+  </ng-container>
 </app-generic-page>

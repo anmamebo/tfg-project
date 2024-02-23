@@ -3,25 +3,23 @@
   [pageDescription]="pageDescription"
   [breadcrumbData]="breadcrumbData"
 >
-  <div class="page-content">
-    <section class="section">
-      <div class="row">
-        <div class="col-12">
-          <app-create-group-card
-            (groupCreated)="updateGroupList()"
-          ></app-create-group-card>
-        </div>
+  <section class="section">
+    <div class="row">
+      <div class="col-12">
+        <app-create-group-card
+          (groupCreated)="updateGroupList()"
+        ></app-create-group-card>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="section">
-      <div class="row">
-        <div class="col-12">
-          <app-generic-list-card
-            [entityData]="entityData"
-          ></app-generic-list-card>
-        </div>
+  <section class="section">
+    <div class="row">
+      <div class="col-12">
+        <app-generic-list-card
+          [entityData]="entityData"
+        ></app-generic-list-card>
       </div>
-    </section>
-  </div>
+    </div>
+  </section>
 </app-generic-page>

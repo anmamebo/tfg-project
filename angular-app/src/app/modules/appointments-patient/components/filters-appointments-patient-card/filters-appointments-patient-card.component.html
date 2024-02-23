@@ -15,109 +15,107 @@
 
   <div class="collapse" id="collapseFilters">
     <app-generic-card [hasCardHeader]="false">
-      <div class="card-content">
-        <form
-          (ngSubmit)="onSubmit()"
-          [formGroup]="filtersForm"
-          class="form form-horizontal"
-        >
-          <div class="row">
-            <!-- Estados -->
-            <div class="col-md-4 col-12">
-              <div class="form-group">
-                <label for="status">Estados</label>
-                <ng-multiselect-dropdown
-                  [placeholder]="'Selecciona un/os estado/s'"
-                  [settings]="dropdownSettings"
-                  [data]="statuses"
-                  formControlName="statuses"
-                ></ng-multiselect-dropdown>
-              </div>
-            </div>
-
-            <!-- Tipos -->
-            <div class="col-md-4 col-12">
-              <div class="form-group">
-                <label for="types">Tipos</label>
-                <ng-multiselect-dropdown
-                  [placeholder]="'Selecciona un/os tipo/s'"
-                  [settings]="dropdownSettings"
-                  [data]="types"
-                  formControlName="types"
-                ></ng-multiselect-dropdown>
-              </div>
-            </div>
-
-            <!-- Especialidades -->
-            <div class="col-md-4 col-12">
-              <div class="form-group">
-                <label for="specialties">Especialidades</label>
-                <ng-multiselect-dropdown
-                  [placeholder]="'Selecciona una/s especialidad/es'"
-                  [settings]="dropdownSettings"
-                  [data]="medicalSpecialties"
-                  formControlName="specialties"
-                ></ng-multiselect-dropdown>
-              </div>
+      <form
+        (ngSubmit)="onSubmit()"
+        [formGroup]="filtersForm"
+        class="form form-horizontal"
+      >
+        <div class="row">
+          <!-- Estados -->
+          <div class="col-md-4 col-12">
+            <div class="form-group">
+              <label for="status">Estados</label>
+              <ng-multiselect-dropdown
+                [placeholder]="'Selecciona un/os estado/s'"
+                [settings]="dropdownSettings"
+                [data]="statuses"
+                formControlName="statuses"
+              ></ng-multiselect-dropdown>
             </div>
           </div>
-          <div class="row">
-            <!-- Fecha cita -->
-            <div class="col-md-4 col-12">
-              <div class="form-group">
-                <label for="date">Fecha cita</label>
-                <input
-                  type="text"
-                  formControlName="date"
-                  id="date"
-                  class="form-control"
-                  mwlFlatpickr
-                  [convertModelValue]="true"
-                  [locale]="locale"
-                  [dateFormat]="'d-m-Y'"
-                  [monthSelectorType]="'dropdown'"
-                  placeholder="Fecha cita"
-                  [mode]="'range'"
-                />
-              </div>
-            </div>
 
-            <!-- Fecha solicitud -->
-            <div class="col-md-4 col-12">
-              <div class="form-group">
-                <label for="requestDate">Fecha solicitud</label>
-                <input
-                  type="text"
-                  formControlName="requestDate"
-                  id="date"
-                  class="form-control"
-                  mwlFlatpickr
-                  [convertModelValue]="true"
-                  [locale]="locale"
-                  [maxDate]="'today'"
-                  [dateFormat]="'d-m-Y'"
-                  [monthSelectorType]="'dropdown'"
-                  placeholder="Fecha solicitud"
-                  [mode]="'range'"
-                />
-              </div>
+          <!-- Tipos -->
+          <div class="col-md-4 col-12">
+            <div class="form-group">
+              <label for="types">Tipos</label>
+              <ng-multiselect-dropdown
+                [placeholder]="'Selecciona un/os tipo/s'"
+                [settings]="dropdownSettings"
+                [data]="types"
+                formControlName="types"
+              ></ng-multiselect-dropdown>
             </div>
           </div>
-          <div class="row">
-            <!-- Botones -->
-            <div class="col-12 d-flex justify-content-end">
-              <button
-                type="button"
-                class="btn btn-outline-primary me-2"
-                (click)="onReset()"
-              >
-                Resetear
-              </button>
-              <button type="submit" class="btn btn-primary">Aplicar</button>
+
+          <!-- Especialidades -->
+          <div class="col-md-4 col-12">
+            <div class="form-group">
+              <label for="specialties">Especialidades</label>
+              <ng-multiselect-dropdown
+                [placeholder]="'Selecciona una/s especialidad/es'"
+                [settings]="dropdownSettings"
+                [data]="medicalSpecialties"
+                formControlName="specialties"
+              ></ng-multiselect-dropdown>
             </div>
           </div>
-        </form>
-      </div>
+        </div>
+        <div class="row">
+          <!-- Fecha cita -->
+          <div class="col-md-4 col-12">
+            <div class="form-group">
+              <label for="date">Fecha cita</label>
+              <input
+                type="text"
+                formControlName="date"
+                id="date"
+                class="form-control"
+                mwlFlatpickr
+                [convertModelValue]="true"
+                [locale]="locale"
+                [dateFormat]="'d-m-Y'"
+                [monthSelectorType]="'dropdown'"
+                placeholder="Fecha cita"
+                [mode]="'range'"
+              />
+            </div>
+          </div>
+
+          <!-- Fecha solicitud -->
+          <div class="col-md-4 col-12">
+            <div class="form-group">
+              <label for="requestDate">Fecha solicitud</label>
+              <input
+                type="text"
+                formControlName="requestDate"
+                id="date"
+                class="form-control"
+                mwlFlatpickr
+                [convertModelValue]="true"
+                [locale]="locale"
+                [maxDate]="'today'"
+                [dateFormat]="'d-m-Y'"
+                [monthSelectorType]="'dropdown'"
+                placeholder="Fecha solicitud"
+                [mode]="'range'"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <!-- Botones -->
+          <div class="col-12 d-flex justify-content-end">
+            <button
+              type="button"
+              class="btn btn-outline-primary me-2"
+              (click)="onReset()"
+            >
+              Resetear
+            </button>
+            <button type="submit" class="btn btn-primary">Aplicar</button>
+          </div>
+        </div>
+      </form>
     </app-generic-card>
   </div>
 </div>
