@@ -2,9 +2,9 @@
   <div class="d-flex flex-column flex-md-row text-center text-md-start mb-3">
     <app-avatar
       [name]="user.name"
-      [extraClasses]="['avatar-xl', 'me-4', 'flex-shrink-0']"
+      [extraClasses]="['avatar-xl', 'me-md-4', 'flex-shrink-0']"
     ></app-avatar>
-    <div class="flex-fill">
+    <div class="flex-fill mt-md-0 mt-3">
       <h5 class="mb-3">{{ user.name }}</h5>
       <button
         [swal]="changeAvatar"
@@ -70,9 +70,9 @@
               <div class="form-group">
                 <app-avatar
                   [name]="user.name"
-                  [extraClasses]="['avatar-xl', 'me-4', 'flex-shrink-0']"
+                  [extraClasses]="['avatar-xl', 'me-md-4', 'flex-shrink-0']"
                 ></app-avatar>
-                <div class="flex-fill">
+                <div class="flex-fill mt-md-0 mt-2">
                   <h5 class="mb-3">{{ user.name }}</h5>
                   <input
                     type="file"
@@ -102,10 +102,8 @@
             </div>
           </div>
         </div>
-        <div class="form-actions">
-          <button type="submit" class="btn btn-outline-primary me-1">
-            Guardar
-          </button>
+        <div class="form-actions mt-2">
+          <button type="submit" class="btn btn-primary me-2">Guardar</button>
           <button
             type="reset"
             class="btn btn-outline-danger"
