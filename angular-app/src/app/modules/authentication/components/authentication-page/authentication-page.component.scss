@@ -83,5 +83,9 @@ html[data-bs-theme="dark"] {
   position: absolute;
   right: 0 !important;
   left: auto !important;
-  padding-right: 3rem !important;
+  padding-right: 1rem !important;
+}
+
+.form-password.form-control.is-invalid {
+  background-position: right calc(2.6em + 0.1875rem) center !important;
 }

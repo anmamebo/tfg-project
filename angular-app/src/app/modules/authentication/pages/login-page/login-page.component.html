@@ -28,7 +28,7 @@
       <input
         [type]="showPassword ? 'text' : 'password'"
         formControlName="password"
-        class="form-control form-control-xl"
+        class="form-control form-control-xl form-password"
         placeholder="Contraseña"
         [ngClass]="{
           'is-invalid': submitted && form.get('password')?.errors
