@@ -18,9 +18,6 @@ import { NotificationService } from 'src/app/core/services/notifications/notific
   providers: [RoomService, DepartmentService],
 })
 export class CreateRoomsCardComponent implements OnInit {
-  /** Título de la tarjeta */
-  public titleCard: string = 'Formulario Sala';
-
   /** Formulario para la información de la sala */
   public createRoomForm: FormGroup = new FormGroup({});
 

@@ -1,5 +1,4 @@
-<app-generic-card [title]="titleCard">
-  <!-- Formulario -->
+<app-generic-card [hasCardHeader]="false">
   <form
     (ngSubmit)="onSubmit()"
     [formGroup]="editGroupForm"
@@ -7,7 +6,8 @@
   >
     <div class="form-body">
       <div class="row">
-        <div class="col-12">
+        <!-- Nombre -->
+        <div class="col col-sm-6 col-xl-4">
           <div class="form-group">
             <label for="group-name">Nombre</label>
             <input
@@ -27,12 +27,12 @@
             ></app-form-errors>
           </div>
         </div>
-        <div class="col-12 d-flex justify-content-end">
-          <button type="submit" class="btn btn-primary me-1 mb-1">
+      </div>
+
+      <div class="row mt-3 justify-content-end">
+        <div class="col col-sm-3 col-xl-2">
+          <button type="submit" class="btn btn-primary w-100">
             Actualizar
-          </button>
-          <button type="reset" class="btn btn-light-secondary me-1 mb-1">
-            Vaciar
           </button>
         </div>
       </div>

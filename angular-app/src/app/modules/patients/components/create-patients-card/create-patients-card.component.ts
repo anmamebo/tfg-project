@@ -24,9 +24,6 @@ import { NotificationService } from 'src/app/core/services/notifications/notific
   providers: [PatientService, CountriesService, DatePipe],
 })
 export class CreatePatientsCardComponent implements OnInit {
-  /** Título de la tarjeta */
-  public titleCard: string = 'Formulario Paciente';
-
   /** Opciones para el campo de género */
   public gender_options = GENDER_OPTIONS;
 

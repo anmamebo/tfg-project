@@ -15,9 +15,6 @@ import { NotificationService } from 'src/app/core/services/notifications/notific
   providers: [AdministrativeService],
 })
 export class EditInfoAdministrativesCardComponent implements OnInit {
-  /** Título de la tarjeta */
-  public titleCard: string = 'Información Básica';
-
   /** Administrativo que se editará */
   @Input() public administrative: User | null = null;
 

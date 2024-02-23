@@ -15,9 +15,6 @@ import { NotificationService } from 'src/app/core/services/notifications/notific
   providers: [DepartmentService],
 })
 export class EditInfoDepartmentsCardComponent implements OnInit {
-  /** Título de la tarjeta */
-  public titleCard: string = 'Información Básica';
-
   /** Departamento que se editará */
   @Input() public department: Department | null = null;
 

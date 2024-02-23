@@ -1,4 +1,4 @@
-<app-generic-card [title]="titleCard">
+<app-generic-card [hasCardHeader]="false">
   <form
     (ngSubmit)="onSubmit()"
     [formGroup]="createDoctorForm"
@@ -140,13 +140,14 @@
             ></ng-multiselect-dropdown>
           </div>
         </div>
+      </div>
 
-        <!-- Botones -->
-        <div class="col-12 d-flex justify-content-end">
-          <button type="reset" class="btn btn-outline-primary me-1">
-            Limpiar
-          </button>
-          <button type="submit" class="btn btn-primary">Crear</button>
+      <div class="row mt-3 justify-content-end">
+        <div class="col-auto">
+          <button type="reset" class="btn btn-outline-primary">Limpiar</button>
+        </div>
+        <div class="col col-sm-3 col-xl-2">
+          <button type="submit" class="btn btn-primary w-100">Crear</button>
         </div>
       </div>
     </div>

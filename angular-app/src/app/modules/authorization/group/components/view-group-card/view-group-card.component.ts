@@ -10,7 +10,7 @@ import { Group } from 'src/app/core/models/group.interface';
 })
 export class ViewGroupCardComponent {
   /** Título de la tarjeta */
-  public titleCard: string = 'Ver Grupo';
+  public titleCard: string = 'Información Básica';
 
   /** Grupo que se visualizará */
   @Input() public group: Group | null = null;

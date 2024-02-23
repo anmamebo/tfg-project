@@ -13,9 +13,6 @@ import { NotificationService } from 'src/app/core/services/notifications/notific
   providers: [DepartmentService],
 })
 export class CreateDepartmentsCardComponent {
-  /** Título de la tarjeta */
-  public titleCard: string = 'Formulario Departamento';
-
   /** Formulario para la información del departamento */
   public createDepartmentForm: FormGroup = new FormGroup({});
 

@@ -2,8 +2,7 @@
   <button
     *ngIf="address"
     (click)="onDelete()"
-    class="btn btn-outline-danger"
-    style="position: absolute; right: 0; top: -80px"
+    class="address-button btn btn-outline-danger"
   >
     Eliminar
   </button>
@@ -167,10 +166,11 @@
             ></app-form-errors>
           </div>
         </div>
+      </div>
 
-        <!-- Botones -->
-        <div class="col-12 d-flex justify-content-end">
-          <button type="submit" class="btn btn-primary me-1 mb-1">
+      <div class="row mt-3 justify-content-end">
+        <div class="col col-sm-3 col-xl-2">
+          <button type="submit" class="btn btn-primary w-100">
             Actualizar
           </button>
         </div>

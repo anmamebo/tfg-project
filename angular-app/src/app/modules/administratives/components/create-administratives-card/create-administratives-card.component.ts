@@ -13,9 +13,6 @@ import { NotificationService } from 'src/app/core/services/notifications/notific
   providers: [AdministrativeService],
 })
 export class CreateAdministrativesCardComponent {
-  /** Título de la tarjeta */
-  public titleCard: string = 'Formulario Administrativo';
-
   /** Formulario para la información del administrativo */
   public createAdministrativeForm: FormGroup = new FormGroup({});
 

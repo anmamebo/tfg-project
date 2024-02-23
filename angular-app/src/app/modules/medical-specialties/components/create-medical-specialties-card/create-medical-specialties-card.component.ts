@@ -17,9 +17,6 @@ import { NotificationService } from 'src/app/core/services/notifications/notific
   providers: [MedicalspecialtyService, DepartmentService],
 })
 export class CreateMedicalSpecialtiesCardComponent implements OnInit {
-  /** Título de la tarjeta */
-  public titleCard: string = 'Formulario Especialidad Médica';
-
   /** Formulario para la información de la especialidad médica */
   public createMedicalSpecialtyForm: FormGroup = new FormGroup({});
 

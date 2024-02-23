@@ -19,9 +19,6 @@ import { NotificationService } from 'src/app/core/services/notifications/notific
   providers: [MedicalspecialtyService, DepartmentService],
 })
 export class EditMedicalSpecialtiesCardComponent {
-  /** Título de la tarjeta */
-  public titleCard: string = 'Información Básica';
-
   /** Especialidad médica que se editará */
   @Input() public medicalSpecialty: MedicalSpecialty | null = null;
 

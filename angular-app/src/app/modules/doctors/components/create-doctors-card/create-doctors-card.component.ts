@@ -19,9 +19,6 @@ import { NotificationService } from 'src/app/core/services/notifications/notific
   providers: [DoctorService, MedicalspecialtyService, DepartmentService],
 })
 export class CreateDoctorsCardComponent implements OnInit {
-  /** Título de la tarjeta */
-  public titleCard: string = 'Formulario Médico';
-
   /** Formulario para la información del médico */
   public createDoctorForm: FormGroup = new FormGroup({});
 

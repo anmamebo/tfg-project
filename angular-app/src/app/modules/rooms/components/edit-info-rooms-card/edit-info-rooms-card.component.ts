@@ -20,9 +20,6 @@ import { NotificationService } from 'src/app/core/services/notifications/notific
   providers: [RoomService, DepartmentService],
 })
 export class EditInfoRoomsCardComponent implements OnInit {
-  /** Título de la tarjeta */
-  public titleCard: string = 'Información Básica';
-
   /** Sala que se editará */
   @Input() public room: Room | null = null;
 

@@ -13,6 +13,23 @@ import { NotificationService } from 'src/app/core/services/notifications/notific
 @Component({
   selector: 'app-edit-address-patients-card',
   templateUrl: './edit-address-patients-card.component.html',
+  styles: [
+    `
+      .address-button {
+        position: absolute;
+        right: 25px;
+        top: -55px;
+      }
+
+      @media screen and (max-width: 576px) {
+        .address-button {
+          position: relative;
+          top: -30px;
+          right: 0;
+        }
+      }
+    `,
+  ],
   providers: [AddressService],
 })
 export class EditAddressPatientsCardComponent implements OnInit {

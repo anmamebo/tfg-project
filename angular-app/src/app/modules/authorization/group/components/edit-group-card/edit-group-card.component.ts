@@ -14,9 +14,6 @@ import { NotificationService } from 'src/app/core/services/notifications/notific
   providers: [GroupService],
 })
 export class EditGroupCardComponent implements OnInit {
-  /** Título de la tarjeta */
-  public titleCard: string = 'Editar Grupo';
-
   /** Grupo que se editará */
   @Input() public group: Group = {} as Group;
 
