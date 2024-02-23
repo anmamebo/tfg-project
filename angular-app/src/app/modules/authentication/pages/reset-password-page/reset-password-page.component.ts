@@ -11,10 +11,18 @@ import Validation from 'src/app/core/validators/general.validator';
 @Component({
   selector: 'app-reset-password-page',
   templateUrl: './reset-password-page.component.html',
-  styleUrls: ['./reset-password-page.component.scss'],
+  styleUrls: [
+    '../../components/authentication-page/authentication-page.component.scss',
+  ],
   providers: [AuthService],
 })
 export class ResetPasswordPageComponent implements OnInit {
+  /** Título de la página. */
+  public title: string = 'Restablecer contraseña';
+
+  /** Subtítulo de la página. */
+  public subtitle: string = 'Ingresa tu nueva contraseña.';
+
   /** Identificador del usuario. */
   public userId: string | null = null;
 

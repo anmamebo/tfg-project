@@ -14,6 +14,7 @@ import { ForgotPasswordPageComponent } from './pages/forgot-password-page/forgot
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { ResetPasswordPageComponent } from './pages/reset-password-page/reset-password-page.component';
 import { SignupPageComponent } from './pages/signup-page/signup-page.component';
+import { AuthenticationPageComponent } from './components/authentication-page/authentication-page.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { SignupPageComponent } from './pages/signup-page/signup-page.component';
     ForgotPasswordPageComponent,
     ResetPasswordPageComponent,
     SignupPageComponent,
+    AuthenticationPageComponent,
   ],
   imports: [
     CommonModule,

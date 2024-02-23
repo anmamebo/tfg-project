@@ -13,10 +13,19 @@ import { AuthService } from 'src/app/core/services/auth/auth.service';
 @Component({
   selector: 'app-signup-page',
   templateUrl: './signup-page.component.html',
-  styleUrls: ['./signup-page.component.scss'],
+  styleUrls: [
+    '../../components/authentication-page/authentication-page.component.scss',
+  ],
   providers: [AuthService, DatePipe],
 })
 export class SignupPageComponent {
+  /** Título de la página. */
+  public title: string = 'Registro';
+
+  /** Subtítulo de la página. */
+  public subtitle: string =
+    'Introduce tus datos para registrarte en el sistema.';
+
   /** Formulario de registro. */
   public signupForm: FormGroup = new FormGroup({});
 

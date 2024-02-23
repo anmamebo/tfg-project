@@ -11,10 +11,19 @@ import { TokenStorageService } from 'src/app/core/services/auth/token-storage.se
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
-  styleUrls: ['./login-page.component.scss'],
+  styleUrls: [
+    '../../components/authentication-page/authentication-page.component.scss',
+  ],
   providers: [AuthService, TokenStorageService],
 })
 export class LoginPageComponent {
+  /** Título de la página. */
+  public title: string = 'Iniciar sesión';
+
+  /** Subtítulo de la página. */
+  public subtitle: string =
+    'Inicia sesión en el sistema con tus datos de autenticación.';
+
   /** Formulario de inicio de sesión. */
   public loginForm: FormGroup = new FormGroup({});
 

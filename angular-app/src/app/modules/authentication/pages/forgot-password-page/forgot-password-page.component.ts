@@ -10,10 +10,19 @@ import { NotificationService } from 'src/app/core/services/notifications/notific
 @Component({
   selector: 'app-forgot-password-page',
   templateUrl: './forgot-password-page.component.html',
-  styleUrls: ['./forgot-password-page.component.scss'],
+  styleUrls: [
+    '../../components/authentication-page/authentication-page.component.scss',
+  ],
   providers: [AuthService],
 })
 export class ForgotPasswordPageComponent {
+  /** Título de la página. */
+  public title: string = 'Olvidé mi contraseña';
+
+  /** Subtítulo de la página. */
+  public subtitle: string =
+    'Te enviaremos un enlace para recuperar tu contraseña.';
+
   /** Formulario de recuperación de contraseña. */
   public forgotPasswordForm: FormGroup = new FormGroup({});
 

@@ -1,111 +1,88 @@
-<div id="auth">
-  <div class="row h-100">
-    <div class="col-lg-5 col-12">
-      <div id="auth-left">
-        <div class="auth-logo">
-          <img [src]="'/assets/images/logo/logo-long.png'" alt="Logo" />
-        </div>
-
-        <h1 class="auth-title">Iniciar sesión</h1>
-        <p class="auth-subtitle mb-5">
-          Inicia sesión en el sistema con tus datos de autenticación.
-        </p>
-
-        <form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
-          <!-- Usuario -->
-          <div class="form-group position-relative has-icon-left mb-4">
-            <input
-              type="text"
-              formControlName="username"
-              class="form-control form-control-xl"
-              placeholder="Usuario"
-              [ngClass]="{
-                'is-invalid': submitted && form.get('username')?.errors
-              }"
-            />
-            <div class="form-control-icon">
-              <i class="bi bi-person"></i>
-            </div>
-
-            <app-form-errors
-              [control]="form.get('username')"
-              [submitted]="submitted"
-            ></app-form-errors>
-          </div>
-
-          <!-- Contraseña -->
-          <div
-            class="password-form-group form-group position-relative has-icon-left mb-4"
-          >
-            <input
-              [type]="showPassword ? 'text' : 'password'"
-              formControlName="password"
-              class="form-control form-control-xl"
-              placeholder="Contraseña"
-              [ngClass]="{
-                'is-invalid': submitted && form.get('password')?.errors
-              }"
-            />
-            <div class="form-control-icon">
-              <i class="bi bi-shield-lock"></i>
-            </div>
-            <div class="form-control-icon form-control-icon-right">
-              <a href="javascript:void(0);">
-                <i
-                  class="bi"
-                  [ngClass]="{
-                    'bi-eye': !showPassword,
-                    'bi-eye-slash': showPassword
-                  }"
-                  (click)="showPassword = !showPassword"
-                ></i>
-              </a>
-            </div>
-
-            <app-form-errors
-              [control]="form.get('password')"
-              [submitted]="submitted"
-            ></app-form-errors>
-          </div>
-
-          <!-- Mensajes de error -->
-          <div
-            *ngIf="submitted && errorMessage != ''"
-            class="alert alert-light-danger color-danger"
-          >
-            <i class="bi bi-exclamation-circle"></i>
-            {{ errorMessage }}
-          </div>
-
-          <button
-            class="btn btn-primary btn-block btn-lg shadow-lg mt-md-5 mt-1"
-          >
-            Ingresar
-          </button>
-        </form>
-
-        <div class="text-center mt-4 text-lg fs-5">
-          <p class="text-gray-600">
-            ¿No tienes cuenta?
-            <a
-              class="d-md-inline d-block"
-              [routerLink]="['/auth/registro']"
-              style="font-weight: 700"
-              >Registrate</a
-            >
-          </p>
-          <p>
-            <a
-              [routerLink]="['/auth/olvide-contrasena']"
-              style="font-weight: 700"
-              >¿Has olvidado tu contraseña?</a
-            >
-          </p>
-        </div>
+<app-authentication-page [title]="title" [subtitle]="subtitle">
+  <form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
+    <!-- Usuario -->
+    <div class="form-group position-relative has-icon-left mb-4">
+      <input
+        type="text"
+        formControlName="username"
+        class="form-control form-control-xl"
+        placeholder="Usuario"
+        [ngClass]="{
+          'is-invalid': submitted && form.get('username')?.errors
+        }"
+      />
+      <div class="form-control-icon">
+        <i class="bi bi-person"></i>
       </div>
+
+      <app-form-errors
+        [control]="form.get('username')"
+        [submitted]="submitted"
+      ></app-form-errors>
     </div>
-    <div class="col-lg-7 d-none d-lg-block">
-      <div id="auth-right"></div>
+
+    <!-- Contraseña -->
+    <div
+      class="password-form-group form-group position-relative has-icon-left mb-4"
+    >
+      <input
+        [type]="showPassword ? 'text' : 'password'"
+        formControlName="password"
+        class="form-control form-control-xl"
+        placeholder="Contraseña"
+        [ngClass]="{
+          'is-invalid': submitted && form.get('password')?.errors
+        }"
+      />
+      <div class="form-control-icon">
+        <i class="bi bi-shield-lock"></i>
+      </div>
+      <div class="form-control-icon form-control-icon-right">
+        <a href="javascript:void(0);">
+          <i
+            class="bi"
+            [ngClass]="{
+              'bi-eye': !showPassword,
+              'bi-eye-slash': showPassword
+            }"
+            (click)="showPassword = !showPassword"
+          ></i>
+        </a>
+      </div>
+
+      <app-form-errors
+        [control]="form.get('password')"
+        [submitted]="submitted"
+      ></app-form-errors>
     </div>
+
+    <!-- Mensajes de error -->
+    <div
+      *ngIf="submitted && errorMessage != ''"
+      class="alert alert-light-danger color-danger"
+    >
+      <i class="bi bi-exclamation-circle"></i>
+      {{ errorMessage }}
+    </div>
+
+    <!-- Botón -->
+    <button class="btn btn-primary btn-block btn-lg shadow-lg mt-md-5 mt-1">
+      Ingresar
+    </button>
+  </form>
+
+  <!-- Enlaces -->
+  <div class="text-center mt-4 text-lg fs-5">
+    <p class="text-gray-600">
+      ¿No tienes cuenta?
+      <a class="fw-bold d-md-inline d-block" [routerLink]="['/auth/registro']"
+        >Registrate</a
+      >
+    </p>
+    <p>
+      <a class="fw-bold" [routerLink]="['/auth/olvide-contrasena']"
+        >¿Has olvidado tu contraseña?</a
+      >
+    </p>
   </div>
-</div>
+</app-authentication-page>
