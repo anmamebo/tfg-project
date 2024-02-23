@@ -31,9 +31,6 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
       catchError((error: HttpErrorResponse) => {
         let errorMessage =
           'Ocurrió un error en el servidor. Inténtalo más tarde.';
-        if (error.status === 401) {
-          console.log(error);
-        }
 
         if (error.status === 400) {
           errorMessage =
