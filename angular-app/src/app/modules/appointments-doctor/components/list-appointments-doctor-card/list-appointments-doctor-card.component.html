@@ -13,10 +13,10 @@
         (searchSubmitted)="onSearchSubmitted($event)"
       ></app-search>
     </div>
-    <div class="col-lg-5 col-md-6 mt-md-0 mt-2 text-end">
+    <div class="col-auto text-md-end">
       <button
         (click)="filterElements('all')"
-        class="btn btn-sm btn-primary rounded-pill me-2"
+        class="btn btn-sm btn-primary rounded-pill me-2 mt-md-0 mt-2"
         [ngClass]="{
           'btn-primary': filter === 'all',
           'btn-outline-primary': filter !== 'all'
@@ -26,7 +26,7 @@
       </button>
       <button
         (click)="filterElements('scheduled')"
-        class="btn btn-sm btn-primary rounded-pill me-2"
+        class="btn btn-sm btn-primary rounded-pill me-2 mt-md-0 mt-2"
         [ngClass]="{
           'btn-primary': filter === 'scheduled',
           'btn-outline-primary': filter !== 'scheduled'
@@ -36,7 +36,7 @@
       </button>
       <button
         (click)="filterElements('rescheduled')"
-        class="btn btn-sm btn-primary rounded-pill me-2"
+        class="btn btn-sm btn-primary rounded-pill me-2 mt-md-0 mt-2"
         [ngClass]="{
           'btn-primary': filter === 'rescheduled',
           'btn-outline-primary': filter !== 'rescheduled'
@@ -46,7 +46,7 @@
       </button>
       <button
         (click)="filterElements('in_progress')"
-        class="btn btn-sm btn-primary rounded-pill me-2"
+        class="btn btn-sm btn-primary rounded-pill me-2 mt-md-0 mt-2"
         [ngClass]="{
           'btn-primary': filter === 'in_progress',
           'btn-outline-primary': filter !== 'in_progress'
