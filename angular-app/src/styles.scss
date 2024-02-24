@@ -74,6 +74,20 @@ html[data-bs-theme="dark"] {
   // Additional dark-mode CSS
   // @import "./mazer-dark";
   @import "node_modules/bootstrap/scss/utilities";
+
+  .swal2-toast,
+  .swal2-modal {
+    background-color: $card-bg !important;
+    color: $primary-text-dark;
+  }
+
+  .swal2-icon {
+    box-sizing: content-box;
+  }
+
+  .swal2-actions > button {
+    margin: 0.3125em;
+  }
 }
 
 /* angular-cli file: src/styles.css */
