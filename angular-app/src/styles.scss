@@ -145,6 +145,22 @@ html[data-bs-theme="dark"] {
       color: rgba(57, 57, 57, 0.3);
     }
   }
+
+  // ApexCharts
+  .apexcharts-menu {
+    background-color: $card-bg !important;
+    color: $secondary-text-dark;
+
+    .apexcharts-menu-item:hover {
+      background-color: $primary-bg-subtle-dark !important;
+    }
+  }
+
+  .apexcharts-legend-text,
+  .apexcharts-text {
+    color: $secondary-text-dark !important;
+    fill: $secondary-text-dark !important;
+  }
 }
 
 /* angular-cli file: src/styles.css */
