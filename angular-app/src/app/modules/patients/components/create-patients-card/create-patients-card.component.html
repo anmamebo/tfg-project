@@ -154,10 +154,10 @@
                 [convertModelValue]="true"
                 [locale]="locale"
                 [maxDate]="'today'"
-                [allowInput]="true"
                 [dateFormat]="'d-m-Y'"
                 [monthSelectorType]="'dropdown'"
                 placeholder="Fecha de nacimiento"
+                [disableMobile]="true"
               />
               <app-form-errors
                 [control]="patientInfo.get('birthdate')"

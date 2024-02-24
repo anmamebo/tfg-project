@@ -108,12 +108,12 @@
                 'is-invalid': submitted && form.get('birthdate')?.errors
               }"
               mwlFlatpickr
-              [altInput]="true"
               [convertModelValue]="true"
               [defaultValue]="patient.birthdate"
               [locale]="locale"
               [maxDate]="'today'"
               [dateFormat]="'Y-m-d'"
+              [disableMobile]="true"
             />
 
             <app-form-errors
