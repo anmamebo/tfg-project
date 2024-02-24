@@ -1,5 +1,5 @@
 .dropdown-toggle::after {
-  display: none; /* Oculta el triángulo del botón */
+  display: none !important; /* Oculta el triángulo del botón */
 }
 
 .actions-button {
