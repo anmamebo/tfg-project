@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ["SECRET_KEY"]
 
 # Entorno de desarrollo - DEBUG activado
-DEBUG = False
+DEBUG = True
 
 # Lista de hosts permitidos en producción (debería especificarse en producción)
 ALLOWED_HOSTS = ["*"]
