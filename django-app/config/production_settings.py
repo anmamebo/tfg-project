@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
+import json
 import os
 from datetime import timedelta
 from pathlib import Path
@@ -216,22 +217,6 @@ MEDIA_URL = "/media/"
 # Configuración de archivos en Google Cloud Storage
 DEFAULT_FILE_STORAGE = "storages.backends.gcloud.GoogleCloudStorage"
 GS_BUCKET_NAME = "bucket_hospitalsys"
-
-# Obtener las credenciales desde Secret Manager
-gs_credentials = get_secret()
-
-# Configurar GS_CREDENTIALS si las credenciales se obtuvieron correctamente
-if gs_credentials:
-    try:
-        # Crear las credenciales a partir de la información obtenida desde Secret Manager
-        GS_CREDENTIALS = service_account.Credentials.from_service_account_info(
-            gs_credentials
-        )
-    except Exception as e:
-        # Manejar cualquier error que pueda ocurrir al crear las credenciales
-        print(f"Error al configurar las credenciales de Google Cloud Storage: {e}")
-        GS_CREDENTIALS = None
-else:
-    # Manejar el caso en el que no se pudieron obtener las credenciales desde Secret Manager
-    print("No se pudieron obtener las credenciales desde Secret Manager")
-    GS_CREDENTIALS = None
+gs_json_data = json.loads(os.environ["GS_CREDENTIALS"])
+gs_json_data["private_key"] = gs_json_data["private_key"].replace("\\n", "\n")
+GS_CREDENTIALS = service_account.Credentials.from_service_account_info(get_secret())
