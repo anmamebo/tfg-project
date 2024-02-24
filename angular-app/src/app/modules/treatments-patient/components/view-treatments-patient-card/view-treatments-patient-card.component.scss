@@ -1,3 +1,37 @@
 .dropdown-toggle::after {
   display: none; /* Oculta el triángulo del botón */
 }
+
+.actions-button {
+  position: absolute;
+  right: 35px;
+  top: 20px;
+}
+
+@media screen and (max-width: 767.98px) {
+  .card-title {
+    font-size: 1rem;
+  }
+
+  h5 {
+    font-size: 0.9rem;
+  }
+
+  .text {
+    font-size: 0.8rem;
+  }
+}
+
+@media screen and (max-width: 991.98px) {
+  .card-title {
+    font-size: 1.3rem;
+  }
+
+  h5 {
+    font-size: 1.1rem;
+  }
+
+  .text {
+    font-size: 1rem;
+  }
+}

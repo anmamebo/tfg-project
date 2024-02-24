@@ -1,7 +1,7 @@
 <app-generic-card *ngIf="medicalTest" [hasCardHeader]="false">
-  <!-- Título -->
   <div id="title" class="row mb-4">
-    <div class="col-auto">
+    <!-- Estado de la prueba médica -->
+    <div class="col-auto mb-md-0 mb-3">
       <span
         class="badge"
         [ngClass]="{
@@ -12,41 +12,41 @@
         {{ medicalTest.is_completed ? "Completada" : "No completada" }}
       </span>
     </div>
+
+    <!-- Título -->
     <div class="col-md col-12">
-      <h4 class="card-title">
-        {{ cardTitle }}
-      </h4>
+      <h4 class="card-title">{{ cardTitle }}</h4>
     </div>
   </div>
 
   <!-- Contenido -->
   <div id="content" class="row">
     <!-- Información -->
-    <div class="col-12 mb-3">
-      <div class="row mb-3">
+    <div class="col-12">
+      <div class="row mb-2">
         <div class="col-12">
           <h5>Información de la prueba médica</h5>
         </div>
       </div>
-      <div class="row mb-1">
+      <div class="row">
         <div class="col-12">
-          <p>
+          <p class="text">
             <strong>Descripción:</strong>
             {{ medicalTest.description || "--" }}
           </p>
         </div>
       </div>
-      <div class="row mb-1">
+      <div class="row">
         <div class="col-12">
-          <p>
+          <p class="text">
             <strong>Archivos adjuntos:</strong>
             {{ medicalTest.attachments?.length }}
           </p>
         </div>
       </div>
-      <div class="row mb-1">
+      <div class="row">
         <div class="col-12">
-          <p>
+          <p class="text">
             <strong>Resultado:</strong>
             {{ medicalTest.result || "--" }}
           </p>
@@ -55,39 +55,39 @@
     </div>
 
     <!-- Información de la cita -->
-    <div *ngIf="medicalTest.appointment" class="col-md-6">
-      <div class="row mb-3">
+    <div *ngIf="medicalTest.appointment" class="col-md-6 mt-md-0 mt-4">
+      <div class="row mb-2">
         <div class="col-12">
           <h5>Información de la cita</h5>
         </div>
       </div>
-      <div class="row mb-1">
+      <div class="row">
         <div class="col-12">
-          <p>
+          <p class="text">
             <strong>Motivo:</strong>
             {{ medicalTest.appointment.reason || "--" }}
           </p>
         </div>
       </div>
-      <div class="row mb-1">
+      <div class="row">
         <div class="col-12">
-          <p>
+          <p class="text">
             <strong>Tipo de cita:</strong>
             {{ medicalTest.appointment.type | typeAppointment }}
           </p>
         </div>
       </div>
-      <div *ngIf="medicalTest.appointment.specialty" class="row mb-1">
+      <div *ngIf="medicalTest.appointment.specialty" class="row">
         <div class="col-12">
-          <p>
+          <p class="text">
             <strong>Especialidad médica:</strong>
             {{ medicalTest.appointment.specialty.name }}
           </p>
         </div>
       </div>
-      <div *ngIf="medicalTest.appointment.schedule" class="row mb-1">
+      <div *ngIf="medicalTest.appointment.schedule" class="row">
         <div class="col-12">
-          <p>
+          <p class="text">
             <strong>Fecha:</strong>
             {{
               medicalTest.appointment.schedule.start_time
@@ -99,24 +99,24 @@
     </div>
 
     <!-- Información del médico -->
-    <div *ngIf="medicalTest.doctor" class="col-md-6">
-      <div class="row mb-3">
+    <div *ngIf="medicalTest.doctor" class="col-md-6 mt-md-0 mt-4">
+      <div class="row mb-2">
         <div class="col-12">
           <h5>Información del médico</h5>
         </div>
       </div>
-      <div class="row mb-1">
+      <div class="row">
         <div class="col-12">
-          <p>
+          <p class="text">
             <strong>Nombre:</strong>
             {{ medicalTest.doctor.user.name }}
             {{ medicalTest.doctor.user.last_name }}
           </p>
         </div>
       </div>
-      <div class="row mb-1">
+      <div class="row">
         <div class="col-12">
-          <p>
+          <p class="text">
             <strong>Correo electrónico:</strong>
             {{ medicalTest.doctor.user.email }}
           </p>

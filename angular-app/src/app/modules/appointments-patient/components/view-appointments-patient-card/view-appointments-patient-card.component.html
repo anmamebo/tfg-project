@@ -1,70 +1,74 @@
 <app-generic-card *ngIf="appointment" [hasCardHeader]="false">
-  <!-- Título -->
+  <!-- Acciones -->
+  <div class="actions-button">
+    <div class="dropdown">
+      <span
+        class="dropdown-toggle"
+        type="button"
+        id="dropdownMenuButton"
+        data-bs-toggle="dropdown"
+        aria-haspopup="true"
+        aria-expanded="false"
+        customTooltip
+        [tooltip]="'Acciones'"
+        [tooltipOffsetTop]="5"
+      >
+        <i class="bi bi-three-dots"></i>
+      </span>
+      <div
+        class="dropdown-menu dropdown-menu-dark"
+        aria-labelledby="dropdownMenuButton"
+      >
+        <span *appHasRole="['Paciente']">
+          <a
+            *ngIf="
+              appointment.status == 'pending' ||
+              appointment.status == 'scheduled' ||
+              appointment.status == 'rescheduled'
+            "
+            class="dropdown-item"
+            style="cursor: pointer"
+            (click)="cancelAppointment()"
+          >
+            <i class="bi bi-x-circle me-2"></i>
+            Cancelar Cita
+          </a>
+          <div
+            *ngIf="
+              appointment.status == 'pending' ||
+              appointment.status == 'scheduled' ||
+              appointment.status == 'rescheduled'
+            "
+            class="dropdown-divider"
+          ></div>
+        </span>
+        <a
+          class="dropdown-item"
+          style="cursor: pointer"
+          (click)="downloadPDF()"
+        >
+          <i class="bi bi-file-earmark-arrow-down me-2"></i>
+          Descargar PDF
+        </a>
+        <a class="dropdown-item" style="cursor: pointer" (click)="printPDF()">
+          <i class="bi bi-printer me-2"></i>
+          Imprimir
+        </a>
+      </div>
+    </div>
+  </div>
+
   <div id="title" class="row mb-4">
-    <div class="col-auto">
+    <!-- Estado de la cita -->
+    <div class="col-auto mb-lg-0 mb-3">
       <span class="badge" [ngClass]="statusBadgeClasses[appointment.status]">
         {{ appointment.status | statusAppointment }}
       </span>
     </div>
-    <div class="col-md col-12">
+
+    <!-- Título -->
+    <div class="col-lg col-12">
       <h4 class="card-title">{{ cardTitle }}</h4>
-    </div>
-    <div class="col-auto">
-      <div class="dropdown">
-        <span
-          class="dropdown-toggle"
-          type="button"
-          id="dropdownMenuButton"
-          data-bs-toggle="dropdown"
-          aria-haspopup="true"
-          aria-expanded="false"
-          customTooltip
-          [tooltip]="'Acciones'"
-          [tooltipOffsetTop]="5"
-        >
-          <i class="bi bi-three-dots"></i>
-        </span>
-        <div
-          class="dropdown-menu dropdown-menu-dark"
-          aria-labelledby="dropdownMenuButton"
-        >
-          <span *appHasRole="['Paciente']">
-            <a
-              *ngIf="
-                appointment.status == 'pending' ||
-                appointment.status == 'scheduled' ||
-                appointment.status == 'rescheduled'
-              "
-              class="dropdown-item"
-              style="cursor: pointer"
-              (click)="cancelAppointment()"
-            >
-              <i class="bi bi-x-circle me-2"></i>
-              Cancelar Cita
-            </a>
-            <div
-              *ngIf="
-                appointment.status == 'pending' ||
-                appointment.status == 'scheduled' ||
-                appointment.status == 'rescheduled'
-              "
-              class="dropdown-divider"
-            ></div>
-          </span>
-          <a
-            class="dropdown-item"
-            style="cursor: pointer"
-            (click)="downloadPDF()"
-          >
-            <i class="bi bi-file-earmark-arrow-down me-2"></i>
-            Descargar PDF
-          </a>
-          <a class="dropdown-item" style="cursor: pointer" (click)="printPDF()">
-            <i class="bi bi-printer me-2"></i>
-            Imprimir
-          </a>
-        </div>
-      </div>
     </div>
   </div>
 
@@ -72,38 +76,38 @@
   <div id="content" class="row">
     <!-- Información cita -->
     <div class="col-md-6">
-      <div class="row mb-3">
+      <div class="row mb-2">
         <div class="col-12">
           <h5>Información de la cita</h5>
         </div>
       </div>
-      <div class="row mb-1">
+      <div class="row">
         <div class="col-12">
-          <p>
+          <p class="text">
             <strong>Motivo:</strong>
             {{ appointment.reason || "--" }}
           </p>
         </div>
       </div>
-      <div class="row mb-1">
+      <div class="row">
         <div class="col-12">
-          <p>
+          <p class="text">
             <strong>Tipo de cita:</strong>
             {{ appointment.type | typeAppointment }}
           </p>
         </div>
       </div>
-      <div class="row mb-1" *ngIf="appointment.specialty">
+      <div class="row" *ngIf="appointment.specialty">
         <div class="col-12">
-          <p>
+          <p class="text">
             <strong>Especialidad médica:</strong>
             {{ appointment.specialty.name }}
           </p>
         </div>
       </div>
-      <div class="row mb-1" *ngIf="appointment.room">
+      <div class="row" *ngIf="appointment.room">
         <div class="col-12">
-          <p>
+          <p class="text">
             <strong>Sala:</strong>
             {{ appointment.room.name }} - {{ appointment.room.location }}
           </p>
@@ -112,24 +116,27 @@
     </div>
 
     <!-- Información médico -->
-    <div class="col-md-6" *ngIf="appointment.doctor && appointment.doctor.user">
-      <div class="row mb-3">
+    <div
+      class="col-md-6 mt-md-0 mt-4"
+      *ngIf="appointment.doctor && appointment.doctor.user"
+    >
+      <div class="row mb-2">
         <div class="col-12">
           <h5>Información del médico</h5>
         </div>
       </div>
-      <div class="row mb-1">
+      <div class="row">
         <div class="col-12">
-          <p>
+          <p class="text">
             <strong>Nombre:</strong>
             {{ appointment.doctor.user.name }}
             {{ appointment.doctor.user.last_name }}
           </p>
         </div>
       </div>
-      <div class="row mb-1">
+      <div class="row">
         <div class="col-12">
-          <p>
+          <p class="text">
             <strong>Correo electrónico:</strong>
             {{ appointment.doctor.user.email }}
           </p>
@@ -141,20 +148,20 @@
     <div class="col-12 mt-4">
       <div class="row">
         <div class="col-md-3" *ngIf="appointment.schedule">
-          <p>
+          <p class="text">
             <i class="bi bi-calendar2-check me-2"></i>
             <strong>Fecha:</strong>
           </p>
-          <p>
+          <p class="text">
             {{ appointment.schedule.start_time | date : " HH:mm - dd/MM/yyyy" }}
           </p>
         </div>
         <div class="col-md-3">
-          <p>
+          <p class="text">
             <i class="bi bi-calendar-week me-2"></i>
             <strong>Fecha solicitud:</strong>
           </p>
-          <p>
+          <p class="text">
             {{ appointment.request_date | date : " HH:mm - dd/MM/yyyy" }}
           </p>
         </div>
