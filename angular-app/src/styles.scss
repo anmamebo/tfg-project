@@ -75,6 +75,7 @@ html[data-bs-theme="dark"] {
   // @import "./mazer-dark";
   @import "node_modules/bootstrap/scss/utilities";
 
+  // Swal
   .swal2-toast,
   .swal2-modal {
     background-color: $card-bg !important;
@@ -87,6 +88,30 @@ html[data-bs-theme="dark"] {
 
   .swal2-actions > button {
     margin: 0.3125em;
+  }
+
+  // Multiselect
+  .multiselect-dropdown .dropdown-btn {
+    border: 1px solid #35354f !important;
+  }
+
+  .dropdown-list {
+    background-color: $card-bg !important;
+    color: $primary-text-dark;
+    border: 1px solid #35354f !important;
+    box-shadow: none !important;
+
+    .filter-textbox {
+      border: 1px solid #35354f !important;
+    }
+
+    .multiselect-item-checkbox input[type="checkbox"] + div {
+      color: $secondary-text-dark;
+    }
+
+    .filter-textbox input {
+      background-color: $card-bg !important;
+    }
   }
 }
 
