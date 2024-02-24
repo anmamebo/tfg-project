@@ -304,6 +304,9 @@ class TreatmentViewSet(
                 status_code=status.HTTP_400_BAD_REQUEST,
             )
 
+        if new_status == "completed":
+            treatment.end_date = datetime.now()
+
         treatment.status = new_status
         treatment.save()
 
