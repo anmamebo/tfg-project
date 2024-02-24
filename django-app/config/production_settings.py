@@ -16,7 +16,6 @@ from datetime import timedelta
 from pathlib import Path
 
 from google.oauth2 import service_account
-from utilities.secret_manager_credentials import get_secret
 
 # Directorio base del proyecto
 BASE_DIR = Path(__file__).resolve().parent.parent
