@@ -14,6 +14,9 @@ import os
 from datetime import timedelta
 from pathlib import Path
 
+from google.oauth2 import service_account
+from utilities.secret_manager_credentials import get_secret
+
 # Directorio base del proyecto
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -182,13 +185,6 @@ SIMPLE_JWT = {
     "TOKEN_REFRESH_SERIALIZER": "rest_framework_simplejwt.serializers.TokenRefreshSerializer",
 }
 
-# Configuración de archivos estáticos y multimedia
-STATIC_URL = "static/"
-STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
-MEDIA_URL = "/media/"
-
 # Configuraciçon de auto field
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
@@ -209,3 +205,33 @@ EMAIL_HOST_PASSWORD = "766859eee6a844"
 EMAIL_PORT = "2525"
 EMAIL_USE_TLS = True
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+
+# Configuración de archivos estáticos y multimedia
+STATIC_URL = "static/"
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_URL = "/media/"
+
+# Configuración de archivos en Google Cloud Storage
+DEFAULT_FILE_STORAGE = "storages.backends.gcloud.GoogleCloudStorage"
+GS_BUCKET_NAME = "bucket_hospitalsys"
+
+# Obtener las credenciales desde Secret Manager
+gs_credentials = get_secret()
+
+# Configurar GS_CREDENTIALS si las credenciales se obtuvieron correctamente
+if gs_credentials:
+    try:
+        # Crear las credenciales a partir de la información obtenida desde Secret Manager
+        GS_CREDENTIALS = service_account.Credentials.from_service_account_info(
+            gs_credentials
+        )
+    except Exception as e:
+        # Manejar cualquier error que pueda ocurrir al crear las credenciales
+        print(f"Error al configurar las credenciales de Google Cloud Storage: {e}")
+        GS_CREDENTIALS = None
+else:
+    # Manejar el caso en el que no se pudieron obtener las credenciales desde Secret Manager
+    print("No se pudieron obtener las credenciales desde Secret Manager")
+    GS_CREDENTIALS = None
