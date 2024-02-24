@@ -113,6 +113,38 @@ html[data-bs-theme="dark"] {
       background-color: $card-bg !important;
     }
   }
+
+  // Flatpickr
+  .flatpickr-calendar {
+    background-color: $card-bg !important;
+    color: $primary-text-dark;
+    border: 1px solid #35354f !important;
+
+    .flatpickr-prev-month,
+    .flatpickr-next-month,
+    .flatpickr-month,
+    .flatpickr-weekday {
+      color: $primary-text-dark !important;
+    }
+
+    .flatpickr-day {
+      color: $secondary-text-dark;
+
+      &.inRange {
+        color: #393939;
+      }
+    }
+
+    .flatpickr-day.flatpickr-disabled,
+    .flatpickr-day.flatpickr-disabled:hover,
+    .flatpickr-day.prevMonthDay,
+    .flatpickr-day.nextMonthDay,
+    .flatpickr-day.notAllowed,
+    .flatpickr-day.notAllowed.prevMonthDay,
+    .flatpickr-day.notAllowed.nextMonthDay {
+      color: rgba(57, 57, 57, 0.3);
+    }
+  }
 }
 
 /* angular-cli file: src/styles.css */
