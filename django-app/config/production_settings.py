@@ -218,4 +218,4 @@ DEFAULT_FILE_STORAGE = "storages.backends.gcloud.GoogleCloudStorage"
 GS_BUCKET_NAME = "bucket_hospitalsys"
 gs_json_data = json.loads(os.environ["GS_CREDENTIALS"])
 gs_json_data["private_key"] = gs_json_data["private_key"].replace("\\n", "\n")
-GS_CREDENTIALS = service_account.Credentials.from_service_account_info(get_secret())
+GS_CREDENTIALS = service_account.Credentials.from_service_account_info(gs_json_data)
