@@ -8,7 +8,6 @@ from django.contrib.auth.models import (
 )
 from django.core.validators import FileExtensionValidator
 from django.db import models
-from simple_history.models import HistoricalRecords
 
 ALLOWED_EXTENSIONS = [
     "jpg",
@@ -83,7 +82,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     reset_password_token = models.CharField(max_length=255, blank=True, null=True)
-    historical = HistoricalRecords()
     objects = UserManager()
 
     class Meta:
