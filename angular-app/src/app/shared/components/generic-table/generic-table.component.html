@@ -6,7 +6,7 @@
     <thead>
       <tr>
         <ng-container *ngFor="let column of columns">
-          <th (click)="sortData(column.field)" style="cursor: pointer">
+          <th class="cursor-pointer" (click)="sortData(column.field)">
             {{ column.header }}
             <i
               *ngIf="column.field === sortedColumn && !reverseSort"
@@ -89,9 +89,8 @@
                   >
                     <a
                       *appHasRole="actionsUrls.delete.roles"
-                      class="action-delete"
+                      class="action-delete cursor-pointer"
                       (click)="onDelete(item.id)"
-                      style="cursor: pointer"
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"

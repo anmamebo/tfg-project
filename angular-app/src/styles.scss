@@ -243,6 +243,11 @@ html[data-bs-theme="dark"] {
   box-shadow: none !important;
 }
 
+// ApexCharts
+.apexcharts-canvas {
+  margin: 0 auto !important;
+}
+
 // General
 button:focus,
 input:focus,
@@ -252,7 +257,10 @@ textarea:focus {
   box-shadow: none !important;
 }
 
-// ApexCharts
-.apexcharts-canvas {
-  margin: 0 auto !important;
+textarea {
+  resize: none;
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }

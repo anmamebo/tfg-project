@@ -22,8 +22,7 @@
         <span *appHasRole="['Paciente']">
           <a
             *ngIf="treatment.status == 'in_progress'"
-            class="dropdown-item"
-            style="cursor: pointer"
+            class="dropdown-item cursor-pointer"
             (click)="completeTreatment()"
           >
             <i class="bi bi-check-circle me-2"></i>
@@ -31,8 +30,7 @@
           </a>
           <a
             *ngIf="treatment.status == 'in_progress'"
-            class="dropdown-item"
-            style="cursor: pointer"
+            class="dropdown-item cursor-pointer"
             (click)="interruptTreatment()"
           >
             <i class="bi bi-exclamation-circle me-2"></i>
@@ -40,8 +38,7 @@
           </a>
           <a
             *ngIf="treatment.status == 'in_progress'"
-            class="dropdown-item"
-            style="cursor: pointer"
+            class="dropdown-item cursor-pointer"
             (click)="cancelTreatment()"
           >
             <i class="bi bi-x-circle me-2"></i>
@@ -52,15 +49,11 @@
             class="dropdown-divider"
           ></div>
         </span>
-        <a
-          class="dropdown-item"
-          style="cursor: pointer"
-          (click)="downloadPDF()"
-        >
+        <a class="dropdown-item cursor-pointer" (click)="downloadPDF()">
           <i class="bi bi-file-earmark-arrow-down me-2"></i>
           Descargar PDF
         </a>
-        <a class="dropdown-item" style="cursor: pointer" (click)="printPDF()">
+        <a class="dropdown-item cursor-pointer" (click)="printPDF()">
           <i class="bi bi-printer me-2"></i>
           Imprimir
         </a>

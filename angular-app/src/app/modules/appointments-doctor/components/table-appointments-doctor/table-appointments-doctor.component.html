@@ -6,7 +6,7 @@
     <thead>
       <tr>
         <ng-container *ngFor="let column of columns">
-          <th (click)="sortData(column.field)" style="cursor: pointer">
+          <th class="cursor-pointer" (click)="sortData(column.field)">
             {{ column.header }}
             <i
               *ngIf="column.field === sortedColumn && !reverseSort"
@@ -24,8 +24,8 @@
       <ng-container *ngIf="data && data.length > 0; else noData">
         <tr
           *ngFor="let item of data"
+          class="cursor-pointer"
           [routerLink]="['/m/citas', item.id]"
-          style="cursor: pointer"
         >
           <td>
             {{ item.patient.user.name }} {{ item.patient.user.last_name }}

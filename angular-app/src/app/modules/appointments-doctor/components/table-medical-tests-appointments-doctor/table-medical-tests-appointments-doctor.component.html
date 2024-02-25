@@ -12,8 +12,8 @@
     <tbody>
       <tr
         *ngFor="let test of medicalTests"
+        class="cursor-pointer"
         [routerLink]="['/pruebas-medicas', test.id]"
-        style="cursor: pointer"
       >
         <td>{{ test.name }}</td>
         <td class="text-center">

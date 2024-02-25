@@ -26,8 +26,7 @@
               appointment.status == 'scheduled' ||
               appointment.status == 'rescheduled'
             "
-            class="dropdown-item"
-            style="cursor: pointer"
+            class="dropdown-item cursor-pointer"
             (click)="cancelAppointment()"
           >
             <i class="bi bi-x-circle me-2"></i>
@@ -42,15 +41,11 @@
             class="dropdown-divider"
           ></div>
         </span>
-        <a
-          class="dropdown-item"
-          style="cursor: pointer"
-          (click)="downloadPDF()"
-        >
+        <a class="dropdown-item cursor-pointer" (click)="downloadPDF()">
           <i class="bi bi-file-earmark-arrow-down me-2"></i>
           Descargar PDF
         </a>
-        <a class="dropdown-item" style="cursor: pointer" (click)="printPDF()">
+        <a class="dropdown-item cursor-pointer" (click)="printPDF()">
           <i class="bi bi-printer me-2"></i>
           Imprimir
         </a>

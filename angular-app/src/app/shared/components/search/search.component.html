@@ -8,20 +8,15 @@
       formControlName="searchTerm"
     />
     <!-- Botón buscar -->
-    <div
-      class="form-control-icon"
-      (click)="submitSearch()"
-      style="cursor: pointer"
-    >
+    <div class="form-control-icon cursor-pointer" (click)="submitSearch()">
       <i class="bi bi-search"></i>
     </div>
     <!-- Bóton borrar búsqueda -->
     <div
       *ngIf="formSearch.get('searchTerm')?.value"
       (click)="clearSearch()"
-      class="form-control-icon form-control-icon-right cancel-search"
+      class="form-control-icon form-control-icon-right cancel-search cursor-pointer"
       style="
-        cursor: pointer;
         position: absolute;
         right: 42px !important;
         left: auto !important;
@@ -33,13 +28,12 @@
     <!-- Bóton info -->
     <div
       *ngIf="infoTooltipText"
-      class="form-control-icon form-control-icon-right"
+      class="form-control-icon form-control-icon-right cursor-pointer"
       style="
         position: absolute;
         right: 0 !important;
         left: auto !important;
         padding-right: 1rem !important;
-        cursor: pointer;
       "
       customTooltip
       [tooltip]="infoTooltipText"
