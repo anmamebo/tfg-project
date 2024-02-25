@@ -252,6 +252,32 @@ class UserViewSet(viewsets.GenericViewSet, ErrorResponseMixin, PaginationMixin):
                 status_code=status.HTTP_405_METHOD_NOT_ALLOWED,
             )
 
+    def delete_user_profile_picture(self, user):
+        """
+        Elimina la foto de perfil de un usuario existente.
+
+        Args:
+            user (User): El usuario.
+
+        Returns:
+            Response: La respuesta que indica si la foto de perfil se ha eliminado correctamente o si ha habido errores.
+        """
+        if user.profile_picture:
+            if (
+                settings.DEFAULT_FILE_STORAGE
+                == "storages.backends.gcloud.GoogleCloudStorage"
+            ):
+                image_path = user.profile_picture.name
+                user.profile_picture = None
+                default_storage.delete(image_path)
+            else:
+                image_path = user.profile_picture.path
+                user.profile_picture.delete(save=False)
+                if image_path and os.path.exists(image_path):
+                    os.remove(image_path)
+
+            user.save()
+
     def update_profile_picture(self, request, user):
         """
         Actualiza la foto de perfil de un usuario existente.
@@ -267,25 +293,11 @@ class UserViewSet(viewsets.GenericViewSet, ErrorResponseMixin, PaginationMixin):
         Returns:
             Response: La respuesta que indica si la foto de perfil se ha actualizado correctamente o si ha habido errores.
         """
-        image_path = None
-        image_name = None
-        if user.profile_picture:
-            image_path = user.profile_picture.path
-            image_name = user.profile_picture.name
+        self.delete_user_profile_picture(user)
 
         user_serializer = UpdateUserSerializer(user, data=request.data, partial=True)
         if user_serializer.is_valid():
             user_serializer.save()
-
-            if (
-                image_name
-                and settings.DEFAULT_FILE_STORAGE
-                == "storages.backends.gcloud.GoogleCloudStorage"
-            ):
-                default_storage.delete(image_name)
-            else:
-                if image_path and os.path.exists(image_path):
-                    os.remove(image_path)
 
             return Response(
                 {
@@ -316,32 +328,11 @@ class UserViewSet(viewsets.GenericViewSet, ErrorResponseMixin, PaginationMixin):
         Returns:
             Response: La respuesta que indica si la foto de perfil se ha eliminado correctamente o si ha habido errores.
         """
-        user = self.get_object(request.user.id)
-        if user.profile_picture:
+        self.delete_user_profile_picture(user)
 
-            if (
-                settings.DEFAULT_FILE_STORAGE
-                == "storages.backends.gcloud.GoogleCloudStorage"
-            ):
-                image_path = user.profile_picture.name
-                user.profile_picture = None
-                default_storage.delete(image_path)
-            else:
-                image_path = user.profile_picture.path
-                user.profile_picture.delete(save=False)
-                if os.path.exists(image_path):
-                    os.remove(image_path)
-
-            user.save()
-
-            return Response(
-                {"message": "Foto de perfil eliminada correctamente"},
-                status=status.HTTP_200_OK,
-            )
-
-        return self.error_response(
-            message="El usuario no tiene foto de perfil",
-            status_code=status.HTTP_400_BAD_REQUEST,
+        return Response(
+            {"message": "Foto de perfil eliminada correctamente"},
+            status=status.HTTP_200_OK,
         )
 
     def filter_and_order_users(self, users):
