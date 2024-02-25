@@ -268,6 +268,7 @@ class UserViewSet(viewsets.GenericViewSet, ErrorResponseMixin, PaginationMixin):
             Response: La respuesta que indica si la foto de perfil se ha actualizado correctamente o si ha habido errores.
         """
         image_path = None
+        image_name = None
         if user.profile_picture:
             image_path = user.profile_picture.path
             image_name = user.profile_picture.name
@@ -277,7 +278,8 @@ class UserViewSet(viewsets.GenericViewSet, ErrorResponseMixin, PaginationMixin):
             user_serializer.save()
 
             if (
-                settings.DEFAULT_FILE_STORAGE
+                image_name
+                and settings.DEFAULT_FILE_STORAGE
                 == "storages.backends.gcloud.GoogleCloudStorage"
             ):
                 default_storage.delete(image_name)
