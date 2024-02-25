@@ -270,13 +270,20 @@ class UserViewSet(viewsets.GenericViewSet, ErrorResponseMixin, PaginationMixin):
         image_path = None
         if user.profile_picture:
             image_path = user.profile_picture.path
+            image_name = user.profile_picture.name
 
         user_serializer = UpdateUserSerializer(user, data=request.data, partial=True)
         if user_serializer.is_valid():
             user_serializer.save()
 
-            if image_path and os.path.exists(image_path):
-                os.remove(image_path)
+            if (
+                settings.DEFAULT_FILE_STORAGE
+                == "storages.backends.gcloud.GoogleCloudStorage"
+            ):
+                default_storage.delete(image_name)
+            else:
+                if image_path and os.path.exists(image_path):
+                    os.remove(image_path)
 
             return Response(
                 {
