@@ -7,6 +7,8 @@ from apps.medicaltests.serializers import (
     MedicalTestAttachmentSerializer,
 )
 from config.permissions import IsAdministratorOrDoctor, IsAdministratorOrDoctorOrPatient
+from django.conf import settings
+from django.core.files.storage import default_storage
 from django.http import FileResponse
 from django.shortcuts import get_object_or_404
 from mixins.error_mixin import ErrorResponseMixin
@@ -115,16 +117,26 @@ class MedicalTestAttachmentViewSet(viewsets.GenericViewSet, ErrorResponseMixin):
         """
         attachment = get_object_or_404(MedicalTestAttachment, pk=pk)
         if attachment.file:
-            path = attachment.file.path
-            if path:
-                attachment.delete()
-                if os.path.exists(path):
-                    os.remove(path)
 
-                return Response(
-                    {"message": "Archivo eliminado correctamente."},
-                    status=status.HTTP_200_OK,
-                )
+            if (
+                settings.DEFAULT_FILE_STORAGE
+                == "storages.backends.gcloud.GoogleCloudStorage"
+            ):
+                path = attachment.file.name
+                if path:
+                    default_storage.delete(path)
+            else:
+                path = attachment.file.path
+                if path:
+                    if os.path.exists(path):
+                        os.remove(path)
+
+            attachment.delete()
+
+            return Response(
+                {"message": "Archivo eliminado correctamente."},
+                status=status.HTTP_200_OK,
+            )
 
         return self.error_response(
             message="No se pudo eliminar el archivo.",

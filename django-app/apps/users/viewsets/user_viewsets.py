@@ -10,6 +10,8 @@ from apps.users.serializers import (
     UserSerializer,
 )
 from config.permissions import IsAdministrator, IsAdministratorOrDoctorOrPatient
+from django.conf import settings
+from django.core.files.storage import default_storage
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from mixins.error_mixin import ErrorResponseMixin
@@ -307,12 +309,21 @@ class UserViewSet(viewsets.GenericViewSet, ErrorResponseMixin, PaginationMixin):
         """
         user = self.get_object(request.user.id)
         if user.profile_picture:
-            image_path = user.profile_picture.path
-            user.profile_picture.delete(save=False)
-            user.save()
 
-            if os.path.exists(image_path):
-                os.remove(image_path)
+            if (
+                settings.DEFAULT_FILE_STORAGE
+                == "storages.backends.gcloud.GoogleCloudStorage"
+            ):
+                image_path = user.profile_picture.name
+                user.profile_picture = None
+                default_storage.delete(image_path)
+            else:
+                image_path = user.profile_picture.path
+                user.profile_picture.delete(save=False)
+                if os.path.exists(image_path):
+                    os.remove(image_path)
+
+            user.save()
 
             return Response(
                 {"message": "Foto de perfil eliminada correctamente"},
