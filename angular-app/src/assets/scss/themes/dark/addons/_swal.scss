@@ -1,0 +1,13 @@
+.swal2-toast,
+.swal2-modal {
+  background-color: $card-bg !important;
+  color: $primary-text-dark;
+}
+
+.swal2-icon {
+  box-sizing: content-box;
+}
+
+.swal2-actions > button {
+  margin: 0.3125em;
+}

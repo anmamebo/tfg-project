@@ -76,179 +76,35 @@ html[data-bs-theme="dark"] {
   @import "node_modules/bootstrap/scss/utilities";
 
   // Swal
-  .swal2-toast,
-  .swal2-modal {
-    background-color: $card-bg !important;
-    color: $primary-text-dark;
-  }
-
-  .swal2-icon {
-    box-sizing: content-box;
-  }
-
-  .swal2-actions > button {
-    margin: 0.3125em;
-  }
+  @import "./assets/scss/themes/dark/addons/swal";
 
   // Multiselect
-  .multiselect-dropdown .dropdown-btn {
-    border: 1px solid #35354f !important;
-  }
-
-  .dropdown-list {
-    background-color: $card-bg !important;
-    color: $primary-text-dark;
-    border: 1px solid #35354f !important;
-    box-shadow: none !important;
-
-    .filter-textbox {
-      border: 1px solid #35354f !important;
-    }
-
-    .multiselect-item-checkbox input[type="checkbox"] + div {
-      color: $secondary-text-dark;
-    }
-
-    .filter-textbox input {
-      background-color: $card-bg !important;
-    }
-  }
+  @import "./assets/scss/themes/dark/addons/multiselect";
 
   // Flatpickr
-  .flatpickr-calendar {
-    background-color: $card-bg !important;
-    color: $primary-text-dark;
-    border: 1px solid #35354f !important;
-
-    .flatpickr-prev-month,
-    .flatpickr-next-month,
-    .flatpickr-month,
-    .flatpickr-weekday {
-      color: $primary-text-dark !important;
-    }
-
-    .flatpickr-day {
-      color: $secondary-text-dark;
-
-      &.inRange {
-        color: #393939;
-      }
-    }
-
-    .flatpickr-day.flatpickr-disabled,
-    .flatpickr-day.flatpickr-disabled:hover,
-    .flatpickr-day.prevMonthDay,
-    .flatpickr-day.nextMonthDay,
-    .flatpickr-day.notAllowed,
-    .flatpickr-day.notAllowed.prevMonthDay,
-    .flatpickr-day.notAllowed.nextMonthDay {
-      color: rgba(57, 57, 57, 0.3);
-    }
-  }
+  @import "./assets/scss/themes/dark/addons/flatpickr";
 
   // ApexCharts
-  .apexcharts-menu {
-    background-color: $card-bg !important;
-    color: $secondary-text-dark;
-
-    .apexcharts-menu-item:hover {
-      background-color: $primary-bg-subtle-dark !important;
-    }
-  }
-
-  .apexcharts-legend-text,
-  .apexcharts-text {
-    color: $secondary-text-dark !important;
-    fill: $secondary-text-dark !important;
-  }
+  @import "./assets/scss/themes/dark/addons/apex-charts";
 
   // Calendar
-  @import "./assets/scss/themes/dark/calendar";
+  @import "./assets/scss/themes/dark/addons/calendar";
 }
 
 /* angular-cli file: src/styles.css */
 @import "../node_modules/angular-calendar/css/angular-calendar.css";
 
-// CALENDARIO
-.cal-month-view .cal-open-day-events {
-  background-color: $primary !important;
-  box-shadow: inset 0 0 15px 0 rgba(0, 0, 0, 0.1) !important;
-}
-
-.cal-day-cell.cal-today {
-  background-color: #f2f7ff !important;
-  color: $primary !important;
-}
-
-.cal-month-view .cal-day-badge {
-  background-color: $primary !important;
-}
-
-.cal-header.cal-today {
-  background-color: #f2f7ff !important;
-}
+// Calendar
+@import "./assets/scss/addons/calendar";
 
 // Multiselect
-.multiselect-dropdown {
-  .dropdown-btn {
-    border: 1px solid #dce7f1 !important;
-
-    span {
-      color: #adb5bd !important;
-    }
-
-    .selected-item-container {
-      .selected-item {
-        background-color: #435ebe !important;
-        max-width: 300px !important;
-
-        span {
-          color: white !important;
-        }
-      }
-    }
-  }
-
-  .multiselect-item-checkbox {
-    input[type="checkbox"]:checked + div::before {
-      background-color: #435ebe !important;
-    }
-
-    div::before {
-      border-color: #435ebe !important;
-      border-radius: 25%;
-      -webkit-border-radius: 25%;
-      -moz-border-radius: 25%;
-      -ms-border-radius: 25%;
-      -o-border-radius: 25%;
-    }
-  }
-
-  .no-filtered-data {
-    h5 {
-      color: #435ebe !important;
-      font-size: 12pt !important;
-    }
-  }
-
-  .no-data {
-    h5 {
-      color: #435ebe !important;
-      font-size: 12pt !important;
-    }
-  }
-}
+@import "./assets/scss/addons/multiselect";
 
 // Swal
-.swal2-close:focus {
-  outline: 0 !important;
-  box-shadow: none !important;
-}
+@import "./assets/scss/addons/swal";
 
 // ApexCharts
-.apexcharts-canvas {
-  margin: 0 auto !important;
-}
+@import "./assets/scss/addons/apex-charts";
 
 // General
 button:focus,
