@@ -23,7 +23,7 @@
               (updatedUserEvent)="getUser()"
             ></app-basic-info-card>
 
-            <div *appHasRole="['Médico']">
+            <div *appHasRole="[DOCTOR]">
               <ng-container *ngIf="user.doctor">
                 <app-doctor-info-card
                   [doctor]="user.doctor"
@@ -32,7 +32,7 @@
               </ng-container>
             </div>
 
-            <div *appHasRole="['Paciente']">
+            <div *appHasRole="[PATIENT]">
               <ng-container *ngIf="user.patient">
                 <app-patient-info-card
                   [patient]="user.patient"

@@ -1,14 +1,14 @@
 <!-- Panel principal Administrativo -->
-<ng-container *appHasRole="['Administrativo']">
+<ng-container *appHasRole="[ADMINISTRATIVE]">
   <app-administrative-home-page></app-administrative-home-page>
 </ng-container>
 
 <!-- Panel principal Médico -->
-<ng-container *appHasRole="['Médico']">
+<ng-container *appHasRole="[DOCTOR]">
   <app-doctor-home-page></app-doctor-home-page>
 </ng-container>
 
 <!-- Panel principal Paciente -->
-<ng-container *appHasRole="['Paciente']">
+<ng-container *appHasRole="[PATIENT]">
   <app-patient-home-page></app-patient-home-page>
 </ng-container>

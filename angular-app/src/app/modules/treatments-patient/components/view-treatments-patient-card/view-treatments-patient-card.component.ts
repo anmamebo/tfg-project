@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ROLES } from '@app/core/constants/roles.constants';
 import {
   STATUS_BADGE_CLASSES,
   StatusBadgeClasses,
@@ -20,6 +21,9 @@ import { es } from 'date-fns/locale';
   providers: [TreatmentService, PdfTreatmentService],
 })
 export class ViewTreatmentsPatientCardComponent implements OnInit {
+  /** Rol de paciente. */
+  public readonly PATIENT = ROLES.PATIENT;
+
   /** Tratamiento. */
   @Input() public treatment: Treatment | null = null;
 

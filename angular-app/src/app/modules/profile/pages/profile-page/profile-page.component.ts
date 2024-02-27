@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { breadcrumbProfileData } from '@app/core/constants/breadcrumb-data.constants';
+import { ROLES } from '@app/core/constants/roles.constants';
 import { User } from '@app/core/models/user.interface';
 import { TokenStorageService } from '@app/core/services/auth/token-storage.service';
 import { UserService } from '@app/core/services/entities/user.service';
@@ -14,6 +15,12 @@ import { UserService } from '@app/core/services/entities/user.service';
   providers: [UserService, TokenStorageService],
 })
 export class ProfilePageComponent implements OnInit {
+  /** Rol de médico. */
+  public readonly DOCTOR = ROLES.DOCTOR;
+
+  /** Rol de paciente. */
+  public readonly PATIENT = ROLES.PATIENT;
+
   /** Título de la página. */
   public pageTitle: string = 'Mi Perfil';
 

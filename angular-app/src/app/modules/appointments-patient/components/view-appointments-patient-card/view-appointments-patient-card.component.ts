@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ROLES } from '@app/core/constants/roles.constants';
 import {
   Appointment,
   STATUS_BADGE_CLASSES,
@@ -21,6 +22,9 @@ import { es } from 'date-fns/locale';
   providers: [AppointmentService, PdfAppointmentService],
 })
 export class ViewAppointmentsPatientCardComponent implements OnInit {
+  /** Rol de paciente. */
+  public readonly PATIENT = ROLES.PATIENT;
+
   /** Cita. */
   @Input() public appointment: Appointment | null = null;
 

@@ -19,7 +19,7 @@
         class="dropdown-menu dropdown-menu-dark"
         aria-labelledby="dropdownMenuButton"
       >
-        <span *appHasRole="['Paciente']">
+        <span *appHasRole="[PATIENT]">
           <a
             *ngIf="
               appointment.status == 'pending' ||
