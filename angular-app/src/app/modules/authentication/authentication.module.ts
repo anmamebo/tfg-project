@@ -6,15 +6,15 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FlatpickrModule } from 'angularx-flatpickr';
 
 // Módulos
-import { FormErrorsModule } from 'src/app/shared/components/form-errors/form-errors.module';
+import { FormErrorsModule } from '@app/shared/components/form-errors/form-errors.module';
 import { AuthenticationRoutingModule } from './authentication-routing.module';
 
 // Componentes
+import { AuthenticationPageComponent } from './components/authentication-page/authentication-page.component';
 import { ForgotPasswordPageComponent } from './pages/forgot-password-page/forgot-password-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { ResetPasswordPageComponent } from './pages/reset-password-page/reset-password-page.component';
 import { SignupPageComponent } from './pages/signup-page/signup-page.component';
-import { AuthenticationPageComponent } from './components/authentication-page/authentication-page.component';
 
 @NgModule({
   declarations: [

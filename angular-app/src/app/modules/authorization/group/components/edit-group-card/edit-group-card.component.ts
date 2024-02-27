@@ -1,9 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Group } from 'src/app/core/models/group.interface';
-import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
-import { GroupService } from 'src/app/core/services/entities/group.service';
-import { NotificationService } from 'src/app/core/services/notifications/notification.service';
+import { Group } from '@app/core/models/group.interface';
+import { MessageResponse } from '@app/core/models/response/message-response.interface';
+import { GroupService } from '@app/core/services/entities/group.service';
+import { NotificationService } from '@app/core/services/notifications/notification.service';
 
 /**
  * Componente que representa la tarjeta para editar un grupo

@@ -1,21 +1,21 @@
 import { DatePipe } from '@angular/common';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { breadcrumbDoctorsScheduleData } from '@app/core/constants/breadcrumb-data.constants';
+import { Doctor } from '@app/core/models/doctor.interface';
+import { ListResponse } from '@app/core/models/response/list-response.interface';
+import { MessageResponse } from '@app/core/models/response/message-response.interface';
+import { Schedule } from '@app/core/models/schedule.interface';
+import { CustomDateFormatter } from '@app/core/providers/custom-date-formatter.provider';
+import { ScheduleService } from '@app/core/services/entities/schedule.service';
+import { NotificationService } from '@app/core/services/notifications/notification.service';
+import { BaseCalendarComponent } from '@app/shared/components/base-calendar/base-calendar.component';
 import { SwalPortalTargets } from '@sweetalert2/ngx-sweetalert2';
 import {
   CalendarDateFormatter,
   CalendarEvent,
   CalendarView,
 } from 'angular-calendar';
-import { breadcrumbDoctorsScheduleData } from 'src/app/core/constants/breadcrumb-data.constants';
-import { Doctor } from 'src/app/core/models/doctor.interface';
-import { ListResponse } from 'src/app/core/models/response/list-response.interface';
-import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
-import { Schedule } from 'src/app/core/models/schedule.interface';
-import { CustomDateFormatter } from 'src/app/core/providers/custom-date-formatter.provider';
-import { ScheduleService } from 'src/app/core/services/entities/schedule.service';
-import { NotificationService } from 'src/app/core/services/notifications/notification.service';
-import { BaseCalendarComponent } from 'src/app/shared/components/base-calendar/base-calendar.component';
 
 /**
  * Componente que representa la página de horarios de médicos

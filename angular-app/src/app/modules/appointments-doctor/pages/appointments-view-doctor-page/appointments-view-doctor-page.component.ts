@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { breadcrumbAppointmentsViewData } from 'src/app/core/constants/breadcrumb-data.constants';
-import { Appointment } from 'src/app/core/models/appointment.interface';
-import { AppointmentService } from 'src/app/core/services/entities/appointment.service';
+import { breadcrumbAppointmentsViewData } from '@app/core/constants/breadcrumb-data.constants';
+import { Appointment } from '@app/core/models/appointment.interface';
+import { AppointmentService } from '@app/core/services/entities/appointment.service';
 
 /**
  * Componente para la página de visualización de una cita

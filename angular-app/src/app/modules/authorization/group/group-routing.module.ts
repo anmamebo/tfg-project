@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { groupResolver } from 'src/app/core/resolvers/group.resolver';
+import { groupResolver } from '@app/core/resolvers/group.resolver';
 import { GroupEditPageComponent } from './pages/group-edit-page/group-edit-page.component';
 import { GroupPageComponent } from './pages/group-page/group-page.component';
 import { GroupViewPageComponent } from './pages/group-view-page/group-view-page.component';

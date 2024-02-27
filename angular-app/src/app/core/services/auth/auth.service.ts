@@ -1,12 +1,12 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { API_URL } from '@app/core/constants/API-URL.constants';
+import { AuthResponse } from '@app/core/models/response/auth-response.interface';
+import { MessageResponse } from '@app/core/models/response/message-response.interface';
+import { TokenStorageService } from '@app/core/services/auth/token-storage.service';
+import { HttpCommonService } from '@app/core/services/http-common/http-common.service';
 import { jwtDecode } from 'jwt-decode';
 import { Observable } from 'rxjs';
-import { API_URL } from 'src/app/core/constants/API-URL.constants';
-import { AuthResponse } from 'src/app/core/models/response/auth-response.interface';
-import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
-import { TokenStorageService } from 'src/app/core/services/auth/token-storage.service';
-import { HttpCommonService } from 'src/app/core/services/http-common/http-common.service';
 
 // Configuración de encabezados HTTP
 const httpOptions = {

@@ -1,9 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
-import { breadcrumbGroupData } from 'src/app/core/constants/breadcrumb-data.constants';
-import { ROLES } from 'src/app/core/constants/roles.constants';
-import { EntityData } from 'src/app/core/models/entity-data.interface';
-import { GroupService } from 'src/app/core/services/entities/group.service';
-import { GenericListCardComponent } from 'src/app/shared/components/generic-list-card/generic-list-card.component';
+import { breadcrumbGroupData } from '@app/core/constants/breadcrumb-data.constants';
+import { ROLES } from '@app/core/constants/roles.constants';
+import { EntityData } from '@app/core/models/entity-data.interface';
+import { GroupService } from '@app/core/services/entities/group.service';
+import { GenericListCardComponent } from '@app/shared/components/generic-list-card/generic-list-card.component';
 
 /**
  * Componente para la página de grupos.

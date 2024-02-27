@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { breadcrumbDoctorsData } from 'src/app/core/constants/breadcrumb-data.constants';
-import { ROLES } from 'src/app/core/constants/roles.constants';
-import { EntityData } from 'src/app/core/models/entity-data.interface';
-import { DoctorService } from 'src/app/core/services/entities/doctor.service';
+import { breadcrumbDoctorsData } from '@app/core/constants/breadcrumb-data.constants';
+import { ROLES } from '@app/core/constants/roles.constants';
+import { EntityData } from '@app/core/models/entity-data.interface';
+import { DoctorService } from '@app/core/services/entities/doctor.service';
 
 /**
  * Componente para la página de doctores.

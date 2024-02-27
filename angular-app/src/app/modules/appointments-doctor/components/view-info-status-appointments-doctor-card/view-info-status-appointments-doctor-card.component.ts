@@ -3,10 +3,10 @@ import {
   Appointment,
   STATUS_BADGE_CLASSES,
   StatusBadgeClasses,
-} from 'src/app/core/models/appointment.interface';
-import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
-import { AppointmentService } from 'src/app/core/services/entities/appointment.service';
-import { NotificationService } from 'src/app/core/services/notifications/notification.service';
+} from '@app/core/models/appointment.interface';
+import { MessageResponse } from '@app/core/models/response/message-response.interface';
+import { AppointmentService } from '@app/core/services/entities/appointment.service';
+import { NotificationService } from '@app/core/services/notifications/notification.service';
 
 /**
  * Componente para la tarjeta de visualización de la información

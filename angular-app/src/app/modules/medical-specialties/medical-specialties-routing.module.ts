@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ROLES } from 'src/app/core/constants/roles.constants';
-import { roleGuard } from 'src/app/core/guards/role.guard';
-import { medicalSpecialtyResolver } from 'src/app/core/resolvers/medical-specialty.resolver';
+import { ROLES } from '@app/core/constants/roles.constants';
+import { roleGuard } from '@app/core/guards/role.guard';
+import { medicalSpecialtyResolver } from '@app/core/resolvers/medical-specialty.resolver';
 import { MedicalSpecialtiesCreatePageComponent } from './pages/medical-specialties-create-page/medical-specialties-create-page.component';
 import { MedicalSpecialtiesEditPageComponent } from './pages/medical-specialties-edit-page/medical-specialties-edit-page.component';
 import { MedicalSpecialtiesPageComponent } from './pages/medical-specialties-page/medical-specialties-page.component';

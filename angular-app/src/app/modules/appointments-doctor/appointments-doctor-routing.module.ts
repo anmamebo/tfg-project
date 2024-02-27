@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { appointmentForDoctorResolver } from 'src/app/core/resolvers/appointment.resolver';
+import { appointmentForDoctorResolver } from '@app/core/resolvers/appointment.resolver';
 import { AppointmentsDoctorPageComponent } from './pages/appointments-doctor-page/appointments-doctor-page.component';
 import { AppointmentsHistoricalDoctorPageComponent } from './pages/appointments-historical-doctor-page/appointments-historical-doctor-page.component';
 import { AppointmentsViewDoctorPageComponent } from './pages/appointments-view-doctor-page/appointments-view-doctor-page.component';

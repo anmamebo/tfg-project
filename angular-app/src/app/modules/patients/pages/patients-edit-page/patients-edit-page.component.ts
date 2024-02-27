@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { breadcrumbPatientsEditData } from 'src/app/core/constants/breadcrumb-data.constants';
-import { Patient } from 'src/app/core/models/patient.interface';
-import { PatientService } from 'src/app/core/services/entities/patient.service';
+import { breadcrumbPatientsEditData } from '@app/core/constants/breadcrumb-data.constants';
+import { Patient } from '@app/core/models/patient.interface';
+import { PatientService } from '@app/core/services/entities/patient.service';
 
 /**
  * Componente para la página de edición de un paciente.

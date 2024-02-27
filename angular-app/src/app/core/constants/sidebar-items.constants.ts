@@ -1,4 +1,4 @@
-import { ROLES } from 'src/app/core/constants/roles.constants';
+import { ROLES } from '@app/core/constants/roles.constants';
 
 export const sidebarData = [
   {

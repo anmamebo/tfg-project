@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
-import { AuthService } from 'src/app/core/services/auth/auth.service';
-import Validation from 'src/app/core/validators/general.validator';
+import { MessageResponse } from '@app/core/models/response/message-response.interface';
+import { AuthService } from '@app/core/services/auth/auth.service';
+import Validation from '@app/core/validators/general.validator';
 
 /**
  * Componente que representa la página de restablecimiento de contraseña.

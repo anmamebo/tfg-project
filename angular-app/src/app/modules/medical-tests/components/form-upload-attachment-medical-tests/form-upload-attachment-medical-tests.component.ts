@@ -1,10 +1,10 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ATTACHMENTS_ALLOWED_FILE_EXTENSIONS } from 'src/app/core/constants/file-extensions.constants';
-import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
-import { MedicalTestService } from 'src/app/core/services/entities/medicaltest.service';
-import { NotificationService } from 'src/app/core/services/notifications/notification.service';
-import Validation from 'src/app/core/validators/general.validator';
+import { ATTACHMENTS_ALLOWED_FILE_EXTENSIONS } from '@app/core/constants/file-extensions.constants';
+import { MessageResponse } from '@app/core/models/response/message-response.interface';
+import { MedicalTestService } from '@app/core/services/entities/medicaltest.service';
+import { NotificationService } from '@app/core/services/notifications/notification.service';
+import Validation from '@app/core/validators/general.validator';
 
 /**
  * Componente para el formulario de subida de ficheros adjuntos de una prueba médica.

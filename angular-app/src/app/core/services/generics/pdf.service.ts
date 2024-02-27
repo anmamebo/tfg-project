@@ -1,8 +1,8 @@
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { API_URL } from '@app/core/constants/API-URL.constants';
+import { HttpCommonService } from '@app/core/services/http-common/http-common.service';
 import { Observable, map } from 'rxjs';
-import { API_URL } from 'src/app/core/constants/API-URL.constants';
-import { HttpCommonService } from 'src/app/core/services/http-common/http-common.service';
 
 /**
  * Servicio genérico para la descarga de archivos PDF.

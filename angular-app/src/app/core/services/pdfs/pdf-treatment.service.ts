@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { PdfService } from '@app/core/services/generics/pdf.service';
+import { HttpCommonService } from '@app/core/services/http-common/http-common.service';
 import { Observable } from 'rxjs';
-import { PdfService } from 'src/app/core/services/generics/pdf.service';
-import { HttpCommonService } from 'src/app/core/services/http-common/http-common.service';
 
 /**
  * Servicio para gestionar la descarga e impresión de pdfs de tratamientos.

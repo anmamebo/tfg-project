@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { breadcrumbAppointmentsPatientData } from 'src/app/core/constants/breadcrumb-data.constants';
-import { EntityData } from 'src/app/core/models/entity-data.interface';
+import { breadcrumbAppointmentsPatientData } from '@app/core/constants/breadcrumb-data.constants';
+import { EntityData } from '@app/core/models/entity-data.interface';
 
 /**
  * Componente para la página de citas del paciente.

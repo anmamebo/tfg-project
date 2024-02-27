@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TokenStorageService } from 'src/app/core/services/auth/token-storage.service';
+import { TokenStorageService } from '@app/core/services/auth/token-storage.service';
 
 /**
  * Componente que muestra un mensaje de bienvenida al usuario

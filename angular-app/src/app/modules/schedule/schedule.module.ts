@@ -10,8 +10,8 @@ import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 // Módulos
-import { GenericPageModule } from 'src/app/shared/components/generic-page/generic-page.module';
-import { LoadingSpinnerModule } from 'src/app/shared/components/loading-spinner/loading-spinner.module';
+import { GenericPageModule } from '@app/shared/components/generic-page/generic-page.module';
+import { LoadingSpinnerModule } from '@app/shared/components/loading-spinner/loading-spinner.module';
 import { ScheduleRoutingModule } from './schedule-routing.module';
 
 // Componentes páginas

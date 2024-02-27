@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { MedicalSpecialty } from 'src/app/core/models/medical-specialty.interface';
+import { MedicalSpecialty } from '@app/core/models/medical-specialty.interface';
 
 /**
  * Componente que representa la tarjeta de visualización de la

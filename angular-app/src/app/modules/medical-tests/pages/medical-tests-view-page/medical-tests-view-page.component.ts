@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { breadcrumbMedicalTestsViewData } from 'src/app/core/constants/breadcrumb-data.constants';
-import { MedicalTest } from 'src/app/core/models/medical-test.interface';
-import { MedicalTestService } from 'src/app/core/services/entities/medicaltest.service';
+import { breadcrumbMedicalTestsViewData } from '@app/core/constants/breadcrumb-data.constants';
+import { MedicalTest } from '@app/core/models/medical-test.interface';
+import { MedicalTestService } from '@app/core/services/entities/medicaltest.service';
 
 /**
  * Componente para la página de visualización de una prueba médica

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { breadcrumbRoomsViewData } from 'src/app/core/constants/breadcrumb-data.constants';
-import { ROLES } from 'src/app/core/constants/roles.constants';
-import { Room } from 'src/app/core/models/room.interface';
-import { RoomService } from 'src/app/core/services/entities/room.service';
+import { breadcrumbRoomsViewData } from '@app/core/constants/breadcrumb-data.constants';
+import { ROLES } from '@app/core/constants/roles.constants';
+import { Room } from '@app/core/models/room.interface';
+import { RoomService } from '@app/core/services/entities/room.service';
 
 /**
  * Componente para la página de visualización de una sala

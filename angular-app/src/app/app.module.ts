@@ -21,7 +21,7 @@ import { NgProgressHttpModule } from 'ngx-progressbar/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { ErrorHandlerInterceptor } from 'src/app/core/interceptors/error-handler.interceptor';
+import { ErrorHandlerInterceptor } from '@app/core/interceptors/error-handler.interceptor';
 
 // Locale ES
 import { registerLocaleData } from '@angular/common';

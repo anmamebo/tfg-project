@@ -1,15 +1,15 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Department } from '@app/core/models/department.interface';
+import { Doctor } from '@app/core/models/doctor.interface';
+import { MedicalSpecialty } from '@app/core/models/medical-specialty.interface';
+import { ListResponse } from '@app/core/models/response/list-response.interface';
+import { MessageResponse } from '@app/core/models/response/message-response.interface';
+import { DepartmentService } from '@app/core/services/entities/department.service';
+import { DoctorService } from '@app/core/services/entities/doctor.service';
+import { MedicalspecialtyService } from '@app/core/services/entities/medicalspecialty.service';
+import { NotificationService } from '@app/core/services/notifications/notification.service';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
-import { Department } from 'src/app/core/models/department.interface';
-import { Doctor } from 'src/app/core/models/doctor.interface';
-import { MedicalSpecialty } from 'src/app/core/models/medical-specialty.interface';
-import { ListResponse } from 'src/app/core/models/response/list-response.interface';
-import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
-import { DepartmentService } from 'src/app/core/services/entities/department.service';
-import { DoctorService } from 'src/app/core/services/entities/doctor.service';
-import { MedicalspecialtyService } from 'src/app/core/services/entities/medicalspecialty.service';
-import { NotificationService } from 'src/app/core/services/notifications/notification.service';
 
 /**
  * Componente que representa la tarjeta de edición de la

@@ -1,11 +1,11 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { API_URL } from '@app/core/constants/API-URL.constants';
+import { Appointment } from '@app/core/models/appointment.interface';
+import { ListResponse } from '@app/core/models/response/list-response.interface';
+import { MessageResponse } from '@app/core/models/response/message-response.interface';
+import { HttpCommonService } from '@app/core/services/http-common/http-common.service';
 import { Observable } from 'rxjs';
-import { API_URL } from 'src/app/core/constants/API-URL.constants';
-import { Appointment } from 'src/app/core/models/appointment.interface';
-import { ListResponse } from 'src/app/core/models/response/list-response.interface';
-import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
-import { HttpCommonService } from 'src/app/core/services/http-common/http-common.service';
 
 interface AppointmentOptions {
   date?: string;

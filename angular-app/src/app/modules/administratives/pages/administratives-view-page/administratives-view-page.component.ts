@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { breadcrumbAdministrativesViewData } from 'src/app/core/constants/breadcrumb-data.constants';
-import { User } from 'src/app/core/models/user.interface';
-import { AdministrativeService } from 'src/app/core/services/entities/administrative.service';
+import { breadcrumbAdministrativesViewData } from '@app/core/constants/breadcrumb-data.constants';
+import { User } from '@app/core/models/user.interface';
+import { AdministrativeService } from '@app/core/services/entities/administrative.service';
 
 /**
  * Componente para la página de visualización de un administrativo

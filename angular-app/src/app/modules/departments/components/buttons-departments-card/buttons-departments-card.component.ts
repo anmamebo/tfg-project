@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { DepartmentService } from 'src/app/core/services/entities/department.service';
-import { NotificationService } from 'src/app/core/services/notifications/notification.service';
+import { DepartmentService } from '@app/core/services/entities/department.service';
+import { NotificationService } from '@app/core/services/notifications/notification.service';
 
 /**
  * Componente para los botones de la tarjeta de un departamento

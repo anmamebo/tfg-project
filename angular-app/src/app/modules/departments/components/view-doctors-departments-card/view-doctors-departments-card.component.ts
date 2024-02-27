@@ -1,11 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Doctor } from 'src/app/core/models/doctor.interface';
+import { Doctor } from '@app/core/models/doctor.interface';
 import {
   ListResponse,
   PaginatedResponse,
-} from 'src/app/core/models/response/list-response.interface';
-import { DoctorService } from 'src/app/core/services/entities/doctor.service';
-import { NotificationService } from 'src/app/core/services/notifications/notification.service';
+} from '@app/core/models/response/list-response.interface';
+import { DoctorService } from '@app/core/services/entities/doctor.service';
+import { NotificationService } from '@app/core/services/notifications/notification.service';
 
 /**
  * Componente que representa la tarjeta de visualización de los médicos

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { MedicalTest } from 'src/app/core/models/medical-test.interface';
+import { MedicalTest } from '@app/core/models/medical-test.interface';
 
 /**
  * Componente para mostrar la información de un examen médico

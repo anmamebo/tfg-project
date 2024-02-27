@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { breadcrumbMedicalSpecialtiesEditData } from 'src/app/core/constants/breadcrumb-data.constants';
-import { MedicalSpecialty } from 'src/app/core/models/medical-specialty.interface';
+import { breadcrumbMedicalSpecialtiesEditData } from '@app/core/constants/breadcrumb-data.constants';
+import { MedicalSpecialty } from '@app/core/models/medical-specialty.interface';
 
 /**
  * Componente para la página de edición de una especialidad médica.

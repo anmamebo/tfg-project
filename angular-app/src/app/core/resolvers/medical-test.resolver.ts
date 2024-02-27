@@ -5,8 +5,8 @@ import {
   Router,
   RouterStateSnapshot,
 } from '@angular/router';
+import { MedicalTestService } from '@app/core/services/entities/medicaltest.service';
 import { Observable, catchError, map, of } from 'rxjs';
-import { MedicalTestService } from 'src/app/core/services/entities/medicaltest.service';
 
 /**
  * Resolver que obtiene detalles de una prueba médica por su ID.

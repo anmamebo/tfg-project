@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { SortEvent } from 'src/app/core/models/sort-event.interface';
+import { SortEvent } from '@app/core/models/sort-event.interface';
 
 interface ActionsUrls {
   show?: {

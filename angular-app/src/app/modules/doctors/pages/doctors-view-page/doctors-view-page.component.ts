@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { breadcrumbDoctorsViewData } from 'src/app/core/constants/breadcrumb-data.constants';
-import { Doctor } from 'src/app/core/models/doctor.interface';
-import { DoctorService } from 'src/app/core/services/entities/doctor.service';
+import { breadcrumbDoctorsViewData } from '@app/core/constants/breadcrumb-data.constants';
+import { Doctor } from '@app/core/models/doctor.interface';
+import { DoctorService } from '@app/core/services/entities/doctor.service';
 
 /**
  * Componente para la página de visualización de un médico

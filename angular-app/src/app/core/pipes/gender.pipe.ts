@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { GENDER_OPTIONS } from 'src/app/core/constants/options/genders-options.constants';
+import { GENDER_OPTIONS } from '@app/core/constants/options/genders-options.constants';
 
 /**
  * Transforma el valor de género en su representación correspondiente.

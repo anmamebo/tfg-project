@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import {
   STATUS_BADGE_CLASSES,
   StatusBadgeClasses,
-} from 'src/app/core/models/appointment.interface';
-import { GenericTableComponent } from 'src/app/shared/components/generic-table/generic-table.component';
+} from '@app/core/models/appointment.interface';
+import { GenericTableComponent } from '@app/shared/components/generic-table/generic-table.component';
 
 /**
  * Componente que representa una tabla de citas.

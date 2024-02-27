@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { MedicalTest } from '@app/core/models/medical-test.interface';
 import { format } from 'date-fns';
 import { es } from 'date-fns/locale';
-import { MedicalTest } from 'src/app/core/models/medical-test.interface';
 
 /**
  * Componente que representa una tarjeta de visualización de pruebas médicas.

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { breadcrumbProfileData } from 'src/app/core/constants/breadcrumb-data.constants';
-import { User } from 'src/app/core/models/user.interface';
-import { TokenStorageService } from 'src/app/core/services/auth/token-storage.service';
-import { UserService } from 'src/app/core/services/entities/user.service';
+import { breadcrumbProfileData } from '@app/core/constants/breadcrumb-data.constants';
+import { User } from '@app/core/models/user.interface';
+import { TokenStorageService } from '@app/core/services/auth/token-storage.service';
+import { UserService } from '@app/core/services/entities/user.service';
 
 /**
  * Componente que representa la página de perfil de usuario.

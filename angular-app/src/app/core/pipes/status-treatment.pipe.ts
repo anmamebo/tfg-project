@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { STATUS_TREATMENT_OPTIONS } from 'src/app/core/constants/options/status-treatment-options.constants';
+import { STATUS_TREATMENT_OPTIONS } from '@app/core/constants/options/status-treatment-options.constants';
 
 /**
  * Transforma el estado de un tratamiento en su representación correspondiente.

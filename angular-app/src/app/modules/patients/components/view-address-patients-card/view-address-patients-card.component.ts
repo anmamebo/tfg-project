@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Address } from 'src/app/core/models/address.interface';
+import { Address } from '@app/core/models/address.interface';
 
 /**
  * Componente que representa la tarjeta de visualización de la

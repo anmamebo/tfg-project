@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { TYPE_APPOINTMENT_OPTIONS } from '@app/core/constants/options/type-appointment-options.constants';
+import { StatisticsService } from '@app/core/services/statistics/statistics.service';
 import {
   ApexAxisChartSeries,
   ApexChart,
@@ -11,8 +13,6 @@ import {
   ApexXAxis,
   ApexYAxis,
 } from 'ng-apexcharts';
-import { TYPE_APPOINTMENT_OPTIONS } from 'src/app/core/constants/options/type-appointment-options.constants';
-import { StatisticsService } from 'src/app/core/services/statistics/statistics.service';
 
 interface TypesData {
   name: string;

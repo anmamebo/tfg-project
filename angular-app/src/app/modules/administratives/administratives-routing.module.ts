@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { administrativeResolver } from 'src/app/core/resolvers/administrative.resolver';
+import { administrativeResolver } from '@app/core/resolvers/administrative.resolver';
 import { AdministrativesCreatePageComponent } from './pages/administratives-create-page/administratives-create-page.component';
 import { AdministrativesEditPageComponent } from './pages/administratives-edit-page/administratives-edit-page.component';
 import { AdministrativesPageComponent } from './pages/administratives-page/administratives-page.component';

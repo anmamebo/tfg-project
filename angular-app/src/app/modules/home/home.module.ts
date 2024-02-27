@@ -9,9 +9,9 @@ import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 // Módulos
-import { GenericCardModule } from 'src/app/shared/components/generic-card/generic-card.module';
-import { GenericListCardModule } from 'src/app/shared/components/generic-list-card/generic-list-card.module';
-import { SharedModule } from 'src/app/shared/shared.module';
+import { GenericCardModule } from '@app/shared/components/generic-card/generic-card.module';
+import { GenericListCardModule } from '@app/shared/components/generic-list-card/generic-list-card.module';
+import { SharedModule } from '@app/shared/shared.module';
 import { HomeRoutingModule } from './home-routing.module';
 
 // Componentes Páginas

@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ROLES } from 'src/app/core/constants/roles.constants';
-import { authGuard } from 'src/app/core/guards/auth.guard';
-import { loginGuard } from 'src/app/core/guards/login.guard';
-import { roleGuard } from 'src/app/core/guards/role.guard';
-import { ErrorModule } from 'src/app/modules/error/error.module';
-import { Error404PageComponent } from 'src/app/modules/error/pages/error404-page/error404-page.component';
+import { ROLES } from '@app/core/constants/roles.constants';
+import { authGuard } from '@app/core/guards/auth.guard';
+import { loginGuard } from '@app/core/guards/login.guard';
+import { roleGuard } from '@app/core/guards/role.guard';
+import { ErrorModule } from '@app/modules/error/error.module';
+import { Error404PageComponent } from '@app/modules/error/pages/error404-page/error404-page.component';
 import { ModulesComponent } from './modules/modules.component';
 
 const routes: Routes = [

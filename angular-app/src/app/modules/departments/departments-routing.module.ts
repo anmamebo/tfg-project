@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ROLES } from 'src/app/core/constants/roles.constants';
-import { roleGuard } from 'src/app/core/guards/role.guard';
-import { departmentResolver } from 'src/app/core/resolvers/department.resolver';
+import { ROLES } from '@app/core/constants/roles.constants';
+import { roleGuard } from '@app/core/guards/role.guard';
+import { departmentResolver } from '@app/core/resolvers/department.resolver';
 import { DepartmentsCreatePageComponent } from './pages/departments-create-page/departments-create-page.component';
 import { DepartmentsEditPageComponent } from './pages/departments-edit-page/departments-edit-page.component';
 import { DepartmentsPageComponent } from './pages/departments-page/departments-page.component';

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DoctorStatisticsService } from '@app/core/services/statistics/doctor-statistics.service';
 import {
   ApexAxisChartSeries,
   ApexChart,
@@ -9,7 +10,6 @@ import {
   ApexPlotOptions,
   ApexXAxis,
 } from 'ng-apexcharts';
-import { DoctorStatisticsService } from 'src/app/core/services/statistics/doctor-statistics.service';
 
 interface AppointmentsPerAge {
   age_group: string;

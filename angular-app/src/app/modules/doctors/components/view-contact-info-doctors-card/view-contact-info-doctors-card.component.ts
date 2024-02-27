@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Doctor } from 'src/app/core/models/doctor.interface';
+import { Doctor } from '@app/core/models/doctor.interface';
 
 /**
  * Componente que representa la tarjeta de visualización de la

@@ -8,14 +8,14 @@ import { FlatpickrModule } from 'angularx-flatpickr';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 // Módulos
-import { ElementsPerPageModule } from 'src/app/shared/components/elements-per-page/elements-per-page.module';
-import { FormErrorsModule } from 'src/app/shared/components/form-errors/form-errors.module';
-import { GenericCardModule } from 'src/app/shared/components/generic-card/generic-card.module';
-import { GenericPageModule } from 'src/app/shared/components/generic-page/generic-page.module';
-import { LoadingSpinnerModule } from 'src/app/shared/components/loading-spinner/loading-spinner.module';
-import { PaginationModule } from 'src/app/shared/components/pagination/pagination.module';
-import { TooltipModule } from 'src/app/shared/components/tooltip/tooltip.module';
-import { SharedModule } from 'src/app/shared/shared.module';
+import { ElementsPerPageModule } from '@app/shared/components/elements-per-page/elements-per-page.module';
+import { FormErrorsModule } from '@app/shared/components/form-errors/form-errors.module';
+import { GenericCardModule } from '@app/shared/components/generic-card/generic-card.module';
+import { GenericPageModule } from '@app/shared/components/generic-page/generic-page.module';
+import { LoadingSpinnerModule } from '@app/shared/components/loading-spinner/loading-spinner.module';
+import { PaginationModule } from '@app/shared/components/pagination/pagination.module';
+import { TooltipModule } from '@app/shared/components/tooltip/tooltip.module';
+import { SharedModule } from '@app/shared/shared.module';
 import { MedicalTestsRoutingModule } from './medical-tests-routing.module';
 
 // Componentes páginas

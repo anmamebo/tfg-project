@@ -11,13 +11,13 @@ import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 // Módulos
-import { ElementsPerPageModule } from 'src/app/shared/components/elements-per-page/elements-per-page.module';
-import { GenericCardModule } from 'src/app/shared/components/generic-card/generic-card.module';
-import { GenericPageModule } from 'src/app/shared/components/generic-page/generic-page.module';
-import { LoadingSpinnerModule } from 'src/app/shared/components/loading-spinner/loading-spinner.module';
-import { PaginationModule } from 'src/app/shared/components/pagination/pagination.module';
-import { TooltipModule } from 'src/app/shared/components/tooltip/tooltip.module';
-import { SharedModule } from 'src/app/shared/shared.module';
+import { ElementsPerPageModule } from '@app/shared/components/elements-per-page/elements-per-page.module';
+import { GenericCardModule } from '@app/shared/components/generic-card/generic-card.module';
+import { GenericPageModule } from '@app/shared/components/generic-page/generic-page.module';
+import { LoadingSpinnerModule } from '@app/shared/components/loading-spinner/loading-spinner.module';
+import { PaginationModule } from '@app/shared/components/pagination/pagination.module';
+import { TooltipModule } from '@app/shared/components/tooltip/tooltip.module';
+import { SharedModule } from '@app/shared/shared.module';
 import { AppointmentsPatientRoutingModule } from './appointments-patient-routing.module';
 
 // Componentes Páginas

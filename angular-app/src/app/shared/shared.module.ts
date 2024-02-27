@@ -2,13 +2,13 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 // Directives
-import { HasRoleDirective } from 'src/app/core/directives/has-role.directive';
+import { HasRoleDirective } from '@app/core/directives/has-role.directive';
 
 // Pipes
-import { GenderPipe } from 'src/app/core/pipes/gender.pipe';
-import { StatusAppointmentPipe } from 'src/app/core/pipes/status-appointment.pipe';
-import { StatusTreatmentPipe } from 'src/app/core/pipes/status-treatment.pipe';
-import { TypeAppointmentPipe } from 'src/app/core/pipes/type-appointment.pipe';
+import { GenderPipe } from '@app/core/pipes/gender.pipe';
+import { StatusAppointmentPipe } from '@app/core/pipes/status-appointment.pipe';
+import { StatusTreatmentPipe } from '@app/core/pipes/status-treatment.pipe';
+import { TypeAppointmentPipe } from '@app/core/pipes/type-appointment.pipe';
 
 @NgModule({
   declarations: [

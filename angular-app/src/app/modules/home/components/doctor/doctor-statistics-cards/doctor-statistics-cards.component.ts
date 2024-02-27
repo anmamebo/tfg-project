@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DoctorStatisticsService } from 'src/app/core/services/statistics/doctor-statistics.service';
+import { DoctorStatisticsService } from '@app/core/services/statistics/doctor-statistics.service';
 
 interface Statistics {
   total_appointments_completed: number;

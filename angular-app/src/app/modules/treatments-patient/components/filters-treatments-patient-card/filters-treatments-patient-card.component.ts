@@ -1,12 +1,12 @@
 import { DatePipe } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Spanish } from 'flatpickr/dist/l10n/es.js';
-import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import {
   STATUS_HISTORICAL_TREATMENT_OPTIONS,
   STATUS_NEXT_TREATMENT_OPTIONS,
-} from 'src/app/core/constants/options/status-treatment-options.constants';
+} from '@app/core/constants/options/status-treatment-options.constants';
+import { Spanish } from 'flatpickr/dist/l10n/es.js';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 
 interface FilterDate {
   from: string | null;

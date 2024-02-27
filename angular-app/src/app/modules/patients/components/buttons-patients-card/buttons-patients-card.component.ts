@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ROLES } from 'src/app/core/constants/roles.constants';
-import { PatientService } from 'src/app/core/services/entities/patient.service';
-import { NotificationService } from 'src/app/core/services/notifications/notification.service';
+import { ROLES } from '@app/core/constants/roles.constants';
+import { PatientService } from '@app/core/services/entities/patient.service';
+import { NotificationService } from '@app/core/services/notifications/notification.service';
 
 /**
  * Componente para los botones de la tarjeta de un paciente

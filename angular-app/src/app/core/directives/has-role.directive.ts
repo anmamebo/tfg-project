@@ -1,5 +1,5 @@
 import { Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core';
-import { AuthService } from 'src/app/core/services/auth/auth.service';
+import { AuthService } from '@app/core/services/auth/auth.service';
 
 /**
  * Directiva para mostrar u ocultar elementos basados en los roles del usuario.

@@ -1,7 +1,7 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TemplateRef, ViewContainerRef } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { AuthService } from 'src/app/core/services/auth/auth.service';
+import { AuthService } from '@app/core/services/auth/auth.service';
 import { HasRoleDirective } from './has-role.directive';
 
 describe('HasRoleDirective', () => {

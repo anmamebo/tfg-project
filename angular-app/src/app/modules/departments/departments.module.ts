@@ -3,15 +3,15 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 
 // Módulos
-import { ElementsPerPageModule } from 'src/app/shared/components/elements-per-page/elements-per-page.module';
-import { FormErrorsModule } from 'src/app/shared/components/form-errors/form-errors.module';
-import { GenericCardModule } from 'src/app/shared/components/generic-card/generic-card.module';
-import { GenericListCardModule } from 'src/app/shared/components/generic-list-card/generic-list-card.module';
-import { GenericPageModule } from 'src/app/shared/components/generic-page/generic-page.module';
-import { GenericTableModule } from 'src/app/shared/components/generic-table/generic-table.module';
-import { PaginationModule } from 'src/app/shared/components/pagination/pagination.module';
-import { SearchModule } from 'src/app/shared/components/search/search.module';
-import { SharedModule } from 'src/app/shared/shared.module';
+import { ElementsPerPageModule } from '@app/shared/components/elements-per-page/elements-per-page.module';
+import { FormErrorsModule } from '@app/shared/components/form-errors/form-errors.module';
+import { GenericCardModule } from '@app/shared/components/generic-card/generic-card.module';
+import { GenericListCardModule } from '@app/shared/components/generic-list-card/generic-list-card.module';
+import { GenericPageModule } from '@app/shared/components/generic-page/generic-page.module';
+import { GenericTableModule } from '@app/shared/components/generic-table/generic-table.module';
+import { PaginationModule } from '@app/shared/components/pagination/pagination.module';
+import { SearchModule } from '@app/shared/components/search/search.module';
+import { SharedModule } from '@app/shared/shared.module';
 import { DepartmentsRoutingModule } from './departments-routing.module';
 
 // Componentes páginas

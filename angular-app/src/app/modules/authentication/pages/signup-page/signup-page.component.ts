@@ -1,11 +1,11 @@
 import { DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { GENDER_OPTIONS } from '@app/core/constants/options/genders-options.constants';
+import { DNI_REGEXP } from '@app/core/constants/regex.constants';
+import { MessageResponse } from '@app/core/models/response/message-response.interface';
+import { AuthService } from '@app/core/services/auth/auth.service';
 import { Spanish } from 'flatpickr/dist/l10n/es';
-import { GENDER_OPTIONS } from 'src/app/core/constants/options/genders-options.constants';
-import { DNI_REGEXP } from 'src/app/core/constants/regex.constants';
-import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
-import { AuthService } from 'src/app/core/services/auth/auth.service';
 
 /**
  * Componente que representa la página de registro.

@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { MessageResponse } from '@app/core/models/response/message-response.interface';
+import { User } from '@app/core/models/user.interface';
+import { EntityService } from '@app/core/services/generics/entity.service';
+import { HttpCommonService } from '@app/core/services/http-common/http-common.service';
 import { Observable } from 'rxjs';
-import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
-import { User } from 'src/app/core/models/user.interface';
-import { EntityService } from 'src/app/core/services/generics/entity.service';
-import { HttpCommonService } from 'src/app/core/services/http-common/http-common.service';
 
 /**
  * Servicio para interactuar con la API para la gestión de usuarios.

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { breadcrumbAppointmentsRequestPatientData } from 'src/app/core/constants/breadcrumb-data.constants';
+import { breadcrumbAppointmentsRequestPatientData } from '@app/core/constants/breadcrumb-data.constants';
 
 /**
  * Componente para la página de solicitud de cita de un paciente.

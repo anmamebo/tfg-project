@@ -1,11 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { MedicalSpecialty } from 'src/app/core/models/medical-specialty.interface';
+import { MedicalSpecialty } from '@app/core/models/medical-specialty.interface';
 import {
   ListResponse,
   PaginatedResponse,
-} from 'src/app/core/models/response/list-response.interface';
-import { MedicalspecialtyService } from 'src/app/core/services/entities/medicalspecialty.service';
-import { NotificationService } from 'src/app/core/services/notifications/notification.service';
+} from '@app/core/models/response/list-response.interface';
+import { MedicalspecialtyService } from '@app/core/services/entities/medicalspecialty.service';
+import { NotificationService } from '@app/core/services/notifications/notification.service';
 
 /**
  * Componente que representa la tarjeta de visualización de las especialidades

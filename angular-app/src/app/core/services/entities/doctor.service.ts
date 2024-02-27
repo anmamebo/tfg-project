@@ -1,10 +1,10 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Doctor } from '@app/core/models/doctor.interface';
+import { ListResponse } from '@app/core/models/response/list-response.interface';
+import { EntityService } from '@app/core/services/generics/entity.service';
+import { HttpCommonService } from '@app/core/services/http-common/http-common.service';
 import { Observable } from 'rxjs';
-import { Doctor } from 'src/app/core/models/doctor.interface';
-import { ListResponse } from 'src/app/core/models/response/list-response.interface';
-import { EntityService } from 'src/app/core/services/generics/entity.service';
-import { HttpCommonService } from 'src/app/core/services/http-common/http-common.service';
 
 interface DoctorOptions {
   paginate?: boolean;

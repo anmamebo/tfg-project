@@ -1,18 +1,18 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Spanish } from 'flatpickr/dist/l10n/es.js';
-import { IDropdownSettings } from 'ng-multiselect-dropdown';
-import { GENDER_OPTIONS } from 'src/app/core/constants/options/genders-options.constants';
+import { GENDER_OPTIONS } from '@app/core/constants/options/genders-options.constants';
 import {
   DNI_REGEXP,
   INTEGER_REGEXP,
   PHONENUMBER_REGEXP,
-} from 'src/app/core/constants/regex.constants';
-import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
-import { CountriesService } from 'src/app/core/services/entities/countries.service';
-import { PatientService } from 'src/app/core/services/entities/patient.service';
-import { NotificationService } from 'src/app/core/services/notifications/notification.service';
+} from '@app/core/constants/regex.constants';
+import { MessageResponse } from '@app/core/models/response/message-response.interface';
+import { CountriesService } from '@app/core/services/entities/countries.service';
+import { PatientService } from '@app/core/services/entities/patient.service';
+import { NotificationService } from '@app/core/services/notifications/notification.service';
+import { Spanish } from 'flatpickr/dist/l10n/es.js';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 
 /**
  * Componente que representa la tarjeta de creación de un paciente

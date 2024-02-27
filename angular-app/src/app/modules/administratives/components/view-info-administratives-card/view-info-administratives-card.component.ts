@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { User } from 'src/app/core/models/user.interface';
+import { User } from '@app/core/models/user.interface';
 
 /**
  * Componente que representa la tarjeta de visualización de la

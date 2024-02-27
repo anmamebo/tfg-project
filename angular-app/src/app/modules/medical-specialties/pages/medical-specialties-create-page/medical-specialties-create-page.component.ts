@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { breadcrumbMedicalSpecialtiesCreateData } from 'src/app/core/constants/breadcrumb-data.constants';
+import { breadcrumbMedicalSpecialtiesCreateData } from '@app/core/constants/breadcrumb-data.constants';
 
 /**
  * Componente para la página de creación de una especialidad médica.

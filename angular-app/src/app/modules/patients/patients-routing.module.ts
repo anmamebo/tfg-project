@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { patientResolver } from 'src/app/core/resolvers/patient.resolver';
+import { patientResolver } from '@app/core/resolvers/patient.resolver';
 import { PatientsCreatePageComponent } from './pages/patients-create-page/patients-create-page.component';
 import { PatientsEditPageComponent } from './pages/patients-edit-page/patients-edit-page.component';
 import { PatientsMedicalHistoryPageComponent } from './pages/patients-medical-history-page/patients-medical-history-page.component';

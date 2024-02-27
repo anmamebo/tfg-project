@@ -1,16 +1,16 @@
 import { DatePipe } from '@angular/common';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { breadcrumbScheduleData } from '@app/core/constants/breadcrumb-data.constants';
+import { Appointment } from '@app/core/models/appointment.interface';
+import { ListResponse } from '@app/core/models/response/list-response.interface';
+import { Schedule } from '@app/core/models/schedule.interface';
+import { CustomDateFormatter } from '@app/core/providers/custom-date-formatter.provider';
+import { AppointmentService } from '@app/core/services/entities/appointment.service';
+import { ScheduleService } from '@app/core/services/entities/schedule.service';
+import { NotificationService } from '@app/core/services/notifications/notification.service';
+import { BaseCalendarComponent } from '@app/shared/components/base-calendar/base-calendar.component';
 import { CalendarDateFormatter, CalendarEvent } from 'angular-calendar';
 import { EventColor } from 'calendar-utils';
-import { breadcrumbScheduleData } from 'src/app/core/constants/breadcrumb-data.constants';
-import { Appointment } from 'src/app/core/models/appointment.interface';
-import { ListResponse } from 'src/app/core/models/response/list-response.interface';
-import { Schedule } from 'src/app/core/models/schedule.interface';
-import { CustomDateFormatter } from 'src/app/core/providers/custom-date-formatter.provider';
-import { AppointmentService } from 'src/app/core/services/entities/appointment.service';
-import { ScheduleService } from 'src/app/core/services/entities/schedule.service';
-import { NotificationService } from 'src/app/core/services/notifications/notification.service';
-import { BaseCalendarComponent } from 'src/app/shared/components/base-calendar/base-calendar.component';
 
 const colors: Record<string, EventColor> = {
   blue: {

@@ -1,10 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { INTEGER_REGEXP } from 'src/app/core/constants/regex.constants';
-import { Address } from 'src/app/core/models/address.interface';
-import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
-import { AddressService } from 'src/app/core/services/entities/address.service';
-import { NotificationService } from 'src/app/core/services/notifications/notification.service';
+import { INTEGER_REGEXP } from '@app/core/constants/regex.constants';
+import { Address } from '@app/core/models/address.interface';
+import { MessageResponse } from '@app/core/models/response/message-response.interface';
+import { AddressService } from '@app/core/services/entities/address.service';
+import { NotificationService } from '@app/core/services/notifications/notification.service';
 
 /**
  * Componente que representa una tarjeta de información de dirección de usuario.

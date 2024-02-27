@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
-import { UserService } from 'src/app/core/services/entities/user.service';
-import { NotificationService } from 'src/app/core/services/notifications/notification.service';
-import Validation from 'src/app/core/validators/general.validator';
+import { MessageResponse } from '@app/core/models/response/message-response.interface';
+import { UserService } from '@app/core/services/entities/user.service';
+import { NotificationService } from '@app/core/services/notifications/notification.service';
+import Validation from '@app/core/validators/general.validator';
 
 /**
  * Componente que representa un formulario para cambiar la contraseña del usuario.

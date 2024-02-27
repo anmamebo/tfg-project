@@ -1,12 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { EntityData } from 'src/app/core/models/entity-data.interface';
+import { EntityData } from '@app/core/models/entity-data.interface';
 import {
   ListResponse,
   PaginatedResponse,
-} from 'src/app/core/models/response/list-response.interface';
-import { SortEvent } from 'src/app/core/models/sort-event.interface';
-import { NotificationService } from 'src/app/core/services/notifications/notification.service';
+} from '@app/core/models/response/list-response.interface';
+import { SortEvent } from '@app/core/models/sort-event.interface';
+import { NotificationService } from '@app/core/services/notifications/notification.service';
 
 /**
  * Componente que representa una tarjeta de listado genérica.

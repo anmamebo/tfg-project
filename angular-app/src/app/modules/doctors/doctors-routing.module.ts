@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { doctorResolver } from 'src/app/core/resolvers/doctor.resolver';
+import { doctorResolver } from '@app/core/resolvers/doctor.resolver';
 import { DoctorsCreatePageComponent } from './pages/doctors-create-page/doctors-create-page.component';
 import { DoctorsEditPageComponent } from './pages/doctors-edit-page/doctors-edit-page.component';
 import { DoctorsPageComponent } from './pages/doctors-page/doctors-page.component';

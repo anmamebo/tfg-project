@@ -1,13 +1,13 @@
 import { DatePipe } from '@angular/common';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { breadcrumbAppointmentsCalendarPatientData } from '@app/core/constants/breadcrumb-data.constants';
+import { Appointment } from '@app/core/models/appointment.interface';
+import { ListResponse } from '@app/core/models/response/list-response.interface';
+import { CustomDateFormatter } from '@app/core/providers/custom-date-formatter.provider';
+import { AppointmentService } from '@app/core/services/entities/appointment.service';
+import { NotificationService } from '@app/core/services/notifications/notification.service';
+import { BaseCalendarComponent } from '@app/shared/components/base-calendar/base-calendar.component';
 import { CalendarDateFormatter, CalendarEvent } from 'angular-calendar';
-import { breadcrumbAppointmentsCalendarPatientData } from 'src/app/core/constants/breadcrumb-data.constants';
-import { Appointment } from 'src/app/core/models/appointment.interface';
-import { ListResponse } from 'src/app/core/models/response/list-response.interface';
-import { CustomDateFormatter } from 'src/app/core/providers/custom-date-formatter.provider';
-import { AppointmentService } from 'src/app/core/services/entities/appointment.service';
-import { NotificationService } from 'src/app/core/services/notifications/notification.service';
-import { BaseCalendarComponent } from 'src/app/shared/components/base-calendar/base-calendar.component';
 
 /**
  * Componente que representa la página de la agenda de un paciente

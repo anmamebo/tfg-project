@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { breadcrumbPatientsCreateData } from 'src/app/core/constants/breadcrumb-data.constants';
+import { breadcrumbPatientsCreateData } from '@app/core/constants/breadcrumb-data.constants';
 
 /**
  * Componente para la página de creación de un paciente.

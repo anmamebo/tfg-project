@@ -1,15 +1,15 @@
 import { Component, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { SwalPortalTargets } from '@sweetalert2/ngx-sweetalert2';
-import { Appointment } from 'src/app/core/models/appointment.interface';
+import { Appointment } from '@app/core/models/appointment.interface';
 import {
   ListResponse,
   PaginatedResponse,
-} from 'src/app/core/models/response/list-response.interface';
-import { Treatment } from 'src/app/core/models/treatment.interface';
-import { TreatmentService } from 'src/app/core/services/entities/treatment.service';
-import { NotificationService } from 'src/app/core/services/notifications/notification.service';
-import { GenericListCardComponent } from 'src/app/shared/components/generic-list-card/generic-list-card.component';
+} from '@app/core/models/response/list-response.interface';
+import { Treatment } from '@app/core/models/treatment.interface';
+import { TreatmentService } from '@app/core/services/entities/treatment.service';
+import { NotificationService } from '@app/core/services/notifications/notification.service';
+import { GenericListCardComponent } from '@app/shared/components/generic-list-card/generic-list-card.component';
+import { SwalPortalTargets } from '@sweetalert2/ngx-sweetalert2';
 
 /**
  * Componente que representa una tarjeta de listado de tratamientos de una cita.

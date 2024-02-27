@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { breadcrumbPatientsMedicalHistoryData } from 'src/app/core/constants/breadcrumb-data.constants';
-import { Patient } from 'src/app/core/models/patient.interface';
+import { breadcrumbPatientsMedicalHistoryData } from '@app/core/constants/breadcrumb-data.constants';
+import { Patient } from '@app/core/models/patient.interface';
 
 /**
  * Componente para la página de historial médico de un paciente

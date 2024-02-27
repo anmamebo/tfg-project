@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { breadcrumbMedicalSpecialtiesViewData } from 'src/app/core/constants/breadcrumb-data.constants';
-import { ROLES } from 'src/app/core/constants/roles.constants';
-import { MedicalSpecialty } from 'src/app/core/models/medical-specialty.interface';
-import { MedicalspecialtyService } from 'src/app/core/services/entities/medicalspecialty.service';
+import { breadcrumbMedicalSpecialtiesViewData } from '@app/core/constants/breadcrumb-data.constants';
+import { ROLES } from '@app/core/constants/roles.constants';
+import { MedicalSpecialty } from '@app/core/models/medical-specialty.interface';
+import { MedicalspecialtyService } from '@app/core/services/entities/medicalspecialty.service';
 
 /**
  * Componente para la página de visualización de una especialidad médica

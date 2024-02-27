@@ -1,4 +1,4 @@
-import { EntityService } from 'src/app/core/services/generics/entity.service';
+import { EntityService } from '@app/core/services/generics/entity.service';
 
 /**
  * Interfaz que describe la estructura de los datos de una entidad.

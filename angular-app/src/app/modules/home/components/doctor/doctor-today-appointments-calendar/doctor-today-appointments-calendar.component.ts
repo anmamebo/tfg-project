@@ -7,16 +7,16 @@ import {
   ElementRef,
   ViewChild,
 } from '@angular/core';
+import { Appointment } from '@app/core/models/appointment.interface';
+import { ListResponse } from '@app/core/models/response/list-response.interface';
+import { CustomDateFormatter } from '@app/core/providers/custom-date-formatter.provider';
+import { AppointmentService } from '@app/core/services/entities/appointment.service';
 import {
   CalendarDateFormatter,
   CalendarEvent,
   CalendarView,
 } from 'angular-calendar';
 import { differenceInMinutes, startOfDay, startOfHour } from 'date-fns';
-import { Appointment } from 'src/app/core/models/appointment.interface';
-import { ListResponse } from 'src/app/core/models/response/list-response.interface';
-import { CustomDateFormatter } from 'src/app/core/providers/custom-date-formatter.provider';
-import { AppointmentService } from 'src/app/core/services/entities/appointment.service';
 
 /**
  * Componente que representa la tarjeta de citas del día actual de un médico.

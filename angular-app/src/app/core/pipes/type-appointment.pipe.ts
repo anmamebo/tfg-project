@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { TYPE_APPOINTMENT_OPTIONS } from 'src/app/core/constants/options/type-appointment-options.constants';
+import { TYPE_APPOINTMENT_OPTIONS } from '@app/core/constants/options/type-appointment-options.constants';
 
 /**
  * Transforma el tipo de una cita médica en su representación correspondiente.

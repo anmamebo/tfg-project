@@ -6,9 +6,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 // Módulos
-import { FormErrorsModule } from 'src/app/shared/components/form-errors/form-errors.module';
-import { GenericCardModule } from 'src/app/shared/components/generic-card/generic-card.module';
-import { GenericPageModule } from 'src/app/shared/components/generic-page/generic-page.module';
+import { FormErrorsModule } from '@app/shared/components/form-errors/form-errors.module';
+import { GenericCardModule } from '@app/shared/components/generic-card/generic-card.module';
+import { GenericPageModule } from '@app/shared/components/generic-page/generic-page.module';
 import { AppointmentRequestRoutingModule } from './appointment-request-routing.module';
 
 // Componentes Páginas

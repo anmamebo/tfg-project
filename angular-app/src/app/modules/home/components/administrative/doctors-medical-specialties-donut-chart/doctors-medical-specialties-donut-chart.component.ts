@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { StatisticsService } from '@app/core/services/statistics/statistics.service';
 import {
   ApexChart,
   ApexNonAxisChartSeries,
   ApexResponsive,
 } from 'ng-apexcharts';
-import { StatisticsService } from 'src/app/core/services/statistics/statistics.service';
 
 interface DoctorsPerMedicalSpecialty {
   name: string;

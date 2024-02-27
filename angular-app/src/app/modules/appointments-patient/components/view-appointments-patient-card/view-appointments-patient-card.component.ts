@@ -1,15 +1,15 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { format } from 'date-fns';
-import { es } from 'date-fns/locale';
 import {
   Appointment,
   STATUS_BADGE_CLASSES,
   StatusBadgeClasses,
-} from 'src/app/core/models/appointment.interface';
-import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
-import { AppointmentService } from 'src/app/core/services/entities/appointment.service';
-import { NotificationService } from 'src/app/core/services/notifications/notification.service';
-import { PdfAppointmentService } from 'src/app/core/services/pdfs/pdf-appointment.service';
+} from '@app/core/models/appointment.interface';
+import { MessageResponse } from '@app/core/models/response/message-response.interface';
+import { AppointmentService } from '@app/core/services/entities/appointment.service';
+import { NotificationService } from '@app/core/services/notifications/notification.service';
+import { PdfAppointmentService } from '@app/core/services/pdfs/pdf-appointment.service';
+import { format } from 'date-fns';
+import { es } from 'date-fns/locale';
 
 /**
  * Componente que representa una tarjeta de visualización de citas para el rol de paciente.

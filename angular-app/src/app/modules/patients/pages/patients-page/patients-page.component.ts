@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { breadcrumbPatientsData } from 'src/app/core/constants/breadcrumb-data.constants';
-import { ROLES } from 'src/app/core/constants/roles.constants';
-import { EntityData } from 'src/app/core/models/entity-data.interface';
-import { PatientService } from 'src/app/core/services/entities/patient.service';
+import { breadcrumbPatientsData } from '@app/core/constants/breadcrumb-data.constants';
+import { ROLES } from '@app/core/constants/roles.constants';
+import { EntityData } from '@app/core/models/entity-data.interface';
+import { PatientService } from '@app/core/services/entities/patient.service';
 
 /**
  * Componente para la página de pacientes.

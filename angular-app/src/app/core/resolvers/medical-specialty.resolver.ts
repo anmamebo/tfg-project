@@ -5,8 +5,8 @@ import {
   Router,
   RouterStateSnapshot,
 } from '@angular/router';
+import { MedicalspecialtyService } from '@app/core/services/entities/medicalspecialty.service';
 import { Observable, catchError, map, of } from 'rxjs';
-import { MedicalspecialtyService } from 'src/app/core/services/entities/medicalspecialty.service';
 
 /**
  * Resolver que obtiene detalles de una especialidad médica por su ID.

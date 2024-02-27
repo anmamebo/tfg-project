@@ -1,13 +1,13 @@
 import { Component, Input, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { PROFILE_PICTURE_ALLOWED_FILE_EXTENSIONS } from '@app/core/constants/file-extensions.constants';
+import { MessageResponse } from '@app/core/models/response/message-response.interface';
+import { User } from '@app/core/models/user.interface';
+import { ProfileImageService } from '@app/core/services/entities/profile-image.service';
+import { UserService } from '@app/core/services/entities/user.service';
+import { NotificationService } from '@app/core/services/notifications/notification.service';
+import Validation from '@app/core/validators/general.validator';
 import { SwalComponent, SwalPortalTargets } from '@sweetalert2/ngx-sweetalert2';
-import { PROFILE_PICTURE_ALLOWED_FILE_EXTENSIONS } from 'src/app/core/constants/file-extensions.constants';
-import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
-import { User } from 'src/app/core/models/user.interface';
-import { ProfileImageService } from 'src/app/core/services/entities/profile-image.service';
-import { UserService } from 'src/app/core/services/entities/user.service';
-import { NotificationService } from 'src/app/core/services/notifications/notification.service';
-import Validation from 'src/app/core/validators/general.validator';
 
 /**
  * Componente que representa una tarjeta de avatar de usuario.

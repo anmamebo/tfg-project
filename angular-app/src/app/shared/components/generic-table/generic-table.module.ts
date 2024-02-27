@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 // Módulos
-import { SharedModule } from 'src/app/shared/shared.module';
+import { SharedModule } from '@app/shared/shared.module';
 
 // Componentes
 import { GenericTableComponent } from './generic-table.component';

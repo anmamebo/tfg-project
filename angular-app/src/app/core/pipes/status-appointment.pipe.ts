@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { STATUS_APPOINTMENT_OPTIONS } from 'src/app/core/constants/options/status-appointment-options.constants';
+import { STATUS_APPOINTMENT_OPTIONS } from '@app/core/constants/options/status-appointment-options.constants';
 
 /**
  * Transforma el estado de una cita en su representación correspondiente.

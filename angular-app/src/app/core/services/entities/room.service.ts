@@ -1,10 +1,10 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ListResponse } from '@app/core/models/response/list-response.interface';
+import { Room } from '@app/core/models/room.interface';
+import { EntityService } from '@app/core/services/generics/entity.service';
+import { HttpCommonService } from '@app/core/services/http-common/http-common.service';
 import { Observable } from 'rxjs';
-import { ListResponse } from 'src/app/core/models/response/list-response.interface';
-import { Room } from 'src/app/core/models/room.interface';
-import { EntityService } from 'src/app/core/services/generics/entity.service';
-import { HttpCommonService } from 'src/app/core/services/http-common/http-common.service';
 
 interface RoomOptions {
   paginate?: boolean;

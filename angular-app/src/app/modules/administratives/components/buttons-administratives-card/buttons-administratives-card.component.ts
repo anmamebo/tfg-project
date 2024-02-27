@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { AdministrativeService } from 'src/app/core/services/entities/administrative.service';
-import { NotificationService } from 'src/app/core/services/notifications/notification.service';
+import { AdministrativeService } from '@app/core/services/entities/administrative.service';
+import { NotificationService } from '@app/core/services/notifications/notification.service';
 
 /**
  * Componente para los botones de la tarjeta de un administrativo

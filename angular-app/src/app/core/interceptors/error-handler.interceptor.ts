@@ -6,9 +6,9 @@ import {
   HttpRequest,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { AuthService } from '@app/core/services/auth/auth.service';
+import { TokenStorageService } from '@app/core/services/auth/token-storage.service';
 import { Observable, catchError, switchMap } from 'rxjs';
-import { AuthService } from 'src/app/core/services/auth/auth.service';
-import { TokenStorageService } from 'src/app/core/services/auth/token-storage.service';
 
 @Injectable()
 export class ErrorHandlerInterceptor implements HttpInterceptor {

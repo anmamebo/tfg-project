@@ -1,8 +1,8 @@
 import { Component, OnDestroy } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import { sidebarData } from '@app/core/constants/sidebar-items.constants';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
-import { sidebarData } from 'src/app/core/constants/sidebar-items.constants';
 
 /**
  * Componente que representa el menú lateral de la aplicación.

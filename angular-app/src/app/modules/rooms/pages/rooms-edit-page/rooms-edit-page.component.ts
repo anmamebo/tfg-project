@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { breadcrumbRoomsEditData } from 'src/app/core/constants/breadcrumb-data.constants';
-import { Room } from 'src/app/core/models/room.interface';
+import { breadcrumbRoomsEditData } from '@app/core/constants/breadcrumb-data.constants';
+import { Room } from '@app/core/models/room.interface';
 
 /**
  * Componente para la página de edición de una sala.

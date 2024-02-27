@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { breadcrumbGroupViewData } from 'src/app/core/constants/breadcrumb-data.constants';
-import { Group } from 'src/app/core/models/group.interface';
+import { breadcrumbGroupViewData } from '@app/core/constants/breadcrumb-data.constants';
+import { Group } from '@app/core/models/group.interface';
 
 /**
  * Componente para la página de visualización de un grupo

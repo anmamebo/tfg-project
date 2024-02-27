@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { StatisticsService } from '@app/core/services/statistics/statistics.service';
 import {
   ApexAxisChartSeries,
   ApexChart,
@@ -10,7 +11,6 @@ import {
   ApexXAxis,
   ApexYAxis,
 } from 'ng-apexcharts';
-import { StatisticsService } from 'src/app/core/services/statistics/statistics.service';
 
 interface AppointmentsPerDay {
   date: string;

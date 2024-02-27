@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { StatisticsService } from 'src/app/core/services/statistics/statistics.service';
+import { StatisticsService } from '@app/core/services/statistics/statistics.service';
 
 interface AverageWaitingTime {
   average_waiting_time_days: number;

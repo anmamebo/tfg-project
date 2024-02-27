@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { breadcrumbRoomsData } from 'src/app/core/constants/breadcrumb-data.constants';
-import { ROLES } from 'src/app/core/constants/roles.constants';
-import { EntityData } from 'src/app/core/models/entity-data.interface';
-import { RoomService } from 'src/app/core/services/entities/room.service';
+import { breadcrumbRoomsData } from '@app/core/constants/breadcrumb-data.constants';
+import { ROLES } from '@app/core/constants/roles.constants';
+import { EntityData } from '@app/core/models/entity-data.interface';
+import { RoomService } from '@app/core/services/entities/room.service';
 
 /**
  * Componente para la página de listado de salas.

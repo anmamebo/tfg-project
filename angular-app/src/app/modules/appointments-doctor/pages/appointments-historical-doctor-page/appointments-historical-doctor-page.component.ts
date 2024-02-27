@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { breadcrumbAppointmentsHistoricalData } from 'src/app/core/constants/breadcrumb-data.constants';
-import { EntityData } from 'src/app/core/models/entity-data.interface';
+import { breadcrumbAppointmentsHistoricalData } from '@app/core/constants/breadcrumb-data.constants';
+import { EntityData } from '@app/core/models/entity-data.interface';
 
 /**
  * Componente para la página del historial de citas.

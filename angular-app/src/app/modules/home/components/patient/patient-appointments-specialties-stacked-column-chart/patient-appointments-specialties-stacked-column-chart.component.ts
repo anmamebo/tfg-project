@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PatientStatisticsService } from '@app/core/services/statistics/patient-statistics.service';
 import {
   ApexAxisChartSeries,
   ApexChart,
@@ -11,7 +12,6 @@ import {
   ApexXAxis,
   ApexYAxis,
 } from 'ng-apexcharts';
-import { PatientStatisticsService } from 'src/app/core/services/statistics/patient-statistics.service';
 
 interface SpecialtiesData {
   name: string;

@@ -1,14 +1,14 @@
 import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, map } from 'rxjs';
-import { API_URL } from 'src/app/core/constants/API-URL.constants';
+import { API_URL } from '@app/core/constants/API-URL.constants';
 import {
   MedicalTest,
   MedicalTestAttachment,
-} from 'src/app/core/models/medical-test.interface';
-import { ListResponse } from 'src/app/core/models/response/list-response.interface';
-import { MessageResponse } from 'src/app/core/models/response/message-response.interface';
-import { HttpCommonService } from 'src/app/core/services/http-common/http-common.service';
+} from '@app/core/models/medical-test.interface';
+import { ListResponse } from '@app/core/models/response/list-response.interface';
+import { MessageResponse } from '@app/core/models/response/message-response.interface';
+import { HttpCommonService } from '@app/core/services/http-common/http-common.service';
+import { Observable, map } from 'rxjs';
 
 interface MedicalTestOptions {
   page?: number;
