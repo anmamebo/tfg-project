@@ -1,0 +1,109 @@
+.cal-month-view {
+  background-color: $card-bg;
+
+  .cal-cell-row {
+    .cal-cell {
+      &:hover {
+        background-color: $primary-bg-subtle-dark !important;
+      }
+    }
+
+    &:hover {
+      background-color: $body-bg !important;
+    }
+  }
+
+  .cal-days {
+    border-color: #393939;
+
+    .cal-cell-row {
+      border-bottom-color: #393939;
+
+      &:hover {
+        background-color: $body-bg !important;
+      }
+
+      .cal-day-cell {
+        &.cal-today {
+          background-color: $body-bg !important;
+        }
+
+        &.cal-weekend {
+          .cal-day-number {
+            color: $danger;
+          }
+        }
+
+        &:hover {
+          background-color: $primary-bg-subtle-dark !important;
+        }
+
+        &:not(:last-child) {
+          border-right-color: #393939;
+        }
+      }
+    }
+  }
+}
+
+.cal-week-view {
+  background-color: $card-bg;
+  border-top-color: #393939;
+
+  .cal-day-headers {
+    border-color: #393939;
+
+    .cal-header {
+      &.cal-today {
+        background-color: $body-bg !important;
+      }
+
+      &.cal-weekend span {
+        color: $danger;
+      }
+
+      &:hover {
+        background-color: $primary-bg-subtle-dark !important;
+      }
+
+      &:first-child {
+        border-left-color: #393939;
+      }
+
+      &:not(:last-child) {
+        border-right-color: #393939;
+      }
+    }
+  }
+
+  .cal-time-events {
+    border-color: #393939;
+
+    .cal-day-columns {
+      .cal-day-column {
+        border-left-color: #393939;
+      }
+
+      &:not(.cal-reisze-active) {
+        .cal-hour-segment {
+          &:hover {
+            background-color: $primary-bg-subtle-dark !important;
+          }
+        }
+      }
+    }
+
+    .cal-hour {
+      &.cal-hour-odd {
+        background-color: $body-bg;
+      }
+
+      &:not(:last-child),
+      &:last-child {
+        .cal-hour-segment {
+          border-bottom-color: #393939;
+        }
+      }
+    }
+  }
+}

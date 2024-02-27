@@ -161,6 +161,9 @@ html[data-bs-theme="dark"] {
     color: $secondary-text-dark !important;
     fill: $secondary-text-dark !important;
   }
+
+  // Calendar
+  @import "./assets/scss/themes/dark/calendar";
 }
 
 /* angular-cli file: src/styles.css */
@@ -168,7 +171,6 @@ html[data-bs-theme="dark"] {
 
 // CALENDARIO
 .cal-month-view .cal-open-day-events {
-  // background-color: $light !important;
   background-color: $primary !important;
   box-shadow: inset 0 0 15px 0 rgba(0, 0, 0, 0.1) !important;
 }
