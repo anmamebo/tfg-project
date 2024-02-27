@@ -7,24 +7,6 @@
     <div class="form-body">
       <div *ngIf="patientInfo" formGroupName="patientInfoForm">
         <div class="row">
-          <!-- Nombre de usuario -->
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="username">Nombre de usuario*</label>
-              <input
-                type="text"
-                formControlName="username"
-                class="form-control"
-                id="username"
-                [attr.readonly]="true"
-                placeholder="Nombre de usuario"
-              />
-              <p>
-                <small class="text-muted">Generado a partir del DNI.</small>
-              </p>
-            </div>
-          </div>
-
           <!-- Email -->
           <div class="col-md-6">
             <div class="form-group">
@@ -46,6 +28,8 @@
               ></app-form-errors>
             </div>
           </div>
+
+          <div class="col-md-6"></div>
 
           <!-- Nombre -->
           <div class="col-md-6">

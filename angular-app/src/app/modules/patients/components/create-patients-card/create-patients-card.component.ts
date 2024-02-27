@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Spanish } from 'flatpickr/dist/l10n/es.js';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
-import { Subscription } from 'rxjs';
 import { GENDER_OPTIONS } from 'src/app/core/constants/options/genders-options.constants';
 import {
   DNI_REGEXP,
@@ -42,9 +41,6 @@ export class CreatePatientsCardComponent implements OnInit {
   /** Indica si se ha enviado el formulario */
   public submitted: boolean = false;
 
-  /** Suscripción al valor del campo DNI */
-  private _dniInputSubscription: Subscription = new Subscription();
-
   /** Indica si se muestran los campos de dirección */
   public showAddressInputs: boolean = false;
 
@@ -62,7 +58,6 @@ export class CreatePatientsCardComponent implements OnInit {
     private _notificationService: NotificationService
   ) {
     this.patientInfoForm = this._fb.group({
-      username: [''],
       name: ['', Validators.required],
       last_name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -111,16 +106,6 @@ export class CreatePatientsCardComponent implements OnInit {
     };
 
     this._getCountries();
-
-    this._dniInputSubscription = this.createPatientForm
-      .get('patientInfoForm')!
-      .get('dni')!
-      .valueChanges.subscribe((value: string) => {
-        this.createPatientForm
-          .get('patientInfoForm')!
-          .get('username')!
-          .setValue(value);
-      });
   }
 
   /** Obtiene los controles del formulario de información del paciente */
