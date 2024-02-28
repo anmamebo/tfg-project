@@ -19,7 +19,7 @@
 
 ## Índice
 * [Despliegue](#despliegue)
-* [Tecnologías](#teconologías)
+* [Tecnologías](#tecnologías)
 * [Configuración](#configuración)
     * [Configuración local](#configuración-local)
     * [Configuración con Docker](#configuración-con-docker)
