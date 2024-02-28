@@ -15,6 +15,29 @@ export class FormErrorsComponent {
   /** Indica si el formulario ha sido enviado */
   @Input() public submitted: boolean = false;
 
+  /** Mapeo de errores a mensajes */
+  private errorMessages: { [key: string]: () => string } = {
+    required: () => 'Campo obligatorio.',
+    minlength: () =>
+      `Mín. ${this.control?.errors?.['minlength']?.requiredLength} caracteres, actual ${this.control?.errors?.['minlength']?.actualLength}.`,
+    maxlength: () =>
+      `Máx. ${this.control?.errors?.['maxlength']?.requiredLength} caracteres, actual ${this.control?.errors?.['maxlength']?.actualLength}.`,
+    max: () => `Valor máximo ${this.control?.errors?.['max']?.max}.`,
+    min: () => `Valor mínimo ${this.control?.errors?.['min']?.min}.`,
+    email: () => 'Email inválido.',
+    pattern: () => 'El campo no cumple con el formato requerido.',
+    matching: () => 'Las contraseñas no coinciden.',
+    passwordsDontMatch: () => 'Las contraseñas no coinciden.',
+    passwordsMatch: () => 'Las contraseñas coinciden.',
+    invalidFileExtension: () => 'Extensión de archivo inválida.',
+    invalidFileSize: () =>
+      `Tamaño de archivo inválido (máx. ${this.control?.errors?.['invalidFileSize']?.maxSize}MB).`,
+    invalidPasswordFormat: () =>
+      'La contraseña debe contener al menos una letra y un número.',
+    invalidPasswordLength: () =>
+      'La contraseña debe tener al menos 8 caracteres.',
+  };
+
   /**
    * Devuelve un array de mensajes de error asociados al control actual.
    * @public
@@ -25,47 +48,11 @@ export class FormErrorsComponent {
 
     if (this.control && this.control.errors) {
       Object.keys(this.control.errors).forEach((error: string) => {
-        switch (error) {
-          case 'required':
-            errors.push('Campo obligatorio.');
-            break;
-          case 'minlength':
-            errors.push(
-              `Mín. ${this.control?.errors?.['minlength']?.requiredLength} caracteres, actual ${this.control?.errors?.['minlength']?.actualLength}.`
-            );
-            break;
-          case 'maxlength':
-            errors.push(
-              `Máx. ${this.control?.errors?.['maxlength']?.requiredLength} caracteres, actual ${this.control?.errors?.['maxlength']?.actualLength}.`
-            );
-            break;
-          case 'max':
-            errors.push(`Valor máximo ${this.control?.errors?.['max']?.max}.`);
-            break;
-          case 'min':
-            errors.push(`Valor mínimo ${this.control?.errors?.['min']?.min}.`);
-            break;
-          case 'email':
-            errors.push('Email inválido.');
-            break;
-          case 'pattern':
-            errors.push('El campo no cumple con el formato requerido.');
-            break;
-          case 'matching':
-            errors.push('Las contraseñas no coinciden.');
-            break;
-          case 'passwordsDontMatch':
-            errors.push('Las contraseñas no coinciden.');
-            break;
-          case 'passwordsMatch':
-            errors.push('Las contraseñas coinciden.');
-            break;
-          case 'invalidFileExtension':
-            errors.push('Extensión de archivo inválida.');
-            break;
-          default:
-            errors.push(error);
-            break;
+        const errorMessageFn = this.errorMessages[error];
+        if (errorMessageFn) {
+          errors.push(errorMessageFn());
+        } else {
+          errors.push(error);
         }
       });
     }
