@@ -9,6 +9,20 @@ import { AppointmentService } from '@app/core/services/entities/appointment.serv
 import { NotificationService } from '@app/core/services/notifications/notification.service';
 import { GenericListCardComponent } from '@app/shared/components/generic-list-card/generic-list-card.component';
 
+interface AppointmentFilters {
+  statuses?: string[];
+  types?: string[];
+  specialties?: string[];
+  date?: {
+    from: string;
+    to: string;
+  };
+  requestDate?: {
+    from: string;
+    to: string;
+  };
+}
+
 /**
  * Componente que representa una tarjeta de listado de citas para el rol de paciente.
  */
@@ -18,7 +32,7 @@ import { GenericListCardComponent } from '@app/shared/components/generic-list-ca
 })
 export class ListAppointmentsPatientCardComponent extends GenericListCardComponent {
   /** Filtros */
-  public filters: any = null;
+  public filters: AppointmentFilters = {};
 
   /** Identificador del paciente */
   @Input() public patientId: string | null = null;
@@ -38,6 +52,28 @@ export class ListAppointmentsPatientCardComponent extends GenericListCardCompone
    * @returns {void}
    */
   public override getItems(): void {
+    const filters = this._getFilters();
+
+    this._appointmentService
+      .getAppointmentsByPatient(filters, this.patientId)
+      .subscribe({
+        next: (response: ListResponse<Appointment>) => {
+          const paginatedResponse = response as PaginatedResponse<Appointment>;
+          this.entityData.items = paginatedResponse.results;
+          this.entityData.numItems = paginatedResponse.count;
+          this.entityData.totalPages = paginatedResponse.total_pages;
+        },
+        error: (error: any) => {
+          this.notificationService.showErrorToast(error.message);
+        },
+      });
+  }
+
+  /**
+   * Obtiene los filtros seleccionados.
+   * @returns {any} Los filtros seleccionados.
+   */
+  private _getFilters(): any {
     let statuses: string[] = [
       'pending',
       'scheduled',
@@ -71,37 +107,22 @@ export class ListAppointmentsPatientCardComponent extends GenericListCardCompone
       }
     }
 
-    this._appointmentService
-      .getAppointmentsByPatient(
-        {
-          statuses: statuses,
-          types: types,
-          specialties: specialties,
-          page: this.entityData.page,
-          numResults: this.entityData.numResults,
-          searchTerm: this.entityData.search.search,
-          paginate: true,
-          state: this.filterState,
-          sortBy: this.sort.column,
-          sortOrder: this.sort.order,
-          scheduleStartTimeFrom: scheduleStartTimeFrom,
-          scheduleStartTimeTo: scheduleStartTimeTo,
-          requestDateFrom: requestDateFrom,
-          requestDateTo: requestDateTo,
-        },
-        this.patientId
-      )
-      .subscribe({
-        next: (response: ListResponse<Appointment>) => {
-          const paginatedResponse = response as PaginatedResponse<Appointment>;
-          this.entityData.items = paginatedResponse.results;
-          this.entityData.numItems = paginatedResponse.count;
-          this.entityData.totalPages = paginatedResponse.total_pages;
-        },
-        error: (error: any) => {
-          this.notificationService.showErrorToast(error.message);
-        },
-      });
+    return {
+      statuses: statuses,
+      types: types,
+      specialtiees: specialties,
+      page: this.entityData.page,
+      numResults: this.entityData.numResults,
+      searchTerm: this.entityData.search.search,
+      paginate: true,
+      state: this.filterState,
+      sortBy: this.sort.column,
+      sortOrder: this.sort.order,
+      scheduleStartTimeFrom: scheduleStartTimeFrom,
+      scheduleStartTimeTo: scheduleStartTimeTo,
+      requestDateFrom: requestDateFrom,
+      requestDateTo: requestDateTo,
+    };
   }
 
   /**

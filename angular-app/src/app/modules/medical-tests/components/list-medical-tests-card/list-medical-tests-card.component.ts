@@ -9,6 +9,14 @@ import { MedicalTestService } from '@app/core/services/entities/medicaltest.serv
 import { NotificationService } from '@app/core/services/notifications/notification.service';
 import { GenericListCardComponent } from '@app/shared/components/generic-list-card/generic-list-card.component';
 
+interface MedicalTestFilters {
+  completed?: any;
+  date?: {
+    from: string;
+    to: string;
+  };
+}
+
 /**
  * Componente que representa una tarjeta de listado de pruebas médicas.
  */
@@ -18,7 +26,7 @@ import { GenericListCardComponent } from '@app/shared/components/generic-list-ca
 })
 export class ListMedicalTestsCardComponent extends GenericListCardComponent {
   /** Filtros */
-  public filters: any = null;
+  public filters: MedicalTestFilters = {};
 
   /** Identificador del paciente */
   @Input() public patientId: string | null = null;
@@ -38,6 +46,28 @@ export class ListMedicalTestsCardComponent extends GenericListCardComponent {
    * @public
    */
   public override getItems(): void {
+    const filters = this._getFilters();
+
+    this._medicalTestService
+      .getMedicalTestsByPatient(filters, this.patientId)
+      .subscribe({
+        next: (response: ListResponse<MedicalTest>) => {
+          const paginatedResponse = response as PaginatedResponse<MedicalTest>;
+          this.entityData.items = paginatedResponse.results;
+          this.entityData.numItems = paginatedResponse.count;
+          this.entityData.totalPages = paginatedResponse.total_pages;
+        },
+        error: (error: any) => {
+          this.notificationService.showErrorToast(error.message);
+        },
+      });
+  }
+
+  /**
+   * Obtiene los filtros seleccionados.
+   * @returns {any} Los filtros seleccionados.
+   */
+  private _getFilters(): any {
     let completed: 'true' | 'false' | undefined = undefined;
     let dateFrom: string | undefined = undefined;
     let dateTo: string | undefined = undefined;
@@ -53,32 +83,18 @@ export class ListMedicalTestsCardComponent extends GenericListCardComponent {
       }
     }
 
-    this._medicalTestService
-      .getMedicalTestsByPatient(
-        {
-          page: this.entityData.page,
-          numResults: this.entityData.numResults,
-          searchTerm: this.entityData.search.search,
-          paginate: true,
-          sortBy: this.sort.column,
-          sortOrder: this.sort.order,
-          completed: completed,
-          dateFrom: dateFrom,
-          dateTo: dateTo,
-        },
-        this.patientId
-      )
-      .subscribe({
-        next: (response: ListResponse<MedicalTest>) => {
-          const paginatedResponse = response as PaginatedResponse<MedicalTest>;
-          this.entityData.items = paginatedResponse.results;
-          this.entityData.numItems = paginatedResponse.count;
-          this.entityData.totalPages = paginatedResponse.total_pages;
-        },
-        error: (error: any) => {
-          this.notificationService.showErrorToast(error.message);
-        },
-      });
+    return {
+      completed: completed,
+      page: this.entityData.page,
+      numResults: this.entityData.numResults,
+      searchTerm: this.entityData.search.search,
+      paginate: true,
+      state: this.filterState,
+      sortBy: this.sort.column,
+      sortOrder: this.sort.order,
+      dateFrom: dateFrom,
+      dateTo: dateTo,
+    };
   }
 
   /**

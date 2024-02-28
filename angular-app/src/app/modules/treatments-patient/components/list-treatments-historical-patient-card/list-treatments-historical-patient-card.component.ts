@@ -9,6 +9,18 @@ import { TreatmentService } from '@app/core/services/entities/treatment.service'
 import { NotificationService } from '@app/core/services/notifications/notification.service';
 import { GenericListCardComponent } from '@app/shared/components/generic-list-card/generic-list-card.component';
 
+interface TreatmentFilters {
+  statuses?: string[];
+  startDate?: {
+    from: string;
+    to: string;
+  };
+  endDate?: {
+    from: string;
+    to: string;
+  };
+}
+
 /**
  * Componente que representa una tarjeta de listado de tratamientos para el rol de paciente.
  */
@@ -18,7 +30,7 @@ import { GenericListCardComponent } from '@app/shared/components/generic-list-ca
 })
 export class ListTreatmentsHistoricalPatientCardComponent extends GenericListCardComponent {
   /** Filtros */
-  public filters: any = null;
+  public filters: TreatmentFilters = {};
 
   /** Identificador del paciente */
   @Input() public patientId: string | null = null;
@@ -40,7 +52,29 @@ export class ListTreatmentsHistoricalPatientCardComponent extends GenericListCar
    * @returns {void}
    */
   public override getItems(): void {
-    let statuses: string[] = ['completed', 'interrupted', 'cancelled'];
+    const filters = this._getFilters();
+
+    this._treatmentService
+      .getTreatmentsByPatient(filters, this.patientId)
+      .subscribe({
+        next: (response: ListResponse<Treatment>) => {
+          const paginatedResponse = response as PaginatedResponse<Treatment>;
+          this.entityData.items = paginatedResponse.results;
+          this.entityData.numItems = paginatedResponse.count;
+          this.entityData.totalPages = paginatedResponse.total_pages;
+        },
+        error: (error: any) => {
+          this.notificationService.showErrorToast(error.message);
+        },
+      });
+  }
+
+  /**
+   * Obtiene los filtros seleccionados.
+   * @returns {any} Los filtros seleccionados.
+   */
+  private _getFilters(): any {
+    let statuses: string[] = ['in_progress'];
     let startDateFrom: string | undefined = undefined;
     let startDateTo: string | undefined = undefined;
     let endDateFrom: string | undefined = undefined;
@@ -60,34 +94,20 @@ export class ListTreatmentsHistoricalPatientCardComponent extends GenericListCar
       }
     }
 
-    this._treatmentService
-      .getTreatmentsByPatient(
-        {
-          statuses: statuses,
-          page: this.entityData.page,
-          numResults: this.entityData.numResults,
-          searchTerm: this.entityData.search.search,
-          paginate: true,
-          sortBy: this.sort.column,
-          sortOrder: this.sort.order,
-          startDateFrom: startDateFrom,
-          startDateTo: startDateTo,
-          endDateFrom: endDateFrom,
-          endDateTo: endDateTo,
-        },
-        this.patientId
-      )
-      .subscribe({
-        next: (response: ListResponse<Treatment>) => {
-          const paginatedResponse = response as PaginatedResponse<Treatment>;
-          this.entityData.items = paginatedResponse.results;
-          this.entityData.numItems = paginatedResponse.count;
-          this.entityData.totalPages = paginatedResponse.total_pages;
-        },
-        error: (error: any) => {
-          this.notificationService.showErrorToast(error.message);
-        },
-      });
+    return {
+      statuses: statuses,
+      page: this.entityData.page,
+      numResults: this.entityData.numResults,
+      searchTerm: this.entityData.search.search,
+      paginate: true,
+      state: this.filterState,
+      sortBy: this.sort.column,
+      sortOrder: this.sort.order,
+      startDateFrom: startDateFrom,
+      startDateTo: startDateTo,
+      endDateFrom: endDateFrom,
+      endDateTo: endDateTo,
+    };
   }
 
   /**
