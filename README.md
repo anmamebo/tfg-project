@@ -8,29 +8,75 @@
 
 
 # HospitalSys
-Este repositorio contiene un sistema informático para la gestión recursos, horarios de uso y turnos de espera de un hospital, compuesto por un backend API desarrollado con Django Rest Framework 4.2.6 y un frontend construido con Angular 16.2.10.
 
-## Paso 1: Clonar repositorio
+<table>
+<tr>
+<td>
+  Este repositorio contiene un sistema informático para la gestión recursos, horarios de uso y turnos de espera de un hospital, compuesto por un backend API desarrollado con Django Rest Framework 4.2.6, un frontend construido con Angular 16.2.10 y una base de datos MySQL.
+</td>
+</tr>
+</table>
+
+## Índice
+* [Despliegue](#despliegue)
+* [Tecnologías](#teconologías)
+* [Configuración](#configuración)
+    * [Configuración local](#configuración-local)
+    * [Configuración con Docker](#configuración-con-docker)
+* [Estilo de código](#estílo-de-código)
+
+## Despliegue
+
+El proyecto ha sido desplegado y está disponible en línea. Puedes acceder a él a través del siguiente enlace:
+
+[https://hospitalsys.vercel.app/](https://hospitalsys.vercel.app/)
+
+Este enlace te llevará a la instancia desplegada del proyecto, donde podrás interactuar con la aplicación en vivo.
+
+## Tecnologías
+Proyecto creado con:
+* Django REST Framework: 4.2.6
+* Angular: 16.2.10
+* Bootstrap: 5.3
+* MySQL
+	
+## Configuración
+
+### Configuración local
+
+#### Paso 1: Clonar repositorio
+
 ```
 git clone https://github.com/anmamebo/tfg-project.git
 ```
 
-###### NECESARIO
-Tener docker instalado en el equipo
+#### Paso 2: Instalar dependencias
+Asegúrate de tener Python y Node.js instalados en tu sistema. Luego, instala las dependencias del proyecto:
 
-## Paso 2: Crear contenedores Docker
 ```
-docker-compose up --build
-```
-
-Una vez estén creados los contenedores podremos hacer ``` docker ps ``` para ver los contenedores iniciados, **IMPORTANTE:** **entrar en la consola del contenedor de Django y realizar las migraciones de la base de datos y crear un usuario**
-
-Para entrar en la consola usaremos:
-```
-docker exec -it <id_contenedor> bash
+cd tfg-project
 ```
 
-Para realizar las migraciones usaremos:
+##### Python
+```
+cd django-app
+```
+```
+pip install -r requirements.txt
+```
+
+##### Node.js
+```
+cd angular-app
+```
+```
+npm install
+```
+
+#### Paso 3: Configurar la base de datos
+Crea una base de datos MySQL y configura las credenciales correspondientes en el archivo de configuración ```settings.py```
+
+#### Paso 4: Realizar migraciones
 ```
 python manage.py makemigrations
 ```
@@ -38,28 +84,110 @@ python manage.py makemigrations
 python manage.py migrate
 ```
 
-Y para crear el usuario usaremos:
+#### Paso 5: Crear superusuario
 ```
 python manage.py createsuperuser
 ```
 
-Por último, debemos reiniciar el contenedor de Django:
+#### Paso 6: Ejecutar el servidor Django
+En una terminal, dentro del directorio ```django-app```, ejecuta:
+```
+python manage.py runserver
+```
+
+### Paso 7: Ejecutar el servidor Angular
+En una nueva terminal, dentro del directorio ```angular-app```, ejecuta:
+```
+npm start
+```
+
+Ahora puedes acceder a la aplicación Django REST en [http://localhost:8000/](http://localhost:8000/) y al frontend Angular en [http://localhost:4200/](http://localhost:4200/).
+
+### Configuración con Docker
+
+
+#### Paso 1: Clonar repositorio
+```
+git clone https://github.com/anmamebo/tfg-project.git
+```
+
+###### NECESARIO
+Tener docker instalado en el equipo
+
+#### Paso 2: Crear contenedores Docker
+```
+docker-compose up --build
+```
+
+Una vez que los contendores estén creados, puedes ejecutar ``` docker ps ``` para ver los contenedores iniciados, **IMPORTANTE:** **Debes ingresar a la consola del contenedor de Django y realizar las migraciones de la base de datos, así como crear un usuario.**
+
+Para ingresar a la consola, utiliza:
+```
+docker exec -it <id_contenedor> bash
+```
+
+Para realizar las migraciones, utiliza:
+```
+python manage.py makemigrations
+```
+```
+python manage.py migrate
+```
+
+Y para crear el usuario, utiliza:
+```
+python manage.py createsuperuser
+```
+
+Finalmente, reinicia el contenedor de Django:
 ```
 docker restart <id_contenedor>
 ```
 
-## PASO 3: Acceder a la aplicación
+#### PASO 3: Acceder a la aplicación
 
 Una vez realizados los pasos anteriores podremos acceder a:
 
-#### PHPMYADMIN
+##### PHPMYADMIN
 En la ruta [http://localhost:8080/](http://localhost:8080/)
 
 - **Usuario**: user
 - **Contraseña**: password
 
-#### DJANGO REST
+##### DJANGO REST
 En la ruta [http://localhost:8000/](http://localhost:8000/)
 
-#### ANGULAR
+##### ANGULAR
 En la ruta [http://localhost:4200/](http://localhost:4200/)
+
+## Estílo de código
+
+Este proyecto sigue ciertas convenciones de estilo de código para mantener una base de código consistente y legible. Se utilizan las siguientes herramientas para el formateo automático del código:
+
+### Python: Black
+
+El código Python en este proyecto se formatea automáticamente utilizando Black. Black es una herramienta de formateo de código Python que garantiza que todo el código esté formateado de manera consistente. Se recomienda ejecutar Black antes de enviar cambios al repositorio para mantener la coherencia en el estilo de código.
+
+Para instalar Black y formatear el código Python, puedes ejecutar el siguiente comando:
+
+```
+pip install black
+```
+
+```
+black .
+```
+
+### TypeScript, HTML, SCSS, etc...: Prettier
+
+El código TypeScript, HTML, SCSS, entre otros, en este proyecto se formatea automáticamente utilizando Prettier. Prettier es una herramienta de formateo de código que garantiza que el código JavaScript, TypeScript, HTML, CSS, SCSS y otros lenguajes estén formateados de manera consistente y legible. Se recomienda ejecutar Prettier antes de enviar cambios al repositorio.
+
+Para instalar Prettier y formatear el código, puedes ejecutar el siguiente comando en el directorio raíz del proyecto:
+
+```
+npm install --save-dev --save-exact prettier
+```
+
+```
+prettier --write .
+```
