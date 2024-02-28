@@ -18,12 +18,12 @@
 </table>
 
 ## Índice
-* [Despliegue](#despliegue)
-* [Tecnologías](#teconologías)
-* [Configuración](#configuración)
-    * [Configuración local](#configuración-local)
-    * [Configuración con Docker](#configuración-con-docker)
-* [Estilo de código](#estílo-de-código)
+* [Despliegue](#despliegue-🌐)
+* [Tecnologías](#teconologías-💻)
+* [Configuración](#configuración-⚙️)
+    * [Configuración local](#configuración-local-🖥️)
+    * [Configuración con Docker](#configuración-con-docker-🐳)
+* [Estilo de código](#estílo-de-código-🎨)
 
 ## Despliegue 🌐
 
