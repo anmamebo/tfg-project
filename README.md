@@ -25,7 +25,7 @@
     * [Configuración con Docker](#configuración-con-docker)
 * [Estilo de código](#estílo-de-código)
 
-## Despliegue
+## Despliegue 🌐
 
 El proyecto ha sido desplegado y está disponible en línea. Puedes acceder a él a través del siguiente enlace:
 
@@ -33,16 +33,16 @@ El proyecto ha sido desplegado y está disponible en línea. Puedes acceder a é
 
 Este enlace te llevará a la instancia desplegada del proyecto, donde podrás interactuar con la aplicación en vivo.
 
-## Tecnologías
+## Tecnologías 💻
 Proyecto creado con:
 * Django REST Framework: 4.2.6
 * Angular: 16.2.10
 * Bootstrap: 5.3
 * MySQL
 	
-## Configuración
+## Configuración ⚙️
 
-### Configuración local
+### Configuración local 🖥️
 
 #### Paso 1: Clonar repositorio
 
@@ -103,7 +103,7 @@ npm start
 
 Ahora puedes acceder a la aplicación Django REST en [http://localhost:8000/](http://localhost:8000/) y al frontend Angular en [http://localhost:4200/](http://localhost:4200/).
 
-### Configuración con Docker
+### Configuración con Docker 🐳
 
 
 #### Paso 1: Clonar repositorio
@@ -160,7 +160,7 @@ En la ruta [http://localhost:8000/](http://localhost:8000/)
 ##### ANGULAR
 En la ruta [http://localhost:4200/](http://localhost:4200/)
 
-## Estílo de código
+## Estílo de código 🎨
 
 Este proyecto sigue ciertas convenciones de estilo de código para mantener una base de código consistente y legible. Se utilizan las siguientes herramientas para el formateo automático del código:
 
