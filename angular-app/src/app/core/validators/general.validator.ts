@@ -48,12 +48,75 @@ export default class Validation {
       const file = control.value;
 
       if (file) {
-        const fileNameParts = file.split('.');
+        const fileName = file.name;
+        const fileNameParts = fileName.split('.');
         const fileExtension =
           fileNameParts.length > 1 ? fileNameParts.pop()?.toLowerCase() : null;
 
         if (fileExtension && allowedExtensions.indexOf(fileExtension) === -1) {
           return { invalidFileExtension: true };
+        }
+      }
+
+      return null;
+    };
+  }
+
+  /**
+   * Comprueba si un campo en un formulario tiene un tamaño de fichero válido.
+   * @param maxSizeMB El tamaño máximo del fichero.
+   * @returns Una función de validación para comprobar el tamaño del fichero.
+   */
+  static fileSizeInMB(maxSizeMB: number): ValidatorFn {
+    const maxSizeBytes = maxSizeMB * 1024 * 1024;
+
+    /**
+     * Función de validación que comprueba el tamaño del fichero.
+     * @param control El control al que se aplica la validación.
+     * @returns Un objeto de errores si el tamaño no es válido; de lo contrario, null.
+     */
+    return (control: AbstractControl): { [key: string]: any } | null => {
+      const file = control.value as File;
+
+      if (file) {
+        const fileSize = file.size;
+
+        if (fileSize > maxSizeBytes) {
+          return { invalidFileSize: { maxSize: maxSizeMB } };
+        }
+      }
+
+      return null;
+    };
+  }
+
+  /**
+   * Comprueba si un campo en un formulario tiene un formato de contraseña válido.
+   * @returns Una función de validación para comprobar el formato de la contraseña.
+   */
+  static passwordFormat(): ValidatorFn {
+    /**
+     * Función de validación que comprueba el formato de la contraseña.
+     * @param control El control al que se aplica la validación.
+     * @returns Un objeto de errores si el formato no es válido; de lo contrario, null.
+     */
+    return (control: AbstractControl): { [key: string]: any } | null => {
+      const password = control.value;
+
+      if (password) {
+        const containsNumber = /\d/.test(password);
+        const containsLetter = /[a-zA-Z]/.test(password);
+
+        if (!containsNumber || !containsLetter) {
+          return {
+            invalidPasswordFormat: true,
+          };
+        }
+
+        if (password.length < 8) {
+          return {
+            invalidPasswordLength: true,
+          };
         }
       }
 

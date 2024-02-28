@@ -5,6 +5,7 @@ import { GENDER_OPTIONS } from '@app/core/constants/options/genders-options.cons
 import { DNI_REGEXP } from '@app/core/constants/regex.constants';
 import { MessageResponse } from '@app/core/models/response/message-response.interface';
 import { AuthService } from '@app/core/services/auth/auth.service';
+import Validation from '@app/core/validators/general.validator';
 import { Spanish } from 'flatpickr/dist/l10n/es';
 
 /**
@@ -56,7 +57,7 @@ export class SignupPageComponent {
       name: ['', Validators.required],
       last_name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required],
+      password: ['', [Validators.required, Validation.passwordFormat()]],
       dni: [
         '',
         [

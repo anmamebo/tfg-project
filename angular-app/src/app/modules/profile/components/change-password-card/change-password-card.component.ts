@@ -34,7 +34,7 @@ export class ChangePasswordCardComponent {
     this.changePasswordForm = this._fb.group(
       {
         current_password: ['', Validators.required],
-        new_password: ['', Validators.required],
+        new_password: ['', [Validators.required, Validation.passwordFormat()]],
         confirm_new_password: ['', Validators.required],
       },
       {

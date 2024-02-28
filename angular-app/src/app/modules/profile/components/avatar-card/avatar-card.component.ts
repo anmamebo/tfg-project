@@ -42,14 +42,15 @@ export class AvatarCardComponent {
     private _notificationService: NotificationService
   ) {
     this.avatarForm = this._fb.group({
-      file: [
-        null,
+      file: [null, [Validators.required]],
+      fileSource: [
+        '',
         [
           Validators.required,
           Validation.fileExtension(PROFILE_PICTURE_ALLOWED_FILE_EXTENSIONS),
+          Validation.fileSizeInMB(5),
         ],
       ],
-      fileSource: ['', [Validators.required]],
     });
   }
 

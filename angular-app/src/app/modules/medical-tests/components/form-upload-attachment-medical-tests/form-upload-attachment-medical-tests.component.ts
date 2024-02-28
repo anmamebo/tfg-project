@@ -36,14 +36,15 @@ export class FormUploadAttachmentMedicalTestsComponent {
     this.uploadAttachmentForm = this._fb.group({
       name: ['', [Validators.required, Validators.maxLength(255)]],
       description: ['', [Validators.maxLength(255)]],
-      file: [
-        null,
+      file: [null, [Validators.required]],
+      fileSource: [
+        '',
         [
           Validators.required,
           Validation.fileExtension(ATTACHMENTS_ALLOWED_FILE_EXTENSIONS),
+          Validation.fileSizeInMB(6),
         ],
       ],
-      fileSource: ['', [Validators.required]],
     });
   }
 

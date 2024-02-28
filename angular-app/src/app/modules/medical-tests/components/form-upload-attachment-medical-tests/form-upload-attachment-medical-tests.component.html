@@ -61,12 +61,12 @@
             formControlName="file"
             (change)="onFileChange($event)"
             [ngClass]="{
-              'is-invalid': submitted && form.get('file')?.errors
+              'is-invalid': submitted && form.get('fileSource')?.errors
             }"
           />
 
           <app-form-errors
-            [control]="form.get('file')"
+            [control]="form.get('fileSource')"
             [submitted]="submitted"
           ></app-form-errors>
         </div>

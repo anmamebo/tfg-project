@@ -70,7 +70,7 @@
               <div class="form-group">
                 <app-avatar
                   [name]="user.name"
-                  [extraClasses]="['avatar-xl', 'me-md-4', 'flex-shrink-0']"
+                  [extraClasses]="['avatar-xl', 'flex-shrink-0']"
                 ></app-avatar>
                 <div class="flex-fill mt-md-0 mt-2">
                   <h5 class="mb-3">{{ user.name }}</h5>
@@ -82,11 +82,11 @@
                     formControlName="file"
                     (change)="onFileChange($event)"
                     [ngClass]="{
-                      'is-invalid': submitted && form.get('file')?.errors
+                      'is-invalid': submitted && form.get('fileSource')?.errors
                     }"
                   />
                   <app-form-errors
-                    [control]="form.get('file')"
+                    [control]="form.get('fileSource')"
                     [submitted]="submitted"
                   ></app-form-errors>
                   <p class="small text-muted mt-3 mb-0">
