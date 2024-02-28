@@ -8,6 +8,7 @@ from django.contrib.auth.models import (
 )
 from django.core.validators import FileExtensionValidator
 from django.db import models
+from utilities.validators import FileSizeValidator
 
 ALLOWED_EXTENSIONS = [
     "jpg",
@@ -15,6 +16,8 @@ ALLOWED_EXTENSIONS = [
     "png",
     "svg",
 ]
+
+MAX_FILE_SIZE_MB = 5
 
 
 def user_directory_path(instance, filename):
@@ -69,7 +72,10 @@ class User(AbstractBaseUser, PermissionsMixin):
         upload_to=user_directory_path,
         blank=True,
         null=True,
-        validators=[FileExtensionValidator(allowed_extensions=ALLOWED_EXTENSIONS)],
+        validators=[
+            FileExtensionValidator(allowed_extensions=ALLOWED_EXTENSIONS),
+            FileSizeValidator(max_size_mb=MAX_FILE_SIZE_MB),
+        ],
     )
     username = models.CharField(
         verbose_name="Nombre de usuario", unique=True, max_length=255

@@ -1,9 +1,9 @@
 import os
-import uuid
 
 from apps.base.models import BaseModel
 from django.core.validators import FileExtensionValidator
 from django.db import models
+from utilities.validators import FileSizeValidator
 
 ALLOWED_EXTENSIONS = [
     "pdf",
@@ -21,6 +21,8 @@ ALLOWED_EXTENSIONS = [
     "mov",
     "wav",
 ]
+
+MAX_FILE_SIZE_MB = 6
 
 
 def medicaltest_directory_path(instance, filename):
@@ -73,7 +75,10 @@ class MedicalTestAttachment(BaseModel):
     file = models.FileField(
         verbose_name="Archivo Adjunto",
         upload_to=medicaltest_directory_path,
-        validators=[FileExtensionValidator(allowed_extensions=ALLOWED_EXTENSIONS)],
+        validators=[
+            FileExtensionValidator(allowed_extensions=ALLOWED_EXTENSIONS),
+            FileSizeValidator(max_size_mb=MAX_FILE_SIZE_MB),
+        ],
     )
     name = models.CharField(
         verbose_name="Nombre del archivo",
