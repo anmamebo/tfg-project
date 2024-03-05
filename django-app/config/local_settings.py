@@ -197,14 +197,6 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Configuración de envío de emails
 
-# Configuración para trabajar con Gmail
-# EMAIL_HOST = "smtp.gmail.com"
-# EMAIL_PORT = 587
-# EMAIL_HOST_USER = ""
-# EMAIL_HOST_PASSWORD = ""
-# EMAIL_USE_TLS = True
-# EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-
 # Configuración para trabajar con Mailtrap
 EMAIL_HOST = "sandbox.smtp.mailtrap.io"
 EMAIL_HOST_USER = "369703b0b004e5"
