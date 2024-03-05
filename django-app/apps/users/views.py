@@ -203,10 +203,8 @@ class ForgetPassword(GenericAPIView, ErrorResponseMixin):
         user.save()
 
         if os.environ.get("DJANGO_ENV") == "PRODUCTION":
-            url = (
-                os.environ.get("FRONTEND_URL")
-                + f"/auth/restablecer-contrasena/{user.id}/{reset_token}"
-            )
+            frontend_url = os.environ.get("FRONTEND_URL")
+            url = f"{frontend_url}/auth/restablecer-contrasena/{user.id}/{reset_token}"
         else:
             url = f"http://localhost:4200/auth/restablecer-contrasena/{user.id}/{reset_token}"
 
