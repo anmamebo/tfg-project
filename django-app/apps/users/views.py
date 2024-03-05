@@ -1,3 +1,4 @@
+import os
 from datetime import datetime
 
 from apps.patients.serializers import CreatePatientSerializer
@@ -201,9 +202,13 @@ class ForgetPassword(GenericAPIView, ErrorResponseMixin):
         user.reset_password_token = reset_token
         user.save()
 
-        url = (
-            f"http://localhost:4200/auth/restablecer-contrasena/{user.id}/{reset_token}"
-        )
+        if os.environ.get("DJANGO_ENV") == "PRODUCTION":
+            url = (
+                os.environ.get("FRONTEND_URL")
+                + f"/auth/restablecer-contrasena/{user.id}/{reset_token}"
+            )
+        else:
+            url = f"http://localhost:4200/auth/restablecer-contrasena/{user.id}/{reset_token}"
 
         if not send_reset_password_email(user, url):
             return self.error_response(
