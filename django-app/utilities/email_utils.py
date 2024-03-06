@@ -123,6 +123,26 @@ def send_success_password_reset_email(user):
     )
 
 
+def send_success_account_activation_email(user):
+    """
+    Envía un correo electrónico al usuario para notificarle que su cuenta se activó correctamente.
+
+    Args:
+        user (User): Usuario al que se le enviará el correo electrónico.
+
+    Returns:
+        bool: True si el correo electrónico se envió correctamente, False en caso contrario.
+    """
+    return send_email(
+        "Cuenta activada correctamente HospitalSys",
+        "success_account_activation_email_template",
+        [user.email],
+        {
+            "name": user.name,
+        },
+    )
+
+
 def send_appointment_assigned_email(appointment, url):
     """
     Envía un correo electrónico al paciente para notificarle que se le ha asignado una cita médica.
