@@ -268,7 +268,7 @@ class PatientViewSet(viewsets.GenericViewSet, PaginationMixin, ErrorResponseMixi
             if not send_success_account_activation_email(user):
                 return Response(
                     {
-                        "message": "Paciente creado correctamente pero no se ha podido enviar el correo electrónico.",
+                        "message": "Paciente activado correctamente pero no se ha podido enviar el correo electrónico.",
                     },
                     status=status.HTTP_200_OK,
                 )

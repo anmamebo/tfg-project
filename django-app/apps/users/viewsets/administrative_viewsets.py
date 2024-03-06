@@ -14,7 +14,10 @@ from mixins.pagination_mixin import PaginationMixin
 from rest_framework import status, viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
-from utilities.email_utils import send_welcome_email
+from utilities.email_utils import (
+    send_success_account_activation_email,
+    send_welcome_email,
+)
 from utilities.password_generator import generate_password
 from utilities.permissions_helper import method_permission_classes
 
@@ -242,6 +245,14 @@ class AdministrativeViewSet(
 
         user.is_active = True
         user.save()
+
+        if not send_success_account_activation_email(user):
+            return Response(
+                {
+                    "message": "Administrativo activado correctamente pero no se ha podido enviar el correo electrónico.",
+                },
+                status=status.HTTP_200_OK,
+            )
 
         return Response(
             {"message": "Administrativo activado correctamente."},

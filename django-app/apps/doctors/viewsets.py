@@ -15,7 +15,10 @@ from rest_framework import status, viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from utilities.doctor_username_generator import generate_doctor_username
-from utilities.email_utils import send_welcome_email
+from utilities.email_utils import (
+    send_success_account_activation_email,
+    send_welcome_email,
+)
 from utilities.password_generator import generate_password
 from utilities.permissions_helper import method_permission_classes
 
@@ -268,6 +271,14 @@ class DoctorViewSet(viewsets.GenericViewSet, PaginationMixin, ErrorResponseMixin
             doctor.save()
             user.is_active = True
             user.save()
+
+            if not send_success_account_activation_email(user):
+                return Response(
+                    {
+                        "message": "Médico activado correctamente pero no se ha podido enviar el correo electrónico.",
+                    },
+                    status=status.HTTP_200_OK,
+                )
 
             return Response(
                 {"message": "Médico activado correctamente."}, status=status.HTTP_200_OK
