@@ -152,6 +152,13 @@ class GroupViewSet(viewsets.GenericViewSet, PaginationMixin, ErrorResponseMixin)
             Response: La respuesta que indica si el grupo se ha eliminado correctamente o si ha habido errores.
         """
         group = self.get_object(pk)
+
+        if group.user_set.exists():
+            return self.error_response(
+                message="El grupo tiene usuarios asociados.",
+                status_code=status.HTTP_400_BAD_REQUEST,
+            )
+
         group.delete()
         return Response(
             {"message": "Grupo eliminado correctamente."}, status=status.HTTP_200_OK
