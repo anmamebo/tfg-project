@@ -74,7 +74,7 @@ export class ListTreatmentsHistoricalPatientCardComponent extends GenericListCar
    * @returns {any} Los filtros seleccionados.
    */
   private _getFilters(): any {
-    let statuses: string[] = ['in_progress'];
+    let statuses: string[] = ['completed', 'interrupted', 'cancelled'];
     let startDateFrom: string | undefined = undefined;
     let startDateTo: string | undefined = undefined;
     let endDateFrom: string | undefined = undefined;
