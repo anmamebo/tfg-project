@@ -198,7 +198,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = "/media/"
 
 # Directorio fixtures
-FIXTURE_DIRS = [os.path.join(BASE_DIR, "seed")]
+FIXTURE_DIRS = [os.path.join(BASE_DIR, "fixture")]
 
 # Configuraciçon de auto field
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
