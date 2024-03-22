@@ -41,6 +41,18 @@ Proyecto creado con:
 * MySQL
 	
 ## Configuración
+Datos para iniciar sesión en el sistema habiendo usado el volcado de datos del fichero `dump.json`:
+* __Administrativo__
+  * Usuario: root
+  * Contraseña: root
+
+* __Médico__
+  * Usuario: amalamillo
+  * Contraseña: aeme
+
+* __Paciente__
+  * Usuario: 78901234G
+  * Contraseña: isabeldiaz
 
 ### Configuración local
 
@@ -84,9 +96,9 @@ python manage.py makemigrations
 python manage.py migrate
 ```
 
-#### Paso 5: Crear superusuario
+#### Paso 5: Cargar datos Base de Datos
 ```
-python manage.py createsuperuser
+python manage.py loaddata dump.json
 ```
 
 #### Paso 6: Ejecutar el servidor Django
