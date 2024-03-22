@@ -7,9 +7,6 @@ __pycache__/
 *.sqlite3
 *.log
 
-# Archivos de configuración local
-.env
-
 # Directorios de entornos virtuales (por ejemplo, virtualenv, venv, .venv)
 venv/
 env/

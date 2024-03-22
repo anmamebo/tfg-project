@@ -14,11 +14,16 @@ import os
 from datetime import timedelta
 from pathlib import Path
 
+from dotenv import load_dotenv
+
+# Carga de variables de entorno
+load_dotenv()
+
 # Directorio base del proyecto
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Clave secreta para Django (debería estar en una variable de entorno en producción)
-SECRET_KEY = "django-insecure-y@%chtd@b_$v69g(&^3(+-w+df@&4bxe4wsuaednx0nn!(@ff="
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 # Entorno de desarrollo - DEBUG activado
 DEBUG = True
@@ -144,11 +149,11 @@ WSGI_APPLICATION = "config.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
-        "NAME": "hospital_db",
-        "USER": "root",
-        "PASSWORD": "",
-        "HOST": "localhost",
-        "PORT": 3306,
+        "NAME": os.getenv("DATABASE_NAME"),
+        "USER": os.getenv("DATABASE_USER"),
+        "PASSWORD": os.getenv("DATABASE_PASSWORD"),
+        "HOST": os.getenv("DATABASE_HOST"),
+        "PORT": os.getenv("DATABASE_PORT"),
     }
 }
 
@@ -198,9 +203,9 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # Configuración de envío de emails
 
 # Configuración para trabajar con Mailtrap
-EMAIL_HOST = "sandbox.smtp.mailtrap.io"
-EMAIL_HOST_USER = "369703b0b004e5"
-EMAIL_HOST_PASSWORD = "766859eee6a844"
-EMAIL_PORT = "2525"
+EMAIL_HOST = os.getenv("EMAIL_HOST")
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
+EMAIL_PORT = os.getenv("EMAIL_PORT")
 EMAIL_USE_TLS = True
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
