@@ -219,3 +219,12 @@ GS_BUCKET_NAME = "bucket_hospitalsys"
 gs_json_data = json.loads(os.environ["GS_CREDENTIALS"])
 gs_json_data["private_key"] = gs_json_data["private_key"].replace("\\n", "\n")
 GS_CREDENTIALS = service_account.Credentials.from_service_account_info(gs_json_data)
+
+# Carga de datos iniciales
+initial_data_loaded = os.getenv("INITIAL_DATA_LOADED", "False").lower() == "true"
+if not initial_data_loaded:
+    print("Cargando datos iniciales...")
+    os.system("python manage.py loaddata dump.json")
+    os.environ["INITIAL_DATA_LOADED"] = "True"
+else:
+    print("Datos iniciales ya cargados")

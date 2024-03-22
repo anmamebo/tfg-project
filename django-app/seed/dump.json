@@ -1,0 +1,4071 @@
+[
+  {
+    "model": "auth.group",
+    "pk": 1,
+    "fields": {
+      "name": "Administrativo",
+      "permissions": []
+    }
+  },
+  {
+    "model": "auth.group",
+    "pk": 2,
+    "fields": {
+      "name": "M�dico",
+      "permissions": []
+    }
+  },
+  {
+    "model": "auth.group",
+    "pk": 3,
+    "fields": {
+      "name": "Paciente",
+      "permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": "00163fd4-f819-4705-a1dc-7bf799fdbb6a",
+    "fields": {
+      "password": "pbkdf2_sha256$600000$YmlL5KH7tby5ghUMaSsN0Z$JONZzeL52791mltPq/PUjJPEvRQWxM6n9lQ8s2rSmZE=",
+      "last_login": null,
+      "is_superuser": false,
+      "profile_picture": "",
+      "username": "93939393T",
+      "email": "testpatient@gmail.com",
+      "name": "Prueba",
+      "last_name": "Prueba",
+      "is_active": false,
+      "is_staff": false,
+      "reset_password_token": null,
+      "groups": [3],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": "055ad094-739f-4355-9934-9a3c50eb82e9",
+    "fields": {
+      "password": "pbkdf2_sha256$600000$h2UPwMpWZmH5cE64uZynax$/QrEWXJaO8045cBnSU1/Urrtgbn974Yx7k0WyOne32k=",
+      "last_login": null,
+      "is_superuser": false,
+      "profile_picture": "",
+      "username": "33338899T",
+      "email": "pruebapruebaprueba@gmail.com",
+      "name": "Prueba",
+      "last_name": "Prueba",
+      "is_active": false,
+      "is_staff": false,
+      "reset_password_token": null,
+      "groups": [3],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": "089c1192-ce75-44f3-be9e-14b494ea2919",
+    "fields": {
+      "password": "pbkdf2_sha256$600000$36cpXErxxw9JAaZFOMl9T4$eFrkhU24n8tNDj6vhN7OuvfbxXcQRihJoYZsaqRzLEI=",
+      "last_login": null,
+      "is_superuser": false,
+      "profile_picture": "",
+      "username": "cgarcia",
+      "email": "doctor1@example.com",
+      "name": "Carlos",
+      "last_name": "Garc�a",
+      "is_active": true,
+      "is_staff": false,
+      "reset_password_token": null,
+      "groups": [2],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": "08c53b4b-ce1e-48b5-8ce2-39b5f4ee74e7",
+    "fields": {
+      "password": "pbkdf2_sha256$600000$tvwjykIjg8EBA1SUu3VjhE$OXLjo5gZHE70msePAMwyAyUXrcR5XNb/lys19+2gz58=",
+      "last_login": null,
+      "is_superuser": false,
+      "profile_picture": "",
+      "username": "63738292Y",
+      "email": "prueba@gmail.com",
+      "name": "Prueba",
+      "last_name": "Prueba",
+      "is_active": false,
+      "is_staff": false,
+      "reset_password_token": null,
+      "groups": [3],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": "0adca497-18b6-4bd3-a588-22d289dc59ec",
+    "fields": {
+      "password": "pbkdf2_sha256$600000$yoUfX24Gp0DJVhAGQ9uFle$wMR2i+YoRncLi3STSyNS3HyB1mNthsMSrH39mPMrW2I=",
+      "last_login": null,
+      "is_superuser": true,
+      "profile_picture": "",
+      "username": "dsafdasf",
+      "email": "sdafda@gmail.com",
+      "name": "adsfdasf",
+      "last_name": "dfadsfa",
+      "is_active": true,
+      "is_staff": true,
+      "reset_password_token": null,
+      "groups": [1],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": "0b0672bd-dd87-46b5-9c48-2447f0a9923e",
+    "fields": {
+      "password": "pbkdf2_sha256$600000$Bk6Wrxl9wLOPyU4ymgAgVo$xqeqNEnLgvCIymD4+1hSfOXgfHPlG8vDJ9dgzNYgWmI=",
+      "last_login": null,
+      "is_superuser": false,
+      "profile_picture": "",
+      "username": "33457483E",
+      "email": "paciente6@gmail.com",
+      "name": "Marcos",
+      "last_name": "P�rez",
+      "is_active": true,
+      "is_staff": false,
+      "reset_password_token": null,
+      "groups": [3],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": "1e58cc94-fbfc-40ae-9bc4-19d594bafe7f",
+    "fields": {
+      "password": "pbkdf2_sha256$600000$mLYJDXKEcIyZ7gxH3j425M$3ANUacc2p/Fkva73Y56d47947WbpL2mr2WDCje3pEO4=",
+      "last_login": "2024-02-05T20:34:10.436",
+      "is_superuser": false,
+      "profile_picture": "",
+      "username": "74849302Y",
+      "email": "pacientedeprueba@gmail.com",
+      "name": "Ana",
+      "last_name": "Mena",
+      "is_active": true,
+      "is_staff": false,
+      "reset_password_token": null,
+      "groups": [3],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": "21f58867-98f5-468a-9c4a-38c3dd9b9750",
+    "fields": {
+      "password": "pbkdf2_sha256$600000$WeWH2GIYFWpi2fzuT0D86a$lvfR/moxpyhi5b/SB9B4e+b9tHOfY2A+FEASDmr7Ing=",
+      "last_login": null,
+      "is_superuser": false,
+      "profile_picture": "",
+      "username": "prueba1000",
+      "email": "prueba1000@gmail.com",
+      "name": "prueba1000",
+      "last_name": "prueba1000",
+      "is_active": true,
+      "is_staff": false,
+      "reset_password_token": null,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": "24362f58-9b0c-4ad8-9fd9-a6eac303f64c",
+    "fields": {
+      "password": "pbkdf2_sha256$600000$YoP3U0QVtTbNmYzl5GIrVI$nUWeiAzeCNoYt4qCuS9EnzaB6OnRQapclCrl/xaNbKA=",
+      "last_login": null,
+      "is_superuser": false,
+      "profile_picture": "",
+      "username": "adiaz",
+      "email": "maria.docs@example.com",
+      "name": "Ana",
+      "last_name": "D�az",
+      "is_active": true,
+      "is_staff": false,
+      "reset_password_token": null,
+      "groups": [2],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": "24fb2d37-1d8e-4d28-a187-889dd0faae13",
+    "fields": {
+      "password": "pbkdf2_sha256$600000$vWVVAWCTYvElZqeEzPNnqU$PTismGek9bJ6+IwhTkaMFxVODuVQyXvTDXagvBxdTzg=",
+      "last_login": null,
+      "is_superuser": false,
+      "profile_picture": "",
+      "username": "jpborrero",
+      "email": "medico1@gmail.com",
+      "name": "Juan Pedro",
+      "last_name": "Borrero Pe�a",
+      "is_active": true,
+      "is_staff": false,
+      "reset_password_token": null,
+      "groups": [2],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": "280fb438-55aa-48bf-8360-f22e2a06ac94",
+    "fields": {
+      "password": "pbkdf2_sha256$600000$PrqzqME9Bw9peqhYQF3nnq$HRm2pvcYl8VO0qqSEAubRCXecOm9kEgqiCDgusaZaC4=",
+      "last_login": null,
+      "is_superuser": false,
+      "profile_picture": "",
+      "username": "73890273H",
+      "email": "paciente2@gmail.com",
+      "name": "Dolores",
+      "last_name": "Acosta Sanz",
+      "is_active": true,
+      "is_staff": false,
+      "reset_password_token": null,
+      "groups": [3],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": "2ba84476-337f-432d-8f15-22610949dab9",
+    "fields": {
+      "password": "hola",
+      "last_login": null,
+      "is_superuser": false,
+      "profile_picture": "",
+      "username": "prueba",
+      "email": "prueba2@gmail.com",
+      "name": "prueba",
+      "last_name": "prueba",
+      "is_active": false,
+      "is_staff": false,
+      "reset_password_token": null,
+      "groups": [2],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": "2ce22adf-1a43-44ec-9ca7-f06de04b323c",
+    "fields": {
+      "password": "pbkdf2_sha256$600000$8kpugUZVHJCmPgGH6koyQN$HVKN03twGiF9/uyB3PtG4ScXYHHdww7Xvtj6xi4MJqM=",
+      "last_login": null,
+      "is_superuser": false,
+      "profile_picture": "",
+      "username": "pgonzalez",
+      "email": "doctormed@example.com",
+      "name": "Pedro",
+      "last_name": "Gonz�lez",
+      "is_active": true,
+      "is_staff": false,
+      "reset_password_token": null,
+      "groups": [2],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": "2e7a11d2-2291-4633-a6e9-64aff62e18ca",
+    "fields": {
+      "password": "pbkdf2_sha256$600000$A1BdlqdhB3uAR1yBMnFqkl$6/HbUAIEGLsZDyuKXzJhCc7yCpW6zxeTYgTvZ/Qfu/4=",
+      "last_login": null,
+      "is_superuser": false,
+      "profile_picture": "",
+      "username": "33334444G",
+      "email": "prueba4@gmail.com",
+      "name": "dsfds",
+      "last_name": "Prueba2",
+      "is_active": true,
+      "is_staff": false,
+      "reset_password_token": null,
+      "groups": [3],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": "3473aac8-be15-4f56-8291-c3643fec8fe6",
+    "fields": {
+      "password": "pbkdf2_sha256$600000$wBprwCUW1M2ciuVOcvdMyk$M4wDIXZ+i2nlKLD6X+2/bqJ9vwNKVa5kmCe/xXNlHco=",
+      "last_login": "2023-12-13T19:35:51.069",
+      "is_superuser": false,
+      "profile_picture": "",
+      "username": "48930233U",
+      "email": "omar@gmail.com",
+      "name": "Omar",
+      "last_name": "Roque",
+      "is_active": true,
+      "is_staff": false,
+      "reset_password_token": null,
+      "groups": [3],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": "3a82cf56-d0cb-44a6-a5cc-7da9b7537020",
+    "fields": {
+      "password": "pbkdf2_sha256$600000$4Eb0ZU4IeVwHI4UZ0Zcvdo$GV42VzoNIR6qr57yDWPrI9vIrY9pKg5NQqWJqt5YcdE=",
+      "last_login": null,
+      "is_superuser": false,
+      "profile_picture": "",
+      "username": "12345678A",
+      "email": "paciente1@example.com",
+      "name": "Mar�a",
+      "last_name": "Garc�a P�rez",
+      "is_active": true,
+      "is_staff": false,
+      "reset_password_token": null,
+      "groups": [3],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": "3e551c76-7e7c-433b-a263-0391005be268",
+    "fields": {
+      "password": "pbkdf2_sha256$600000$0hUrrpwBETIfp3D78PevTn$PmfKZJyTMteXVjMkUmz1aEA9w7OmIgMpOK1TYVvVz+g=",
+      "last_login": null,
+      "is_superuser": false,
+      "profile_picture": "",
+      "username": "74747474T",
+      "email": "pruebappp@gmail.com",
+      "name": "Prueba",
+      "last_name": "Prueba",
+      "is_active": false,
+      "is_staff": false,
+      "reset_password_token": null,
+      "groups": [3],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": "40b3778f-6d77-4592-b82c-f3754bfc8be5",
+    "fields": {
+      "password": "pbkdf2_sha256$600000$hNZhWqKFV6ZhFs6XHRx1rY$aRvip/zsZHuLto6FfFT2ca8lWuci2+QyQiP9o2st9+I=",
+      "last_login": null,
+      "is_superuser": false,
+      "profile_picture": "",
+      "username": "sfernandez",
+      "email": "docsan@gmail.com",
+      "name": "Santiago",
+      "last_name": "Fern�ndez",
+      "is_active": true,
+      "is_staff": false,
+      "reset_password_token": null,
+      "groups": [2],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": "41a049f2-9729-48ce-9e9f-dec1b1f5d1a3",
+    "fields": {
+      "password": "pbkdf2_sha256$600000$SaOhPSDEyZCBTFYGyQ48Uj$35iMW0ciNWvitrrKESw0jpqHaegwdzxno6N85rmfMW8=",
+      "last_login": null,
+      "is_superuser": false,
+      "profile_picture": "",
+      "username": "76367263T",
+      "email": "pruebapaciente2@gmail.com",
+      "name": "Prueba",
+      "last_name": "Prueba",
+      "is_active": false,
+      "is_staff": false,
+      "reset_password_token": null,
+      "groups": [3],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": "42465f3b-f21c-4397-a5c7-f4842f0ca8ff",
+    "fields": {
+      "password": "pbkdf2_sha256$600000$NNSKBMgar9et28uZNGFg8T$vkAB5hWH47RRHMdOEu2i4z1eEvKm5UKM1pIlee/7phk=",
+      "last_login": "2024-02-28T18:06:45.230",
+      "is_superuser": true,
+      "profile_picture": "",
+      "username": "root",
+      "email": "root@root.com",
+      "name": "root",
+      "last_name": "root",
+      "is_active": true,
+      "is_staff": true,
+      "reset_password_token": null,
+      "groups": [1],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": "54515af3-a39a-4269-b407-9f5bf7ebd9f3",
+    "fields": {
+      "password": "pbkdf2_sha256$600000$X5tYoJ3DNGy9S3UDD6OUEq$0/iD3tS+TfRKWBWrm7LGcF2eBWM2aXKUhvCeLPKd2a0=",
+      "last_login": null,
+      "is_superuser": true,
+      "profile_picture": "",
+      "username": "adminprueba2",
+      "email": "administrativoprueba2@gmail.com",
+      "name": "Administrativo",
+      "last_name": "Prueba",
+      "is_active": true,
+      "is_staff": true,
+      "reset_password_token": null,
+      "groups": [1],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": "570d4720-14ea-49c4-9dd6-0405c7d2ef81",
+    "fields": {
+      "password": "pbkdf2_sha256$600000$FyIu8oBFqx4oVeCZmC8QQc$p4qV1O7X+lqy5a90t7+1SnGEWox5dvDtnuIpluKteB8=",
+      "last_login": null,
+      "is_superuser": false,
+      "profile_picture": "",
+      "username": "jrodriguez",
+      "email": "josedoc@gmail.com",
+      "name": "Jos�",
+      "last_name": "Rodr�guez",
+      "is_active": true,
+      "is_staff": false,
+      "reset_password_token": null,
+      "groups": [2],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": "5891f3e0-1716-4b2d-924c-b2ce7f0fdfd9",
+    "fields": {
+      "password": "pbkdf2_sha256$600000$6CbGbP68q8e3nFhCQFgDXj$kNfpozvVy6XVTb6CQ4vFp1yQAMjfrb38IDzwXs17iNc=",
+      "last_login": null,
+      "is_superuser": false,
+      "profile_picture": "",
+      "username": "34567890C",
+      "email": "laura.sanchez@example.com",
+      "name": "Laura",
+      "last_name": "S�nchez G�mez",
+      "is_active": true,
+      "is_staff": false,
+      "reset_password_token": null,
+      "groups": [3],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": "5b228048-31c5-44f1-afaf-7b1580f47520",
+    "fields": {
+      "password": "pbkdf2_sha256$600000$b6D6JdB3pnlApWDIVWC05g$vuqH6FyYZmHceiNlvGzIM7xXazQVbJnXrgE8SoTVDVA=",
+      "last_login": null,
+      "is_superuser": true,
+      "profile_picture": "",
+      "username": "dasdas",
+      "email": "dasd@gmail.com",
+      "name": "asddas",
+      "last_name": "dasd",
+      "is_active": false,
+      "is_staff": true,
+      "reset_password_token": null,
+      "groups": [1],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": "62571a01-07c1-4236-843d-16248616ce36",
+    "fields": {
+      "password": "pbkdf2_sha256$600000$EInRIuRTWh3GYztU9ufF0W$KQ1uUy2txK3hHRhZkRCjTIILBQewISZRwYS5S2O37V8=",
+      "last_login": null,
+      "is_superuser": false,
+      "profile_picture": "",
+      "username": "cperez",
+      "email": "doc@example.com",
+      "name": "Carmen",
+      "last_name": "P�rez",
+      "is_active": false,
+      "is_staff": false,
+      "reset_password_token": null,
+      "groups": [2],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": "6fbc7ff5-df46-4527-8adc-15647663c7c3",
+    "fields": {
+      "password": "pbkdf2_sha256$600000$5wQYTHmM5CF2QEmU62fEqA$3F8X51eLHn+r5zTmWD0EOot72wt1ZpQRKsr+vjcQhQ4=",
+      "last_login": "2023-12-13T14:22:09.090",
+      "is_superuser": false,
+      "profile_picture": "",
+      "username": "rmorales",
+      "email": "roberto@gmail.com",
+      "name": "Roberto",
+      "last_name": "Morales",
+      "is_active": true,
+      "is_staff": false,
+      "reset_password_token": null,
+      "groups": [2],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": "71c5b401-d729-47f2-ad1b-7313c593491b",
+    "fields": {
+      "password": "pbkdf2_sha256$600000$P0U49LwcuNRrjUjhfmQBbm$kh6JG/gPQLoVsZJI2Gb3qP9JJUtaezZWG3Ltxgfa5Eo=",
+      "last_login": null,
+      "is_superuser": false,
+      "profile_picture": "",
+      "username": "87289372Y",
+      "email": "carlos@gmail.com",
+      "name": "Carlos",
+      "last_name": "Herrera",
+      "is_active": true,
+      "is_staff": false,
+      "reset_password_token": null,
+      "groups": [3],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": "73b8d51c-aa21-4245-a4db-107b0a6ca9c4",
+    "fields": {
+      "password": "pbkdf2_sha256$600000$AnW2uuPVlbCRh5DUNoMeGa$u63k+U6PjnFXChVaULtissBMWxNyXxW+FcQs0Z2LTso=",
+      "last_login": "2024-02-28T02:41:07.009",
+      "is_superuser": false,
+      "profile_picture": "",
+      "username": "78901234G",
+      "email": "isabel.diaz@example.com",
+      "name": "Isabel",
+      "last_name": "D�az Moreno",
+      "is_active": true,
+      "is_staff": false,
+      "reset_password_token": null,
+      "groups": [3],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": "752d330a-1852-439e-8cc0-42b89ddb429f",
+    "fields": {
+      "password": "pbkdf2_sha256$600000$am36gdhIVMt8qizAjOmIJv$WkBf4eMO3S0/9/9cOGEzFAefQeyXpu+HF74MnwBCJD8=",
+      "last_login": "2023-12-13T18:29:11.085",
+      "is_superuser": false,
+      "profile_picture": "",
+      "username": "jaborrero",
+      "email": "medico2@gmail.com",
+      "name": "Juan Antonio",
+      "last_name": "Borrero Pe�a",
+      "is_active": true,
+      "is_staff": false,
+      "reset_password_token": null,
+      "groups": [2],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": "7873fcf3-7d5f-4322-8ad8-640aab6b4e08",
+    "fields": {
+      "password": "pbkdf2_sha256$600000$ZP3HEdYGf59JYA1lhqR80G$UAKr0V0UK1ukJxwjx94YGL5z6u9hzf+UIu46R7lkrY4=",
+      "last_login": null,
+      "is_superuser": false,
+      "profile_picture": "",
+      "username": "lsanchez",
+      "email": "docmed@example.com",
+      "name": "Laura",
+      "last_name": "S�nchez",
+      "is_active": true,
+      "is_staff": false,
+      "reset_password_token": null,
+      "groups": [2],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": "7aa7bd07-1909-4732-a60e-5fa858ad2140",
+    "fields": {
+      "password": "pbkdf2_sha256$600000$bLui85eVYexy7Yt8pXH4F5$WPdvDjwWLgv5bZG7BSIWEcAgr5NN8YKZ0AsUI4ihxS4=",
+      "last_login": null,
+      "is_superuser": false,
+      "profile_picture": "",
+      "username": "adminprueba1",
+      "email": "administrativoprueba1@gmail.com",
+      "name": "Administrativo",
+      "last_name": "Prueba",
+      "is_active": true,
+      "is_staff": true,
+      "reset_password_token": null,
+      "groups": [1],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": "7d3389e2-27f1-4c58-bd84-f5c16819d5e6",
+    "fields": {
+      "password": "pbkdf2_sha256$600000$N0qjDI9EJadkxWH5PG82aU$UxnN9KvC3A9zEw2j6RQvo1/1xjcAmOFgF1Ro0b4NCqY=",
+      "last_login": null,
+      "is_superuser": false,
+      "profile_picture": "",
+      "username": "mlama1",
+      "email": "manolo@gmail.com",
+      "name": "Manolo",
+      "last_name": "Lama Guijarro",
+      "is_active": true,
+      "is_staff": false,
+      "reset_password_token": null,
+      "groups": [2],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": "7fab3926-da77-4e8c-9f0d-0492e932bd18",
+    "fields": {
+      "password": "pbkdf2_sha256$600000$XBuEFBYtzJuKHkWlNsDlK7$epErx5oKhMsP5+1EnuNK23iVWFabx+KGWfpGI3UVJGQ=",
+      "last_login": null,
+      "is_superuser": false,
+      "profile_picture": "",
+      "username": "jmoreno",
+      "email": "juan@gmail.com",
+      "name": "Juan",
+      "last_name": "Moreno",
+      "is_active": true,
+      "is_staff": false,
+      "reset_password_token": null,
+      "groups": [2],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": "83438c47-235f-4fb6-8d73-737ae95682a7",
+    "fields": {
+      "password": "pbkdf2_sha256$600000$tVaxPgm93fedl4EWH4AsaQ$RSco20PXUsG3bdcWnJz508Gut2sf+nu8255LewB8evs=",
+      "last_login": null,
+      "is_superuser": false,
+      "profile_picture": "",
+      "username": "56789012E",
+      "email": "ana.gonzalez@example.com",
+      "name": "Ana",
+      "last_name": "Gonz�lez Garc�a",
+      "is_active": true,
+      "is_staff": false,
+      "reset_password_token": null,
+      "groups": [3],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": "88d77a1e-df25-4459-bc19-a1dfc90b7dc1",
+    "fields": {
+      "password": "pbkdf2_sha256$600000$1Lq8SNRZhP7JhFEIzXNZTi$1OcVsj66Gvye/L6H3FuYwzyN2on9pm4287d+LA0fRMw=",
+      "last_login": null,
+      "is_superuser": true,
+      "profile_picture": "",
+      "username": "fdsfdsf",
+      "email": "dsfdsf@gmail.com",
+      "name": "sadsad",
+      "last_name": "sadsa",
+      "is_active": false,
+      "is_staff": true,
+      "reset_password_token": null,
+      "groups": [1],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": "8fc5392a-047c-4d94-9dc7-6aa967888617",
+    "fields": {
+      "password": "pbkdf2_sha256$600000$WfvcwAg1uSPq1Z0ydc5n3D$CK3DjLGzEHLRP8CvHMoBhl4YD+NSngchlV9wrxdfz7g=",
+      "last_login": "2024-02-22T18:54:41.016",
+      "is_superuser": false,
+      "profile_picture": "",
+      "username": "12345678T",
+      "email": "pruebapaciente@gmail.com",
+      "name": "Prueba",
+      "last_name": "Prueba",
+      "is_active": false,
+      "is_staff": false,
+      "reset_password_token": null,
+      "groups": [3],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": "937fc373-3e61-468b-84fe-87848ebd356c",
+    "fields": {
+      "password": "pbkdf2_sha256$600000$AIBudp0pHHO8VdzEAox0Uh$vhm9/pLVFhi10vz9gs4zoHR6GILTK0WOyx34yLnj5QQ=",
+      "last_login": null,
+      "is_superuser": false,
+      "profile_picture": "",
+      "username": "adminprueba",
+      "email": "administrativoprueba@gmail.com",
+      "name": "Administrativo",
+      "last_name": "Prueba",
+      "is_active": true,
+      "is_staff": false,
+      "reset_password_token": null,
+      "groups": [1],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": "9653b788-f434-439f-b5b5-511444409be8",
+    "fields": {
+      "password": "pbkdf2_sha256$600000$UvC6ncDHNeTDqGGwIlbxmQ$6ZN7n+56hyEBzzQcmlyEolTLVvEO/Aw/MzTZrIzfzSw=",
+      "last_login": null,
+      "is_superuser": false,
+      "profile_picture": "",
+      "username": "lmorales",
+      "email": "lola@gmail.com",
+      "name": "Lola",
+      "last_name": "Morales Sanz",
+      "is_active": true,
+      "is_staff": false,
+      "reset_password_token": null,
+      "groups": [2],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": "9bd46c6e-dedf-4664-be34-e2fea3841dd8",
+    "fields": {
+      "password": "pbkdf2_sha256$600000$RTiCgQgCYbhG6UQEgrnY4s$zHQoV6yCO2C0dIcVcVH97+2UHmDhYC84DqkD/xIupv8=",
+      "last_login": "2024-02-22T19:09:03",
+      "is_superuser": false,
+      "profile_picture": "",
+      "username": "72892920T",
+      "email": "pruebapaciente3@gmail.com",
+      "name": "Prueba",
+      "last_name": "Prueba",
+      "is_active": false,
+      "is_staff": false,
+      "reset_password_token": null,
+      "groups": [3],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": "9dc32ad7-152a-4b4e-9dbf-c14ecf28081b",
+    "fields": {
+      "password": "pbkdf2_sha256$600000$CdtSsch55RVx8HTY9XdeV9$jUjiOf+fWSP/FOh09xaQLFHpKldHEY4IDj7I6lv78MY=",
+      "last_login": null,
+      "is_superuser": false,
+      "profile_picture": "",
+      "username": "67890123F",
+      "email": "pedro.ruiz@example.com",
+      "name": "Pedro",
+      "last_name": "Ruiz Mart�n",
+      "is_active": true,
+      "is_staff": false,
+      "reset_password_token": null,
+      "groups": [3],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": "a38c045a-7f7a-4dd4-83c9-e0e64d36d682",
+    "fields": {
+      "password": "pbkdf2_sha256$600000$u4pZqphwTnrPsUvG2aU0s0$fB6nH3RFz/JLcUJTcCvPg7/hrixW87egK66rOZaIdSM=",
+      "last_login": null,
+      "is_superuser": false,
+      "profile_picture": "",
+      "username": "47839201E",
+      "email": "paciente1@gmail.com",
+      "name": "Manuel",
+      "last_name": "Mart�nez Alamillo",
+      "is_active": true,
+      "is_staff": false,
+      "reset_password_token": null,
+      "groups": [3],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": "a6c8f5df-6265-490e-b900-6acf0fa4e3d2",
+    "fields": {
+      "password": "pbkdf2_sha256$600000$M1c6Sm8WGcNxxNw1t6dmsf$khqv+/9O8g1SjvOm39D0distnvJ69+CjIQhmaLzNxgE=",
+      "last_login": "2023-12-12T18:42:03.775",
+      "is_superuser": false,
+      "profile_picture": "",
+      "username": "38736437G",
+      "email": "paciente20@gmail.com",
+      "name": "Manuel Jes�s",
+      "last_name": "Arellano",
+      "is_active": true,
+      "is_staff": false,
+      "reset_password_token": null,
+      "groups": [3],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": "a8f4eb12-fc09-4033-b5c6-82737fb713e3",
+    "fields": {
+      "password": "pbkdf2_sha256$600000$JXtLHbk5BcXA7M1EtJZoCI$DA7KGfGzsvJ6yinmI7pmaq6jUg/CiOJnP3iBk6t8hIQ=",
+      "last_login": null,
+      "is_superuser": false,
+      "profile_picture": "",
+      "username": "mlama",
+      "email": "medico10@gmail.com",
+      "name": "Manolo",
+      "last_name": "Lama",
+      "is_active": true,
+      "is_staff": false,
+      "reset_password_token": null,
+      "groups": [2],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": "ab724c92-c20d-4513-a846-08005e7edc7f",
+    "fields": {
+      "password": "pbkdf2_sha256$600000$AuVhKOrqba6Fr4GN3srDDy$mmURofdzXs23X1Ttdqmq0kZdcWOEV12bSwEWSDy3iJc=",
+      "last_login": null,
+      "is_superuser": false,
+      "profile_picture": "",
+      "username": "jperez",
+      "email": "docjohn@example.com",
+      "name": "Juan",
+      "last_name": "P�rez",
+      "is_active": true,
+      "is_staff": false,
+      "reset_password_token": null,
+      "groups": [2],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": "ac4d4b79-a367-46b6-844e-ef72e6e2f0d4",
+    "fields": {
+      "password": "pbkdf2_sha256$600000$Y9lHhPMOAsnrJlFwqHuGym$6EzeGdM0LexAAnqY9e6YAjXf9wf8S8lsiXs9LRO+r1c=",
+      "last_login": null,
+      "is_superuser": false,
+      "profile_picture": "",
+      "username": "23456789B",
+      "email": "josedelgado@example.com",
+      "name": "Jos�",
+      "last_name": "Delgado Rodr�guez",
+      "is_active": true,
+      "is_staff": false,
+      "reset_password_token": null,
+      "groups": [3],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": "af3eb257-006b-4b6e-9103-9abef4ea235f",
+    "fields": {
+      "password": "pbkdf2_sha256$600000$iqgX3v0CZtqY1hPpdMTbNz$lTMw2XQ39lEkPlwxWGwQ/Nsz+dc83SOHqiM4RK/Ux9M=",
+      "last_login": null,
+      "is_superuser": false,
+      "profile_picture": "",
+      "username": "dlopez",
+      "email": "eldoctor@example.com",
+      "name": "David",
+      "last_name": "L�pez",
+      "is_active": true,
+      "is_staff": false,
+      "reset_password_token": null,
+      "groups": [2],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": "b9c7197c-f8f3-4472-90d6-23f6d5e09493",
+    "fields": {
+      "password": "pbkdf2_sha256$600000$0Fgl4xyKb1GnKmyIaLVtZE$2iwOmwTyUia1SSojgtiAZeR6xZvidUs5uSE6HLFYt3U=",
+      "last_login": null,
+      "is_superuser": false,
+      "profile_picture": "",
+      "username": "32738392Y",
+      "email": "paciente50@gmail.com",
+      "name": "Loko",
+      "last_name": "Loko",
+      "is_active": false,
+      "is_staff": false,
+      "reset_password_token": null,
+      "groups": [3],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": "bfb2a2f7-b766-4648-b821-dd904b2fc004",
+    "fields": {
+      "password": "pbkdf2_sha256$600000$s1NWSnFBfpnIOmRc2TRnLX$65kKBDCPDpJh2HsVkDnIJqarSA2iLxCmyFNAnwmINYw=",
+      "last_login": null,
+      "is_superuser": false,
+      "profile_picture": "",
+      "username": "74890273G",
+      "email": "paciente5@gmail.com",
+      "name": "Triana",
+      "last_name": "Marques Rodr�guez",
+      "is_active": true,
+      "is_staff": false,
+      "reset_password_token": null,
+      "groups": [3],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": "c178ecd0-3974-4306-80d8-158aff8ba497",
+    "fields": {
+      "password": "pbkdf2_sha256$600000$Lvqpi5HoY3fGxBSvFTAcMp$EyxJUlD4E4i0O93z78PodZKDF05EKcL+u6/21ySWEaE=",
+      "last_login": null,
+      "is_superuser": false,
+      "profile_picture": "",
+      "username": "45678901D",
+      "email": "david.martinez@example.com",
+      "name": "David",
+      "last_name": "Mart�nez L�pez",
+      "is_active": true,
+      "is_staff": false,
+      "reset_password_token": null,
+      "groups": [3],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": "c29aeda9-800a-4773-9752-b5d7b52579a0",
+    "fields": {
+      "password": "pbkdf2_sha256$600000$UjG1eAhFXigHHG3KXy6K1D$tD6Jf+sioOKm9nKxSljuQjlj1BKaQSr1JxcMbuLhwbQ=",
+      "last_login": null,
+      "is_superuser": false,
+      "profile_picture": "",
+      "username": "01234567J",
+      "email": "manuel.garcia@example.com",
+      "name": "Manuel",
+      "last_name": "Garc�a Mart�nez",
+      "is_active": true,
+      "is_staff": false,
+      "reset_password_token": null,
+      "groups": [3],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": "c6bfbe1e-8d5f-4b6a-9836-939c819995e1",
+    "fields": {
+      "password": "pbkdf2_sha256$600000$u5LqNsdYGqUXvOVnFqBL0w$7FQ0JhvaRQzvgWrB9m3MAOr8khYNrLqQT+8TCuNjzaA=",
+      "last_login": null,
+      "is_superuser": true,
+      "profile_picture": "",
+      "username": "prueba237",
+      "email": "prueba237@gmail.com",
+      "name": "sadasd",
+      "last_name": "dasd",
+      "is_active": false,
+      "is_staff": true,
+      "reset_password_token": null,
+      "groups": [1],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": "c81e7160-02c4-4286-afa4-11b99a54bf13",
+    "fields": {
+      "password": "pbkdf2_sha256$600000$JgyKrjeKZovQgvhwdkGp8P$JiK77Aj/F0jJJcqXsKv/zQvswX22QuvikwtpwtB7wqI=",
+      "last_login": null,
+      "is_superuser": false,
+      "profile_picture": "",
+      "username": "33449922K",
+      "email": "paciente3@gmail.com",
+      "name": "Francisco",
+      "last_name": "Arellano",
+      "is_active": true,
+      "is_staff": false,
+      "reset_password_token": null,
+      "groups": [3],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": "ce8ffb8a-1132-486f-9e6a-20dddab5b2a6",
+    "fields": {
+      "password": "pbkdf2_sha256$600000$wRDMajiigqcUPZfLCcXyLD$S7QpcWPkk6DbDY1RKvGTBA2zpmAQnsrV5QoEP7j4YXI=",
+      "last_login": "2023-12-17T00:44:40.415",
+      "is_superuser": false,
+      "profile_picture": "",
+      "username": "dmolinero",
+      "email": "medico23@gmail.com",
+      "name": "Dionisio",
+      "last_name": "Molinero",
+      "is_active": true,
+      "is_staff": false,
+      "reset_password_token": null,
+      "groups": [2],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": "d2dd3ecb-c88c-4463-b488-93813c4fdff7",
+    "fields": {
+      "password": "pbkdf2_sha256$600000$jvg8JDs8rMRcluGufsJTCj$Kq7vbfwVIKxEQOGD7qMeTsh/ZGykFw7gIH7s0GQbF9M=",
+      "last_login": null,
+      "is_superuser": false,
+      "profile_picture": "",
+      "username": "mmartinez",
+      "email": "medic@example.com",
+      "name": "Mar�a",
+      "last_name": "Mart�nez",
+      "is_active": true,
+      "is_staff": false,
+      "reset_password_token": null,
+      "groups": [2],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": "da863588-e330-4902-ac04-79d464639a8f",
+    "fields": {
+      "password": "pbkdf2_sha256$600000$qQHZlMtVznhSP7OBVtJoe9$HjQSVa+jVHsdwV3Jf/5+glKVKNzGdtazDKZzYEwraLY=",
+      "last_login": null,
+      "is_superuser": true,
+      "profile_picture": "",
+      "username": "adminprueba4",
+      "email": "adminprueba4@gmail.com",
+      "name": "Admin",
+      "last_name": "Prueba",
+      "is_active": true,
+      "is_staff": true,
+      "reset_password_token": null,
+      "groups": [1],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": "e079b25a-e64c-4ef9-993f-e9d052724511",
+    "fields": {
+      "password": "pbkdf2_sha256$600000$1GBqACe60T5d1pjpDj9bAR$GdLik14015BinyGhY4s8y1o2m2z1qUcSzztFrFm+kLU=",
+      "last_login": null,
+      "is_superuser": false,
+      "profile_picture": "",
+      "username": "mruiz",
+      "email": "medical@example.com",
+      "name": "Marta",
+      "last_name": "Ruiz",
+      "is_active": true,
+      "is_staff": false,
+      "reset_password_token": null,
+      "groups": [2],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": "e58cfc6a-ea51-428f-a2eb-835e26c90c7f",
+    "fields": {
+      "password": "pbkdf2_sha256$600000$6SFBDxHfhs9Hpmw9ik59Gm$3j6RvDqLIzDI5defVz6xW/Zw2XxBx3GdhN7irlPnMP8=",
+      "last_login": null,
+      "is_superuser": false,
+      "profile_picture": "",
+      "username": "omoreno",
+      "email": "omar123@gmail.com",
+      "name": "Omar",
+      "last_name": "Moreno",
+      "is_active": true,
+      "is_staff": false,
+      "reset_password_token": null,
+      "groups": [2],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": "eb1628f7-3dcf-466e-8e0c-bcad4cbd554a",
+    "fields": {
+      "password": "pbkdf2_sha256$600000$rID9HRJkYf93acINkTXxRS$jgBP5d9AKsDJk+OGJXP0JFNVpdr2dy3KVFIa+3IhBR0=",
+      "last_login": null,
+      "is_superuser": false,
+      "profile_picture": "",
+      "username": "83473829U",
+      "email": "paciente10@gmail.com",
+      "name": "Lucas",
+      "last_name": "Morales",
+      "is_active": true,
+      "is_staff": false,
+      "reset_password_token": null,
+      "groups": [3],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": "f3d68f9b-540d-45b2-b4eb-19132c101f75",
+    "fields": {
+      "password": "pbkdf2_sha256$600000$i32evNNOdSWFOtcfmdcf1r$RH9KFYC1TOkCIcKxV3Q5HjcJ2c8760P9Ev3PlxYvzGg=",
+      "last_login": null,
+      "is_superuser": false,
+      "profile_picture": "",
+      "username": "27282910T",
+      "email": "pacienteprueba100@gmail.com",
+      "name": "Juan Alberto",
+      "last_name": "Morales D�az",
+      "is_active": true,
+      "is_staff": false,
+      "reset_password_token": null,
+      "groups": [3],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": "f57f8aea-52b6-48c7-b320-977e570a83c2",
+    "fields": {
+      "password": "pbkdf2_sha256$600000$mwGLl8pbowZWF9Yt4BhKSs$FdnAQ5ufGcYs/ddCQPuOSBMUECoZbQa98Ubfy01ULdI=",
+      "last_login": null,
+      "is_superuser": false,
+      "profile_picture": "",
+      "username": "28923022E",
+      "email": "paciente11@gmail.com",
+      "name": "Oscar",
+      "last_name": "Moreno",
+      "is_active": true,
+      "is_staff": false,
+      "reset_password_token": null,
+      "groups": [3],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": "f65cd187-9b1b-419e-a3a4-238991329ea4",
+    "fields": {
+      "password": "pbkdf2_sha256$600000$mSI6R2CZMs8e0GlvAYU6Y6$VR0Gd7kPwE7Go2wxhgMkdyaOnNxr0Z3cPwi4jd8ByOE=",
+      "last_login": null,
+      "is_superuser": false,
+      "profile_picture": "",
+      "username": "ajhf",
+      "email": "prueba382@gmail.com",
+      "name": "Prueb",
+      "last_name": "ahsjfd",
+      "is_active": false,
+      "is_staff": false,
+      "reset_password_token": null,
+      "groups": [3],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": "f789c59f-f339-4b56-9f40-d41cc19f42ed",
+    "fields": {
+      "password": "pbkdf2_sha256$600000$VOZcAXnz0BMKk8Cv9A9FNW$kry/OVhS8nnfrUeLBVQBJ/5KGkltLGt7Cx0lSFNia8o=",
+      "last_login": "2023-12-12T18:37:34.951",
+      "is_superuser": false,
+      "profile_picture": "",
+      "username": "dmolinero1",
+      "email": "daniel@gmail.com",
+      "name": "Daniel",
+      "last_name": "Molinero",
+      "is_active": true,
+      "is_staff": false,
+      "reset_password_token": null,
+      "groups": [2],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": "f80caca1-40dd-4f33-a56f-a76073aeee87",
+    "fields": {
+      "password": "pbkdf2_sha256$600000$qhOfXQ0uJHBbsnui0kmXwK$ON8j52YbKjnWbdiIG7BkMlPxF/LnmJT0GqYr2uCfULo=",
+      "last_login": null,
+      "is_superuser": false,
+      "profile_picture": "",
+      "username": "89012345H",
+      "email": "carlos.lopez@example.com",
+      "name": "Carlos",
+      "last_name": "L�pez S�nchez",
+      "is_active": true,
+      "is_staff": false,
+      "reset_password_token": null,
+      "groups": [3],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": "fbf7e55e-a204-43db-ad68-11ab5cf81768",
+    "fields": {
+      "password": "pbkdf2_sha256$600000$lgDsW701Bs1fNjGaeIJJic$ZPhY5QjAClFEzs6qPp+mNsZOUqyeRmdfPEq6NL2hP8E=",
+      "last_login": "2024-02-28T02:24:50.840",
+      "is_superuser": true,
+      "profile_picture": "",
+      "username": "ammerida",
+      "email": "anmamebo2001@gmail.com",
+      "name": "Antonio Manuel",
+      "last_name": "M�rida Borrero",
+      "is_active": true,
+      "is_staff": true,
+      "reset_password_token": "c2uytz-95af614d454e0a62b6045e8eb0817576",
+      "groups": [2],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "patients.patient",
+    "pk": "01c5785b-c270-4039-aeeb-e9dcc4340997",
+    "fields": {
+      "state": false,
+      "created_date": "2023-12-14T00:06:28.926",
+      "modified_date": "2024-01-11T02:54:11.461",
+      "deleted_date": "2024-01-11T02:54:11.461",
+      "user": "f65cd187-9b1b-419e-a3a4-238991329ea4",
+      "dni": "ajhf",
+      "birthdate": null,
+      "gender": "F",
+      "phone": null,
+      "social_security": null,
+      "address": null,
+      "nationality": "Espa�a"
+    }
+  },
+  {
+    "model": "patients.patient",
+    "pk": "07810ff1-c644-4dca-8faf-bea7f5d3ba79",
+    "fields": {
+      "state": true,
+      "created_date": "2023-12-05T17:25:12.454",
+      "modified_date": "2023-12-05T17:25:12.454",
+      "deleted_date": "2023-12-05T17:25:12.454",
+      "user": "f80caca1-40dd-4f33-a56f-a76073aeee87",
+      "dni": "89012345H",
+      "birthdate": "1992-10-15",
+      "gender": "M",
+      "phone": "012345678",
+      "social_security": "210987654008",
+      "address": null,
+      "nationality": null
+    }
+  },
+  {
+    "model": "patients.patient",
+    "pk": "09f55645-1103-4780-b86b-321839deed6d",
+    "fields": {
+      "state": true,
+      "created_date": "2023-12-12T16:52:57.645",
+      "modified_date": "2023-12-12T16:52:57.645",
+      "deleted_date": "2023-12-12T16:52:57.645",
+      "user": "bfb2a2f7-b766-4648-b821-dd904b2fc004",
+      "dni": "74890273G",
+      "birthdate": "1992-09-22",
+      "gender": "F",
+      "phone": null,
+      "social_security": null,
+      "address": null,
+      "nationality": null
+    }
+  },
+  {
+    "model": "patients.patient",
+    "pk": "22cb84df-9bdc-4634-b370-6278af0ba2fe",
+    "fields": {
+      "state": true,
+      "created_date": "2023-12-12T18:08:51.022",
+      "modified_date": "2023-12-14T00:19:46.734",
+      "deleted_date": "2023-12-14T00:19:46.734",
+      "user": "a6c8f5df-6265-490e-b900-6acf0fa4e3d2",
+      "dni": "38736437G",
+      "birthdate": "2003-03-30",
+      "gender": "M",
+      "phone": null,
+      "social_security": "3242424",
+      "address": null,
+      "nationality": "Corea del Norte"
+    }
+  },
+  {
+    "model": "patients.patient",
+    "pk": "300a70eb-cc43-455d-85a6-fa6031aebf70",
+    "fields": {
+      "state": true,
+      "created_date": "2023-12-05T17:23:29.034",
+      "modified_date": "2023-12-05T17:23:29.034",
+      "deleted_date": "2023-12-05T17:23:29.034",
+      "user": "9dc32ad7-152a-4b4e-9dbf-c14ecf28081b",
+      "dni": "67890123F",
+      "birthdate": "1988-12-08",
+      "gender": "M",
+      "phone": "890123456",
+      "social_security": "432109876006",
+      "address": null,
+      "nationality": null
+    }
+  },
+  {
+    "model": "patients.patient",
+    "pk": "424c01b4-dbe2-466d-9920-9c8834e0565d",
+    "fields": {
+      "state": true,
+      "created_date": "2023-12-12T17:05:44.128",
+      "modified_date": "2024-01-17T18:50:52.748",
+      "deleted_date": "2024-01-17T18:50:52.748",
+      "user": "0b0672bd-dd87-46b5-9c48-2447f0a9923e",
+      "dni": "33457483E",
+      "birthdate": "2001-01-04",
+      "gender": "M",
+      "phone": null,
+      "social_security": null,
+      "address": null,
+      "nationality": "Alemania"
+    }
+  },
+  {
+    "model": "patients.patient",
+    "pk": "47c46c73-d510-4627-b886-84f4d57e0532",
+    "fields": {
+      "state": true,
+      "created_date": "2024-02-05T16:17:30.738",
+      "modified_date": "2024-02-24T18:21:03.608",
+      "deleted_date": "2024-02-24T18:21:03.608",
+      "user": "fbf7e55e-a204-43db-ad68-11ab5cf81768",
+      "dni": "47548635E",
+      "birthdate": "2001-04-06",
+      "gender": "M",
+      "phone": "627660577",
+      "social_security": "231231232132",
+      "address": "e623d785-363a-44da-96a5-a34f99e94996",
+      "nationality": "Espa�a"
+    }
+  },
+  {
+    "model": "patients.patient",
+    "pk": "482278b8-e1c3-462f-8e3e-eded602c3e67",
+    "fields": {
+      "state": true,
+      "created_date": "2023-12-10T20:44:24.439",
+      "modified_date": "2024-01-28T16:57:44.767",
+      "deleted_date": "2024-01-28T16:57:44.767",
+      "user": "2e7a11d2-2291-4633-a6e9-64aff62e18ca",
+      "dni": "33334444G",
+      "birthdate": null,
+      "gender": "M",
+      "phone": null,
+      "social_security": "445566778899",
+      "address": "6353c881-0cdc-4f31-82ca-c3ed271f8893",
+      "nationality": null
+    }
+  },
+  {
+    "model": "patients.patient",
+    "pk": "56a49b8f-2cdc-42b4-a323-47764cd10e39",
+    "fields": {
+      "state": true,
+      "created_date": "2023-12-14T00:04:56.750",
+      "modified_date": "2024-01-28T16:59:42.777",
+      "deleted_date": "2024-01-28T16:59:42.777",
+      "user": "1e58cc94-fbfc-40ae-9bc4-19d594bafe7f",
+      "dni": "74849302Y",
+      "birthdate": "1995-03-03",
+      "gender": "F",
+      "phone": "666112233",
+      "social_security": "2386473",
+      "address": "7d159f8b-3d00-4ff8-bcb2-3b2be42caaa2",
+      "nationality": "Albania"
+    }
+  },
+  {
+    "model": "patients.patient",
+    "pk": "575986ad-9480-477c-8333-e210cc1ea590",
+    "fields": {
+      "state": true,
+      "created_date": "2023-12-05T17:22:57.539",
+      "modified_date": "2024-02-05T16:25:27.109",
+      "deleted_date": "2024-02-05T16:25:27.109",
+      "user": "83438c47-235f-4fb6-8d73-737ae95682a7",
+      "dni": "56789012E",
+      "birthdate": "1995-05-30",
+      "gender": "F",
+      "phone": "789012345",
+      "social_security": "543210987005",
+      "address": null,
+      "nationality": null
+    }
+  },
+  {
+    "model": "patients.patient",
+    "pk": "5ef38dff-f25f-4654-8912-d905ed124935",
+    "fields": {
+      "state": true,
+      "created_date": "2023-12-05T17:22:30.410",
+      "modified_date": "2024-01-28T16:56:25.564",
+      "deleted_date": "2024-01-28T16:56:25.564",
+      "user": "c178ecd0-3974-4306-80d8-158aff8ba497",
+      "dni": "45678901D",
+      "birthdate": null,
+      "gender": "M",
+      "phone": "678901234",
+      "social_security": "654321098004",
+      "address": "009a58bf-5235-46eb-9c5a-cbceb0ef9f16",
+      "nationality": null
+    }
+  },
+  {
+    "model": "patients.patient",
+    "pk": "5fbbfc93-4d75-40bd-b6b9-cc8811444feb",
+    "fields": {
+      "state": true,
+      "created_date": "2023-12-05T17:20:54.251",
+      "modified_date": "2023-12-05T17:20:54.251",
+      "deleted_date": "2023-12-05T17:20:54.251",
+      "user": "3a82cf56-d0cb-44a6-a5cc-7da9b7537020",
+      "dni": "12345678A",
+      "birthdate": "1985-03-12",
+      "gender": "F",
+      "phone": "123456789",
+      "social_security": "987654321001",
+      "address": null,
+      "nationality": null
+    }
+  },
+  {
+    "model": "patients.patient",
+    "pk": "60fcb57a-3b2d-44c4-99e1-cc901f0d0c9f",
+    "fields": {
+      "state": true,
+      "created_date": "2023-12-12T16:03:50.864",
+      "modified_date": "2023-12-12T16:03:50.864",
+      "deleted_date": "2023-12-12T16:03:50.864",
+      "user": "a38c045a-7f7a-4dd4-83c9-e0e64d36d682",
+      "dni": "47839201E",
+      "birthdate": "2000-12-14",
+      "gender": "M",
+      "phone": "666112233",
+      "social_security": "36247632",
+      "address": null,
+      "nationality": null
+    }
+  },
+  {
+    "model": "patients.patient",
+    "pk": "68e02c83-b1e7-4f39-ba8e-6a46e875cb3d",
+    "fields": {
+      "state": true,
+      "created_date": "2023-12-05T17:21:37.763",
+      "modified_date": "2023-12-05T17:21:37.763",
+      "deleted_date": "2023-12-05T17:21:37.763",
+      "user": "ac4d4b79-a367-46b6-844e-ef72e6e2f0d4",
+      "dni": "23456789B",
+      "birthdate": "1990-07-25",
+      "gender": "M",
+      "phone": "987654321",
+      "social_security": "876543210002",
+      "address": null,
+      "nationality": null
+    }
+  },
+  {
+    "model": "patients.patient",
+    "pk": "6c198c5c-064e-44b8-bdf8-41715e5bdc6b",
+    "fields": {
+      "state": true,
+      "created_date": "2023-12-12T16:22:03.005",
+      "modified_date": "2023-12-12T16:22:03.005",
+      "deleted_date": "2023-12-12T16:22:03.005",
+      "user": "c81e7160-02c4-4286-afa4-11b99a54bf13",
+      "dni": "33449922K",
+      "birthdate": "1992-09-22",
+      "gender": "M",
+      "phone": null,
+      "social_security": "324234",
+      "address": null,
+      "nationality": null
+    }
+  },
+  {
+    "model": "patients.patient",
+    "pk": "787d50eb-aa72-41b4-b1c9-322a746523c5",
+    "fields": {
+      "state": true,
+      "created_date": "2023-12-12T17:16:31.487",
+      "modified_date": "2023-12-12T17:16:31.487",
+      "deleted_date": "2023-12-12T17:16:31.487",
+      "user": "f57f8aea-52b6-48c7-b320-977e570a83c2",
+      "dni": "28923022E",
+      "birthdate": "1992-03-12",
+      "gender": "M",
+      "phone": null,
+      "social_security": null,
+      "address": null,
+      "nationality": null
+    }
+  },
+  {
+    "model": "patients.patient",
+    "pk": "90205a62-3482-4a06-a6c8-ba680b096694",
+    "fields": {
+      "state": true,
+      "created_date": "2023-12-05T17:22:04.912",
+      "modified_date": "2023-12-05T17:22:04.912",
+      "deleted_date": "2023-12-05T17:22:04.912",
+      "user": "5891f3e0-1716-4b2d-924c-b2ce7f0fdfd9",
+      "dni": "34567890C",
+      "birthdate": "1982-11-05",
+      "gender": "F",
+      "phone": "567890123",
+      "social_security": "765432109003",
+      "address": null,
+      "nationality": null
+    }
+  },
+  {
+    "model": "patients.patient",
+    "pk": "9f196a69-bf6e-42b5-b74a-8e05718fe2ab",
+    "fields": {
+      "state": true,
+      "created_date": "2023-12-05T17:25:38.319",
+      "modified_date": "2023-12-05T17:25:38.319",
+      "deleted_date": "2023-12-05T17:25:38.319",
+      "user": "c29aeda9-800a-4773-9752-b5d7b52579a0",
+      "dni": "01234567J",
+      "birthdate": "1974-02-14",
+      "gender": "M",
+      "phone": "234567890",
+      "social_security": "098765432010",
+      "address": null,
+      "nationality": null
+    }
+  },
+  {
+    "model": "patients.patient",
+    "pk": "adf3a42b-f472-468f-a2ed-430ec59c9446",
+    "fields": {
+      "state": false,
+      "created_date": "2024-02-27T03:18:53.189",
+      "modified_date": "2024-02-27T03:18:53.189",
+      "deleted_date": "2024-02-27T03:18:53.189",
+      "user": "055ad094-739f-4355-9934-9a3c50eb82e9",
+      "dni": "33338899T",
+      "birthdate": "2024-02-03",
+      "gender": "M",
+      "phone": null,
+      "social_security": null,
+      "address": null,
+      "nationality": null
+    }
+  },
+  {
+    "model": "patients.patient",
+    "pk": "b05bb640-ab95-452a-a81e-11ad5e331e5e",
+    "fields": {
+      "state": true,
+      "created_date": "2023-12-12T17:22:07.299",
+      "modified_date": "2023-12-12T17:22:07.299",
+      "deleted_date": "2023-12-12T17:22:07.299",
+      "user": "3473aac8-be15-4f56-8291-c3643fec8fe6",
+      "dni": "48930233U",
+      "birthdate": "1983-02-23",
+      "gender": "M",
+      "phone": null,
+      "social_security": "374284234",
+      "address": null,
+      "nationality": null
+    }
+  },
+  {
+    "model": "patients.patient",
+    "pk": "b08d5dcf-22f4-4c1f-bd5f-e674eddd8b98",
+    "fields": {
+      "state": false,
+      "created_date": "2024-02-22T18:54:11.514",
+      "modified_date": "2024-02-22T19:10:24.986",
+      "deleted_date": "2024-02-22T19:10:24.986",
+      "user": "8fc5392a-047c-4d94-9dc7-6aa967888617",
+      "dni": "12345678T",
+      "birthdate": "2024-02-01",
+      "gender": "M",
+      "phone": null,
+      "social_security": null,
+      "address": null,
+      "nationality": null
+    }
+  },
+  {
+    "model": "patients.patient",
+    "pk": "b79033d4-fade-4335-b73c-6e378b83afcf",
+    "fields": {
+      "state": true,
+      "created_date": "2023-12-12T17:11:57.319",
+      "modified_date": "2023-12-12T17:11:57.319",
+      "deleted_date": "2023-12-12T17:11:57.319",
+      "user": "eb1628f7-3dcf-466e-8e0c-bcad4cbd554a",
+      "dni": "83473829U",
+      "birthdate": "1992-08-01",
+      "gender": "M",
+      "phone": null,
+      "social_security": "87234324",
+      "address": null,
+      "nationality": null
+    }
+  },
+  {
+    "model": "patients.patient",
+    "pk": "c231e417-902e-49e0-bc50-ba5aa0682251",
+    "fields": {
+      "state": true,
+      "created_date": "2024-02-27T03:03:21.042",
+      "modified_date": "2024-02-27T03:03:21.042",
+      "deleted_date": "2024-02-27T03:03:21.042",
+      "user": "f3d68f9b-540d-45b2-b4eb-19132c101f75",
+      "dni": "27282910T",
+      "birthdate": "1978-02-09",
+      "gender": "M",
+      "phone": "684939393",
+      "social_security": "287283748",
+      "address": null,
+      "nationality": "Alemania"
+    }
+  },
+  {
+    "model": "patients.patient",
+    "pk": "cc069339-dfff-4b55-9639-463134aa9d91",
+    "fields": {
+      "state": false,
+      "created_date": "2024-02-27T03:15:59.480",
+      "modified_date": "2024-02-27T03:15:59.480",
+      "deleted_date": "2024-02-27T03:15:59.480",
+      "user": "00163fd4-f819-4705-a1dc-7bf799fdbb6a",
+      "dni": "93939393T",
+      "birthdate": "2024-02-02",
+      "gender": "M",
+      "phone": null,
+      "social_security": null,
+      "address": null,
+      "nationality": null
+    }
+  },
+  {
+    "model": "patients.patient",
+    "pk": "ccafa0fa-2000-4345-bc94-96faa681ac85",
+    "fields": {
+      "state": true,
+      "created_date": "2023-12-05T17:23:57.587",
+      "modified_date": "2024-02-23T18:53:55.402",
+      "deleted_date": "2024-02-23T18:53:55.402",
+      "user": "73b8d51c-aa21-4245-a4db-107b0a6ca9c4",
+      "dni": "78901234G",
+      "birthdate": "1979-04-22",
+      "gender": "F",
+      "phone": "901234567",
+      "social_security": "321098765007",
+      "address": "386ed842-279e-4a62-b21a-52ab3e6d9e4c",
+      "nationality": "Espa�a"
+    }
+  },
+  {
+    "model": "patients.patient",
+    "pk": "cd5f3d83-569d-494b-9817-896addfcba03",
+    "fields": {
+      "state": false,
+      "created_date": "2024-02-27T03:20:09.189",
+      "modified_date": "2024-02-27T03:20:09.189",
+      "deleted_date": "2024-02-27T03:20:09.189",
+      "user": "3e551c76-7e7c-433b-a263-0391005be268",
+      "dni": "74747474T",
+      "birthdate": "2024-02-03",
+      "gender": "M",
+      "phone": null,
+      "social_security": null,
+      "address": null,
+      "nationality": null
+    }
+  },
+  {
+    "model": "patients.patient",
+    "pk": "d822838e-9884-4750-8902-380e5c3cdd8e",
+    "fields": {
+      "state": true,
+      "created_date": "2023-12-12T16:06:20.305",
+      "modified_date": "2023-12-12T16:06:20.305",
+      "deleted_date": "2023-12-12T16:06:20.305",
+      "user": "280fb438-55aa-48bf-8360-f22e2a06ac94",
+      "dni": "73890273H",
+      "birthdate": "1992-12-01",
+      "gender": "F",
+      "phone": null,
+      "social_security": null,
+      "address": null,
+      "nationality": null
+    }
+  },
+  {
+    "model": "patients.patient",
+    "pk": "daa95420-2ee5-4e8f-8888-a0ccea2dc032",
+    "fields": {
+      "state": true,
+      "created_date": "2023-12-05T17:26:23.815",
+      "modified_date": "2023-12-14T00:21:51.762",
+      "deleted_date": "2023-12-14T00:21:51.762",
+      "user": "71c5b401-d729-47f2-ad1b-7313c593491b",
+      "dni": "87289372Y",
+      "birthdate": "2001-03-04",
+      "gender": "M",
+      "phone": "673829267",
+      "social_security": "7328477328",
+      "address": null,
+      "nationality": "Rumania"
+    }
+  },
+  {
+    "model": "patients.patient",
+    "pk": "e72b8431-6c50-4ece-b2a9-2cb67a16578c",
+    "fields": {
+      "state": false,
+      "created_date": "2023-12-12T18:58:31.975",
+      "modified_date": "2023-12-15T20:12:30.964",
+      "deleted_date": "2023-12-15T20:12:30.964",
+      "user": "b9c7197c-f8f3-4472-90d6-23f6d5e09493",
+      "dni": "32738392Y",
+      "birthdate": "1999-03-01",
+      "gender": "M",
+      "phone": "666112233",
+      "social_security": "23423424",
+      "address": null,
+      "nationality": null
+    }
+  },
+  {
+    "model": "patients.patient",
+    "pk": "ed5403c0-812c-407b-aa3e-121b947e2424",
+    "fields": {
+      "state": false,
+      "created_date": "2023-12-05T17:27:02.878",
+      "modified_date": "2023-12-05T17:27:18.281",
+      "deleted_date": "2023-12-05T17:27:18.281",
+      "user": "08c53b4b-ce1e-48b5-8ce2-39b5f4ee74e7",
+      "dni": "63738292Y",
+      "birthdate": "2002-12-09",
+      "gender": "M",
+      "phone": "666112233",
+      "social_security": "238674623",
+      "address": null,
+      "nationality": null
+    }
+  },
+  {
+    "model": "patients.patient",
+    "pk": "f042783c-4fde-4cb3-8b3b-c020447cf0d3",
+    "fields": {
+      "state": false,
+      "created_date": "2024-02-22T19:04:12.468",
+      "modified_date": "2024-02-22T19:10:19.378",
+      "deleted_date": "2024-02-22T19:10:19.378",
+      "user": "41a049f2-9729-48ce-9e9f-dec1b1f5d1a3",
+      "dni": "76367263T",
+      "birthdate": "2024-02-16",
+      "gender": "F",
+      "phone": null,
+      "social_security": null,
+      "address": null,
+      "nationality": null
+    }
+  },
+  {
+    "model": "patients.patient",
+    "pk": "f5e9c5f5-e006-4c8f-a7cd-47f825dff3a1",
+    "fields": {
+      "state": false,
+      "created_date": "2024-02-22T19:07:21.278",
+      "modified_date": "2024-02-22T19:17:11.644",
+      "deleted_date": "2024-02-22T19:17:11.644",
+      "user": "9bd46c6e-dedf-4664-be34-e2fea3841dd8",
+      "dni": "72892920T",
+      "birthdate": "2024-02-09",
+      "gender": "F",
+      "phone": null,
+      "social_security": null,
+      "address": null,
+      "nationality": null
+    }
+  },
+  {
+    "model": "addresses.address",
+    "pk": "009a58bf-5235-46eb-9c5a-cbceb0ef9f16",
+    "fields": {
+      "state": true,
+      "created_date": "2024-01-28T16:55:51.954",
+      "modified_date": "2024-01-28T16:55:51.954",
+      "deleted_date": "2024-01-28T16:55:51.954",
+      "street": "Calle Pozo",
+      "number": 40,
+      "floor": null,
+      "city": "Sevilla",
+      "province": "Sevilla",
+      "country": "Espa�a",
+      "postal_code": "41801"
+    }
+  },
+  {
+    "model": "addresses.address",
+    "pk": "386ed842-279e-4a62-b21a-52ab3e6d9e4c",
+    "fields": {
+      "state": true,
+      "created_date": "2024-02-23T18:53:55.394",
+      "modified_date": "2024-02-23T18:53:55.394",
+      "deleted_date": "2024-02-23T18:53:55.394",
+      "street": "Avenida de Andaluc�a",
+      "number": 12,
+      "floor": "1A",
+      "city": "Aznalc�llar",
+      "province": "Sevilla",
+      "country": "Espa�a",
+      "postal_code": "41870"
+    }
+  },
+  {
+    "model": "addresses.address",
+    "pk": "6353c881-0cdc-4f31-82ca-c3ed271f8893",
+    "fields": {
+      "state": true,
+      "created_date": "2024-01-28T16:57:44.058",
+      "modified_date": "2024-01-28T16:57:44.058",
+      "deleted_date": "2024-01-28T16:57:44.058",
+      "street": "Calle Aires",
+      "number": 1,
+      "floor": "1",
+      "city": "Aznalc�llar",
+      "province": "Sevilla",
+      "country": "Espa�a",
+      "postal_code": "41870"
+    }
+  },
+  {
+    "model": "addresses.address",
+    "pk": "7d159f8b-3d00-4ff8-bcb2-3b2be42caaa2",
+    "fields": {
+      "state": true,
+      "created_date": "2024-01-28T16:59:42.772",
+      "modified_date": "2024-02-05T18:23:59.453",
+      "deleted_date": "2024-02-05T18:23:59.453",
+      "street": "Avenida Lorca",
+      "number": 1,
+      "floor": "4A",
+      "city": "Madrid",
+      "province": "Madrid",
+      "country": "Espa�a",
+      "postal_code": "73029"
+    }
+  },
+  {
+    "model": "addresses.address",
+    "pk": "e623d785-363a-44da-96a5-a34f99e94996",
+    "fields": {
+      "state": true,
+      "created_date": "2024-02-05T17:58:19.835",
+      "modified_date": "2024-02-05T18:22:21.105",
+      "deleted_date": "2024-02-05T18:22:21.105",
+      "street": "Santa B�rbara",
+      "number": 50,
+      "floor": null,
+      "city": "Aznalc�llar",
+      "province": "Sevilla",
+      "country": "Espa�a",
+      "postal_code": "41870"
+    }
+  },
+  {
+    "model": "doctors.doctor",
+    "pk": "04f0a1ca-14b6-47a6-a15e-b144e21e449f",
+    "fields": {
+      "state": true,
+      "created_date": "2023-12-05T17:15:18.110",
+      "modified_date": "2024-01-28T16:18:05.635",
+      "deleted_date": "2024-01-28T16:18:05.635",
+      "user": "e079b25a-e64c-4ef9-993f-e9d052724511",
+      "collegiate_number": "7890123456",
+      "is_available": true,
+      "departments": ["3ed3711a-e226-4e8b-a371-c40de1317eff"],
+      "medical_specialties": ["2fc5cb85-098a-463f-9d92-7488def5a588"]
+    }
+  },
+  {
+    "model": "doctors.doctor",
+    "pk": "0cf68a1c-51c9-443e-8220-976546154250",
+    "fields": {
+      "state": true,
+      "created_date": "2023-12-12T18:10:16.671",
+      "modified_date": "2024-02-23T18:04:03.404",
+      "deleted_date": "2024-02-23T18:04:03.404",
+      "user": "a8f4eb12-fc09-4033-b5c6-82737fb713e3",
+      "collegiate_number": "383838383",
+      "is_available": true,
+      "departments": [],
+      "medical_specialties": []
+    }
+  },
+  {
+    "model": "doctors.doctor",
+    "pk": "139919c4-951f-4f1e-a7c4-62374a20b0c0",
+    "fields": {
+      "state": true,
+      "created_date": "2023-12-12T18:15:16.901",
+      "modified_date": "2023-12-12T18:15:16.901",
+      "deleted_date": "2023-12-12T18:15:16.901",
+      "user": "7d3389e2-27f1-4c58-bd84-f5c16819d5e6",
+      "collegiate_number": "234324",
+      "is_available": true,
+      "departments": [],
+      "medical_specialties": []
+    }
+  },
+  {
+    "model": "doctors.doctor",
+    "pk": "2c4ea99e-e9fe-46df-9779-a4ed12fcf27a",
+    "fields": {
+      "state": true,
+      "created_date": "2023-12-05T17:13:00.049",
+      "modified_date": "2024-01-28T16:07:53.194",
+      "deleted_date": "2024-01-28T16:07:53.194",
+      "user": "570d4720-14ea-49c4-9dd6-0405c7d2ef81",
+      "collegiate_number": "1357924680",
+      "is_available": true,
+      "departments": ["f8a80b89-387c-4e00-b876-8657007de171"],
+      "medical_specialties": ["03135210-0f2f-418f-b073-01a1f397d600"]
+    }
+  },
+  {
+    "model": "doctors.doctor",
+    "pk": "55199aa1-2709-4f57-a0c1-e9cf6014e3b7",
+    "fields": {
+      "state": true,
+      "created_date": "2023-12-12T17:28:31.697",
+      "modified_date": "2023-12-12T17:28:31.697",
+      "deleted_date": "2023-12-12T17:28:31.697",
+      "user": "24fb2d37-1d8e-4d28-a187-889dd0faae13",
+      "collegiate_number": "1312323",
+      "is_available": true,
+      "departments": [],
+      "medical_specialties": []
+    }
+  },
+  {
+    "model": "doctors.doctor",
+    "pk": "5acca8df-b24e-4d14-90d9-ad874869edc3",
+    "fields": {
+      "state": true,
+      "created_date": "2023-12-12T18:16:40.680",
+      "modified_date": "2023-12-18T00:42:22.345",
+      "deleted_date": "2023-12-18T00:42:22.345",
+      "user": "f789c59f-f339-4b56-9f40-d41cc19f42ed",
+      "collegiate_number": "23432434",
+      "is_available": true,
+      "departments": [],
+      "medical_specialties": []
+    }
+  },
+  {
+    "model": "doctors.doctor",
+    "pk": "7037acfd-ddb2-48fb-b2f1-75c90437d3c5",
+    "fields": {
+      "state": true,
+      "created_date": "2023-12-05T17:14:30.201",
+      "modified_date": "2024-01-28T16:11:33.531",
+      "deleted_date": "2024-01-28T16:11:33.531",
+      "user": "ab724c92-c20d-4513-a846-08005e7edc7f",
+      "collegiate_number": "5432167890",
+      "is_available": true,
+      "departments": ["d7f482f6-f0b8-4685-9f55-60969d33344c"],
+      "medical_specialties": ["d37a0a9c-e961-4620-9c01-b8a7d10f4138"]
+    }
+  },
+  {
+    "model": "doctors.doctor",
+    "pk": "778c25f8-e075-43f3-8560-d6b1940ad57d",
+    "fields": {
+      "state": true,
+      "created_date": "2023-12-05T17:11:35.514",
+      "modified_date": "2024-01-28T16:11:46.472",
+      "deleted_date": "2024-01-28T16:11:46.472",
+      "user": "089c1192-ce75-44f3-be9e-14b494ea2919",
+      "collegiate_number": "1234567890",
+      "is_available": true,
+      "departments": ["d7f482f6-f0b8-4685-9f55-60969d33344c"],
+      "medical_specialties": ["d37a0a9c-e961-4620-9c01-b8a7d10f4138"]
+    }
+  },
+  {
+    "model": "doctors.doctor",
+    "pk": "7e459c92-3f60-4a92-82e3-817842c9a36a",
+    "fields": {
+      "state": true,
+      "created_date": "2023-12-05T17:13:46.914",
+      "modified_date": "2024-01-28T16:07:59.646",
+      "deleted_date": "2024-01-28T16:07:59.646",
+      "user": "40b3778f-6d77-4592-b82c-f3754bfc8be5",
+      "collegiate_number": "9870123456",
+      "is_available": true,
+      "departments": ["f8a80b89-387c-4e00-b876-8657007de171"],
+      "medical_specialties": ["03135210-0f2f-418f-b073-01a1f397d600"]
+    }
+  },
+  {
+    "model": "doctors.doctor",
+    "pk": "8727f9bc-8580-489f-b2cc-c8a7eb88d553",
+    "fields": {
+      "state": true,
+      "created_date": "2024-01-28T19:11:23.986",
+      "modified_date": "2024-01-28T19:11:23.986",
+      "deleted_date": "2024-01-28T19:11:23.986",
+      "user": "9653b788-f434-439f-b5b5-511444409be8",
+      "collegiate_number": "3127378216",
+      "is_available": true,
+      "departments": ["d7f482f6-f0b8-4685-9f55-60969d33344c"],
+      "medical_specialties": ["d37a0a9c-e961-4620-9c01-b8a7d10f4138"]
+    }
+  },
+  {
+    "model": "doctors.doctor",
+    "pk": "98513308-5ca7-44d7-b31f-c315245336b6",
+    "fields": {
+      "state": true,
+      "created_date": "2023-12-05T16:34:55.105",
+      "modified_date": "2024-02-22T06:00:01.512",
+      "deleted_date": "2024-02-22T06:00:01.512",
+      "user": "fbf7e55e-a204-43db-ad68-11ab5cf81768",
+      "collegiate_number": "3224354325",
+      "is_available": true,
+      "departments": [
+        "1d84422f-ef7e-49d9-b756-62f156dc883a",
+        "89e38f9e-3aa1-475b-8af0-c6e8d6bab156",
+        "d7f482f6-f0b8-4685-9f55-60969d33344c"
+      ],
+      "medical_specialties": [
+        "9abaf738-d085-4701-adfe-52b5f26f87d6",
+        "a2c49054-641b-4f28-8fd7-e80bbf8d72e7",
+        "d37a0a9c-e961-4620-9c01-b8a7d10f4138"
+      ]
+    }
+  },
+  {
+    "model": "doctors.doctor",
+    "pk": "9c260a1c-297a-4a31-9854-21737bf082fb",
+    "fields": {
+      "state": true,
+      "created_date": "2023-12-05T17:13:23.384",
+      "modified_date": "2024-02-14T17:36:08.770",
+      "deleted_date": "2024-02-14T17:36:08.770",
+      "user": "d2dd3ecb-c88c-4463-b488-93813c4fdff7",
+      "collegiate_number": "2468013579",
+      "is_available": true,
+      "departments": [
+        "1d84422f-ef7e-49d9-b756-62f156dc883a",
+        "f8a80b89-387c-4e00-b876-8657007de171"
+      ],
+      "medical_specialties": [
+        "03135210-0f2f-418f-b073-01a1f397d600",
+        "a2c49054-641b-4f28-8fd7-e80bbf8d72e7"
+      ]
+    }
+  },
+  {
+    "model": "doctors.doctor",
+    "pk": "b2e13ebe-8800-4ea0-bb60-edcb8850df77",
+    "fields": {
+      "state": false,
+      "created_date": "2023-12-05T17:16:37.700",
+      "modified_date": "2024-01-28T16:16:39.178",
+      "deleted_date": "2024-01-28T16:16:39.178",
+      "user": "62571a01-07c1-4236-843d-16248616ce36",
+      "collegiate_number": "4321098765",
+      "is_available": false,
+      "departments": [
+        "1d84422f-ef7e-49d9-b756-62f156dc883a",
+        "89e38f9e-3aa1-475b-8af0-c6e8d6bab156",
+        "f8a80b89-387c-4e00-b876-8657007de171"
+      ],
+      "medical_specialties": [
+        "03135210-0f2f-418f-b073-01a1f397d600",
+        "9abaf738-d085-4701-adfe-52b5f26f87d6",
+        "a2c49054-641b-4f28-8fd7-e80bbf8d72e7"
+      ]
+    }
+  },
+  {
+    "model": "doctors.doctor",
+    "pk": "b3d2125d-efe3-44c7-9261-04c219dd00f2",
+    "fields": {
+      "state": false,
+      "created_date": "2023-12-09T20:11:34.441",
+      "modified_date": "2024-02-12T00:42:45.036",
+      "deleted_date": "2024-02-12T00:42:45.036",
+      "user": "2ba84476-337f-432d-8f15-22610949dab9",
+      "collegiate_number": "3224353333",
+      "is_available": false,
+      "departments": [],
+      "medical_specialties": []
+    }
+  },
+  {
+    "model": "doctors.doctor",
+    "pk": "b950e8e7-4377-4157-85d4-ea5e8d1b1fb6",
+    "fields": {
+      "state": true,
+      "created_date": "2023-12-12T17:29:18.196",
+      "modified_date": "2023-12-12T17:29:18.196",
+      "deleted_date": "2023-12-12T17:29:18.196",
+      "user": "752d330a-1852-439e-8cc0-42b89ddb429f",
+      "collegiate_number": "1312222",
+      "is_available": true,
+      "departments": [],
+      "medical_specialties": []
+    }
+  },
+  {
+    "model": "doctors.doctor",
+    "pk": "c5c98c8a-91f9-4ae0-898c-93fda30d1079",
+    "fields": {
+      "state": true,
+      "created_date": "2023-12-05T17:11:09.677",
+      "modified_date": "2024-01-28T15:59:27.803",
+      "deleted_date": "2024-01-28T15:59:27.803",
+      "user": "e58cfc6a-ea51-428f-a2eb-835e26c90c7f",
+      "collegiate_number": "123123",
+      "is_available": true,
+      "departments": ["f8bac9b9-2a37-4e6b-8daa-2e2ba0b4a438"],
+      "medical_specialties": ["f4af6ec3-2de6-4ce3-926c-8b1df61ca898"]
+    }
+  },
+  {
+    "model": "doctors.doctor",
+    "pk": "c781a7b7-bf62-46af-b6bd-8ce87b17e34e",
+    "fields": {
+      "state": true,
+      "created_date": "2023-12-05T17:16:00.035",
+      "modified_date": "2024-01-28T16:08:20.575",
+      "deleted_date": "2024-01-28T16:08:20.575",
+      "user": "2ce22adf-1a43-44ec-9ca7-f06de04b323c",
+      "collegiate_number": "3210987654",
+      "is_available": true,
+      "departments": [
+        "1d84422f-ef7e-49d9-b756-62f156dc883a",
+        "f8a80b89-387c-4e00-b876-8657007de171"
+      ],
+      "medical_specialties": [
+        "03135210-0f2f-418f-b073-01a1f397d600",
+        "a2c49054-641b-4f28-8fd7-e80bbf8d72e7"
+      ]
+    }
+  },
+  {
+    "model": "doctors.doctor",
+    "pk": "c849c38c-53d9-4345-acb1-532787c40dc9",
+    "fields": {
+      "state": true,
+      "created_date": "2023-12-12T18:16:03.185",
+      "modified_date": "2023-12-12T18:16:03.185",
+      "deleted_date": "2023-12-12T18:16:03.185",
+      "user": "ce8ffb8a-1132-486f-9e6a-20dddab5b2a6",
+      "collegiate_number": "324234",
+      "is_available": true,
+      "departments": [],
+      "medical_specialties": []
+    }
+  },
+  {
+    "model": "doctors.doctor",
+    "pk": "cb3b12b5-4a6e-481b-8cbe-c9f3330f274c",
+    "fields": {
+      "state": true,
+      "created_date": "2023-12-05T17:12:05.073",
+      "modified_date": "2024-01-28T16:18:15.471",
+      "deleted_date": "2024-01-28T16:18:15.471",
+      "user": "7873fcf3-7d5f-4322-8ad8-640aab6b4e08",
+      "collegiate_number": "9876543210",
+      "is_available": true,
+      "departments": ["3ed3711a-e226-4e8b-a371-c40de1317eff"],
+      "medical_specialties": ["2fc5cb85-098a-463f-9d92-7488def5a588"]
+    }
+  },
+  {
+    "model": "doctors.doctor",
+    "pk": "d24f9519-be9e-4312-905d-238d829d3511",
+    "fields": {
+      "state": true,
+      "created_date": "2023-12-05T17:14:09.546",
+      "modified_date": "2024-01-28T15:59:36.295",
+      "deleted_date": "2024-01-28T15:59:36.295",
+      "user": "24362f58-9b0c-4ad8-9fd9-a6eac303f64c",
+      "collegiate_number": "6789054321",
+      "is_available": true,
+      "departments": ["f8bac9b9-2a37-4e6b-8daa-2e2ba0b4a438"],
+      "medical_specialties": ["f4af6ec3-2de6-4ce3-926c-8b1df61ca898"]
+    }
+  },
+  {
+    "model": "doctors.doctor",
+    "pk": "dacd945b-2c23-45d9-93da-07e35fda724b",
+    "fields": {
+      "state": true,
+      "created_date": "2023-12-05T17:14:53.140",
+      "modified_date": "2024-01-28T16:18:31.224",
+      "deleted_date": "2024-01-28T16:18:31.224",
+      "user": "af3eb257-006b-4b6e-9103-9abef4ea235f",
+      "collegiate_number": "8765432109",
+      "is_available": true,
+      "departments": [
+        "1d84422f-ef7e-49d9-b756-62f156dc883a",
+        "3ed3711a-e226-4e8b-a371-c40de1317eff"
+      ],
+      "medical_specialties": [
+        "2fc5cb85-098a-463f-9d92-7488def5a588",
+        "a2c49054-641b-4f28-8fd7-e80bbf8d72e7"
+      ]
+    }
+  },
+  {
+    "model": "doctors.doctor",
+    "pk": "db3fcad9-5e14-40bd-9593-c6044c4f400d",
+    "fields": {
+      "state": true,
+      "created_date": "2023-12-05T21:00:54.106",
+      "modified_date": "2024-01-28T15:59:43.393",
+      "deleted_date": "2024-01-28T15:59:43.393",
+      "user": "7fab3926-da77-4e8c-9f0d-0492e932bd18",
+      "collegiate_number": "7623234",
+      "is_available": true,
+      "departments": ["f8bac9b9-2a37-4e6b-8daa-2e2ba0b4a438"],
+      "medical_specialties": ["f4af6ec3-2de6-4ce3-926c-8b1df61ca898"]
+    }
+  },
+  {
+    "model": "doctors.doctor",
+    "pk": "dca33f5c-213d-4fb4-a702-f3a6a1fbe7ea",
+    "fields": {
+      "state": true,
+      "created_date": "2023-12-12T17:45:33.773",
+      "modified_date": "2024-01-28T15:58:31.543",
+      "deleted_date": "2024-01-28T15:58:31.543",
+      "user": "6fbc7ff5-df46-4527-8adc-15647663c7c3",
+      "collegiate_number": "3482434",
+      "is_available": true,
+      "departments": ["f8bac9b9-2a37-4e6b-8daa-2e2ba0b4a438"],
+      "medical_specialties": ["f4af6ec3-2de6-4ce3-926c-8b1df61ca898"]
+    }
+  },
+  {
+    "model": "medicalspecialties.medicalspecialty",
+    "pk": "03135210-0f2f-418f-b073-01a1f397d600",
+    "fields": {
+      "state": true,
+      "created_date": "2024-01-28T16:07:35.692",
+      "modified_date": "2024-02-12T17:53:34.698",
+      "deleted_date": "2024-02-12T17:53:34.698",
+      "name": "Neurolog�a",
+      "description": "Especialidad m�dica dedicada al estudio y tratamiento de trastornos del sistema nervioso.",
+      "department": "f8a80b89-387c-4e00-b876-8657007de171"
+    }
+  },
+  {
+    "model": "medicalspecialties.medicalspecialty",
+    "pk": "2fc5cb85-098a-463f-9d92-7488def5a588",
+    "fields": {
+      "state": true,
+      "created_date": "2024-01-28T16:17:10.076",
+      "modified_date": "2024-02-12T18:14:40.358",
+      "deleted_date": "2024-02-12T18:14:40.358",
+      "name": "Oncolog�a",
+      "description": "Especialidad m�dica que se ocupa del estudio y tratamiento del c�ncer.",
+      "department": "3ed3711a-e226-4e8b-a371-c40de1317eff"
+    }
+  },
+  {
+    "model": "medicalspecialties.medicalspecialty",
+    "pk": "448d03e2-b49b-458e-b5d6-fa0b20a25221",
+    "fields": {
+      "state": true,
+      "created_date": "2024-01-28T16:14:32.574",
+      "modified_date": "2024-01-28T16:14:32.574",
+      "deleted_date": "2024-01-28T16:14:32.574",
+      "name": "Ginecolog�a y Obstetricia",
+      "description": "Rama de la medicina centrada en la salud reproductiva de la mujer.",
+      "department": null
+    }
+  },
+  {
+    "model": "medicalspecialties.medicalspecialty",
+    "pk": "472b76fe-3b70-4830-8c51-49dc6cab008e",
+    "fields": {
+      "state": false,
+      "created_date": "2024-01-28T16:15:14.992",
+      "modified_date": "2024-01-28T16:15:17.919",
+      "deleted_date": "2024-01-28T16:15:17.919",
+      "name": "prueba",
+      "description": "prueba",
+      "department": null
+    }
+  },
+  {
+    "model": "medicalspecialties.medicalspecialty",
+    "pk": "4a0cb863-2840-45b9-b012-c61f00a4fa2d",
+    "fields": {
+      "state": false,
+      "created_date": "2024-01-28T16:08:41.970",
+      "modified_date": "2024-01-28T16:08:46.012",
+      "deleted_date": "2024-01-28T16:08:46.012",
+      "name": "prueba1",
+      "description": "prueba",
+      "department": null
+    }
+  },
+  {
+    "model": "medicalspecialties.medicalspecialty",
+    "pk": "9abaf738-d085-4701-adfe-52b5f26f87d6",
+    "fields": {
+      "state": true,
+      "created_date": "2024-01-28T16:15:28.027",
+      "modified_date": "2024-02-12T18:05:04.031",
+      "deleted_date": "2024-02-12T18:05:04.031",
+      "name": "Cardiolog�a",
+      "description": "Especialidad m�dica centrada en el diagn�stico y tratamiento de enfermedades del coraz�n y sistema circulatorio.",
+      "department": "89e38f9e-3aa1-475b-8af0-c6e8d6bab156"
+    }
+  },
+  {
+    "model": "medicalspecialties.medicalspecialty",
+    "pk": "a2c49054-641b-4f28-8fd7-e80bbf8d72e7",
+    "fields": {
+      "state": true,
+      "created_date": "2024-01-28T16:00:12.723",
+      "modified_date": "2024-02-12T17:53:38.847",
+      "deleted_date": "2024-02-12T17:53:38.847",
+      "name": "Pediatr�a",
+      "description": "Rama de la medicina que se especializa en la atenci�n m�dica de ni�os y adolescentes.",
+      "department": "1d84422f-ef7e-49d9-b756-62f156dc883a"
+    }
+  },
+  {
+    "model": "medicalspecialties.medicalspecialty",
+    "pk": "d37a0a9c-e961-4620-9c01-b8a7d10f4138",
+    "fields": {
+      "state": true,
+      "created_date": "2024-01-28T16:09:09.336",
+      "modified_date": "2024-02-12T17:53:32.580",
+      "deleted_date": "2024-02-12T17:53:32.580",
+      "name": "Dermatolog�a",
+      "description": "Rama de la medicina que se ocupa del diagn�stico y tratamiento de enfermedades de la piel, cabello y u�as.",
+      "department": "d7f482f6-f0b8-4685-9f55-60969d33344c"
+    }
+  },
+  {
+    "model": "medicalspecialties.medicalspecialty",
+    "pk": "f436cc0d-327c-4ab0-8828-ce3c1b35418c",
+    "fields": {
+      "state": true,
+      "created_date": "2024-01-28T16:12:13.997",
+      "modified_date": "2024-01-28T16:12:13.997",
+      "deleted_date": "2024-01-28T16:12:13.997",
+      "name": "Cirug�a",
+      "description": null,
+      "department": null
+    }
+  },
+  {
+    "model": "medicalspecialties.medicalspecialty",
+    "pk": "f4af6ec3-2de6-4ce3-926c-8b1df61ca898",
+    "fields": {
+      "state": true,
+      "created_date": "2024-01-28T15:36:47.261",
+      "modified_date": "2024-02-12T17:53:43.002",
+      "deleted_date": "2024-02-12T17:53:43.002",
+      "name": "Oftalmolog�a",
+      "description": "Especialidad m�dica dedicada al estudio y tratamiento de enfermedades relacionadas con los ojos y la vista.",
+      "department": "f8bac9b9-2a37-4e6b-8daa-2e2ba0b4a438"
+    }
+  },
+  {
+    "model": "schedules.schedule",
+    "pk": "08761561-7005-48bc-a8a7-0a2929bbff10",
+    "fields": {
+      "state": true,
+      "created_date": "2024-02-21T16:13:00.659",
+      "modified_date": "2024-02-21T16:13:00.659",
+      "deleted_date": "2024-02-21T16:13:00.659",
+      "start_time": "2024-02-24T18:00:00",
+      "end_time": "2024-02-24T18:30:00",
+      "day_of_week": 5,
+      "doctor": "98513308-5ca7-44d7-b31f-c315245336b6"
+    }
+  },
+  {
+    "model": "schedules.schedule",
+    "pk": "0e4e1c8a-9f3e-4664-b450-c6e7edda0e57",
+    "fields": {
+      "state": true,
+      "created_date": "2024-02-21T16:12:43.471",
+      "modified_date": "2024-02-21T16:12:43.471",
+      "deleted_date": "2024-02-21T16:12:43.471",
+      "start_time": "2024-02-22T12:00:00",
+      "end_time": "2024-02-22T12:30:00",
+      "day_of_week": 3,
+      "doctor": "98513308-5ca7-44d7-b31f-c315245336b6"
+    }
+  },
+  {
+    "model": "schedules.schedule",
+    "pk": "16f3a8d0-8248-4df0-870c-62a26e4fd72a",
+    "fields": {
+      "state": true,
+      "created_date": "2024-02-21T16:12:45.328",
+      "modified_date": "2024-02-21T16:12:45.328",
+      "deleted_date": "2024-02-21T16:12:45.328",
+      "start_time": "2024-02-22T11:30:00",
+      "end_time": "2024-02-22T12:00:00",
+      "day_of_week": 3,
+      "doctor": "98513308-5ca7-44d7-b31f-c315245336b6"
+    }
+  },
+  {
+    "model": "schedules.schedule",
+    "pk": "17059767-8740-4cba-8fbe-7b0a8a68ad4b",
+    "fields": {
+      "state": true,
+      "created_date": "2024-02-12T18:49:55.721",
+      "modified_date": "2024-02-12T20:53:26.357",
+      "deleted_date": "2024-02-12T20:53:26.357",
+      "start_time": "2024-02-15T09:00:00",
+      "end_time": "2024-02-15T09:30:00",
+      "day_of_week": 3,
+      "doctor": "98513308-5ca7-44d7-b31f-c315245336b6"
+    }
+  },
+  {
+    "model": "schedules.schedule",
+    "pk": "1aae610a-c652-4476-ba34-b3b46b491197",
+    "fields": {
+      "state": true,
+      "created_date": "2024-02-05T16:30:17.908",
+      "modified_date": "2024-02-05T16:30:17.908",
+      "deleted_date": "2024-02-05T16:30:17.908",
+      "start_time": "2024-02-02T17:00:00",
+      "end_time": "2024-02-02T17:11:00",
+      "day_of_week": 4,
+      "doctor": "139919c4-951f-4f1e-a7c4-62374a20b0c0"
+    }
+  },
+  {
+    "model": "schedules.schedule",
+    "pk": "1bb71cfc-61e4-4167-acbb-37aaa6a66c23",
+    "fields": {
+      "state": true,
+      "created_date": "2024-02-21T16:12:39.933",
+      "modified_date": "2024-02-21T16:12:39.933",
+      "deleted_date": "2024-02-21T16:12:39.933",
+      "start_time": "2024-02-22T09:30:00",
+      "end_time": "2024-02-22T10:00:00",
+      "day_of_week": 3,
+      "doctor": "98513308-5ca7-44d7-b31f-c315245336b6"
+    }
+  },
+  {
+    "model": "schedules.schedule",
+    "pk": "1c454c08-c9e6-4174-bc18-606bab2f3761",
+    "fields": {
+      "state": true,
+      "created_date": "2023-12-16T15:24:55.734",
+      "modified_date": "2023-12-16T15:24:55.734",
+      "deleted_date": "2023-12-16T15:24:55.734",
+      "start_time": "2023-12-16T17:00:00",
+      "end_time": "2023-12-16T17:15:00",
+      "day_of_week": 5,
+      "doctor": "98513308-5ca7-44d7-b31f-c315245336b6"
+    }
+  },
+  {
+    "model": "schedules.schedule",
+    "pk": "1daaa6d3-7084-4e00-80c5-53e37419e7b3",
+    "fields": {
+      "state": true,
+      "created_date": "2024-02-12T20:52:36.576",
+      "modified_date": "2024-02-12T20:52:36.576",
+      "deleted_date": "2024-02-12T20:52:36.576",
+      "start_time": "2024-02-15T10:00:00",
+      "end_time": "2024-02-15T10:30:00",
+      "day_of_week": 3,
+      "doctor": "98513308-5ca7-44d7-b31f-c315245336b6"
+    }
+  },
+  {
+    "model": "schedules.schedule",
+    "pk": "1fed16a6-286a-41bc-85bf-5b467b57a975",
+    "fields": {
+      "state": true,
+      "created_date": "2023-12-15T18:34:17.836",
+      "modified_date": "2023-12-15T18:34:17.836",
+      "deleted_date": "2023-12-15T18:34:17.836",
+      "start_time": "2023-11-15T18:33:58",
+      "end_time": "2023-11-15T18:50:06",
+      "day_of_week": 2,
+      "doctor": "98513308-5ca7-44d7-b31f-c315245336b6"
+    }
+  },
+  {
+    "model": "schedules.schedule",
+    "pk": "260f231c-d190-4700-99ae-aae1163751d5",
+    "fields": {
+      "state": true,
+      "created_date": "2024-02-15T02:13:14.339",
+      "modified_date": "2024-02-15T02:13:14.339",
+      "deleted_date": "2024-02-15T02:13:14.339",
+      "start_time": "2024-02-20T12:00:00",
+      "end_time": "2024-02-20T12:30:00",
+      "day_of_week": 1,
+      "doctor": "778c25f8-e075-43f3-8560-d6b1940ad57d"
+    }
+  },
+  {
+    "model": "schedules.schedule",
+    "pk": "3ae95dca-148d-4b1a-bf62-9b16dc1a439b",
+    "fields": {
+      "state": true,
+      "created_date": "2024-02-15T02:18:11.389",
+      "modified_date": "2024-02-15T02:18:11.389",
+      "deleted_date": "2024-02-15T02:18:11.389",
+      "start_time": "2024-02-28T13:30:00",
+      "end_time": "2024-02-28T14:00:00",
+      "day_of_week": 2,
+      "doctor": "98513308-5ca7-44d7-b31f-c315245336b6"
+    }
+  },
+  {
+    "model": "schedules.schedule",
+    "pk": "46eccc52-d6c2-45fc-bb4a-eac179e6e9a2",
+    "fields": {
+      "state": true,
+      "created_date": "2024-02-12T20:38:12.652",
+      "modified_date": "2024-02-12T20:38:12.652",
+      "deleted_date": "2024-02-12T20:38:12.652",
+      "start_time": "2024-02-15T09:00:00",
+      "end_time": "2024-02-15T09:30:00",
+      "day_of_week": 3,
+      "doctor": "9c260a1c-297a-4a31-9854-21737bf082fb"
+    }
+  },
+  {
+    "model": "schedules.schedule",
+    "pk": "47405cab-3ac4-4c69-8682-281fbffb6584",
+    "fields": {
+      "state": true,
+      "created_date": "2023-12-18T13:16:43.533",
+      "modified_date": "2023-12-18T13:16:43.533",
+      "deleted_date": "2023-12-18T13:16:43.533",
+      "start_time": "2023-12-18T18:00:00",
+      "end_time": "2023-12-18T18:15:00",
+      "day_of_week": 0,
+      "doctor": "98513308-5ca7-44d7-b31f-c315245336b6"
+    }
+  },
+  {
+    "model": "schedules.schedule",
+    "pk": "479973d8-6fa7-48ba-9fa3-3cbc63f27ce9",
+    "fields": {
+      "state": true,
+      "created_date": "2023-12-05T17:32:01.652",
+      "modified_date": "2023-12-05T17:32:01.652",
+      "deleted_date": "2023-12-05T17:32:01.652",
+      "start_time": "2023-12-05T17:31:49",
+      "end_time": "2023-12-05T18:31:51",
+      "day_of_week": 1,
+      "doctor": "98513308-5ca7-44d7-b31f-c315245336b6"
+    }
+  },
+  {
+    "model": "schedules.schedule",
+    "pk": "4f2a009d-2d97-4c86-b0b0-1d9ec88a4e50",
+    "fields": {
+      "state": true,
+      "created_date": "2023-12-18T13:14:56.097",
+      "modified_date": "2023-12-18T13:14:56.097",
+      "deleted_date": "2023-12-18T13:14:56.097",
+      "start_time": "2023-12-18T16:30:00",
+      "end_time": "2023-12-18T17:30:00",
+      "day_of_week": 0,
+      "doctor": "9c260a1c-297a-4a31-9854-21737bf082fb"
+    }
+  },
+  {
+    "model": "schedules.schedule",
+    "pk": "51c90386-7c45-4c41-b8a6-ba215080ff39",
+    "fields": {
+      "state": true,
+      "created_date": "2024-02-05T16:36:00.970",
+      "modified_date": "2024-02-05T16:36:00.970",
+      "deleted_date": "2024-02-05T16:36:00.970",
+      "start_time": "2024-02-14T11:00:00",
+      "end_time": "2024-02-14T11:15:00",
+      "day_of_week": 2,
+      "doctor": "d24f9519-be9e-4312-905d-238d829d3511"
+    }
+  },
+  {
+    "model": "schedules.schedule",
+    "pk": "5604722e-926b-4fde-a854-f0ef0623c321",
+    "fields": {
+      "state": true,
+      "created_date": "2024-02-17T14:43:18.092",
+      "modified_date": "2024-02-17T14:43:18.092",
+      "deleted_date": "2024-02-17T14:43:18.092",
+      "start_time": "2024-02-18T10:00:00",
+      "end_time": "2024-02-18T10:30:00",
+      "day_of_week": 6,
+      "doctor": "8727f9bc-8580-489f-b2cc-c8a7eb88d553"
+    }
+  },
+  {
+    "model": "schedules.schedule",
+    "pk": "5f7986c4-e74a-4104-81e1-155a65c3af60",
+    "fields": {
+      "state": true,
+      "created_date": "2023-12-16T16:34:33.043",
+      "modified_date": "2023-12-22T17:19:58.170",
+      "deleted_date": "2023-12-22T17:19:58.170",
+      "start_time": "2023-12-22T19:30:00",
+      "end_time": "2023-12-22T19:45:00",
+      "day_of_week": 4,
+      "doctor": "98513308-5ca7-44d7-b31f-c315245336b6"
+    }
+  },
+  {
+    "model": "schedules.schedule",
+    "pk": "6a91cb3a-bc10-4c11-ad72-689e6833916b",
+    "fields": {
+      "state": true,
+      "created_date": "2024-02-21T16:12:42.244",
+      "modified_date": "2024-02-21T16:12:42.244",
+      "deleted_date": "2024-02-21T16:12:42.244",
+      "start_time": "2024-02-22T11:00:00",
+      "end_time": "2024-02-22T11:30:00",
+      "day_of_week": 3,
+      "doctor": "98513308-5ca7-44d7-b31f-c315245336b6"
+    }
+  },
+  {
+    "model": "schedules.schedule",
+    "pk": "6c3ab5f2-1420-430b-a65a-52fcb4d75c57",
+    "fields": {
+      "state": true,
+      "created_date": "2024-02-12T18:50:38.808",
+      "modified_date": "2024-02-12T20:32:17.042",
+      "deleted_date": "2024-02-12T20:32:17.042",
+      "start_time": "2024-02-15T18:00:00",
+      "end_time": "2024-02-15T18:30:00",
+      "day_of_week": 3,
+      "doctor": "98513308-5ca7-44d7-b31f-c315245336b6"
+    }
+  },
+  {
+    "model": "schedules.schedule",
+    "pk": "7660a8b3-e55f-4c4f-8d0a-a39cc1c3b67f",
+    "fields": {
+      "state": true,
+      "created_date": "2023-12-17T14:07:32.006",
+      "modified_date": "2023-12-17T14:07:32.006",
+      "deleted_date": "2023-12-17T14:07:32.006",
+      "start_time": "2023-12-17T18:00:00",
+      "end_time": "2023-12-17T18:15:00",
+      "day_of_week": 6,
+      "doctor": "04f0a1ca-14b6-47a6-a15e-b144e21e449f"
+    }
+  },
+  {
+    "model": "schedules.schedule",
+    "pk": "92093835-97fa-49a1-a6d2-b1859fe119f5",
+    "fields": {
+      "state": true,
+      "created_date": "2023-12-17T17:19:59.093",
+      "modified_date": "2023-12-17T17:19:59.093",
+      "deleted_date": "2023-12-17T17:19:59.093",
+      "start_time": "2023-12-17T20:00:00",
+      "end_time": "2023-12-17T20:10:00",
+      "day_of_week": 6,
+      "doctor": "139919c4-951f-4f1e-a7c4-62374a20b0c0"
+    }
+  },
+  {
+    "model": "schedules.schedule",
+    "pk": "9214651c-b32f-4fc0-8602-a8fee83128e5",
+    "fields": {
+      "state": true,
+      "created_date": "2023-12-05T17:30:48.097",
+      "modified_date": "2023-12-05T17:30:48.097",
+      "deleted_date": "2023-12-05T17:30:48.097",
+      "start_time": "2023-12-08T17:00:00",
+      "end_time": "2023-12-08T17:30:00",
+      "day_of_week": 4,
+      "doctor": "98513308-5ca7-44d7-b31f-c315245336b6"
+    }
+  },
+  {
+    "model": "schedules.schedule",
+    "pk": "a30e5ce0-7a57-4c49-b4b8-c2fccab36044",
+    "fields": {
+      "state": true,
+      "created_date": "2024-02-15T02:54:17.672",
+      "modified_date": "2024-02-15T02:54:17.672",
+      "deleted_date": "2024-02-15T02:54:17.672",
+      "start_time": "2024-02-18T17:30:00",
+      "end_time": "2024-02-18T18:00:00",
+      "day_of_week": 6,
+      "doctor": "98513308-5ca7-44d7-b31f-c315245336b6"
+    }
+  },
+  {
+    "model": "schedules.schedule",
+    "pk": "a824bb56-f980-4deb-bb76-28cfc42da830",
+    "fields": {
+      "state": true,
+      "created_date": "2024-02-12T19:17:33.987",
+      "modified_date": "2024-02-12T20:33:01.297",
+      "deleted_date": "2024-02-12T20:33:01.297",
+      "start_time": "2024-02-15T15:00:00",
+      "end_time": "2024-02-15T15:30:00",
+      "day_of_week": 3,
+      "doctor": "98513308-5ca7-44d7-b31f-c315245336b6"
+    }
+  },
+  {
+    "model": "schedules.schedule",
+    "pk": "a92f1385-c2ef-4d51-94ab-5cf0a36c9b65",
+    "fields": {
+      "state": true,
+      "created_date": "2023-12-15T15:55:13.168",
+      "modified_date": "2023-12-15T15:55:13.168",
+      "deleted_date": "2023-12-15T15:55:13.168",
+      "start_time": "2023-12-16T15:54:53",
+      "end_time": "2023-12-16T15:54:55",
+      "day_of_week": 5,
+      "doctor": "98513308-5ca7-44d7-b31f-c315245336b6"
+    }
+  },
+  {
+    "model": "schedules.schedule",
+    "pk": "a9ab17a1-bf4a-4918-ab1e-f68911cfe408",
+    "fields": {
+      "state": true,
+      "created_date": "2024-02-21T16:12:59.150",
+      "modified_date": "2024-02-21T16:12:59.150",
+      "deleted_date": "2024-02-21T16:12:59.150",
+      "start_time": "2024-02-24T17:30:00",
+      "end_time": "2024-02-24T18:00:00",
+      "day_of_week": 5,
+      "doctor": "98513308-5ca7-44d7-b31f-c315245336b6"
+    }
+  },
+  {
+    "model": "schedules.schedule",
+    "pk": "ad59b3c5-b402-4fd5-a273-db58c2247581",
+    "fields": {
+      "state": true,
+      "created_date": "2023-12-15T15:35:53.756",
+      "modified_date": "2023-12-15T15:35:53.756",
+      "deleted_date": "2023-12-15T15:35:53.756",
+      "start_time": "2023-12-15T15:35:40",
+      "end_time": "2023-12-15T15:50:42",
+      "day_of_week": 4,
+      "doctor": "98513308-5ca7-44d7-b31f-c315245336b6"
+    }
+  },
+  {
+    "model": "schedules.schedule",
+    "pk": "aeba5905-f5ed-4729-8d2d-6797320939e2",
+    "fields": {
+      "state": true,
+      "created_date": "2024-02-12T18:50:21.952",
+      "modified_date": "2024-02-12T20:31:54.979",
+      "deleted_date": "2024-02-12T20:31:54.979",
+      "start_time": "2024-02-15T09:30:00",
+      "end_time": "2024-02-15T10:00:00",
+      "day_of_week": 3,
+      "doctor": "98513308-5ca7-44d7-b31f-c315245336b6"
+    }
+  },
+  {
+    "model": "schedules.schedule",
+    "pk": "cb2b1feb-1e92-4ed8-b5b2-c7c07ac74abc",
+    "fields": {
+      "state": true,
+      "created_date": "2024-02-21T16:12:53.529",
+      "modified_date": "2024-02-21T16:12:53.529",
+      "deleted_date": "2024-02-21T16:12:53.529",
+      "start_time": "2024-02-23T13:30:00",
+      "end_time": "2024-02-23T14:00:00",
+      "day_of_week": 4,
+      "doctor": "98513308-5ca7-44d7-b31f-c315245336b6"
+    }
+  },
+  {
+    "model": "schedules.schedule",
+    "pk": "cd5cfb63-34f1-4e4e-bd66-b5a1babc5042",
+    "fields": {
+      "state": true,
+      "created_date": "2024-02-21T16:12:57.147",
+      "modified_date": "2024-02-21T16:12:57.147",
+      "deleted_date": "2024-02-21T16:12:57.147",
+      "start_time": "2024-02-24T17:00:00",
+      "end_time": "2024-02-24T17:30:00",
+      "day_of_week": 5,
+      "doctor": "98513308-5ca7-44d7-b31f-c315245336b6"
+    }
+  },
+  {
+    "model": "schedules.schedule",
+    "pk": "e2bb37fc-f686-47bf-9852-2b8761519785",
+    "fields": {
+      "state": true,
+      "created_date": "2024-02-14T17:18:34.402",
+      "modified_date": "2024-02-14T17:18:34.402",
+      "deleted_date": "2024-02-14T17:18:34.402",
+      "start_time": "2024-02-14T20:00:00",
+      "end_time": "2024-02-14T20:30:00",
+      "day_of_week": 2,
+      "doctor": "98513308-5ca7-44d7-b31f-c315245336b6"
+    }
+  },
+  {
+    "model": "schedules.schedule",
+    "pk": "e592813a-a203-4277-90f5-00d823bf6f66",
+    "fields": {
+      "state": true,
+      "created_date": "2024-02-17T14:44:36.542",
+      "modified_date": "2024-02-17T14:44:36.542",
+      "deleted_date": "2024-02-17T14:44:36.542",
+      "start_time": "2024-02-27T10:30:00",
+      "end_time": "2024-02-27T11:00:00",
+      "day_of_week": 1,
+      "doctor": "8727f9bc-8580-489f-b2cc-c8a7eb88d553"
+    }
+  },
+  {
+    "model": "schedules.schedule",
+    "pk": "eecfd5a6-bb1e-4512-a63c-d1c222d288d2",
+    "fields": {
+      "state": true,
+      "created_date": "2024-02-21T16:12:51.175",
+      "modified_date": "2024-02-21T16:12:51.175",
+      "deleted_date": "2024-02-21T16:12:51.175",
+      "start_time": "2024-02-23T10:30:00",
+      "end_time": "2024-02-23T11:00:00",
+      "day_of_week": 4,
+      "doctor": "98513308-5ca7-44d7-b31f-c315245336b6"
+    }
+  },
+  {
+    "model": "schedules.schedule",
+    "pk": "fad1108a-6302-4528-8140-d1bf7ac19fd8",
+    "fields": {
+      "state": true,
+      "created_date": "2024-02-14T17:35:46.803",
+      "modified_date": "2024-02-14T17:35:46.803",
+      "deleted_date": "2024-02-14T17:35:46.803",
+      "start_time": "2024-02-14T10:00:00",
+      "end_time": "2024-02-14T10:30:00",
+      "day_of_week": 2,
+      "doctor": "9c260a1c-297a-4a31-9854-21737bf082fb"
+    }
+  },
+  {
+    "model": "schedules.schedule",
+    "pk": "fb9fe856-1d5b-4e4e-8fff-45e60028c381",
+    "fields": {
+      "state": true,
+      "created_date": "2024-02-14T17:34:48.390",
+      "modified_date": "2024-02-14T17:34:48.390",
+      "deleted_date": "2024-02-14T17:34:48.390",
+      "start_time": "2024-02-14T09:00:00",
+      "end_time": "2024-02-14T09:30:00",
+      "day_of_week": 2,
+      "doctor": "9c260a1c-297a-4a31-9854-21737bf082fb"
+    }
+  },
+  {
+    "model": "schedules.schedule",
+    "pk": "fee619b4-c7ed-4f53-b122-f2f9f1069451",
+    "fields": {
+      "state": true,
+      "created_date": "2023-12-05T17:31:21.909",
+      "modified_date": "2023-12-05T17:31:21.909",
+      "deleted_date": "2023-12-05T17:31:21.909",
+      "start_time": "2023-12-07T11:00:00",
+      "end_time": "2023-12-07T11:45:00",
+      "day_of_week": 3,
+      "doctor": "98513308-5ca7-44d7-b31f-c315245336b6"
+    }
+  },
+  {
+    "model": "rooms.room",
+    "pk": "215c3880-88df-4902-af1a-c01687e6dde0",
+    "fields": {
+      "state": true,
+      "created_date": "2024-01-28T17:33:18.394",
+      "modified_date": "2024-01-28T17:33:18.394",
+      "deleted_date": "2024-01-28T17:33:18.394",
+      "name": "Sala 412",
+      "description": "Sala de consultas dermatol�gicas",
+      "type": "Consultas",
+      "location": "Cuarto piso",
+      "capacity": 6,
+      "is_available": true,
+      "department": "d7f482f6-f0b8-4685-9f55-60969d33344c"
+    }
+  },
+  {
+    "model": "rooms.room",
+    "pk": "4e932bed-f1cd-4fce-835c-7438f395f5bf",
+    "fields": {
+      "state": true,
+      "created_date": "2024-01-28T17:35:36.679",
+      "modified_date": "2024-02-13T01:13:26.922",
+      "deleted_date": "2024-02-13T01:13:26.922",
+      "name": "Sala 101",
+      "description": "Sala de cuidados intensivos",
+      "type": "Cuidados Intensivos",
+      "location": "Primer piso",
+      "capacity": 8,
+      "is_available": true,
+      "department": "89e38f9e-3aa1-475b-8af0-c6e8d6bab156"
+    }
+  },
+  {
+    "model": "rooms.room",
+    "pk": "5072cb5d-c190-462d-a943-942e7559d2bd",
+    "fields": {
+      "state": true,
+      "created_date": "2024-01-28T17:35:01.900",
+      "modified_date": "2024-01-28T17:35:01.900",
+      "deleted_date": "2024-01-28T17:35:01.900",
+      "name": "Sala 205",
+      "description": "Sala de cirug�a",
+      "type": "Cirug�a",
+      "location": "Segundo piso",
+      "capacity": 12,
+      "is_available": true,
+      "department": "f8a80b89-387c-4e00-b876-8657007de171"
+    }
+  },
+  {
+    "model": "rooms.room",
+    "pk": "71d1b61e-80ac-4b3e-8949-3fd9c819ec8e",
+    "fields": {
+      "state": true,
+      "created_date": "2024-01-28T17:34:28.004",
+      "modified_date": "2024-01-28T17:34:28.004",
+      "deleted_date": "2024-01-28T17:34:28.004",
+      "name": "Sala 802",
+      "description": "Sala de oncolog�a",
+      "type": "Oncolog�a",
+      "location": "Octavo piso",
+      "capacity": 9,
+      "is_available": true,
+      "department": "3ed3711a-e226-4e8b-a371-c40de1317eff"
+    }
+  },
+  {
+    "model": "rooms.room",
+    "pk": "8d207220-78ea-4a1f-9e7a-54586cecdfde",
+    "fields": {
+      "state": true,
+      "created_date": "2024-01-28T17:32:37.534",
+      "modified_date": "2024-01-28T17:32:37.534",
+      "deleted_date": "2024-01-28T17:32:37.534",
+      "name": "Sala 1001",
+      "description": "Sala de pediatr�a",
+      "type": "Pediatr�a",
+      "location": "D�cimo piso",
+      "capacity": 12,
+      "is_available": true,
+      "department": "1d84422f-ef7e-49d9-b756-62f156dc883a"
+    }
+  },
+  {
+    "model": "rooms.room",
+    "pk": "a8f140fe-f500-4952-9e25-d8fe461b3608",
+    "fields": {
+      "state": false,
+      "created_date": "2024-01-28T17:31:56.103",
+      "modified_date": "2024-01-28T17:31:59.307",
+      "deleted_date": "2024-01-28T17:31:59.307",
+      "name": "Prueba",
+      "description": null,
+      "type": null,
+      "location": "asdfdas",
+      "capacity": null,
+      "is_available": false,
+      "department": "3ed3711a-e226-4e8b-a371-c40de1317eff"
+    }
+  },
+  {
+    "model": "rooms.room",
+    "pk": "c59ff863-9452-4d1b-85be-6e1c82613705",
+    "fields": {
+      "state": true,
+      "created_date": "2024-02-14T17:41:16.543",
+      "modified_date": "2024-02-14T17:41:16.543",
+      "deleted_date": "2024-02-14T17:41:16.543",
+      "name": "Sala 1002",
+      "description": "Sala de pediatr�a",
+      "type": "Pediatr�a",
+      "location": "D�cimo piso",
+      "capacity": 3,
+      "is_available": true,
+      "department": "1d84422f-ef7e-49d9-b756-62f156dc883a"
+    }
+  },
+  {
+    "model": "rooms.room",
+    "pk": "c863266e-d3e2-4e5c-9096-65e8e6c4be77",
+    "fields": {
+      "state": true,
+      "created_date": "2024-01-28T17:33:54.507",
+      "modified_date": "2024-01-28T17:33:54.507",
+      "deleted_date": "2024-01-28T17:33:54.507",
+      "name": "Sala 510",
+      "description": "Sala de ex�menes oftalmol�gicos",
+      "type": "Ex�menes",
+      "location": "Quinto piso",
+      "capacity": 5,
+      "is_available": true,
+      "department": "f8bac9b9-2a37-4e6b-8daa-2e2ba0b4a438"
+    }
+  },
+  {
+    "model": "departments.department",
+    "pk": "1d84422f-ef7e-49d9-b756-62f156dc883a",
+    "fields": {
+      "state": true,
+      "created_date": "2023-12-05T16:38:27.259",
+      "modified_date": "2023-12-05T16:38:27.259",
+      "deleted_date": "2023-12-05T16:38:27.259",
+      "name": "Pediatr�a",
+      "description": "Rama de la medicina que se especializa en la atenci�n m�dica de ni�os y adolescentes."
+    }
+  },
+  {
+    "model": "departments.department",
+    "pk": "3ed3711a-e226-4e8b-a371-c40de1317eff",
+    "fields": {
+      "state": true,
+      "created_date": "2023-12-05T16:38:59.414",
+      "modified_date": "2023-12-06T15:56:36.761",
+      "deleted_date": "2023-12-06T15:56:36.761",
+      "name": "Oncolog�a",
+      "description": "Especialidad m�dica que se ocupa del estudio y tratamiento del c�ncer."
+    }
+  },
+  {
+    "model": "departments.department",
+    "pk": "6babf05f-bba3-46e9-868e-b005ae5ddf22",
+    "fields": {
+      "state": false,
+      "created_date": "2023-12-05T16:39:59.694",
+      "modified_date": "2023-12-05T16:40:49.319",
+      "deleted_date": "2023-12-05T16:40:49.319",
+      "name": "Prueba",
+      "description": null
+    }
+  },
+  {
+    "model": "departments.department",
+    "pk": "89e38f9e-3aa1-475b-8af0-c6e8d6bab156",
+    "fields": {
+      "state": true,
+      "created_date": "2023-12-05T16:38:37.800",
+      "modified_date": "2023-12-09T20:02:50.337",
+      "deleted_date": "2023-12-09T20:02:50.337",
+      "name": "Cardiolog�a",
+      "description": "Especialidad m�dica centrada en el diagn�stico y tratamiento de enfermedades del coraz�n y sistema circulatorio."
+    }
+  },
+  {
+    "model": "departments.department",
+    "pk": "ad19d219-3cb7-4f0d-b95b-bc565d2fa6df",
+    "fields": {
+      "state": false,
+      "created_date": "2023-12-10T20:11:22.037",
+      "modified_date": "2024-02-18T17:32:47.431",
+      "deleted_date": "2024-02-18T17:32:47.431",
+      "name": "Prueba2",
+      "description": null
+    }
+  },
+  {
+    "model": "departments.department",
+    "pk": "d7f482f6-f0b8-4685-9f55-60969d33344c",
+    "fields": {
+      "state": true,
+      "created_date": "2023-12-05T16:38:03.871",
+      "modified_date": "2023-12-05T16:38:03.871",
+      "deleted_date": "2023-12-05T16:38:03.871",
+      "name": "Dermatolog�a",
+      "description": "Rama de la medicina que se ocupa del diagn�stico y tratamiento de enfermedades de la piel, cabello y u�as."
+    }
+  },
+  {
+    "model": "departments.department",
+    "pk": "f8a80b89-387c-4e00-b876-8657007de171",
+    "fields": {
+      "state": true,
+      "created_date": "2023-12-05T16:38:47.075",
+      "modified_date": "2023-12-05T16:38:47.075",
+      "deleted_date": "2023-12-05T16:38:47.075",
+      "name": "Neurolog�a",
+      "description": "Especialidad m�dica dedicada al estudio y tratamiento de trastornos del sistema nervioso."
+    }
+  },
+  {
+    "model": "departments.department",
+    "pk": "f8bac9b9-2a37-4e6b-8daa-2e2ba0b4a438",
+    "fields": {
+      "state": true,
+      "created_date": "2023-12-05T16:38:14.989",
+      "modified_date": "2023-12-05T16:38:14.989",
+      "deleted_date": "2023-12-05T16:38:14.989",
+      "name": "Oftalmolog�a",
+      "description": "Especialidad m�dica dedicada al estudio y tratamiento de enfermedades relacionadas con los ojos y la vista."
+    }
+  },
+  {
+    "model": "appointments.appointment",
+    "pk": "072eea93-7266-4b2e-b503-eb43c390778e",
+    "fields": {
+      "state": true,
+      "created_date": "2023-12-16T15:25:42.447",
+      "modified_date": "2024-02-05T18:59:21.841",
+      "deleted_date": "2024-02-05T18:59:21.841",
+      "status": "in_progress",
+      "type": "consultation",
+      "reason": "Dolor de cabeza",
+      "observations": "",
+      "duration": null,
+      "time_patient_arrived": "2024-02-05T18:59:21.841",
+      "end_time": null,
+      "request_date": "2023-12-01T15:25:42.447",
+      "priority": 3,
+      "patient": "07810ff1-c644-4dca-8faf-bea7f5d3ba79",
+      "room": "8d207220-78ea-4a1f-9e7a-54586cecdfde",
+      "doctor": "98513308-5ca7-44d7-b31f-c315245336b6",
+      "specialty": "a2c49054-641b-4f28-8fd7-e80bbf8d72e7",
+      "schedule": "1c454c08-c9e6-4174-bc18-606bab2f3761"
+    }
+  },
+  {
+    "model": "appointments.appointment",
+    "pk": "29356394-1a02-410e-9cc3-6e6469728114",
+    "fields": {
+      "state": true,
+      "created_date": "2024-02-05T16:36:45.223",
+      "modified_date": "2024-02-05T16:36:45.223",
+      "deleted_date": "2024-02-05T16:36:45.223",
+      "status": "pending",
+      "type": "surgery",
+      "reason": "Operaci�n de vista",
+      "observations": null,
+      "duration": null,
+      "time_patient_arrived": null,
+      "end_time": null,
+      "request_date": "2024-02-05T16:36:45.223",
+      "priority": null,
+      "patient": "47c46c73-d510-4627-b886-84f4d57e0532",
+      "room": null,
+      "doctor": null,
+      "specialty": "f4af6ec3-2de6-4ce3-926c-8b1df61ca898",
+      "schedule": null
+    }
+  },
+  {
+    "model": "appointments.appointment",
+    "pk": "2eba8881-2d3c-41e9-9631-2b372f02731f",
+    "fields": {
+      "state": true,
+      "created_date": "2023-12-05T17:33:59.520",
+      "modified_date": "2024-02-22T05:55:46.987",
+      "deleted_date": "2024-02-22T05:55:46.987",
+      "status": "completed",
+      "type": "consultation",
+      "reason": "Dolor de cabeza constante",
+      "observations": "La paciente entra visiblemente mareada",
+      "duration": 113059,
+      "time_patient_arrived": "2023-12-05T17:35:21",
+      "end_time": "2023-12-05T17:55:21",
+      "request_date": "2023-12-05T17:32:48",
+      "priority": 1,
+      "patient": "ccafa0fa-2000-4345-bc94-96faa681ac85",
+      "room": "8d207220-78ea-4a1f-9e7a-54586cecdfde",
+      "doctor": "98513308-5ca7-44d7-b31f-c315245336b6",
+      "specialty": "a2c49054-641b-4f28-8fd7-e80bbf8d72e7",
+      "schedule": "9214651c-b32f-4fc0-8602-a8fee83128e5"
+    }
+  },
+  {
+    "model": "appointments.appointment",
+    "pk": "3489857a-3354-475e-88d7-4bccc69cf7db",
+    "fields": {
+      "state": true,
+      "created_date": "2024-02-05T16:31:18.954",
+      "modified_date": "2024-02-05T16:31:18.954",
+      "deleted_date": "2024-02-05T16:31:18.954",
+      "status": "completed",
+      "type": "consultation",
+      "reason": "Dolor de cabeza",
+      "observations": "Paciente bastante afectado",
+      "duration": null,
+      "time_patient_arrived": "2024-02-02T17:01:30",
+      "end_time": "2024-02-02T17:10:00",
+      "request_date": "2024-01-24T16:31:18.954",
+      "priority": 3,
+      "patient": "47c46c73-d510-4627-b886-84f4d57e0532",
+      "room": "8d207220-78ea-4a1f-9e7a-54586cecdfde",
+      "doctor": "139919c4-951f-4f1e-a7c4-62374a20b0c0",
+      "specialty": "a2c49054-641b-4f28-8fd7-e80bbf8d72e7",
+      "schedule": "1aae610a-c652-4476-ba34-b3b46b491197"
+    }
+  },
+  {
+    "model": "appointments.appointment",
+    "pk": "3fff86ee-d888-4350-aa39-d722a3b2c461",
+    "fields": {
+      "state": true,
+      "created_date": "2024-02-05T16:40:54.842",
+      "modified_date": "2024-02-05T18:57:14.183",
+      "deleted_date": "2024-02-05T18:57:14.183",
+      "status": "cancelled",
+      "type": "other",
+      "reason": "Urgencia corte en el brazo",
+      "observations": "",
+      "duration": null,
+      "time_patient_arrived": null,
+      "end_time": null,
+      "request_date": "2024-02-05T16:40:54.842",
+      "priority": null,
+      "patient": "47c46c73-d510-4627-b886-84f4d57e0532",
+      "room": null,
+      "doctor": "8727f9bc-8580-489f-b2cc-c8a7eb88d553",
+      "specialty": "f436cc0d-327c-4ab0-8828-ce3c1b35418c",
+      "schedule": null
+    }
+  },
+  {
+    "model": "appointments.appointment",
+    "pk": "4dd2fde1-c7b4-47d8-a98c-c8de79b417d2",
+    "fields": {
+      "state": true,
+      "created_date": "2023-12-05T19:35:17.634",
+      "modified_date": "2024-02-12T18:45:21.290",
+      "deleted_date": "2024-02-12T18:45:21.290",
+      "status": "scheduled",
+      "type": "other",
+      "reason": "Pierna rota",
+      "observations": "",
+      "duration": null,
+      "time_patient_arrived": null,
+      "end_time": null,
+      "request_date": "2023-12-05T19:34:54",
+      "priority": 2,
+      "patient": "daa95420-2ee5-4e8f-8888-a0ccea2dc032",
+      "room": "8d207220-78ea-4a1f-9e7a-54586cecdfde",
+      "doctor": "98513308-5ca7-44d7-b31f-c315245336b6",
+      "specialty": "a2c49054-641b-4f28-8fd7-e80bbf8d72e7",
+      "schedule": "fee619b4-c7ed-4f53-b122-f2f9f1069451"
+    }
+  },
+  {
+    "model": "appointments.appointment",
+    "pk": "4e9aaa84-7e56-463d-ba45-b9bb4dadf9f2",
+    "fields": {
+      "state": true,
+      "created_date": "2023-12-15T15:37:26.612",
+      "modified_date": "2024-02-05T18:58:05.985",
+      "deleted_date": "2024-02-05T18:58:05.985",
+      "status": "scheduled",
+      "type": "procedure",
+      "reason": "Acn�",
+      "observations": "",
+      "duration": null,
+      "time_patient_arrived": null,
+      "end_time": null,
+      "request_date": "2023-12-15T15:37:26.612",
+      "priority": 3,
+      "patient": "daa95420-2ee5-4e8f-8888-a0ccea2dc032",
+      "room": "215c3880-88df-4902-af1a-c01687e6dde0",
+      "doctor": "98513308-5ca7-44d7-b31f-c315245336b6",
+      "specialty": "d37a0a9c-e961-4620-9c01-b8a7d10f4138",
+      "schedule": "ad59b3c5-b402-4fd5-a273-db58c2247581"
+    }
+  },
+  {
+    "model": "appointments.appointment",
+    "pk": "63cfb742-8b1a-4856-992d-b6013d7c758c",
+    "fields": {
+      "state": true,
+      "created_date": "2024-02-05T16:36:02.957",
+      "modified_date": "2024-02-05T16:36:02.957",
+      "deleted_date": "2024-02-05T16:36:02.957",
+      "status": "scheduled",
+      "type": "checkup",
+      "reason": "Revisi�n rodilla",
+      "observations": "",
+      "duration": null,
+      "time_patient_arrived": null,
+      "end_time": null,
+      "request_date": "2024-02-05T16:36:02.957",
+      "priority": 2,
+      "patient": "47c46c73-d510-4627-b886-84f4d57e0532",
+      "room": "8d207220-78ea-4a1f-9e7a-54586cecdfde",
+      "doctor": "d24f9519-be9e-4312-905d-238d829d3511",
+      "specialty": "a2c49054-641b-4f28-8fd7-e80bbf8d72e7",
+      "schedule": "51c90386-7c45-4c41-b8a6-ba215080ff39"
+    }
+  },
+  {
+    "model": "appointments.appointment",
+    "pk": "6e6be4b5-7f1a-42cf-98bd-3ea89a29ec40",
+    "fields": {
+      "state": true,
+      "created_date": "2023-12-15T18:36:38.165",
+      "modified_date": "2023-12-15T18:42:20.867",
+      "deleted_date": "2023-12-15T18:42:20.867",
+      "status": "completed",
+      "type": "surgery",
+      "reason": "Operaci�n de vista",
+      "observations": "",
+      "duration": null,
+      "time_patient_arrived": "2023-11-15T17:33:00",
+      "end_time": "2023-11-15T18:45:00",
+      "request_date": "2023-11-01T18:36:38.165",
+      "priority": 1,
+      "patient": "09f55645-1103-4780-b86b-321839deed6d",
+      "room": "c863266e-d3e2-4e5c-9096-65e8e6c4be77",
+      "doctor": "98513308-5ca7-44d7-b31f-c315245336b6",
+      "specialty": "f4af6ec3-2de6-4ce3-926c-8b1df61ca898",
+      "schedule": "1fed16a6-286a-41bc-85bf-5b467b57a975"
+    }
+  },
+  {
+    "model": "appointments.appointment",
+    "pk": "78453dd7-5274-46c5-8ed7-e62396c4ff57",
+    "fields": {
+      "state": true,
+      "created_date": "2024-02-05T16:33:28.880",
+      "modified_date": "2024-02-05T16:33:28.880",
+      "deleted_date": "2024-02-05T16:33:28.880",
+      "status": "pending",
+      "type": "procedure",
+      "reason": "Manchas en la piel",
+      "observations": null,
+      "duration": null,
+      "time_patient_arrived": null,
+      "end_time": null,
+      "request_date": "2024-02-05T16:33:28.881",
+      "priority": null,
+      "patient": "47c46c73-d510-4627-b886-84f4d57e0532",
+      "room": null,
+      "doctor": null,
+      "specialty": "d37a0a9c-e961-4620-9c01-b8a7d10f4138",
+      "schedule": null
+    }
+  },
+  {
+    "model": "appointments.appointment",
+    "pk": "79f84434-87ca-45b6-96a8-81498c7e8dc9",
+    "fields": {
+      "state": true,
+      "created_date": "2023-12-16T15:25:42.369",
+      "modified_date": "2024-02-13T00:24:41.609",
+      "deleted_date": "2024-02-13T00:24:41.609",
+      "status": "completed",
+      "type": "consultation",
+      "reason": "Dolor de cabeza",
+      "observations": "",
+      "duration": null,
+      "time_patient_arrived": "2024-01-12T02:18:05",
+      "end_time": "2024-01-12T02:28:51",
+      "request_date": "2023-12-16T15:25:42.369",
+      "priority": 3,
+      "patient": "07810ff1-c644-4dca-8faf-bea7f5d3ba79",
+      "room": "8d207220-78ea-4a1f-9e7a-54586cecdfde",
+      "doctor": "98513308-5ca7-44d7-b31f-c315245336b6",
+      "specialty": "a2c49054-641b-4f28-8fd7-e80bbf8d72e7",
+      "schedule": "5f7986c4-e74a-4104-81e1-155a65c3af60"
+    }
+  },
+  {
+    "model": "appointments.appointment",
+    "pk": "7c5fb602-452a-42f5-bdc2-388dffbc3a77",
+    "fields": {
+      "state": true,
+      "created_date": "2023-12-05T17:37:01.175",
+      "modified_date": "2023-12-05T17:37:01.175",
+      "deleted_date": "2023-12-05T17:37:01.175",
+      "status": "completed",
+      "type": "checkup",
+      "reason": "Revisi�n de la vista",
+      "observations": "",
+      "duration": null,
+      "time_patient_arrived": "2023-12-05T17:36:15",
+      "end_time": "2023-12-05T17:44:00",
+      "request_date": "2023-12-01T18:01:00",
+      "priority": 3,
+      "patient": "07810ff1-c644-4dca-8faf-bea7f5d3ba79",
+      "room": "c863266e-d3e2-4e5c-9096-65e8e6c4be77",
+      "doctor": "98513308-5ca7-44d7-b31f-c315245336b6",
+      "specialty": "f4af6ec3-2de6-4ce3-926c-8b1df61ca898",
+      "schedule": "479973d8-6fa7-48ba-9fa3-3cbc63f27ce9"
+    }
+  },
+  {
+    "model": "appointments.appointment",
+    "pk": "7e9ce355-68a0-4800-a0fa-a57f461e8368",
+    "fields": {
+      "state": true,
+      "created_date": "2024-02-17T14:46:00.564",
+      "modified_date": "2024-02-22T05:52:54.815",
+      "deleted_date": "2024-02-22T05:52:54.815",
+      "status": "cancelled",
+      "type": "consultation",
+      "reason": "hfgjfghjj",
+      "observations": null,
+      "duration": null,
+      "time_patient_arrived": null,
+      "end_time": null,
+      "request_date": "2024-02-17T14:46:00.565",
+      "priority": null,
+      "patient": "ccafa0fa-2000-4345-bc94-96faa681ac85",
+      "room": "215c3880-88df-4902-af1a-c01687e6dde0",
+      "doctor": "8727f9bc-8580-489f-b2cc-c8a7eb88d553",
+      "specialty": "d37a0a9c-e961-4620-9c01-b8a7d10f4138",
+      "schedule": "5604722e-926b-4fde-a854-f0ef0623c321"
+    }
+  },
+  {
+    "model": "appointments.appointment",
+    "pk": "8241cbc9-ffa5-42eb-979f-61c14ad484c1",
+    "fields": {
+      "state": true,
+      "created_date": "2023-12-09T19:46:39.134",
+      "modified_date": "2023-12-09T19:46:39.134",
+      "deleted_date": "2023-12-09T19:46:39.134",
+      "status": "pending",
+      "type": "consultation",
+      "reason": "",
+      "observations": "",
+      "duration": null,
+      "time_patient_arrived": null,
+      "end_time": null,
+      "request_date": "2023-12-09T19:46:39.134",
+      "priority": null,
+      "patient": "07810ff1-c644-4dca-8faf-bea7f5d3ba79",
+      "room": null,
+      "doctor": null,
+      "specialty": "f4af6ec3-2de6-4ce3-926c-8b1df61ca898",
+      "schedule": null
+    }
+  },
+  {
+    "model": "appointments.appointment",
+    "pk": "becaf3f4-cf29-445b-8d77-f211020c5b82",
+    "fields": {
+      "state": true,
+      "created_date": "2023-12-18T13:16:44.683",
+      "modified_date": "2023-12-18T13:16:44.683",
+      "deleted_date": "2023-12-18T13:16:44.683",
+      "status": "rescheduled",
+      "type": "consultation",
+      "reason": "Picor en el cuello",
+      "observations": "",
+      "duration": null,
+      "time_patient_arrived": null,
+      "end_time": null,
+      "request_date": "2023-12-02T13:16:44.683",
+      "priority": 3,
+      "patient": "daa95420-2ee5-4e8f-8888-a0ccea2dc032",
+      "room": "8d207220-78ea-4a1f-9e7a-54586cecdfde",
+      "doctor": "98513308-5ca7-44d7-b31f-c315245336b6",
+      "specialty": "a2c49054-641b-4f28-8fd7-e80bbf8d72e7",
+      "schedule": "47405cab-3ac4-4c69-8682-281fbffb6584"
+    }
+  },
+  {
+    "model": "appointments.appointment",
+    "pk": "c9cd3070-3c3f-4a67-9c3a-353c6ac92af2",
+    "fields": {
+      "state": true,
+      "created_date": "2023-12-15T15:56:18.537",
+      "modified_date": "2024-01-22T18:23:30.994",
+      "deleted_date": "2024-01-22T18:23:30.994",
+      "status": "in_progress",
+      "type": "checkup",
+      "reason": "Revisi�n escayola",
+      "observations": "",
+      "duration": null,
+      "time_patient_arrived": "2024-01-22T18:23:30.994",
+      "end_time": null,
+      "request_date": "2023-12-15T15:56:18.537",
+      "priority": 2,
+      "patient": "56a49b8f-2cdc-42b4-a323-47764cd10e39",
+      "room": "8d207220-78ea-4a1f-9e7a-54586cecdfde",
+      "doctor": "98513308-5ca7-44d7-b31f-c315245336b6",
+      "specialty": "a2c49054-641b-4f28-8fd7-e80bbf8d72e7",
+      "schedule": "a92f1385-c2ef-4d51-94ab-5cf0a36c9b65"
+    }
+  },
+  {
+    "model": "appointments.appointment",
+    "pk": "d8901a8c-2a6d-4ed8-afe6-75103aae5b29",
+    "fields": {
+      "state": true,
+      "created_date": "2024-02-15T02:16:27.182",
+      "modified_date": "2024-02-22T05:52:44.722",
+      "deleted_date": "2024-02-22T05:52:44.722",
+      "status": "cancelled",
+      "type": "consultation",
+      "reason": "Manchas",
+      "observations": null,
+      "duration": null,
+      "time_patient_arrived": null,
+      "end_time": null,
+      "request_date": "2024-02-15T02:16:27.182",
+      "priority": null,
+      "patient": "ccafa0fa-2000-4345-bc94-96faa681ac85",
+      "room": "215c3880-88df-4902-af1a-c01687e6dde0",
+      "doctor": "778c25f8-e075-43f3-8560-d6b1940ad57d",
+      "specialty": "d37a0a9c-e961-4620-9c01-b8a7d10f4138",
+      "schedule": "260f231c-d190-4700-99ae-aae1163751d5"
+    }
+  },
+  {
+    "model": "appointments.appointment",
+    "pk": "e50c24a7-9513-4c44-b908-7dc9eb786ad0",
+    "fields": {
+      "state": true,
+      "created_date": "2024-02-15T02:14:51.552",
+      "modified_date": "2024-02-21T16:16:32.855",
+      "deleted_date": "2024-02-21T16:16:32.855",
+      "status": "cancelled",
+      "type": "consultation",
+      "reason": "Caida de pelo",
+      "observations": null,
+      "duration": null,
+      "time_patient_arrived": null,
+      "end_time": null,
+      "request_date": "2024-02-15T02:14:51.552",
+      "priority": null,
+      "patient": "ccafa0fa-2000-4345-bc94-96faa681ac85",
+      "room": "215c3880-88df-4902-af1a-c01687e6dde0",
+      "doctor": "98513308-5ca7-44d7-b31f-c315245336b6",
+      "specialty": "d37a0a9c-e961-4620-9c01-b8a7d10f4138",
+      "schedule": "1daaa6d3-7084-4e00-80c5-53e37419e7b3"
+    }
+  },
+  {
+    "model": "appointments.appointment",
+    "pk": "fb884e41-8fd4-4ad6-a90d-dcbd8a44a234",
+    "fields": {
+      "state": true,
+      "created_date": "2024-02-22T15:02:08.362",
+      "modified_date": "2024-02-22T15:02:08.721",
+      "deleted_date": "2024-02-22T15:02:08.721",
+      "status": "scheduled",
+      "type": "consultation",
+      "reason": "sadsadsadsad",
+      "observations": null,
+      "duration": null,
+      "time_patient_arrived": null,
+      "end_time": null,
+      "request_date": "2024-02-22T15:02:08.362",
+      "priority": null,
+      "patient": "ccafa0fa-2000-4345-bc94-96faa681ac85",
+      "room": "215c3880-88df-4902-af1a-c01687e6dde0",
+      "doctor": "98513308-5ca7-44d7-b31f-c315245336b6",
+      "specialty": "d37a0a9c-e961-4620-9c01-b8a7d10f4138",
+      "schedule": "eecfd5a6-bb1e-4512-a63c-d1c222d288d2"
+    }
+  },
+  {
+    "model": "treatments.treatment",
+    "pk": "0c2f1a0c-1fbc-411c-9e23-c62a9bea6506",
+    "fields": {
+      "state": false,
+      "created_date": "2023-12-05T17:57:53.851",
+      "modified_date": "2024-01-17T19:25:39.914",
+      "deleted_date": "2024-01-17T19:25:39.914",
+      "status": "in_progress",
+      "description": "Tomar pastillas21324",
+      "duration": "2 semanas",
+      "start_date": "2023-12-02T23:00:00",
+      "end_date": null,
+      "comments": "No exceder frecuencia",
+      "application_frequency": "Cada 8 horas",
+      "recommended_dosage": "20mg",
+      "doctor": "98513308-5ca7-44d7-b31f-c315245336b6",
+      "patient": "ccafa0fa-2000-4345-bc94-96faa681ac85",
+      "appointment": "2eba8881-2d3c-41e9-9631-2b372f02731f"
+    }
+  },
+  {
+    "model": "treatments.treatment",
+    "pk": "24a4e22f-be80-4c13-be8d-83df74ae7a8e",
+    "fields": {
+      "state": true,
+      "created_date": "2023-12-05T17:57:56.786",
+      "modified_date": "2024-01-18T01:23:47.598",
+      "deleted_date": "2024-01-18T01:23:47.598",
+      "status": "in_progress",
+      "description": "Tomar pastillas",
+      "duration": "2 semanas",
+      "start_date": "2023-12-02T23:00:00",
+      "end_date": null,
+      "comments": null,
+      "application_frequency": "Cada 8 horas",
+      "recommended_dosage": "20mg",
+      "doctor": "98513308-5ca7-44d7-b31f-c315245336b6",
+      "patient": "ccafa0fa-2000-4345-bc94-96faa681ac85",
+      "appointment": "2eba8881-2d3c-41e9-9631-2b372f02731f"
+    }
+  },
+  {
+    "model": "treatments.treatment",
+    "pk": "2d0f51e6-9299-494e-86ff-b66d59fca8f9",
+    "fields": {
+      "state": true,
+      "created_date": "2023-12-05T17:57:56.225",
+      "modified_date": "2024-02-05T19:13:11.798",
+      "deleted_date": "2024-02-05T19:13:11.798",
+      "status": "in_progress",
+      "description": "Tomar pastillas",
+      "duration": "2 semanas",
+      "start_date": "2023-12-29T23:00:00",
+      "end_date": null,
+      "comments": "No exceder frecuenciaa",
+      "application_frequency": "Cada 8 horas",
+      "recommended_dosage": "20mg",
+      "doctor": "98513308-5ca7-44d7-b31f-c315245336b6",
+      "patient": "ccafa0fa-2000-4345-bc94-96faa681ac85",
+      "appointment": "2eba8881-2d3c-41e9-9631-2b372f02731f"
+    }
+  },
+  {
+    "model": "treatments.treatment",
+    "pk": "3e55f4e0-6b28-4bfc-a020-0b5fa0d92ccb",
+    "fields": {
+      "state": true,
+      "created_date": "2023-12-05T17:50:13.184",
+      "modified_date": "2023-12-05T17:50:13.184",
+      "deleted_date": "2023-12-05T17:50:13.184",
+      "status": "in_progress",
+      "description": "Tomar pastillas",
+      "duration": "7 d�as",
+      "start_date": "2023-12-05T23:00:00",
+      "end_date": null,
+      "comments": null,
+      "application_frequency": "Cada 8 horas",
+      "recommended_dosage": "10mg",
+      "doctor": "98513308-5ca7-44d7-b31f-c315245336b6",
+      "patient": "07810ff1-c644-4dca-8faf-bea7f5d3ba79",
+      "appointment": "7c5fb602-452a-42f5-bdc2-388dffbc3a77"
+    }
+  },
+  {
+    "model": "treatments.treatment",
+    "pk": "4c4bfaf6-6c37-489b-8721-9f2f998ecf73",
+    "fields": {
+      "state": true,
+      "created_date": "2023-12-05T17:57:53.261",
+      "modified_date": "2024-02-24T16:52:24.873",
+      "deleted_date": "2024-02-24T16:52:24.873",
+      "status": "completed",
+      "description": "Tomar pastillas",
+      "duration": "2 semanas",
+      "start_date": "2023-12-02T23:00:00",
+      "end_date": "2024-02-24T16:52:24.870",
+      "comments": "No exceder frecuencia",
+      "application_frequency": "Cada 8 horas",
+      "recommended_dosage": "20mg",
+      "doctor": "98513308-5ca7-44d7-b31f-c315245336b6",
+      "patient": "ccafa0fa-2000-4345-bc94-96faa681ac85",
+      "appointment": "2eba8881-2d3c-41e9-9631-2b372f02731f"
+    }
+  },
+  {
+    "model": "treatments.treatment",
+    "pk": "5036dd96-f521-41a4-b053-f833d9856ea3",
+    "fields": {
+      "state": true,
+      "created_date": "2023-12-05T17:57:50.237",
+      "modified_date": "2023-12-05T17:57:50.237",
+      "deleted_date": "2023-12-05T17:57:50.237",
+      "status": "in_progress",
+      "description": "Tomar pastillas",
+      "duration": "2 semanas",
+      "start_date": "2023-12-02T23:00:00",
+      "end_date": null,
+      "comments": "No exceder frecuencia",
+      "application_frequency": "Cada 8 horas",
+      "recommended_dosage": "20mg",
+      "doctor": "98513308-5ca7-44d7-b31f-c315245336b6",
+      "patient": "ccafa0fa-2000-4345-bc94-96faa681ac85",
+      "appointment": "2eba8881-2d3c-41e9-9631-2b372f02731f"
+    }
+  },
+  {
+    "model": "treatments.treatment",
+    "pk": "559413ca-6844-4942-94a8-7ebdc3f1637a",
+    "fields": {
+      "state": true,
+      "created_date": "2023-12-05T17:57:55.667",
+      "modified_date": "2024-01-17T20:04:15.496",
+      "deleted_date": "2024-01-17T20:04:15.496",
+      "status": "in_progress",
+      "description": "Tomar pastillas",
+      "duration": "2 semanas",
+      "start_date": "2023-12-26T23:00:00",
+      "end_date": null,
+      "comments": "No exceder frecuencia",
+      "application_frequency": "Cada 8 horas",
+      "recommended_dosage": "20mg",
+      "doctor": "98513308-5ca7-44d7-b31f-c315245336b6",
+      "patient": "ccafa0fa-2000-4345-bc94-96faa681ac85",
+      "appointment": "2eba8881-2d3c-41e9-9631-2b372f02731f"
+    }
+  },
+  {
+    "model": "treatments.treatment",
+    "pk": "55fee744-21e2-454c-a26e-512c0bb99ca4",
+    "fields": {
+      "state": true,
+      "created_date": "2023-12-05T17:57:54.470",
+      "modified_date": "2023-12-05T17:57:54.470",
+      "deleted_date": "2023-12-05T17:57:54.470",
+      "status": "in_progress",
+      "description": "Tomar pastillas",
+      "duration": "2 semanas",
+      "start_date": "2023-12-02T23:00:00",
+      "end_date": null,
+      "comments": "No exceder frecuencia",
+      "application_frequency": "Cada 8 horas",
+      "recommended_dosage": "20mg",
+      "doctor": "98513308-5ca7-44d7-b31f-c315245336b6",
+      "patient": "ccafa0fa-2000-4345-bc94-96faa681ac85",
+      "appointment": "2eba8881-2d3c-41e9-9631-2b372f02731f"
+    }
+  },
+  {
+    "model": "treatments.treatment",
+    "pk": "8241c6b8-cc08-4dd0-8620-d98583d9aa8f",
+    "fields": {
+      "state": true,
+      "created_date": "2023-12-05T17:57:52.669",
+      "modified_date": "2023-12-05T17:57:52.669",
+      "deleted_date": "2023-12-05T17:57:52.669",
+      "status": "in_progress",
+      "description": "Tomar pastillas",
+      "duration": "2 semanas",
+      "start_date": "2023-12-02T23:00:00",
+      "end_date": null,
+      "comments": "No exceder frecuencia",
+      "application_frequency": "Cada 8 horas",
+      "recommended_dosage": "20mg",
+      "doctor": "98513308-5ca7-44d7-b31f-c315245336b6",
+      "patient": "ccafa0fa-2000-4345-bc94-96faa681ac85",
+      "appointment": "2eba8881-2d3c-41e9-9631-2b372f02731f"
+    }
+  },
+  {
+    "model": "treatments.treatment",
+    "pk": "85b23e8e-70b3-4c42-b40b-9411c927ce47",
+    "fields": {
+      "state": true,
+      "created_date": "2024-01-30T19:58:03.536",
+      "modified_date": "2024-01-30T19:58:03.536",
+      "deleted_date": "2024-01-30T19:58:03.536",
+      "status": "in_progress",
+      "description": "Prueba",
+      "duration": "2 d�as",
+      "start_date": "2024-01-30T23:00:00",
+      "end_date": null,
+      "comments": null,
+      "application_frequency": null,
+      "recommended_dosage": null,
+      "doctor": "98513308-5ca7-44d7-b31f-c315245336b6",
+      "patient": "daa95420-2ee5-4e8f-8888-a0ccea2dc032",
+      "appointment": "4e9aaa84-7e56-463d-ba45-b9bb4dadf9f2"
+    }
+  },
+  {
+    "model": "treatments.treatment",
+    "pk": "e0f31f09-5b3d-4f80-af8c-139fef4ae1ac",
+    "fields": {
+      "state": true,
+      "created_date": "2023-12-10T20:19:26.270",
+      "modified_date": "2024-01-17T20:05:26.127",
+      "deleted_date": "2024-01-17T20:05:26.127",
+      "status": "in_progress",
+      "description": "sasasddsadd",
+      "duration": "sadsad",
+      "start_date": "2023-12-09T23:00:00",
+      "end_date": null,
+      "comments": null,
+      "application_frequency": null,
+      "recommended_dosage": null,
+      "doctor": "98513308-5ca7-44d7-b31f-c315245336b6",
+      "patient": "ccafa0fa-2000-4345-bc94-96faa681ac85",
+      "appointment": "2eba8881-2d3c-41e9-9631-2b372f02731f"
+    }
+  },
+  {
+    "model": "treatments.treatment",
+    "pk": "e66a2d6e-ae8d-4dbc-8cdf-241eb5c96064",
+    "fields": {
+      "state": true,
+      "created_date": "2023-12-05T17:57:55.030",
+      "modified_date": "2024-01-17T19:58:49.519",
+      "deleted_date": "2024-01-17T19:58:49.519",
+      "status": "in_progress",
+      "description": "Tomar pastillas",
+      "duration": "2 semanas",
+      "start_date": "2023-12-02T23:00:00",
+      "end_date": null,
+      "comments": "No exceder frecuencia",
+      "application_frequency": "Cada 8 horas",
+      "recommended_dosage": "20mg",
+      "doctor": "98513308-5ca7-44d7-b31f-c315245336b6",
+      "patient": "ccafa0fa-2000-4345-bc94-96faa681ac85",
+      "appointment": "2eba8881-2d3c-41e9-9631-2b372f02731f"
+    }
+  },
+  {
+    "model": "treatments.treatment",
+    "pk": "ebd57ecc-af8e-4e89-a13d-6291c2b25fb9",
+    "fields": {
+      "state": true,
+      "created_date": "2024-02-05T16:38:18.903",
+      "modified_date": "2024-02-05T19:19:39.220",
+      "deleted_date": "2024-02-05T19:19:39.220",
+      "status": "interrupted",
+      "description": "Tomar pastillas",
+      "duration": "1 semana",
+      "start_date": "2024-02-03T11:00:00",
+      "end_date": null,
+      "comments": "",
+      "application_frequency": "8 horas",
+      "recommended_dosage": "10mg",
+      "doctor": "139919c4-951f-4f1e-a7c4-62374a20b0c0",
+      "patient": "47c46c73-d510-4627-b886-84f4d57e0532",
+      "appointment": "3489857a-3354-475e-88d7-4bccc69cf7db"
+    }
+  },
+  {
+    "model": "medicaltests.medicaltest",
+    "pk": "14ba98c0-4075-4721-a505-f535d360de9c",
+    "fields": {
+      "state": true,
+      "created_date": "2024-01-31T18:01:20.740",
+      "modified_date": "2024-01-31T18:23:15.780",
+      "deleted_date": "2024-01-31T18:23:15.780",
+      "name": "Radiograf�a",
+      "description": "Descripci�n de la prueba",
+      "date_prescribed": "2024-01-31T18:01:20.740",
+      "result": "Resultado asdhsajhfjds",
+      "is_completed": true,
+      "doctor": "98513308-5ca7-44d7-b31f-c315245336b6",
+      "patient": "ccafa0fa-2000-4345-bc94-96faa681ac85",
+      "appointment": "2eba8881-2d3c-41e9-9631-2b372f02731f"
+    }
+  },
+  {
+    "model": "medicaltests.medicaltest",
+    "pk": "20616d00-bab3-40cc-afe1-603d7a292162",
+    "fields": {
+      "state": true,
+      "created_date": "2024-02-05T19:30:30.596",
+      "modified_date": "2024-02-06T14:16:18.449",
+      "deleted_date": "2024-02-06T14:16:18.449",
+      "name": "retret",
+      "description": "",
+      "date_prescribed": "2024-02-05T19:30:30.596",
+      "result": "",
+      "is_completed": false,
+      "doctor": "98513308-5ca7-44d7-b31f-c315245336b6",
+      "patient": "ccafa0fa-2000-4345-bc94-96faa681ac85",
+      "appointment": "2eba8881-2d3c-41e9-9631-2b372f02731f"
+    }
+  },
+  {
+    "model": "medicaltests.medicaltest",
+    "pk": "2940a581-232d-4710-b54e-0f174365d0ad",
+    "fields": {
+      "state": false,
+      "created_date": "2024-02-23T22:26:57.574",
+      "modified_date": "2024-02-23T22:27:04.209",
+      "deleted_date": "2024-02-23T22:27:04.209",
+      "name": "dsfdsf",
+      "description": "dsfd",
+      "date_prescribed": "2024-02-23T22:26:57.574",
+      "result": null,
+      "is_completed": false,
+      "doctor": "98513308-5ca7-44d7-b31f-c315245336b6",
+      "patient": "daa95420-2ee5-4e8f-8888-a0ccea2dc032",
+      "appointment": "4e9aaa84-7e56-463d-ba45-b9bb4dadf9f2"
+    }
+  },
+  {
+    "model": "medicaltests.medicaltest",
+    "pk": "39eca4a3-c845-4087-9ff9-31e3269ba9fb",
+    "fields": {
+      "state": true,
+      "created_date": "2024-02-05T16:39:14.587",
+      "modified_date": "2024-02-05T16:40:28.267",
+      "deleted_date": "2024-02-05T16:40:28.267",
+      "name": "Anal�tica",
+      "description": "Descripci�n de la anal�tica",
+      "date_prescribed": "2024-02-05T16:39:14.587",
+      "result": "Anal�tica correcta",
+      "is_completed": true,
+      "doctor": "139919c4-951f-4f1e-a7c4-62374a20b0c0",
+      "patient": "47c46c73-d510-4627-b886-84f4d57e0532",
+      "appointment": "3489857a-3354-475e-88d7-4bccc69cf7db"
+    }
+  },
+  {
+    "model": "medicaltests.medicaltest",
+    "pk": "72d1d298-33ef-4ff2-86a1-b252301edfaa",
+    "fields": {
+      "state": true,
+      "created_date": "2024-01-31T18:01:01.874",
+      "modified_date": "2024-01-31T18:01:01.874",
+      "deleted_date": "2024-01-31T18:01:01.874",
+      "name": "Prueba",
+      "description": "Descripci�n de la prueba",
+      "date_prescribed": "2024-01-31T18:01:01.874",
+      "result": null,
+      "is_completed": false,
+      "doctor": "98513308-5ca7-44d7-b31f-c315245336b6",
+      "patient": "56a49b8f-2cdc-42b4-a323-47764cd10e39",
+      "appointment": null
+    }
+  },
+  {
+    "model": "medicaltests.medicaltest",
+    "pk": "7fa0721e-d67f-4b91-9184-c54f23284338",
+    "fields": {
+      "state": true,
+      "created_date": "2024-02-02T17:19:06.553",
+      "modified_date": "2024-02-02T17:19:06.553",
+      "deleted_date": "2024-02-02T17:19:06.553",
+      "name": "Prueba",
+      "description": null,
+      "date_prescribed": "2024-02-02T17:19:06.553",
+      "result": null,
+      "is_completed": false,
+      "doctor": "98513308-5ca7-44d7-b31f-c315245336b6",
+      "patient": "56a49b8f-2cdc-42b4-a323-47764cd10e39",
+      "appointment": "c9cd3070-3c3f-4a67-9c3a-353c6ac92af2"
+    }
+  },
+  {
+    "model": "medicaltests.medicaltest",
+    "pk": "8bb65da0-4f6a-48c9-9c3f-c0525502bd88",
+    "fields": {
+      "state": true,
+      "created_date": "2024-01-29T19:27:34.379",
+      "modified_date": "2024-01-31T16:26:55.093",
+      "deleted_date": "2024-01-31T16:26:55.093",
+      "name": "Prueba 1",
+      "description": "Descripci�n de la prueba.",
+      "date_prescribed": "2024-01-29T19:27:34.379",
+      "result": "",
+      "is_completed": false,
+      "doctor": "98513308-5ca7-44d7-b31f-c315245336b6",
+      "patient": "56a49b8f-2cdc-42b4-a323-47764cd10e39",
+      "appointment": "c9cd3070-3c3f-4a67-9c3a-353c6ac92af2"
+    }
+  },
+  {
+    "model": "medicaltests.medicaltest",
+    "pk": "ac76d771-028e-4bbb-93e9-b04e31766fb1",
+    "fields": {
+      "state": true,
+      "created_date": "2024-01-31T18:22:57.231",
+      "modified_date": "2024-01-31T18:22:57.231",
+      "deleted_date": "2024-01-31T18:22:57.231",
+      "name": "fgdfg",
+      "description": "fdgfdg",
+      "date_prescribed": "2024-01-31T18:22:57.231",
+      "result": null,
+      "is_completed": false,
+      "doctor": "98513308-5ca7-44d7-b31f-c315245336b6",
+      "patient": "ccafa0fa-2000-4345-bc94-96faa681ac85",
+      "appointment": "2eba8881-2d3c-41e9-9631-2b372f02731f"
+    }
+  },
+  {
+    "model": "medicaltests.medicaltest",
+    "pk": "b270e32a-a571-48cc-b759-052d28d27e5e",
+    "fields": {
+      "state": true,
+      "created_date": "2024-02-05T20:21:03.506",
+      "modified_date": "2024-02-24T14:26:44.090",
+      "deleted_date": "2024-02-24T14:26:44.090",
+      "name": "Prueba",
+      "description": "Descripci�n",
+      "date_prescribed": "2024-02-05T20:21:03.506",
+      "result": "Correcto",
+      "is_completed": true,
+      "doctor": "98513308-5ca7-44d7-b31f-c315245336b6",
+      "patient": "07810ff1-c644-4dca-8faf-bea7f5d3ba79",
+      "appointment": "072eea93-7266-4b2e-b503-eb43c390778e"
+    }
+  },
+  {
+    "model": "medicaltests.medicaltest",
+    "pk": "fe6b3c52-d88e-45b6-9cbf-2c4bbe8d3d53",
+    "fields": {
+      "state": true,
+      "created_date": "2024-01-29T18:40:22.213",
+      "modified_date": "2024-01-29T19:35:13.066",
+      "deleted_date": "2024-01-29T19:35:13.066",
+      "name": "Anal�tica",
+      "description": "Anal�tica para el control del tratamiento",
+      "date_prescribed": "2024-01-29T18:40:22.213",
+      "result": "",
+      "is_completed": false,
+      "doctor": "98513308-5ca7-44d7-b31f-c315245336b6",
+      "patient": "daa95420-2ee5-4e8f-8888-a0ccea2dc032",
+      "appointment": null
+    }
+  }
+]
