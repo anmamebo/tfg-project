@@ -38,13 +38,3 @@ class FileSizeValidator:
             and self.message == other.message
             and self.code == other.code
         )
-
-    # max_size_bytes = max_size_mb * 1024 * 1024
-    # filesize = value.size
-
-    # if filesize > max_size_bytes:
-    #     raise ValidationError(
-    #         _("El tamaño máximo de la imagen es de %(max_size)s MB."),
-    #         code="invalid_size",
-    #         params={"max_size": max_size_mb},
-    #     )
