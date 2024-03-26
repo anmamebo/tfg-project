@@ -74,7 +74,7 @@ export class LoginPageComponent {
     this._authService.login(user).subscribe({
       next: (response: AuthResponse) => {
         this.errorMessage = '';
-        this._tokenStorageService.saveSingIn(response);
+        this._tokenStorageService.saveSignIn(response);
         this._router.navigate(['/']);
       },
       error: (e) => {

@@ -116,7 +116,7 @@ export class TokenStorageService {
    * Almacena el token de autenticación y los datos del usuario en el almacenamiento de sesión.
    * @param {any} user Los datos del usuario con el token de autenticación.
    */
-  public saveSingIn(user: any): void {
+  public saveSignIn(user: any): void {
     this.saveSession(user);
   }
 }
