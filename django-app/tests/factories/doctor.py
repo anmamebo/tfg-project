@@ -1,8 +1,6 @@
 import factory
 from apps.doctors.models import Doctor
 from faker import Factory
-from tests.factories.group import GroupFactory
-from tests.factories.medicalspecialty import MedicalSpecialtyFactory
 from tests.factories.user import DoctorUserFactory
 
 faker = Factory.create()
