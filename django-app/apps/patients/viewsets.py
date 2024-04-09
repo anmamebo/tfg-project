@@ -56,7 +56,7 @@ class PatientViewSet(viewsets.GenericViewSet, PaginationMixin, ErrorResponseMixi
         Lista todos los pacientes.
 
         Permisos requeridos:
-            - El usuario debe ser administrador o doctor.
+            - El usuario debe ser administrador o médico.
 
         Parámetros opcionales:
             state (bool): El estado de los pacientes a listar.
@@ -82,7 +82,7 @@ class PatientViewSet(viewsets.GenericViewSet, PaginationMixin, ErrorResponseMixi
         Crea un nuevo paciente con usuario y contraseña generados automáticamente.
 
         Permisos requeridos:
-            - El usuario debe ser administrador o doctor.
+            - El usuario debe ser administrador o médico.
 
         Args:
             request (Request): La solicitud HTTP.
@@ -128,7 +128,7 @@ class PatientViewSet(viewsets.GenericViewSet, PaginationMixin, ErrorResponseMixi
         Recupera los detalles de un paciente específico.
 
         Permisos requeridos:
-            - El usuario debe ser administrador, doctor o paciente.
+            - El usuario debe ser administrador, médico o paciente.
             - El usuario debe ser el paciente que se está consultando (en el caso de paciente).
 
         Args:
@@ -149,7 +149,7 @@ class PatientViewSet(viewsets.GenericViewSet, PaginationMixin, ErrorResponseMixi
         y luego los del paciente.
 
         Permisos requeridos:
-            - El usuario debe ser administrador, doctor o paciente.
+            - El usuario debe ser administrador, médico o paciente.
             - El usuario debe ser el paciente que se está consultando (en el caso de paciente).
 
         Args:
