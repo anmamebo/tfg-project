@@ -22,7 +22,6 @@
 * [Tecnologías](#tecnologías)
 * [Configuración](#configuración)
     * [Configuración local](#configuración-local)
-    * [Configuración con Docker](#configuración-con-docker)
 * [Estilo de código](#estílo-de-código)
 
 ## Despliegue
