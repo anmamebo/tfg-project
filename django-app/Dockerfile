@@ -13,11 +13,11 @@ RUN pip install -r requirements.txt
 # Copy the rest of the application code to the container
 COPY . .
 
-# Run database migrations
-RUN python manage.py makemigrations
+# # Run database migrations
+# RUN python manage.py makemigrations
 
-# Apply database migrations
-RUN python manage.py migrate
+# # Apply database migrations
+# RUN python manage.py migrate
 
 # Expose the default Django development port
 EXPOSE 8000
