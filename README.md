@@ -115,63 +115,6 @@ npm start
 
 Ahora puedes acceder a la aplicación Django REST en [http://localhost:8000/](http://localhost:8000/) y al frontend Angular en [http://localhost:4200/](http://localhost:4200/).
 
-### Configuración con Docker
-
-
-#### Paso 1: Clonar repositorio
-```
-git clone https://github.com/anmamebo/tfg-project.git
-```
-
-###### NECESARIO
-Tener docker instalado en el equipo
-
-#### Paso 2: Crear contenedores Docker
-```
-docker-compose up --build
-```
-
-Una vez que los contendores estén creados, puedes ejecutar ``` docker ps ``` para ver los contenedores iniciados, **IMPORTANTE:** **Debes ingresar a la consola del contenedor de Django y realizar las migraciones de la base de datos, así como crear un usuario.**
-
-Para ingresar a la consola, utiliza:
-```
-docker exec -it <id_contenedor> bash
-```
-
-Para realizar las migraciones, utiliza:
-```
-python manage.py makemigrations
-```
-```
-python manage.py migrate
-```
-
-Y para crear el usuario, utiliza:
-```
-python manage.py createsuperuser
-```
-
-Finalmente, reinicia el contenedor de Django:
-```
-docker restart <id_contenedor>
-```
-
-#### PASO 3: Acceder a la aplicación
-
-Una vez realizados los pasos anteriores podremos acceder a:
-
-##### PHPMYADMIN
-En la ruta [http://localhost:8080/](http://localhost:8080/)
-
-- **Usuario**: user
-- **Contraseña**: password
-
-##### DJANGO REST
-En la ruta [http://localhost:8000/](http://localhost:8000/)
-
-##### ANGULAR
-En la ruta [http://localhost:4200/](http://localhost:4200/)
-
 ## Estílo de código
 
 Este proyecto sigue ciertas convenciones de estilo de código para mantener una base de código consistente y legible. Se utilizan las siguientes herramientas para el formateo automático del código:
