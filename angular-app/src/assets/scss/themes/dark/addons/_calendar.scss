@@ -6,6 +6,10 @@
       &:hover {
         background-color: $primary-bg-subtle-dark !important;
       }
+
+      &.cal-has-events.cal-open {
+        background-color: $primary-bg-subtle-dark !important;
+      }
     }
 
     &:hover {

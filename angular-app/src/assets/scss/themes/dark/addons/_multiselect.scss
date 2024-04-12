@@ -16,6 +16,10 @@
     color: $secondary-text-dark;
   }
 
+  .multiselect-item-checkbox:hover {
+    background-color: $primary-bg-subtle-dark !important;
+  }
+
   .filter-textbox input {
     background-color: $card-bg !important;
   }
