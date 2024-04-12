@@ -1,8 +1,7 @@
 {
   "$schema": "https://railway.app/railway.schema.json",
   "build": {
-    "builder": "NIXPACKS",
-    "nixPkgs": ["glibc"]
+    "builder": "NIXPACKS"
   },
   "deploy": {
     "startCommand": "python manage.py makemigrations && python manage.py migrate && python manage.py collectstatic --noinput && gunicorn --timeout 500 config.wsgi",
