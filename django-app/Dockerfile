@@ -13,7 +13,8 @@ RUN pip install -r requirements.txt
 # Copy the rest of the application code to the container
 COPY . .
 
-ARG DJANGO_SECRET_KEY
+ARG DJANGO_ENV
+ARG SECRET_KEY
 
 # # Run database migrations
 # RUN python manage.py makemigrations
