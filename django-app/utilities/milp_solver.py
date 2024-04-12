@@ -1,3 +1,4 @@
+import os
 from collections import defaultdict
 from datetime import datetime, timedelta
 
@@ -192,9 +193,10 @@ def solve_milp(appointment, hours_preferences_selection):
 
     handle_results(X, appointments, all_doctors, all_days, all_hours, all_rooms)
 
-    print_results_to_txt(
-        prob, X, all_appointments, all_doctors, all_days, all_hours, all_rooms
-    )
+    if os.environ.get("DJANGO_ENV") != "PRODUCTION":
+        print_results_to_txt(
+            prob, X, all_appointments, all_doctors, all_days, all_hours, all_rooms
+        )
 
     return True
 
