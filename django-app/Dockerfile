@@ -15,6 +15,8 @@ COPY . .
 
 # Run database migrations
 RUN python manage.py makemigrations
+
+# Apply database migrations
 RUN python manage.py migrate
 
 # Expose the default Django development port
