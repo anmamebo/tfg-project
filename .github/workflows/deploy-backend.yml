@@ -13,23 +13,19 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Navigate to django-app directory
-        run: cd django-app
-
       - name: Setup Python 3.11.1
         uses: actions/setup-python@v2
         with:
           python-version: 3.11.1
-
-      - name: List files in directory
-        run: ls
       
       - name: Install requirements
         run: |
+          cd django-app
           pip install -r requirements.txt
       
       - name: Run tests
         run: |
+          cd django-app
           python manage.py test
       
       - name: Install Railway CLI
