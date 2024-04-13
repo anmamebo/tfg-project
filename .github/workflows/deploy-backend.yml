@@ -42,7 +42,7 @@ jobs:
       - name: Run tests
         run: |
           cd django-app
-          python manage.py test
+          python manage.py test --keepdb --noinput
       
       - name: Install Railway CLI
         run: |
