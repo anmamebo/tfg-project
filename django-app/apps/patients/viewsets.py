@@ -14,12 +14,11 @@ from mixins.pagination_mixin import PaginationMixin
 from rest_framework import status, viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
-from utilities.email_utils import (
-    send_success_account_activation_email,
-    send_welcome_email,
-)
+from utilities.email_utils import EmailService
 from utilities.password_generator import generate_password
 from utilities.permissions_helper import method_permission_classes
+
+email_service = EmailService()
 
 
 class PatientViewSet(viewsets.GenericViewSet, PaginationMixin, ErrorResponseMixin):
@@ -103,7 +102,9 @@ class PatientViewSet(viewsets.GenericViewSet, PaginationMixin, ErrorResponseMixi
         if patient_serializer.is_valid():
             patient = patient_serializer.save()
 
-            if not send_welcome_email(patient.user, request.data["user"]["password"]):
+            if not email_service.send_welcome_email(
+                patient.user, request.data["user"]["password"]
+            ):
                 return Response(
                     {
                         "message": "Paciente creado correctamente pero no se ha podido enviar el correo electrónico.",
@@ -265,7 +266,7 @@ class PatientViewSet(viewsets.GenericViewSet, PaginationMixin, ErrorResponseMixi
                 address.state = True
                 address.save()
 
-            if not send_success_account_activation_email(user):
+            if not email_service.send_success_account_activation_email(user):
                 return Response(
                     {
                         "message": "Paciente activado correctamente pero no se ha podido enviar el correo electrónico.",

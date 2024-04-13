@@ -27,9 +27,11 @@ from rest_framework import status, viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from utilities.appointment_url_generator import build_appointment_url
-from utilities.email_utils import send_appointment_assigned_email
+from utilities.email_utils import EmailService
 from utilities.milp_solver import solve_milp
 from utilities.permissions_helper import method_permission_classes
+
+email_service = EmailService()
 
 
 class AppointmentViewSet(
@@ -153,7 +155,7 @@ class AppointmentViewSet(
 
             # Envía el correo electrónico al paciente
             try:
-                if not send_appointment_assigned_email(
+                if not email_service.send_appointment_assigned_email(
                     appointment, google_calendar_url
                 ):
                     return self.error_response(

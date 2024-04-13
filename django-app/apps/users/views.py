@@ -17,11 +17,9 @@ from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import TokenObtainPairView
-from utilities.email_utils import (
-    send_reset_password_email,
-    send_success_password_reset_email,
-    send_welcome_signup_email,
-)
+from utilities.email_utils import EmailService
+
+email_service = EmailService()
 
 
 class Login(TokenObtainPairView, ErrorResponseMixin):
@@ -106,7 +104,7 @@ class Signup(GenericAPIView, ErrorResponseMixin):
         if serializer.is_valid():
             patient = serializer.save()
 
-            if not send_welcome_signup_email(patient.user):
+            if not email_service.send_welcome_signup_email(patient.user):
                 return Response(
                     {
                         "message": "Usuario creado, pero no se pudo enviar el correo electrónico"
@@ -208,7 +206,7 @@ class ForgetPassword(GenericAPIView, ErrorResponseMixin):
         else:
             url = f"http://localhost:4200/auth/restablecer-contrasena/{user.id}/{reset_token}"
 
-        if not send_reset_password_email(user, url):
+        if not email_service.send_reset_password_email(user, url):
             return self.error_response(
                 message="Error al enviar el correo electrónico",
                 status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
@@ -261,7 +259,7 @@ class ResetPassword(GenericAPIView, ErrorResponseMixin):
         user.reset_password_token = None
         user.save()
 
-        if not send_success_password_reset_email(user):
+        if not email_service.send_success_password_reset_email(user):
             return self.error_response(
                 message="Error al enviar el correo electrónico",
                 status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
