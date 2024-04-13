@@ -28,6 +28,16 @@ jobs:
         run: |
           cd django-app
           pip install -r requirements.txt
+
+      - name: Make migrations
+        run: |
+          cd django-app
+          python manage.py makemigrations
+
+      - name: Apply migrations
+        run: |
+          cd django-app
+          python manage.py migrate
       
       - name: Run tests
         run: |
