@@ -8,6 +8,12 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    env:
+      DB_DATABASE: ${{ secrets.DB_DATABASE }}
+      DB_USER: ${{ secrets.DB_USER }}
+      DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+      DB_HOST: ${{ secrets.DB_HOST }}
+      DB_PORT: ${{ secrets.DB_PORT }}
 
     steps:
       - name: Checkout code
@@ -34,7 +40,7 @@ jobs:
       
       - name: Login to Railway
         run: |
-          railway login --token $RAILWAY_TOKEN
+          railway login --token ${{ secrets.RAILWAY_TOKEN }}
 
       - name: Deploy to Railway
         run: |
