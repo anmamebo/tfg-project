@@ -46,7 +46,7 @@ jobs:
         
       - name: Install curl
         run: |
-          apt-get update -y && apt-get install -y curl
+          sudo apt-get update -y && apt-get install -y curl
 
       - name: Install Railway CLI
         run: |
