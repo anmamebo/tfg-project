@@ -43,10 +43,14 @@ jobs:
         run: |
           cd django-app
           python manage.py test --keepdb --noinput
-      
+        
+      - name: Install curl
+        run: |
+          apt-get update -y && apt-get install -y curl
+
       - name: Install Railway CLI
         run: |
-          curl -sSL https://get.railway.app | sh
+          curl -fsSL https://railway.app/install.sh | sh
       
       - name: Login to Railway
         run: |
