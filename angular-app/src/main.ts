@@ -1,4 +1,3 @@
-// TODO: no utilizar en produccion
 import '@angular/compiler'; // Importar el compilador JIT
 
 import { enableProdMode } from '@angular/core';
